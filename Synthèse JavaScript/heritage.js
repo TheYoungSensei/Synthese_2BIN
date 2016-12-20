@@ -5,4 +5,3 @@ var createEtudiant=function(nom,prenom) {
 	self.getNoma=function() {return noma;}
 	return self;
 }
-46

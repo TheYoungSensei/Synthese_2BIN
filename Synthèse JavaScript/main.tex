@@ -124,4 +124,68 @@ Les attributs d'un objet peuvent provenir d'un parent de l'objet, par contre la 
 
 \JavaScript{heritage}{Exemple d'utilisation de l'héritage sur une pseudo classe}
 
+\section{JavaScript dans le browser}
+
+\subsection{Ajout du JavaScript au sein de notre page HTML}
+
+\JavaScript{ajoutJS_direct}{Directement au sein de la page HTML}
+
+\JavaScript{ajoutJS_indirect}{Au sein d'un fichier séparé du reste de la page HTML}
+
+\subsection{Méthodes / Variables utiles}
+
+\begin{itemize}
+	\item console.log : affiche au sein de la console ce qui lui est passé en paramètre (si variable affiche son contenu).
+    \item navigator : objet contenant de l'information sur le browser lui-même, permet de l'identifier.
+    \item window : objet manipulant la fenêtre du browser.
+    \item document : objet manipulant la fenêtre du browser (document.writeln("argument") remplace le contenu de la pge HTML par celui passé en paramètre).
+    \item location : objet représentant l'URL de la page.
+    (location.href = cette URL, location.reload() recharge la page, location.replace("URL") navigue vers l'url passée en paramètre).
+\end{itemize}
+\newpage
+\subsection{Document Object Model (DOM)}
+
+\subsubsection{Présentation générale du DOM}
+
+Le navigateur crée de lui même une représentation objet de la page. Lorsque cet objet est manipulé par JavaScript, ce dernier se mets automatiquement à jour.
+\newline
+\newline
+Le DOM a une structure en arbre où chaque nœud représente un élément HTML, par ailleurs certains attributs correspondent aux attributs HTML. Certaines fonctions permettent de manipuler de diverses manières le nœud et/ou d'accéder 	aux autres nœuds.
+\newline
+\newline
+En pratique, traverser un arbre pour trouver un nœud en particulier est très peu souple  (Si on change la moindre chose dans notre structure HTML on devra modifier l'intégralité de notre code en conséquence. Il existe donc des raccourcis facilitant l'accès à des nœuds en particulier.
+\begin{figure}[H]
+	\centering
+    \fbox{\includegraphics{dom.PNG}}
+    \caption{Exemple de représentation du DOM d'une page HTML}
+\end{figure}
+
+\subsubsection{Quelques méthodes utiles du DOM}
+\begin{itemize}
+	\item \emph{document.getElementById(...)} : retourne l'objet portant l'id entré en paramètre
+    \item \emph{document.getElementsByName(...) } : retourne les objets ayant l'attribut name égal à celui passé en paramètre. (Cette méthode renvoie donc un tableau d'éléments).
+    \item \emph{document.getElementsByClassName(...)} : retourne les objets ayant une classe css égale à celle passée en paramètre de la méthode).
+    \item \emph{document.getElementsByTagName(...)} : retourne les objets dont le tag HTML est équivalent à celui entré en paramètre.
+\end{itemize}
+
+\subsection{Les événements}
+
+Les événements 	permettent de pouvoir réagir aux actions de l'utilisateur, on enregistre alors les fonctions qui seront appelées lors d'actions spécifiques de l'utilisateur (action utilisateur = un événement sur un élément du DOM).
+\newline
+\newline
+Les éléments HTML possèdent des attributs affectables à une fonction JavaScript.
+\begin{figure}[H]
+	\centering
+    \fbox{\includegraphics[scale=0.90]{event_souris.PNG}}
+    \caption{Pour exemple voici les événements rattachés à la souris}
+\end{figure}
+ Par contre, la valeur de l'attribut est unique, si on change cette valeur, la fonction précédemment affectée à cet événement ne sera plus appelée. L'HTML peut quant à lui référencé une fonction JavaScript qui n'est pas encore chargée, Ceci peut conduire a certains disfonctionnements si l'utilisateur réagit trop vite. (Afin de se prévenir de ces problèmes, on enregistre via le DOM, \emph{document.body.addEventListener("click", function(){}})).
+\newline
+\newline
+Les navigateurs ne permettent d'effectuer qu'une seule tâche à la fois (on dit qu'ils sont monothreadés). Ainsi, quand le JS s'exécute, rien d'autre ne s'exécute (pas de chargement de page, pas de rafraîchissement de la page, pas d'autres JS, pas d'interactions avec l'utilisateur, ...).
+\newline
+\newline
+Cas spécial, la fonction : \emph{setTimeout(f,t)}, utilisée si l'on souhaite effectuer des actions dans le futur, .., f sera une fonction appelée après t millisecondes. (Il existe une alternative si l'on désire créer un intervalle : \emph{setInterval(f,t)}
+
+\section{Lecture optionnelle mais conseillée}
 \end{document}
