@@ -1,0 +1,127 @@
+\documentclass{article}[12pt]
+
+%--------------Packages------------------------------
+\usepackage[utf8]{inputenc} %Pour encoder du texte en français
+\usepackage[francais]{babel} %Pour encoder du texte en français
+\usepackage{graphicx} %pour inclure des images
+\usepackage{changepage}
+\usepackage{version} % permet d'utiliser l'environnement comment
+\graphicspath{{./figures/}} %repertoire images
+\usepackage{listings} %si on veut afficher du code, le code doit se trouver dans un dossier "codes" 					  %lui même dans le même répertoire que ce fichier tex
+\usepackage{color} %nécessaire pour changer les couleurs du highlighting du code
+\usepackage{amsmath,amssymb}%pour des maths au cas où
+\usepackage{array,multirow,makecell}%Pour manipuler les tableaux
+\usepackage{url} %pour utiliser les liens hypertextes
+\usepackage{hyperref} %pour utiliser les liens hypertextes
+\usepackage{float}
+\newlength{\offsetpage}
+\setlength{\offsetpage}{2.0cm}
+\newenvironment{widepage}{\begin{adjustwidth}{-\offsetpage}{-\offsetpage}%
+    \addtolength{\textwidth}{2\offsetpage}}%
+{\end{adjustwidth}}
+
+\newcommand{\JavaScript}[2]{
+	\begin{itemize}
+		\item[]\lstinputlisting[caption=#2,label=#1]{#1.js}
+	\end{itemize}
+}
+% ---------- Document ------------ %
+\begin{document}
+
+\input{page_de_garde.tex}
+
+\tableofcontents%table des matières
+\newpage
+
+\section{Présentation du JavaScript}
+
+\subsection{Langage d'avenir}
+
+Le JavaScript est un langage créé pour le front-end Web, il peut également être utilisé au niveau back-end Web notamment à l'aide de Node.js.
+
+\subsection{Mauvaise réputation}
+
+\paragraph{Argument 1} : Performances médiocres
+
+\paragraph{Argument 2} : Le langage est considéré comme sale, ceci est du à certaines {\color{blue}spécificités} du langage parfois inhabituelles. ({\color{blue}Beaucoup de manières de faire la même chose}, et ceci de manière très différentes).
+
+\subsection{Les bons côtés}
+
+Il existe divers moyens afin de réaliser la même opération et de ce fait parmi toutes ces manières, il en existe forcément {\color{blue} une simple à comprendre et à utiliser} 
+
+\subsection{Langage interprété}
+
+Il n'y a pas de phase de compilation, c'est donc le code source qui sera directement utilisé lors de la compilation.
+
+\subsection{Langage dynamiquement typé}
+
+Le type des variables est déterminé à l'exécution, le mot clef {\color{blue} var} sert à déclarer les variables (Attention, le type d'une variable peut changer lors de l'exécution du programme).
+\newpage
+\subsection{Opérateur instanceOf}
+
+\begin{figure}[H]
+	\centering
+	\fbox{\includegraphics{instanceOf.PNG}}
+    \caption{Tableau montrant le résultat renvoyé par l'opérateur instanceOf}
+\end{figure}
+
+\subsection{Opérateur typeOf}
+
+Fonction permettant de tester une variable et de retourner une chaîne de caractères décrivant le type de cette dernière.
+
+\begin{figure}[H]
+	\centering
+	\fbox{\includegraphics[scale=0.90]{typeOf.PNG}}
+    \caption{Tableau montrant le résultat renvoyé par l'opérateur typeOf}
+\end{figure}
+
+\subsection{Différence entre "==" et "==="}
+
+"==" effectue un transtypage faiblement typé. Ceci peut parfois donner des résultats surprenant, on évitera donc de l'utiliser. équivalent de "==" pour démontrer une inégalité : "!="
+\newline
+\newline
+"===" n'effectue pas de transtypage, on le privilégiera donc à "==",  équivalent de "===" pour démontrer une inégalité : "!==".
+
+\subsection{Les fonctions}
+
+Une fonction est considéré comme une méthode sans classe, par ailleurs les fonctions peuvent très bien être assignées au sein de variables. 
+\newline
+\newline
+Étant donné qu'une fonction peut etre affectée à des variables de noms différents, le nom de la fonction n'a pas réellement d'importance. Dans certains cas on ne nommera même pas la fonction (elle sera donc considérée comme une fonction anonyme)
+\newline
+\newline
+C'est la présence ou l'absence de parenthèses qui détermine si on parle de la référence de la fonction, ou de son exécution.
+
+\subsection{Portée lexicale des variables}
+
+Une variable ne se restreint pas au bloc où elle est déclarée, elle se restreint plutôt à la fonction qui  l'englobe.
+\newline
+\newline
+Il faut faire attention aux variables globales car si celles sont utilisées pour définir une autre variable ce sera la référence de la variable globale qui sera retenue au sein de celle-ci et non sa valeur.
+
+\subsection{OO en JavaScript}
+
+JavaScript supporte aussi la programmation orientée objet, mais la manière dont elle fonctionne est fortement différente du java.
+\newline
+\newline
+Les Objets JavaScript indépendamment de la programmation OO fonctionne comme des Maps. On associe une clé à une valeur, on parle alors d'objets associatifs.
+
+\subsection{Gestion des attributs}
+
+\JavaScript{attribute_value}{Valeur d'un attribut}
+\JavaScript{change_value}{Modification d'un attribut}
+\JavaScript{delete_value}{Suppresion d'un attribut}
+
+\subsection{Objets et héritages}
+
+Les attributs d'un objet peuvent provenir d'un parent de l'objet, par contre la méthode Object.keys ne renverra pas les attributs parents, si l'on désire tout de même y accéder on peut toujours utiliser un for(... in ...). On peut également savoir si un objet possède un attribut a l'aide de la méthode hasOwnProperty("attribut").
+
+\subsection{Pseudo Classe}
+
+\JavaScript{decla_pseudo_classe}{Exemple de déclaration d'une pseudo classe}
+
+\JavaScript{util_pseudo_classe}{Exemple d'utilisation d'une pseudo classe}
+
+\JavaScript{heritage}{Exemple d'utilisation de l'héritage sur une pseudo classe}
+
+\end{document}
