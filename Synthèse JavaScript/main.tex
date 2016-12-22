@@ -187,5 +187,93 @@ Les navigateurs ne permettent d'effectuer qu'une seule tâche à la fois (on dit
 \newline
 Cas spécial, la fonction : \emph{setTimeout(f,t)}, utilisée si l'on souhaite effectuer des actions dans le futur, .., f sera une fonction appelée après t millisecondes. (Il existe une alternative si l'on désire créer un intervalle : \emph{setInterval(f,t)}
 
+\section{JQuery}
+
+\subsection{Pourquoi le JQuery}
+
+La manipulation du DOM en JavaScript est lourde et donc vite pénible, Elle pose également des problèmes de compatibilité entre les différents navigateurs. à l'aide de JQuery, on va simplifier et normaliser tout cela.
+\newline
+\newline
+Le JQuery permet notamment une bibliothèque JavaScript, d'assurer une compatibilité multi-navigateurs, de simplifier l'écriture de scripts, de demander au serveur de mettre à jour une partie de la page en utilisant une requête AJAX. Le JQuery est notamment utiliser par de nombreux acteurs du premier plan du Web.
+\newline
+\newline
+Attention, il faut toujours attendre que le DOM soit entièrement obtenus avant d'appliquer du code sur notre page. \begin{lstlisting}
+$(function(){
+	//ici le dom est entierement defini
+});
+\end{lstlisting}. Une méthode s'utilisera souvent comme suit : selecteur.méthode(paramètres).
+
+\subsection{Méthodes d'écritures}
+\begin{itemize}
+	\item \emph{selecteur.html("mon message")} : va remplacer le contenu HTML de mon sélecteur et va y écrire mon message à la place.
+    \item \emph{selecteur.text("mon message")} : va remplacer la valeur textuelle stockée dans l'élément par le message passé en paramètre.
+    \item \emph{selecteur.val("mon message"} : écrit le message dans la zone texte, au contraire si il n'y a pas de paramètres : obtient la valeur entrée dans la zone texte. 
+\end{itemize}
+Il est intéressant de noter que ces méthodes utilisée sans paramètres renvoie uniquement ce qu'elle représente sans en remplacer le contenu.
+
+\subsection{Sélection d'éléments}
+On peut sélectionner les nœuds du DOM qui nous intéressent à l'aide de 
+\begin{lstlisting}
+	$('Selecteur')
+\end{lstlisting} 
+où sélecteur représente un sélecteur CSS ou un sélecteur JQuery.Cette fonction, renvoie un objet JQuery qui représente un ou plusieurs éléments du DOM. (C'est une sorte de tableau, on peut notamment utiliser \begin{lstlisting}
+	$('element:first')
+\end{lstlisting} afin de recevoir la premier élément de la page, toutes les caractéristiques normalement applicables à un tableau le sont également pour celui-ci.
+\begin{figure}[H]
+	\centering
+    \fbox{\includegraphics[scale=0.60]{selecteur1.PNG}}
+    \caption{Exemples de sélecteurs d'éléments}
+\end{figure}
+\begin{figure}[H]
+	\centering
+    \fbox{\includegraphics[scale=0.60]{selecteur2.PNG}}
+    \caption{Suite des exemples de sélecteur d'éléments}
+\end{figure}
+\subsection{Modifier le css}
+\begin{itemize}
+	\item \emph{selecteur.css('attribut')} : récupère la valeur d'un attribut css.
+    \item \emph{selecteur.css('attribut','valeur')} : définit un attribut css.
+    \item \emph{selecteur.css({"attribut1":"valeur1",
+    							"attribut2":"valeur2"}} : définit plusieurs attributs CSS.
+\end{itemize}
+\subsection{Parcourir les éléments sélectionnés}
+\begin{lstlisting}
+$('Selecteur').each(function(index) {
+	// $(this) donne l'element courant
+});
+\end{lstlisting}
+où index est une variable JavaScript qui représente la position de l'élément dans la sélection.
+\subsection{Listener}
+On peut attacher un listener sur un event à l'aide d'un sélecteur :
+\begin{lstlisting}
+	$('.a').click(function(){ alert("Click sur une balise de class a!"); });
+\end{lstlisting}
+On peut utiliser une manière de lier de façon générique : le \emph{on}
+\begin{lstlisting}
+$('.c').on("mouseenter", function(){
+	$('.c').text("Mouse au-dessus");
+});
+\end{lstlisting}
+\subsection{Insertion d'éléments dans le DOM}
+\begin{itemize}
+	\item .append() : ajoute l'élément après ceux déjà présent au sein de celui passé en paramètre.
+    \item .prepend() : ajoute l'élément avant ceux déjà présent au sein de celui passé en paramètre.
+   	\item .after() : ajoute l'élément après celui auquel la méthode est attachée.
+    \item .before() : ajoute l'élément avant celui auquel la méthode est attachée.
+\end{itemize}
+
 \section{Lecture optionnelle mais conseillée}
+\subsection{Chapitre 1}
+\begin{itemize}
+	\item \href{http://stackoverflow.com/research/developer-survey-2016}{Enquête sur l'utilisation des différents langages}
+    \item \href{http://www.stefankrause.net/wp/?p=144}{Différences d'utilisation entre le Java, le JavaScript ainsi que le C}
+    \item \href{http://www.w3schools.com/js/js_datatypes.asp}{Différents types de données en JavaScript}
+    \item \href{http://www.w3schools.com/js/js_function_closures.asp}{Les Fonctions de closure}
+	\item \href{http://www.w3schools.com/jsref/jsref_push.asp}{Documentation sur la fonction push}
+\end{itemize}
+\subsection{Chapitre 2}
+\begin{itemize}
+    \item \href{http://www.w3schools.com/jsref/dom_obj_event.asp}{Documentation sur les évènements surgissant aus sein du DOM}
+    \item \href{http://www.w3schools.com/js/js_htmldom_eventlistener.asp}{Documentation sur le EventListener}
+\end{itemize}
 \end{document}
