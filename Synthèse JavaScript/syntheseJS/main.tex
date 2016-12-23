@@ -285,6 +285,81 @@ Toute entité JSON est une valeur JavaScript, rétrospectivement, toute valeur J
     \fbox{\includegraphics{json_example.PNG}}
     \caption{Exemple structure de JSON}
 \end{figure}
+\section{HTTPServlet}
+\subsection{Subdivisions Application Web}
+Une application Web est subdivisées en deux parties : le front-end (gestion du navigateur, permet d'émettre des requêtes (Au Format HTTP)) et le back-end (gestion des fichiers et des requêtes).
+\newline
+\newline
+Le passage du front-end au back-end est une question composée de :
+\begin{itemize}
+	\item Une URL
+    \item une méthode
+    \item une adresse d'origine
+    \item des cookies
+    \item des données à envoyer
+    \item d'un mymetype pour les données à envoyer
+    \item des en-têtes 
+\end{itemize}
+Le passage du back-end -> front-end est une réponse composée de : 
+\begin{itemize}
+	\item Un code d'état (200 = OK, ...)
+    \item Des données
+    \item Un mime-type pour ces données
+    \item Des modifications de cookies
+    \item Des en-têtes, des informations sur la manière de cacher les entrées
+\end{itemize}
+\subsection{Les méthodes des requêtes}
+\paragraph{GET} : sert à obtenir une ressource (L'URL entrée dans le navigateur effectue un GET sur cette adresse). Elle est bookmarkable, en générale elle peut être mise en cache.
+\paragraph{POST} : sert à soumettre une réponse (Soumission d'un formulaire, les données sont envoyées en POST). Elle est non-bookmarkable, en général elle ne peut pas être mise en cache (La réponse à la soumission d'un formulaire dépend de ce formulaire et change donc à chaque fois).
+\paragraph{Les autres méthodes}
+\emph{DELETE, PUT} : utilisée dans les API Webs, dans le standard REST (il est peu voir pas du tout utilisé à partir du navigateur).
+\subsection{Liaison avec le Java}
+Il nous faut un serveur pour écouter les requêtes Web et y répondre. Nous utiliserons un composant Java dédié au traitement des requêtes : Le HTTPServlet (s'utilise au sein d'un serveur Web, traite beaucoup de requêtes différentes : donc de multiples HTTPServlet sur un seul serveur).
+\subsection{Configuration des HTTPServlet}
+Il faut configurer la ou les servlets pour expliquer à java leur comportement (quels ports écouter, quels chemins dans l'URL correspondent à quels servlets, si il y a un fichier "index.html" à afficher en cas d'absence de précision, ...).
+\subsection{HTTPServlet}
+Cette classe a pour but d'être étendue, chaque requête HTTP servlet appellera la méthode :
+\JavaScript{methode_service}{Méthode Service}
+\subsection{HttpServletRequest}
+Il s'agit de tout ce qui concerne la requête, voici les méthodes que l'on peut appliquer dessus :
+\begin{itemize}
+	\item \emph{getPathInfo()} : renvoie la partie d'URL supplémentaire à ce qui est configuré pour le servlet.
+    \item \emph{getParameter(String)} : obtient un des paramètres de la requête, c'est à dire des données transmises.
+    \item \emph{getCookies()} : retourne les cookies.
+\end{itemize}
+\subsection{HttpServletResponse}
+Il s'agit de tout ce qui concerne la réponse, voici les méthodes que l'on peut appliquer dessus :
+\begin{itemize}
+	\item \emph{setStatus(int)} : définit le statut de la réponse.
+    \item \emph{setContentLength(int)} : définit la longueur en byte de la réponse.
+    \item \emph{setCharacterEncoding(String)} : définit l'encodage de la réponse.
+    \item \emph{setContentType(String)} : définir le mimetype de la réponse
+    \item \emph{getOutputStream()} : retourne l'Output Stream permettant d'écrire la réponse.
+\end{itemize}
+\subsection{Jetty}
+En java, sur un unique serveur Web on peut exécuter plusieurs applications distinctes (On appelle cela un 'Application Server', chaque application y est distinguée par son URL, on déploie par ailleurs son application sur un application server).
+\subsubsection{Jetty : Nomenclature}
+\begin{itemize}
+	\item Server : ce qui écoute sur un port TCP.
+    \item WebAppContext : ce qui configure le serveur en tant qu'application server.
+    \item ServletHolder : retient le nom et la configuration d'une instance de servlet.
+    \item HTTPServlet : classe à étendre pour répondre aux requêtes HTTP.
+\subsubsection{Principe}
+\JavaScript{principe_jetty}{Principe Jetty}
+\subsubsection{WebAppContext}
+\JavaScript{webappcontext}{Quelques méthodes du WebAppContext}
+\end{itemize}
+\subsection{Configuration d'une application Web}
+\paragraph{web.xml} : Description XML de la configuration de l'application. Sur un Application Server, chaque application possède son propre web.xml la concernant.
+\paragraph{Embedded}
+A la place d'avoir un application server sur lequel on déploie les applications, on va utiliser un processus Java qui embarque son propre application server pour y déployer son unique application. Même si cela est moins souple qu'un application server, cela est plus pratique lors du développement(Pas de phase de déploiement, c'est une pure application Java qui s'exécute, par ailleurs, les outils de debugging habituels restent fonctionnels).
+\subsection{Exception}
+\subsubsection{Exceptions dans doGet ou doPost}
+Lorsqu'un fichier est non-trouvé : Error 404, Ceci est un traitement normal du coté Java et non une exception jetée.
+\JavaScript{error404}{Gestion de l'erreur 404}
+\subsubsection{Exception en Java}
+Si une exception s'échappe, c'est Jetty lui-même qui la gérera (redirection vers une page d'erreur ou envoi d'un message standard). En général on évitera de laisser s'échapper les exceptions.
+\JavaScript{gestion_exception}{Gestion des Exceptions}
 \section{Lecture optionnelle mais conseillée}
 \subsection{Chapitre 1}
 \begin{itemize}
@@ -314,5 +389,14 @@ Toute entité JSON est une valeur JavaScript, rétrospectivement, toute valeur J
 \subsection{Chapitre 5}
 \begin{itemize}
 	\item \href{http://json.org}{Documentation sur le JSON} 
+\end{itemize}
+\subsection{Chapitre 6}
+\begin{itemize}
+	\item  \href{https://tools.ietf.org/html/rfc2616}{Documentation protocole HTTP}
+    \item \href{http://www.eclipse.org/jetty/}{Documentation Jetty}
+    \item \href{https://www.sitepoint.com/web-foundations/mime-types-complete-list/}{Liste complètes des mime-types}
+    \item \href{https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html}{Liste des codes de statut}
+    \item \href{http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html}{Documentation sur la HttpServletRequest}
+    \item \href{http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletResponse.html}{Documentation sur la HttpServletResponse}
 \end{itemize}
 \end{document}
