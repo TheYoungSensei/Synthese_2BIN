@@ -390,6 +390,92 @@ Pendant la sérialisation si il n'y a pas d'informations de typage (type Object)
 \subsection{Classe anonyme}
 \JavaScript{classe_anonyme}{Exemple de classe anonyme}
 Les classes anonymes permettent de déclarer et d'instancier une classe en même temps, elle permettent d'écrire un code plus concis et elles sont souvent utilisée dans le contexte d'écrire un Listener.
+\section{Chapitre 8 : Ajax}
+\subsection{Utilité des requêtes Ajax}
+Avec des requêtes "normales", la réponse est de l'HTML fournie directement à partir de l'implémentation Java. Il est peu pratique de travailler de la sorte, on finis par écrire de l'HTML long et compliqués dans des Strings en Java.
+\subsection{JSP}
+Il existe une approcha classique qui permet de gérer cette manière de travailler. Utilisation de fichiers templates, les données à injecter dans le template sont retenues dans un modèle Java, des tags JSP permettent de faire le lien entre le modèle et l'HTML à intégrer et le servlet s'occupe de tout faire fonctionner ensemble.
+\JavaScript{exempleJSP}{Exemple JSP}
+\paragraph{Critique du JSP} : On mélange du Java dans de l'HTML, cela est difficile à maintenir, et requiert beaucoup de discipline. De plus il s'agit d'une navigation à l'ancienne (l'unité de communication est la page entière,correspond au Web classique, pas aux applications Webs modernes.), donc très verbeux et pas amusant à utiliser. 
+\subsection{Appel Ajax}
+\begin{figure}[H]
+	\centering
+    \fbox{\includegraphics[scale=0.75]{design_ajax.PNG}}
+    \caption{Design Ajax}
+\end{figure}
+Un appel Ajax est donc une requête HTTP, mais qui ne navigue pas vers une nouvelle page. étant donné que nos requêtes Ajax communiqueront en JSON, ce dernier n'est pas à destination de l'utilisateur et donc ces requêtes seront envoyées avec la méthode POST.
+\JavaScript{requete_ajax}{Exemple de requête Ajax}
+Attention car uen requête HTML 	transporte du texte pas du JSON, il faudra donc transformer la chaîne de caractère renvoyée par le serveur en un objet JSON (on utilisera pour cela la méthode JSON.parse). Au contraire si l'on souhaite envoyer un objet JSON au sein d'une requête il faudra le transformer d'abord en chaîne de caractères (on utilisera pour cela : JSON.stringify).
+\section{Chapitre 9 : L'authentification}
+\subsection{Principe de l'authentification}
+L'authentification consiste à identifier un utilisateur.
+\begin{figure}[H]
+	\centering
+    \fbox{\includegraphics[scale=0.75]{cycle_vie.PNG}}
+    \caption{Cycle de vie Front-end / Back-end}
+\end{figure}
+\paragraph{Le problème de l'authentification} résident du fait que les requêtes du front-end dépendent de l'utilisateur authentifié, que le serveur connaît cet utilisateur au moment de son authentification et que les requêtes sont facilement manipulables. Le serveur doit donc trouver un moyen de retenir l'utilisateur une fois qu'il est authentifié pour répondre aux requêtes ultérieures correctement.
+\subsection{Session}
+L'application Server va retenir une conversation (plusieurs requêtes succesives du même front-end) entre un front-end et un back-end (Attention, une conversation n'est pas une connexion TCP, l'application server fais de son mieux pour ne pas se tromper mais des erreurs peuvent survenir).
+\newline
+\newline
+Lors d'une authentification réussie, la session est remplie avec l'id de l'utilisateur.
+\begin{lstlisting}
+	req.getSession().setAttribute("id", idUser);
+\end{lstlisting}
+Ainsi, lors des requêtes ultérieures, le serveur récupère l'id à partir de la session.
+\begin{lstlisting}
+	Object idUser=req.getSession().getAttribute("id");
+if (idUser!=null) {...}
+\end{lstlisting}
+\paragraph{Inconvénients de la session}
+\begin{itemize}
+	\item La session utilise de la 	mémoire pour chaque utilisateur
+    \item Il peut y avoir de longues périodes d'inactivités du front-end (Deux possibilités : soit les sessions n'expirent jamais mais alors la mémoire n'est pas récupérée et au dans le cas contraire, les sessions expirent mais alors l'utilisateur devra se réauthentifier).
+    \item En cas de redémarrage du serveur, toutes les données sont perdues
+\end{itemize}
+Ces inconvénients sont dû à une seule chose : le serveur possède un état dépendant du front-end.
+\newline
+\newline
+La solution à cela serait un serveur Stateless : Cela serait fonctionnel et la réponse à une requête ne dépendrait que de la requête elle-même et non pas d'un état retenu sur le serveur.
+\newline
+\newline
+Mais une requête est trop facilement modifiable, le serveur ne peut avoir confiance qu'en lui-même (on va dès lors utiliser la cryptographie). 
+\subsection{Httpservlet HttpSession}
+On peut obtenir une HttpSession depuis la requête HTTP (HttpServletRequest) à l'aide de la méthode \emph{getSession()}, cette instance sera une Map<String, Object> sur lequel on peut obtenir un attribut (\emph{getAttribute()}) et en rajouter un (\emph{setAttribute()})
+\subsection{Gestion de l'authentification : Json Web Token (JWT)}
+Il s'agit d'une chaîne de caractères qui retient les informations d'authentification de l'utilisateur, elle est signée cryptographiquement par le serveur. De ce fait même, seul le serveur peut générer et valider un JWT valide.
+\newline
+\newline
+\JavaScript{creation_jwt}{Création de la chaîne JWT lors d'une authentification réussie}
+Dans ce bout de code, JWTSecret est une chaîne de caractères connue uniquement par le serveur.
+\newline
+\newline
+On peut mettre un id, un nom, une date de péremption, l'IP du front-end, mais on ne peut surtout pas mettre le mot de passe de l'utilisateur. De plus une chaîne JWT ne peut être créé que par le serveur (sur base de son secret caché), de ce fait même sa signature ne peut être validée que par le serveur (toujours sur base de son secret caché), par contre elle est facilement décryptable, le front-end peut en lire le contenu facilement et cela sans même connaître le secret.
+\newline
+\newline
+\paragraph{JWT et cookies}
+Le navigateur devra donc fournir la chaîne de caractères à chacune de ses requêtes. Il vaudrait donc mieux le retenir au sein d'un cookie, cela rendrait le processus automatique.
+\newline
+\newline
+Les cookies font partie du protocole HTTP. Elles son,t placées au niveau d'un domaine, ont un nom, un contenu et peuvent avoir une date de péremption. Le front-end et le back-end peuvent ajouter/supprimer/modifier les cookies tant que le domaine est correct. Toutes les requêtes HTTP émises par le front-end contiennent tous les cookies placés sur l'URL de la page.
+\JavaScript{creation_cookie}{Création d'un cookie contenant la chaîne JWT}
+Lors des requêtes ultérieures, on pourra aller chercher la chaîne JWT dans les cookies.
+\JavaScript{get_cookie}{Vérification de la présence du cookie}
+L'étape finale sera donc de valider la chaîne JWT avant de récupérer l'utilisateur.
+\JavaScript{check_jwt}{Vérification de la chaîne JWT}
+\paragraph{Authentification avec JWT}, lorsque l'utilisateur rentre son login/mdp, une requête est envoyé sur une Servlet (c'est là que l'on procèder a à une vérification de son login/mdp, en cas de succès, on créera une chaîne JWT qui contient l'id/login de l'utilisateur et on placera cela dans un cookie en renvoyant un message de succès, si au contraire on est dans le cas d'un échec, on renvoie un message d'erreur). Sur base de message renvoyée par le serveur, le front-end décidera de la marche à suivre.
+\newline
+\newline
+\paragraph{Dès que l'utilisateur est authentifié}, chaque requête contiendra le cookie avec la chaîne JWT (Les servlets vont valider le JWT et vont récupérer l'id / le login de l'utilisateur, et effectueront par la suite leur traitement habituel).
+\subsection{Session et JWT}
+Valider la signature JWT prend du temps, on va donc le faire une fois par session uniquement. Le processus deviendra donc : Est ce que la session est authentifiée, si oui alors on peut traiter la requête, sinon on prends alors la chaîne JWT et on valide la signature. On retiendra cette authentification dans la session pour la prochaine fois et on peut traiter la demande dans le cas ou celle celle ci ne serait pas validée, on redirige vers la page d'authentification.
+\subsection{Chapitre Bonus : L'Orienté Objet en JavaScript}
+\JavaScript{oo_js}{Exemple d'orienté objet en JavaScript}
+L'utilisation du new crée un this lors de l'exécution de la fonction (this et new sont des mots-clés du langage, l'appel d'une fonction avec un new renvoie un this (le this représentera l'instance), la fonction sert donc de constructeur à cette instance, elle définit les propriétés de ce this notamment les fonctions utilisables.
+\JavaScript{prototype}{Exemple de prototype JavaScript}
+Ici, john.getage() continue à renvoyer son âge, mais this.age est accessible via john.age également. LE principe du prototype lors de l'accès à une propriété : Si on ne trouve pas la propriété directement sur l'objet, alors JS cherche cette dernière sur le prototype de la fonction pour l'appeler.
+\JavaScript{heritage_prototype}{Exemple d'Héritage par prototype}
 \section{Lecture optionnelle mais conseillée}
 \subsection{Chapitre 1}
 \begin{itemize}
@@ -434,5 +520,27 @@ Les classes anonymes permettent de déclarer et d'instancier une classe en même
 	\item \href{http://owlike.github.io/genson/}{Documentation Genson}
     \item \href{http://owlike.github.io/genson/Documentation/UserGuide/}{Guide d'utilisateur Genson}
     \href{http://owlike.github.io/genson/Documentation/Javadoc/}{Vue Globale Genson}
+\end{itemize}
+\subsection{Chapitre 8}
+\begin{itemize}
+	\item \href{http://api.jquery.com/jquery.ajax/}{Documentation sur les requêtes Ajax} 
+\end{itemize}
+\subsection{Chapitre 9}
+\begin{itemize}
+	\item \href{https://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpSession.html}{Documentation sur la HttpSession}
+    \item \href{github.com/auth0/java-jwt}{Github pour l'utilisation des JWT au sein d'un code Java}
+    \item \href{http://www.journaldev.com/1956/java-servlet-cookies-example}{Documentation sur l'utilisation des cookies au sein de Java}
+\end{itemize}
+\subsection{Chapitre Bonus}
+\begin{itemize}
+ \item \href{http://phrogz.net/js/classes/OOPinJS2.html}{Documentation sur l'orienté objet en JavaScript}
+\end{itemize}
+\subsection{Documentation supplémentaire}
+\begin{itemize}
+	\item \href{http://www.w3schools.com/bootstrap/}{Documentation sur Bootstrap}
+    \item \href{https://jqueryui.com}{Documentation sur JQuery}
+    \item \href{https://www.datatables.net}{Documentation sur les DataTables}
+    \item \href{https://select2.github.io/examples.html}{Documentation sur les SELECT2}
+    \item \href{http://www.w3schools.com/html/html5_canvas.asp}{Documentation sur les Canvas}
 \end{itemize}
 \end{document}
