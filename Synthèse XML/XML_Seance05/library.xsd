@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="library">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="songlist">
+					<xs:complexType>
+						<xs:sequence>
+<xs:element name="song" type="songType" maxOccurs="unbounded" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="playlists" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="playlists">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="list" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+<xs:element name="track_ID" maxOccurs="unbounded" type="xs:positiveInteger"/>
+						</xs:sequence>
+<xs:attribute name="name" type="xs:ID" use = "required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="songType">
+		<xs:sequence>
+			<xs:element name="track_ID" type="xs:integer" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="artist" minOccurs="0" type="xs:string" />
+			<xs:element name="album" minOccurs="0" type="xs:string" />
+			<xs:element name="genre" minOccurs="0" type="genreType" />
+			<xs:element name="comments" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string" >
+						<xs:attribute name="author" type="xs:string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="genreType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Hip hop"/><xs:enumeration value="Trip hop"/>
+			<xs:enumeration value="Rock"/><xs:enumeration value="House" />
+			<xs:enumeration value="Metal"/><xs:enumeration value="Disco"/>
+			<xs:enumeration value="Pop"/><xs:enumeration value="Electro"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

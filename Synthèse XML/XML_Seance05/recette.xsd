@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema version="1.0"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="recettes" type="recettesType" />
+	<xsd:complexType name="recettesType">
+	<xsd:sequence>
+		<xsd:element maxOccurs="unbounded" name="recette" type="recetteType" />
+	</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="recetteType">
+		<xsd:sequence>
+			<xsd:element name="entete" type="enteteType" />
+			<xsd:element maxOccurs="unbounded" name="ingredients"
+				type="ingredientsType" />
+			<xsd:element maxOccurs="unbounded" name="instruction"
+				type="xsd:string" />
+		</xsd:sequence>
+		<xsd:attribute name="type" type="typeType" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="ingredientsType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="ingredient"
+				type="ingredientType" />
+		</xsd:sequence>
+		<xsd:attribute name="nbPers" type="xsd:int" use="required"/>
+		<xsd:attribute name="pour" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="ingredientType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="qte" type="xsd:double" use="optional"/>
+				<xsd:attribute name="unite" type="uniteType" use="optional" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="typeType">
+	<xsd:restriction base="xsd:string">
+	<xsd:enumeration value="entree"/>
+	<xsd:enumeration value="plat"/>
+	<xsd:enumeration value="dessert"/>
+	<xsd:enumeration value="cocktail"/>
+	<xsd:enumeration value="soupe"/>
+	<xsd:enumeration value="amuseBouche"/>
+	<xsd:enumeration value="sauce"/>
+	</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="uniteType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="cs" />
+			<xsd:enumeration value="cc" />
+			<xsd:enumeration value="verre" />
+			<xsd:enumeration value="verres" />
+			<xsd:enumeration value="pincee" />
+			<xsd:enumeration value="pincees" />
+			<xsd:enumeration value="tige" />
+			<xsd:enumeration value="tiges" />
+			<xsd:enumeration value="gr" />
+			<xsd:enumeration value="kg" />
+			<xsd:enumeration value="l" />
+			<xsd:enumeration value="cl" />
+			<xsd:enumeration value="dl" />
+			<xsd:enumeration value="ml" />
+			<xsd:enumeration value="gousse" />
+			<xsd:enumeration value="gousses" />
+			<xsd:enumeration value="feuille" />
+			<xsd:enumeration value="feuilles" />
+			<xsd:enumeration value="rondelle" />
+			<xsd:enumeration value="rondelles" />
+			<xsd:enumeration value="cm" />
+			<xsd:enumeration value="bouquet" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="enteteType">
+		<xsd:all>
+			<xsd:element name="titre" type="xsd:string" />
+			<xsd:element name="preparation" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="cuisson" type="xsd:string" minOccurs="0" />
+			<xsd:element name="remarque" type="xsd:string" minOccurs="0" />
+			<xsd:element name="marinade" type="xsd:string" minOccurs="0" />
+		</xsd:all>
+	</xsd:complexType>
+</xsd:schema>
