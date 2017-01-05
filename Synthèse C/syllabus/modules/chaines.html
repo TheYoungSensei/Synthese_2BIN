@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>cours de Langage C</title>
+<link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../css/modele04.css"
+	media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/infoB.css" media="all" />
+</head>
+
+<body>
+
+<div id="global">
+
+<div id="entete">
+<h1>Langage C</h1>
+<h2 class="sous-titre" id="id_chaine">Les chaînes de caractères</h2>
+
+</div>
+<!-- #entete -->
+
+
+<div id="navigation">
+<ul>
+
+        <li><a href="../index.html">Introduction</a></li>
+        <li><a href="./langage.html">Les éléments du langage</a></li>
+        <li><a href="./instructions.html">Les instructions</a></li>
+        <li><a href="./tableaux.html">Les tableaux</a></li>
+        <li><a href="./pointeurs.html">Les pointeurs</a></li>
+        <li><a href="./chaines.html">Les chaines de caractères</a></li>
+        <li><a href="./fonctions.html">Les fonctions</a></li>
+        <li><a href="./modularisation.html">La modularisation</a></li>
+        <li><a href="./classes.html">Les classes d'allocation</a></li>
+        <li><a href="./structures.html">Les structures</a></li>
+        <li><a href="./fichier.html">Les fichiers en C</a></li>
+        <li><a href="./preprocesseur.html">Le preprocesseur</a></li>
+        <li><a href="./librairies.html">Les librairies</a></li>
+        <li><a href="./lexique.html">Index</a></li>
+
+</ul>
+</div>
+<!-- #navigation -->
+
+<div id="contenu">
+
+<h2>Les chaînes de caractères</h2>
+
+<h3>Introduction</h3>
+<p>Contrairement à d'autres langage, le type <em>string</em> n'existe pas en C. 
+Or cette notion est nécessaire pour permettre une interaction avec l'utilisateur qui s'exprime avec des mots.
+Il est donc important de pouvoir représenter et manipuler aisément les chaînes de caractères.</p>
+<p>Le langage C va utiliser des tableaux de caractères pour stocker les chaînes de caractères.
+Mais dans le but de simplifier les traitements de ces tableaux, il va introduire une particularité à ces tableaux :
+le tableau des caractères qui représente la chaîne sera toujours terminé par un caractère spécial, '<em>\0</em>' (0X00).</p>
+<p>Nous pouvons donc représenter la chaîne "Hello World\n" par le tableau suivant <img src="../images/HelloW.png" alt="un tableau de car" />.<br />
+Nous remarquons que le nombre de bytes utilisé dans ce tableau est 13, même si la chaîne ne compte que 12 caractères. </p>
+
+<h3>Définition de chaînes de caractères</h3>
+<p>L'utilisation de chaînes de caractères nécessite la définition de variables, 
+	soit sous forme d'un tableau de caractères <em class="code">char mot[25]</em>, 
+	soit sous la forme d'un pointeur sur un caractère <em class="code">char *mot</em>,  
+	la différence se situe au niveau de la gestion de la mémoire. 
+	La définition d'un tableau de caractères réserve un certain nombre de bytes en mémoire (indiqué par la taille du tableau); 
+	cela impose de copier les caractères dans le tableau. 
+	Par contre, la définition d'un pointeur sur un caractère ne réserve aucun espace mémoire pour stocker la chaîne, 
+	mais uniquement un pointeur, une adresse où retrouver la chaîne de caractères. 
+	Pour utiliser ce pointeur, il est nécessaire de l'affecter 
+	soit avec l'adresse d'une zone mémoire allouée (malloc), 
+	soit avec un tableau, 
+	soit avec un autre pointeur 
+	ou encore avec un littéral déclaré entre les caractères " (défini dans le data segment RO).  
+</p>
+
+<h3>Traitement des chaînes de caractères</h3>
+<p>Le premier point sur lequel il est nécessaire d'insister
+est qu'une chaîne de caractères est un tableau de caractères
+et que toutes les remarques énoncées à propos des tableaux restent d'application,
+comme le fait de s'assurer que la zone mémoire est suffisante pour stocker tous les caractères du tabeau,
+en n'oubliant pas de compter le caractère fin de chaîne '<em>\0</em>'.
+Dans cette optique, il n'est pas inutile de rappeler que l'espace mémoire peut 
+être réservé soit à la compilation <a href="./tableaux.html#id_definition"> <em class="code">char ligne[257]</em></a>
+lorsque l'on connaît la taille du tableau et qu'elle restera fixe durant la vie du processus,
+soit par une <a href="./pointeurs.html#id_memDyn">allocation dynamique</a>
+(si la taille est inconnue à la compilation ou bien que cette taille peut varier en cours d'exécution).
+Dans l'exemple suivant, nous définissons un tableau de 257 caractères permettant de stocker en mémoire une ligne lue sur stdin,
+comme nous ne connaissons pas à l'avance la taille de la ligne à lire, nous choisissons une taille que nous espérons suffisante
+et en lien avec les caractéristiques du système (la taille du buffer de lecture, multiple de 256).</p>
+<pre>char ligne[257];
+while(fgets(ligne, 257, stdin) != NULL) {
+	printf("La chaîne lue est : %s", ligne);
+}</pre>
+<p>La fonction <a href=""><em class="code">fgets</em></a> lit sur stdin une ligne (jusque et y compris le caractère '\n')
+et stocke les caractères lus dans le tableau <em class="code">ligne</em>, avec un maximum de 255 caractères, pour laisser une place au caractère '\0'
+ajouté par la fonction elle-même;
+si l'utilisateur a introduit une ligne plus longue, la suite de la ligne sera lue lors de l'appel suivant de la fonction <em class="code">fgets.</em> </p>
+<p>Plusieurs fonctions permettent l'affichage d'une chaîne de caractères; dans un premier temps, nous utiliserons la fonction <em class="code">printf</em>.
+Le format à utiliser est le format <em>%s</em>.</p> 
+<p>Un autre aspect à prendre en compte lors de l'utilisation des chaînes de caractères est que
+le langage C ne prévoit aucunement le stockage de la taille de la chaîne, cette information doit être gérée par l'application elle-même.</p>
+<p>Les <a href="./langage.html#id_valStr">littéraux</a> représentant une chaîne de caractères sont encadrés du caractère <em>"</em>, il sont stockés dans un segment de mémoire <em>RO</em>.</p>
+
+<h3>Les fonctions standards</h3>
+<p>Comme il n'existe pas de type String en C, les opérations que l'on désire accomplir sur les chaînes de caractères ne peuvent pas être réalisées au moyen d'opérateurs : pas d'opérateur  de concaténation, pas d'opérateur de comparaison, etc</p>
+<p>Pourtant ces traitements sont nécessaires.
+La solution mise en place par les concepteurs du langage est de proposer des fonctions standards,
+adaptées au système sur lequel tourne l'application.
+La déclaration de ces fonctions est reprise dans le fichier d'entête <em class="code">string.h</em>
+qu'il est donc impératif d'inclure dans chaque programme qui manipule des chaînes de caractères.</p>
+
+<h4>Les fonctions de base</h4>
+<p>Ces fonctions reçoivent une ou deux chaînes en paramètre.</p>
+<dl>
+<dt class="code"><a href="http://www.man-online.org/page/3-strlen">size_t strlen(const char *s)</a></dt>
+	<dd>fonction qui calcule la longueur (le nombre de caractères) de la chaîne passée en paramètre,
+	<em class="code">size_t</em> est une rédéfinition d'un type <em class="code">int</em>.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strcpy">char *strcpy(char *dest, const char *src)</a></dt>
+	<dd>fonction qui copie la chaîne contenue à l'adresse <em class="code">src</em>
+	dans la zone mémoire dont l'adresse est <em class="code">dest</em>; 
+	le programme doit s'assurer que <em class="code">dest</em> est suffisamment grande pour contenir le nombre de caractères de la source plus 1.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strcat">char *strcat(char *dest, const char *src)</a></dt>
+	<dd>fonction qui concatène la chaîne contenue à l'adresse <em class="code">src</em>
+	à la chaîne dont l'adresse est <em class="code">dest</em>;
+	le programme doit s'assurer que la longueur de la zone mémoire  <em class="code">dest</em>
+	est au moins égale à la somme des longueurs des deux chaînes plus 1.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strcmp">int strcmp(const char *dest, const char *src)</a></dt>
+	<dd>fonction qui compare deux chaînes de caractères;
+	la valeur renvoyée sera 0  si les contenus des chaînes sont égaux,
+	inférieure à 0 si la première est plus petite suivant l'ordre alphabétique, strictement positive si la première est supérieure.</p>
+	<p>Attention, il ne faut pas confondre avec la comparaison
+	<pre>if (p == q){
+		printf(" ??????????????????\n");
+}</pre>
+qui compare 2 pointeurs, c-à-d 2 adresses mémoires. </dd>
+</dl>
+
+<h4>Les fonctions de base avec une taille maximale</h4>
+<p>Les fonctions de base ne permettent pas de limiter le traitement des chaînes à une certaine taille, ce qui peut être gênant.
+La librairie standard comprend d'autres fonctions qui reçoivent un paramètre supplémentaire, une taille maximale.</p>
+<dl>
+<dt class="code"><a href="http://www.man-online.org/page/3-strncpy">char *strncpy(char *dest, const char *src, size_t n)</a></dt>
+	<dd>fonction qui copie la chaîne contenue à l'adresse <em class="code">src</em>
+	dans la zone mémoire dont l'adresse est <em class="code">dest</em>; 
+	La copie se termine au <em class="code">\0</em> ou après n caractères,
+	mais dans ce dernier cas, le caractère <em class="code">\0</em> n'est pas recopié dans le tableau <em class="code">dest</em>.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strncat">char *strncat(char *dest, const char *src, size_t n)</a></dt>
+	<dd>fonction qui concatène la chaîne contenue à l'adresse <em class="code">src</em>
+	à la chaîne dont l'adresse est <em class="code">dest</em>;
+	La concaténation se termine au <em class="code">\0</em> ou après n caractères,
+	mais dans ce dernier cas, le caractère <em class="code">\0</em> n'est pas recopié dans le tableau <em class="code">dest</em>.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strncmp">int strncmp(const char *dest, const char *src, size_t n)</a></dt>
+	<dd>fonction qui compare deux chaînes de caractères;
+	la valeur renvoyée sur nulle si les chaînes sont égales,
+	inférieure à 0 si la première est plus petite suivant l'ordre alphabétique, plus grand que 0 si la première est supérieure. </dd>
+</dl>
+
+<h4>Les fonctions de recherches</h4>
+<p></p>
+<dl>
+<dt class="code"><a href="http://www.man-online.org/page/3-strchr">char *strchr(const char *chaine, int car)</a></dt>
+	<dd>fonction qui cherche le caractère <em class="code">car</em> dans la chaîne <em class="code">chaine</em>,
+	la fonction retourne l'adresse de la première occurrence du caractère ou <em class="code">NULL</em> si le caractère n'est pas trouvé.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strrchr">char *strrchr(const char *chaine, int car)</a></dt>
+	<dd>fonction qui cherche le caractère <em class="code">car</em> dans la chaîne <em class="code">chaine</em>,
+	la fonction retourne l'adresse de la dernière occurrence du caractère ou <em class="code">NULL</em> si le caractère n'est pas trouvé.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strstr">char *strstr(const char *chaine, const char *sub)</a></dt>
+	<dd>fonction qui cherche la sous-chaine <em class="code">sub</em> dans la chaîne <em class="code">chaine</em>,
+	la fonction retourne l'adresse de la première occurrence de la sous-chaîne ou <em class="code">NULL</em> si le caractère n'est pas trouvé.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strspn">size_t strspn(const char *chaine, const char *ensemble)</a></dt>
+	<dd>fonction qui cherche le premier caractère  de la chaîne <em class="code">chaine</em> qui n'appartient pas à l'<em class="code">ensemble</em>,
+	la fonction retourne l'indice de ce caractère ou la longueur de la chaîne si tous les caractères sont présents.</dd>
+<dt class="code" id="id_strcspn"><a href="http://www.man-online.org/page/3-strcspn">size_t strcspn(const char *chaine, const char *ensemble)</a></dt>
+	<dd>fonction qui cherche le premier caractère  de la chaîne <em class="code">chaine</em> qui appartient à l'<em class="code">ensemble</em>,
+	la fonction retourne l'indice de ce caractère ou la longueur de la chaîne si aucun caractère n'est  présent.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strpbrk">char *strpbrk(const char *chaine, const char *ensemble)</a></dt>
+	<dd>fonction qui réalise le même traitement que <a href="#id_strcspn">strcspn</a>
+	mais renvoie un pointeur sur le premier caractère  de la chaîne <em class="code">chaine</em> qui appartient pas à l'<em class="code">ensemble</em>,
+	ou un pointeur nul si aucun caractère n'est présent.</dd>
+</dl>
+
+<h4>La fonction strtok</h4>
+<p>Cette fonction permet de découper une chaîne de caractères en <em>token</em>. Mais son utilisation est très différente du <em>tokenizer</em> de java.<br />
+Sa déclaration <a href="http://www.man-online.org/page/3-strtok">char * strtok(char *str, const char *delim)</a>
+nous apprend que la fonction reçoit 2 arguments,
+le premier est la chaîne de caractères à analyser</p>
+<p><img src="../images/strtok1.png" alt="exemple de strtok" /></p>
+et le second est une chaîne de caractères reprenant la liste des séparateurs pris en compte pour déterminer le token.
+La fonction renvoie l'adresse du token. </p>
+<pre>char src[] = "IPL	02/764 46 46";
+char *nom;
+if ((nom = strtok(src, "\t \r")) == NULL){
+	fprintf(stderr, "???\n");
+	return 1;
+} </pre>
+<p>Attention, la fonction va modifier la chaîne source en remplaçant le délimiteur par le caractère <em class="code">\0</em> qui détermine la fin du token.</p>
+<p><img src="../images/strtok2.png" alt="exemple de strtok" /><br /></p>
+<p>Pour obtenir le token suivant, il faut ré-appeler la fonction, mais cette fois le premier argument n'est plus l'adresse d'une chaîne
+mais le pointeur nul <em class="code">NULL</em> pour spécifier à la fonction que l'on continue de travailler sur la chaîne traitée lors de l'appel précédent. 
+La liste des délimiteurs peut être modifiée lors de chaque appel de la fonction.</p>
+<pre>	char *prefixe;
+
+	if ((prefixe = strtok(NULL, "/")) == NULL){
+		fprintf(stderr, "???\n");
+		return 1;
+	}</pre>
+<p><img src="../images/strtok3.png" alt="exemple de strtok" /></p>
+<p>Si la fonction ne trouve pas le séparateur, elle considère la fin de la chaine source comme le token à renvoyer.</p>
+<pre>	char *numero;
+	if ((numero = strtok(NULL, ":")) == NULL){
+		fprintf(stderr, "???\n");
+		return 1;
+	} </pre>
+<p><img src="../images/strtok4.png" alt="exemple de strtok" /><br /></p>
+<p>Lorsque la chaîne est vide, la fonction renvoie un pointeur nul.</p>
+<pre>	char *adresse;
+	if ((adresse = strtok(NULL, ":;")) == NULL){
+		fprintf(stderr, "C'est fini ...\n");
+		return 1;
+	}
+</pre>
+<p><img src="../images/strtok5.png" alt="exemple de strtok" /></p>
+
+<h4>Les fonctions de conversions numériques</h4>
+<p>La conversion d'une chaîne de caractères en la valeur numérique qu'elle représente peut se faire en utilisant des fonctions de conversion simple
+<em class="code">double atof(const char *str)</em>, <em class="code">int atoi(const char *str)</em>, <em class="code">long atol(const char *str)</em>,
+qui ne donnent aucune information sur le résultat ou grâce à des fonctions qui fourniront des informations exploitables
+pour s'assurer que la conversion est correcte, 
+<em class="code">double strtol(const char *str, char **pptr)</em>,
+<em class="code">long strtol(const char *str, char **pptr, int base)</em>,
+<em class="code">unsigned long strtoul(const char *str, char **pptr, int base)</em>,
+Ces fonctions nécessitent l'inclusion du fichier <em class="code">stdlib.h</em>.</p>
+<p>Voici les fonctions de conversions simples</p>
+<dl>
+<dt class="code"><a href="http://www.man-online.org/page/3-atof">double atof(const char *str)</a></dt>
+	<dd>Cette fonction convertit la valeur comprise dans la chaîne <em class="code">str</em> en un nombre <em class="code">double</em>,
+	la conversion se termine au premier caractère qui n'est pas interprétable.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-atoi">int atoi(const char *str)</a></dt>
+	<dd>Cette fonction convertit la valeur comprise dans la chaîne <em class="code">str</em> en un nombre <em class="code">int</em>,
+	la conversion se termine au premier caractère qui n'est pas interprétable.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-atol">int atol(const char *str)</a></dt>
+	<dd>Cette fonction convertit la valeur comprise dans la chaîne <em class="code">str</em> en un nombre <em class="code">long</em>,
+	la conversion se termine au premier caractère qui n'est pas interprétable.</dd>
+</dl>
+<p>Et celles qui convertissent la chaine avec une référence sur le caractère qui cause l'arrêt de la conversion.
+Dans ces fonctions, le paramètre <em class="code">char **pptr</em> permet à la fonction de renvoyer l'adresse du caractère qui a causé l'arrêt de la conversion.
+De plus la fonction positionne la variable système  <em class="code">errno</em> à un code d'erreur qui indique la raison de l'arrêt de la conversion.</p>
+<dl>
+<dt class="code"><a href="http://www.man-online.org/page/3-strtod">double strtod(const char *str, char **pptr)</a></dt>
+	<dd>Cette fonction convertit la valeur comprise dans la chaîne <em class="code">str</em> en un nombre <em class="code">double</em>,
+	la conversion se termine au premier caractère qui n'est pas interprétable, son adresse est renvoyée dans le paramètre <em class="code">pptr</em></dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strtol">long strtol(const char *str, char **pptr, int base)</a></dt>
+	<dd>Cette fonction convertit la valeur comprise dans la chaîne <em class="code">str</em> en un nombre <em class="code">long int</em>.
+	Elle convertit un nombre encodé dans une base comprise entre 2 et 36.
+	La conversion se termine au premier caractère qui n'est pas interprétable.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-strtoul">int strtoul(const char *str, char **pptr, int base)</a></dt>
+	<dd>Cette fonction convertit la valeur comprise dans la chaîne <em class="code">str</em> en un nombre <em class="code">unsigned long int</em>.
+	Elle convertit un nombre encodé dans une base comprise entre 2 et 36.
+	La conversion se termine au premier caractère qui n'est pas interprétable.</dd>
+</dl>
+
+<h4>Les fonctions de traitements sur la mémoire</h4>
+<p>Semblables aux fonctions de traitement des chaînes de caractères, elles utilisent des zones mémoires non spécifiques aux chaînes de caractères
+et donc se basent sur une dimension pour limiter leur action.</p>
+<dl>
+<dt class="code"><a href="http://www.man-online.org/page/3-memchr">void *memchr(const  void *ptr, int car , size_t n)</a></dt>
+	<dd>fonction qui cherche le caractère <em class="code">car</em> dans la zone mémoire d'adresse <em class="code">ptr</em> sur <em class="code">n</em> bytes,
+	la fonction retourne l'adresse de la première occurrence du caractère ou <em class="code">NULL</em> si le caractère n'est pas trouvé.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-memcmp">int memcmp(const  void *ptr1, const void *ptr2, size_t n)</a></dt>
+	<dd>fonction qui compare deux zones de mémoire.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-memcpy">char *memcpy(void *dest, const  void *src , size_t n)</a></dt>
+	<dd>fonction qui copie une zone mémoire dans une autre.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-memmove">char *memmove(void *dest, const void *src , size_t n)</a></dt>
+	<dd>fonction qui copie une zone mémoire dans une autre, les zones mémoire peuvent se superposer.
+	La fonction retourne l'adresse de la première occurrence du caractère ou <em class="code">NULL</em> si le caractère n'est pas trouvé.</dd>
+<dt class="code"><a href="http://www.man-online.org/page/3-memset">void *memset(void *ptr, int car , size_t n)</a></dt>
+	<dd>fonction qui place n caractères <em class="code">car</em> dans la zone mémoire <em class="code">ptr</em>.</dd>
+</dl>
+
+<h3>Tableaux de chaînes de caractères</h3>
+<p>En accord avec la définition d'une chaîne de caractères, nous comprenons aisément qu'un tableau de chaînes de caractères est en fait
+un tableau de tableaux de caractères, peut-être un peu particulier.
+</p>
+
+<h4>Tables définies à la compilation</h4>
+<p>Une table de chaînes de caractères peut être définie de deux manières différentes,
+soit comme une table de tables de caractères</p><pre>char tabTab[4][4]={"ABC", "DE", "F"};</pre>
+<p><img src="../images/TableDeTables.png" alt="table de tables" /><br />
+soit comme une table de pointeurs sur un caractère</p><pre>char *tabPtr[4]={"ABC", "DE", "F"};</pre>
+<p><img src="../images/TableDePointeurs.png" alt="table de pointeurs" /><br /></p>
+<p>Dans le second cas, la table <em class="code">tabPtr</em> contient des adresses de chaines stockées dans le Data Segment,
+tandis que dans le premier cas la table <em class="code">tabTab</em>, contient des tableaux de caractères.
+</p>
+
+<h4>Tables dynamiques</h4>
+<p>Pour allouer une table de chaînes de caractères  <em class="code">char **table</em> dynamiquement,
+il faut d'abord allouer la table des pointeurs <em class="code">table=(char **)malloc((n+1)*sizeof(char*))</em>
+où n+1 permet de tenir compte du pointeur nul qui marquera la fin de la table
+et ensuite pour chaque pointeur, allouer la mémoire suffisante et recopier la chaîne.</p>
+<pre>char **tabDyn;
+if ((tabDyn = (char **)malloc(4*sizeof(char*))) == NULL){
+	perror("Malloc KO\n");
+	return1;
+}
+if ((*tabDyn = (char *)malloc((strlen(tableDesPointeurs[0])+1)*sizeof(char))) == NULL){
+	perror("Malloc KO\n");
+	return1;
+}
+strcpy(*tabDyn, *tableDesPointeurs);
+....
+</pre>
+<p><img src="../images/TableDynamique.png" alt="table dynamique" /></p>
+
+<h4>Un cas particulier, le tableau des arguments du programme</h4>
+<p>Lorsque l'utilisateur veut passer des arguments au programme, il doit utiliser une structure particulière, un tableau des arguments
+déclaré comme paramètre de la fonction principale <em class="code">main</em>.
+Chaque argument de l'application est une chaîne de caractères qui est reprise dans un tableau,
+le premier élément de cette table, l'élément 0 du tableau est le nom du processus.
+l'autre paramètre de cette fonction <em class="code">main</em>, de type <em class="code">int</em> donne le nombre de chaînes dans la table,
+à savoir le nombre des arguments + 1.
+Le dernier élément de la table est un pointeur nul pour marquer la fin de la table.</p>
+<p>Si l'utilisateur appelle le programme suivant</p>
+<pre>int main(int argc, char *argv[]){
+	printf("Le nom du processus est %s\n", *argv);
+	if (argc == 3){
+		printf("Le nom du premier argument est %s\n", *(argv+1));
+		printf("Le nom du second argument est %s\n", argv[2]);
+	}
+}
+	</pre><p>en introduisant dans le shell la commande suivante :</p> <pre>./affiche arg1 arg2</pre>
+voici le résultat qui s'affichera<pre>
+Le nom du processus est ./affiche
+Le nom du premier argument est arg1
+Le nom du second argument est arg2
+</pre>
+
+<h3>Traitement des caractères</h3>
+<p>Avant de terminer ce chapitre, passons rapidement en revue quelques macros de traitements d'un caractère.</p>
+
+<p>Les traitements essentiels des caractères ont été codés dans des macros, définies dans le fichier d'entête <em class="code">&lt;ctype.h&gt;</em>.
+Ces macros permettent de caractériser le caractère (stocké dans un <em class="code">char</em> ou stocké dans un <em class="code">int</em>), comme
+</p>
+<dl>
+	<dt class="code">isalpha(c)</dt><dd>teste si c est une lettre</dd> 
+	<dt class="code">islower(c)</dt><dd>teste si c est une lettre minuscule</dd>
+	<dt class="code">isupper(c)</dt><dd>teste si c est une lettre majuscule</dd>
+	<dt class="code">isdigit(c)</dt><dd>teste si c est une chiffre</dd>
+	<dt class="code">isalnum(c)</dt><dd>teste si c est une lettre ou un chiffre</dd>
+	<dt class="code">isxdigit(c)</dt><dd>teste si c est une chiffre hexadécimal</dd>
+	<dt class="code">ispunct(c)</dt><dd>teste si c est un caractère de ponctuation</dd>
+	<dt class="code">isprint(c)</dt><dd>teste si c est un caractère imprimable (32 à 126)</dd>
+	<dt class="code">isgraph(c)</dt><dd>teste si c est un caractère imprimable visible (33 à 126)</dd>
+	<dt class="code">iscntrl(c)</dt><dd>teste si c est un caractère de contrôle (0 à 31 ou 127)</dd>
+	<dt class="code">isspace(c)</dt><dd>teste si c est un espacement (' ', '\t', '\n', '\r', '\f', '\v')</dd>
+	<dt class="code">isascii(c)</dt><dd>teste si c est compris entre 0 et 127</dd>
+</dl>
+ou de les modifier comme 
+<dl>
+	<dt class="code">tolower(c)</dt><dd>renvoie le caractère en minuscule</dd>
+	<dt class="code">toupper(c)</dt><dd>renvoie le caractère en majuscule</dd>
+</dl>
+</div>
+<!-- #contenu -->
+
+
+<p id="copyright"> <a
+	href="mailto:bernard.henriet@ipl.be">Bernard Henriet</a> &copy; 2015 <a href="http://www.ipl.be"><img src="../images/ipl_bleu.png" alt="logo ipl" /></a></p>
+
+</div>
+<!-- #global -->
+
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>cours de Langage C</title>
+<link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../css/modele04.css"
+	media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/infoB.css" media="all" />
+</head>
+
+<body>
+
+<div id="global">
+
+<div id="entete">
+<h1>Langage C</h1>
+<h2 class="sous-titre" id="i_perl">Introduction</h2>
+
+</div>
+<!-- #entete -->
+
+
+<div id="navigation">
+<ul>
+
+        <li><a href="../index.html">Introduction</a></li>
+        <li><a href="./langage.html">Les éléments du langage</a></li>
+        <li><a href="./instructions.html">Les instructions</a></li>
+        <li><a href="./tableaux.html">Les tableaux</a></li>
+        <li><a href="./pointeurs.html">Les pointeurs</a></li>
+        <li><a href="./chaines.html">Les chaines de caractères</a></li>
+        <li><a href="./fonctions.html">Les fonctions</a></li>
+        <li><a href="./modularisation.html">La modularisation</a></li>
+        <li><a href="./classes.html">Les classes d'allocation</a></li>
+        <li><a href="./structures.html">Les structures</a></li>
+        <li><a href="./fichier.html">Les fichiers en C</a></li>
+        <li><a href="./preprocesseur.html">Le preprocesseur</a></li>
+        <li><a href="./librairies.html">Les librairies</a></li>
+        <li><a href="./lexique.html">Index</a></li>
+
+</ul>
+</div>
+<!-- #navigation -->
+
+<div id="contenu">
+
+<h2>Les éléments du langage</h2>
+
+<p>Tout langage de programmation utilise un <a href="#i_caract">ensemble de caractères</a> 
+qui assemblés forment les différents éléments de ce langage, notamment les <a href="#i_comm">commentaires</a>, <a href="#i_motsR">les mots-réservés</a>, <a href="#i_identif">les identificateurs</a>, etc.
+</p>
+<h3 id="i_caract">Les caractères permis</h3>
+<p>
+<ul>
+<li>Les lettres de l'alphabet (majuscules et minuscules)</li>
+<li>Les chiffres.</li>
+<li>Les caractères spéciaux (dans l'ordre Ascii) 
+! " # % & ' ( ) * + , - . / : ; < = > ? [ \ ] ^ _ { | } </li>
+<li>Certains caratères, les séparateurs de mots, sont permis mais ignorés par le compilateur, ce sont 
+le caractère d'espacement &lt;sp&gt;, la tabulation &lt;tab&gt;, la tabulation verticale, le carriage return, le retour à la ligne '\n', le saut de page '\f'</li>
+</ul>
+</p>
+<h3 id="i_comm">Les commentaires</h3>
+<p>Ils sont importants car ils permettent de se souvenir des intentions mises lors de l'écriture du programme, ou
+d'expliquer le code à d'autres lecteurs.  En ANSI C, ils commencent par les symboles <em>/*</em> et se terminent par  <em>*/</em> . 
+Ils peuvent se prolonger sur plusieurs lignes mais ne peuvent en aucun cas s'imbriquer. 
+Par exemple 
+<pre>	 #include &lt;stdio.h&gt;
+
+	 /* début du programme */
+	 int main(){        /* fonction principale */
+		printf("Hello world\n");
+		return 0;
+	 }
+</pre>
+Vous pouvez les utiliser pour introduire votre fichier, 
+expliquer le rôle d'une variable ou d'une fonction, décrire un morceau du code.
+</p>
+<h3 id="i_motsR">Les mots réservés</h3>
+<p> Le langage C se réserve l'usage d'un certain nombre de mots 
+qui de ce fait ne peuvent pas être choisis par le programmeur comme identificateurs de variables ou de fonctions. Ces mots sont repris dans la liste suivante : 
+<em>asm</em>,	<em>auto</em>,	<em>break</em>,	<em>case</em>,	<em>char</em>,	<em>const</em>,	<em>continue</em>,
+<em>default</em>,	<em>do</em>,	<em>double</em>,	<em>else</em>,	<em>entry</em>,	<em>enum</em>,	<em>extern</em>,
+<em>float</em>,	<em>for</em>,	<em>fortran</em>,	<em>goto</em>,	<em>if</em>,	<em>int</em>,	<em>long</em>,
+<em>register</em>,	<em>return</em>,	<em>short</em>,	<em>signed</em>,	<em>sizeof</em>,	<em>static</em>,	<em>struct</em>,
+<em>switch</em>,	<em>typedef</em>,	<em>union</em>,	<em>unsigned</em>,	<em>void</em>,	<em>volatile</em>,	<em>while</em>.
+</p>
+
+<h3>Les types</h3>
+<p> 
+Le langage C est assez pauvre en types de base, il ne connaît que les types numériques <a href="#id_tInt">entier</a>
+ et <a href="#id_tReel">réel</a>.
+Par contre pas de type <a href="#id_tBool">booléen</a> (simulé par un type entier),
+ ni de type <a href="#id_tStr">chaîne de caractères</a>, considérée comme un tableau de caractères un peu particulier.
+</p>
+<h4 id="id_tInt">Les types entiers</h4>
+<p> Ils sont codés sur un nombre déterminé de bytes. Le tableau suivant reprend les différents types entiers.
+</p>
+<table>
+<tr>
+	<td rowspan=3>1 byte</td>
+	<td>char</td>
+	<td></td>
+</tr>
+<tr>
+	<td>unsigned char</td>
+	<td>0 à 255</td>
+</tr>
+<tr>
+	<td>signed char (en ANSI C)</td>
+	<td>-128 à 127</td>
+</tr>
+<tr>
+	<td rowspan=2>2 bytes</td>
+	<td>short (short int)</td>
+	<td>-32768 à 32767</td>
+</tr>
+<tr>
+	<td>unsigned short (unsigned short int)</td>
+	<td>0 à 65535</td>
+</tr>
+<tr>
+	<td rowspan=2>2 ou 4 bytes</td>
+	<td>int</td>
+	<td></td>
+</tr>
+<tr>
+	<td>unsigned (unsigned int)</td>
+	<td></td>
+</tr>
+<tr>
+	<td rowspan=2>4 bytes</td>
+	<td>long (long int)</td>
+	<td>-2147483648 à 2147483647</td>
+</tr>
+<tr>
+	<td>unsigned long (unsigned long int)</td>
+	<td>0 à 4294967295</td>
+</tr>
+</table>
+<p>Le type <em>int</em> peut être codé sur 2 ou 4 bytes en fonction du compilateur, mais nous aurons toujours sizeof(short) <= sizeof(int) <= sizeof(long)
+</p>
+<p>Le type <em>char</em> est un type entier qui contient le code Ascii du caractère mais qui peut être utilisé dans les expressions arithmétiques.
+</p>
+<h4 id="id_tReel">Les types réels</h4>
+<p> Leurs tailles sont laissées à la discrétion du compilateur (notamment en fonction du processeur).
+	Le langage C (ANSI C) connaît 3 types réels : <em>float</em>, <em>double</em> et <em>long double</em>.
+</p>
+
+<h4 id="id_tBool">Le pseudo-type booléen</h4>
+<p> Le type booléen n'existant pas, il est recommandé d'utiliser un type <a href="id_tInt">entier</a>,
+sachant que la valeur <em>FAUX</em> correspondra à la valeur nulle 0 tandis que <em>VRAI</em> sera représentée par tout autre valeur. Toutefois, le résultat d'une expression logique vraie est 1.
+</p>
+<h3 id="id_operateurs" > opérateurs</h3>
+<p>La plupart des opérateurs définis dans le langage C ont été repris dans la définition du Java.
+Voici les principaux, classés par ordre de priorité , nous en découvrirons d'autres par la suite.
+<table id="id_priorite">
+<tr>
+	<th>Niveau de priorité</th>
+	<th>Opérateur</th>
+	<th>description</th>
+	<th>Associativité</th>
+</tr>
+<tr>
+	<td rowspan=2>17</td>
+	<td>[]</td>
+	<td>indice de tableau</td>
+	<td rowspan=2>gauche</td>
+</tr>
+<tr>
+	<td>(...)</td>
+	<td>appel de fonction</td>
+</tr>
+<tr>
+	<td rowspan=2>16</td>
+	<td>++</td>
+	<td>post-incrémentation</td>
+	<td rowspan=2>gauche</td>
+</tr>
+<tr>
+	<td>--</td>
+	<td>post-décrémentation</td>
+</tr>
+<tr>
+	<td rowspan=2>15</td>
+	<td>++</td>
+	<td>pré-incrémentation</td>
+	<td rowspan=2>droite</td>
+</tr>
+<tr>
+	<td>--</td>
+	<td>pré-décrémentation</td>
+</tr>
+<tr>
+	<td rowspan=7>15</td>
+	<td>sizeof</td>
+	<td>calcule la taille d'une variable(d'un type)</td>
+	<td rowspan=7>droite</td>
+</tr>
+<tr>
+	<td>~</td>
+	<td>complément à 1 (inversion des bits)</td>
+</tr>
+<tr>
+	<td>!</td>
+	<td>non logique </td>
+</tr>
+<tr>
+	<td>+</td>
+	<td>identité (opérateur unaire)</td>
+</tr>
+<tr>
+	<td>-</td>
+	<td>changement de signe (complément à 2)</td>
+</tr>
+<tr>
+	<td class="nv">&</td>
+	<td class="nv">adresse</td>
+</tr>
+<tr>
+	<td class="nv">*</td>
+	<td class="nv">indirection, déréférenciation</td>
+</tr>
+<tr>
+	<td >14</td>
+	<td>(type)</td>
+	<td>cast, changement forcé de type</td>
+	<td>droite</td>
+</tr>
+<tr>
+	<td rowspan=3>13</td>
+	<td>*</td>
+	<td>multiplication</td>
+	<td rowspan=3>gauche</td>
+</tr>
+<tr>
+	<td><a href="#" class="infoB">/<span>réalise une division entière si les 2 opérandes sont entiers, sinon une division réelle</span></a></td>
+	<td>division </td>
+</tr>
+<tr>
+	<td>%</td>
+	<td>modulo (uniquement si opérandes entiers)</td>
+</tr>
+<tr>
+	<td rowspan=2>12</td>
+	<td>+</td>
+	<td>addition</td>
+	<td rowspan=2>gauche</td>
+</tr>
+<tr>
+	<td>-</td>
+	<td>soustraction</td>
+</tr>
+<tr>
+	<td rowspan=2>11</td>
+	<td>&lt;&lt;</td>
+	<td>shift vers la gauche</td>
+	<td rowspan=2>gauche</td>
+</tr>
+<tr>
+	<td>&gt;&gt;</td>
+	<td>shift vers la droite (shift logique si premier opérande est unsigned)</td>
+</tr>
+<tr>
+	<td rowspan=4>10</td>
+	<td>&lt;;</td>
+	<td>inférieur</td>
+	<td rowspan=4>gauche</td>
+</tr>
+<tr>
+	<td>&gt;</td>
+	<td>supérieur</td>
+</tr>
+<tr>
+	<td>&lt;=</td>
+	<td>inférieur ou égal</td>
+</tr>
+<tr>
+	<td>&gt;=</td>
+	<td>supérieur ou égal</td>
+</tr>
+<tr>
+	<td rowspan=2>9</td>
+	<td>==</td>
+	<td>égal</td>
+	<td rowspan=2>gauche</td>
+</tr>
+<tr>
+	<td>!=</td>
+	<td>différent</td>
+</tr>
+<tr>
+	<td>8</td>
+	<td>&</td>
+	<td>AND bit à bit</td>
+	<td>gauche</td>
+</tr>
+<tr>
+	<td>7</td>
+	<td>^</td>
+	<td>XOR bit à bit</td>
+	<td>gauche</td>
+</tr>
+<tr>
+	<td>6</td>
+	<td>|</td>
+	<td>OR bit à bit</td>
+	<td>gauche</td>
+</tr>
+<tr>
+	<td>5</td>
+	<td>&&</td>
+	<td>AND logique (évaluation court-circuitée)</td>
+	<td>gauche</td>
+</tr>
+<tr>
+	<td>4</td>
+	<td>||</td>
+	<td>OR logique (évaluation court-circuitée)</td>
+	<td>gauche</td>
+</tr>
+<tr>
+	<td>3</td>
+	<td>? :</td>
+	<td>opérateur ternaire conditionnel</td>
+	<td>droite</td>
+</tr>
+<tr>
+	<td>2</td>
+	<td>= *= /= %= <br />
+	+= -= &lt;&lt;= &gt;&gt;= <br />
+	&= ^= |=</td>
+	<td>affectation</td>
+	<td >droite</td>
+</tr>
+<tr>
+	<td>1</td>
+	<td>,</td>
+	<td>évaluation séquentielle</td>
+	<td>gauche</td>
+</tr>
+</table>
+</p>
+
+<h3 >Les conversions  de types </h3>
+<p>C réalise un certain nombre de conversions pour interpréter une valeur dans un autre type, soit <a href="#i_convCast">explicite grâce au cast</a>, soit de manière <a href="#i_convImpl">implicite</a>.
+</p>
+<h4 id="i_convCast">Conversions explicites par cast</h4>
+<p>Le cast d'une expression permet de changer le type de la valeur évaluée par cette expression.
+</p>
+<table>
+<tr>
+	<th>type de destination (cast)</th>
+	<th>type d'origine</th>
+	<th>exemple</th>
+	<th>Remarque</th>
+</tr>
+<tr>
+	<td>un type entier</td>
+	<td>un type entier ou réel</td>
+	<td>i = (int)x</td>
+	<td>ATTENTION, si x est réelle, il y a perte de la partie décimale de la valeur</td>
+</tr>
+<tr>
+	<td>un type réel</td>
+	<td>un type entier ou réel</td>
+	<td>d = (double)i</td>
+	<td></td>
+</tr>
+</table>
+
+<h4 id="i_convImpl">Conversions implicites</h4>
+<p>Par ailleurs, lors de l'évaluation d'une expression, C convertit automatiquement <a href="#i_convUnaire">certaines expressions</a> dans un type préférentiel.
+	Avant d'utiliser  un opérateur binaire, (sauf <em>&lt;&lt;</em> et <em>&gt;&gt;</em>),
+	une <a href="#i_convBin">conversion binaire</a> peut également être réalisée pour permettre aux deux opérandes d'être de même type;
+	enfin, une conversion peut être réalisée lors d'<a href="#i_convAffect">une affectation</a>.
+</p>
+<p id="i_convUnaire">Les <em>conversions unaires</em> vont s'appliquer à un seul opérande, en respectant les règles énoncées dans le tableau suivant.
+</p>
+<table>
+<tr>
+	<th>type original de l'opérande</th>
+	<th>est converti en</th>
+</tr>
+<tr>
+	<td>char ou short</td>
+	<td>int</td>
+</tr>
+<tr>
+	<td>unsigned char ou unsigned short</td>
+	<td>int ou unsigned(le plus petit qui parvient à garder la valeur)</td>
+</tr>
+</table>
+<p id="i_convBin">Les <em>conversions binaires</em> vont s'appliquer sur un des opérandes, en respectant la hiérarchie des types suivantes :<br />
+	int &lt; unsigned &lt; long &lt; unsigned long &lt; float &lt; double<br />
+	l'opérande d'un type inférieur est promu dans le type de l'autre opérande.
+</p>
+<p id="i_convAffect">Les <em>conversions d'affectation</em> permettent à l'opérande de droite d'être converti pour rester compatible avec le type de l'opérande de gauche.
+</p>
+<p>Dans l'exemple suivant, 
+<pre>long a;
+int b = 4;
+double x = 4.2;
+double y = 2.3;
+
+a = (int)x*y + b;
+</pre>
+en fonction de la priorité des opérateurs, nous rencontrons les conversions suivantes :
+<table>
+<tr>
+	<td>(int)x</td>
+	<td>convertion explicite</td>
+	<td>la valeur réelle contenue dans la variable double x est convertie en int avec perte de la partie décimale</td>
+</tr>
+<tr>
+	<td>(int)x*y</td>
+	<td>convertion binaire</td>
+	<td>la multiplication est réalisée dans le type double, le premier opérande (int)x est converti en double (comme y)</td>
+</tr>
+<tr>
+	<td>(int)x*y + b</td>
+	<td>convertion binaire</td>
+	<td>la somme est réalisée dans le type double, le deuxième opérande b est converti en double </td>
+</tr>
+<tr>
+	<td>a = (int)x*y + b</td>
+	<td>convertion d'affectation</td>
+	<td>le résultat est converti en long int avec perte de la partie décimale</td>
+</tr>
+</table>
+Que vaut le résultat de cette expression ?
+</p> 
+
+<h3 >Les littéraux </h3>
+<p>Il est tout à fait possible d'introduire des valeurs dans le code du programme.
+Ces valeurs peuvent être 
+des valeurs <a href="#id_valInt">entières</a> ou <a href="#id_valReel">réelles</a>, 
+des <a href="#id_valCar">caractères</a> et même des <a href="#id_valStr">chaînes de caractères (strings)</a>.
+</p>
+<h4 id="id_valInt">représentant une valeur entière</h4>
+<ul>
+	<li>en notation décimale : 15, -232</li>
+	<li>en notation décimale (pour un long) : 15L</li>
+	<li>en notation décimale (pour un unsigned) : 15U</li>
+	<li>en notation décimale (pour un unsigned long ) : 15UL</li>
+	<li>en notation octale : 017</li>
+	<li>en notation hexadécimale : 0XF, 0XABC3</li>
+</ul>
+<h4 id="id_valReel">représentant une valeur réelles</h4>
+<ul>
+	<li>1.45, -3.14, 31.4E-14</li>
+	<li>pour des float : 1.45F, -2E3F</li>
+	<li>pour des long double : 1.45L, -2E3L</li>
+</ul>
+<h4 id="id_valCar">représentant un caractère</h4>
+<p>En général, C considère les caractères sur un byte.
+Les caractères sont introduits entre des simples quotes. Ils peuvent être donnés 
+</p>
+<dl>
+	<dt>sous forme de caractères</dt><dd>'a, 'z', '2'</dd>
+	<dt>en notation octale</dt><dd>'\377', '\0'</dd>
+	<dt>sous forme échappée</dt><dd>
+		<ul>
+		<li>'\a' : sonnerie</li>
+		<li>'\b' : backspace</li>
+		<li>'\f' : saut de page</li>
+		<li>'\n' : passage à la ligne</li>
+		<li>'\r' : carriage return</li>
+		<li>'\t' : tabulation</li>
+		<li>'\v' : tabulation verticale</li>
+		<li>'\\' : le caractère \</li>
+		</ul></dd>
+	<dt>en notation hexadécimale</dt><dd>'\xab'</dd>
+</dl>
+<h4 id="id_valStr">représentant une chaine de caractères</h4>
+<p> Elles sont notées entre les caractères doubles quotes <em>"</em>, par exemple <em class="code">"Voici une chaine de caractères"</em>.
+</p>
+<p> Elles sont stockées, en mémoire, dans dans le Data Segment, ce qui signifie qu'elles sont invariables durant la vie de l'application.
+</p>
+<p> Elles sont constituées  du tableau formé par les caractères  de la chaîne et terminées par le caractère de code Ascii 0X00 ('<em>\0</em>').
+</p>
+<p> Deux chaines de caractères séparées par un espace (au sens C du terme) sont concaténées à la compilation pour n'en former qu'une seule.
+</p>
+<p>Il est possible d'incorporer des caractères représentés par leur valeur octale ou hexadécimale, protégés par '\'. Il est toute fois important d'être prudent car si la valeur du caractère ainsi précisée dépasse la taille d'un byte ou utilise des symboles incorrects, le compilateur interprétera la valeur en fonction de ses règles de conversion. Par exemple <em class="code">"\191"</em> sera constituée des caractères '\1', '9', '1', '\0', de même "<em class="code">\1111"</em>, sera une chaine de caractères de 2 caractères '\111', '1' et '\0', tout comme <em class="code">"xabc"</em> constituée de '\xab', 'c', et '\0'. 
+</p>
+
+<h3 id="i_identif">Les identificateurs</h3>
+<p> 
+Il représente le nom d'un élément utilisé dans un programme pour identifier une variable, une constante, fonction, etc. 
+</p>
+<p>
+Ils sont composés de lettres (minuscules ou majuscules), de chiffres, et du caractère '_', 
+mais il ne peuvent pas commencer par un chiffre. 
+Le C est "case sensitive", c-à-d que les minuscules et majuscules sont considérées comme des caractères différents.
+</p>
+<h4 id="id_var">Déclaration et définition d'une variable</h4>
+<p>
+C distingue <em>déclaration</em> et <em>définition</em> de variables et de fonctions.
+Une déclaration indique simplement au compilateur l'existence d'un élément dont le nom et le type ont été spécifiés, il n'y a pas de réservation de mémoire et l'élément ne peut pas encore être utilisé.
+Par contre lors d'une définition de variable ou de fonction, il y a physiquement réservation d'espace mémoire (pour y stocker une valeur ou pour donner le code de la fonction). Nous reviendrons plus tard sur cette distinction.
+</p>
+<p> Une variable se déclare en spécifiant son type et l'identificateur qui la représente dans le programme, tandis que lorsqu'on définit une variable, il est possible de lui donner une valeur initiale.
+Par exemple : 
+<pre>int a; /* déclaration ou définition de la variable a de type int */
+short b = 3; /* définition de la variable b de type short, initialisée à la valeur 3 */</pre>
+Les déclarations (définitions) multiples (plusieurs déclarations (définitions) dans la même expression) sont permises
+<pre> int a, b, c=5, d; /* définition des variables de type int a, b, c, d où seule c est initialisée */</pre>
+Rem : La valeur d'initialisation peut être le résultat d'une expression mais elle doit être connue lors de la compilation.
+<pre>int taille = 3 * 4;
+int tailleD = taille * 2;</pre>
+</p>
+<h4>Les <a id="id_const">constantes</a></h4>
+<p>En ANSI C, il existe deux techniques pour définir une constante : soit en utilisant une macro
+<pre>#define MAX 10</pre>
+qui sera convertie en sa valeur lors de la précompilation,
+</p>
+<p>soit en définisant une variable qualifiée de constante</p>
+<pre>const int max = 10;</pre>
+.
+</p>
+
+
+</div>
+<!-- #contenu -->
+
+
+<p id="copyright"> <a
+	href="mailto:bernard.henriet@ipl.be">Bernard Henriet</a> &copy; 2015 <a href="http://www.ipl.be"><img src="../images/ipl_bleu.png" alt="logo ipl" /></a></p>
+
+</div>
+<!-- #global -->
+
+</body>
+</html>

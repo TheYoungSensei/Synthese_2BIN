@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>cours de Langage C</title>
+        <link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="../css/modele04.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../css/infoB.css" media="all" />
+    </head>
+
+<body>
+<div id="global">
+
+<div id="entete">
+<h1>Langage C</h1>
+<h2 class="sous-titre" id="id_table">Les classes d'allocation</h2>
+
+</div>
+<!-- #entete -->
+
+
+<div id="navigation">
+<ul>
+
+        <li><a href="../index.html">Introduction</a></li>
+        <li><a href="./langage.html">Les éléments du langage</a></li>
+        <li><a href="./instructions.html">Les instructions</a></li>
+        <li><a href="./tableaux.html">Les tableaux</a></li>
+        <li><a href="./pointeurs.html">Les pointeurs</a></li>
+        <li><a href="./chaines.html">Les chaines de caractères</a></li>
+        <li><a href="./fonctions.html">Les fonctions</a></li>
+        <li><a href="./modularisation.html">La modularisation</a></li>
+        <li><a href="./classes.html">Les classes d'allocation</a></li>
+        <li><a href="./structures.html">Les structures</a></li>
+        <li><a href="./fichier.html">Les fichiers en C</a></li>
+        <li><a href="./preprocesseur.html">Le preprocesseur</a></li>
+        <li><a href="./librairies.html">Les librairies</a></li>
+        <li><a href="./lexique.html">Index</a></li>
+</ul>
+</div>
+<!-- #navigation -->
+
+<div id="contenu">
+
+<h2>Les classes d'allocation</h2>
+<p>En C, chaque variable (et chaque fonction) est caractérisée par son nom, son type mais aussi sa <a href="#id_classe">classe d'allocation</a>.
+La classe d'allocation indique au compilateur le <em>type de mémoire</em> nécessaire pour stocker la variable,
+ce qui détermine 
+sa <a href="#id_extent">durée de vie</a> et sa <a href="#id_visibilite">visibilité</a>.
+</p>
+
+<h3>Quelques notions préliminaires</h3>
+<dl>
+<dt>Portée(scope) d'un identificateur</dt>
+	<dd>Région du texte du programme où sa déclaration est active; ceci implique que le compilateur refusera un identificateur dont il n'a pas encore rencontré la déclaration. Pour un 
+	<dl>
+	<dt>Identificateur top-level</dt>
+	<dd>Identificateur déclaré en dehors de toute fonction, sa portée va du point de déclaration à la fin du fichier</dd>
+	
+<dt>Identificateur local, déclaré dans un bloc (ou fonction)</dt>
+	<dd>Sa portée va du point de déclaration jusqu'à la fin du bloc (ou fonction)</dd>
+	
+	<dt>Paramètre formel dans la définition d'une fonction</dt>
+	<dd>Sa portée va du point de déclaration dans la définition de la fonction jusqu'à la fin de la fonction</dd>
+	
+<dt>Macro</dt>
+	<dd>Sa portée débute par la déclaration de la macro <em class="code">#define nom</em> et se termine à la fin du fichier ou
+		à la suppression de la macro <em class="code">#undef nom</em></dd>
+	</dl></dd>
+
+<dt>Visibilité</dt>
+	<dd>Propriété d'un identificateur indiquant si l'identificateur correspond à la déclaration de l'élément.
+	 Elle correspond à la portée, sauf si un identificateur de même nom est déclaré à un niveau plus interne.
+	 Une variable ne peut pas être utilisée tant qu'elle n'est plus visible, même si elle existe toujours (elle garde sa valeur).
+	 Par exemple, une variable top-level sera occultée par un variable locale de même nom. </dd>
+
+<dt id="id_classNom">Classes de noms</dt>
+	<dd>Ensemble des identificateurs de même qualité. Un identificateur doit être unique à l'intérieur d'une classe de noms,
+	mais peut se retrouver dans différentes classes, même si pareille pratique nuit à la lisibilité du code.
+	C reconnaît plusieurs classes de noms :
+	<ul><li> les noms de macros</li>
+	    <li>les noms de labels</li>
+	    <li>les tags de struct, union, enum</li>
+	    <li>les noms de composants(champs des struct ou union</li>
+	    <li>les autres noms (variables, fonctions, ...)</li>
+	</ul></dd>
+
+<dt>Existence</dt>
+	<dd>Période de temps durant laquelle de la mémoire est allouée à l'élément (variable ou fonction).
+	C propose trois types d'existence.
+	<dl>
+		<dt id="id_existence_statique">Existence statique</dt>
+		<dd>La mémoire est allouée au début du programme et libérée à la fin,
+		    la mémoire est réservée dans des segments de mémoire spécifiques.</dd>
+		<dt>Existence locale</dt>
+		<dd>La mémoire est allouée à l'entrée du bloc (ou fonction) et libérée à la sortie,
+		    la mémoire est réservée sur la pile du processeur.</dd>
+		<dt>Existence dynamique</dt>
+		<dd>La mémoire est allouée à la demande, durant l'exécution de l'application, 
+		    au moyen de la fonction <em class="code">malloc()</em>, <em class="code">calloc(</em>), ou
+		    <em class="code">realloc()</em>. Elle est libérée grâce à la fonction <em class="code">free()</em>
+		    ou à la fin de l'application.</dd>
+	</dl></dd>
+</dl>
+
+<h3 id="id_classe">Les classes d'allocations</h3>
+<p>C reconnaît 4 classes d'allocation : <a href="#id_extern">externe</a>, <a href="#id_auto">automatique</a>,
+ <a href="#id_static">statique</a> et <a href="#id_register">register</a>.</p>
+<p>Ces classes s'appliquent aussi bien aux variables, et qu'aux fonctions.
+<h4 id="id_extern">extern</h4>
+<p>La classe d'allocation extern qualifie un élément (variable ou fonction)
+dont le nom est connu en dehors du fichier de définition,
+c'est l'éditeur de liens qui s'occupe de partager le nom dans tous les fichiers de l'application.</p>
+<dl>
+	<dt>Variables</dt>
+	<dd>C'est la valeur par défaut des variables <em id="id_top-level">top-level</em>,
+		mais elle peut aussi s'appliquer à des variables déclarées à l'entrée d'un bloc.
+		Ces variables ont une <a href="#id_existence_statique">existence statique</a>
+		c-à-d qu'elles sont stockées dans un segment de données à la compilation .</dd>
+	<dt>Fonctions</dt>
+	<dd>C'est également la valeur par défaut des fonctions, car par défaut les fonctions sont reconnues dans toute l'application.</dd>
+</dl>
+
+<h4 id="id_auto">auto</h4>
+<p>La mémoire est allouée automatiquement sur la pile du processeur, à l'entrée du bloc et libérée à la sortie.
+	Son existence est locale au bloc.
+	Si la variable est initialisée lors de la définition, elle le sera à  chaque utilisation du bloc,
+	 sinon elle n'est pas initialisée, et sa valeur est indéterminée. </p>
+<dl>
+	<dt>Variables</dt>
+	<dd>Valable uniquement pour des variables locales à un bloc ou à une fonction,
+		définies à l'entrée du bloc.</dd>
+	<dt>Fonctions</dt>
+	<dd>Sans objet, non applicable aux fonctions.</dd>
+</dl>
+
+<h4 id="id_static">static</h4>
+<p>La classe statique signifie que l'élément a une durée de vie équivalente à celle de l'application,
+	 mais l'élément n'est pas transmis à l'éditeur de liens, il n'est pas reconnu en dehors du fichier où il est défini. </p>
+<dl>
+	<dt>Variables</dt>
+	<dd>Si la variable est <em>top-level</em>, elle peut être utilisée dans toutes les fonctions du fichier,
+		tandis que si la variable est locale à une fonction, elle est rémanente,
+		 elle revient lors de chaque appel de la fonction et garde sa valeur d'un appel à l'autre.
+		La variable est stockée dans le data segment.</dd>
+	<dt>Fonctions</dt>
+	<dd>Cette classe signale que le nom de cette fonction n'est pas transmis à l'éditeur de liens,
+		la fonction est inconnue en dehors du fichier de définition.</dd>
+</dl>
+
+<h4 id="id_register">register</h4>
+<p>Signale au compilateur que la variable ou le paramètre peut être stocké dans un registre,
+	 avec pour conséquence qu'il n'est pas possible d'utiliser son adresse.</p>
+<dl>
+	<dt>Variables</dt>
+	<dd>peut être stockée dans un registre</dd>
+	<dt>Fonctions</dt>
+	<dd>sans objet</dd>
+</dl>
+
+<h3>Distinction entre déclaration et définition</h3>
+<p>La distinction entre <em>déclaration</em> et <em>définition</em> se marque au niveau de l'utilisation de la mémoire,
+ on parle de définition (de variable ou de fonction) lorsque la mémoire est réservée pour cet élément et
+de déclaration pour annoncer l'existence de l'identifiant (qui doit être défini ailleurs dans le code).</p>
+<p>Pour les fonctions, la distinction est aisée : la définition est liée à l'écriture du code de la fonction,
+la déclaration indiquant au compilateur les conditions d'utilisation de la fonction.
+Pour les fonctions extern, la déclaration peut se mettre soit dans un fichier d'entête (.h) ou au top-level, au début du fichier.
+Pour les fonctions statiques, la déclaration n'est jamais placée dans un fichier d'entête.
+Attention, rappelons que les fonctions non déclarées sont considérées par le compilateur comme des fonctions de type int, sans paramètre 
+<em class="code">int fct()</em>.</p>
+<p>Pour les variables, la distinction est plus complexe, essentiellement pour les variables top-level.</br>
+Pour les variables auto et register, pas de problème, sur la pile au en registre, donc pas de déclaration possible uniquement une définition;</br>
+pour les variables statiques, c'est simple, elles sont limitées à un seul fichier et la définition constituera déclaration.</br>
+Pour les variables extern, cela dépend du type de compilateur, car la norme n'impose pas de règle précise.
+Pour éviter d'entrer dans les détails, nous appliquerons la règle suivante :
+<em>Les variables sont déclarées extern dans les fichiers d'entête (.h) en indiquant le mot extern
+et dans un seul fichier code (.c) on définira la variable en omettant le mot extern et en spécifiant un initiateur</em>.
+</p>
+</div>
+
+<!-- #contenu -->
+
+
+<p id="copyright"> <a
+	href="mailto:bernard.henriet@ipl.be">Bernard Henriet</a> &copy; 2015 <a href="http://www.ipl.be"><img src="../images/ipl_bleu.png" alt="logo ipl" /></a></p>:
+
+</div>
+<!-- #global -->
+
+</body>
+</html>

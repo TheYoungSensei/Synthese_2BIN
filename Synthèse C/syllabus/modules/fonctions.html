@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>cours de Langage C</title>
+<link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../css/modele04.css"
+	media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/infoB.css" media="all" />
+</head>
+
+<body>
+
+<div id="global">
+
+<div id="entete">
+<h1>Langage C</h1>
+<h2 class="sous-titre" id="id_fonction">Les fonctions</h2>
+
+</div>
+<!-- #entete -->
+
+
+<div id="navigation">
+<ul>
+
+        <li><a href="../index.html">Introduction</a></li>
+        <li><a href="./langage.html">Les éléments du langage</a></li>
+        <li><a href="./instructions.html">Les instructions</a></li>
+        <li><a href="./tableaux.html">Les tableaux</a></li>
+        <li><a href="./pointeurs.html">Les pointeurs</a></li>
+        <li><a href="./chaines.html">Les chaines de caractères</a></li>
+        <li><a href="./fonctions.html">Les fonctions</a></li>
+        <li><a href="./modularisation.html">La modularisation</a></li>
+        <li><a href="./classes.html">Les classes d'allocation</a></li>
+        <li><a href="./structures.html">Les structures</a></li>
+        <li><a href="./fichier.html">Les fichiers en C</a></li>
+        <li><a href="./preprocesseur.html">Le preprocesseur</a></li>
+        <li><a href="./librairies.html">Les librairies</a></li>
+        <li><a href="./lexique.html">Index</a></li>
+
+</ul>
+</div>
+<!-- #navigation -->
+
+<div id="contenu">
+
+<h2>Les fonctions</h2>
+
+<h3>Introduction</h3>
+<p>Une fonction, est une sous-routine, un morceau de programme qui s'exécute indépendemment du déroulement de l'application principale.
+L'intérêt d'utiliser des fonctions dans les programmes réside dans la simplification du code de l'application
+liée à l'isolement en parties distinctes, fonctionnelles de certains traitements.
+Un autre avantage induit par l'utilisation de fonctions est la réutilisation du code à plusieurs endroits de l'application
+et même dans différents programmes.
+De plus, les fonctions peuvent cacher des détails d'implémentation et de cette façon clarifier le déroulement principal de l'application.
+ </p>
+<p>Pour créer des fonctions dans un programme C, il est nécessaire
+d'une part d'en <a href="#id_declare">déclarer</a> le <em>prototype</em> en début de fichier
+et d'autre part de les <a href="#id_define">définir</a> en fin de fichier, après la fonction main.</p>
+<p>Attention, en C il n'est pas possible d'imbriquer une fonction dans une autre pour en restreindre l'usage. </p>
+
+<h3 id="id_declare">La déclaration des fonctions</h3>
+<p>Le prototype d'une fonction se déclare toujours en début de fichier, soit dans un fichier d'include, soit directement dans le fichier source.
+Cette déclaration permet de renseigner le compilateur sur les caractéristiques de la fonction :
+la liste des paramètres, en donnant leur type, et le type de la fonction, c-à-d le type de la valeur de retour.
+Par exemple la déclaration suivante
+</p>
+<pre>int fct(int, char);</pre>
+<p>annonce au compilateur que <em class="code"> fct</em> est une fonction de type <em class="code">int</em>,
+c-à-d qu'elle retourne une valeur <em class="code">int</em> et
+qu'elle utilise 2 paramètres, le premier de type <em class="code">int</em> et le deuxième de type <em class="code">char</em>.</p>
+<p>Une fonction qui n'utilise aucun paramètre sera éventuellement déclarée avec une liste de paramètres valant <em>void</em>. Tandis qu'une fonction qui accepte un nombre variable de paramètres pourra spécifier une liste indéterminée de paramètres</p>
+<pre>int fct (param1, param2, ...);</pre>
+<p>Par défaut, si une fonction n'est pas déclarée, cette fonction sera considérée par le compilateur de type <em class="code">int</em>,
+ce qui pourra conduire à des incompatibilités.
+</p>
+
+<h3 id="id_define">La définition des fonctions</h3>
+<p>Outre la <a href="#id_param">liste des paramètres</a>
+ainsi que son <a href="#id_retour">type</a>, 
+la définition d'une fonction reprend le code de la fonction. Le code est en fait un bloc d'instructions, placé entre les caractères <em>{</em> et <em>}</em>.</p>
+<p>Les fonctions sont définies de manière indépendante, c-à-d qu'il n'est pas permis d'imbriquer une fonction à l'intérieur d'une autre fonction.
+Elles sont toujours définies après la fonction mail.
+</p>
+
+<h3 id="id_param">Les paramètres des fonctions</h3>
+<p>Les paramètres de la fonction sont des variables locales à la fonction qui reçoivent une valeur d'initialisation provenant du programme appelant.
+</p>
+<p class="gauche">Comme vous l'avez vu au cours de langage d'assemblage, lors de l'appel de la fonction, 
+les paramètres sont copiés sur la pile du processeur;  à la fin de la fonction, les données de la fonction sont effacées de la pile avec comme conséquence que les paramètres sont perdus.<br />
+On dit que le passage des paramètres en C se fait <em>par valeur</em>, le paramètre reçoit une valeur mais ne retourne aucun résultat au sortir de la fonction.<br />
+L'exemple suivant illustre ce mécanisme.<br />
+La fonction <em class="code">swap</em> doit permutter le contenu de 2 variables.
+La première version de cette fonction :
+</p>
+<p class="droite"><img alt="pile" src="../images/fct.png" width="200" height="200"/> </p>
+
+<pre>void swap(int a, int b){ /* fonction qui échange le contenu de 2 variables */
+	int temp = a;
+	a = b;
+	b = temp;
+} </pre>
+<p>ne fonctionne pas. L'appel de cette fonction</p> <pre>swap(varA, varB);</pre>
+<p class="gauche">ne produit aucun résultat
+car les valeurs permutées sont dans les paramètres <em class="code">a</em> et <em class="code">b</em>
+et pas dans les variables <em class="code">varA</em> et <em class="code">varB</em>,
+le changement intervenu durant le déroulement de la fonction reste local.
+A la fin de la fonction, les données locales sont perdues.</p>
+<p class="droite"><img alt="pile" src="../images/fct1.png" width="200" height="200"/> </p>
+<p>Or, il est fréquent qu'une fonction doive retourner plus d'une valeur et donc il est nécessaire qu'elle puisse utiliser des paramètres <em>in-out</em>.</p>
+<p>En C, puisque les paramètres sont passés par <em>valeur</em>, il faut utiliser comme paramètres les adresses des variables qui doivent être modifiées dans la fonction.
+Les paramètres doivent dès lors être des pointeurs.</br>
+Nous pouvons donc réécrire la fonction <em class="code">swap</em> de la sorte, en utilisant des pointeurs </p>
+<pre>void swap(int *a, int *b){ /* fonction qui échange valablement le contenu de 2 variables */
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+} </pre>
+<p >L'appel de cette fonction</p>
+<pre>swap(&amp;varA, &amp;varB);</pre>
+<p class="gauche">va produire le résultat attendu.
+En effet, si les adresses des variables <em class="code">varA</em> et <em class="code">varB</em> ne changent pas, le contenu lui a bien été modifié grâce à l'utilisation des pointeurs.</p>
+<p class="droite"><img alt="pile" src="../images/fctPtr.png" width="200" height="200"/> </p>
+<p>Les tableaux sont convertis en pointeurs par le compilateur. Donc le contenu des tableaux utilisés en argument est modifié par la fonction.
+Toutefois, il est possible de s'en prémunir en les qualifiant de  <em class="code">const</em>. </p>
+<pre>int initialiserTable(int *t, int taille){
+	int i;
+	for (i =0; i&lt;taille; i++){
+		t[i]=i;
+	}
+	return taille;
+}</pre>	
+
+<h3 id="id_retour">Le type de la fonction</h3>
+<p>Une fonction peut soit retourner une valeur à la fonction appelante, attention pas de tableau, soit ne rien retourner;
+dans ce <a href="#" class="infoB">cas<span>certains langages les appellent procédures</span></a>, elle sera dite de type <em> void</em>.</p>
+<pre>void itoa(int a){
+	printf("%d");
+	return;
+}</pre>
+<p>La valeur est renvoyée par la fonction grâce à l'instruction <em class="code">return expr</em>
+où <em class="code">expr</em> est une expression qu'il est préférable de placer entre <em>(</em> et <em>)</em>. 
+Par exemple,</p>
+<pre>double sum(double a, double b){
+	return (a+b);
+}</pre>
+<p>Si nécessaire, une conversion d'affectation sera effectuée pour adapter le type de l'expression au type de la fonction.</p>
+<pre>int cube(int a){
+	double res = pow(a, 3);
+	return res;
+}</pre>
+<p>Dans cet exemple, la fonction <em class="code">cube</em> convertit le résultat de type <em class="code">double</em> en une valeur de type <em class="code">int</em>.</p>
+<p>De même une conversion d'affectation peut être réalisée lors de la récupération du résultat de la fonction. </p>
+<pre>double racine(int a){
+	double res = pow(a, 1.0/3);
+	return res;
+}
+...
+int i = 27, j;
+printf("la racine cubique de %d est %d \n" i, j=racine3(i);</pre>
+
+<p>Attention, C n'exige pas d'intruction <em class="code">return</em> mais le résultat peut être inapproprié si elle est omise, comme dans l'exemple suivant :</p>
+<pre>int div(int a, int b){
+	if (b != 0){
+		return (a/b);
+	}
+}</pre>
+<p>Ni à la compilation, ni lors de l'exécution, n'apparaitra un message indiquant un problème lorsque le second paramètre est nul.</p>
+
+<h3>Les variables des fonctions</h3>
+<p>Les fonctions utilisent différentes sortes de variables pour conserver des données durant la vie de la fonction : les <a href="#id_vLocale">variables locales</a>, <a href="#id_vStatique">les variables statiques</a>, <a href="#id_param">les paramètres</a>.Elles peuvent, si nécessaire, accéder aux <a href="#id_vExterne">variables externes</a>.</p>
+
+<h4 id="id_vLocale">Les variables locales</h4>
+<p>Une variable locale automatique (la classification par défaut des variables locales) est une variable dont le rayon d'action est limité à la fonction où elle est déclarée.
+Elle est créée sur la pile du processeur à chaque appel de la fonction et détruite lorsque la fonction se termine.
+Elle permet de stocker des données qui ne doivent vivre que durant l'exécution de la fonction.
+</p>
+
+<h4 id="id_vStatique">Les variables statiques</h4>
+<p>Par contre, une variable locale statique est une variable locale à la fonction, elle ne peut pas être utilisée en dehors de la fonction,
+mais sa <em>durée de vie est liée à la durée de vie de l'application</em>,
+elle n'est pas stockée sur la pile du processeur mais dans un segment de mémoire spécifique :
+elle ne disparaît que lorsque l'application se termine. 
+Elle permet donc de garder l'information qu'elle mémorise d'un appel de fonction à l'autre.
+Un exemple de ce genre de variable est le pointeur utilisé dans la fonction <a href="id_strtok">strtok</a>;
+à chaque appel de la fonction, il continue le traitement de la chaîne initiale à partir de l'endroit mémorisé lors de l'appel précédent.</p>
+<p>Voici un autre exemple dans lequel on accumule, dans une variable statique, les valeurs reçues en argument.</p>
+<pre>#include <stdio.h>
+
+int ajouter(int i);
+
+int main (int argc, char **argv){
+	char ligne[80];
+
+	while (fgets(ligne, 80, stdin)){
+		int n = atoi(ligne);
+		printf("%d\n", ajouter(n));
+	}
+}
+
+int ajouter(int i){
+	static int somme = 0;
+	
+	return (somme+=i);
+}
+</pre>
+
+<h4 id="id_vExterne">Les variables externes</h4>
+<p>Une variable externe est une variable déclarée en dehors d'une fonction, accessible à partir de n'importe quelle fonction.</p>
+
+</div>
+<!-- #contenu -->
+
+
+<p id="copyright"> <a
+	href="mailto:bernard.henriet@ipl.be">Bernard Henriet</a> &copy; 2015 <a href="http://www.ipl.be"><img src="../images/ipl_bleu.png" alt="logo ipl" /></a></p>
+
+</div>
+<!-- #global -->
+
+</body>
+</html>

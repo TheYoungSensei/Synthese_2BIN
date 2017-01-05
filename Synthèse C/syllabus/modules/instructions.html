@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>cours de Langage C</title>
+<link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../css/modele04.css"
+	media="screen" />
+</head>
+
+<body>
+
+<div id="global">
+
+<div id="entete">
+<h1>Langage C</h1>
+<h2 class="sous-titre" id="i_perl">Introduction</h2>
+
+</div>
+<!-- #entete -->
+
+
+<div id="navigation">
+<ul>
+
+        <li><a href="../index.html">Introduction</a></li>
+        <li><a href="./langage.html">Les éléments du langage</a></li>
+        <li><a href="./instructions.html">Les instructions</a></li>
+        <li><a href="./tableaux.html">Les tableaux</a></li>
+        <li><a href="./pointeurs.html">Les pointeurs</a></li>
+        <li><a href="./chaines.html">Les chaines de caractères</a></li>
+        <li><a href="./fonctions.html">Les fonctions</a></li>
+        <li><a href="./modularisation.html">La modularisation</a></li>
+        <li><a href="./classes.html">Les classes d'allocation</a></li>
+        <li><a href="./structures.html">Les structures</a></li>
+        <li><a href="./fichier.html">Les fichiers en C</a></li>
+        <li><a href="./preprocesseur.html">Le preprocesseur</a></li>
+        <li><a href="./librairies.html">Les librairies</a></li>
+        <li><a href="./lexique.html">Index</a></li>
+
+</ul>
+</div>
+<!-- #navigation -->
+
+<div id="contenu">
+
+<h2>Les instructions</h2>
+
+<p>Le langage C est un langage structuré.</p>
+<p>Un programme écrit en C est composé d'une suite d'instructions
+pouvant être  une <a href = "#id_instSimple">instruction simple</a>,
+une <a href="#id_instBloc">bloc d'instructions</a>, 
+une <a href="#id_instRep">répétitive</a>,
+une <a href="#id_instAlt">alternative</a>.
+Le C permet également l'écriture de <a href="#id_instFct">fonctions</a>.
+</p>
+<h3 id="id_instSimple">Les instructions simples</h3>
+<ul>
+	<li>Le C accepte l'usage de l'instruction nulle, marquée par le caractère <em>';'</em> séparateur d'instructions.  </li>
+	<li>Il permet également l'utilisation de l'instruction expression, qui évalue l'expression pour ses effets de bord.
+Nous rencontrerons essentiellement trois cas d'utilisation :
+les affectations 
+<pre>a = b * c;</pre>
+les pré ou post incrémentations et décrémentations 
+<pre>a++;</pre>
+et les appels de fonction de type void ou dont la valeur de retour  n'est pas exploitée 
+<pre>printf(...);</pre> </li>
+	<li><em>break</em> : instruction qui permet de quitter une branche du switch ou de sortir d'une répétitive directement, sans réévaluer la condition.</li>
+	<li><em>continue</em> : instruction utilisée uniquement dans les répétitives,
+elle permet de sauter la suite du corps de la répétitive
+et de passer directement à une nouvelle vérification de la condition; dans un <em>for</em>, elle permet l'exécution de l'adaptation.</li>
+</ul>
+
+<h3 id="id_instBloc">Le bloc d'instructions</h3>
+<p>Lorsque plusieurs instructions doivent être traitées conjointement,
+elles sont regroupées en un bloc d'instructions encadrés par une paire d'accolades <em>'{'</em> et <em>'}'</em>.
+<pre> {
+       instr1;
+       instr2;
+         ...
+   } </pre>
+Ce bloc d'instructions peut débuter par la définition d'un certain nombres de variables, locales à ce bloc d'instructions.
+Par exemple 
+<pre> {
+	 définition de variables;
+	
+	 liste d'instructions
+}</pre>
+Les variables doivent toujours être déclarées avant la première instruction et leur existence se termine à la fin du bloc.
+</p>
+<p>
+Si un identificateur redéfinit un variable déjà existante, la nouvelle variable occulte l'ancienne, celle définie dans un bloc englobant.
+Dans l'exemple suivant,
+<pre> {
+	int i = 5;
+	{
+		int i = 7;
+		printf("i vaut %d\n", i++);
+	}
+	printf("i vaut %d\n", i);
+}
+</pre>
+l'affichage donnera
+<pre>i vaut 7
+i vaut 5
+</pre>
+</p>
+
+<h3 id="id_instRep">Les répétitives</h3>
+<p>Le langage C connaît différents type de répétitives, le <a href="#id_while">while</a>, le <a href="#id_for">for</a>
+et le <a href="#id_do">do ... while</a>.
+Toutes ces répétitives utilisent une condition de continuation, c-à-d que l'itération suivante est réalisée si la condition testée vaut VRAI en d'autres mots la boucle se termine lorsque la condition devient FAUX.
+</p>
+
+<h4 id="id_while">La répétitive while</h4>
+<p>Cette répétitive est utilisée lorsque l'on désire répéter plusieurs fois une instruction (ou un bloc d'instructions).
+La condition est vérifiée avant d'entamer l'itération et donc si la condition est directement FAUX, l'instruction n'est pas exécutée.
+<pre>while (cdt)
+	instruction;</pre>
+ou
+<pre>while (cdt) {
+	instruction1;
+	instructions2;
+}</pre>
+Dans ce cas, le bloc d'instruction n'est pas suivi par le ';'.
+Pour éviter toute ambiguité, une répétitive sans instruction s'écrira comme suite (en utilisant une instruction nulle
+<pre>while (cdt)
+	;</pre>
+Dans l'exemple suivant, nous effectuons une lecture sur <em>stdin</em> et quittons la répétitive lorsque l'utilisateur introduit la fin des données.
+<pre>char ligne[256];
+while(fgets(ligne, 256,stdin) != NULL){
+	printf("%s", ligne);
+}</pre> 
+</p>
+
+<h4 id="id_do">do ... while</h4>
+<p>
+Cet autre type de répétitive s'emploie très rarement, uniquement lorsque l'on est certain que la répétitive doit s'exécuter au moins une fois. Pour éviter toute confusion avec le while, il est recommandé de respecter les conventions suivantes :
+<ul>
+	<li>On mettra toujours les instructions entre accolades, même si il n'y a qu'une seule instruction dans le bloc.</li>
+	<li>L'accolade fermante sera écrite sur la même ligne que le while.
+	<li>On placera toujours le point virgule directement après la condition, sur la même ligne pour éviter toute confusion avec le while instruction nulle.</li>
+</ul>
+<pre>do {
+instruction;
+} while (cdt);</pre>
+
+<h4 id="id_for">for</h4>
+<p> Le for est une écriture condensée du while. Il est constitué de 3 parties : l'<em>initialisation</em>, la <em>condition</em> et l'<em>adaptation</em>.
+</p>
+<p> L'initialisation est exécutée à l'entame de la répétitive, une seule fois au début de l'exécution de la répétitive; si plusieurs expressions doivent composer cette initialisation, elles sont séparées par le caractère '<em>,</em>'. 
+</p>
+<p>La condition est une condition de continuation, elle est exécutée une première fois juste après l'initialisation, et donc le corps de la répétitive peut ne pas etre exécuté.
+</p>
+<p>L'adaptation est exécutée à la fin de chaque itération, juste avant une nouvelle évaluation de la condition.
+</p>
+<p>
+<pre>for (i=0; i<5; i++){
+	printf("%d\n", i);
+}</pre>
+</p>
+<p>En ANSI C, il n'est pas permis de procéder à des définitions de variables locales dans l'initialisation.
+</p>
+<h3 id="id_instAlt">Les alternatives</h3>
+<p>C connaît 2 types de traitements conditionnels, les <a href="#id_if">alternatives</a>, qui permettent de réaliser ou pas un traitement en fonction d'une condition
+	 et les <a href="#id_switch">switch</a> qui réalisent un traitement en fonction du contenu d'une variable dénombrable (entière).
+</p>
+
+<h4 id="id_if">if</h4>
+<p>Plusieurs syntaxes sont possibles pour marquer une alternative, soit l'alternative simple 
+<pre>if(cdt) 
+	instruction;</pre>
+à laquelle on préfère la forme avec accolades
+<pre>if(cdt)  {
+	instruction;
+}</pre>
+et les <em>if</em> <em>else</em>
+<pre>if(cdt)  {
+	instruction1;
+	.....
+} else {
+	instruction2;
+	.....
+}</pre>
+Attention, le <em>else</em> se rapporte toujours au dernier <em>if</em> libre et dans le même bloc (quelque soit l'indentation utilisée par le programmeur). 
+<pre>if(a&gt;b)  
+	if (c&gt;d){
+		if (c&gt;0)
+			c++;
+		} else
+			d++;
+	else
+		a++;
+</pre>
+</p>
+
+<h4 id="id_switch">switch</h4>
+<p>Le <em>sitch</em> peut être considéré comme un branchement multiple en fonction d'une valeur entière, dès que l'on est aiguillé vers une branche,
+	le traitement se poursuit en séquence, sauf si un <em>break</em> termine le traitement de la branche et permet de quitter la structure de contôle.
+<pre>switch(a){
+	case val1 :
+	case val2 :
+		....
+		break;
+	case val3 :
+		....
+	case val4 :
+		....
+		break;
+	default :
+		....
+		break;
+}</pre>
+Remarque : le <em>default</em> peut être placé n'importe où dans la liste des <em>case</em>.
+</p>
+</div>
+<!-- #contenu -->
+
+
+<p id="copyright"> <a
+	href="mailto:bernard.henriet@ipl.be">Bernard Henriet</a> &copy; 2015 <a href="http://www.ipl.be"><img src="../images/ipl_bleu.png" alt="logo ipl" /></a></p>
+
+</div>
+<!-- #global -->
+
+</body>
+</html>

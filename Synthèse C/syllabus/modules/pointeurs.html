@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>cours de Langage C</title>
+<link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../css/modele04.css"
+	media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/infoB.css" media="all" />
+</head>
+
+<body>
+
+<div id="global">
+
+<div id="entete">
+<h1>Langage C</h1>
+<h2 class="sous-titre" id="id_table">Les pointeurs</h2>
+
+</div>
+<!-- #entete -->
+
+
+<div id="navigation">
+<ul>
+
+        <li><a href="../index.html">Introduction</a></li>
+        <li><a href="./langage.html">Les éléments du langage</a></li>
+        <li><a href="./instructions.html">Les instructions</a></li>
+        <li><a href="./tableaux.html">Les tableaux</a></li>
+        <li><a href="./pointeurs.html">Les pointeurs</a></li>
+        <li><a href="./chaines.html">Les chaines de caractères</a></li>
+        <li><a href="./fonctions.html">Les fonctions</a></li>
+        <li><a href="./modularisation.html">La modularisation</a></li>
+        <li><a href="./classes.html">Les classes d'allocation</a></li>
+        <li><a href="./structures.html">Les structures</a></li>
+        <li><a href="./fichier.html">Les fichiers en C</a></li>
+        <li><a href="./preprocesseur.html">Le preprocesseur</a></li>
+        <li><a href="./librairies.html">Les librairies</a></li>
+        <li><a href="./lexique.html">Index</a></li>
+
+</ul>
+</div>
+<!-- #navigation -->
+
+<div id="contenu">
+
+<h2>Les pointeurs</h2>
+
+<h3>Introduction</h3>
+<p>Vous avez noté dans la présentation du langage qu'un des intérêts du C est son efficacité. Une des raisons de ces bonnes performances tient à la gestion aisée de la mémoire, proche de ce que permet un langage d'assemblage.
+La manipulation des adresses mémoire se fait au moyen des <em>pointeurs</em>. Un pointeur est un type particulier, capable de conserver l'adresse d'un byte de la  mémoire. Le pointeur est intimement lié au type de la donnée stockée à cette adresse de manière à en respecter les contraintes .
+Dans le paragraphe suivant nous abordons l'utilisation des pointeurs.
+</p>
+
+<h3>Utilisation</h3>
+<p id="id_declaration">La définition d'une variable de type pointeur, nécessite de spécifier le type de la donnée qui sera accédée par le pointeur, le symbole utilisé est le caractère  <em>*</em>.
+Par exemple, <pre>int *ptrI;</pre> définit <em class="code">ptrI</em> comme étant un pointeur sur un int (une variable qui contient l'adresse du premier byte d'une zone mémoire pouvant contenir un int).
+Tel que défini, le pointeur  n'a pas été initialisé et  il n'y a pas de réservation de place mémoire pour la valeur pointée.
+<img src="../images/pointeurs/pointeur.png" alt="pointeur"/>
+Il contient donc  une valeur quelconque qui peut être l'adresse d'une zone mémoire interdite, l'adresse d'un zone déjà utilisée, etc. <em>Il doit donc être initialisé avant d'être utilisé</em>.</p>
+<p>Pour être initialisé, il doit recevoir une adresse; différentes possibilités  s'offrent à nous :
+<ul><li>l'adresse d'une variable déjà défine, pour l'obtenir, il faut utiliser l'opérateur <em id="id_adresse">&</em>.<pre>ptrI = &varA;</pre> ptrI reçoit l'adresse de la variable varA.</li>
+<img src="../images/pointeurs/pointeursurA.png" alt="pointeur"/>
+<li>l'adresse contenue dans un autre pointeur (du même type)<pre>int *autrePtr = ptrI;</pre><em class="code">autrePtr</em> reçoit l'adresse contenue dans le pointeur <em class="code">ptrI</em> .</li>
+<li>l'adresse d'un tableau <pre>ptrI = tab;</pre> <em class="code">ptrI</em> reçoit l'adresse du tableau <em class="code">tab</em>, c-à-d l'adresse du premier élément du tableau (<em class="code">&tab[0]</em>)</li>
+<li>l'adresse d'une zone <a href="./pointeurs.html#id_memDyn">mémoire dynamique</a> (voir plus bas)</li>
+<li>ou encore l'adresse <em class="code">NULL</em> spécifiant une adresse inacessible. Cette valeur sera également utilisée comme valeur de retour pour indiquer que une fonction ne s'est pas terminée correctement.</li>
+</ul></p>
+<p id="id_deref">Le contenu de la mémoire (la déréférenciation) est obtenu en appliquant l'opérateur <em>*</em> au pointeur, comme le montre l'exemple suivant :
+<pre>printf("%d", *ptrI);</pre>
+</p>
+
+<h3>La priorité des opérateurs</h3>
+<p>Nous avons abordé la <a href="./langage.html#id_priorite">priorité des principaux opérateurs</a> lors de la présentation du langage.
+Nous pouvons ajouter à la liste les opérateurs liés à la manipulation des pointeurs:
+<table>
+<tr>
+	<th>Niveau de priorité</th>
+	<th>Opérateur</th>
+	<th>description</th>
+	<th>Associativité</th>
+</tr>
+<tr>
+	<td rowspan=2>17</td>
+	<td>[]</td>
+	<td>indice de tableau</td>
+	<td rowspan=2>gauche</td>
+</tr>
+<tr>
+	<td>(...)</td>
+	<td>appel de fonction</td>
+</tr>
+<tr>
+	<td rowspan=2>16</td>
+	<td>++</td>
+	<td>post-incrémentation</td>
+	<td rowspan=2>gauche</td>
+</tr>
+<tr>
+	<td>--</td>
+	<td>post-décrémentation</td>
+</tr>
+<tr>
+	<td rowspan=2>15</td>
+	<td>++</td>
+	<td>pré-incrémentation</td>
+	<td rowspan=2>droite</td>
+</tr>
+<tr>
+	<td>--</td>
+	<td>pré-décrémentation</td>
+</tr>
+<tr>
+	<td rowspan=7>15</td>
+	<td>sizeof</td>
+	<td>calcule la taille d'une variable(d'un type)</td>
+	<td rowspan=7>droite</td>
+</tr>
+<tr>
+	<td>~</td>
+	<td>complément à 1 (inversion des bits)</td>
+</tr>
+<tr>
+	<td>!</td>
+	<td>non logique </td>
+</tr>
+<tr>
+	<td>+</td>
+	<td>identité (opérateur unaire)</td>
+</tr>
+<tr>
+	<td>-</td>
+	<td>changement de signe (complément à 2)</td>
+</tr>
+<tr>
+	<td class="nv">&</td>
+	<td class="nv">adresse</td>
+</tr>
+<tr>
+	<td class="nv">*</td>
+	<td class="nv">indirection, déréférenciation</td>
+</tr>
+<tr>
+	<td >14</td>
+	<td>(type)</td>
+	<td>cast, changement forcé de type</td>
+	<td>droite</td>
+</tr>
+<tr>
+	<td rowspan=3>13</td>
+	<td>*</td>
+	<td>multiplication</td>
+	<td rowspan=3>gauche</td>
+</tr>
+<tr>
+	<td>/</td>
+	<td>division </td>
+</tr>
+<tr>
+	<td>%</td>
+	<td>modulo (uniquement si opérandes entiers)</td>
+</tr>
+<tr>
+	<td rowspan=2>12</td>
+	<td>+</td>
+	<td>addition</td>
+	<td rowspan=2>gauche</td>
+</tr>
+<tr>
+	<td>-</td>
+	<td>soustraction</td>
+</tr>
+</table>
+
+</p>
+
+<h3>Les conversions de pointeurs</h3>
+<p>Les compilateurs C remplacent automatiquement les tables par des pointeurs, en y appliquant l'<a href="#id_arithPtr">arithmétique des pointeurs</a> pour convertir les indices. En C, un tableau est donc considéré comme un pointeur constant, sa valeur (l'adresse en mémoire des données) est invariante.
+D'autres conversions explicites (par cast) sont permises </p> 
+<table>
+<tr>
+	<th>type de destination (cast)</th>
+	<th>type d'origine</th>
+</tr>
+<tr>
+	<td>type entier</td>
+	<td>pointeur</td>
+<tr>
+</tr>
+	<td><em class="code">T*</em> ou <em class="code">void*</em></td>
+	<td>un type entier<br /><em class="code">void*</em><br /><em class="code">Q*</em></td>
+</tr>
+</table>
+ou automatiques (lors d'affectations) sont appliquées : </p> 
+<table>
+<tr>
+	<th>type à gauche</th>
+	<th>type permis à droite (sans cast)</th>
+</tr>
+<tr>
+	<td><em class="code">void*</em></td>
+	<td>0 ou <em class="code">T*</em> ou <em class="code">void*</em></td>
+<tr>
+</tr>
+	<td><em class="code">T*</em> ou <em class="code">void*</em></td>
+	<td>0 ou <em class="code">T*</em> ou <em class="code">void*</em></td>
+</tr>
+</table>
+
+<h3 id="id_memDyn">Mémoire dynamique</h3>
+<p>Vous avez vu dans le cours de langage d'assemblage qu'il existe
+<a href="http://www.geeksforgeeks.org/memory-layout-of-c-program/">plusieurs segments pour constituer un programme</a> :
+le <em>code segment</em> qui contient toutes les lignes de codes, le <em>data segment</em> qui contient les données initialisées,
+le <em>bss</em> qui regroupe les variables globales non initialisées à la compilation (elles seront dans ce cas mise à zéro),
+la <em>pile</em> qui mémorise les informations utiles des sous-programmes et le <em>heap</em>.
+C'est cette partie de la mémoire que le programme va utiliser pour alimenter les demandes de mémoire dynamique.</p>
+<p>Dans un programme C, la mémoire dynamique est allouée en réponse à l'appel de la fonction <em class="code"><a href="#id_malloc">malloc</a></em>,
+ou d'une fonction dérivée <em class="code"><a href="#id_calloc">calloc</a></em>
+ou <em class="code"><a href="#id_realloc">realloc</a></em>.</p>
+<p>La fonction <em id="id_malloc" class="code"><a href="http://www.man-online.org/page/3-malloc">malloc</a></em>
+alloue le nombre de bytes demandé dans l'argument, cette mémoire est accédée grâce au pointeur retourné par la fonction.
+En cas de problème, la fonction renvoie un pointeur nul <em class="code">NULL</em>.. Il est donc impératif de toujours tester le code de retour de la fonction.
+Voici un exemple de création d'une zone mémoire pouvant contenir une valeur <em class="code">double</em> :<pre>double *ptrD;
+if ((ptrD = (double*)malloc(sizeof(double))) == NULL){
+	perror("Allocation dynamique de ptrD impossible");
+	return 1;
+}</pre>De même, la fonction malloc permet de créer des tableaux dynamiques, comme dans l'exemple suivant qui crée un tableau de 10 <em class="code">int</em> :
+<pre>int *tabDyn;
+if ((tabDyn = (int*)malloc(10*sizeof(int))) == NULL){
+	perror("Allocation dynamique de tabDyn impossible");
+	return 1;
+}</pre>
+</p>
+<p>La particularité de la fonction <em class="code" id="id_calloc"><a href="http://www.man-online.org/page/3-calloc">calloc</a></em>
+est d'allouer une zone mémoire initialisée à zéro tandis que la fonction <em class="code" id="id_realloc"><a href="http://www.man-online.org/page/3-realloc">realloc</a></em>
+</em> permet de réallouer une zone mémoire en en modifiant la taille tout en conservant le contenu stocké dans la mémoire.
+<pre> if ((tabDyn = (int*)realloc(tabDyn, 20*sizeof(int))) == NULL){
+	perror("Allocation dynamique de tabDyn impossible");
+	return 1;
+}</pre>Dans cet exemple, la table <em class="code">tabDyn</em> est réallouée, éventuellement à un autre endroit de la mémoire, sa taille est doublée mais le contenu est conservé.
+</p>
+<p>Pour une gestion saine de l'espace mémoire, il est recommandé de libérer la mémoire dynamique devenue inutile dans l'application
+pour éviter des <em>fuites de mémoire</em>, zones mémoires qui ne sont plus accessibles, donc perdues pour l'application.
+Cette libération de mémoire se fait grâce à la fonction <em id="id_free" class="code"><a href="http://www.man-online.org/page/3-free">free</a></em>
+<pre>free(tabDyn);</pre>.
+
+<h3 id="id_arithPtr">Arithmétique des pointeurs</h3>
+<p>Le langage C permet de modifier la valeurs d'un pointeur en y appliquant des expressions mettant en jeu une arithmétique particulière, l'<em>arithmétique des pointeurs</em>.
+Dans cette technique, le compilateur prend en compte la taille de l'élément pointé lors de l'ajout (ou suppression) d'une ou de plusieurs unités, comme dans l'exemple suivant
+<pre>int *ptr, tab[5];
+ptr = tab;</pre>
+<p><img src="../images/pointeurs/table1.png" alt="table"/></p>
+<pre>ptr++;</pre>
+<p><img src="../images/pointeurs/table2.png" alt="incrementation du pointeur"/></p>
+où l'incrémentation permet d'ajouter au pointeur <em class="code">ptr</em> un nombre de bytes égal à la taille de l'élément et donc d'accéder à l'élément suivant de la table.
+Comme toujours en C, il n'y a pas de vérification et la prudence reste de vigueur.
+</p>
+<p>La soustraction de 2 pointeurs de même type donne le nombre d'éléments qui séparent les 2 adresses.
+<pre>indice = ptr-tab;</pre>
+L'addition de 2 pointeurs est permise par le compilateur mais le résultat sera non significatif, sans  doute hors de l'espace d'adressage du programme. 
+Les autres opérations sont sans objet.
+</p>
+
+<h3>Parcours d'une table par pointeurs</h3>
+<p>Il est plus efficace de parcourir une table en utilisant un pointeur, car de cette façon, on évite le calcul de l'indice à chaque itération.
+Par exemple, le code 
+<pre>
+int i, taille = 10, table[10];
+	for (i = 0; i < taille; i++)
+		printf("%d\n", table[i]);</pre>
+sera remplacé avec bonheur par la version utilisant un pointeur
+<pre>int * q;
+for (q = table; q - table < taille; q++)
+		printf("%d\n", *q);</pre>
+</p>
+
+</div>
+<!-- #contenu -->
+
+
+<p id="copyright"> <a
+	href="mailto:bernard.henriet@ipl.be">Bernard Henriet</a> &copy; 2015 <a href="http://www.ipl.be"><img src="../images/ipl_bleu.png" alt="logo ipl" /></a></p>
+
+</div>
+<!-- #global -->
+
+</body>
+</html>

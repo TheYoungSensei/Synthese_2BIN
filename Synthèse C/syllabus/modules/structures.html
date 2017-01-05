@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+	<title>cours de Langage C</title>
+	<link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="../css/modele04.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="../css/infoB.css" media="all" />
+    </head>
+
+<body>
+
+<div id="global">
+
+<div id="entete">
+<h1>Langage C</h1>
+<h2 class="sous-titre" id="id_structure">Les structures</h2>
+
+</div>
+<!-- #entete -->
+
+
+<div id="navigation">
+<ul>
+
+        <li><a href="../index.html">Introduction</a></li>
+        <li><a href="./langage.html">Les éléments du langage</a></li>
+        <li><a href="./instructions.html">Les instructions</a></li>
+        <li><a href="./tableaux.html">Les tableaux</a></li>
+        <li><a href="./pointeurs.html">Les pointeurs</a></li>
+        <li><a href="./chaines.html">Les chaines de caractères</a></li>
+        <li><a href="./fonctions.html">Les fonctions</a></li>
+        <li><a href="./modularisation.html">La modularisation</a></li>
+        <li><a href="./classes.html">Les classes d'allocation</a></li>
+        <li><a href="./structures.html">Les structures</a></li>
+        <li><a href="./fichier.html">Les fichiers en C</a></li>
+        <li><a href="./preprocesseur.html">Le preprocesseur</a></li>
+        <li><a href="./librairies.html">Les librairies</a></li>
+        <li><a href="./lexique.html">Index</a></li>
+
+</ul>
+</div>
+<!-- #navigation -->
+
+<div id="contenu">
+
+<h2>Les structures</h2>
+
+<h3>Introduction</h3>
+<p>Jusqu'à présent, nous utilisons des types de données simples : <a href="./langage.html#id_tInt">entiers</a>,
+ <a href="./langage.html#id_tReel">réels</a> ou encore les <a href="./tableaux.html#id_table">tableaux</a> et les <a href="./pointeurs.html">pointeurs</a>.
+Dans ce chapitre, nous abordons les types personnalisés, construits dans le cadre d'une application spécifique.
+Ces nouveaux types composés, appelés <em>structures</em>, permettent de regrouper des données pouvant être de types différents  en une même entité.</p>
+<p>Ce premier exemple </p>
+<pre><code>struct point {
+	 int abscisse;
+	 int ordonnees;
+}
+</code></pre>
+<p>déclare un <a href="#" class="infoB">nouveau type<span>le mot struct est obligatoire, il introduit la structure</span></a>, <em class="code">struct point</em>
+composé de deux composantes de type <em class="code">int</em> appelés <em class="code">abscisse</em> et <em class="code">ordonnee</em>.
+Le mot-clé <em>struct</em> est obligatoire, il introduit la description de la structure.
+Il peut être suivid'un <em>tag</em> identifiant la structure.
+La liste des <em>composants</em> est placée entre les caractères accolades '<em>{</em>' et '<em>}</em>'.</p>
+<p> Une variable <em class="code">origine</em> de ce type <em class="code">struct point</em>
+sera définie en précisant son type et recevra éventuellement une valeur initiale.
+ </p>
+<pre><code>struct point origine; // sans initialisation ou
+struct point origine = {0, 0}; // avec initialisation
+</code></pre>
+
+<h3>Utilisation</h3>
+<p>
+L'accès à un des composants d'une variable se fait en spécifiant le nom de la variable 
+ et le nom du composant introduit par l'opérateur '<em>.</em>'
+comme dans l'exemple suivant</p>
+<pre><code>orignie.abscisse = 2;
+</code></pre>
+<p>où <em class="code">origine </em> est le nom de la variable et <em class="code">abscisse</em> est le nom du composant.</p>
+<p>Une structure peut également être accédée par <a href="./pointeurs.html">pointeur</a>, <em class="code">struct point *ptr</em>.
+Dans ce cas on utilisera plus volontiers l'opérateur <em>-></em> pour accéder à un composant,
+comme dans l'exemple suivant <em class="code">ptr-&gt;abscisse = 2;</em>,
+équivalent à l'expression <em class="code">(*ptr).abscisse = 2;</em>.
+Attention, les parenthèses sont obligatoires vu les <a href="./langage.html#id_priorite">règles de priorité des opérateurs</a>.
+</p>
+<pre><code>struct point *ptr = &origine;
+(*ptr).abscisse = 2;
+ptr->abscisse = 2;
+</code></pre>
+<p>Les deux écritures sont équivalentes</p>
+
+<h4>Opérations sur les structures</h4>
+<p>
+Les seules opérations permises sur les structures sont 
+</p>
+<dl>
+<dt>L'accès à un composant</dt>
+<dd class="code">origine.abscisse, ptr-&gt;abscisse</dd>
+<dt>prendre l'adresse d'une structure</dt>
+<dd class="code"> ptr = &amp;origine</dd>
+<dt>ou d'un champ</dt>
+<dd class="code"> ptr = &amp;origine.abscisse</dd>
+<dt>affectation de structure à structure (de même type)</dt>
+<dd class="code">monPoint = origine;</dd>
+<dt>Passage d'une structure comme paramètre de fonction</dt>
+<dd class="code">void afficherPoint(struct point p) { ...}; </dd>
+<dt>structure comme valeur de retour d'une fonction</dt>
+<dd class="code">struct point fct(int a, int o){ .... return p);</dd>
+</dl>
+
+<h4>Taille d'une structure</h4>
+<p>La taille d'une structure sera toujours supérieure ou égale à la somme des tailles de tous ses composants.<br />
+<em class="code">sizeof(struct point)</em> &ge; &sum; <em class="code">sizeof(composants)</em><br />
+Ceci est lié à la nécessité d'aligner les champs sur des adresses mémoires compatibles avec le type des composants.
+</p>
+
+<h4>Structures récursives</h4>
+<p>Une structure récursive est une structure dont au moins un des champs est lui-même une structure de ce même type.
+ En C, il n'est pas possible de créer une structure réellement récursive car le compilateur doit connaître
+la taille de la structure et donc la taille de chaque champ  avant de l'utiliser. L'écriture suivante est donc interdite : </p>
+<pre><code>struct noeud {
+	int valeur;
+	struct noeud suivant;
+};
+</code></pre>
+<p>
+Pour contourner cette limitation et vu l'importance des structures récursives dans les langages de programmation,
+le C va utiliser les pointeurs sur structures (la taille d'un pointeur est une valeur connue) pour référencer une structure à l'intérieur d'elle-même. Comme dans l'exemple suivant
+</p>
+<pre><code>struct noeud {
+	 int valeur;
+	 struct noeud * suivant;
+} </code></pre>
+
+<h4>Champs de bits (bit fields)</h4>
+<p>Il existe une utilisation particulière des structures, <em>les champs de bits</em>
+ qui vont limiter les composants à un certains nombre de bits.
+ Ces structures sont essentiellement utilisées pour accéder aux données systèmes. 
+</p>
+<pre><code>struct champ {
+	unsigned a:4;
+	unsigned :2; // sert de padding
+	unsigned b:5;
+	unsigned c:5;
+}
+</code></pre>
+<p>L'accès à un champ se fait comme pour les structures classiques <em class="code">x.c</em>
+mais il n'est pas permis de prendre l'adresse d'un champ <em class="code">&amp;x.c</em>.
+</p>
+
+<h4>Structures anonymes</h4>
+<p>Pour les structures utilisées ponctuellement, la spécification d'un tag est inutile. On peut écrire</p>
+<pre><code>struct { int x, y; double d;} a, b, *p;
+</code></pre>
+<p>Mais ces déclarations sont uniques, la même déclaration ailleurs dans le code créera un autre type et des variables incompatibles.</p>
+
+<h3>Unions</h3>
+<p>Une <em>union</em> est une structure où les champs se superposent en mémoire; ces unions sont utilisées pour stocker dans une même zone mémoire,
+des valeurs de types différents, mais à des moments différents. Par exemple :
+</p>
+<pre><code>union exemple {
+	int a;
+	double b;
+	char *s;
+}
+</code></pre>
+<p>Une variable de ce type pourra contenir soit un <em class="code">int</em>, soit un <em class="code">double</em>, soit une adresse sur un caractère.<br />
+La taille d'une union est au moins égale à la taille du plus grand champ. 
+<em class="code">sizeof(struct point)</em> &ge; max( <em class="code">sizeof(composants)</em> )</p>
+<h4>Le bon usage des unions</h4>
+<p>Parfois, utiliser une union implique de gérer un code reprenant le champ utilisé dans la variable.
+Et donc on pourra avoir une structure reprenant l'union et le code indiquant le champ à considérer dans cette union. Par exemple</p>
+<pre>struct monUnion {
+	int type;
+	union {
+		double x;
+		int y;
+		char c;
+	} u;
+} s;</pre>
+<p>L'utilisation de la variable <em class="code">s</em> impliquera de spécifier le type :</p>
+<pre>#define DOUBLE	0
+#define INT	1
+#define CHAR	2
+
+if (s.type == DOUBLE){
+	traiter(s.u.x);
+}</pre>
+<p>Lorsque l'union est une union de structures,  pareille écriture alourdit le code</p>
+<pre>struct maStruct {
+	int type;
+	union {
+		struct un {
+			int x, y;
+		} un;
+		struct deux {
+			double a, b;
+		} deux;
+	} u;
+} s;</pre>
+<p>qui peut conduire à un code tel que</p>
+<pre>#define UN	1
+#define DEUX	2
+
+double result;
+if (s.type == UN){
+	result = s.u.un.x + s.u.un.y;
+} else if (s.type == DEUX){
+	result = s.u.deux.a + s.u.deux.b;
+}</pre>
+<p>On préférera définir cette construction sous la forme</p>
+<pre>union mienne {
+	int type;
+	struct un {
+		int type;
+		int x, y;
+	} un;
+	struct deux {
+		int type;
+		double a, b;
+	} deux;
+} u;</pre>
+<p>Avec cette définition, ou le type est répété dans chaque union, l'accès à un composant est simplifié : </p>
+<pre>
+if (u.type == UN){
+	result = u.un.x + u.un.y;
+} else if (u.type == DEUX){
+	result = u.deux.a + u.deux.b;
+}</pre>
+
+
+<h3>Enumérés</h3>
+<p>Un type <em>enuméré</em> est un type construit à partir d'un ensemble de valeurs spécifiées dans la définition de ce type.</p>
+<pre>enum couleur {rouge, vert, bleu, blanc, noir};</pre>
+<p>définit un type <em class="code">enum couleur</em> et les différentes valeurs que peuvent prendre les variables de ce type.</p>
+<pre>enum couleur maCouleur, maFavorite;</pre>
+<p>définit 2 variables de ce type <em class="code">enum couleur</em>.
+Les identifiants s'utilisent seuls, sans spécifier le nom du type</p>
+<pre>maCouleur = rouge;</pre>
+<p>Ce sont en fait des types entiers, et chaque valeur déclarée dans le type correspond à une valeur entière.
+<em class="code">rouge</em> vaut 0, <em class="code">vert</em> 1, etc.
+Et donc l'arithmétique sur les entiers peut s'appliquer à ce type</p>
+<pre>maCouleur++;</pre>
+<p>va recevoir la couleur <em class="code">vert</em>
+ou</p>
+<pre>maFavorite = maCouleur + bleu;</pre>
+<p>code tout à fait illisible et à déconseiller.
+</p>
+
+<h3 id="id_typedef">typedef</h3>
+<p><em>typedef</em> est une construction qui introduit un synonyme d'un type existant. Par exemple </p>
+<pre><code>typedef unsigned int size_t;
+</em></pre>
+<p>définit un synonyme <em class="code">size_t</em>,
+représentant une taille liée à un type, à un entier non signé <em class="code">unsigned int</em>.
+</p>
+<p>L'utilisation de typedef ne crée pas un nouveau type avec tous les contrôles et tests effectués par le compilateur,
+mais il aide à la lecture et à la compréhension du code.
+</p>
+<p>L'usage de typedef est recommandé pour simplifier l'écriture de type complexe, comme les structures.
+Nous trouverons fréquemment le renommage de structures grâce à typedef.</p>
+<pre><code>struct point {
+	int abscisse;
+	int ordonnées;
+}
+typedef struct point point;
+</code></pre>
+<p>Il n'y a pas de confusion entre les 2 noms <em class="code">point</em> car ils sont utilisés dans 2
+<a href="./modularisation.html#id_classNom"> classes de nommage</a> différentes.
+ ou encore de façon plus condensée
+</p>
+ <pre><code>typedef struct point {
+	 int abscisse;
+	 int ordonnée;
+} point;
+ </code></pre>
+
+</div>
+<!-- #contenu -->
+
+
+<p id="copyright"> <a
+	href="mailto:bernard.henriet@ipl.be">Bernard Henriet</a> &copy; 2016 <a href="http://www.ipl.be"><img src="../images/ipl_bleu.png" alt="logo ipl" /></a></p>
+
+</div>
+<!-- #global -->
+
+</body>
+</html>

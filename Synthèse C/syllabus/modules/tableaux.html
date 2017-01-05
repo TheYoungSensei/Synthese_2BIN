@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>cours de Langage C</title>
+<link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../css/modele04.css"
+	media="screen" />
+<link rel="stylesheet" type="text/css" href="../css/infoB.css" media="all" />
+</head>
+
+<body>
+<div id="global">
+
+<div id="entete">
+<h1>Langage C</h1>
+<h2 class="sous-titre" id="id_table">Les tableaux</h2>
+
+</div>
+<!-- #entete -->
+
+
+<div id="navigation">
+<ul>
+
+        <li><a href="../index.html">Introduction</a></li>
+        <li><a href="./langage.html">Les éléments du langage</a></li>
+        <li><a href="./instructions.html">Les instructions</a></li>
+        <li><a href="./tableaux.html">Les tableaux</a></li>
+        <li><a href="./pointeurs.html">Les pointeurs</a></li>
+        <li><a href="./chaines.html">Les chaines de caractères</a></li>
+        <li><a href="./fonctions.html">Les fonctions</a></li>
+        <li><a href="./modularisation.html">La modularisation</a></li>
+        <li><a href="./classes.html">Les classes d'allocation</a></li>
+        <li><a href="./structures.html">Les structures</a></li>
+        <li><a href="./fichier.html">Les fichiers en C</a></li>
+        <li><a href="./preprocesseur.html">Le preprocesseur</a></li>
+        <li><a href="./librairies.html">Les librairies</a></li>
+        <li><a href="./lexique.html">Index</a></li>
+
+</ul>
+</div>
+<!-- #navigation -->
+
+<div id="contenu">
+
+<h2>Les tableaux</h2>
+
+<h3>Introduction</h3>
+<p>Les tableaux en langage C ressemblent à ce que vous avez appris en Java. Mais vous devez être attentifs aux nombreuses différences qui risquent de vous poser problèmes.</p>
+<p>En C, la taille des tableaux  est fixée à la compilation. C'est le résultat d'une expression entière constante qui ne peut en aucun cas être modifiée en cours d'exécution.
+Nous verrons plus tard qu'il existe une autre forme de tableau, dynamique, qui permet de gérer la taille de la table en cours d'exécution de l'application.
+</p>
+<p>Comme il a été écrit dans l'introduction, le langage C ne réalise que très peu de contrôle, notamment en ce qui concerne la gestion des tableaux. Ni le compilateur, ni lors de l'exécution il n'y a vérification que l'
+<a href="#" class="infoB">indice<span>numéro de l'élement dans le tableau</span></a>
+ reste dans les limites de l'
+<a href="#" class="infoB">index<span>ensemble des indices possibles (de 0 à taille-1)</span></a>
+ : pas d'avertissement si vous utilisez un indice négatif ni si vous dépassez la limite de la table.</p>
+<p>
+</p>
+
+<h3 id="id_definition" >Définition d'un tableau</h3>
+<p>Pour définir un tableau dans un programme C vous devez spécifier le type des éléments, le nom du tableau et sa taille, l'index d'un tableau commence toujours à la valeur 0. Une seule syntaxe est reconnue :
+</p>
+<pre>int table[4]; /* définition d'une table de 4 int d'indices compris entre 0 et 3*/
+double monTableau[N*M]; /* valable si M et N sont connu à la compilation */</pre>
+<p>Une table peut être initialisée lors de sa définition, les valeurs doivent être spécifiées entre accolades, comme dans l'exemple :
+</p>
+<pre>int table[4] = {1, 123, -15, 8};</pre>
+<p>
+Dans ce cas, il faut rester attentif au fait que la taille de la table doit être suffisante pour éviter une erreur de compilation. Par contre, si la taille est supérieure au nombre de valeurs d'initialisation, les derniers éléments sont initialisés à la valeur 0. Par exemple : dans la définition suivante, 
+</p>
+<pre>int table[4] = {1, 3};</pre>
+<p>
+les 2 derniers éléments (aux indices 2 et 3) de la table sont initialisés à 0.<br />
+Autre possibilité, utiliser une taille implicite pour la table, valant le nombre d'éléments donnés en initialisation comme dans l'exemple suivant :
+</p>
+<pre>int table[] = {1, 5, -67}; </pre>
+<p>
+La table aura une dimension de 3.
+</p>
+
+<h3>Utilisation</h3>
+<p>L'accès à un élément du tableau s'indique en spécifiant le nom de la table et la valeur de l'indice noté entre les caractères '<em>[</em>' et '<em>]</em>'
+</p>
+<pre>table[2]++; /*post incrémentation du 3ème élément du tableau */</pre>
+<p>Le langage C n'a pas prévu de conserver la taille d'un tableau dans une structure particulière. Cette spécificité du langage a comme conséquences
+</p>
+<ul>
+	<li>qu'il est impossible d'obtenir la taille sans programmer explicitement sa gestion.</li>
+	<li>que le compilateur n'offre aucun contrôle quant aux valeurs utilisées comme indice, qu'elle soit négative ou supérieure à la taille de la table. Ce dernier point peut constituer une grande faille de sécurité.</li>
+</ul>
+<p>
+Puisque l'index commence toujours à 0, les valeurs possibles pour un indice sont comprises entre 0 et la taille -1.
+</p>
+
+<h3>Tableaux multidimensionnels</h3>
+<p>Un tableau à 2 dimensions est considéré en C comme un tableau de tableaux ce qui implique que les indices doivent s'indiquer chacun entre crochets '<em>[</em>' et '<em>]</em>'.
+</p>
+<pre>int matrice[4][3];</pre>
+<p>
+est la définition d'un tableau de 4 sous-tableaux, chacun contenant 3 <em>int</em>. En mémoire, ces 12 éléments sont stockés consécutivement.
+</p>
+<p>L'initialisation du tableau se fait en initialisant chaque sous-tableau, les sous-tableaux non explicitement initialisés le sont à 0.
+</p>
+<pre>int matrice [3][5] = {{1, 3, 5}, {2, 4}};</pre>
+<p>L'accès a un des éléments de cette matrice se réalise en indiquant les 2 indices comme dans l'exemple suivant, qui initialise le dernier élément de la table déclarée précédemment à 5 :
+<pre>matrice[2][4] = 5;</pre>
+<p>
+Une erreur fréquente est l'utilisation d'une notation semblable à celle employée en mathématique, en séparant les indices par la virgule.
+</p>
+Cette écriture <pre>matrice[3, 2];</pre>
+<p>est acceptée par le compilateur mais a toute fois une signification différente de ce que vous avez appris en mathématique.
+</p>
+
+
+</div>
+<!-- #contenu -->
+
+
+<p id="copyright"> <a
+	href="mailto:bernard.henriet@ipl.be">Bernard Henriet</a> &copy; 2015 <a href="http://www.ipl.be"><img src="../images/ipl_bleu.png" alt="logo ipl" /></a></p>
+
+</div>
+<!-- #global -->
+
+</body>
+</html>

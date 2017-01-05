@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>cours de Langage C</title>
+        <link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="../css/modele04.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../css/infoB.css" media="all" />
+    </head>
+
+<body>
+<div id="global">
+
+<div id="entete">
+<h1>Langage C</h1>
+<h2 class="sous-titre" id="id_table">La modularisation</h2>
+
+</div>
+<!-- #entete -->
+
+
+<div id="navigation">
+<ul>
+
+        <li><a href="../index.html">Introduction</a></li>
+        <li><a href="./langage.html">Les éléments du langage</a></li>
+        <li><a href="./instructions.html">Les instructions</a></li>
+        <li><a href="./tableaux.html">Les tableaux</a></li>
+        <li><a href="./pointeurs.html">Les pointeurs</a></li>
+        <li><a href="./chaines.html">Les chaines de caractères</a></li>
+        <li><a href="./fonctions.html">Les fonctions</a></li>
+        <li><a href="./modularisation.html">La modularisation</a></li>
+        <li><a href="./classes.html">Les classes d'allocation</a></li>
+        <li><a href="./structures.html">Les structures</a></li>
+        <li><a href="./fichier.html">Les fichiers en C</a></li>
+        <li><a href="./preprocesseur.html">Le preprocesseur</a></li>
+        <li><a href="./librairies.html">Les librairies</a></li>
+        <li><a href="./lexique.html">Index</a></li>
+
+</ul>
+</div>
+<!-- #navigation -->
+
+<div id="contenu">
+
+<h2>La modularisation</h2>
+
+<h3>Introduction</h3>
+<p>Nous avons vu dans le chapitre précédent qu'un gros programme peut être découpé
+en plusieurs fonctions de manière à en simplifier la programmation et la lecture.
+Nous allons aborder dans ce chapitre la manière d'organiser ces fonctions en différents fichiers.
+Cette manière de travailler évitera au programmeur la manipulation de gros fichiers lourds 
+à maintenir et à compiler. Cela permet aussi la réutilisation des fonctions dans plusieurs applications.</p>
+
+<h3>La découpe en modules</h3>
+<p>La création d'un module doit répondre à une nécessité fonctionnelle,
+par exemple rassembler toutes les fonctions qui manipulent une liste,
+ou organisationnelle,
+par exemple réunir dans un fichier toutes les fonctions utilitaires liées à une application.</p>
+<p>Cette découpe en plusieurs fichiers, offre la possibilité de réutiliser dans d'autres applications 
+les fonctions définies pour une application,
+simplement en faisant référence à ce module.</p>
+<p>Un module est un fichier source C, reprenant la définition d'une ou de plusieurs fonctions.</p>
+<p>Mais pour appeler une fonction à l'intérieur d'un module il faut en connaître le nom et la manière de 
+<a href="#" class="infoB">l'utiliser<span>le type de la fonction et la liste de ses paramètres</span></a>,
+il est donc nécessaire de rappeler le prototype des fonctions dans tous les fichiers où elles sont référencées.
+</p>
+
+<h3>Les fichiers d'include</h3>
+<p>Réécrire le prototype dans tous les fichiers où cela est nécessaire et un travail ardu qui peut facilement générer des erreurs.
+Il est préférable d'écrire ces prototypes une fois pour toutes dans un seul fichier par module,
+que l'on va inclure dans tous les fichiers où se trouvent des appels aux fonctions.
+Le C a prévu ce mécanisme d'inclusion de fichiers en introduisant la notion de fichier d'entête.
+C'est le travail du 
+<a href="#" class="infoB">préprocesseur<span>étape précédant la compilation, consistant à adapter la source C</span></a>,
+ de veiller à inclure ces fichiers dans les sources C.</p>
+<p>Il existe 2 syntaxes pour donner au préprocesseur le nom d'un fichier à inclure :
+La première que vous avez rencontrée depuis votre premier programme, permet d'inclure un fichier d'entête lié aux fonctions standards;
+elle spécifie le nom du fichier entre les caractères <em>&lt;</em> et <em>&gt;</em>, comme dans l'instruction 
+<br /><em class="code">#include &lt;stdio.h&gt;</em> <br />
+qui permet d'inclure le protoytpe de toutes les fonctions standards d'entrée/sortie telles que
+<em class="code">printf</em>, 
+<em class="code">fgets</em>, 
+<em class="code">getchar</em>, etc. </p>
+<p>La seconde utilise le caractère <em>"</em>. Elle indique au préprocesseur d'inclure le fichier d'entete se trouvant dans le réperoire courant.
+En voici un exemple :
+<br /><em class="code">#include "pile.h"</em> <br />
+Nous avons repris dans ce fichier <em class="code">pile.h</em> le prototype des fonctions de gestion d'une pile, 
+dont le code se trouve dans un module <em class="code">pile.c</em></p>
+<p>Outre la déclaration des prototypes des fonctions, un fichier d'entête peut contenir
+des définitions de constantes (sous forme de macros), comme par exemple
+<br /><em class="code">#define TAILLE 100</em><br />
+des définitions de types introduites par <a href="./structures.html#id_typedef">typedef</a>,
+la déclaration de variables externes, mais <em>aucune ligne de code</em>.
+</p>
+<p>Voici un exemple du fichier d'entete <em class="code">pile.h</em>.</p>
+<pre>  1 /***********************************************************************
+  2  * pile.h
+  3  * gestion d'une pile d'entiers par une table
+  4  * bdh 
+  6  ***********************************************************************/
+  7 #include &lt;stdio.h&gt;
+  8 
+  9 #if ! defined (_PILE_H_)
+ 10 #define _PILE_H_
+ 11 #define TRUE    1
+ 12 #define FALSE   0
+ 13 
+ 14 #define OK      0
+ 15 #define KO      1
+ 16 
+ 17     /* définition du type Pile */
+ 18       .....
+ 21	/* empile un entier sur la pile */
+ 22 void push(int);
+ 23	/* depile  et retourne un entier de la pile */
+ 24 int pop();
+ 25	/* vérifie si la pile est vide */
+ 26 int isEmpty();
+ 27	/* vérifie si la pile est pleine*/
+ 28 int isFull();
+ 29	/* affiche la pile */
+ 30 void print();
+ 31	/* initialise la pile */
+ 32 void init();
+ 33 #endif </pre>
+<p>La ligne 9 est un directive conditionnelle du préprocessuer qui permet d'éviter la double inclusion.
+Si la macro <em class="code">_PILE_H_</em> est déjà définie, c'est que le fichier a déjà été inclus dans la source 
+et il est donc inutile de réaliser le traitement qui suit, c-à-d d'ajouter les différentes déclarations.</p>
+
+<h3>Les fichiers "source" des fonctions</h3>
+<p>C'est dans ces fichiers que l'on retrouve les fonctions qui complètent l'application. </p>
+<p>Le fichier source comprend toujours l'inclusion du fichier d'entête pour bénéficier
+des différentes définitions de macros et déclarations de variables.  </p>
+<p>Voici une partie du fichier source <em class="code">pile.c</em> correspondant au fichier d'entête <em class="code">pile.h</em>.
+L'implémentation du code est laissé à votre discrétion.</p>
+<pre>  1 /***********************************************************************
+  2  * pile.c
+  3  * gestion d'une pile par une table
+  4  * bdh 
+  6  ***********************************************************************/
+  7 #include "pile.h"
+  8
+  9 	/* definition de la variable static Pile */
+ 10 
+ 11
+ 12
+ 13 	/* variable globale reprenant le type d'erreur */
+ 14
+ 15 
+ 16	/* empile un entier sur la pile */
+ 17 void push(int val){
+ 24         .....
+ 25 }
+ 26 
+ 27	/* depile  et retourne un entier de la pile */
+ 28 int pop(){
+ 34         ......
+ 35 }
+ 36 
+ 37	/* vérifie si la pile est vide */
+ 38 int isEmpty(){
+ 39         ......
+ 40 }
+ 41
+ 42	/* vérifie si la pile est pleine*/
+ 43 int isFull(){
+ 44         ......
+ 45 }
+ 46 
+ 47	/* initialise la pile */
+ 48 void init(){
+ 49         ......
+ 51 }
+ 52 
+ 53 /* affiche la pile */
+ 54 void print(){
+ 63         .....
+ 64 } </pre>
+
+<h3>Le makefile</h3>
+<p>La génération d'une application passe par plusieurs étapes, notamment :</p>
+<ul class="tiret">
+	<li>La <em>compilation</em> des différentes sources grâce au compilateur;
+		par exemple pour compiler le fichier <em class="code">module.c</em>
+		il faut appeler le compilateur au moyen de la commande  <em class="code">cc -c module.c</em>
+		qui va fournir un module objet, ici le fichier <em class="code">module.o</em>
+	</li>
+	<li>l'<em>édition des liens</em> réalisée par l'éditeur de lien (appeler par la commande <em class="code">cc</em>)
+		<em class="code">cc -o executable *.o</em> qui va générer l'exécutable
+		en assemblant les différents modules objets <em class ="code">*.o</em> et librairies standards
+		en un fichier exécutable ici <em class="code">executable</em>.
+	</li>
+</ul>
+</p>
+<p>L'utilitaire <a href="http://www.gnu.org/software/make/">make</a> peut automatiser cette séquence de traitements, 
+en se limitant à l'exécution de ceux qui sont nécessaires pour mettre à jour l'application. <br />
+Pour réaliser ce travail, la commande <em class="code">make</em> utilise un fichier, appelé  par défaut, <em class="code">Makefile</em>, qui comprend une série de règles, traitées récursivement.<br />
+Chaque règle comprend une <em>condition</em> de dépendance basée sur le <em>mtime</em> des fichiers</br>
+<em class="code">cible : dépendance1 dépendance 2 dépendante3</em>,</br>
+l'action sera réalisée si la cible est plus ancienne qu'une des dépendances, c-à-d si le mtime de la cible est plus petit que le mtime d'une des dépendances;</br>
+et une <em>action</em> :</br>
+<em class="code"><\t>action </em></br>
+ commande  précédée d'un caractère de tabulation.
+<em class =code">make</em> va exécuter l'action si la condition le réclame.</br>
+Pour évaluer le mtime des dépendances, make recherche plus loin dans la liste des règles celles qui vont mettre à jour ces dépendances,
+et ainsi de suite, de manière récursive. </p>
+<p>Voici le fichier <em class="code">Makefile</em> associé à une application qui utilise notre module <em class="code"> pile</em> : </p>
+<pre>  1 #################################################################
+  2 # Makefile
+  3 #       calculatrice en notation polonaise inversée
+  4 # bdh 
+  5 #################################################################
+  6 npi : npi.o pile.o
+  7         cc -o npi npi.o pile.o
+  8 npi.o : npi.c pile.h
+  9         cc -c npi.c
+ 10 pile.o : pile.c pile.h
+ 11         cc -c pile.c </pre>
+<p>Dans ce fichier, la règle (6-7) construit l'exécutable <em class="code">npi</em> grâce à l'édition des liens (7) qui "fusionne" les différents modules de l'application ainsi que certaines librairies standard,
+la règle (8-9) vérifie le module objet <em class="code">pile.o</em>
+et éventuellement compile (9) la source <em class="code">pile.c</em> pour le mettre à jour si ce module objet est plus ancien que les fichiers dont il dépend,
+à savoir la source <em class="code">pile.c</em> et le fichier d'include <em class="code">pile.h</em>, fichier inclus dans le fichier <em class="code">pile.c</em>, etc.</br>
+En résumé :
+make exécute l'édition des liens si un des modules objets a été mis à jour, un module est recompilé si un des fichiers a été modifié.
+</p>
+
+</div>
+
+<!-- #contenu -->
+
+
+<p id="copyright"> <a
+	href="mailto:bernard.henriet@ipl.be">Bernard Henriet</a> &copy; 2016 <a href="http://www.ipl.be"><img src="../images/ipl_bleu.png" alt="logo ipl" /></a></p>
+
+</div>
+<!-- #global -->
+
+</body>
+</html>
