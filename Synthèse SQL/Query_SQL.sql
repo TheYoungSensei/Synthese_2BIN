@@ -321,7 +321,7 @@ OR
 
 5)	SELECT p.pub_id, p.pub_name
 	FROM publishers p
-	WHERE p.pub_id NOT EXISTS (SELECT t.title_id 
+	WHERE NOT EXISTS (SELECT t.title_id 
 								FROM titles t
 								WHERE p.pub_id = t.pub_id)
 
