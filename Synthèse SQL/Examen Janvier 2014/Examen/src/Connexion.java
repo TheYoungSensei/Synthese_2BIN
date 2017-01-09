@@ -8,7 +8,7 @@ public class Connexion {
 	
 	public static final String IP = "localhost:5433/examen";
 	public static final String USER = "postgres";
-	public static final String PASSWORD = "Tiffy0603";
+	public static final String PASSWORD = "********";
 	private PreparedStatement er;
 	private PreparedStatement lz;
 	private PreparedStatement ha;
@@ -47,7 +47,7 @@ public class Connexion {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return "Le reperage n'a pas pu être ajouté";
+			return "Le reperage n'a pas pu Ãªtre ajoutÃ©";
 		}
 		return msg;
 	}
@@ -59,7 +59,7 @@ public class Connexion {
 			lz.setInt(2, heure);
 			try (ResultSet rs = lz.executeQuery()) {
 				while(rs.next()) {
-					msg += "La Zone " + rs.getString(1) + " possède " + rs.getInt(2) + " aventurier(s)\n";
+					msg += "La Zone " + rs.getString(1) + " possÃ¨de " + rs.getInt(2) + " aventurier(s)\n";
 				}
 			}
 		} catch (SQLException e) {
@@ -67,7 +67,7 @@ public class Connexion {
 			return "Erreur lors du listing";
 		}
 		if(msg == null) {
-			return "Pas d'aventuriers pour cette heure là à cette date là";
+			return "Pas d'aventuriers pour cette heure lÃ  Ã  cette date lÃ ";
 		}
 		return msg;
 	}
@@ -78,7 +78,7 @@ public class Connexion {
 			ha.setString(1, nom);
 			try (ResultSet rs = ha.executeQuery()) {
 				while(rs.next()) {
-					msg += "Repérage en " + rs.getString(1) + ", le " + rs.getString(2) + " à "
+					msg += "RepÃ©rage en " + rs.getString(1) + ", le " + rs.getString(2) + " Ã  "
 							+ rs.getInt(3) + "\n";
 				}
 			}
@@ -97,12 +97,12 @@ public class Connexion {
 			nr.setString(1, nom);
 			try (ResultSet rs = nr.executeQuery()) {
 				while(rs.next()) {
-					return "L'aventurier à été repéré : " + rs.getString(1) + " fois";
+					return "L'aventurier Ã  Ã©tÃ© repÃ©rÃ© : " + rs.getString(1) + " fois";
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return "Erreur lors du nombre de repérages";
+			return "Erreur lors du nombre de repÃ©rages";
 		}
 		return "Pas de reperages pour cet aventurier";
 	}
