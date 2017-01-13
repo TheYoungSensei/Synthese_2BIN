@@ -1,0 +1,27 @@
+package client;
+
+import java.io.FileInputStream;
+import java.lang.reflect.Constructor;
+import java.util.Properties;
+
+import tv.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+		try {
+			String url = (args.length == 0)?"src/config/prod.properties" : args[0];
+			FileInputStream file = new FileInputStream(url);
+			Properties props = new Properties();
+			props.load(file);
+			file.close();
+			Constructor<?> c = Class.forName(props.getProperty("tv.TvFactory")).getDeclaredConstructor();
+			c.setAccessible(true);
+			Client client = new Client((TvFactory) c.newInstance());
+			client.watchTv();
+		} catch (Throwable e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+}
