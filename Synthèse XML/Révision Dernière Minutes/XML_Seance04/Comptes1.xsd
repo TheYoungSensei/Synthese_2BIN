@@ -1,0 +1,72 @@
+<?xml version = "1.0" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Nom" type="xs:string" />
+	<xs:element name="Prenom" type="xs:string" />
+	<xs:element name="Visa" type="xs:positiveInteger" />
+	<xs:element name="Bancontact" type="xs:positiveInteger" />
+	<xs:element name="Proton"><xs:complexType/></xs:element>
+	<xs:element name="CptVue">
+		<xs:complexType>
+				<xs:sequence>
+					<xs:element ref="Compte" />
+					<xs:element ref="Visa" minOccurs="0" />
+					<xs:element ref="Bancontact" 
+						minOccurs="0" maxOccurs="unbounded" />
+					<xs:element ref="Proton" minOccurs="0" />
+				</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CptEpargne">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Compte" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Comptes">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="CptEpargne" />
+				<xs:element ref="CptVue" />
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Client">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Nom" />
+				<xs:element ref="Prenom" />
+				<xs:element ref="Comptes" />
+			</xs:sequence>
+			<xs:attribute name="Numero" use="required" type="xs:ID" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Clients">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Client" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Compte">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="numeroSEPAType">
+					<xs:attribute name="Monnaie" default="Eur" type="monnaieType" />
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="monnaieType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Usd" />
+			<xs:enumeration value="Eur" />
+			<xs:enumeration value="Cad" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numeroSEPAType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="BE\d\d \d{4} \d{4} \d{4}" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
