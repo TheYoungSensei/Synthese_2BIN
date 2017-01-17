@@ -10,7 +10,7 @@ public class MyServer extends HttpServlet{
 	
 	public static void main(String[] args) throws Exception {
 		// lie le server � un port
-		 Server server = new Server(8000);
+		 Server server = new Server(8070);
 		// instancie un WebAppContext pour configurer le server
 		 WebAppContext context = new WebAppContext();
 		// O� se trouvent les fichiers (ils seront servis par un DefaultServlet)
