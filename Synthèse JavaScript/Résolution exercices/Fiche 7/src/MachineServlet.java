@@ -18,15 +18,14 @@ public class MachineServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String type = req.getParameter("type");
 		switch(type) {
-		case "post":
-			effectuerModif(req,resp);
-		case "init":
+			case "post" :
+				effectuerModif(req, resp);
+			case "init" :
 				initialisationPage(req, resp);
 				break;
-		default :
+			default :
 				resp.setStatus(500);
 				resp.getOutputStream().write("Attention type invalide".getBytes());
 				break;
@@ -37,8 +36,6 @@ public class MachineServlet extends HttpServlet{
 		String id = req.getParameter("id");
 		String jsonreq = req.getParameter("json");
 		if(jsonreq != null) {
-			System.out.println(jsonreq);
-			System.out.println(id);
 			Files.write(Paths.get("machines/" + id), jsonreq.getBytes());
 		}
 	}
@@ -50,8 +47,8 @@ public class MachineServlet extends HttpServlet{
 				.useConstructorWithArguments(true)
 				.create();
 		HashMap<String, String> machines = new HashMap<String, String>();
-		DirectoryStream<Path> ds  = Files.newDirectoryStream(Paths.get("./machines"));
-		for(Path chemin : ds){
+		DirectoryStream<Path> ds = Files.newDirectoryStream(Paths.get("./machines"));
+		for(Path chemin : ds) {
 			machines.put(chemin.getFileName().toString(), new String(Files.readAllBytes(chemin)));
 		}
 		String msg = genson.serialize(machines);

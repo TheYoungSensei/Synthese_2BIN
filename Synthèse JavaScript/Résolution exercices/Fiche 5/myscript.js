@@ -66,11 +66,10 @@ var JSONTOForm = function($racine, $result) {
 			} else if ($elem.attr('type') === "text" || $elem.attr('type') === "password") {
 				$elem.val($dict[$name]);
 			} else if ($elem.attr('type') === "radio") {
-				$elem.each(function(index){
-					if($elem.val() === $dict[$name]){
-						$(this).prop('checked', true);
-					}
-				});
+				$elem2 = $racine.find('input [name ="' + $name + '"], [value = "' + $dict[$name] + '"]');
+				if($elem2 !== undefined) {
+					$elem2.prop("checked", true);
+				}
 			} else if ($elem.attr('type') === 'checkbox') {
 				if($dict[$name]){
 					$elem.prop('checked', true);
@@ -102,7 +101,6 @@ var JSONTOForm = function($racine, $result) {
 		if($elem !== undefined) {
 			$option = $elem.find('option');
 			$option.each(function(index){
-				console.log($dict[$name]);
 				if($(this).val() === $dict[$name]){
 					$(this).prop('selected', true);
 				}

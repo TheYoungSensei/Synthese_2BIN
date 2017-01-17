@@ -1,33 +1,31 @@
 var machines = {};
 
 $(function(){
-	
-	
 	$.ajax({
 		url : '/Machine',
 		type : 'POST',
 		data : {
-			type : "init"
+			type : 'init'
 		},
-		success : function(reponseTxt){
+		success : function(reponseTxt) {
 			machines = {};
 			$("#machines").html(" ");
 			machines = JSON.parse(reponseTxt);
-			$.each(machines, function(key,val){
+			$.each(machines, function(key, val){
 				$("#machines").append($('<option>' + key + '</option>'));
 				$("#machines option:first").click();
-			})
+			});
 		},
-		error : function(e){
+		error : function(e) {
 			console.log(e.message);
 		}
 	});
-	
+
 	$("#machines").on("change", function(e){
 		selectMachine($('#machines').find(':selected').val());
 	});
-	
-	$('#effectuerModif').click(function(e){
+
+	$("#effectuerModif").click(function(e){
 		var form = formToJSON($("#formulaire"));
 		$.ajax({
 			url : '/Machine',
@@ -37,17 +35,17 @@ $(function(){
 				id : $("#machines").find(':selected').val(),
 				json : JSON.stringify(form)
 			},
-			success : function(reponse){
+			sucess : function(reponse) {
 				machines = {};
 				$("#machines").html(" ");
 				machines = JSON.parse(reponse);
-				$.each(machines, function(key,val){
+				$.each(machines, function(key, val) {
 					$("#machines").append($('<option>' + key + '</option>'));
 					$("#machines option:first").click();
-				})
+				});
 			},
-			error : function(e){
-				console.log(e.message);
+			error : function(e) {
+				console.log(e.message);	
 			}
 		});
 	});
