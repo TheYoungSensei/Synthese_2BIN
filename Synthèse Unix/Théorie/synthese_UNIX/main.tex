@@ -155,7 +155,12 @@ gid\_t gid; \newline
  \newline
  Comme vous pouvez le remarquer, la composition de structure IPC est très similaire à celle représentant les droits d'accès sur les fichiers régulier. Celle ci peut être changée par : msgctl(), shmctl(), srmctl().
 \section{Message queue}
-Il s'agit d'une liste chaînée de message sauvegardée dans l'espace noyau.La pile est identifiée par a "message queue id". Elle est ouverte ou créée par msgget(). Les messages sont envoyés par msgsend() (Ils sont rajouté à la fin de la pile). Les messages sont lus par msgrcv() (Ils ne sont pas nécessairement lu en FIFO).  Ces piles possède une structure  msqid\_ds. Ils permettent une communication bidirectionelle entre des processus totalement différents. Les messages ont un type et les frontières entre ces derniers sont préservés. Les piles de message sont en dehors du système de fichier et en dehors de l'arborescence de processus).  
+Il s'agit d'une liste chaînée de message sauvegardée dans l'espace noyau.La pile est identifiée par a "message queue id". Elle est ouverte ou créée par msgget(). Les messages sont envoyés par msgsend() (Ils sont rajouté à la fin de la pile). Les messages sont lus par msgrcv() (Ils ne sont pas nécessairement lu en FIFO).  Ces piles possède une structure  msqid\_ds. Ils permettent une communication bidirectionelle entre des processus totalement différents. Les messages ont un type et les frontières entre ces derniers sont préservés. Les piles de message sont en dehors du système de fichier et en dehors de l'arborescence de processus).
+\section{Semaphores}
+Leur but est de permettre la synchronisation des opérations. Il s'agit d'un entier strictement positif sur lequel on peut effectuer des opérations basiques (incrémenter ou décrémenter la valeur de la sémaphore ainsi que bloquer le processus tant que la sémaphore n'atteigne pas une certaine valeur (par exemple : 0)). Elles permettent de contrôler et de protéger l'accès à certaines ressources critiques.
+\paragraph{Remarques : } La valeur d'initialisation peut être 'n' > 1 (Tant que 'n' processus peuvent accéder à cette ressource simultanément. Il faut également noter que les sémaphores doivent obligatoirement être atomiques. En Unix, on ne possède pas une sémaphore mais un ensemble de sémaphores, plusieurs opérations sont disponibles et sont atomiques (semget() : permet de récupérer un identifiant pour un ensemble de sémaphores, semctl() : permet d'effectuer des opérations de controle sur un ensemble de sémaphores, semop() : permet d'effectuer des opérations sur un ensemble de sémaphores).
+\section{Mémoires Partagées}
+Il s'agit d'une manière d'échanger des données entre les processus, elle est plus rapide que les manières conventionnelles car elle ne nécessite pas d'appels systèmes. Par contre elle nécessite d'être créée par une processus, les autre processus devront donc s'y attacher et dès qu'un processus cesse l'utiliser il devra se détacher.
 \section{Appels Systèmes}
 \subsection{Open()}
 \paragraph{Include : }
@@ -665,7 +670,7 @@ Envoie le signal SIGALRM après quelque secondes.
 \end{itemize}
 \paragraph{Explication des paramètres : }
 \begin{itemize}
-	\item flags peut prendre comme valeur soit : IPC\_CREATE (cela créera la structure si elle n'existait pas déjà et ouvrira la structure si celle ci existait déjà). soit IPC\_EXCL (crée la structure si elle n'existe pas et envoie une erreur ousinon).   
+	\item flags peut prendre comme valeur soit : IPC\_CREATE (cela créera la structure si elle n'existait pas déjà et ouvrira la structure si celle ci existait déjà). soit IPC\_EXCL (crée la structure si elle n'existe pas et envoie une erreur ou sinon).   
 \end{itemize}
 \subsection{msgsnd()}
 \paragraph{Déclarations : }
@@ -695,12 +700,331 @@ Envoie le signal SIGALRM après quelque secondes.
 \subsection{msgctl()}
 \paragraph{Déclarations : }
 \begin{itemize}
-	\item int msgctl(int qid, int cmd, struct msqid\_ds *ptr)  
+	\item int msgctl(int qid, int cmd, struct msqid\_ds *ptr)	; 
 \end{itemize}
 \paragraph{Explication des paramètres : }
 \begin{itemize}
 \item qid : il s'agit de l'identifiant de la structure (l'id de la structure qid). 
 \item ptr : un pointeur vers une structure IPC :  msqid\_ds.
 \item cmd qui peut prendre comme valeur : IPC\_STAT (retourne la structure de controle), IPC\_SET (qui permet d'écrire : msg\_perm.uid, msg\_perm.gid, msg\_perm.mode et msg\_qbytes à la structure de contrôle) et IPC\_RMID (permet de supprimer la pile de message). 
+\end{itemize}
+\subsection{semget()}
+\paragraph{Déclarations : }
+\begin{itemize}
+	\item int semget(key\_t key, int nsems, int semflg);
+\end{itemize}
+\paragraph{Explication des paramètres : }
+\begin{itemize}
+\item key : un nombre représentant une clé.
+\item nsems : le nombre de sémaphores de l'ensemble. 
+\item semflg :  peut prendre comme valeur soit : IPC\_CREATE (cela créera la structure si elle n'existait pas déjà et ouvrira la structure si celle ci existait déjà). soit IPC\_EXCL (crée la structure si elle n'existe pas et envoie une erreur ou sinon).   
+\end{itemize}
+\paragraph{Type de retour : } un ensemble de sémaphore (plutôt leur identifiant), il faut par contre faire attention car ces sémaphores sont créés et non initialisées.
+\subsection{semctl()}
+\paragraph{Déclarations : }
+\begin{itemize}
+	\item int semctl(int semid, int semnum, int cmd, arg); 
+\end{itemize}
+\paragraph{Explication des paramètres : }
+\begin{itemize}
+\item semid : l'identifiant de l'ensemble de sémaphore.
+\item semnum : le numéro de la sémaphore au sein de son ensemble.
+\item cmd : Il peut prendre comme valeur :  
+\begin{itemize}
+	\item GETVAL/SETVAL: permet d'obtenir / de changer la valeur d'une sémaphore.
+	\item GETALL/SETALL: permet d'obtenir / de changer la valeur de toutes les sémaphores.
+	\item GETPID: permet d'obtenir l'id du dernier processus à avoir utiliser la sémaphore.
+	\item GETNCNT: permet d'obtenir le nombre de processus attendant sur la sémaphore (valeur > valeur actuelle).
+	\item GETZCNT: permet d'obtenir le nombre de processus attendant sur la sémaphore (valeur = 0).
+	\item IPC\_STAT: retourne semid\_ds à l'intérieur d'un pointeur passé à l'aide de arg.
+	\item IPC\_SET: modifie le uid et git effectif ainsi que les modes à travers ipc\_perm de  semid\_ds.
+	\item IPC\_RMID: supprime l'ensemble de sémaphores.
+\end{itemize}
+\item arg :  depend de cmd. 
+\end{itemize}
+\subsection{semop()}
+\paragraph{Déclarations : }
+\begin{itemize}
+	\item int semop(int semid, struct sembuf sops[], int nsops);
+\end{itemize}
+\paragraph{Explication des paramètres : }
+\begin{itemize}
+\item semid : l'identifiant de l'ensemble de sémaphore.
+\item sops : le tableau représentant les sem ops. 
+\item nsops: nombre de sem ops. 
+\end{itemize}
+\paragraph{Sembuf : } sembuf décrit une opération sur une sémaphore.\\
+struct sembuf {\\
+ushort sem\_num; // numéro de la sémaphore\\
+short sem\_op; // Opération sur la sémaphore (+1, -1)\\
+short sem\_flg; // flag de la sémaphore \\
+}; 
+\paragraph{Remarques : } Semop permet d'effectuer des opérations sur un ensemble de sémaphores de manière atomique. 
+\paragraph{Opération sur la sémaphore : }
+\begin{itemize}
+\item sem\_op > 0 : la valeur est ajoutée à la sémaphore courante.
+\item sem\_op < 0 : si |sem\_op| <= à la valeur de la sémaphore, |sem\_op| est soustrait de la valeur actuelle de la sémaphore, autrement si |sem\_op| > la valeur de la sémaphore alors semncnt++, le processus courant est endormis jusqu'a ce que |sem\_op| <= la valeur de la semaphore (dès que tel est le cas, soustrait cette valeur à la valeur de la sémaphore).
+\item sem\_op == 0 : si la valeur de la sémaphore != 0 : semznct++, le processus attend tant que la valeur de la sémaphore n’égale pas 0 ).
+\end{itemize}
+\paragraph{Valeur de sem\_flg : } Il peut prendre comme valeur : IPC\_NOWAIT si la condition ferait en sorte que le processus s'endorme : l'appel système se termine directement avec comme code d'erreur : EAGAIN. La deuxième valeur qu'il peut prendre est : SEM\_UNDO (Toute les modifications sur la valeur de la sémaphore du processus courant sont sauvegardées afin d'être effectuées à nouveau à la fin du processus courant. 
+\subsection{shmget()}
+\paragraph{Déclarations : }
+\begin{itemize}
+	\item int shmget(key\_t key, int size, int shmflg);
+\end{itemize}
+\paragraph{Explication des paramètres : }
+\begin{itemize}
+\item key : un nombre représentant une clé.
+\item nsems : taille de la mémoire partagée (LA taille minimum du segment, seulement utile pour le processus créateur de la sharedMemory. 
+\item shmflg :  peut prendre comme valeur soit : IPC\_CREATE (cela créera la structure si elle n'existait pas déjà et ouvrira la structure si celle ci existait déjà). soit IPC\_EXCL (crée la structure si elle n'existe pas et envoie une erreur ou sinon).   
+\end{itemize}
+\subsection{shmctl()}
+\paragraph{Déclarations : }
+\begin{itemize}
+	\item int shmctl(int shmid, int cmd, struct shmid\_ds \*buf);
+\end{itemize}
+\paragraph{Explication des paramètres : }
+\begin{itemize}
+\item shmid : L'identifiant de la mémoire partagée. 
+\item cmd : la commande a exécuté sur shm. 
+\begin{itemize}
+	\item SHM\_STAT : recupère la structure shmid\_ds depuis le kernel.
+    \item SHM\_SET : permet de mettre les champs autorisés de shmid\_ds.
+    \item SHM\_RMID : détruit la méoire partagée (Si tous les processus utilisant la mémoire partagée s'en détache alors cela l'a détruit également).
+    \item SHM\_LOCK, SHM\_UNLOCK : permettent de bloquer / débloquer la mémoire partagée dans la mémoire physique.
+\end{itemize}
+\item shmflg : ci requis avec cmd.   
+\end{itemize}
+\subsection{shmat()}
+\paragraph{Déclarations : }
+\begin{itemize}
+	\item void \*shmat (int shmid, void \*addr, int flag)
+\end{itemize}
+\paragraph{Explication des paramètres : }
+\begin{itemize}
+\item shmid : L'identifiant de la mémoire partagée. 
+\item addr : devrait être NULL dans les applications actuelles.
+\item flag : SHM\_RDONLY.  
+\end{itemize}
+\paragraph{Retour : } l'adresse mémoire que le processus appelant pourra utiliser.
+\paragraph{void shmdt(addr) : } permet de détacher un processus de la mémoire partagée à laquelle il est relié. 
+\section{Unix Journey}
+Il s'agit d'une partie reprenant plutôt les commandes admins et ce que l'utilisateur utilise.
+\subsection{Se déplacer entre les répertoires}
+\begin{itemize}
+\item cd 
+\item cd . (Ne sert à rien (se déplacer jusqu'au répertoire courant revient à ne pas se déplacer du tout). 
+\item cd .. : se déplacer vers le répertoire parent. 
+\item cd \~ : se déplacer vers le répertoire login
+\item cd user : se déplacer au sein du répertoire user présent au sein du répertoire courant.
+\end{itemize}
+\subsection{Lister les fichiers}
+\begin{itemize}
+	\item ls (Il s'agit d'une alias pour /bin/ls
+    \item ls -l : En  plus  du  nom, affiche le type du fichier, les permissions d'accès, le nombre de liens  physiques, le  nom  du propriétaire et du groupe, la taille en octets, et l'horodatage (de la  dernière  modification,  sauf  si une autre date est réclamée par les options -c ou -u).
+    \item ls -1 : Présente un fichier par ligne.
+    \item ls -a : Affiche tous les fichiers des répertoires, y  compris les fichiers commençant par un `.'.
+    \item ls -c : Trier  le  contenu  des répertoires en fonction des dates de changement des statuts de fichiers, plutôt qu'en  fonction  de  la date de modification.  S'il
+s'agit  d'un  format  long,  afficher  la  date  de changement  de statut plutôt que la date de modification du fichier.
+	\item ls -d :  Afficher les répertoires avec la même  présentation que  les  fichiers,  sans  lister leur contenu.  
+    \item ls -i : Afficher le  numéro  d'index  (i-noeud)  de  chaque fichier à gauche de son nom.
+    \item ls -r :  Inverse le tri du contenu des répertoires.
+    \item ls –t : Trie le contenu des répertoires en fonction de la date et non pas en ordre alphabétique. Les fichiers les plus récents sont présentés en premier.
+    \item ls –u : Trie  le contenu des répertoires en fonction de la date de dernier accès au fichier plutôt  que  selon la  date  de modification. Si le format d'affichage est large, c'est la date de dernier accès  qui  est affichée.
+    \item ls -C : Présente  les  fichiers  en colonnes, triés verticalement.
+    \item ls -s : permet de lister la taille des fichiers. 
+    \item ls -F : Ajoute un caractère à chaque nom de  fichier  pour indiquer son type.  les fichiers réguliers exécutables sont suivis d'un  `*'.  Les  répertoires  sont suivis  de `/', les liens symboliques d'un `@', les FIFOs  d'un  `|'.   Les  fichiers  réguliers   non-exécutables ne sont suivis d'aucun caractère.
+    \item ls - R : Affiche  récursivement  le contenu des sous-répertoires.
+	\item ls -s | more –c (note different output - ls use isatty())
+	\item ls -S : Trie par taille de fichier.
+\end{itemize}
+\subsection{Temps des fichiers}
+Structure stat :
+\begin{itemize}
+	\item int stat(const char \*file\_name, struct stat \*buf); : récupère le statut du fichier pointé par file\_name et remplit le buffer buf.
+    \item int fstat(int filedes, struct stat \*buf); : est identique à stat, sauf que le fichier ouvert est pointé par le descripteur filedes, obtenu avec open(2).
+    \item int fstat(int filedes, struct stat \*buf);  : est identique à stat, sauf que dans le cas d'un lien symbolique, il donne l'état du lien lui-même plutôt que celui du fichier visé.
+\end{itemize}
+Temps des fichiers :
+\begin{itemize}
+\item Access time (atime) : Temps depuis la dernière fois que le fichier a été accédé (Read Time).
+\item Modified time (mtime) : Temps depuis la dernière fois que le fichier a été modifié (Write Time).
+\item Change time (ctime) : Temps depuis la dernière fois que l'inode a été modifié (Inode Change). 
+\end{itemize}
+\subsection{Déplacer / Copier des fichiers}
+\paragraph{mv : } Permet de déplacer ou de renommer des fichiers. (L'inode peut changer si on change fs).
+\paragraph{cp : } Permet de copier des fichiers. Options disponibles : 
+\begin{itemize}
+\item -f : Efface les fichiers cibles existants (voir ci-dessus).
+\item -i: Interroge l'utilisateur avant d'écraser des fichiers réguliers existants. La question est affichée sur stderr, et la réponse lue depuis stdin.
+\item -p Conserve le propriétaire, le groupe, les permissions d'accès et les horodatages du fichier original. Si la conservation du propriétaire ou du groupe est impossible, les bits Set-UID et Set-GID sont effacés. L'horodatage sera quand même légèrement différent entre l'original et la copie car l'opération de copie nécessite un accès en lecture au fichier source.
+\item -R : Copie récursivement les répertoires, et gérer correctement les copies des fichiers spéciaux ou des FIFOs.
+-r : Copier récursivement les répertoires mais la gestion des fichiers spéciaux n'est pas définie. En fait l'option -r est autorisée, et même encouragée à se comporter comme l'option -R, toutefois le comportement (stupide) de la version GNU n'est pas interdit.
+\item -- : Indique la fin explicite de la liste des options.
+\end{itemize}
+\subsection{Droits d'utilisateur et de groupe}
+Fichiers importants : /etc/passwd (information sur les comptes utilisateurs), etc/group (information de groupes), /etc/shadow (information sécurisée sur les comptes utilisateurs), /etc/gshadow.
+\paragraph{useradd : } Crée un nouvel utilisateur ou mets à jour l'information par défaut sur un nouvel utilisateur.
+\paragraph{groupadd : } Crée un nouveau groupe ou mets à jour l'information par défaut sur un nouveau groupe.
+\paragraph{chown : } Modifie le propriétaire et le groupe d'un fichier.
+\paragraph{chgrp : }  Change le groupe propriétaire d'un fichier. 
+\subsection{Types de fichiers et protection}
+\paragraph{Types de fichier : } Répertoires, fichier régulier, lien symbolique, pipes, sockets,(block/ character) devices.
+\paragraph{Bits spécifiques : }
+\begin{itemize}
+\item setuid : spécifique aux exécutables.
+\item setgid : spécifique aux répertoires.
+\item sticky bit pour les fichiers.
+\item sticky bits pour les répertoires.
+\end{itemize}
+\paragraph{Cas spécifiques : } rwx pour les répertoires.
+\subsection{Espace Disque : }
+\paragraph{Espace disque des fichiers : } Les fichiers prennent de la place sur le disque. Afin de connaitre la place que prend un répertoire, on peut utiliser la commande du (Donne les statistiques sur l'utilisation du disque). Options pouvant être utilisée avec ce dernier :
+\begin{itemize}
+\item -a : Affiche les statistiques pour tous les fichiers, pas seulement les répertoires.
+\item -k : Affiche la taille en ko (kilo-octets, 1024 octets).
+\item -s : Affiche seulement le total pour chaque argument.
+\item -x: Ignore les répertoires situés sur un système de fichiers différent de celui de l'argument étudié.
+\end{itemize}
+Remarques : au sujet des liens physiques : ils ne sont comptés qu'une seule fois.
+\paragraph{Espace disque utilisé d'une partition : } on utilisera la commande df (Fournit la quantité d'espace occupé des systèmes de fichiers.) Options pouvant être utilisée avec ce dernier :
+\begin{itemize}
+\item -k : Utilise des unités de 1024 octets plutôt que les unités de 512 octets par défaut.
+\item -P : Affichage sur six colonnes, précédées de l'en-tête `Filesystem N-blocks Used Available Capacity Mounted on' (avec N=512, ou N=1024 si l'option -k est utilisée).
+\item -h : NOT FOUND
+\item -H : NOT FOUND
+\item -P : NOT FOUND
+\item -t : NOT FOUND
+\item -- : Fin explicite de la liste des options.
+\end{itemize}
+\subsection{Trouver des fichiers}
+Afin de trouver des fichiers on utilisera l'appel système find. Ce dernier peut avoir pour option :
+\begin{itemize}
+\item  -type c Fichier du type c :
+\begin{itemize}
+\item b : fichier spécial en mode bloc (avec tampon)
+\item c : fichier spécial en mode caractère (sans tampon)
+\item d : répertoire
+\item p : tube nommé (FIFO)
+\item f : fichier régulier
+\item l : liens symbolique
+\item s : socket
+\end{itemize}
+\item -perm mode : Fichier dont les autorisations d'accès sont fixées exactement au mode indiqué (en notation symbolique ou octale). La notation symbolique utilise le mode 0 comme point de départ.
+\item -perm -mode : Fichier ayant au moins toutes les autorisations indiquées dans le mode.
+\item -perm +mode : Fichier ayant certaines des autorisations indiquées dans le mode.
+\item -mtime n : Fichier dont les données ont été modifiées il y a n*24 heures.
+\item -atime n : dernier accès au fichier il y a n*24 heures.
+\item -ctime n : dernière modification du statut du fichier il y a n*24 heures.
+\item -size n[bckw] : Fichier utilisant n unités d'espace. Les unités sont des blocs de 512 octets par défaut (ou si un suffixe `b' suit le nombre n), des octets si un suffixe `c' suit n, des kilo-octets si un suffixe `k' est utilisé, ou des mots de 2 octets si un `w' suit le nombre n. La taille ne prend pas en compte les blocs indirects, mais elle comptabilise les blocs des fichiers éparpillés pas encore alloués.
+\item -name motif : Fichier dont le nom de base (sans les répertoires du chemin d'accès), correspond au motif du shell. Les méta-caractères (`*', `?', et `[]') ne sont jamais mis en correspondance avec un point `.' au début du nom. Pour ignorer un répertoire, ainsi que tous ses sous-répertoires, utiliser l'option -prune ; vous trouverez un exemple dans la description de l'option -path.
+\item -path motif : Fichier dont le nom complet correspond au motif fourni. Lors du développement des méta-caractères, `/' et `.' ne sont pas traités différemment des autres caractères, ainsi par exemple : 
+find . -path './sr*sc' 
+affichera l'élément de répertoire intitulé './src/misc' (s'il en existe un). Pour ignorer une arborescence complète de répertoires, utilisez l'option -prune plutôt que de vérifier chaque fichier de l'arbre. Par exemple, pour ignorer le répertoire `src/emacs' et tous ses sous-répertoires, tout en affichant le nom de tous les autres fichiers, faites quelque chose comme : 
+find . -path './src/emacs' -prune -o -print
+\item -user utilisateur : fichier appartenant à l'utilisateur indiqué (U-ID numérique éventuellement)
+\item -nouser : Fichier dont l'U-ID numérique ne correspond à aucun utilisateur.
+\item group nom\_groupe : fichier appartenant au groupe nom\_groupe (éventuellement ID numérique).
+\item -nogroup : Fichier dont le G-ID numérique ne correspond à aucun groupe d'utilisateurs.
+\end{itemize}
+Remarque : Les arguments numériques peuvent être indiqués comme suit : +n (supérieur à n), -n (inférieur à n) et n (égal à n).
+Actions pouvant être utilisée sur find : 
+\begin{itemize}
+\item -exec commande : Exécute la commande ; vrai si le code de retour 0 est renvoyé. Tous les arguments suivants de find sont considérés comme des arguments pour la ligne de commande, jusqu'à ce qu'on rencontre un `;'. La chaîne `{}' est remplacée par le nom du fichier en cours de traitement, et ceci dans toutes ses occurrences, pas seulement aux endroits où elle est isolée, comme c'est le cas avec d'autres versions de find. Ces deux chaînes peuvent avoir besoin d'être protégées du développement de la ligne de commande par le shell, en utilisant le caractère d'échappement (`\') ou une protection par des apostrophes. La commande est exécutée depuis le répertoire de départ.
+\item -ls : NOT FOUND
+\item -delete : NOT FOUND
+\item -execdir : NOT FOUND
+\end{itemize}
+\subsection{Comparaison de fichiers}
+On peut poru cela utiliser la commande diff (Trouve les différences entre des fichiers). Options pouvant être utilisées sur ce dernier :
+\begin{itemize}
+\item -nb (nb est un nombre entier) Afficher nb lignes de contexte. Cette option ne précise pas le format de sortie par elle-même, elle n'a pas d'effet si elle n'est pas combinée avec -c ou -u. Cette option est obsolète. Pour fonctionner correctement, patch nécessite typiquement deux lignes de contexte.
+\item -a : Traiter tous les fichiers comme du texte, et les comparer ligne-à-ligne, même s'ils semblent contenir des données binaires.
+\item -b : ne pas tenir compte des différences concernant des espaces blancs.
+\item -B : Ne pas tenir compte des différences qui concernent des lignes blanches.
+\item --brief : Indique seulement si les fichiers diffèrent, pas les différences elles-mêmes.
+\item -c : Utiliser le format de sortie contextuel.
+\item -C nb
+\end{itemize}
+\subsection{Fichiers d'archives / de compression}
+\paragraph{tar : } la version GNU de l'utilitaire tar de gestion d'archives.  
+\paragraph{compress : } Compresse ou décompresse des fichiers.
+\paragraph{gzip : } Compacte ou décompacte des fichiers. 
+\subsection{Gestion des processus}
+\paragraph{Trouver des processus : } Afin de toruver des processus, on va utiliser la commande ps (Affiche l'état des processus en cours). Celle ci peut avoir comme options : 
+\begin{itemize}
+\item l: affichage long
+\item u : (utilisateur) présente le nom de l'utilisateur et l'heure de lancement.
+\item j : (job) présente les Pgid et Sid.
+\item s : (signal) présente les signaux bloqués, ignorés et interceptés.
+\item v : (vm) affiche des informations sur la mémoire virtuelle.
+\item m : (mémoire) affiche des informations sur l'occupation mémoire. À combiner avec l'option p pour obtenir les nombres de pages.
+\item f : (forêt) affiche les arbres généalogiques des processus.
+\item a : (autres) présente également les processus des autres utilisateurs.
+\item x : affiche les processus qui n'ont pas de terminal de contrôle.
+\item S : additionne les temps CPU et les fautes de pagination des processus fils.
+\item c : (commande) affiche le nom de la commande exécutée.
+\item e : (environnement) présente l'environnement à la suite de la ligne de commande exécutée.
+\item w : (wide) affichage large. Ne coupe pas les informations pour les limiter à une seule ligne. Pour être exact, chaque `w' autorise une ligne supplémentaire pour chaque processus. Si la ligne supplémentaire n'est pas nécessaire, elle n'est pas utilisée. Il peut y avoir jusqu'à 100 w.
+\item h : ne pas afficher d'en-tête.
+\item r : ne présenter que les processus en cours d'exécution (running).
+\item n : Affichage numérique des champs USER et WCHAN.
+\end{itemize}
+\paragraph{nice : } Exécute un programme avec une priorité d'ordonnancement modifiée.  
+\paragraph{lsof : } liste les fichiers ouverts.
+\subsection{Filtres élémentaires}
+\paragraph{Commande grep : } Affiche les lignes correspondant à un motif donné. Elle peut être utilisée avec les options :
+\begin{itemize}
+\item -num : Les correspondances seront affichées avec num lignes supplémentaires avant et après. Néanmoins, grep n'affichera jamais une ligne plus d'une fois.
+\item -A num : Affiche num lignes supplémentaires après la ligne correspondante.
+\item -B num : Affiche num lignes supplémentaires avant la ligne correspondante.
+\item -C : est équivalent à -2.
+\item -V : Affiche le numéro de version de grep sur la sortie d'erreur standard. Ce numéro de version devra être inclus dans tous les rapports de bogues (voir plus bas).
+\item -b : Avant chaque ligne, afficher son décalage (en octet) au sein du fichier d'entrée.
+\item -c : Ne pas afficher les résultats normaux. À la place, afficher un compte des lignes correspondantes pour chaque fichier d'entrée. Avec l'option -v (voir plus bas), afficher les nombres de lignes ne correspondant pas au motif.
+\item -e motif : Utilise le motif indiqué. Ceci permet de protéger les motifs commençant par -.
+\item -f fichier : Lit le motif dans le fichier indiqué.
+\item -h : Ne pas afficher le nom des fichiers dans les résultats lorsque plusieurs fichiers sont parcourus.
+\item -i : Ignore les différences majuscules/minuscules aussi bien dans le motif que dans les fichiers d'entrée.
+\item -L : Ne pas afficher les résultats normaux. À la place, indiquer le nom des fichiers pour lesquels aucun résultat n'aurait été affiché.
+\item -l : Ne pas afficher les résultats normaux. À la place, indiquer le nom des fichiers pour lesquels des résultats auraient été affiches.
+\item -n : Ajoute à chaque ligne de sortie un préfixe contenant son numéro dans le fichier d'entrée.
+\item -q : Silence. Ne pas afficher les résultats normaux.
+\item -s : Ne pas afficher les messages d'erreurs concernant les fichiers inexistants ou illisibles.
+\item -v : Inverser la mise en correspondance, pour sélectionner les lignes ne correspondant pas au motif.
+\item -w : Ne sélectionne que les lignes contenant une correspondance formant un mot complet. La sous-chaîne correspondante doit donc être soit au début de la ligne, soit précédée d'un caractère n'appartenant pas à un mot. De même elle doit se trouver soit à la fin de la ligne, soit être suivie par un caractère n'appartenant pas à un mot. Les caractères composants les mots sont les lettres, les chiffres et le souligné (`\_'). ([NDT] Bien entendu les minuscules accentuées ne sont pas des lettres ! Elles servent donc à séparer les mots...)
+\item -x : Ne sélectionne que les correspondances qui occupent une ligne entière.
+\end{itemize}
+\paragraph{dirname : } Ne conserve que la partie répertoire d'un chemin d'accès.
+\paragraph{basename : } Élimine le chemin d'accès et le suffixe d'un nom de fichier.
+\paragraph{awk : } Langage d'examen et de traitement de motifs.  
+\paragraph{tr : } Transpose ou élimine des caractères.
+\paragraph{sort : } Trie les lignes d'un fichier texte.
+\paragraph{head -n : }  Affiche le début d'un fichier (-n : nombre de lignes).  
+\paragraph{tail -n : } Affiche la dernière partie d'un fichier (-n : nombre de lignes).
+\paragraph{xargs : } onstruire et exécuter des lignes de commandes à partir de l'entrée standard.
+\subsection{Plus de filtres}
+\paragraph{Editors : } Discussion au sujet des éditeurs (dd, ex, vi, emacs, nemacs, pico). 
+\paragraph{Différences cat et tac : } cat : Concatène des fichiers et les affiche sur la sortie standard. tac : Concatène et affiche des fichiers à l'envers.
+\subsection{Shells}
+Le shell est l'interpréteur de commandes (Il n'y a pas qu'un seul interpréteur de commandes : sh, csh, ksh, bash, tcsh, zsh, ce qui fait que chaque interpréteur à ses propres particularités, tels que la syntaxe de programmation, ou son historique), il s'agit également du nom générique d'un command file. Le shell par défaut est le dernier champ de /etc/passwd (Les shells valides sont repris dans le fichier : /etc/shells).
+\subsection{Bash Programming}
+\paragraph{Utilisation de variables : } Les variables peuvent être locales ou globales. Elles peuvent également être prédéfinies : 
+\begin{itemize}
+\item \$\$ (pid)
+\item \$\*
+\item \$?
+\item \$0
+\item \$\#
+\item \$1 \$2 \$3 \$4 ...
+\item \$BASH\_VERSION
+\end{itemize}
+\subsection{Shell Escaping}
+On peut procéder a l’échappement de caractères à l'aide de : 
+\begin{itemize}
+\item \/
+\item simple quotes
+\item double quotes
+\item prargs
 \end{itemize}
 \end{document}
