@@ -2,6 +2,7 @@
 
 %--------------Packages------------------------------
 \usepackage[utf8]{inputenc} %Pour encoder du texte en français
+\usepackage{lscape}
 \usepackage[francais]{babel} %Pour encoder du texte en français
 \usepackage{graphicx} %pour inclure des images
 \usepackage{changepage}
@@ -140,4 +141,27 @@ Si vous souhaitez des informations supplémentaires, plusieurs logiciels ont ét
 \paragraph{Problème rencontré : } Comment va t'on faire pour avoir accès à cette session au niveau de la couche Business ? On ne peut pas la passer en paramètre (ce serait bien trop fastidieux), ni la mettre dans un fichier properties (cela ne peut se faire quant on à plusieurs utilisateurs).
 \paragraph{Solution : Thread} une solution au problème serait de stocker la session dans le thread. Afin d'avoir accès à cette session partout on va créer une classe SessionManager qui aura un attribut de type ThreadLocal (cet attribut pourrait même être statique, mais la dépendance concrète à peu d'importance). 
 \paragraph{Classe Config : } on pourrait dès lors créer une classe Config disponible dans toute notre application qui contiendrait des infos devant être accesible un peu partout. 
+\newpage
+\section{Analyse complète du système}
+\subsection{Diagramme Complet}
+\begin{landscape}[H]
+\fbox{\includegraphics[]{Schema_Complet_Multithread.png}}
+    \centering
+\end{landscape}
+\subsection{Description}
+\paragraph{Servlet : } Permet de traiter les requêtes et de rediriger les requêtes vers les classes correspondantes au bon traitement (La plupart du temps passe le relais au UseCaseController correspondant).
+\paragraph{BizFactory : } Interface regroupant les méthodes publiques relatives à la logique de Factory. cette interface sert surtout à réduire les dépendances concrètes et ainsi favorise le passage entre l’environnement de production net celui de développement. 
+\paragraph{BizFactoryImpl : } Classe implémentant BizFactory, cette dernière contiendra donc l'implémentation des différentes méthodes définies dans BizFactory, c'est donc elle qui contiendra réellement la logique de factory.
+\paragraph{UserUcc : } Interface regroupant les méthodes publiques relatives au UseCaseController d'un type d'objet. (Souvent ces UseCase seront des UseCase tels que ceux ci pourraient être définis dans un diagramme de cas d'utilisation, ils'agit en soit d'une tâche, d'un besoin de l'utilisateur).
+\paragraph{UserUccImpl : } Classe implémentant UserUcc, cette dernière contiendra donc l'implémentation des différentes méthodes définies dans UserUcc, c'est donc elle qui s'occupera réellement de traiter les cas d'utilisation relatif à un type d'objet.
+\paragraph{UserDto : } Interface ne contenant que les getters et setters d'un type d'objet (Il s'agit en soit d'un sac de données). Ils permettent de créer l'objet (via les setters) et de le rendre accesible dans la partie IHM de notre application.
+\paragraph{UserBiz : } Interface regroupant les méthodes Business nécessaire au sein des autres packaqges de notre application, cette interface sert surtout à réduire les dépendances concrètes et ainsi favorise le passage entre l’environnement de production net celui de développement. 
+\paragraph{UserImpl : } Classe implémentant les interfaces UserDto et UserBiz. Étant donné que ces deux interfaces sont implémentées par une seule et même classe, passer d'une interface à l'autre est assez aisé.
+\paragraph{UnitOfWork : } Interface regroupant les méthodes relatives à la gestion de transactions business et donc il s'agit d'une interface définissant la méthode startTransaction, commit et rollBack business. (Attention cette classe n'est pas nécessaire pour avoir une application multithread fonctionnelle), cette interface sert surtout à réduire les dépendances concrètes et ainsi favorise le passage entre l’environnement de production et celui de développement. 
+\paragraph{UnitOfWorkImpl : } Classe implémentant UnitOfWork, cette dernière contiendra donc l'implémentation des différentes méthodes définies dans UnitOfWork, c'est donc elle qui s'occupera réellement de la gestion des transactions business.
+\paragraph{UserDAO : } Interface regroupant les opérations SELECT, INSERT, UPDATE et DELETE relatives à un type d'objet. Cette interface sert surtout à réduire les dépendances concrètes et ainsi favorise le passage entre l’environnement de production et celui de développement. 
+\paragraph{UserDAOImpl : } Classe implémentant UserDAO, cette dernière contiendra donc l'implémentation des différentes méthodes définies dans USERDAO, c'est donc elle qui s'occupera réellement des opérations d'INSERT, UPDATE, DELETE et SELECT d'un type d'objet.
+\paragraph{DalServices : } Interface s'occupant de la gestion des transactions , c'est cette dernière qui s'occupera de gérer les startTransaction, rollBack et commit et donc des transactions. 
+\paragraph{DalBackEndServices : } Interface permettant surtout de garder la préparation des statement uniquement à l'intérieur du package DAL en le mettant à part des autres méthodes relatives au transactions. Cette interface s’occupera essentiellement de la préparation des statement.
+\paragraph{DalServicesMultiImpl : } Classe implémentant DalServices et DalBackEndServices, étant donné que cette classe implémente les deux interfaces, C'est cette dernière qui s'occupera à la fois de la gestion des transactions et de la préparation des statements. LA séparation en deux interfaces bien distinctes vient surtout du fait que l'on veut séparer ces deux logiques et empêcher la préparation des statements d'être accesible à l'extérieur du package DAL. 
 \end{document}
