@@ -42,8 +42,9 @@ Interfaces du noyau, ils sont écrit et utilisés en C (Ils peuvent également �
     \item Misc
 \end{itemize}
 \paragraph{Problèmes de portabilité : } Les programmes utilisant directement les appels systèmes ne sont pas des standard du langage C, sont des programmes C "Unix", ne sont pas portable entre les différents types de Unix. (Problème avec les appels systèmes : les fichiers en-têtes, ainsi que le type des arguments). Afin d'éviter ce genre de soucis, utiliser une directive de compilation (CPP).
+\paragraph{Compilation : } Il faut savoir que cc passe par plusieurs étapes de compilation (Pré processing (va s'occuper de traiter les define, les include, ...). Quant à gcc il faut faire attention car il s'agit d'un compilateur non optimisé.
 \paragraph{Types de données des primitives sytèmes : } (permet de cacher les détails d'implémentation, définit au sein de <sys/types.h>)
-\paragraph{Traitement des erreurs :} tous les appels systèmes retournent -1 en cas d'erreur. De ce fait le code de retour d'un appel système doit toujours être vérifié. (On peut également utiliser errno (<errno.h>) ainsi que perror
+\paragraph{Traitement des erreurs :} tous les appels systèmes retournent -1 en cas d'erreur. De ce fait le code de retour d'un appel système doit toujours être vérifié. (On peut également utiliser errno (<errno.h>) ainsi que perror.
 \paragraph{Opérations I/O : } Unix fournit une interface uniforme sur des ressources telles que :
 \begin{itemize}
 	\item Fichiers
@@ -162,7 +163,7 @@ Leur but est de permettre la synchronisation des opérations. Il s'agit d'un ent
 \section{Mémoires Partagées}
 Il s'agit d'une manière d'échanger des données entre les processus, elle est plus rapide que les manières conventionnelles car elle ne nécessite pas d'appels systèmes. Par contre elle nécessite d'être créée par une processus, les autre processus devront donc s'y attacher et dès qu'un processus cesse l'utiliser il devra se détacher.
 \section{Appels Systèmes}
-\subsection{Open()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/open.2.php}{Open()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <sys/types.h>
@@ -186,7 +187,7 @@ Ouvre les fichiers en écriture ou en lecture. Retourne soit le "file descriptor
 	\item O\_EXCL : Crée le fichier d'erreur si il y en a.
 \end{itemize}
 Le mode est un argument utilisé avec O\_CREAT (Il s'agit du mode de fichier Unix). Les erreur quant à elles peuvent être spécifiées par errno.
-\subsection{Creat}
+\subsection{Creat()}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <sys/types.h>
@@ -199,7 +200,7 @@ Le mode est un argument utilisé avec O\_CREAT (Il s'agit du mode de fichier Uni
 	\item int mkdir(const char \* path, mode\_t mode); Pour les dossiers
 	\item int mknod(const char \* path, mode\_t mode, dev\_t dev); Pour les fichiers spéciaux
 \end{itemize}
-\subsection{Read()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/read.2.php}{Read()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -222,7 +223,7 @@ Le mode est un argument utilisé avec O\_CREAT (Il s'agit du mode de fichier Uni
 \end{itemize}
 \paragraph{Remarques : }
 Le retour peut (et est souvent) plus petit que la longueur attendue. Il faut donc être préparé à lire moins de données que ce qui était attendu. 
-\subsection{Write}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/write.2.php}{Write()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -245,7 +246,7 @@ Le retour peut (et est souvent) plus petit que la longueur attendue. Il faut don
 \end{itemize}
 \paragraph{Remarques : }
 Le retour peut (et est souvent) plus petit que la longueur attendue. Il faut donc être préparé à lire moins de données que ce qui était attendu. 
-\subsection{Lseek()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/lseek.2.php}{Lseek()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <sys/types.h>
@@ -261,7 +262,7 @@ Le retour peut (et est souvent) plus petit que la longueur attendue. Il faut don
 	\item \emph{offset : } Nombre de bytes qui doivent être déplacés (évités) par le pointeur.
 	\item \emph{whence : } point de départ (SEEK\_SET : début du fichier, SEEK\_CUR : à partir de la position courante, SEEK\_END à partir de la fin du fichier).
 \end{itemize}
-\subsection{Ioctl()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/ioctl.2.php}{Ioctl()}}
 Pour toutes les autres opérations I/O.
 \paragraph{Include : }
 \begin{itemize}
@@ -271,13 +272,13 @@ Pour toutes les autres opérations I/O.
 \begin{itemize}
 	\item int ioctl(int fd, MTIOCTOP, (struct mtop \*) mt\_cmd);
 \end{itemize}
-\subsection{Close()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/close.2.php}{Close()}}
 Permet de dissocier l'entier du descripteur de fichier. Il retourne 0 (en cas de succès) ou -1 (en cas d'erreur). Il faut savoir que tous les fichiers sont fermés lors de la fermeture du programme.
-\subsection{Dup()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/dup.2.php}{Dup()}}
 \paragraph{Remarques : } int fd2 = dup(int fd1), fd2 est une dupplication de fd1. fd2 partage le même fichier d'entrée que fd1 (Par cela on entend que fd1 et fd2 partage les même drapeaux statut, le même mode d'accès tout comme le même offset du fichier courant). fd2 sera le plus petit "file descriptor" disponible. fd1 pourra être fermé, par contre l'appel à dup peut échouer (errno : EBADF, EMFILE).
 \subsection{Dup2()}
 Dup2() est une opération atomique permettant de regrouper close(fd2) ainsi que fd2 = dup(fd1).
-\subsection{Mmap()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/mmap.2.php}{Mmap()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <sys/types.h>
@@ -324,7 +325,7 @@ Le fichier doit être ouvert, plusieurs processus peuvent mettre en mémoire le 
 \end{itemize}
 \paragraph{Remarques : }
 Détruit la mise en mémoire entre un fichier et l'espace adressé en mémoire virtuelle. Pour fermer un fichier, n'appeler surtout pas munmap. 
-\subsection{Msync()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/msync.2.php}{Msync()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <sys/types.h>
@@ -347,7 +348,7 @@ Détruit la mise en mémoire entre un fichier et l'espace adressé en mémoire v
 \end{itemize}
 \paragraph{Remarques : }
 Force le système à écrire les données mappées sur le disque.
-\subsection{Link()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/link.2.php}{Link()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -367,7 +368,7 @@ Force le système à écrire les données mappées sur le disque.
 \end{itemize}
 \paragraph{Remarques : }
 Name1 et Name2 auront donc la même inode. (Il n'y a donc aucun moyen de savoir lequel des deux est le nom originel).
-\subsection{Unlink()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/unlink.2.php}{Unlink()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -387,7 +388,7 @@ Name1 et Name2 auront donc la même inode. (Il n'y a donc aucun moyen de savoir 
 \end{itemize}
 \paragraph{Remarques : }
 La permision en écriture est nécéssaire sur le répertoire parent. 
-\subsection{Symlink()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/symlink.2.php}{Symlink()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -407,7 +408,7 @@ La permision en écriture est nécéssaire sur le répertoire parent.
 \end{itemize}
 \paragraph{Remarques : }
 Similaire au lien physiques sans les limitations des frontières du sytème de fichier.
-\subsection{Readlink()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/readlink.2.php}{Readlink()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -428,7 +429,7 @@ Similaire au lien physiques sans les limitations des frontières du sytème de f
 \end{itemize}
 \paragraph{Remarques : }
 Lit la valeur d'un lien symbolique.
-\subsection{Stat()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/stat.2.php}{Stat()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <sys/types.h>
@@ -449,7 +450,7 @@ Lit la valeur d'un lien symbolique.
 	\item \emph{ret : } les informations au sujet de l'objet spécifié. 
 	\item \emph{-1 : } une erreur est apparue.
 \end{itemize}
-\subsection{Rename()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/rename.2.php}{Rename()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <stdio.h>
@@ -465,7 +466,7 @@ Lit la valeur d'un lien symbolique.
 \end{itemize}
 \paragraph{Remarques : }
 Permet de remplacer l'ancien nom de fichier par le nouveau.
-\subsection{flock()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/flock.2.php}{flock()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <sys/files.h>
@@ -478,7 +479,7 @@ Permet de remplacer l'ancien nom de fichier par le nouveau.
 \begin{itemize}
 	\item \emph{operation : } peut prendre les valeurs : (LOCK\_SH qui signifie cadenas partagé (peut être utilisé par plus d'un processus), LOCK\_EX qui signifie cadenas exclusif (peut être utilisé par un seul processus), LOCK\_NB qui signifie que l'on ne doit pas bloqué lorsque le cadenas est pris (retournera -1 dans le cas où les fichier est bloqué) et LOCK\_UN qui permet de délocker une ressource. 
 \end{itemize}
-\subsection{Lockf()}
+\subsection{\href{http://jp.barralis.com/linux-man/man3/lockf.3.php}{Lockf()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -493,7 +494,7 @@ Permet de remplacer l'ancien nom de fichier par le nouveau.
 	\item \emph{cmd : } peut prendre les valeurs : F\_LOCK (permet de placer le cadenas), F\_TLOCK (permet de placer le cadenas et de retourner 0 ou -1), F\_ULOCK (permet de nettoyer le cadenas, de le remettre à zéro) et F\_TEST (permet de tester le cadenas).
 	\item \emph{len :} longueur de la zone à placer sous cadenas.
 \end{itemize}
-\subsection{Fork()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/fork.2.php}{Fork()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <sys/types.h>
@@ -517,7 +518,7 @@ Les deux processus ont les mêmes copies des données mémoires.De ce fait, ils 
 \item \emph{L'enfant termine avant le parent :} l'enfant devient dès lors un processus zombie (Il faut savoir qu'un processus enfant terminé continue d'exister tant que le parent ne se termine pas ou que le parent ne vérifie pas la valeur d'exit du processus enfant (wait(), ..)). Un processus zombie ne consume aucune ressource (à part peut être une entrée dans la table des processus).
 \item \emph{Synchronisation :} Un processus parent doit parfois attendre que l'un de ses fils se termine. (Utilisation des appels systèmes wait() et exit()).
 \end{itemize}
-\subsection{Wait()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/wait.2.php}{Wait()}}
 Attend que l'un de ses fils se termine.
 \paragraph{Include : }
 \begin{itemize}
@@ -540,7 +541,7 @@ Attend que l'un de ses fils se termine.
 \end{itemize}
 \paragraph{Remarques : }
 Il peut attendre un fils spécifique et même en attendre plusieurs.
-\subsection{Exit()}
+\subsection{\href{http://jp.barralis.com/linux-man/man3/exit.3.php}{Exit()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -558,7 +559,7 @@ Il peut attendre un fils spécifique et même en attendre plusieurs.
 L'appel système \_exit(status) : Termine le processus courant immédiatement (les "file descriptor" ouverts sont fermés, les processus enfant sont envoyés à un autre processus (init), le processus parent recoit un signal SIGCHLD, le statut est retourné au processus parent).
 La fonction exit(status) : exécute les fonctions de fin de processus (tels que le flushing des streams) et appelle \_exit(status).
 Dès lors la fonction exit devrait être privilégiée à l'appel système \_exit().
-\subsection{Exec()}
+\subsection{\href{http://jp.barralis.com/linux-man/man3/exec.3.php}{Exec()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -578,7 +579,7 @@ Dès lors la fonction exit devrait être privilégiée à l'appel système \_exi
 \end{itemize}
 \paragraph{Remarques : }
 Il exécute un processus, il ne le démarre pas (Le processus est déjà lancé par fork()) exec va dépasser le processus courant par un nouveau. Il s'agit d'une famille de fonctions mais d'un appel système. 
-\subsection{Pipe()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/pipe.2.php}{Pipe()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -606,7 +607,7 @@ Il exécute un processus, il ne le démarre pas (Le processus est déjà lancé 
 \paragraph{Remarques : }
 Plutot inutile au sein d'un seul processus. Il faut le combiner avec fork pour le rendre vraiment efficace. Les données vont dans une direction, les pipes ne peuvent être utilisées que dans des processus ayant au moins un ancêtre commun. (Il faut les paramétrer avant le fork). La synchronisation est possible par : le blocage du reader lorsque le pipe est vide, le blocage du writer lorsque le pipe est plein. Un processus pourrait être à la fois writer et reader. Les processus doivent par contre être d'accord sur la taille et le format des messages échangés. Les "file descriptor" qui ne sont pas utilisés doivent être fermés afin d'empêcher un deadlock d'apparaitre.
 \paragraph{popen() : } permet de simplifier le processus d'envoi de données à un autre processus (Il faut inclure <stdio.h> et il se déclare : FILE \* popen(const char \* cmd, const char \* type);). Il s'utilise avec pclose(FILE \* stream). 
-\subsection{Kill()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/kill.2.php}{Kill()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <signal.h>
@@ -631,7 +632,7 @@ Plutot inutile au sein d'un seul processus. Il faut le combiner avec fork pour l
 	\item \emph{0 : } en cas de succès.
 	\item \emph{-1 : } une erreur est apparue.
 \end{itemize}
-\subsection{Signal()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/signal.2.php}{Signal()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <signal.h>
@@ -652,7 +653,7 @@ Queue : seulement un signal de chaque type peut être enregistré pour un proces
     \item  \emph{BSD : } ne remet pas le gestionnaire à défaut mais bloque les signaux tant que le gestionnaire n'a pas finis son traitement (pas de défausse, mais mise en queue, ils seront juste remis par la suite). 
 \end{itemize}
 \paragraph{Vulnérabilité : } une fenêtre e vulnérabilité existe pour cela il faudra utiliser sigaction qui permet d'utiliser un masque durant le traitement du gestionnaire. Il utilisera le comportement BSD et bloquera les autres signaux durant le traitement du gestionnaire.
-\subsection{Alarm()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/alarm.2.php}{Alarm()}}
 \paragraph{Include : }
 \begin{itemize}
 	\item \#include <unistd.h>
@@ -663,7 +664,7 @@ Queue : seulement un signal de chaque type peut être enregistré pour un proces
 \end{itemize}
 \paragraph{Remarques : }
 Envoie le signal SIGALRM après quelque secondes.
-\subsection{msgget()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/msgget.2.php}{msgget()}}
 \paragraph{Déclarations : }
 \begin{itemize}
 	\item int qid = msgget(KEY,mode|flags);
@@ -697,7 +698,7 @@ Envoie le signal SIGALRM après quelque secondes.
 \item type : le type peut être égal à 0 (le premier message de la file est lu), au dessus de 0 (le premier message étant égal à type est lu) ou peut être en dessous de 0 (le premier message ayant un type plus petit ou égal à la valeur absolue de type est lu).
 \item flags peut prendre comme valeur IPC\_NOWAIT (ne bloquera pas si la file est vide) ou MSG\_NOERROR (qui permet de tronquer les messages).
 \end{itemize}
-\subsection{msgctl()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/msgctl.2.php}{msgctl()}}
 \paragraph{Déclarations : }
 \begin{itemize}
 	\item int msgctl(int qid, int cmd, struct msqid\_ds *ptr)	; 
@@ -708,7 +709,7 @@ Envoie le signal SIGALRM après quelque secondes.
 \item ptr : un pointeur vers une structure IPC :  msqid\_ds.
 \item cmd qui peut prendre comme valeur : IPC\_STAT (retourne la structure de controle), IPC\_SET (qui permet d'écrire : msg\_perm.uid, msg\_perm.gid, msg\_perm.mode et msg\_qbytes à la structure de contrôle) et IPC\_RMID (permet de supprimer la pile de message). 
 \end{itemize}
-\subsection{semget()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/semget.2.php}{semget()}}
 \paragraph{Déclarations : }
 \begin{itemize}
 	\item int semget(key\_t key, int nsems, int semflg);
@@ -720,7 +721,7 @@ Envoie le signal SIGALRM après quelque secondes.
 \item semflg :  peut prendre comme valeur soit : IPC\_CREATE (cela créera la structure si elle n'existait pas déjà et ouvrira la structure si celle ci existait déjà). soit IPC\_EXCL (crée la structure si elle n'existe pas et envoie une erreur ou sinon).   
 \end{itemize}
 \paragraph{Type de retour : } un ensemble de sémaphore (plutôt leur identifiant), il faut par contre faire attention car ces sémaphores sont créés et non initialisées.
-\subsection{semctl()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/semctl.2.php}{semctl()}}
 \paragraph{Déclarations : }
 \begin{itemize}
 	\item int semctl(int semid, int semnum, int cmd, arg); 
@@ -742,7 +743,7 @@ Envoie le signal SIGALRM après quelque secondes.
 \end{itemize}
 \item arg :  depend de cmd. 
 \end{itemize}
-\subsection{semop()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/semop.2.php}{semop()}}
 \paragraph{Déclarations : }
 \begin{itemize}
 	\item int semop(int semid, struct sembuf sops[], int nsops);
@@ -767,7 +768,7 @@ short sem\_flg; // flag de la sémaphore \\
 \item sem\_op == 0 : si la valeur de la sémaphore != 0 : semznct++, le processus attend tant que la valeur de la sémaphore n’égale pas 0 ).
 \end{itemize}
 \paragraph{Valeur de sem\_flg : } Il peut prendre comme valeur : IPC\_NOWAIT si la condition ferait en sorte que le processus s'endorme : l'appel système se termine directement avec comme code d'erreur : EAGAIN. La deuxième valeur qu'il peut prendre est : SEM\_UNDO (Toute les modifications sur la valeur de la sémaphore du processus courant sont sauvegardées afin d'être effectuées à nouveau à la fin du processus courant. 
-\subsection{shmget()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/shmget.2.php}{shmget()}}
 \paragraph{Déclarations : }
 \begin{itemize}
 	\item int shmget(key\_t key, int size, int shmflg);
@@ -778,7 +779,7 @@ short sem\_flg; // flag de la sémaphore \\
 \item nsems : taille de la mémoire partagée (LA taille minimum du segment, seulement utile pour le processus créateur de la sharedMemory. 
 \item shmflg :  peut prendre comme valeur soit : IPC\_CREATE (cela créera la structure si elle n'existait pas déjà et ouvrira la structure si celle ci existait déjà). soit IPC\_EXCL (crée la structure si elle n'existe pas et envoie une erreur ou sinon).   
 \end{itemize}
-\subsection{shmctl()}
+\subsection{\href{http://jp.barralis.com/linux-man/man2/shmctl.2.php}{shmctl()}}
 \paragraph{Déclarations : }
 \begin{itemize}
 	\item int shmctl(int shmid, int cmd, struct shmid\_ds \*buf);
@@ -820,7 +821,7 @@ Il s'agit d'une partie reprenant plutôt les commandes admins et ce que l'utilis
 \end{itemize}
 \subsection{Lister les fichiers}
 \begin{itemize}
-	\item ls (Il s'agit d'une alias pour /bin/ls
+	\item \href{http://jp.barralis.com/linux-man/man1/ls.1.php}{ls} (Il s'agit d'une alias pour /bin/ls
     \item ls -l : En  plus  du  nom, affiche le type du fichier, les permissions d'accès, le nombre de liens  physiques, le  nom  du propriétaire et du groupe, la taille en octets, et l'horodatage (de la  dernière  modification,  sauf  si une autre date est réclamée par les options -c ou -u).
     \item ls -1 : Présente un fichier par ligne.
     \item ls -a : Affiche tous les fichiers des répertoires, y  compris les fichiers commençant par un `.'.
@@ -852,8 +853,8 @@ Temps des fichiers :
 \item Change time (ctime) : Temps depuis la dernière fois que l'inode a été modifié (Inode Change). 
 \end{itemize}
 \subsection{Déplacer / Copier des fichiers}
-\paragraph{mv : } Permet de déplacer ou de renommer des fichiers. (L'inode peut changer si on change fs).
-\paragraph{cp : } Permet de copier des fichiers. Options disponibles : 
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/mv.1.php}{mv} : } Permet de déplacer ou de renommer des fichiers. (L'inode peut changer si on change fs).
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/cp.1.php}{cp} : } Permet de copier des fichiers. Options disponibles : 
 \begin{itemize}
 \item -f : Efface les fichiers cibles existants (voir ci-dessus).
 \item -i: Interroge l'utilisateur avant d'écraser des fichiers réguliers existants. La question est affichée sur stderr, et la réponse lue depuis stdin.
@@ -864,10 +865,10 @@ Temps des fichiers :
 \end{itemize}
 \subsection{Droits d'utilisateur et de groupe}
 Fichiers importants : /etc/passwd (information sur les comptes utilisateurs), etc/group (information de groupes), /etc/shadow (information sécurisée sur les comptes utilisateurs), /etc/gshadow.
-\paragraph{useradd : } Crée un nouvel utilisateur ou mets à jour l'information par défaut sur un nouvel utilisateur.
+\paragraph{\href{http://jp.barralis.com/linux-man/man8/useradd.8.php}{useradd} : } Crée un nouvel utilisateur ou mets à jour l'information par défaut sur un nouvel utilisateur.
 \paragraph{groupadd : } Crée un nouveau groupe ou mets à jour l'information par défaut sur un nouveau groupe.
-\paragraph{chown : } Modifie le propriétaire et le groupe d'un fichier.
-\paragraph{chgrp : }  Change le groupe propriétaire d'un fichier. 
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/chown.1.php}{chown} : } Modifie le propriétaire et le groupe d'un fichier.
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/chgrp.1.php}{chgrp} : }  Change le groupe propriétaire d'un fichier. 
 \subsection{Types de fichiers et protection}
 \paragraph{Types de fichier : } Répertoires, fichier régulier, lien symbolique, pipes, sockets,(block/ character) devices.
 \paragraph{Bits spécifiques : }
@@ -879,7 +880,7 @@ Fichiers importants : /etc/passwd (information sur les comptes utilisateurs), et
 \end{itemize}
 \paragraph{Cas spécifiques : } rwx pour les répertoires.
 \subsection{ Espace Disque : }
-\paragraph{Espace disque des fichiers : } Les fichiers prennent de la place sur le disque. Afin de connaitre la place que prend un répertoire, on peut utiliser la commande du (Donne les statistiques sur l'utilisation du disque). Options pouvant être utilisée avec ce dernier :
+\paragraph{Espace disque des fichiers : } Les fichiers prennent de la place sur le disque. Afin de connaitre la place que prend un répertoire, on peut utiliser la commande \href{http://jp.barralis.com/linux-man/man1/du.1.php}{du} (Donne les statistiques sur l'utilisation du disque, donne l'espace du répertoire et non l'espace utilisé par un seul utilisateur). Options pouvant être utilisée avec ce dernier :
 \begin{itemize}
 \item -a : Affiche les statistiques pour tous les fichiers, pas seulement les répertoires.
 \item -k : Affiche la taille en ko (kilo-octets, 1024 octets).
@@ -887,7 +888,7 @@ Fichiers importants : /etc/passwd (information sur les comptes utilisateurs), et
 \item -x: Ignore les répertoires situés sur un système de fichiers différent de celui de l'argument étudié.
 \end{itemize}
 Remarques : au sujet des liens physiques : ils ne sont comptés qu'une seule fois.
-\paragraph{Espace disque utilisé d'une partition : } on utilisera la commande df (Fournit la quantité d'espace occupé des systèmes de fichiers.) Options pouvant être utilisée avec ce dernier :
+\paragraph{Espace disque utilisé d'une partition : } on utilisera la commande \href{http://jp.barralis.com/linux-man/man1/df.1.php}{df} (Fournit la quantité d'espace occupé des systèmes de fichiers, elle permet de savori quel est l'espace disponible) Options pouvant être utilisée avec ce dernier :
 \begin{itemize}
 \item -k : Utilise des unités de 1024 octets plutôt que les unités de 512 octets par défaut.
 \item -P : Affichage sur six colonnes, précédées de l'en-tête `Filesystem N-blocks Used Available Capacity Mounted on' (avec N=512, ou N=1024 si l'option -k est utilisée).
@@ -898,7 +899,7 @@ Remarques : au sujet des liens physiques : ils ne sont comptés qu'une seule foi
 \item -- : Fin explicite de la liste des options.
 \end{itemize}
 \subsection{ Trouver des fichiers}
-Afin de trouver des fichiers on utilisera l'appel système find. Ce dernier peut avoir pour option :
+Afin de trouver des fichiers on utilisera l'appel système \href{http://jp.barralis.com/linux-man/man1/find.1.php}{find}. Ce dernier peut avoir pour option :
 \begin{itemize}
 \item  -type c Fichier du type c :
 \begin{itemize}
@@ -936,7 +937,7 @@ Actions pouvant être utilisée sur find :
 \item -execdir : NOT FOUND
 \end{itemize}
 \subsection{ Comparaison de fichiers}
-On peut poru cela utiliser la commande diff (Trouve les différences entre des fichiers). Options pouvant être utilisées sur ce dernier :
+On peut pour cela utiliser la commande \href{http://jp.barralis.com/linux-man/man1/diff.1.php}{diff} (Trouve les différences entre des fichiers). Options pouvant être utilisées sur ce dernier :
 \begin{itemize}
 \item -nb (nb est un nombre entier) Afficher nb lignes de contexte. Cette option ne précise pas le format de sortie par elle-même, elle n'a pas d'effet si elle n'est pas combinée avec -c ou -u. Cette option est obsolète. Pour fonctionner correctement, patch nécessite typiquement deux lignes de contexte.
 \item -a : Traiter tous les fichiers comme du texte, et les comparer ligne-à-ligne, même s'ils semblent contenir des données binaires.
@@ -947,11 +948,11 @@ On peut poru cela utiliser la commande diff (Trouve les différences entre des f
 \item -C nb
 \end{itemize}
 \subsection{Fichiers d'archives / de compression}
-\paragraph{tar : } la version GNU de l'utilitaire tar de gestion d'archives.  
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/tar.1.php}{tar} : } la version GNU de l'utilitaire tar de gestion d'archives.  
 \paragraph{compress : } Compresse ou décompresse des fichiers.
-\paragraph{gzip : } Compacte ou décompacte des fichiers. 
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/gzip.1.php}{gzip} : } Compacte ou décompacte des fichiers. 
 \subsection{Gestion des processus}
-\paragraph{Trouver des processus : } Afin de toruver des processus, on va utiliser la commande ps (Affiche l'état des processus en cours). Celle ci peut avoir comme options : 
+\paragraph{Trouver des processus : } Afin de toruver des processus, on va utiliser la commande \href{http://jp.barralis.com/linux-man/result.php#rech}{ps} (Affiche l'état des processus en cours). Celle ci peut avoir comme options : 
 \begin{itemize}
 \item l: affichage long
 \item u : (utilisateur) présente le nom de l'utilisateur et l'heure de lancement.
@@ -970,10 +971,10 @@ On peut poru cela utiliser la commande diff (Trouve les différences entre des f
 \item r : ne présenter que les processus en cours d'exécution (running).
 \item n : Affichage numérique des champs USER et WCHAN.
 \end{itemize}
-\paragraph{nice : } Exécute un programme avec une priorité d'ordonnancement modifiée.  
-\paragraph{lsof : } liste les fichiers ouverts.
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/nice.1.php}{nice} : } Exécute un programme avec une priorité d'ordonnancement modifiée.  
+\paragraph{\href{http://jp.barralis.com/linux-man/man8/lsof.8.php}{lsof} : } liste les fichiers ouverts.
 \subsection{Filtres élémentaires}
-\paragraph{Commande grep : } Affiche les lignes correspondant à un motif donné. Elle peut être utilisée avec les options :
+\paragraph{Commande \href{http://jp.barralis.com/linux-man/man1/grep.1.php}{grep} : } Affiche les lignes correspondant à un motif donné. Elle peut être utilisée avec les options :
 \begin{itemize}
 \item -num : Les correspondances seront affichées avec num lignes supplémentaires avant et après. Néanmoins, grep n'affichera jamais une ligne plus d'une fois.
 \item -A num : Affiche num lignes supplémentaires après la ligne correspondante.
@@ -995,17 +996,17 @@ On peut poru cela utiliser la commande diff (Trouve les différences entre des f
 \item -w : Ne sélectionne que les lignes contenant une correspondance formant un mot complet. La sous-chaîne correspondante doit donc être soit au début de la ligne, soit précédée d'un caractère n'appartenant pas à un mot. De même elle doit se trouver soit à la fin de la ligne, soit être suivie par un caractère n'appartenant pas à un mot. Les caractères composants les mots sont les lettres, les chiffres et le souligné (`\_'). ([NDT] Bien entendu les minuscules accentuées ne sont pas des lettres ! Elles servent donc à séparer les mots...)
 \item -x : Ne sélectionne que les correspondances qui occupent une ligne entière.
 \end{itemize}
-\paragraph{dirname : } Ne conserve que la partie répertoire d'un chemin d'accès.
-\paragraph{basename : } Élimine le chemin d'accès et le suffixe d'un nom de fichier.
-\paragraph{awk : } Langage d'examen et de traitement de motifs.  
-\paragraph{tr : } Transpose ou élimine des caractères.
-\paragraph{sort : } Trie les lignes d'un fichier texte.
-\paragraph{head -n : }  Affiche le début d'un fichier (-n : nombre de lignes).  
-\paragraph{tail -n : } Affiche la dernière partie d'un fichier (-n : nombre de lignes).
-\paragraph{xargs : } onstruire et exécuter des lignes de commandes à partir de l'entrée standard.
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/dirname.1.php}{dirname} : } Ne conserve que la partie répertoire d'un chemin d'accès.
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/basename.1.php}{basename} : } Élimine le chemin d'accès et le suffixe d'un nom de fichier.
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/gawk.1.php}{awk} : } Langage d'examen et de traitement de motifs.  
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/tr.1.php}{tr} : } Transpose ou élimine des caractères.
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/sort.1.php}{sort} : } Trie les lignes d'un fichier texte.
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/head.1.php}{head} -n : }  Affiche le début d'un fichier (-n : nombre de lignes).  
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/tail.1.php}{tail} -n : } Affiche la dernière partie d'un fichier (-n : nombre de lignes).
+\paragraph{\href{http://jp.barralis.com/linux-man/man1/xargs.1.php}{xargs} : } construire et exécuter des lignes de commandes à partir de l'entrée standard.
 \subsection{ Plus de filtres}
 \paragraph{Editors : } Discussion au sujet des éditeurs (dd, ex, vi, emacs, nemacs, pico). 
-\paragraph{Différences cat et tac : } cat : Concatène des fichiers et les affiche sur la sortie standard. tac : Concatène et affiche des fichiers à l'envers.
+\paragraph{Différences cat et tac : } \href{http://jp.barralis.com/linux-man/man1/cat.1.php}{cat} : Concatène des fichiers et les affiche sur la sortie standard. \href{http://jp.barralis.com/linux-man/man1/tac.1.php}{tac} : Concatène et affiche des fichiers à l'envers.
 \subsection{ Shells}
 Le shell est l'interpréteur de commandes (Il n'y a pas qu'un seul interpréteur de commandes : sh, csh, ksh, bash, tcsh, zsh, ce qui fait que chaque interpréteur à ses propres particularités, tels que la syntaxe de programmation, ou son historique), il s'agit également du nom générique d'un command file. Le shell par défaut est le dernier champ de /etc/passwd (Les shells valides sont repris dans le fichier : /etc/shells).
 \subsection{ Bash Programming}
@@ -1027,4 +1028,5 @@ On peut procéder a l’échappement de caractères à l'aide de :
 \item double quotes
 \item prargs
 \end{itemize}
+\section{Liens Externes}
 \end{document}
