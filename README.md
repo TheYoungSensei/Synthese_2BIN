@@ -9,4 +9,4 @@ Repos of my cursus at IPL (Institut Paul Lambin). This was made to publish my wo
 
 <h3>Terms and Services<h3>
 
-Be careful when using this repository. This is a work in progress and this was done by a human person (Well I think so) so some things might / may be false. Use your sense of analysis and in case of error(s) / amelioration(s), Let me know about it to aware the other utlisators.
+Be careful when using this repository. This is a work in progress and was done by a human person (Well I think so) so some things might / may be false. Use your sense of analysis and in case of error(s) / amelioration(s), Let me know about it to aware the other utilisators.
