@@ -122,7 +122,7 @@ int main(int argc, char **argv) {
 		} /* fin de la boucle de traitement du père */
 		/* affichage des statistiques */
 		if(nombreEssais != 0) { /* Division par 0 non autorisée ici */
-			sprintf(ligne, "Vous avez devine %d nombres avec en moyenne %d essais par nombre\n", nombreCorrects, nombreCorrects / nombreEssais);
+			sprintf(ligne, "Vous avez devine %d nombres avec en moyenne %d essais par nombre\n", nombreCorrects, nombreEssais/ nombreCorrects);
 		} else {
 			sprintf(ligne, "Vous avez %d nombres avec en moyenne 0 essais par nombre\n", nombreCorrects);
 		}
