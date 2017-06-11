@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
 }
 
 int getPermissions(int fd, char *nomFichier) {
-	char *ligne;
+	char ligne[256];
 	struct stat *st;
 	char userR = '-';
 	char userW = '-';
@@ -78,9 +78,9 @@ int getPermissions(int fd, char *nomFichier) {
 	char otherR = '-';
 	char otherW = '-';
 	char otherX = '-';
-	if((ligne = (char *) malloc(sizeof(char) * 256)) == NULL) {
-		perror("Erreur malloc\n");
-		exit(4);
+	if((st = (struct stat *) malloc(sizeof(stat))) == NULL) {
+		perror("MALLOC\n");
+		exit(3);
 	}
 	fstat(fd, st);
 	sprintf(ligne, "%s a une taille de %zu et possède les permissions : \n", nomFichier, st->st_size);
