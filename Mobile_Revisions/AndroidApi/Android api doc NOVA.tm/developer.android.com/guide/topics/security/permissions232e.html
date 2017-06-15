@@ -1,0 +1,1442 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- Mirrored from developer.android.com/guide/topics/security/permissions.html?hl=ko by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:08:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="q-cgADFTFbn87Vb5G_YDQqYaRL5TBQwSGBmfX-z-3S46MTQ5NzUxNjQ3MTgyMDcxMA" />
+
+  
+    <link rel="canonical" href="permissions232e.html?hl=ko">
+  
+
+  
+    <link rel="alternate" href="permissions7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="permissions0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="permissions9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="permissionsde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="permissions232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="permissions0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="permissions6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/security/permissions.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/security/permissions.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/security/permissions.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/security/permissions.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/security/permissions.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/security/permissions.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/security/permissions.html?hl=pt-br" hreflang="pt-br-cn">
+  
+
+  <link rel="alternate" href="../permissions/index.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon232e.png?hl=ko">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-180232e.png?hl=ko">
+
+
+<title>
+
+  시스템 권한 | Android Developers
+
+</title>
+
+  <meta name="description" content="Permissions Google I&amp;#47;O 2015—Android M Permissions: Best Practices for Developers Android is a privilege-separated operating system, in which each application runs with a distinct system identity (Linux user ID and group ID). Parts of the system are…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/defaultee8c.css?hl=ko?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle232e.js?hl=ko" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__ko232e.js?hl=ko"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android232e.js?hl=ko"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docsee8c.js?hl=ko?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ko&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ko&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ko&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ko&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "ko", "served": "ko"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=ko">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo232e.png?hl=ko"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=ko"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=ko"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=ko"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=ko"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=ko" width="18" height="19" alt="Play 콘솔">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="검색">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">뒤로</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index232e.html?hl=ko" >소개</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals232e.html?hl=ko" >앱 기본 항목</a></li><li><a href="../../practices/compatibility232e.html?hl=ko" >기기 호환성</a></li><li><a href="permissions232e.html?hl=ko" >시스템 권한</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index232e.html?hl=ko" >플랫폼 아키텍처</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack232e.html?hl=ko"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Java 8 언어 기능 사용</a></li><li><a href="../../practices/verifying-apps-art232e.html?hl=ko" >ART(Android 런타임)에서 앱 동작 확인</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index232e.html?hl=ko" >앱 구성 요소</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters232e.html?hl=ko" >인텐트 및 인텐트 필터</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common232e.html?hl=ko" >공통 인텐트</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities232e.html?hl=ko" >액티비티</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments232e.html?hl=ko" >프래그먼트</a></li><li><a href="../../components/loaders232e.html?hl=ko" >로더</a></li><li><a href="../../components/tasks-and-back-stack232e.html?hl=ko" >작업 및 백 스택</a></li><li><a href="../../components/recents232e.html?hl=ko" >개요 화면</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services232e.html?hl=ko" >서비스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services232e.html?hl=ko" >바인드된 서비스</a></li><li><a href="../../components/aidl232e.html?hl=ko" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providers232e.html?hl=ko" >콘텐츠 제공자</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basics232e.html?hl=ko" >콘텐츠 제공자 기본 정보</a></li><li><a href="../providers/content-provider-creating232e.html?hl=ko" >콘텐츠 제공자 생성</a></li><li><a href="../providers/calendar-provider232e.html?hl=ko" >캘린더 제공자</a></li><li><a href="../providers/contacts-provider232e.html?hl=ko" >연락처 제공자</a></li><li><a href="../providers/document-provider232e.html?hl=ko" >저장소 액세스 프레임워크</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index232e.html?hl=ko" >앱 위젯</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host232e.html?hl=ko" >앱 위젯 호스트</a></li></ul></li><li><a href="../../components/processes-and-threads232e.html?hl=ko" >프로세스 및 스레드</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index232e.html?hl=ko" >앱 리소스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview232e.html?hl=ko" >개요</a></li><li><a href="../resources/providing-resources232e.html?hl=ko" >리소스 제공</a></li><li><a href="../resources/accessing-resources232e.html?hl=ko" >리소스 액세스</a></li><li><a href="../resources/runtime-changes232e.html?hl=ko" >런타임 변경 처리</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization232e.html?hl=ko" >현지화</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework232e.html?hl=ko" >ICU4J Android 프레임워크 API</a></li><li><a href="../resources/multilingual-support232e.html?hl=ko" >언어 및 로케일</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources232e.html?hl=ko" >리소스 유형</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource232e.html?hl=ko" >애니메이션</a></li><li><a href="../resources/color-list-resource232e.html?hl=ko" >색상 상태 목록</a></li><li><a href="../resources/drawable-resource232e.html?hl=ko" >드로어블</a></li><li><a href="../resources/layout-resource232e.html?hl=ko" >레이아웃</a></li><li><a href="../resources/menu-resource232e.html?hl=ko" >메뉴</a></li><li><a href="../resources/string-resource232e.html?hl=ko" >문자열</a></li><li><a href="../resources/style-resource232e.html?hl=ko" >스타일</a></li><li><a href="../resources/more-resources232e.html?hl=ko" >기타 유형</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro232e.html?hl=ko" >앱 매니페스트</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element232e.html?hl=ko" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element232e.html?hl=ko" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element232e.html?hl=ko" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element232e.html?hl=ko" >&lt;application&gt;</a></li><li><a href="../manifest/category-element232e.html?hl=ko" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element232e.html?hl=ko" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element232e.html?hl=ko" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element232e.html?hl=ko" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element232e.html?hl=ko" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element232e.html?hl=ko" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element232e.html?hl=ko" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element232e.html?hl=ko" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element232e.html?hl=ko" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element232e.html?hl=ko" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element232e.html?hl=ko" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element232e.html?hl=ko" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element232e.html?hl=ko" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element232e.html?hl=ko" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element232e.html?hl=ko" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element232e.html?hl=ko" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element232e.html?hl=ko" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element232e.html?hl=ko" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element232e.html?hl=ko" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element232e.html?hl=ko" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element232e.html?hl=ko" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element232e.html?hl=ko" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element232e.html?hl=ko" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index232e.html?hl=ko" >사용자 인터페이스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview232e.html?hl=ko" >개요</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout232e.html?hl=ko" >레이아웃</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear232e.html?hl=ko" >선형 레이아웃</a></li><li><a href="../ui/layout/relative232e.html?hl=ko" >상대적 레이아웃</a></li><li><a href="../ui/layout/listview232e.html?hl=ko" >목록 뷰</a></li><li><a href="../ui/layout/gridview232e.html?hl=ko" >그리드 뷰</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls232e.html?hl=ko" >입력 컨트롤</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button232e.html?hl=ko" >버튼</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=ko" >텍스트 필드</a></li><li><a href="../ui/controls/checkbox232e.html?hl=ko" >체크박스</a></li><li><a href="../ui/controls/radiobutton232e.html?hl=ko" >라디오 버튼</a></li><li><a href="../ui/controls/togglebutton232e.html?hl=ko" >전환 버튼</a></li><li><a href="../ui/controls/spinner232e.html?hl=ko" >스피너</a></li><li><a href="../ui/controls/pickers232e.html?hl=ko" >선택기</a></li></ul></li><li><a href="../ui/ui-events232e.html?hl=ko" >입력 이벤트</a></li><li><a href="../ui/menus232e.html?hl=ko" >메뉴</a></li><li><a href="../ui/settings232e.html?hl=ko" >설정</a></li><li><a href="../ui/dialogs232e.html?hl=ko" >대화상자</a></li><li><a href="../ui/notifiers/notifications232e.html?hl=ko" >알림</a></li><li><a href="../ui/notifiers/toasts232e.html?hl=ko" >알림 메시지</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index232e.html?hl=ko" >검색</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog232e.html?hl=ko" >검색 인터페이스 생성</a></li><li><a href="../search/adding-recent-query-suggestions232e.html?hl=ko" >최근 쿼리 제안 추가</a></li><li><a href="../search/adding-custom-suggestions232e.html?hl=ko" >사용자 지정 제안 추가</a></li><li><a href="../search/searchable-config232e.html?hl=ko" >검색 가능한 구성</a></li></ul></li><li><a href="../ui/multi-window232e.html?hl=ko" >다중 창 지원</a></li><li><a href="../ui/drag-drop232e.html?hl=ko" >드래그 앤 드롭</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index232e.html?hl=ko" >접근성</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps232e.html?hl=ko" >액세스 가능한 애플리케이션 만들기</a></li><li><a href="../ui/accessibility/checklist232e.html?hl=ko" >접근성 개발자 검사 목록</a></li><li><a href="../ui/accessibility/services232e.html?hl=ko" >접근성 서비스 구축</a></li></ul></li><li><a href="../ui/themes232e.html?hl=ko" >스타일 및 테마</a></li><li><a href="../ui/custom-components232e.html?hl=ko" >사용자 지정 구성 요소</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index232e.html?hl=ko" >애니메이션 및 그래픽</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview232e.html?hl=ko" >개요</a></li><li><a href="../graphics/prop-animation232e.html?hl=ko" >속성 애니메이션</a></li><li><a href="../graphics/view-animation232e.html?hl=ko" >뷰 애니메이션</a></li><li><a href="../graphics/drawable-animation232e.html?hl=ko" >드로어블 애니메이션</a></li><li><a href="../graphics/2d-graphics232e.html?hl=ko" >캔버스 및 드로어블</a></li><li><a href="../graphics/opengl232e.html?hl=ko" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel232e.html?hl=ko" >하드웨어 가속</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index232e.html?hl=ko" >연산</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute232e.html?hl=ko" >RenderScript</a></li><li><a href="../renderscript/advanced232e.html?hl=ko" >고급 RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview232e.html?hl=ko" >런타임 API 참조</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types232e.html?hl=ko" >숫자 유형</a></li><li><a href="../renderscript/reference/rs_object_types232e.html?hl=ko" >객체 유형</a></li><li><a href="../renderscript/reference/rs_convert232e.html?hl=ko" >변환 함수</a></li><li><a href="../renderscript/reference/rs_math232e.html?hl=ko" >수학 상수 및 함수</a></li><li><a href="../renderscript/reference/rs_vector_math232e.html?hl=ko" >벡터 수학 함수</a></li><li><a href="../renderscript/reference/rs_matrix232e.html?hl=ko" >행렬 함수</a></li><li><a href="../renderscript/reference/rs_quaternion232e.html?hl=ko" >사원수 함수</a></li><li><a href="../renderscript/reference/rs_atomic232e.html?hl=ko" >원자 업데이트 함수</a></li><li><a href="../renderscript/reference/rs_time232e.html?hl=ko" >시간 함수 및 유형</a></li><li><a href="../renderscript/reference/rs_allocation_data232e.html?hl=ko" >할당 데이터 액세스 함수</a></li><li><a href="../renderscript/reference/rs_object_info232e.html?hl=ko" >객체 특성 함수</a></li><li><a href="../renderscript/reference/rs_for_each232e.html?hl=ko" >커널 호출 함수 및 유형</a></li><li><a href="../renderscript/reference/rs_io232e.html?hl=ko" >입력/출력 함수</a></li><li><a href="../renderscript/reference/rs_debug232e.html?hl=ko" >디버깅 함수</a></li><li><a href="../renderscript/reference/rs_graphics232e.html?hl=ko" >그래픽 함수 및 유형</a></li><li><a href="../renderscript/reference/index232e.html?hl=ko" >인덱스</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index232e.html?hl=ko" >미디어 및 카메라</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer232e.html?hl=ko" >미디어 재생</a></li><li><a href="../media/mediarouter232e.html?hl=ko" >미디어 라우터</a></li><li><a href="../media/mediarouteprovider232e.html?hl=ko" >미디어 루트 제공자</a></li><li><a href="../media/exoplayer232e.html?hl=ko" >ExoPlayer</a></li><li><a href="../media/media-formats232e.html?hl=ko" >지원되는 미디어 형식</a></li><li><a href="../media/mediarecorder232e.html?hl=ko" >오디오 캡처</a></li><li><a href="../media/jetplayer232e.html?hl=ko" >JetPlayer</a></li><li><a href="../media/camera232e.html?hl=ko" >카메라</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index232e.html?hl=ko" >위치 및 센서</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index232e.html?hl=ko" >위치 및 지도</a></li><li><a href="../location/strategies232e.html?hl=ko" >위치 전략</a></li><li><a href="../sensors/sensors_overview232e.html?hl=ko" >센서 개요</a></li><li><a href="../sensors/sensors_motion232e.html?hl=ko" >동작 센서</a></li><li><a href="../sensors/sensors_position232e.html?hl=ko" >위치 센서</a></li><li><a href="../sensors/sensors_environment232e.html?hl=ko" >환경 센서</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index232e.html?hl=ko" >연결</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth232e.html?hl=ko" >블루투스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le232e.html?hl=ko" >블루투스 저전력</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index232e.html?hl=ko" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc232e.html?hl=ko" >NFC 기초</a></li><li><a href="../connectivity/nfc/advanced-nfc232e.html?hl=ko" >고급 NFC</a></li><li><a href="../connectivity/nfc/hce232e.html?hl=ko" >호스트 기반 카드 에뮬레이션</a></li></ul></li><li><a href="../connectivity/wifip2p232e.html?hl=ko" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index232e.html?hl=ko" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory232e.html?hl=ko" >액세서리</a></li><li><a href="../connectivity/usb/host232e.html?hl=ko" >호스트</a></li></ul></li><li><a href="../connectivity/sip232e.html?hl=ko" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index232e.html?hl=ko" >텍스트 및 입력</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste232e.html?hl=ko" >복사 및 붙여넣기</a></li><li><a href="../text/creating-input-method232e.html?hl=ko" >IME 생성</a></li><li><a href="../text/spell-checker-framework232e.html?hl=ko" >맞춤법 검사기</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index232e.html?hl=ko" >데이터 저장소</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage232e.html?hl=ko" >저장소 옵션</a></li><li><a href="../data/backup232e.html?hl=ko" >데이터 백업</a></li><li><a href="../data/install-location232e.html?hl=ko" >앱 설치 위치</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=ko" >라이브러리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=ko" >지원 라이브러리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=ko" >기능</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=ko" >설정</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=ko" >수정 버전 기록</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=ko" >데이터 바인딩 라이브러리</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=ko" >테스트 지원 라이브러리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=ko" >API 참조</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index232e.html?hl=ko" >관리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin232e.html?hl=ko" >기기 정책</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index232e.html?hl=ko" >웹 앱</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting232e.html?hl=ko" >웹 앱에서 서로 다른 화면 지원</a></li><li><a href="../../webapps/webview232e.html?hl=ko" >WebView에서 웹 앱 작성</a></li><li><a href="../../webapps/migrating232e.html?hl=ko" >Android 4.4에서 WebView로 마이그레이션</a></li><li><a href="../../webapps/debugging232e.html?hl=ko" >웹 앱 디버깅</a></li><li><a href="../../webapps/best-practices232e.html?hl=ko" >웹 앱 모범 사례</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index232e.html?hl=ko"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="모범 사례" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">모범 사례</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support232e.html?hl=ko" >다중 화면 지원</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution232e.html?hl=ko" >특정 화면에 배포</a></li><li><a href="../../practices/screen-compat-mode232e.html?hl=ko" >화면 호환 모드</a></li></ul></li><li><a href="../../practices/tablets-and-handsets232e.html?hl=ko" >태블릿 및 핸드셋 지원</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=ko">홈</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=ko">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=ko">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=ko">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=ko">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=ko">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=ko"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=ko"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=ko"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">교육</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index232e.html?hl=ko"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=ko"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">참조</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=ko">샘플</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=ko"
+           >라이브러리</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=ko"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=ko"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=ko">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=ko">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=ko">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=ko"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=ko">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=ko">Play 콘솔</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=ko"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=ko"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=ko">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=ko">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">시스템 권한</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+<h2>이 문서의 내용</h2>
+<ol>
+<li><a href="#arch">보안 아키텍처</a></li>
+<li><a href="#signing">애플리케이션 서명</a></li>
+<li><a href="#userid">사용자 ID 및 파일 액세스</a></li>
+<li><a href="#permissions">권한 사용</a></li>
+<li><a href="#normal-dangerous">정상 권한 및 위험한 권한</a>
+  <ol>
+    <li><a href="#perm-groups">권한 그룹</a></li>
+  </ol>
+</li>
+<li><a href="#defining">권한 정의 및 적용</a>
+	<ol>
+  <li><a href="#custom-recommendations">사용자 지정 권한 권장 사항</a></li>
+	<li><a href="#manifest">AndroidManifest.xml을 사용하는 경우</a></li>
+	<li><a href="#broadcasts">브로드캐스트를 전송하는 경우</a></li>
+	<li><a href="#enforcement">기타 권한 적용</a></li>
+	</ol></li>
+<li><a href="#uri">URI 권한</a></li>
+</ol>
+
+  <h2>주요 클래스</h2>
+  <ol>
+    <li><code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko">Manifest.permission</a></code></li>
+    <li><code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko">Manifest.permission_group</a></code></li>
+  </ol>
+
+  <h2>참고 항목</h2>
+  <ol>
+    <li><a href="https://developer.android.com/training/permissions/index.html?hl=ko">시스템 권한 사용</a></li>
+  </ol>
+
+<!--
+  <h2>See also</h2>
+  <ol>
+    <li></li>
+  </ol>
+-->
+</div>
+</div>
+
+<a class="notice-designers" href="https://www.google.com/design/spec/patterns/permissions.html?hl=ko">
+  <div>
+    <h3>디자인 패턴</h3>
+    <p>권한</p>
+  </div>
+</a>
+
+<!-- video box --> <a class="notice-developers-video" href="https://www.youtube.com/watch?v=f17qe9vZ8RM&amp;hl=ko">
+<div>
+    <h3>동영상</h3>
+    <p>Google I/O 2015—Android M 권한: 개발자를 위한 모범 사례</p>
+</div>
+</a>
+
+<p>Android는 권한으로 구분되는 운영 체제이며, 여기서는 각 애플리케이션이 고유한 시스템 ID(Linux 사용자 ID 및 그룹 ID)를 사용하여 실행됩니다. 시스템의 각 부분은 고유한 ID로도 구분되어 있습니다. 그렇게 함으로써 Linux는 애플리케이션을 서로 간에 그리고 시스템으로부터 격리합니다.</p>
+
+<p>추가 세부 수준의 보안 기능이 "권한" 메커니즘 통해 제공됩니다. 이 메커니즘에서는 특정 프로세스가 수행할 수 있는 특정 작업과 특정 데이터 조각에 대한 임시 액세스를 부여하기 위한 URI별 권한에 대한 제한을 적용합니다.</p>
+
+<p>이 문서에서는 애플리케이션 개발자가 Android에서 제공하는 보안 기능을 어떻게 사용할 수 있는지에 대해 설명합니다. 추가 일반 <a href="http://source.android.com/tech/security/index.html?hl=ko" class="external-link">Android 보안 개요</a>는 Android 오픈소스 프로젝트에 나와 있습니다.</p>
+
+
+<a name="arch"></a>
+<h2>보안 아키텍처</h2>
+
+<p>Android 보안 아키텍처는 기본적으로 애플리케이션에 다른 애플리케이션, 운영 체제 또는 사용자에 안 좋은 영향을 미칠 수 있는 작업을 수행할 수 있는 권한이 없다는 것을 바탕으로 디자인되었습니다. 여기에는 사용자의 개인 데이터(예: 연락처 또는 이메일) 읽기/쓰기, 다른 애플리케이션 파일 읽기/쓰기, 네트워크 액세스 수행, 기기를 실행 상태로 유지 등이 포함됩니다.</p>
+
+<p>Android 애플리케이션은 각각 하나의 프로세스 샌드박스에서 작업하기 때문에 애플리케이션은 리소스 및 데이터를 명시적으로 공유해야 합니다. 애플리케이션은 기본 샌드박스가 제공하지 않는 추가적인 기능에 대해 필요한 <em>권한</em>을 선언함으로써 이 작업을 수행합니다. 애플리케이션은 필요한 권한을 정적으로 선언하고 Android 시스템은 사용자에게 이에 대한 동의를 묻습니다.</p>
+
+<p>애플리케이션 샌드박스는 애플리케이션을 빌드하는 데 사용된 기술에 종속되지 않습니다. 특히, Dalvik VM은 보안 경계가 아니며 모든 앱이 네이티브 코드를 실행할 수 있습니다(<a href="https://developer.android.com/tools/sdk/ndk/index.html?hl=ko">Android NDK</a> 참조). 모든 유형의 애플리케이션(Java, 네이티브 및 하이브리드)이 동일한 방식으로 샌드박싱되며 각각 동일한 수준의 보안 기능을 가집니다.</p>
+
+
+<a name="signing"></a>
+<h2>애플리케이션 서명</h2>
+
+<p>모든 APK(<code>.apk</code> 파일)는 인증서로 서명되어야 하며, 이 인증서의 개인 키는 개발자가 유지합니다. 이 인증서는 애플리케이션의 작성자를 식별합니다. 인증서는 인증 기관이 서명할 필요가 <em>없습니다</em>. Android 애플리케이션이 자체 서명된 인증서를 사용하는 것은 전적으로 허용되는 일반적인 것입니다. Android에서 인증서의 용도는 애플리케이션 작성자를 구별하는 것입니다. 이를 통해 시스템은 애플리케이션에 <a href="../manifest/permission-element232e.html?hl=ko#plevel">서명 레벨 권한</a>에 대한 액세스를 부여하거나 거부할 수 있으며 다른 애플리케이션과 <a href="../manifest/manifest-element232e.html?hl=ko#uid">동일한 Linux ID를 부여해달라는 애플리케이션 요청</a>을 수락하거나 거부할 수 있습니다.</p>
+
+<a name="userid"></a>
+<h2>사용자 ID 및 파일 액세스</h2>
+
+<p>설치 시, Android는 각 패키지에 고유한 Linux 사용자 ID를 제공합니다. ID는 해당 기기에서 패키지의 수명 동안 일정하게 유지됩니다. 다른 기기에서는 동일한 패키지가 다른 UID를 가질 수 있습니다. 중요한 점은 각 패키지가 특정 기기에서 고유한 UID를 가진다는 것입니다.</p>
+
+<p>보안이 프로세스 레벨에서 적용되며 패키지가 다른 Linux 사용자로 실행되어야 하기 때문에 두 개 패키지의 코드는 일반적으로 동일한 프로세스에서 실행될 수 없습니다. 각 패키지에 대한 <code>AndroidManifest.xml</code>의 <code><a href="https://developer.android.com/reference/android/R.styleable.html?hl=ko#AndroidManifest">manifest</a></code> 태그에 <code><a href="https://developer.android.com/reference/android/R.attr.html?hl=ko#sharedUserId">sharedUserId</a></code> 특성을 사용하여 패키지에 동일한 사용자 ID가 할당되도록 할 수 있습니다. 이렇게 함으로써 보안을 목적으로 두 패키지가 동일한 사용자 ID와 파일 권한을 갖는 동일한 애플리케이션으로 취급됩니다. 참고로, 보안을 유지하기 위해 동일한 서명으로 서명된(그리고 동일한 sharedUserId를 요청하는) 두 개의 애플리케이션에만 동일한 사용자 ID가 지정됩니다.</p>
+
+<p>애플리케이션이 저장하는 데이터에만 해당 애플리케이션의 사용자 ID가 할당되고, 일반적으로 다른 패키지는 이 데이터에 액세스할 수 없습니다. <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#getSharedPreferences(java.lang.String, int)">getSharedPreferences(String, int)</a></code>, <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#openFileOutput(java.lang.String, int)">openFileOutput(String, int)</a></code> 또는 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#openOrCreateDatabase(java.lang.String, int, android.database.sqlite.SQLiteDatabase.CursorFactory)">openOrCreateDatabase(String, int, SQLiteDatabase.CursorFactory)</a></code>를 사용하여 새 파일을 생성할 때는 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#MODE_WORLD_READABLE">MODE_WORLD_READABLE</a></code> 및/또는 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#MODE_WORLD_WRITEABLE">MODE_WORLD_WRITEABLE</a></code> 플래그를 사용하여 다른 패키지가 파일을 읽고 쓸 수 있도록 허용할 수 있습니다. 이러한 플래그를 설정할 때 파일은 여전히 애플리케이션이 소유하지만, 해당 전역 읽기 및/또는 쓰기 권한은 기타 모든 애플리케이션이 파일을 볼 수 있도록 적절하게 설정되었습니다.</p>
+
+
+<h2 id="permissions">권한 사용</h2>
+
+<p>기본 Android 애플리케이션에는 기본적으로 이와 연결된 권한이 없습니다. 즉, 사용자 환경 및 기기에 저장된 모든 데이터에 안 좋은 영향을 미칠 수 있는 어떠한 작업도 수행할 수 없습니다. 기기의 보호되는 기능을 사용하려면 <a href="../manifest/manifest-intro232e.html?hl=ko">앱 매니페스트</a>에 하나 이상의 <a href="../manifest/uses-permission-element232e.html?hl=ko"><code>&lt;uses-permission&gt;</code></a> 태그를 포함해야 합니다.</p>
+
+<p>예를 들어, 들어오는 SMS 메시지를 모니터링해야 하는 애플리케이션은 다음을 지정할 수 있습니다.</p>
+
+<pre>&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.android.app.myapp&quot; &gt;
+    &lt;uses-permission android:name=&quot;android.permission.RECEIVE_SMS&quot; /&gt;
+    ...
+&lt;/manifest&gt;</pre>
+
+<div class="sidebox-wrapper">
+<div class="sidebox">
+  <h3>권한 레벨</h3>
+  <p>권한에 대한 다양한 보호 레벨에 대한 자세한 내용은 <a href="#normal-dangerous">정상 권한 및 위험한 권한</a>을 참조하세요.</p>
+</div>
+</div>
+
+<p>
+  앱이 매니페스트에서 <em>정상</em> 권한(즉, 사용자 개인 정보 또는 기기 작업에 많은 위험이 되지 않는 권한)을 나열하는 경우 시스템이 자동으로 이러한 권한을 부여합니다. 앱이 매니페스트에서 <em>위험한</em> 권한(즉, 사용자 개인 정보 또는 기기의 정상 작업에 영향을 미칠 수 있는 권한)을 나열하는 경우 시스템이 이러한 권한을 명시적으로 부여하도록 사용자에게 요청합니다. Android가 요청을 수행하는 방법은 실행하는 시스템 버전과 앱에서 대상으로 지정하는 시스템 버전에 따라 다릅니다.
+</p>
+
+<ul>
+  <li>기기가 Android 6.0(API 레벨 23) 이상을 실행하고<em> </em>앱의 <a href="../manifest/uses-sdk-element232e.html?hl=ko#target"><code>targetSdkVersion</code></a>이 23 이상인 경우 앱은 런타임에 사용자로부터 권한을 요청합니다. 사용자가 언제든지 권한을 취소할 수 있으므로, 앱이 실행할 때마다 권한을 갖고 있는지 여부를 확인해야 합니다. 앱에서 권한을 요청하는 방법에 대한 자세한 내용은 <a href="https://developer.android.com/training/permissions/index.html?hl=ko">시스템 권한 사용</a> 교육 가이드를 참조하세요.
+  </li>
+
+  <li>기기가 Android 5.1(API 레벨 22) 이하를 실행하거나<em> </em>앱의 <a href="../manifest/uses-sdk-element232e.html?hl=ko#target"><code>targetSdkVersion</code></a>이 22 이하인 경우, 시스템이 사용자가 앱을 설치할 때 권한을 부여하도록 사용자에게 요청합니다. 앱의 업데이트된 버전에 새 권한을 추가할 경우 시스템이 사용자가 앱을 업데이트할 때 해당 권한을 부여하도록 사용자에게 요청합니다. 사용자가 앱을 설치한 후에는 앱을 제거하는 것이 권한을 취소할 수 있는 유일한 방법입니다.
+  </li>
+</ul>
+
+<p>권한 오류로 인해 <code><a href="https://developer.android.com/reference/java/lang/SecurityException.html?hl=ko">SecurityException</a></code>이 애플리케이션에 발생하는 경우가 꽤 있습니다. 하지만, 이것이 모든 경우에 발생한다는 보장은 없습니다. 예를 들어, <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#sendBroadcast(android.content.Intent)">sendBroadcast(Intent)</a></code> 메서드는 데이터가 각 수신기에 제공될 때 권한을 검사하고, 메서드 호출이 반환된 후에는 권한 오류가 있어도 예외가 수신되지 않습니다. 하지만, 거의 모든 경우 권한 오류가 시스템 로그에 출력됩니다.</p>
+
+<p>Android 시스템에서 제공하는 권한은 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko">Manifest.permission</a></code>에서 확인할 수 있습니다. 모든 애플리케이션은 자체의 고유한 권한을 정의하고 적용할 수도 있으며, 따라서 이 목록이 가능한 모든 권한이 나열된 종합적인 목록은 아닙니다.</p>
+
+<p>다음과 같은 경우 하나의 특정 권한이 프로그램 작업 동안 여러 위치에서 적용될 수 있습니다.</p>
+
+<ul>
+<li>시스템에 대해 호출을 수행할 때 애플리케이션이 특정 기능을 실행하지 않도록 방지하기 위해</li>
+<li>액티비티를 시작할 때 애플리케이션이 다른 애플리케이션의 액티비티를 실행하지 않도록 방지하기 위해</li>
+<li>브로드캐스트를 송수신하는 경우 자신이 보낸 브로드캐스트를 수신할 수 있는 사용자 또는 브로드캐스트를 자신에게 전송할 수 있는 사용자를 제어하기 위해</li>
+<li>콘텐츠 제공자에 액세스하고 작업할 때</li>
+<li>서비스에 바인딩하거나 서비스를 시작할 때</li>
+</ul>
+
+<h3 id="auto-adjustments">자동 권한 조정</h3>
+
+<p> 시간이 지남에 따라 새 제한이 플랫폼에 추가될 수 있습니다. 이 경우, 특정 API를 사용하기 위해서는 앱이 이전에는 필요하지 않았던 권한을 요청해야 합니다. 기존 앱은 이러한 API에 대한 액세스를 자유롭게 사용할 수 있다고 간주하므로 Android는 새 권한 요청을 앱의 매니페스트에 적용하여 새 플랫폼 버전에 설치된 앱이 손상되는 것을 방지할 수 있습니다. Android는 <a href="../manifest/uses-sdk-element232e.html?hl=ko#target"><code>targetSdkVersion</code></a> 특성에 제공된 값에 따라 앱에 권한이 필요할 수 있을지 여부를 결정합니다. 값이 권한이 추가된 버전보다 낮을 경우 Android가 이 권한을 추가합니다.</p>
+<p>예를 들어, <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#WRITE_EXTERNAL_STORAGE">WRITE_EXTERNAL_STORAGE</a></code> 권한이 공유 저장소 공간에 대한 액세스를 제한하도록 API 레벨 4에 추가되었다고 가정합니다. 이 경우 <a href="../manifest/uses-sdk-element232e.html?hl=ko#target"><code>targetSdkVersion</code></a>이 3 이하이면 이 권한이 최신 버전의 Android에 설치된 앱에 추가됩니다.</p>
+
+<p class="caution">
+  <strong>주의:</strong> 권한이 앱에 자동으로 추가된 경우 앱이 실제적으로 권한을 필요로 하지 않을 수 있더라도 이러한 추가 권한이 Google Play의 앱 목록에 나열됩니다.
+</p>
+
+<p>이를 방지하고 필요하지 않은 기본 권한을 제거하려면 항상 <a href="../manifest/uses-sdk-element232e.html?hl=ko#target"><code>targetSdkVersion</code></a>을 가능한 한 높게 업데이트해야 합니다. <code><a href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html?hl=ko">Build.VERSION_CODES</a></code> 문서에서 각 릴리스에 추가된 권한을 확인할 수 있습니다.</p>
+</div>
+
+<h2 id="normal-dangerous">정상 권한 및 위험한 권한</h2>
+
+<p>
+  시스템 권한은 여러 보호 레벨로 나뉘어져 있습니다. 알아야 하는 가장 중요한 두 가지 보호 레벨은 <em>정상</em> 권한과 <em>위험한</em> 권한입니다.
+</p>
+
+<ul>
+  <li>
+    <em>정상</em> 권한에는 앱이 앱의 샌드박스 외부에 있는 데이터 또는 리소스에 액세스해야 하는 영역이 포함되지만, 사용자 개인 정보나 다른 앱의 작업에 위험이 거의 없는 영역은 포함되지 않습니다. 예를 들어, 표준 시간대를 설정하는 권한은 정상 권한입니다. 앱이 정상 권한을 필요로 한다고 선언하면 시스템이 자동으로 이 권한을 앱에 부여합니다. 현재 정상 권한에 대한 전체 목록은 <a href="../permissions/normal-permissions232e.html?hl=ko">정상 권한</a>을 참조하세요.
+  </li>
+
+  <li>
+    <em>위험한</em> 권한에는 앱이 사용자의 개인 정보를 포함하거나 사용자의 저장된 데이터나 다른 앱의 작업에 영향을 미칠 수 있는 데이터나 리소스를 필요로 하는 영역이 포함됩니다. 예를 들어, 사용자의 연락처를 읽을 수 있는 권한은 위험한 권한입니다. 앱에서 위험한 권한이 필요하다고 선언하면 사용자가 이 권한을 앱에 명시적으로 부여해야 합니다.
+  </li>
+</ul>
+
+<div class="sidebox-wrapper">
+<div class="sidebox">
+  <h3 id="special_permissions">특별 권한</h3>
+  <p>
+    정상 권한 및 위험한 권한처럼 동작하지 않는 권한이 두어 개 있습니다. <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#SYSTEM_ALERT_WINDOW">SYSTEM_ALERT_WINDOW</a></code> 및 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#WRITE_SETTINGS">WRITE_SETTINGS</a></code>는 특히 민감하므로 대부분의 앱이 이 권한을 사용하지 않아야 합니다. 앱이 이러한 권한 중 하나를 필요로 할 경우 매니페스트에 이 권한을 선언하고<em> </em>사용자 승인을 요청하는 인텐트를 전송해야 합니다. 시스템은 사용자에게 세부 관리 화면을 표시하여 인텐트에 응답합니다.
+  </p>
+
+  <p>
+    이러한 권한을 요청하는 방법에 대한 자세한 내용은 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#SYSTEM_ALERT_WINDOW">SYSTEM_ALERT_WINDOW</a></code> 및 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#WRITE_SETTINGS">WRITE_SETTINGS</a></code> 참조 항목을 참조하세요.
+  </p>
+</div>
+</div>
+
+<h3 id="perm-groups">권한 그룹</h3>
+
+<p>
+  모든 위험한 Android 시스템 권한은 권한 그룹에 속합니다. 기기가 Android 6.0(API 레벨 23)을 실행 중이고 앱의 <a href="../manifest/uses-sdk-element232e.html?hl=ko#target"><code>targetSdkVersion</code></a>이 23 이상인 경우 앱이 위험한 권한을 요청할 때 다음 시스템 동작이 적용됩니다.
+</p>
+
+<ul>
+  <li>앱이 매니페스트에 나열된 위험한 권한을 요청하고 현재 권한 그룹에 포함된 권한을 갖고 있지 않은 경우 시스템이 앱이 액세스해야 하는 권한 그룹을 설명하는 대화상자를 사용자에게 표시합니다. 이 대화상자에서는 해당 그룹에 포함된 특정 권한은 설명하지 않습니다. 예를 들어, 앱이 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#READ_CONTACTS">READ_CONTACTS</a></code> 권한을 요청하는 경우, 앱이 기기의 연락처에 액세스해야 한다는 메시지만 시스템 대화상자에 나타납니다. 사용자가 승인하면 시스템에서 앱이 요청한 권한만 앱에 부여합니다.
+  </li>
+
+  <li>앱이 매니페스트에 나열된 위험한 권한을 요청하고 앱에 이미 동일한 권한 그룹 내에 있는 다른 위험한 권한이 있는 경우, 시스템이 사용자와의 상호 작용 없이 이러한 권한을 즉시 부여합니다. 예를 들어, 앱이 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#READ_CONTACTS">READ_CONTACTS</a></code> 권한을 이전에 요청하여 부여받았으며 이후 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#WRITE_CONTACTS">WRITE_CONTACTS</a></code>를 요청한 경우 시스템이 즉시 이 권한을 부여합니다.
+  </li>
+</ul>
+
+<p class="aside">
+  정상 권한과 앱에서 정의한 권한을 포함하여 어떠한 권한이든 권한 그룹에 속할 수 있습니다. 하지만, 권한 그룹은 권한이 위험한 경우에만 사용자 환경에 영향을 미칩니다. 정상 권한에 대해서는 권한 그룹을 무시할 수 있습니다.
+</p>
+
+<p>
+  기기가 Android 5.1(API 레벨 22) 이하를 실행하거나 앱의 <a href="../manifest/uses-sdk-element232e.html?hl=ko#target"><code>targetSdkVersion</code></a>이 22 이하인 경우, 시스템이 설치 시 권한을 부여하도록 사용자에게 요청합니다. 다시 한 번 설명하지만, 시스템은 사용자에게 개별 권한이 아니라 앱이 필요로 하는 권한 <em>그룹</em>만 알립니다.
+</p>
+
+<p class="table-caption" id="permission-groups">
+  <strong>표 1.</strong> 위험한 권한 및 권한 그룹.</p>
+<table>
+  <tr>
+    <th scope="col">권한 그룹</th>
+    <th scope="col">권한</th>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko#CALENDAR">CALENDAR</a></code></td>
+    <td>
+      <ul>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#READ_CALENDAR">READ_CALENDAR</a></code>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#WRITE_CALENDAR">WRITE_CALENDAR</a></code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko#CAMERA">CAMERA</a></code></td>
+    <td>
+      <ul>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#CAMERA">CAMERA</a></code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko#CONTACTS">CONTACTS</a></code></td>
+    <td>
+      <ul>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#READ_CONTACTS">READ_CONTACTS</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#WRITE_CONTACTS">WRITE_CONTACTS</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#GET_ACCOUNTS">GET_ACCOUNTS</a></code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko#LOCATION">LOCATION</a></code></td>
+    <td>
+      <ul>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#ACCESS_FINE_LOCATION">ACCESS_FINE_LOCATION</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#ACCESS_COARSE_LOCATION">ACCESS_COARSE_LOCATION</a></code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko#MICROPHONE">MICROPHONE</a></code></td>
+    <td>
+      <ul>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#RECORD_AUDIO">RECORD_AUDIO</a></code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko#PHONE">PHONE</a></code></td>
+    <td>
+      <ul>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#READ_PHONE_STATE">READ_PHONE_STATE</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#CALL_PHONE">CALL_PHONE</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#READ_CALL_LOG">READ_CALL_LOG</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#WRITE_CALL_LOG">WRITE_CALL_LOG</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#ADD_VOICEMAIL">ADD_VOICEMAIL</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#USE_SIP">USE_SIP</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#PROCESS_OUTGOING_CALLS">PROCESS_OUTGOING_CALLS</a></code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko#SENSORS">SENSORS</a></code></td>
+    <td>
+      <ul>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#BODY_SENSORS">BODY_SENSORS</a></code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko#SMS">SMS</a></code></td>
+    <td>
+      <ul>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#SEND_SMS">SEND_SMS</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#RECEIVE_SMS">RECEIVE_SMS</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#READ_SMS">READ_SMS</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#RECEIVE_WAP_PUSH">RECEIVE_WAP_PUSH</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#RECEIVE_MMS">RECEIVE_MMS</a></code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko#STORAGE">STORAGE</a></code>
+    </td>
+    <td>
+      <ul>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#READ_EXTERNAL_STORAGE">READ_EXTERNAL_STORAGE</a></code>
+        </li>
+        <li>
+          <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#WRITE_EXTERNAL_STORAGE">WRITE_EXTERNAL_STORAGE</a></code>
+        </li>
+      </ul>
+    </td>
+  </tr>
+
+</table>
+
+
+<a name="declaring"></a>
+<h2 id="defining">권한 정의 및 적용</h2>
+
+<p>
+  자체적인 권한을 적용하려면 먼저 <code>AndroidManifest.xml</code>에서 하나 이상의 <a href="../manifest/permission-element232e.html?hl=ko"><code>&lt;permission&gt;</code></a> 요소를 사용하여 이러한 권한을 선언해야 합니다.
+</p>
+
+<p>예를 들어, 해당 액티비티 중 하나를 시작할 수 있는 사용자를 제어해야 하는 애플리케이션은 다음과 같이 이 작업에 대한 권한을 선언할 수 있습니다.</p>
+
+<pre>&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.example.myapp&quot; &gt;
+    &lt;permission android:name=&quot;com.example.myapp.permission.DEADLY_ACTIVITY&quot;
+        android:label=&quot;&#64;string/permlab_deadlyActivity&quot;
+        android:description=&quot;&#64;string/permdesc_deadlyActivity&quot;
+        android:permissionGroup=&quot;android.permission-group.COST_MONEY&quot;
+        android:protectionLevel=&quot;dangerous&quot; /&gt;
+    ...
+&lt;/manifest&gt;</pre>
+
+<p class="note">
+  <strong>참고:</strong> 모든 패키지가 동일한 인증서로 서명되지 않은 경우에는 여러 패키지가 동일한 이름으로 권한을 선언할 수 있도록 시스템이 허용하지 않습니다. 패키지가 권한을 선언할 때, 사용자가 동일한 권한 이름을 사용하여 첫 번째 패키지와 동일한 인증서로 서명되지 않은 다른 패키지를 설치할 수 있도록 시스템이 허용하지 않습니다. 이름 충돌을 방지하려면 사용자 지정 권한의 이름을 도메인이 앞에 오는 스타일로 지정하는 것이 좋습니다(예: <code>com.example.myapp.ENGAGE_HYPERSPACE</code>).
+</p>
+
+<p><code><a href="https://developer.android.com/reference/android/R.styleable.html?hl=ko#AndroidManifestPermission_protectionLevel">protectionLevel</a></code> 특성은 필수 항목입니다. 이 특성은 사용자에게 권한을 요구하는 애플리케이션을 알리는 방법이나 해당 권한을 보유할 수 있도록 허용되는 사용자를 시스템에 알립니다. 이에 대한 설명은 링크로 연결된 문서에 나와 있습니다.</p>
+
+<p>
+  <a href="../manifest/permission-group-element232e.html?hl=ko"><code>android:permissionGroup</code></a> 특성은 선택 항목이며, 시스템이 사용자에게 권한을 표시하는 데 도움을 주려는 경우에만 사용합니다. 대부분의 경우, 그룹을 직접 정의할 수 있더라도 이 특성을 표준 시스템 그룹(<code><a href="https://developer.android.com/reference/android/Manifest.permission_group.html?hl=ko">android.Manifest.permission_group</a></code>에 나열되어 있음)으로 설정하는 것을 원할 것입니다. 기존 그룹을 사용하는 것이 사용자에게 표시되는 권한 UI를 단순화하므로 이 방법이 권장됩니다.
+</p>
+
+<p>권한에 대해 레이블 및 설명을 모두 제공해야 합니다. 이는 사용자가 권한 목록(<code><code><a href="https://developer.android.com/reference/android/R.styleable.html?hl=ko#AndroidManifestPermission_label">android:label</a></code></code>)이나 단일 권한에 대한 세부 정보(<code><code><a href="https://developer.android.com/reference/android/R.styleable.html?hl=ko#AndroidManifestPermission_description">android:description</a></code></code>)를 볼 때 확인할 수 있는 문자열 리소스입니다. 레이블은 권한이 보호하는 기능의 주요 부분만 설명하는 몇 개 단어로 구성된 짧은 형식이어야 합니다. 설명은 권한 소유자가 수행할 수 있도록 해당 권한이 허용하는 작업을 설명하는 몇 개 문장으로 구성되어야 합니다. 설명을 두 개의 문장으로 구성하는 것이 규칙입니다. 첫 번째 문장은 권한을 설명하고, 두 번째 문장은 사용자에게 애플리케이션에 권한이 부여된 경우 잘못될 수 있는 항목의 유형을 경고합니다.</p>
+
+<p>다음은 CALL_PHONE 권한에 대한 레이블 및 설명의 예시입니다.</p>
+
+<pre>
+&lt;string name=&quot;permlab_callPhone&quot;&gt;directly call phone numbers&lt;/string&gt;
+&lt;string name=&quot;permdesc_callPhone&quot;&gt;Allows the application to call
+    phone numbers without your intervention. Malicious applications may
+    cause unexpected calls on your phone bill. Note that this does not
+    allow the application to call emergency numbers.&lt;/string&gt;
+</pre>
+
+<p>Settings 앱 및 쉘 명령어 <code>adb shell pm list permissions</code>를 사용하여 시스템에 현재 정의되어 있는 권한을 볼 수 있습니다. Settings 앱을 사용하려면 <b>Settings</b> &gt; <b>Applications</b>로 이동합니다. 앱을 선택하고 아래로 스크롤하여 앱이 사용하는 권한을 확인합니다. 개발자의 경우, adb '-s' 옵션을 사용하면 사용자에게 권한이 표시되는 방법과 유사한 형태로 권한이 표시됩니다.</p>
+
+<pre class="no-pretty-print">
+$ adb shell pm list permissions -s
+All Permissions:
+
+Network communication: view Wi-Fi state, create Bluetooth connections, full
+Internet access, view network state
+
+Your location: access extra location provider commands, fine (GPS) location,
+mock location sources for testing, coarse (network-based) location
+
+Services that cost you money: send SMS messages, directly call phone numbers
+
+...</pre>
+
+<h3 id="custom-recommendations">
+  사용자 지정 권한 권장 사항
+</h3>
+
+<p>
+  앱은 고유한 사용자 지정 권한을 정의한 후 <a href="../manifest/uses-permission-element232e.html?hl=ko"><code>&lt;uses-permission&gt;</code></a> 요소를 정의하여 다른 앱에서 이러한 사용자 지정 권한을 요청할 수 있습니다. 하지만, 앱이 그렇게 하는 것이 필요한지 여부를 신중하게 평가해야 합니다.
+</p>
+
+<ul>
+  <li>다른 앱에 기능을 노출하는 앱 모음을 디자인하는 경우 각 권한이 한 번만 정의되도록 앱을 디자인하는 것이 좋습니다. 앱이 모두 동일한 인증서로 서명되지 않은 경우 이렇게 해야 합니다. 앱이 모두 동일한 인증서로 서명된 경우에도 각각의 권한을 한 번만 정의하는 것이 좋습니다.
+  </li>
+
+  <li>기능이 제공하는 앱과 동일한 서명으로 서명된 앱에서만 사용할 수 있는 경우 서명 검사를 사용하여 사용자 지정 권한을 정의하는 것을 방지할 수 있습니다. 앱 중 하나가 다른 앱에 대한 요청을 수행할 때 두 번째 앱이 요청을 수락하기 전에 두 앱이 모두 동일한 인증서로 서명되었는지 확인할 수 있습니다.
+  </li>
+
+  <li>자신의 고유한 기기에서만 실행되는 앱 모음을 개발하는 경우 모음에 포함된 모든 앱에 대한 권한을 관리하는 패키지를 개발하고 설치해야 합니다. 이 패키지는 서비스를 자체적으로 제공할 필요가 없습니다. 이 패키지는 모든 권한을 선언하기만 하며, 모음에 포함된 다른 앱이 <a href="../manifest/uses-permission-element232e.html?hl=ko"><code>&lt;uses-permission&gt;</code></a> 요소를 사용하여 이러한 권한을 요청합니다.
+  </li>
+</ul>
+
+<a name="manifest"></a>
+<h3>AndroidManifest.xml에서 권한 적용</h3>
+
+<p><code>AndroidManifest.xml</code>을 통해 시스템이나 애플리케이션의 전체 구성 요소에 대한 액세스를 제한하는 상위 수준의 권한을 적용할 수 있습니다. 이렇게 하려면 원하는 구성 요소에 대한 액세스를 제어하는 권한을 지명하여 이 구성 요소에 대해 <code><a href="https://developer.android.com/reference/android/R.attr.html?hl=ko#permission">android:permission</a></code> 특성을 포함합니다.</p>
+
+<p><strong><code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ko">Activity</a></code></strong> 권한(<code><a href="https://developer.android.com/reference/android/R.styleable.html?hl=ko#AndroidManifestActivity">&lt;activity&gt;</a></code> 태그에 적용됨)은 연결된 액티비티를 시작할 수 있는 사용자를 제한합니다. 이 권한은 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#startActivity(android.content.Intent)">Context.startActivity()</a></code> 및 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ko#startActivityForResult(android.content.Intent, int)">Activity.startActivityForResult()</a></code>가 실행되는 동안 검사됩니다. 호출자가 필요한 권한이 없을 경우 호출에서 <code><a href="https://developer.android.com/reference/java/lang/SecurityException.html?hl=ko">SecurityException</a></code>이 발생합니다.</p>
+
+<p><strong><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ko">Service</a></code></strong> 권한(<code><a href="https://developer.android.com/reference/android/R.styleable.html?hl=ko#AndroidManifestService">&lt;service&gt;</a></code> 태그에 적용됨)은 연결된 서비스를 시작하거나 바인딩할 수 있는 사용자를 제한합니다. 이 권한은 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#startService(android.content.Intent)">Context.startService()</a></code>, <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#stopService(android.content.Intent)">Context.stopService()</a></code> 및 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#bindService(android.content.Intent, android.content.ServiceConnection, int)">Context.bindService()</a></code>가 실행되는 동안 검사됩니다. 호출자가 필요한 권한이 없을 경우 호출에서 <code><a href="https://developer.android.com/reference/java/lang/SecurityException.html?hl=ko">SecurityException</a></code>이 발생합니다.</p>
+
+<p><strong><code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=ko">BroadcastReceiver</a></code></strong> 권한(<code><a href="https://developer.android.com/reference/android/R.styleable.html?hl=ko#AndroidManifestReceiver">&lt;receiver&gt;</a></code> 태그에 적용됨)은 연결된 수신자에 브로드캐스트를 전송할 수 있는 사용자를 제한합니다. 이 권한은 시스템이 지정된 수신자에 제출된 브로드캐스트를 제공하려고 시도하므로 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#sendBroadcast(android.content.Intent)">Context.sendBroadcast()</a></code>가 반환된 <em>후에</em> 검사됩니다. 따라서, 권한 오류가 발생해도 호출자에는 예외가 발생하지 않으며, 단지 인텐트만 제공하지 않게 됩니다. 같은 방법으로, 권한을 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#registerReceiver(android.content.BroadcastReceiver, android.content.IntentFilter, java.lang.String, android.os.Handler)">Context.registerReceiver()</a></code>에 제공하여 프로그래밍 방식으로 등록된 수신자에게 브로드캐스트할 수 있는 사용자를 제어할 수 있습니다. 다르게는 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#sendBroadcast(android.content.Intent, java.lang.String)">Context.sendBroadcast()</a></code>를 호출할 때 권한을 제공하여 브로드캐스트를 수신하도록 허용되는 BroadcastReceiver 객체를 제한할 수도 있습니다(아래 참조).</p>
+
+<p><strong><code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ko">ContentProvider</a></code></strong> 권한(<code><a href="https://developer.android.com/reference/android/R.styleable.html?hl=ko#AndroidManifestProvider">&lt;provider&gt;</a></code> 태그에 적용됨)은 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ko">ContentProvider</a></code>에서 데이터에 액세스할 수 있는 사용자를 제한합니다. (콘텐츠 제공자가 사용할 수 있는 <a href="#uri">URI 권한</a>이라고 하는 중요한 추가 보안 기능이 있습니다. 이에 대해서는 뒷부분에서 설명합니다.) 다른 구성 요소와 달리, 두 가지 개별적인 권한 특성을 설정할 수 있습니다. <code><a href="https://developer.android.com/reference/android/R.attr.html?hl=ko#readPermission">android:readPermission</a></code>은 제공자로부터 데이터를 읽을 수 있는 사용자를 제한하고, <code><a href="https://developer.android.com/reference/android/R.attr.html?hl=ko#writePermission">android:writePermission</a></code>은 제공자에 데이터를 쓸 수 있는 사용자를 제한합니다. 참고로, 제공자가 읽기 및 쓰기 권한 모두를 사용하여 보호되는 경우, 쓰기 권한만 보유할 경우에는 제공자로부터 데이터를 읽을 수 없습니다. 먼저 제공자를 검색할 때 권한 검사가 수행되고(두 권한 중 하나라도 없는 경우 SecurityException이 발생함), 그 다음으로 제공자에서 작업을 수행할 때 검사가 수행됩니다. <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code>를 사용하려면 읽기 권한이 있어야 하고, <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#insert(android.net.Uri, android.content.ContentValues)">ContentResolver.insert()</a></code>, <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">ContentResolver.update()</a></code>, <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#delete(android.net.Uri, java.lang.String, java.lang.String[])">ContentResolver.delete()</a></code>를 사용하려면 쓰기 권한이 있어야 합니다. 이러한 경우 모두, 필요한 권한이 없으면 호출에서 <code><a href="https://developer.android.com/reference/java/lang/SecurityException.html?hl=ko">SecurityException</a></code>이 발생합니다.</p>
+
+
+<a name="broadcasts"></a>
+<h3>브로드캐스트를 전송할 때 권한 적용</h3>
+
+<p>등록된 <code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=ko">BroadcastReceiver</a></code>에 인텐트를 전송할 수 있는 사용자에게 권한을 적용하는 경우(위의 설명 참조) 이외에, 브로드캐스트를 전송할 때 필요한 권한을 지정할 수도 있습니다. 권한 문자열을 사용하여 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#sendBroadcast(android.content.Intent, java.lang.String)">Context.sendBroadcast()</a></code>를 호출함으로써 브로드캐스트를 수신하기 위해서는 수신기의 애플리케이션이 해당 권한을 보유해야 한다는 것을 요구해야 합니다.</p>
+
+<p>수신기와 브로드캐스터 모두에 권한이 필요할 수 있습니다. 이 경우 두 권한 검사가 모두 통과해야만 인텐트가 연결된 대상에 제공됩니다.</p>
+
+
+<a name="enforcement"></a>
+<h3>기타 권한 적용</h3>
+
+<p>원하는 대로 세분화된 권한을 서비스에 대한 모든 호출에 적용할 수 있습니다. 이 작업은 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#checkCallingPermission(java.lang.String)">Context.checkCallingPermission()</a></code> 메서드를 사용하여 수행합니다. 원하는 권한 문자열을 사용하여 호출합니다. 그러면 권한이 현재 호출하는 프로세스에 부여되었는지 여부를 나타내는 정수가 반환됩니다. 이 방법은 일반적으로 서비스에서 게시된 IDL 인터페이스를 통해서나 다른 프로세스에서 지정하는 다른 방법을 통해 다른 프로세스에서 들어오는 호출을 실행하는 경우에만 사용할 수 있습니다.</p>
+
+<p>권한을 검사하는 데 유용한 여러 가지 다른 방법이 있습니다. 다른 프로세스의 pid를 알고 있는 경우에는 Context 메서드 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#checkPermission(java.lang.String, int, int)">Context.checkPermission(String, int, int)</a></code>를 사용하여 해당 pid에 대해 권한을 검사할 수 있습니다. 다른 애플리케이션의 패키지 이름을 알고 있는 경우에는 직접적인 PackageManager 메서드 <code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=ko#checkPermission(java.lang.String, java.lang.String)">PackageManager.checkPermission(String, String)</a></code>을 사용하여 특정 패키지에 특정 권한이 부여되었는지 여부를 확인할 수 있습니다.</p>
+
+
+<a name="uri"></a>
+<h2>URI 권한</h2>
+
+<p>지금까지 설명한 표준 권한 시스템으로는 콘텐츠 제공자에 사용하는 데 충분하지 않은 경우가 많습니다. 콘텐츠 제공자는 읽기 및 쓰기 권한을 사용하여 자체적으로 보호하기를 원할 수 있으며, 이 경우 해당 직속 클라이언트는 다른 애플리케이션에서 작동하기 위해 특정 URI를 이러한 애플리케이션에 전달해야 합니다. 이에 대한 일반적인 예는 메일 애플리케이션의 첨부파일입니다. 메일은 민감한 사용자 데이터이므로 메일에 대한 액세스는 권한으로 보호되어야 합니다. 하지만, 이미지 첨부파일에 대한 URI가 이미지 뷰어에 제공된 경우 해당 이미지 뷰어가 모든 이메일에 액세스할 수 있는 권한을 가지고 있을 이유가 없으므로 이미지 뷰어가 이 첨부파일을 열 수 있는 권한을 가지고 있지 않을 것입니다.</p>
+
+<p>이 문제를 해결할 수 있는 방법은 URI별 권한입니다. 액티비티를 시작하거나 결과를 액티비티에 반환할 때 호출자는 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ko#FLAG_GRANT_READ_URI_PERMISSION">Intent.FLAG_GRANT_READ_URI_PERMISSION</a></code> 및/또는 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ko#FLAG_GRANT_WRITE_URI_PERMISSION">Intent.FLAG_GRANT_WRITE_URI_PERMISSION</a></code>을 설정할 수 있습니다. 이 설정은 콘텐츠 제공자에서 인텐트에 해당하는 데이터에 액세스할 수 있는 권한이 있는지 여부에 상관없이 수신하는 액티비티 권한 액세스를 인텐트에 있는 특정 데이터 URI에 부여합니다.</p>
+
+<p>이 메커니즘은 사용자 상호작용(첨부파일 열기, 목록에서 연락처 선택 등)이 세분화된 권한에 대한 임시 부여를 유도하는 일반적인 기능 스타일 모델을 허용합니다. 이는 애플리케이션에 필요한 권한을 동작과 직접적으로 관련이 있는 권한으로 줄이는 데 핵심적인 기능일 수 있습니다.</p>
+
+<p>하지만 세분화된 URI 권한을 부여하려면 이러한 URI를 보유하는 콘텐츠 제공자와 협력해야 합니다. 콘텐츠 제공자가 이 기능을 구현하고 <code><a href="https://developer.android.com/reference/android/R.styleable.html?hl=ko#AndroidManifestProvider_grantUriPermissions">android:grantUriPermissions</a></code> 특성 또는 <code><a href="https://developer.android.com/reference/android/R.styleable.html?hl=ko#AndroidManifestGrantUriPermission">&lt;grant-uri-permissions&gt;</a></code> 태그를 통해 이 기능을 지원한다는 것을 선언할 것을 적극 권장합니다.</p>
+
+<p>자세한 내용은 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#grantUriPermission(java.lang.String, android.net.Uri, int)">Context.grantUriPermission()</a></code>, <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#revokeUriPermission(android.net.Uri, int)">Context.revokeUriPermission()</a></code> 및 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#checkUriPermission(android.net.Uri, int, int, int)">Context.checkUriPermission()</a></code> 메서드에서 확인할 수 있습니다.</p>
+
+<div class="next-docs">
+<div class="col-6">
+  <h2 class="norule">계속 읽기:</h2>
+  <dl>
+    <dt><a href="../manifest/uses-feature-element232e.html?hl=ko#permissions">기능 요구사항을 암시하는 권한</a></dt>
+    <dd>일부 권한을 요청하는 것이 어떤 식으로 해당 하드웨어 또는 소프트웨어 기능을 포함하는 기기로 앱을 암묵적으로 제한하는지 설명하는 정보입니다.</dd>
+    <dt><a href="../manifest/uses-permission-element232e.html?hl=ko"><code>&lt;uses-permission&gt;</code></a></dt>
+    <dd>앱의 필수 시스템 권한을 선언하는 매니페스트 태그에 대한 API 참조입니다.
+    </dd>
+    <dt><code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko">Manifest.permission</a></code></dt>
+    <dd>모든 시스템 권한에 대한 API 참조입니다.</dd>
+  </dl>
+</div>
+<div class="col-6">
+  <h2 class="norule">혹시 다음과 같은 내용에도 흥미가 있으신가요?</h2>
+  <dl>
+    <dt><a href="../../practices/compatibility232e.html?hl=ko">기기 호환성</a></dt>
+    <dd>여러 가지 유형의 기기에서 Android의 작동 방식과 앱을 각 기기에 맞춰 최적화하는 방법 또는 여러 가지 기기에 대해 앱의 가용성을 제한하는 방법 등에 관한 정보입니다.</dd>
+    <dt><a href="http://source.android.com/devices/tech/security/index.html?hl=ko" class="external-link">Android 보안 개요</a></dt>
+    <dd>Android 플랫폼의 보안 모델에 대한 자세한 설명입니다.</dd>
+  </dl>
+</div>
+</div>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=ko" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="블로그" target="_blank">블로그</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=ko" title="지원">지원</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=ko" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=ko" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=ko" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=ko" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="q-cgADFTFbn87Vb5G_YDQqYaRL5TBQwSGBmfX-z-3S46MTQ5NzUxNjQ3MTgyMDcxMA" />
+      <input type="hidden" name="next" value="/guide/topics/security/permissions.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+             selected="selected" >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">이메일 주소</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unifiedee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../../android_metadata_enee8c.js?hl=ko?v=2017061508" defer></script>
+  
+  <script src="../../../reference/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../../reference/gms_listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=ko"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_ko.js?hl=ko?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/security/permissions.html?hl=ko by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:08:27 GMT -->
+</html>

@@ -1,0 +1,1533 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from developer.android.com/guide/topics/ui/multi-window.html?hl=zh-cn by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:15:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="pj0q4nCLSRV25wn_WsueWr_MtRg7B0eFaMCf0XrIPP06MTQ5NzUxNzAzOTcyMDEwMA" />
+
+  
+    <link rel="canonical" href="multi-window0b8e.html?hl=zh-cn">
+  
+
+  
+    <link rel="alternate" href="multi-window6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="multi-window0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="multi-windowde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="multi-window9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="multi-window232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="multi-window9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="multi-window327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="multi-windowf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="multi-window0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="multi-window.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/multi-window.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/multi-window.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/multi-window.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/multi-window.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/multi-window.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/multi-window.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/multi-window.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/multi-window.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/multi-window.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/multi-window.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="multi-window.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon0b8e.png?hl=zh-cn">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1800b8e.png?hl=zh-cn">
+
+
+<title>
+
+  多窗口支持 | Android Developers
+
+</title>
+
+  <meta name="description" content="Android N 全新支持同时显示多个应用窗口。">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default414d.css?hl=zh-cn?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle0b8e.js?hl=zh-cn" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__zh_cn0b8e.js?hl=zh-cn"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android0b8e.js?hl=zh-cn"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs414d.js?hl=zh-cn?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-cn&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-cn&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "zh-cn", "served": "zh-cn"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=zh-cn">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo0b8e.png?hl=zh-cn"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=zh-cn"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=zh-cn"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=zh-cn"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=zh-cn"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=zh-cn" width="18" height="19" alt="Play 控制台">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="搜索">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">返回</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index0b8e.html?hl=zh-cn" >简介</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals0b8e.html?hl=zh-cn" >应用基础知识</a></li><li><a href="../../practices/compatibility0b8e.html?hl=zh-cn" >设备兼容性</a></li><li><a href="../security/permissions0b8e.html?hl=zh-cn" >系统权限</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index0b8e.html?hl=zh-cn" >平台架构</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack0b8e.html?hl=zh-cn"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 の機能" zh-tw-lang="Java 8 の機能">使用 Java 8 语言功能</a></li><li><a href="../../practices/verifying-apps-art0b8e.html?hl=zh-cn" >在 Android Runtime (ART) 上验证应用行为</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index0b8e.html?hl=zh-cn" >应用组件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters0b8e.html?hl=zh-cn" >Intent 和 Intent 过滤器</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common0b8e.html?hl=zh-cn" >通用 Intent</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities0b8e.html?hl=zh-cn" >Activity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments0b8e.html?hl=zh-cn" >片段</a></li><li><a href="../../components/loaders0b8e.html?hl=zh-cn" >加载器</a></li><li><a href="../../components/tasks-and-back-stack0b8e.html?hl=zh-cn" >任务和返回栈</a></li><li><a href="../../components/recents0b8e.html?hl=zh-cn" >概览屏幕</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services0b8e.html?hl=zh-cn" >服务</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services0b8e.html?hl=zh-cn" >绑定服务</a></li><li><a href="../../components/aidl0b8e.html?hl=zh-cn" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providers0b8e.html?hl=zh-cn" >内容提供程序</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basics0b8e.html?hl=zh-cn" >内容提供程序基础知识</a></li><li><a href="../providers/content-provider-creating0b8e.html?hl=zh-cn" >创建内容提供程序</a></li><li><a href="../providers/calendar-provider0b8e.html?hl=zh-cn" >日历提供程序</a></li><li><a href="../providers/contacts-provider0b8e.html?hl=zh-cn" >联系人提供程序</a></li><li><a href="../providers/document-provider0b8e.html?hl=zh-cn" >存储访问框架</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index0b8e.html?hl=zh-cn" >应用小部件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host0b8e.html?hl=zh-cn" >应用小部件主机</a></li></ul></li><li><a href="../../components/processes-and-threads0b8e.html?hl=zh-cn" >进程和线程</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index0b8e.html?hl=zh-cn" >应用资源</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview0b8e.html?hl=zh-cn" >概览</a></li><li><a href="../resources/providing-resources0b8e.html?hl=zh-cn" >提供资源</a></li><li><a href="../resources/accessing-resources0b8e.html?hl=zh-cn" >访问资源</a></li><li><a href="../resources/runtime-changes0b8e.html?hl=zh-cn" >处理运行时变更</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization0b8e.html?hl=zh-cn" >本地化</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework0b8e.html?hl=zh-cn" >ICU4J Android 框架 API</a></li><li><a href="../resources/multilingual-support0b8e.html?hl=zh-cn" >语言和语言区域</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources0b8e.html?hl=zh-cn" >资源类型</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource0b8e.html?hl=zh-cn" >动画</a></li><li><a href="../resources/color-list-resource0b8e.html?hl=zh-cn" >颜色状态列表</a></li><li><a href="../resources/drawable-resource0b8e.html?hl=zh-cn" >可绘制对象</a></li><li><a href="../resources/layout-resource0b8e.html?hl=zh-cn" >布局</a></li><li><a href="../resources/menu-resource0b8e.html?hl=zh-cn" >菜单</a></li><li><a href="../resources/string-resource0b8e.html?hl=zh-cn" >字符串</a></li><li><a href="../resources/style-resource0b8e.html?hl=zh-cn" >样式</a></li><li><a href="../resources/more-resources0b8e.html?hl=zh-cn" >其他类型</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro0b8e.html?hl=zh-cn" >应用清单</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element0b8e.html?hl=zh-cn" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element0b8e.html?hl=zh-cn" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element0b8e.html?hl=zh-cn" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element0b8e.html?hl=zh-cn" >&lt;application&gt;</a></li><li><a href="../manifest/category-element0b8e.html?hl=zh-cn" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element0b8e.html?hl=zh-cn" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element0b8e.html?hl=zh-cn" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element0b8e.html?hl=zh-cn" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element0b8e.html?hl=zh-cn" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element0b8e.html?hl=zh-cn" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element0b8e.html?hl=zh-cn" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element0b8e.html?hl=zh-cn" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element0b8e.html?hl=zh-cn" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element0b8e.html?hl=zh-cn" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element0b8e.html?hl=zh-cn" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element0b8e.html?hl=zh-cn" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element0b8e.html?hl=zh-cn" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element0b8e.html?hl=zh-cn" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element0b8e.html?hl=zh-cn" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element0b8e.html?hl=zh-cn" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element0b8e.html?hl=zh-cn" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element0b8e.html?hl=zh-cn" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element0b8e.html?hl=zh-cn" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element0b8e.html?hl=zh-cn" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element0b8e.html?hl=zh-cn" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element0b8e.html?hl=zh-cn" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element0b8e.html?hl=zh-cn" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index0b8e.html?hl=zh-cn" >用户界面</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="overview0b8e.html?hl=zh-cn" >概览</a></li><li class="nav-section"><div class="nav-section-header"><a href="declaring-layout0b8e.html?hl=zh-cn" >布局</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="layout/linear0b8e.html?hl=zh-cn" >线性布局</a></li><li><a href="layout/relative0b8e.html?hl=zh-cn" >相对布局</a></li><li><a href="layout/listview0b8e.html?hl=zh-cn" >列表视图</a></li><li><a href="layout/gridview0b8e.html?hl=zh-cn" >网格视图</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="controls0b8e.html?hl=zh-cn" >输入控件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="controls/button0b8e.html?hl=zh-cn" >按钮</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=zh-cn" >文本字段</a></li><li><a href="controls/checkbox0b8e.html?hl=zh-cn" >复选框</a></li><li><a href="controls/radiobutton0b8e.html?hl=zh-cn" >单选按钮</a></li><li><a href="controls/togglebutton0b8e.html?hl=zh-cn" >切换按钮</a></li><li><a href="controls/spinner0b8e.html?hl=zh-cn" >微调框</a></li><li><a href="controls/pickers0b8e.html?hl=zh-cn" >选取器</a></li></ul></li><li><a href="ui-events0b8e.html?hl=zh-cn" >输入事件</a></li><li><a href="menus0b8e.html?hl=zh-cn" >菜单</a></li><li><a href="settings0b8e.html?hl=zh-cn" >设置</a></li><li><a href="dialogs0b8e.html?hl=zh-cn" >对话框</a></li><li><a href="notifiers/notifications0b8e.html?hl=zh-cn" >通知</a></li><li><a href="notifiers/toasts0b8e.html?hl=zh-cn" >Toast</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index0b8e.html?hl=zh-cn" >搜索</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog0b8e.html?hl=zh-cn" >创建搜索界面</a></li><li><a href="../search/adding-recent-query-suggestions0b8e.html?hl=zh-cn" >添加近期查询建议</a></li><li><a href="../search/adding-custom-suggestions0b8e.html?hl=zh-cn" >添加自定义建议</a></li><li><a href="../search/searchable-config0b8e.html?hl=zh-cn" >可搜索配置</a></li></ul></li><li><a href="multi-window0b8e.html?hl=zh-cn" >多窗口支持</a></li><li><a href="drag-drop0b8e.html?hl=zh-cn" >拖放</a></li><li class="nav-section"><div class="nav-section-header"><a href="accessibility/index0b8e.html?hl=zh-cn" >无障碍功能</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="accessibility/apps0b8e.html?hl=zh-cn" >为应用设置无障碍功能</a></li><li><a href="accessibility/checklist0b8e.html?hl=zh-cn" >无障碍功能开发者检查单</a></li><li><a href="accessibility/services0b8e.html?hl=zh-cn" >构建无障碍服务</a></li></ul></li><li><a href="themes0b8e.html?hl=zh-cn" >样式和主题</a></li><li><a href="custom-components0b8e.html?hl=zh-cn" >自定义组件</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index0b8e.html?hl=zh-cn" >动画和图形</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview0b8e.html?hl=zh-cn" >概览</a></li><li><a href="../graphics/prop-animation0b8e.html?hl=zh-cn" >属性动画</a></li><li><a href="../graphics/view-animation0b8e.html?hl=zh-cn" >视图动画</a></li><li><a href="../graphics/drawable-animation0b8e.html?hl=zh-cn" >可绘制动画</a></li><li><a href="../graphics/2d-graphics0b8e.html?hl=zh-cn" >画布和可绘制对象</a></li><li><a href="../graphics/opengl0b8e.html?hl=zh-cn" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel0b8e.html?hl=zh-cn" >硬件加速</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index0b8e.html?hl=zh-cn" >计算</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute0b8e.html?hl=zh-cn" >RenderScript</a></li><li><a href="../renderscript/advanced0b8e.html?hl=zh-cn" >高级 RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview0b8e.html?hl=zh-cn" >Runtime API 参考</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types0b8e.html?hl=zh-cn" >数字类型</a></li><li><a href="../renderscript/reference/rs_object_types0b8e.html?hl=zh-cn" >对象类型</a></li><li><a href="../renderscript/reference/rs_convert0b8e.html?hl=zh-cn" >转换函数</a></li><li><a href="../renderscript/reference/rs_math0b8e.html?hl=zh-cn" >数学常量和函数</a></li><li><a href="../renderscript/reference/rs_vector_math0b8e.html?hl=zh-cn" >矢量数学函数</a></li><li><a href="../renderscript/reference/rs_matrix0b8e.html?hl=zh-cn" >矩阵函数</a></li><li><a href="../renderscript/reference/rs_quaternion0b8e.html?hl=zh-cn" >四元数函数</a></li><li><a href="../renderscript/reference/rs_atomic0b8e.html?hl=zh-cn" >原子更新函数</a></li><li><a href="../renderscript/reference/rs_time0b8e.html?hl=zh-cn" >时间函数和类型</a></li><li><a href="../renderscript/reference/rs_allocation_data0b8e.html?hl=zh-cn" >分配数据访问函数</a></li><li><a href="../renderscript/reference/rs_object_info0b8e.html?hl=zh-cn" >对象特性函数</a></li><li><a href="../renderscript/reference/rs_for_each0b8e.html?hl=zh-cn" >内核调用函数和类型</a></li><li><a href="../renderscript/reference/rs_io0b8e.html?hl=zh-cn" >输入/输出函数</a></li><li><a href="../renderscript/reference/rs_debug0b8e.html?hl=zh-cn" >调试函数</a></li><li><a href="../renderscript/reference/rs_graphics0b8e.html?hl=zh-cn" >图形函数和类型</a></li><li><a href="../renderscript/reference/index0b8e.html?hl=zh-cn" >索引</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index0b8e.html?hl=zh-cn" >媒体和相机</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer0b8e.html?hl=zh-cn" >媒体回放</a></li><li><a href="../media/mediarouter0b8e.html?hl=zh-cn" >媒体路由器</a></li><li><a href="../media/mediarouteprovider0b8e.html?hl=zh-cn" >媒体路由提供程序</a></li><li><a href="../media/exoplayer0b8e.html?hl=zh-cn" >ExoPlayer</a></li><li><a href="../media/media-formats0b8e.html?hl=zh-cn" >支持的媒体格式</a></li><li><a href="../media/mediarecorder0b8e.html?hl=zh-cn" >音频采集</a></li><li><a href="../media/jetplayer0b8e.html?hl=zh-cn" >JetPlayer</a></li><li><a href="../media/camera0b8e.html?hl=zh-cn" >相机</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index0b8e.html?hl=zh-cn" >位置和传感器</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index0b8e.html?hl=zh-cn" >位置和地图</a></li><li><a href="../location/strategies0b8e.html?hl=zh-cn" >位置策略</a></li><li><a href="../sensors/sensors_overview0b8e.html?hl=zh-cn" >传感器概览</a></li><li><a href="../sensors/sensors_motion0b8e.html?hl=zh-cn" >运动传感器</a></li><li><a href="../sensors/sensors_position0b8e.html?hl=zh-cn" >位置传感器</a></li><li><a href="../sensors/sensors_environment0b8e.html?hl=zh-cn" >环境传感器</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index0b8e.html?hl=zh-cn" >连接</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth0b8e.html?hl=zh-cn" >蓝牙</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le0b8e.html?hl=zh-cn" >蓝牙低功耗</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index0b8e.html?hl=zh-cn" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc0b8e.html?hl=zh-cn" >NFC 基础知识</a></li><li><a href="../connectivity/nfc/advanced-nfc0b8e.html?hl=zh-cn" >高级 NFC</a></li><li><a href="../connectivity/nfc/hce0b8e.html?hl=zh-cn" >基于主机的卡模拟</a></li></ul></li><li><a href="../connectivity/wifip2p0b8e.html?hl=zh-cn" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index0b8e.html?hl=zh-cn" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory0b8e.html?hl=zh-cn" >配件</a></li><li><a href="../connectivity/usb/host0b8e.html?hl=zh-cn" >主机</a></li></ul></li><li><a href="../connectivity/sip0b8e.html?hl=zh-cn" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index0b8e.html?hl=zh-cn" >文本和输入</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste0b8e.html?hl=zh-cn" >复制和粘贴</a></li><li><a href="../text/creating-input-method0b8e.html?hl=zh-cn" >创建 IME</a></li><li><a href="../text/spell-checker-framework0b8e.html?hl=zh-cn" >拼写检查程序</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index0b8e.html?hl=zh-cn" >数据存储</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage0b8e.html?hl=zh-cn" >存储选项</a></li><li><a href="../data/backup0b8e.html?hl=zh-cn" >数据备份</a></li><li><a href="../data/install-location0b8e.html?hl=zh-cn" >应用安装位置</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=zh-cn" >库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=zh-cn" >支持库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=zh-cn" >功能</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=zh-cn" >设置</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=zh-cn" >修订历史记录</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=zh-cn" >数据绑定库</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=zh-cn" >测试支持库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=zh-cn" >API 参考</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index0b8e.html?hl=zh-cn" >管理</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin0b8e.html?hl=zh-cn" >设备政策</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index0b8e.html?hl=zh-cn" >网络应用</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting0b8e.html?hl=zh-cn" >在网络应用中支持不同屏幕</a></li><li><a href="../../webapps/webview0b8e.html?hl=zh-cn" >在 WebView 中构建网络应用</a></li><li><a href="../../webapps/migrating0b8e.html?hl=zh-cn" >迁移到 Android 4.4 中的 WebView</a></li><li><a href="../../webapps/debugging0b8e.html?hl=zh-cn" >调试网络应用</a></li><li><a href="../../webapps/best-practices0b8e.html?hl=zh-cn" >网络应用最佳做法</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index0b8e.html?hl=zh-cn"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="最佳做法" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">最佳做法</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support0b8e.html?hl=zh-cn" >支持多种屏幕</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution0b8e.html?hl=zh-cn" >分配到特定屏幕</a></li><li><a href="../../practices/screen-compat-mode0b8e.html?hl=zh-cn" >屏幕兼容性模式</a></li></ul></li><li><a href="../../practices/tablets-and-handsets0b8e.html?hl=zh-cn" >支持平板电脑和手机</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=zh-cn">首页</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=zh-cn">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=zh-cn">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=zh-cn">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=zh-cn">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=zh-cn">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=zh-cn"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=zh-cn"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=zh-cn"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">培训</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index0b8e.html?hl=zh-cn"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=zh-cn"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">参考网页</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=zh-cn">示例</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=zh-cn"
+           >库</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=zh-cn"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=zh-cn"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=zh-cn">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=zh-cn">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=zh-cn">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=zh-cn"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=zh-cn">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=zh-cn">Play 控制台</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=zh-cn"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=zh-cn"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=zh-cn">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=zh-cn">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">多窗口支持</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="tb-wrapper">
+  <div id="tb">
+    <h2>本文内容</h2>
+      <ol>
+        <li><a href="#overview">概览</a></li>
+        <li><a href="#lifecycle">多窗口生命周期</a></li>
+        <li><a href="#configuring">针对多窗口模式配置应用
+</a></li>
+        <li><a href="#running">在多窗口模式中运行应用</a></li>
+        <li><a href="#testing">测试应用的多窗口支持</a></li>
+      </ol>
+    <h2>另请参阅</h2>
+      <ol>
+        <li><a class="external-link" href="https://github.com/googlesamples/android-MultiWindowPlayground">多窗口 Playground 示例应用
+</a></li>
+        <li><a class="external-link" href="https://medium.com/google-developers/5-tips-for-preparing-for-multi-window-in-android-n-7bed803dda64">在 Android N 为多窗口做准备的五条建议</a></li>
+      </ol>
+  </div>
+</div>
+
+<p>
+  Android N 添加了对同时显示多个应用窗口的支持。
+在手持设备上，两个应用可以在“分屏”模式中左右并排或上下并排显示。
+<em></em>在电视设备上，应用可以使用“画中画”模式，在用户与另一个应用交互的同时继续播放视频。
+
+<em></em>
+</p>
+
+<p>
+  如果您使用 N Preview SDK 构建应用，则可以配置应用处理多窗口显示的方法。
+例如，您可以指定 Activity 的最小允许尺寸。
+您还可以禁用应用的多窗口显示，确保系统仅以全屏模式显示应用。
+
+
+</p>
+
+<h2 id="overview">概览</h2>
+
+<p>
+  Android N 允许多个应用同时共享屏幕。例如，用户可以分屏显示应用，在左边查看网页，同时在右边写邮件。
+
+用户体验取决于设备：
+
+</p>
+
+<ul>
+  <li>运行 Android N 的手持设备具有分屏模式。
+在此模式中，系统以左右并排或上下并排的方式分屏显示两个应用。
+用户可以拖动两个应用之间的分界线，放大其中一个应用，同时缩小另一个。
+
+  </li>
+
+  <li>在运行 Android N 的 Nexus Player 上，应用能以<a href="picture-in-picture0b8e.html?hl=zh-cn">画中画模式</a>显示，即在用户浏览网页或与其他应用交互的同时继续显示内容。
+
+
+
+  </li>
+
+  <li>较大设备的制造商可选择启用自由形状模式，在该模式中，用户可以自由调整各 Activity 的尺寸。
+若制造商启用此功能，设备将同时具有自由形状模式和分屏模式。
+
+
+  </li>
+</ul>
+
+<img src="../../../images/android-7.0/mw-splitscreen0b8e.png?hl=zh-cn" alt="" width="650" srcset="/images/android-7.0/mw-splitscreen.png 1x,
+    /images/android-7.0/mw-splitscreen_2x.png 2x," id="img-split-screen" />
+<p class="img-caption">
+  <strong>图 1.</strong> 两个应用在分屏模式中左右并排显示。
+</p>
+
+<p>
+  用户可以通过以下方式切换到多窗口模式：
+</p>
+
+<ul>
+  <li>若用户打开 <a href="../../components/recents0b8e.html?hl=zh-cn">Overview 屏幕</a>并长按 Activity 标题，则可以拖动该 Activity 至屏幕突出显示的区域，使 Activity 进入多窗口模式。
+
+
+
+  </li>
+
+  <li>若用户长按 Overview 按钮，设备上的当前 Activity 将进入多窗口模式，同时将打开 Overview 屏幕，用户可在该屏幕中选择要共享屏幕的另一个 Activity。
+
+
+  </li>
+</ul>
+
+<p>
+  用户可以在两个 Activity 共享屏幕的同时在这两个 Activity 之间<a href="drag-drop0b8e.html?hl=zh-cn">拖放</a>数据
+
+（在此之前，用户只能在一个 Activity 内部拖放数据）。
+
+</p>
+
+<h2 id="lifecycle">多窗口生命周期</h2>
+
+<p>
+  多窗口模式不会更改 <a href="https://developer.android.com/training/basics/activity-lifecycle/index.html?hl=zh-cn">Activity 生命周期</a>。
+
+</p>
+
+<p>
+  在多窗口模式中，在指定时间只有最近与用户交互过的 Activity 为活动状态。
+该 Activity 将被视为顶级 Activity。<em></em>
+  所有其他 Activity 虽然可见，但均处于暂停状态。
+  但是，这些已暂停但可见的 Activity 在系统中享有比不可见 Activity 更高的优先级。
+如果用户与其中一个暂停的 Activity 交互，该 Activity 将恢复，而之前的顶级 Activity 将暂停。
+
+
+</p>
+
+<p class="note">
+  <strong>注：</strong>在多窗口模式中，用户仍可以看到处于暂停状态的应用。
+应用在暂停状态下可能仍需要继续其操作。
+例如，处于暂停模式但可见的视频播放应用应继续显示视频。
+因此，我们建议播放视频的 Activity 不要暂停其 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn#onPause()">onPause()</a></code> 处理程序中的视频。
+
+<em></em>
+  应暂停 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn#onStop()">onStop()</a></code> 中的视频，并恢复 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn#onStart()">onStart()</a></code> 中的视频播放。
+</p>
+
+<p>
+  如<a href="../resources/runtime-changes0b8e.html?hl=zh-cn">处理运行时变更</a>中所述，用户使用多窗口模式显示应用时，系统将通知 Activity 发生配置变更。
+
+这也会发生在当用户调整应用大小，或将应用恢复到全屏模式时。
+
+  该变更与系统通知应用设备从纵向模式切换到横向模式时的 Activity 生命周期影响基本相同，但设备不仅仅是交换尺寸，而是会变更尺寸。
+
+
+如<a href="../resources/runtime-changes0b8e.html?hl=zh-cn">处理运行时变更</a>中所述，您的 Activity 可以自行处理配置变更，或允许系统销毁 Activity，并以新的尺寸重新创建该 Activity。
+
+
+
+</p>
+
+<p>
+  如果用户调整窗口大小，并在任意维度放大窗口尺寸，系统将调整 Activity 以匹配用户操作，同时根据需要发布<a href="../resources/runtime-changes0b8e.html?hl=zh-cn">运行时变更</a>。
+
+如果应用在新公开区域的绘制滞后，系统将使用 <code><a href="https://developer.android.com/reference/android/R.attr.html?hl=zh-cn#windowBackground">windowBackground</a></code> 属性或默认 <code>windowBackgroundFallback</code> 样式属性指定的颜色暂时填充该区域。
+
+
+</p>
+
+<h2 id="configuring">针对多窗口模式配置应用</h2>
+
+<p>
+  如果您的应用面向 Android N，您可以对应用的 Activity 是否支持多窗口显示以及显示方式进行配置。
+您可以在清单文件中设置属性，以控制大小和布局。
+
+  根 Activity 的属性设置适用于其任务栈中的所有 Activity。
+例如，如果根 Activity 已 <code>android:resizeableActivity</code> 设定为 true，则任务栈中的所有 Activity 都将可以调整大小。
+
+
+</p>
+
+<p class="note">
+  <strong>注：</strong>如果您使用低于 Android N 版本的 SDK 构建多向应用，则用户在多窗口模式中使用应用时，系统将强制调整应用大小。
+
+系统将显示对话框，提醒用户应用可能会发生异常。
+系统不会调整定向应用的大小；如果用户尝试在多窗口模式下打开定向应用，应用将全屏显示。
+
+
+<em></em>
+</p>
+
+<h4 id="resizeableActivity">android:resizeableActivity</h4>
+<p>
+  在清单的 <code>&lt;activity&gt;</code> 或
+ <code>&lt;application&gt;</code> 节点中设置该属性，启用或禁用多窗口显示：
+
+</p>
+
+<pre>
+android:resizeableActivity=["true" | "false"]
+</pre>
+
+<p>
+  如果该属性设置为 true，Activity 将能以分屏和自由形状模式启动。
+如果此属性设置为 false，Activity 将不支持多窗口模式。
+如果该值为 false，且用户尝试在多窗口模式下启动 Activity，该 Activity 将全屏显示。
+
+
+</p>
+
+<p>
+  如果您的应用面向 Android N，但未对该属性指定值，则该属性的值默认设为 true。
+
+</p>
+
+<h4 id="supportsPictureInPicture">android:supportsPictureInPicture</h4>
+
+<p>
+  在清单文件的 <code>&lt;activity&gt;</code> 节点中设置该属性，指明 Activity 是否支持画中画显示。
+如果 <code>android:resizeableActivity</code> 为 false，将忽略该属性。
+
+</p>
+
+<pre>
+android:supportsPictureInPicture=["true" | "false"]
+</pre>
+
+<h3 id="layout">布局属性</h3>
+
+<p>
+  对于 Android N，<code>&lt;layout&gt;</code> 清单元素支持以下几种属性，这些属性影响 Activity 在多窗口模式中的行为：
+
+
+</p>
+
+<dl>
+  <dt>
+    <code>android:defaultWidth</code>
+  </dt>
+
+  <dd>
+    以自由形状模式启动时 Activity 的默认宽度。
+  </dd>
+
+  <dt>
+    <code>android:defaultHeight</code>
+  </dt>
+
+  <dd>
+    以自由形状模式启动时 Activity 的默认高度。
+  </dd>
+
+  <dt>
+    <code>android:gravity</code>
+  </dt>
+
+  <dd>
+    以自由形状模式启动时 Activity 的初始位置。请参阅 <code><a href="https://developer.android.com/reference/android/view/Gravity.html?hl=zh-cn">Gravity</a></code> 参考资料，了解合适的值设置。
+
+  </dd>
+
+  <dt>
+    <code>android:minimalHeight</code>、<code>android:minimalWidth</code>
+  </dt>
+
+  <dd>
+    分屏和自由形状模式中 Activity 的最小高度和最小宽度。
+如果用户在分屏模式中移动分界线，使 Activity 尺寸低于指定的最小值，系统会将 Activity 裁剪为用户请求的尺寸。
+
+
+  </dd>
+</dl>
+
+<p>
+  例如，以下节点显示了如何指定 Activity 在自由形状模式中显示时 Activity 的默认大小、位置和最小尺寸：
+
+
+</p>
+
+<pre>
+&lt;activity android:name=".MyActivity"&gt;
+    &lt;layout android:defaultHeight="500dp"
+          android:defaultWidth="600dp"
+          android:gravity="top|end"
+          android:minimalHeight="450dp"
+          android:minimalWidth="300dp" /&gt;
+&lt;/activity&gt;
+</pre>
+
+<h2 id="running">在多窗口模式中运行应用</h2>
+
+<p>
+  Android N 添加了新功能，以支持可在多窗口模式中运行的应用。
+
+</p>
+
+<h3 id="disabled-features">多窗口模式中被禁用的功能</h3>
+
+<p>
+  在设备处于多窗口模式中时，某些功能会被禁用或忽略，因为这些功能对与其他 Activity 或应用共享设备屏幕的 Activity 而言没有意义。
+
+此类功能包括：
+
+<ul>
+  <li>某些<a href="https://developer.android.com/training/system-ui/index.html?hl=zh-cn">系统 UI</a> 自定义选项将被禁用；例如，在非全屏模式中，应用无法隐藏状态栏。
+
+
+  </li>
+
+  <li>系统将忽略对 <code><a href="../manifest/activity-element0b8e.html?hl=zh-cn#screen"
+  >android:screenOrientation</a></code> 属性所作的更改。
+  </li>
+</ul>
+
+<h3 id="change-notification">多窗口变更通知和查询</h3>
+
+<p>
+  <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn">Activity</a></code> 类中添加了以下新方法，以支持多窗口显示。
+有关各方法的详细信息，请参阅 <a href="https://developer.android.com/preview/setup-sdk.html?hl=zh-cn#docs-dl">N Preview SDK 参考</a>。
+
+
+</p>
+
+<dl>
+  <dt>
+    <code>Activity.isInMultiWindowMode()</code>
+  </dt>
+
+  <dd>
+    调用该方法以确认 Activity 是否处于多窗口模式。
+  </dd>
+
+  <dt>
+    <code>Activity.isInPictureInPictureMode()</code>
+  </dt>
+
+  <dd>
+    调用该方法以确认 Activity 是否处于画中画模式。
+
+    <p class="note">
+      <strong>注：</strong>画中画模式是多窗口模式的特例。
+如果 <code>myActivity.isInPictureInPictureMode()</code> 返回 true，则 <code>myActivity.isInMultiWindowMode()</code> 也返回 true。
+
+
+    </p>
+  </dd>
+
+  <dt>
+    <code>Activity.onMultiWindowModeChanged()</code>
+  </dt>
+
+  <dd>
+    Activity 进入或退出多窗口模式时系统将调用此方法。
+在 Activity 进入多窗口模式时，系统向该方法传递 true 值，在退出多窗口模式时，则传递 false 值。
+
+
+  </dd>
+
+  <dt>
+    <code>Activity.onPictureInPictureModeChanged()</code>
+  </dt>
+
+  <dd>
+    Activity 进入或退出画中画模式时系统将调用此方法。
+在 Activity 进入画中画模式时，系统向该方法传递 true 值，在退出画中画模式时，则传递 false 值。
+
+
+  </dd>
+</dl>
+
+<p>
+  每个方法还有 <code><a href="https://developer.android.com/reference/android/app/Fragment.html?hl=zh-cn">Fragment</a></code> 版本，例如 <code>Fragment.isInMultiWindowMode()</code>。
+
+</p>
+
+<h3 id="entering-pip">进入画中画模式</h3>
+
+<p>
+  如需在画中画模式中启动 Activity，请调用新方法 <code>Activity.enterPictureInPictureMode()</code>。
+如果设备不支持画中画模式，则此方法无效。
+如需了解详细信息，请参阅<a href="picture-in-picture0b8e.html?hl=zh-cn">画中画</a>文档。
+
+</p>
+
+<h3 id="launch">在多窗口模式中启动新 Activity</h3>
+
+<p>
+  在启动新 Activity 时，用户可以提示系统如果可能，应将新 Activity 显示在当前 Activity 旁边。
+要执行此操作，可使用标志 <code>Intent.FLAG_ACTIVITY_LAUNCH_TO_ADJACENT</code>。
+
+传递此标志将请求以下行为：
+
+</p>
+
+<ul>
+  <li>如果设备处于分屏模式，系统会尝试在启动系统的 Activity 旁创建新 Activity，这样两个 Activity 将共享屏幕。
+
+系统并不一定能实现此操作，但如果可以，系统将使两个 Activity 处于相邻的位置。
+
+  </li>
+
+  <li>如果设备不处于分屏模式，则该标志无效。
+  </li>
+</ul>
+
+<p>
+  如果设备处于自由形状模式，则在启动新 Activity 时，用户可通过调用 <code>ActivityOptions.setLaunchBounds()</code> 指定新 Activity 的尺寸和屏幕位置。
+
+如果设备不处于多窗口模式，则该方法无效。
+
+</p>
+
+<p class="note">
+  <strong>注：</strong>如果您在任务栈中启动 Activity，该 Activity 将替换屏幕上的 Activity，并继承其所有的多窗口属性。
+
+如果要在多窗口模式中以单独的窗口启动新 Activity，则必须在新的任务栈中启动此 Activity。
+
+</p>
+
+<h3 id="dnd">支持拖放</h3>
+
+<p>
+  用户可以在两个 Activity 共享屏幕的同时在这两个 Activity 之间<a href="drag-drop0b8e.html?hl=zh-cn">拖放</a>数据
+
+（在此之前，用户只能在一个 Activity 内部拖放数据）。
+因此，如果您的应用目前不支持拖放功能，您可以在其中添加此功能。
+
+</p>
+
+<p>
+  N Preview SDK 扩展了 <a href="https://developer.android.com/reference/android/view/package-summary.html?hl=zh-cn"><code>android.view</code></a> 软件包，以支持跨应用拖放。
+有关以下类和方法的详细信息，请参阅 <a href="https://developer.android.com/preview/setup-sdk.html?hl=zh-cn#docs-dl">N Preview SDK 参考</a>。
+
+
+</p>
+
+<dl>
+  <dt>
+    <code>android.view.DropPermissions</code>
+  </dt>
+
+  <dd>
+    令牌对象，负责指定对接收拖放数据的应用授予的权限。
+
+  </dd>
+
+  <dt>
+    <code>View.startDragAndDrop()</code>
+  </dt>
+
+  <dd>
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">View.startDrag()</a></code> 的新别名。要启用跨 Activity 拖放，请传递新标志 <code>View.DRAG_FLAG_GLOBAL</code>。
+
+如需对接收拖放数据的 Activity 授予 URI 权限，可根据情况传递新标志 <code>View.DRAG_FLAG_GLOBAL_URI_READ</code> 或 <code>View.DRAG_FLAG_GLOBAL_URI_WRITE</code>。
+
+
+
+  </dd>
+
+  <dt>
+    <code>View.cancelDragAndDrop()</code>
+  </dt>
+
+  <dd>
+    取消当前正在进行的拖动操作。只能由发起拖动操作的应用调用。
+
+  </dd>
+
+  <dt>
+    <code>View.updateDragShadow()</code>
+  </dt>
+
+  <dd>
+    替换当前正在进行的拖动操作的拖动阴影。只能由发起拖动操作的应用调用。
+
+  </dd>
+
+  <dt>
+    <code>Activity.requestDropPermissions()</code>
+  </dt>
+
+  <dd>
+    请求使用 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn">DragEvent</a></code> 中包含的 <code><a href="https://developer.android.com/reference/android/content/ClipData.html?hl=zh-cn">ClipData</a></code> 传递的内容 URI 的权限。
+  </dd>
+</dl>
+
+<h2 id="testing">测试应用的多窗口支持</h2>
+
+<p>
+  无论您是否针对 Android N 更新应用，都应验证应用在多窗口模式下的行为，以防用户尝试在运行 Android N 的设备上以多窗口模式启动应用。
+
+
+</p>
+
+<h3 id="configuring">配置测试设备</h3>
+
+<p>
+  如果在设备上安装 Android N，则将自动支持分屏模式。
+
+</p>
+
+<h3 id="test-non-n">如果应用并非使用 N Preview SDK 构建</h3>
+
+<p>
+  如果您的应用不是使用 N Preview SDK 构建的，则用户尝试在多窗口模式中使用应用时，系统将强制调整应用大小，除非应用进行了定向声明。
+
+
+</p>
+
+<p>
+  如果您的应用没有进行定向声明，则应在运行 Android N 的设备上启动应用，并尝试将应用切换到分屏模式。
+
+验证并确保在强制调整应用大小时用户体验可接受。
+
+</p>
+
+<p>
+  如果应用进行了定向声明，则应尝试将应用切换到多窗口模式。
+验证并确保执行此操作后，应用仍保持全屏模式。
+
+</p>
+
+<h3 id="test-mw">如果支持多窗口模式</h3>
+
+<p>
+  如果您的应用是使用 N Preview SDK 构建的，且未禁用多窗口支持，则分别在分屏和自由形状模式下验证以下行为。
+
+
+</p>
+
+<ul>
+  <li>在全屏模式下启动应用，然后通过长按 Overview 按钮切换到多窗口模式。
+验证并确保应用正常切换。
+  </li>
+
+  <li>直接在多窗口模式中启动应用，验证并确保应用正常启动。
+您可以按一下 Overview 按钮，再长按应用的标题栏，并将其拖动到屏幕上任一突出显示的区域，从而在多窗口模式中启动应用。
+
+
+  </li>
+
+  <li>拖动分界线，在分屏模式中调整应用的大小。
+  验证并确保应用正常调整大小且未崩溃，并且必要的 UI 元素仍可见。
+
+  </li>
+
+  <li>如果您指定了应用的最小尺寸，请尝试将应用尺寸调整到低于最小值。
+验证并确保无法将应用尺寸调整到低于指定最小值。
+
+  </li>
+
+  <li>完成所有测试后，验证并确保应用性能可以接受。例如，验证并确保调整应用大小后更新 UI 没有长时间的滞后。
+
+
+  </li>
+</ul>
+
+<h4 id="test-checklist">测试检查单</h4>
+
+<p>
+  要在多窗口模式中验证应用性能，请执行以下操作。
+除非另有说明，否则请分别在分屏和多窗口模式中执行以下操作。
+
+</p>
+
+<ul>
+  <li>进入和退出多窗口模式。
+  </li>
+
+  <li>从您的应用切换到另一个应用，验证并确保应用在非活动但可见的状态下正常运行。
+例如，如果您的应用在播放视频，则验证并确保在用户与另一个应用交互时视频仍在继续播放。
+
+
+  </li>
+
+  <li>在分屏模式中，尝试移动分界线，放大或缩小应用。
+分别在左右和上下并排显示模式中尝试这些操作。
+验证并确保应用不会崩溃，主要功能可见，且调整操作不需要过长时间。
+
+
+  </li>
+
+  <li>快速连续执行几次调整操作。验证并确保应用不会崩溃或出现内存泄漏。
+有关检查应用内存使用率的信息，请参阅<a href="https://developer.android.com/tools/debugging/debugging-memory.html?hl=zh-cn">查看内存使用率</a>。
+
+
+  </li>
+
+  <li>在多个不同窗口配置中正常使用应用，验证并确保应用正常运行。
+验证并确保文本可读，且 UI 元素大小正常，不影响交互。
+
+  </li>
+</ul>
+
+<h3 id="test-disabled-mw">如果已禁用多窗口支持</h3>
+
+<p>
+  如果您通过设置 <code>android:resizableActivity="false"</code> 禁用了多窗口支持，则应在运行 Android N 的设备上启动应用，并尝试将应用切换到自由形状和分屏模式。
+
+
+验证并确保执行此操作后，应用仍保持全屏模式。
+
+</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=zh-cn" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="博客" target="_blank">博客</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=zh-cn" title="支持">支持</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=zh-cn" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=zh-cn" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=zh-cn" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=zh-cn" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="pj0q4nCLSRV25wn_WsueWr_MtRg7B0eFaMCf0XrIPP06MTQ5NzUxNzAzOTcyMDEwMA" />
+      <input type="hidden" name="next" value="/guide/topics/ui/multi-window.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+             selected="selected" >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Email 地址</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en414d.js?hl=zh-cn?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=zh-cn"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_zh-cn.js?hl=zh-cn?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/ui/multi-window.html?hl=zh-cn by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:15:09 GMT -->
+</html>

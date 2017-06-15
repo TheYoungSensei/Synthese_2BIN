@@ -1,0 +1,2051 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from developer.android.com/guide/topics/connectivity/bluetooth.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:01:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="_3lD3lNf2watNFJKT7rp3xCe0Up3kdmtO5RdBVFO5V06MTQ5NzUxNTkwOTUzMTgxMA" />
+
+  
+    <link rel="canonical" href="bluetooth.html">
+  
+
+  
+    <link rel="alternate" href="bluetooth7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="bluetooth9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="bluetooth0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="bluetooth0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="bluetoothde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="bluetooth232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="bluetooth6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="bluetooth.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/connectivity/bluetooth.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/connectivity/bluetooth.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/connectivity/bluetooth.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/connectivity/bluetooth.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/connectivity/bluetooth.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/connectivity/bluetooth.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/connectivity/bluetooth.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/connectivity/bluetooth.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="bluetooth.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon.png">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-180.png">
+
+
+<title>
+
+  Bluetooth | Android Developers
+
+</title>
+
+  <meta name="description" content="The Android platform includes support for the Bluetooth network stack, which allows a device to wirelessly exchange data with other Bluetooth devices. The application framework provides access to the Bluetooth functionality through the Android Bluetooth…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default803f.css?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle.js" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android.js"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android.js"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs803f.js?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;en&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;en&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "en", "served": "en"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo.png"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Search">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Back</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index.html" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals.html" >App Fundamentals</a></li><li><a href="../../practices/compatibility.html" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/index.html" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requesting.html" >Requesting Permissions</a></li><li><a href="../permissions/defining.html" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index.html" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack.html"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-art.html" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index.html" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters.html" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common.html" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/index.html" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activities.html" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecycle.html" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changes.html" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stack.html" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecycle.html" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundles.html" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recents.html" >Recents Screen</a></li></ul></li><li><a href="../../components/fragments.html" >Fragments</a></li><li><a href="../../components/loaders.html" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services.html" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services.html" >Bound Services</a></li><li><a href="../../components/aidl.html" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providers.html" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basics.html" >Content Provider Basics</a></li><li><a href="../providers/content-provider-creating.html" >Creating a Content Provider</a></li><li><a href="../providers/calendar-provider.html" >Calendar Provider</a></li><li><a href="../providers/contacts-provider.html" >Contacts Provider</a></li><li><a href="../providers/document-provider.html" >Open files using Storage Access Framework</a></li><li><a href="../providers/create-document-provider.html" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcasts.html" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index.html" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host.html" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threads.html" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index.html" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview.html" >Overview</a></li><li><a href="../resources/providing-resources.html" >Providing Resources</a></li><li><a href="../resources/accessing-resources.html" >Accessing Resources</a></li><li><a href="../resources/runtime-changes.html" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization.html" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework.html" >ICU4J Android Framework APIs</a></li><li><a href="../resources/multilingual-support.html" >Language and Locale</a></li></ul></li><li><a href="../resources/complex-xml-resources.html" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources.html" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource.html" >Animation</a></li><li><a href="../resources/color-list-resource.html" >Color State List</a></li><li><a href="../resources/drawable-resource.html" >Drawable</a></li><li><a href="../resources/layout-resource.html" >Layout</a></li><li><a href="../resources/menu-resource.html" >Menu</a></li><li><a href="../resources/string-resource.html" >String</a></li><li><a href="../resources/style-resource.html" >Style</a></li><li><a href="../resources/more-resources.html" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro.html" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element.html" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element.html" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element.html" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element.html" >&lt;application&gt;</a></li><li><a href="../manifest/category-element.html" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element.html" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element.html" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element.html" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element.html" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element.html" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element.html" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element.html" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element.html" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element.html" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element.html" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element.html" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element.html" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element.html" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element.html" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element.html" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element.html" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element.html" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element.html" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element.html" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element.html" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element.html" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element.html" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index.html" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview.html" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout.html" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear.html" >Linear Layout</a></li><li><a href="../ui/layout/relative.html" >Relative Layout</a></li><li><a href="../ui/layout/recyclerview.html" >Recycler View</a></li><li><a href="../ui/layout/listview.html" >List View</a></li><li><a href="../ui/layout/gridview.html" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls.html" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button.html" >Buttons</a></li><li><a href="../ui/controls/checkbox.html" >Checkboxes</a></li><li><a href="../ui/controls/radiobutton.html" >Radio Buttons</a></li><li><a href="../ui/controls/togglebutton.html" >Toggle Buttons</a></li><li><a href="../ui/controls/spinner.html" >Spinners</a></li><li><a href="../ui/controls/pickers.html" >Pickers</a></li></ul></li><li><a href="../ui/ui-events.html" >Input Events</a></li><li><a href="../ui/menus.html" >Menus</a></li><li><a href="../ui/settings.html" >Settings</a></li><li><a href="../ui/dialogs.html" >Dialogs</a></li><li><a href="../ui/notifiers/notifications.html" >Notifications</a></li><li><a href="../ui/notifiers/toasts.html" >Toasts</a></li><li><a href="../ui/shortcuts.html" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index.html" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog.html" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestions.html" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestions.html" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-config.html" >Searchable Configuration</a></li></ul></li><li><a href="../ui/multi-window.html" >Multi-Window Support</a></li><li><a href="../ui/drag-drop.html" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index.html" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps.html" >Making Apps More Accessible</a></li><li><a href="../ui/accessibility/checklist.html" >Accessibility Developer Checklist</a></li><li><a href="../ui/accessibility/node-tree-debugging.html" >Using Node Tree Debugging</a></li><li><a href="../ui/accessibility/services.html" >Building Accessibility Services</a></li><li><a href="../ui/accessibility/custom-views.html" >Building Accessible Custom Views</a></li></ul></li><li><a href="../ui/themes.html" >Styles and Themes</a></li><li><a href="../ui/custom-components.html" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index.html" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview.html" >Overview</a></li><li><a href="../graphics/prop-animation.html" >Property Animation</a></li><li><a href="../graphics/view-animation.html" >View Animation</a></li><li><a href="../graphics/drawable-animation.html" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphics.html" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resources.html" >Vector Drawable</a></li></ul></li><li><a href="../graphics/opengl.html" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel.html" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index.html" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute.html" >RenderScript</a></li><li><a href="../renderscript/advanced.html" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview.html" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types.html" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_types.html" >Object Types</a></li><li><a href="../renderscript/reference/rs_convert.html" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_math.html" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_math.html" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrix.html" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternion.html" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomic.html" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_time.html" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_data.html" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_info.html" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_each.html" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_io.html" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debug.html" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphics.html" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/index.html" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/index.html" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overview.html" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-session.html" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-app.html" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservice.html" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-client.html" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacks.html" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-app.html" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activity.html" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacks.html" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttons.html" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphones.html" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index.html" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formats.html" >Supported Media Formats</a></li><li><a href="../media/mediaplayer.html" >MediaPlayer</a></li><li><a href="../media/mediarecorder.html" >MediaRecorder</a></li><li><a href="../media/exoplayer.html" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routing.html" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouter.html" >MediaRouter API</a></li><li><a href="../media/mediarouteprovider.html" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/camera.html" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index.html" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index.html" >Location and Maps</a></li><li><a href="../location/strategies.html" >Location Strategies</a></li><li><a href="../sensors/sensors_overview.html" >Sensors Overview</a></li><li><a href="../sensors/sensors_motion.html" >Motion Sensors</a></li><li><a href="../sensors/sensors_position.html" >Position Sensors</a></li><li><a href="../sensors/sensors_environment.html" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index.html" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="bluetooth.html" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="bluetooth-le.html" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="nfc/index.html" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="nfc/nfc.html" >NFC Basics</a></li><li><a href="nfc/advanced-nfc.html" >Advanced NFC</a></li><li><a href="nfc/hce.html" >Host-based Card Emulation</a></li></ul></li><li><a href="wifip2p.html" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="usb/index.html" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="usb/accessory.html" >Accessory</a></li><li><a href="usb/host.html" >Host</a></li></ul></li><li><a href="sip.html" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index.html" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste.html" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-method.html" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboard.html" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-framework.html" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index.html" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage.html" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../data/backup.html" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/autobackup.html" >Auto Backup</a></li><li><a href="../data/keyvaluebackup.html" >Key/Value Backup</a></li><li><a href="../data/testingbackup.html" >Testing Backup and Restore</a></li></ul></li><li><a href="../data/install-location.html" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index.html" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin.html" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index.html" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting.html" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webview.html" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migrating.html" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debugging.html" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practices.html" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index.html"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support.html" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution.html" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-mode.html" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessness.html" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsets.html" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html">Home</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Training</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index.html"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Reference</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html">Samples</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html"
+           >Libraries</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Bluetooth</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+  <h2>In this document</h2>
+  <ol>
+    <li><a href="#TheBasics">The Basics</a>
+      <ol>
+        <li><a href="#Permissions">Bluetooth Permissions</a></li>
+      </ol>
+    </li>
+    <li><a href="#Profiles">Working with Profiles</a>
+      <ol>
+        <li><a href="#AT-Commands">Vendor-specific AT commands</a></li>
+      </ol>
+    </li>
+    <li><a href="#HDP">Health Device Profile</a>
+      <ol>
+        <li><a href="#Create-HDP-App">Creating an HDP Application</a></li>
+      </ol>
+    </li>
+    <li><a href="#SettingUp">Setting Up Bluetooth</a></li>
+    <li><a href="#FindingDevices">Finding Devices</a>
+      <ol>
+        <li><a href="#QueryingPairedDevices">Querying paired devices</a></li>
+        <li><a href="#DiscoveringDevices">Discovering devices</a></li>
+      </ol></li>
+    <li><a href="#ConnectingDevices">Connecting Devices</a>
+      <ol>
+        <li><a href="#ConnectionTechniques">Connection techniques</a></li>
+        <li><a href="#ConnectingAsAServer">Connecting as a server</a></li>
+        <li><a href="#ConnectingAsAClient">Connecting as a client</a></li>
+      </ol></li>
+    <li><a href="#ManagingAConnection">Managing a Connection</a></li>
+    <li><a href="#KeyClassesAndInterfaces">Key Classes and Interfaces</a>
+  </ol>
+
+  <h2>Related samples</h2>
+  <ol>
+    <li><a href="https://developer.android.com/samples/BluetoothChat/index.html">Bluetooth Chat</a></li>
+  </ol>
+
+</div>
+</div>
+
+
+<p>The Android platform includes support for the Bluetooth network stack,
+which allows a device to wirelessly exchange data with other Bluetooth devices.
+The application framework provides access to the Bluetooth functionality through
+the Android Bluetooth APIs. These APIs let applications wirelessly
+connect to other Bluetooth devices, enabling point-to-point and multipoint
+wireless features.</p>
+
+<p>Using the Bluetooth APIs, an Android application can perform the
+following:</p>
+<ul>
+  <li>Scan for other Bluetooth devices</li>
+  <li>Query the local Bluetooth adapter for paired Bluetooth devices</li>
+  <li>Establish RFCOMM channels</li>
+  <li>Connect to other devices through service discovery</li>
+  <li>Transfer data to and from other devices</li>
+  <li>Manage multiple connections</li>
+</ul>
+
+<p>This page focuses on <em>Classic Bluetooth</em>. Classic
+Bluetooth is the right choice for more battery-intensive operations, which include streaming
+and communicating between Android devices. For Bluetooth devices with low power requirements,
+Android 4.3 (API level 18) introduces API support for Bluetooth Low Energy. To learn more,
+see <a href="bluetooth-le.html">Bluetooth Low Energy</a>.</p>
+
+<p>This document describes different Bluetooth profiles, including the Health
+Device Profile. It then explains how to use the Android Bluetooth APIs to
+accomplish the four major tasks necessary to communicate using Bluetooth:
+setting up Bluetooth, finding devices that are either paired or available in the
+local area, connecting devices, and transferring data between devices.</p>
+
+<h2 id="TheBasics">The Basics</h2>
+
+<p>In order for Bluetooth-enabled devices to transmit data between each other,
+they must first form a channel of communication using a <i>pairing</i> process.
+One device, a <i>discoverable device</i>, makes itself available for incoming
+connection requests. Another device finds the discoverable device using a
+<i>service discovery</i> process. After the discoverable device accepts the
+pairing request, the two devices complete a <i>bonding</i> process where they
+exchange security keys. The devices cache these keys for later use. After the
+pairing and bonding processes are complete, the two devices exchange
+information. When the session is complete, the device that initiated the
+pairing request releases the channel that had linked it to the discoverable
+device. The two devices remain bonded, however, so they can reconnect
+automatically during a future session as long as they're in range of each other
+and neither device has removed the bond.</p>
+
+<h3 id="Permissions">Bluetooth Permissions</h3>
+
+<p>In order to use Bluetooth features in your application, you must declare
+the Bluetooth permission <code><a href="https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH">BLUETOOTH</a></code>.
+You need this permission to perform any Bluetooth communication,
+such as requesting a connection, accepting a connection, and transferring data.</p>
+
+<p>If you want your app to initiate device discovery or manipulate Bluetooth
+settings, you must declare the <code><a href="https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH_ADMIN">BLUETOOTH_ADMIN</a></code>
+permission in addition to the <code><a href="https://developer.android.com/reference/android/Manifest.permission.html#BLUETOOTH">BLUETOOTH</a></code>
+permission. Most applications need this permission solely for the
+ability to discover local Bluetooth devices. The other abilities granted by this
+permission should not be used, unless the application is a "power manager" that
+will modify Bluetooth settings upon user request.</p>
+
+<p>Declare the Bluetooth permission(s) in your application manifest file. For
+example:</p>
+
+<pre>
+&lt;manifest ... >
+  &lt;uses-permission android:name="android.permission.BLUETOOTH" />
+  &lt;uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+  ...
+&lt;/manifest>
+</pre>
+
+<p>See the <a
+href="../manifest/uses-permission-element.html">&lt;uses-permission></a>
+reference for more information about declaring application permissions.</p>
+
+<h2 id="Profiles">Working with Profiles</h2>
+
+<p>Starting in Android 3.0, the Bluetooth API includes support for working with
+Bluetooth profiles. A <em>Bluetooth profile</em> is a wireless interface
+specification for Bluetooth-based communication between devices. An example
+is the Hands-Free profile. For a mobile phone to connect to a wireless headset,
+both devices must support the Hands-Free profile.</p>
+
+<p>The Android Bluetooth API provides implementations for the following
+Bluetooth profiles:</p>
+<ul>
+
+  <li><strong>Headset</strong>. The Headset profile provides support for
+Bluetooth headsets to be used with mobile phones. Android provides the
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHeadset.html">BluetoothHeadset</a></code> class, which is a proxy for
+controlling the Bluetooth Headset Service. This includes both Bluetooth Headset
+and Hands-Free (v1.5) profiles. The <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHeadset.html">BluetoothHeadset</a></code>
+class includes support for AT commands. For more discussion of this topic, see
+<a href="#AT-Commands">Vendor-specific AT commands</a></li>
+
+  <li><strong>A2DP</strong>. The Advanced Audio Distribution Profile (A2DP)
+profile defines how high quality audio can be streamed from one device to
+another over a Bluetooth connection. Android provides the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothA2dp.html">BluetoothA2dp</a></code> class, which is a proxy for controlling
+the Bluetooth A2DP Service.</li>
+
+ <li><strong>Health Device</strong>. Android 4.0 (API level 14) introduces
+support for the Bluetooth Health Device Profile (HDP). This lets you create
+applications that use Bluetooth to communicate with health devices that support
+Bluetooth, such as heart-rate monitors, blood meters, thermometers, scales, and
+so on. For a list of supported devices and their corresponding device data
+specialization codes, refer to Bluetooth's <a class="external-link"
+href="https://www.bluetooth.com/specifications/assigned-numbers/health-device-profile">HDP
+Device Data Specializations</a>. These values
+are also referenced in the ISO/IEEE 11073-20601 [7] specification as
+MDC_DEV_SPEC_PROFILE_* in the Nomenclature Codes Annex. For more discussion of
+HDP, see <a href="#HDP">Health Device Profile</a>.</li>
+
+</ul>
+
+<p>Here are the basic steps for working with a profile:</p>
+<ol>
+
+  <li>Get the default adapter, as described in
+    <a href="bluetooth.html#SettingUp">Setting Up
+      Bluetooth</a>.</li>
+
+  <li>Set up a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothProfile.ServiceListener.html">BluetoothProfile.ServiceListener</a></code>. This
+listener notifies <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothProfile.html">BluetoothProfile</a></code> clients when
+they have been connected to or disconnected from the service.</li>
+
+  <li>Use <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#getProfileProxy(android.content.Context, android.bluetooth.BluetoothProfile.ServiceListener, int)">getProfileProxy()</a></code> to
+establish a connection to the profile proxy object associated with the profile.
+In the example below, the profile proxy object is an instance of <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHeadset.html">BluetoothHeadset</a></code>.</li>
+
+  <li>In <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothProfile.ServiceListener.html#onServiceConnected(int, android.bluetooth.BluetoothProfile)">onServiceConnected()</a></code>, get a handle
+to the profile proxy object.</li>
+
+  <li>Once you have the profile proxy object, you can use it to monitor the
+state of the connection and perform other operations that are relevant to that
+profile.</li>
+</ol>
+
+<p> For example, this code snippet shows how to connect to a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHeadset.html">BluetoothHeadset</a></code> proxy object so that you can control the
+Headset profile:</p>
+
+<pre>BluetoothHeadset mBluetoothHeadset;
+
+// Get the default adapter
+BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+private BluetoothProfile.ServiceListener mProfileListener = new BluetoothProfile.ServiceListener() {
+    public void onServiceConnected(int profile, BluetoothProfile proxy) {
+        if (profile == BluetoothProfile.HEADSET) {
+            mBluetoothHeadset = (BluetoothHeadset) proxy;
+        }
+    }
+    public void onServiceDisconnected(int profile) {
+        if (profile == BluetoothProfile.HEADSET) {
+            mBluetoothHeadset = null;
+        }
+    }
+};
+
+// Establish connection to the proxy.
+mBluetoothAdapter.getProfileProxy(context, mProfileListener, BluetoothProfile.HEADSET);
+
+// ... call functions on mBluetoothHeadset
+
+// Close proxy connection after use.
+mBluetoothAdapter.closeProfileProxy(mBluetoothHeadset);
+</pre>
+
+
+
+<h3 id="AT-Commands">Vendor-specific AT commands</h3>
+
+<p>Starting in Android 3.0 (API level 11), applications can register to receive system
+broadcasts of pre-defined vendor-specific AT commands sent by headsets (such as
+a Plantronics +XEVENT command). For example, an application could receive
+broadcasts that indicate a connected device's battery level and could notify the
+user or take other action as needed. Create a broadcast receiver for the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHeadset.html#ACTION_VENDOR_SPECIFIC_HEADSET_EVENT">ACTION_VENDOR_SPECIFIC_HEADSET_EVENT</a></code> intent
+to handle vendor-specific AT commands for the headset.</p>
+
+<h2 id="HDP">Health Device Profile</h2>
+
+<p>Android 4.0 (API level 14) introduces support for the Bluetooth Health Device
+Profile (HDP). This lets you create applications that use Bluetooth to
+communicate with health devices that support Bluetooth, such as heart-rate
+monitors, blood meters, thermometers, and scales. The Bluetooth Health API
+includes the classes <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealth.html">BluetoothHealth</a></code>, <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealthCallback.html">BluetoothHealthCallback</a></code>, and <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealthAppConfiguration.html">BluetoothHealthAppConfiguration</a></code>, which are described in <a
+href="#KeyClassesAndInterfaces">Key Classes and Interfaces</a>.</p>
+
+<p>In using the Bluetooth Health API, it's helpful to understand these key HDP concepts:</p>
+<dl>
+    <dt><strong>Source</strong></dt>
+
+    <dd>A health device&mdash;such
+    as a weight scale, glucose meter, or thermometer&mdash;that
+transmits medical data to a
+smart device, such as an Android phone or tablet. </dd>
+    <dt><strong>Sink</strong></dt>
+
+    <dd>The smart device that
+receives the medical data. In an Android HDP application, the sink is
+represented by a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealthAppConfiguration.html">BluetoothHealthAppConfiguration</a></code>
+object.</dd>
+    <dt><strong>Registration</strong></dt>
+    <dd>The process used to register a sink for communicating with a particular health device.</dd>
+    <dt><strong>Connection</strong></dt>
+    <dd>The process used to open a channel between a health device (source) and a smart device (sink).</dd>
+</dl>
+
+<h3 id="Create-HDP-App">Creating an HDP Application</h3>
+
+<p>Here are the basic steps involved in creating an Android HDP application:</p>
+<ol>
+
+  <li>Get a reference to the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealth.html">BluetoothHealth</a></code> proxy
+object. <p>Similar to regular headset and A2DP profile devices, you must call
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#getProfileProxy(android.content.Context, android.bluetooth.BluetoothProfile.ServiceListener, int)">getProfileProxy()</a></code>
+with a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothProfile.ServiceListener.html">BluetoothProfile.ServiceListener</a></code> and the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothProfile.html#HEALTH">HEALTH</a></code> profile type to
+establish a connection with the profile proxy object.</p> </li>
+
+  <li>Create a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealthCallback.html">BluetoothHealthCallback</a></code> and register an
+application configuration
+(<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealthAppConfiguration.html">BluetoothHealthAppConfiguration</a></code>)
+that acts as a health
+sink.</li>
+
+  <li><p>Establish a connection to a health device.</p>
+
+  <p class="note"><b>Note: </b>Some devices will initiate the
+connection automatically.  It is unnecessary to carry out this step for those devices.</p></li>
+
+  <li>When connected successfully to a health device, read/write to the health
+device using the file descriptor. The received data need to be interpreted
+using a health manager which implements the <a class="external-link"
+href="http://standards.ieee.org/develop/wg/PHD.html">IEEE 11073</a>
+specifications.</li>
+
+  <li>When done, close the health channel and unregister the application.  The
+channel also closes when there is extended inactivity.</li>
+</ol>
+
+<h2 id="SettingUp">Setting Up Bluetooth</h2>
+
+<p>Before your application can communicate over Bluetooth, you need to verify
+that Bluetooth is supported on the device, and if so, ensure that it is enabled.</p>
+
+<p>If Bluetooth is not supported, then you should gracefully disable any
+Bluetooth features. If Bluetooth is supported, but disabled, then you can request that the
+user enable Bluetooth without leaving your application. This setup is
+accomplished in two steps, using the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html">BluetoothAdapter</a></code>:</p>
+
+
+<ol>
+<li>Get the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html">BluetoothAdapter</a></code>.
+<p>The <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html">BluetoothAdapter</a></code> is required for any and all Bluetooth
+activity. To get the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html">BluetoothAdapter</a></code>, call the static <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#getDefaultAdapter()">getDefaultAdapter()</a></code> method. This returns a
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html">BluetoothAdapter</a></code> that represents the device's own
+Bluetooth adapter (the Bluetooth radio). There's one Bluetooth adapter for the
+entire system, and your application can interact with it using this object. If
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#getDefaultAdapter()">getDefaultAdapter()</a></code> returns null,
+then the device does not support Bluetooth and your story ends here. For example:</p>
+<pre>
+BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+if (mBluetoothAdapter == null) {
+    // Device does not support Bluetooth
+}
+</pre>
+</li>
+
+<li>Enable Bluetooth.
+<p>Next, you need to ensure that Bluetooth is enabled. Call <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#isEnabled()">isEnabled()</a></code> to check whether Bluetooth is
+currently enabled. If this method returns false, then Bluetooth is disabled. To
+request that Bluetooth be enabled, call <code><a href="https://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code>,
+passing in an <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#ACTION_REQUEST_ENABLE">ACTION_REQUEST_ENABLE</a></code> intent action.
+This call issues a request to enable Bluetooth through the system settings (without
+stopping your application). For example:</p>
+<pre>
+if (!mBluetoothAdapter.isEnabled()) {
+    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+}
+</pre>
+
+<p>A dialog will appear requesting user permission to enable Bluetooth, as shown
+in Figure 1. If the user responds "Yes," the system will begin to enable Bluetooth,
+and focus will return to your application once the process completes (or fails).</p>
+
+<div class="figure" style="width:200px">
+<img src="../../../images/bt_enable_request.png" />
+<strong>Figure 1:</strong> The enabling Bluetooth dialog.
+</div>
+
+<p>The <code>REQUEST_ENABLE_BT</code> constant passed to <code><a href="https://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code> is a locally
+defined integer that must be greater than 0. The system passes this constant back to you in your
+<code><a href="https://developer.android.com/reference/android/app/Activity.html#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code> implementation as the
+<code>requestCode</code> parameter.</p>
+
+<p>If enabling Bluetooth succeeds, your activity receives the <code><a href="https://developer.android.com/reference/android/app/Activity.html#RESULT_OK">RESULT_OK</a></code> result code in the <code><a href="https://developer.android.com/reference/android/app/Activity.html#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code>
+callback. If Bluetooth was not enabled
+due to an error (or the user responded "No") then the result code is <code><a href="https://developer.android.com/reference/android/app/Activity.html#RESULT_CANCELED">RESULT_CANCELED</a></code>.</p>
+</li>
+</ol>
+
+<p>Optionally, your application can also listen for the
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#ACTION_STATE_CHANGED">ACTION_STATE_CHANGED</a></code> broadcast intent, which
+the system broadcasts whenever the Bluetooth state changes. This broadcast contains
+the extra fields <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#EXTRA_STATE">EXTRA_STATE</a></code> and <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#EXTRA_PREVIOUS_STATE">EXTRA_PREVIOUS_STATE</a></code>, containing the new and old
+Bluetooth states, respectively. Possible values for these extra fields are
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#STATE_TURNING_ON">STATE_TURNING_ON</a></code>, <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#STATE_ON">STATE_ON</a></code>, <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#STATE_TURNING_OFF">STATE_TURNING_OFF</a></code>, and <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#STATE_OFF">STATE_OFF</a></code>. Listening for this
+broadcast can be useful if your app needs to detect runtime changes made to the Bluetooth state.</p>
+
+<p class="note"><strong>Tip:</strong> Enabling discoverability will automatically
+enable Bluetooth. If you plan to consistently enable device discoverability before
+performing Bluetooth activity, you can skip
+step 2 above. For more information, read the <a href="#EnablingDiscoverability">enabling discoverability</a>,
+section on this page.</p>
+
+
+<h2 id="FindingDevices">Finding Devices</h2>
+
+<p>Using the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html">BluetoothAdapter</a></code>, you can find remote Bluetooth
+devices either through device discovery or by querying the list of paired
+devices.</p>
+
+<p>Device discovery is a scanning procedure that searches the local area for
+Bluetooth-enabled devices and requests some information about each one. This
+process is sometimes referred to as <i>discovering</i>, <i>inquiring</i>, or <i>scanning</i>.
+However, a nearby Bluetooth device responds to a discovery
+request only if it is currently accepting information requests by being
+<i>discoverable</i>. If a device is
+discoverable, it will respond to the discovery request by sharing some
+information, such as the device's name, its class, and its unique MAC address. Using
+this information, the device that is performing the discovery process can then choose
+to initiate a connection to the discovered device.</p>
+
+<p>Once a connection is made with a remote device for the first time, a pairing
+request is automatically presented to the user. When a device is
+paired, the basic information about that device&mdash;such as the device's name, class,
+and MAC address&mdash;is saved and can be read using the Bluetooth APIs. Using the
+known MAC address for a remote device, a connection can be initiated with it at
+any time without performing discovery, assuming the device is still within range.</p>
+
+<p>Note that there is a difference between being paired and being connected:</p>
+<ul>
+  <li>To be <i>paired</i> means that two devices are aware of each other's existence, have a
+shared link-key that can be used for authentication, and are capable of
+establishing an encrypted connection with each other.</li>
+  <li>To be <i>connected</i> means that the devices currently share an RFCOMM channel
+and are able to transmit data with
+each other. The current Android Bluetooth API's require devices to be paired
+before an RFCOMM connection can be established. Pairing is automatically performed
+when you initiate an encrypted connection with the Bluetooth APIs.</li>
+</ul>
+
+<p>The following sections describe how to find devices that have been paired, or
+discover new devices using device discovery.</p>
+
+<p class="note"><strong>Note:</strong> Android-powered devices are not
+discoverable by default. A user can make
+the device discoverable for a limited time through the system settings, or an
+application can request that the user enable discoverability without leaving the
+application. For more information, see the <a href="#EnablingDiscoverability">enable discoverability</a>
+section on this page.</p>
+
+
+<h3 id="QueryingPairedDevices">Querying paired devices</h3>
+
+<p>Before performing device discovery, it's worth querying the set
+of paired devices to see if the desired device is already known. To do so,
+call <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#getBondedDevices()">getBondedDevices()</a></code>. This
+will return a set of <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code> objects representing
+paired devices. For example, you can query all paired devices and
+get the name and MAC address of each device, as the following
+code snippet demonstrates:</p>
+<pre>
+Set&lt;BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+
+if (pairedDevices.size() > 0) {
+    // There are paired devices. Get the name and address of each paired device.
+    for (BluetoothDevice device : pairedDevices) {
+        String deviceName = device.getName();
+        String deviceHardwareAddress = device.getAddress(); // MAC address
+    }
+}
+</pre>
+
+<p>To initiate a connection with a Bluetooth device, all that's needed from the
+associated <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code> object is the MAC address,
+which you retrieve by calling <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html#getAddress()">getAddress()</a></code>. You can learn more about creating a connection in the section
+about <a href="#ConnectingDevices">Connecting Devices</a>.</p>
+
+<p class="caution"><strong>Caution:</strong> Performing device discovery consumes
+a lot of the Bluetooth adapter's resources. After you have found a device to
+connect to, be certain that you stop discovery with
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#cancelDiscovery()">cancelDiscovery()</a></code> before
+attempting a connection. Also, you shouldn't perform discovery while connected
+to a device because the discovery process significantly reduces the bandwidth
+available for any existing connections.</p>
+
+<h3 id="DiscoveringDevices">Discovering devices</h3>
+
+<p>To start discovering devices, simply call <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#startDiscovery()">startDiscovery()</a></code>. The
+process is asynchronous and returns a boolean value
+indicating whether discovery has successfully started. The discovery process
+usually involves an inquiry scan of about 12 seconds, followed by a page scan of
+each device found to retrieve its Bluetooth name.</p>
+
+<p>In order to receive information about each
+device discovered, your application must register a BroadcastReceiver for the
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html#ACTION_FOUND">ACTION_FOUND</a></code> intent. The system
+broadcasts this intent for each device. The intent contains the extra fields
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html#EXTRA_DEVICE">EXTRA_DEVICE</a></code> and
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html#EXTRA_CLASS">EXTRA_CLASS</a></code>, which in turn contain a
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code> and a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothClass.html">BluetoothClass</a></code>, respectively.
+The following code snippet shows how you can
+register to handle the broadcast when devices are discovered:</p>
+<pre>
+&#64;Override
+protected void onCreate(Bundle savedInstanceState) {
+    ...
+
+    // Register for broadcasts when a device is discovered.
+    IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+    registerReceiver(mReceiver, filter);
+}
+
+// Create a BroadcastReceiver for ACTION_FOUND.
+private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+            // Discovery has found a device. Get the BluetoothDevice
+            // object and its info from the Intent.
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            String deviceName = device.getName();
+            String deviceHardwareAddress = device.getAddress(); // MAC address
+        }
+    }
+};
+
+&#64;Override
+protected void onDestroy() {
+    super.onDestroy();
+    ...
+
+    // Don't forget to unregister the ACTION_FOUND receiver.
+    unregisterReceiver(mReceiver);
+}
+</pre>
+
+<p>To initiate a connection with a Bluetooth device, all that's needed from the
+associated <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code> object is the MAC address,
+which you retrieve by calling
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html#getAddress()">getAddress()</a></code>. You can learn
+more about creating a connection in the section about
+<a href="#ConnectingDevices">Connecting Devices</a>.</p>
+
+<p class="caution"><strong>Caution:</strong> Performing device discovery consumes
+a lot of the Bluetooth adapter's resources. After you have found a device to
+connect to, be certain that you stop discovery with
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#cancelDiscovery()">cancelDiscovery()</a></code> before
+attempting a connection. Also, you shouldn't perform discovery while connected
+to a device because the discovery process significantly reduces the bandwidth
+available for any existing connections.</p>
+
+<h4 id="EnablingDiscoverability">Enabling discoverability</h4>
+
+<p>If you would like to make the local device discoverable to other devices,
+call <code><a href="https://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent, int)">startActivityForResult(Intent, int)</a></code> with the
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#ACTION_REQUEST_DISCOVERABLE">ACTION_REQUEST_DISCOVERABLE</a></code> intent.
+This will issue a request to enable the system's discoverable mode without having
+to navigate to the Settings app, which would stop your own app. By default, the device becomes
+discoverable for 120 seconds, or 2 minutes. You can define a different duration,
+up to 3600 seconds (1 hour), by adding the
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#EXTRA_DISCOVERABLE_DURATION">EXTRA_DISCOVERABLE_DURATION</a></code> extra.
+
+<p class="caution"><b>Caution: </b>If you set the
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#EXTRA_DISCOVERABLE_DURATION">EXTRA_DISCOVERABLE_DURATION</a></code> extra's
+value to 0, the device is always discoverable. This configuration is insecure
+and therefore highly discouraged.</p>
+
+<p>The following code snippet sets the device to be discoverable for 5 minutes (300 seconds):</p>
+
+<pre>
+Intent discoverableIntent =
+        new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+startActivity(discoverableIntent);
+</pre>
+
+<div class="figure" style="width:200px">
+<img src="../../../images/bt_enable_discoverable.png" />
+<strong>Figure 2:</strong> The enabling discoverability dialog.
+</div>
+
+<p>A dialog is displayed, requesting the user's permission to make the device
+discoverable, as shown in Figure 2. If the user responds "Yes," then the device
+becomes discoverable for the specified amount of time. Your activity then
+receives a call to the <code><a href="https://developer.android.com/reference/android/app/Activity.html#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code> callback, with the result code equal to the duration that the device
+is discoverable. If the user responded "No," or if an error occurred, the result code will
+be <code><a href="https://developer.android.com/reference/android/app/Activity.html#RESULT_CANCELED">RESULT_CANCELED</a></code>.</p>
+
+<p class="note"><strong>Note:</strong> If Bluetooth has not been enabled on the device,
+then enabling device discoverability will automatically enable Bluetooth.</p>
+
+<p>The device silently remains in discoverable mode for the allotted time.
+If you would like to be notified when the discoverable mode has changed, you can
+register a BroadcastReceiver for the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#ACTION_SCAN_MODE_CHANGED">ACTION_SCAN_MODE_CHANGED</a></code>
+intent. This intent contains the extra fields <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#EXTRA_SCAN_MODE">EXTRA_SCAN_MODE</a></code> and
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#EXTRA_PREVIOUS_SCAN_MODE">EXTRA_PREVIOUS_SCAN_MODE</a></code>, which provide the
+new and old scan mode, respectively. Possible values for each extra are as follows:</p>
+<dl>
+  <dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#SCAN_MODE_CONNECTABLE_DISCOVERABLE">SCAN_MODE_CONNECTABLE_DISCOVERABLE</a></code></dt>
+  <dd>The device is in discoverable mode.</dd>
+
+  <dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#SCAN_MODE_CONNECTABLE">SCAN_MODE_CONNECTABLE</a></code></dt>
+  <dd>The device is not in discoverable mode but can still receive
+  connections.</dd>
+
+  <dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#SCAN_MODE_NONE">SCAN_MODE_NONE</a></code></dt>
+  <dd>The device is not in discoverable mode and cannot receive
+  connections.</dl>
+</dl>
+
+<p>If you are initiating the connection to a remote device, you do not need to
+enable device discoverability.  Enabling discoverability is only necessary when
+you want your application to host a server socket that accepts incoming
+connections, as remote devices must be able to discover other devices before
+initiating connections to those other devices.</p>
+
+<h2 id="ConnectingDevices">Connecting Devices</h2>
+
+<p>In order to create a connection between two devices, you
+must implement both the server-side and client-side mechanisms because one
+device must open a server socket, and the other one must initiate the connection
+using the server device's MAC address. The server device and the client device
+each obtain the required <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code>
+in different ways. The server receives socket information when an incoming
+connection is accepted. The client provides socket information when it opens an
+RFCOMM channel to the server.</p>
+
+<p>The server and client are considered
+connected to each other when they each have a connected
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> on the same RFCOMM channel. At this
+point, each device can obtain input and output streams, and and data transfer can
+begin, which is discussed in the section about <a
+href="#ManagingAConnection">Managing a Connection</a>. This section describes how
+to initiate the connection between two devices.</p>
+
+<h3 id="ConnectionTechniques">Connection techniques</h3>
+
+<p>One implementation technique is to automatically prepare each device as a
+server so that each device has a server socket open and listening for connections.
+In this case, either device can initiate a connection with the other and become the
+client. Alternatively, one device can explicitly host the connection and open
+a server socket on demand, and the other device initiates the connection.</p>
+
+<div class="figure" style="width:200px">
+<img src="../../../images/bt_pairing_request.png" />
+<strong>Figure 3:</strong> The Bluetooth pairing dialog.
+</div>
+
+<p class="note"><strong>Note:</strong> If the two devices have not been previously paired,
+then the Android framework automatically shows a pairing request notification or
+dialog to the user during the connection procedure, as shown in Figure 3.
+Therefore, when your application attempts to connect devices, it doesn't need to
+be concerned about whether or not the devices are
+paired. Your RFCOMM connection attempt will block until the user has successfully paired
+the two devices, and the attempt fails if the user rejects pairing, or if the
+pairing process fails or times out.</p>
+
+<h3 id="ConnectingAsAServer">Connecting as a server</h3>
+
+<p>When you want to connect two devices, one must act as a server by holding an
+open <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code>. The purpose of the server
+socket is to listen for incoming connection requests and
+provide a connected <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> after a request is
+accepted. When the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> is acquired from the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code>,
+the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code> can&mdash;and should&mdash;be
+discarded, unless you want the device to accept more connections.</p>
+
+<div class="sidebox-wrapper">
+<div class="sidebox">
+<h2>About UUID</h2>
+
+<p>A Universally Unique Identifier (UUID) is a standardized 128-bit format for a string
+ID used to uniquely identify information. The point of a UUID is that it's big
+enough that you can select any random ID, and it won't clash with any other ID.
+In this case, it's
+used to uniquely identify your application's Bluetooth service. To get a UUID to
+use with your application, you can use one of the many random UUID generators on
+the web, then initialize a <code><a href="https://developer.android.com/reference/java/util/UUID.html">UUID</a></code> with <code><a href="https://developer.android.com/reference/java/util/UUID.html#fromString(java.lang.String)">fromString(String)</a></code>.</p>
+</div>
+</div>
+
+<p>To set up a server socket and accept a connection, complete the following
+sequence of steps:</p>
+
+<ol>
+<li>Get a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code> by calling
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#listenUsingRfcommWithServiceRecord(java.lang.String, java.util.UUID)">listenUsingRfcommWithServiceRecord()</a></code>.
+<p>The string is an identifiable name of your service, which the system
+automatically writes to a new Service Discovery Protocol (SDP) database entry on
+the device. The name is arbitrary and can simply be your application name. The
+UUID is also included in the SDP entry and forms the basis for the connection
+agreement with the client device. That is, when the client attempts to connect
+with this device, it will carry a UUID that uniquely identifies the service with
+which it wants to connect. These UUIDs must match in order for the connection to
+be accepted.</p>
+</li>
+
+<li>Start listening for connection requests by calling
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html#accept()">accept()</a></code>.
+<p>This is a blocking call. It returns when either a connection has been
+accepted or an exception has occurred. A connection is accepted only when a
+remote device has sent a connection request containing a UUID that matches the one
+registered with this listening server socket. When successful,
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html#accept()">accept()</a></code> returns a connected
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code>.</p>
+</li>
+
+<li>Unless you want to accept additional connections, call
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html#close()">close()</a></code>.
+<p>This method call releases the server socket and all its resources, but doesn't close the
+connected <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> that's been returned by <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html#accept()">accept()</a></code>. Unlike TCP/IP, RFCOMM allows only one
+connected client per channel at a time, so in most cases, it makes sense to call <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html#close()">close()</a></code> on the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code> immediately after accepting a connected
+socket.</p>
+</li>
+</ol>
+
+<p>Because the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html#accept()">accept()</a></code> call is
+a blocking call, it should not be executed in the main activity UI thread so
+that your application can still respond to other user interactions. It usually makes
+sense to do all work that involves a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code> or <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> in a new
+thread managed by your application. To abort a blocked call such as <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html#accept()">accept()</a></code>, call <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html#close()">close()</a></code> on the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code> or <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> from another thread. Note that all methods on a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code> or <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code>
+are thread-safe.</p>
+
+<h4>Example</h4>
+
+<p>Here's a simplified thread for the server component that accepts incoming
+connections:</p>
+<pre>
+private class AcceptThread extends Thread {
+    private final BluetoothServerSocket mmServerSocket;
+
+    public AcceptThread() {
+        // Use a temporary object that is later assigned to mmServerSocket
+        // because mmServerSocket is final.
+        BluetoothServerSocket tmp = null;
+        try {
+            // MY_UUID is the app's UUID string, also used by the client code.
+            tmp = mBluetoothAdapter.listenUsingRfcommWithServiceRecord(NAME, MY_UUID);
+        } catch (IOException e) {
+            Log.e(TAG, "Socket's listen() method failed", e);
+        }
+        mmServerSocket = tmp;
+    }
+
+    public void run() {
+        BluetoothSocket socket = null;
+        // Keep listening until exception occurs or a socket is returned.
+        while (true) {
+            try {
+                socket = mmServerSocket.accept();
+            } catch (IOException e) {
+                Log.e(TAG, "Socket's accept() method failed", e);
+                break;
+            }
+
+            if (socket != null) {
+                // A connection was accepted. Perform work associated with
+                // the connection in a separate thread.
+                manageMyConnectedSocket(socket);
+                mmServerSocket.close();
+                break;
+            }
+        }
+    }
+
+    // Closes the connect socket and causes the thread to finish.
+    public void cancel() {
+        try {
+            mmServerSocket.close();
+        } catch (IOException e) {
+            Log.e(TAG, "Could not close the connect socket", e);
+        }
+    }
+}
+</pre>
+
+<p>In this example, only one incoming connection is desired, so as soon as a
+connection is accepted and the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> is
+acquired, the app
+passes the acquired <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> to a separate
+thread, closes the
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code>, and breaks out of the loop.</p>
+
+<p>Note that when <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html#accept()">accept()</a></code>
+returns the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code>, the socket is already
+connected. Therefore, you shouldn't call <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html#connect()">connect()</a></code>,
+as you do from the client side.</p>
+
+<p>The app-specific <code>manageMyConnectedSocket()</code> method is designed to
+initiate the thread for transferring data, which is discussed in the section
+about <a href="#ManagingAConnection">Managing a Connection</a>.</p>
+
+<p>Usually, you should close your <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code>
+as soon as you are done listening for incoming connections. In this example, <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html#close()">close()</a></code> is called as soon
+as the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> is acquired. You may also want
+to provide a public method in your thread that can close the private <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> in the event that you need to stop listening on that
+server socket.</p>
+
+
+<h3 id="ConnectingAsAClient">Connecting as a client</h3>
+
+<p>In order to initiate a connection with a remote device that is accepting
+connections on an open server socket, you must first obtain a
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code> object that represents the remote device.
+To learn how to create a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code>, see <a
+href="#FindingDevices">Finding Devices</a>. You must then use the
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code> to acquire a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> and initiate the connection.</p>
+
+<p>The basic procedure is as follows:</p>
+
+<ol>
+<li>Using the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code>, get a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> by calling <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html#createRfcommSocketToServiceRecord(java.util.UUID)">createRfcommSocketToServiceRecord(UUID)</a></code>.
+<p>This method initializes a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> object that
+allows the client to connect to a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code>. The UUID passed here
+must match the UUID used by the server device when it called
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#listenUsingRfcommWithServiceRecord(java.lang.String, java.util.UUID)">listenUsingRfcommWithServiceRecord(String, UUID)</a></code> to open its <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code>. To use a matching UUID, hard-code the UUID
+string into your application, and then reference it from both the server and client
+code.</p>
+</li>
+
+<li>Initiate the connection by calling <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html#connect()">connect()</a></code>. Note that this method is a blocking call.
+<p>After a client calls this method, the system performs an SDP lookup to find
+the remote device with the matching UUID. If the lookup is successful and the remote device
+accepts the connection, it shares the RFCOMM channel to use during the
+connection, and the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html#connect()">connect()</a></code> method returns.
+If the connection fails, or if the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html#connect()">connect()</a></code> method times out (after about
+12 seconds), then the method throws an <code><a href="https://developer.android.com/reference/java/io/IOException.html">IOException</a></code>.</p>
+<p>Because <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html#connect()">connect()</a></code> is a blocking call,
+you should always perform this connection procedure in a thread that is separate from the
+main activity (UI) thread.</p>
+<p class="note"><b>Note: </b>You should always call <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#cancelDiscovery()">cancelDiscovery()</a></code> to
+ensure that the device is not performing device discovery before you call
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html#connect()">connect()</a></code>. If discovery is in progress, then
+the connection attempt is significantly slowed, and it's more likely to fail.</p>
+</li>
+</ol>
+
+<h4>Example</h4>
+
+<p>Here is a basic example of a client thread that initiates a Bluetooth
+connection:</p>
+<pre>
+private class ConnectThread extends Thread {
+    private final BluetoothSocket mmSocket;
+    private final BluetoothDevice mmDevice;
+
+    public ConnectThread(BluetoothDevice device) {
+        // Use a temporary object that is later assigned to mmSocket
+        // because mmSocket is final.
+        BluetoothSocket tmp = null;
+        mmDevice = device;
+
+        try {
+            // Get a BluetoothSocket to connect with the given BluetoothDevice.
+            // MY_UUID is the app's UUID string, also used in the server code.
+            tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
+        } catch (IOException e) {
+            Log.e(TAG, "Socket's create() method failed", e);
+        }
+        mmSocket = tmp;
+    }
+
+    public void run() {
+        // Cancel discovery because it otherwise slows down the connection.
+        mBluetoothAdapter.cancelDiscovery();
+
+        try {
+            // Connect to the remote device through the socket. This call blocks
+            // until it succeeds or throws an exception.
+            mmSocket.connect();
+        } catch (IOException connectException) {
+            // Unable to connect; close the socket and return.
+            try {
+                mmSocket.close();
+            } catch (IOException closeException) {
+                Log.e(TAG, "Could not close the client socket", closeException);
+            }
+            return;
+        }
+
+        // The connection attempt succeeded. Perform work associated with
+        // the connection in a separate thread.
+        manageMyConnectedSocket(mmSocket);
+    }
+
+    // Closes the client socket and causes the thread to finish.
+    public void cancel() {
+        try {
+            mmSocket.close();
+        } catch (IOException e) {
+            Log.e(TAG, "Could not close the client socket", e);
+        }
+    }
+}
+</pre>
+
+<p>Notice that, in this snippet,
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#cancelDiscovery()">cancelDiscovery()</a></code> is called before
+the connection attempt occurs. You should always call
+<code>cancelDiscovery()</code> before
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html#connect()">connect()</a></code>, especially because
+<code>cancelDiscovery()</code> succeeds regardless of whether device discovery
+is currently in progress. If your app needs to determine whether device
+discovery is in progress, however, you can check using
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html#isDiscovering()">isDiscovering()</a></code>.</p>
+
+<p>The app-specific <code>manageMyConnectedSocket()</code> method is designed to
+initiate the thread for transferring data, which is discussed in the section
+about <a href="#ManagingAConnection">Managing a Connection</a>.</p>
+
+<p>When you're done with your <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code>, always
+call <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html#close()">close()</a></code>. Doing so will
+immediately close the connected socket and release all related internal
+resources.</p>
+
+
+<h2 id="ManagingAConnection">Managing a Connection</h2>
+
+<p>After you have successfully connected multiple devices, each one has a
+connected <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code>. This is where the fun
+begins because you can share information between devices. Using the
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code>, the general procedure to transfer
+data is as follows:</p>
+<ol>
+<li>Get the <code><a href="https://developer.android.com/reference/java/io/InputStream.html">InputStream</a></code> and <code><a href="https://developer.android.com/reference/java/io/OutputStream.html">OutputStream</a></code> that
+handle transmissions through the socket using <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html#getInputStream()">getInputStream()</a></code> and
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html#getOutputStream()">getOutputStream()</a></code>, respectively.</li>
+
+<li>Read and write data to the streams using <code><a href="https://developer.android.com/reference/java/io/InputStream.html#read(byte[])">read(byte[])</a></code> and <code><a href="https://developer.android.com/reference/java/io/OutputStream.html#write(byte[])">write(byte[])</a></code>.</li>
+</ol>
+
+<p>There are, of course, implementation details to consider. In particular,
+you should use a dedicated thread for reading from the stream and writing to it. This is
+important because both the <code><a href="https://developer.android.com/reference/java/io/InputStream.html#read(byte[])">read(byte[])</a></code> and
+<code><a href="https://developer.android.com/reference/java/io/OutputStream.html#write(byte[])">write(byte[])</a></code> methods are blocking calls. The
+<code><a href="https://developer.android.com/reference/java/io/InputStream.html#read(byte[])">read(byte[])</a></code> method blocks until there is something to read
+from the stream. The <code><a href="https://developer.android.com/reference/java/io/OutputStream.html#write(byte[])">write(byte[])</a></code> method doesn't usually
+block, but it can block for flow control if the remote device is not calling
+<code><a href="https://developer.android.com/reference/java/io/InputStream.html#read(byte[])">read(byte[])</a></code> quickly enough and the intermediate buffers become full as a result.
+So, your main loop in the thread should be dedicated to reading from the
+<code><a href="https://developer.android.com/reference/java/io/InputStream.html">InputStream</a></code>. A separate public method in the thread can be used to initiate
+writes to the <code><a href="https://developer.android.com/reference/java/io/OutputStream.html">OutputStream</a></code>.</p>
+
+<h4>Example</h4>
+
+<p>Here's an example of how you can transfer data between two devices connected
+over Bluetooth:</p>
+<pre>
+public class MyBluetoothService {
+    private static final String TAG = "MY_APP_DEBUG_TAG";
+    private Handler mHandler; // handler that gets info from Bluetooth service
+
+    // Defines several constants used when transmitting messages between the
+    // service and the UI.
+    private interface MessageConstants {
+        public static final int MESSAGE_READ = 0;
+        public static final int MESSAGE_WRITE = 1;
+        public static final int MESSAGE_TOAST = 2;
+
+        // ... (Add other message types here as needed.)
+    }
+
+    private class ConnectedThread extends Thread {
+        private final BluetoothSocket mmSocket;
+        private final InputStream mmInStream;
+        private final OutputStream mmOutStream;
+        private byte[] mmBuffer; // mmBuffer store for the stream
+
+        public ConnectedThread(BluetoothSocket socket) {
+            mmSocket = socket;
+            InputStream tmpIn = null;
+            OutputStream tmpOut = null;
+
+            // Get the input and output streams; using temp objects because
+            // member streams are final.
+            try {
+                tmpIn = socket.getInputStream();
+            } catch (IOException e) {
+                Log.e(TAG, "Error occurred when creating input stream", e);
+            }
+            try {
+                tmpOut = socket.getOutputStream();
+            } catch (IOException e) {
+                Log.e(TAG, "Error occurred when creating output stream", e);
+            }
+
+            mmInStream = tmpIn;
+            mmOutStream = tmpOut;
+        }
+
+        public void run() {
+            mmBuffer = new byte[1024];
+            int numBytes; // bytes returned from read()
+
+            // Keep listening to the InputStream until an exception occurs.
+            while (true) {
+                try {
+                    // Read from the InputStream.
+                    numBytes = mmInStream.read(mmBuffer);
+                    // Send the obtained bytes to the UI activity.
+                    Message readMsg = mHandler.obtainMessage(
+                            MessageConstants.MESSAGE_READ, numBytes, -1,
+                            mmBuffer);
+                    readMsg.sendToTarget();
+                } catch (IOException e) {
+                    Log.d(TAG, "Input stream was disconnected", e);
+                    break;
+                }
+            }
+        }
+
+        // Call this from the main activity to send data to the remote device.
+        public void write(byte[] bytes) {
+            try {
+                mmOutStream.write(bytes);
+
+                // Share the sent message with the UI activity.
+                Message writtenMsg = mHandler.obtainMessage(
+                        MessageConstants.MESSAGE_WRITE, -1, -1, mmBuffer);
+                writtenMsg.sendToTarget();
+            } catch (IOException e) {
+                Log.e(TAG, "Error occurred when sending data", e);
+
+                // Send a failure message back to the activity.
+                Message writeErrorMsg =
+                        mHandler.obtainMessage(MessageConstants.MESSAGE_TOAST);
+                Bundle bundle = new Bundle();
+                bundle.putString("toast",
+                        "Couldn't send data to the other device");
+                writeErrorMsg.setData(bundle);
+                mHandler.sendMessage(writeErrorMsg);
+            }
+        }
+
+        // Call this method from the main activity to shut down the connection.
+        public void cancel() {
+            try {
+                mmSocket.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Could not close the connect socket", e);
+            }
+        }
+    }
+}
+</pre>
+
+<p>After the constructor acquires the necessary streams, the thread waits for
+data to come through the <code><a href="https://developer.android.com/reference/java/io/InputStream.html">InputStream</a></code>. When <code><a href="https://developer.android.com/reference/java/io/InputStream.html#read(byte[])">read(byte[])</a></code> returns with
+data from the stream, the data is sent to the main activity using a member
+<code><a href="https://developer.android.com/reference/android/os/Handler.html">Handler</a></code> from the parent class. The thread then waits for more
+bytes to be read from the <code><a href="https://developer.android.com/reference/java/io/InputStream.html">InputStream</a></code>.</p>
+
+<p>Sending outgoing data is as simple as calling the thread's
+<code>write()</code> method from the main activity and passing in the bytes to
+be sent. This method calls <code><a href="https://developer.android.com/reference/java/io/OutputStream.html#write(byte[])">write(byte[])</a></code> to send
+the data to the remote device. If an <code><a href="https://developer.android.com/reference/java/io/IOException.html">IOException</a></code> is thrown when
+calling <code><a href="https://developer.android.com/reference/java/io/OutputStream.html#write(byte[])">write(byte[])</a></code>, the thread sends a toast to
+the main activity, explaining to the user that the device couldn't send the
+given bytes to the other (connected) device.</p>
+
+<p>The thread's <code>cancel()</code> method allows the connection to be
+terminated at any time by closing the <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code>.
+This method should always be called when you're done using the Bluetooth
+connection.</p>
+
+<p>For a demonstration of using the Bluetooth APIs, see the <a
+href="https://developer.android.com/samples/BluetoothChat/index.html">Bluetooth Chat sample app</a>.</p>
+
+<h2 id="KeyClassesAndInterfaces">Key Classes and Interfaces</h2>
+
+<p>All of the Bluetooth APIs are available in the <code><a href="https://developer.android.com/reference/android/bluetooth/package-summary.html">android.bluetooth</a></code>
+package. Here's a summary of the classes and interfaces you will need to create Bluetooth
+connections:</p>
+
+<dl>
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html">BluetoothAdapter</a></code></dt>
+<dd>Represents the local Bluetooth adapter (Bluetooth radio). The
+<code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html">BluetoothAdapter</a></code> is the entry-point for all Bluetooth
+interaction. Using this,
+you can discover other Bluetooth devices, query a list of bonded (paired)
+devices, instantiate a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code> using a known
+MAC address, and create a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code> to
+listen for communications
+from other devices.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html">BluetoothDevice</a></code></dt>
+<dd>Represents a remote Bluetooth device. Use this to request a connection
+with a remote device through a <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code> or
+query information about the
+device such as its name, address, class, and bonding state.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code></dt>
+<dd>Represents the interface for a Bluetooth socket (similar to a TCP
+<code><a href="https://developer.android.com/reference/java/net/Socket.html">Socket</a></code>). This is the connection point that allows
+an application to exchange data with another Bluetooth device using
+<code><a href="https://developer.android.com/reference/java/io/InputStream.html">InputStream</a></code> and <code><a href="https://developer.android.com/reference/java/io/OutputStream.html">OutputStream</a></code>.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothServerSocket.html">BluetoothServerSocket</a></code></dt>
+<dd>Represents an open server socket that listens for incoming requests
+(similar to a TCP <code><a href="https://developer.android.com/reference/java/net/ServerSocket.html">ServerSocket</a></code>). In order to connect two
+Android devices, one device must open a server socket with this class. When a
+remote Bluetooth device makes a connection request to this device, the device
+accepts the connection, then returns a connected <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket.html">BluetoothSocket</a></code>.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothClass.html">BluetoothClass</a></code></dt>
+<dd>Describes the general characteristics and capabilities of a Bluetooth
+device. This is a read-only set of properties that defines the device's classes and
+services. Although this information provides a useful hint regarding a device's
+type, the attributes of this class don't necessarily describe all Bluetooth
+profiles and services that the device supports.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothProfile.html">BluetoothProfile</a></code></dt>
+<dd>An interface that
+represents a Bluetooth profile. A <em>Bluetooth profile</em> is a wireless
+interface specification for Bluetooth-based communication between devices. An
+example is the Hands-Free profile.  For more discussion of profiles, see <a
+href="#Profiles">Working with Profiles</a>.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHeadset.html">BluetoothHeadset</a></code></dt>
+<dd>Provides support for
+Bluetooth headsets to be used with mobile phones. This includes both the Bluetooth
+Headset profile and the Hands-Free (v1.5) profile.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothA2dp.html">BluetoothA2dp</a></code></dt>
+<dd> Defines how high-quality
+audio can be streamed from one device to another over a Bluetooth connection
+using the Advanced Audio Distribution Profile (A2DP).</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealth.html">BluetoothHealth</a></code></dt>
+<dd> Represents a Health Device Profile proxy that controls the Bluetooth service.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealthCallback.html">BluetoothHealthCallback</a></code></dt>
+<dd>An abstract class that you use to implement <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealth.html">BluetoothHealth</a></code> callbacks. You must extend this class and
+implement the callback methods to receive updates about changes in the
+application’s registration state and Bluetooth channel state.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHealthAppConfiguration.html">BluetoothHealthAppConfiguration</a></code></dt>
+<dd>Represents an application configuration that the Bluetooth Health third-party
+application registers to communicate with a remote Bluetooth health
+device.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothProfile.ServiceListener.html">BluetoothProfile.ServiceListener</a></code></dt>
+<dd>An interface that notifies <code><a href="https://developer.android.com/reference/android/bluetooth/BluetoothProfile.html">BluetoothProfile</a></code>
+interprocess communication (IPC) clients when they have been connected to or
+disconnected from the internal service that runs a particular profile. </dd>
+
+</dl>
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html" title="Support">Support</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="_3lD3lNf2watNFJKT7rp3xCe0Up3kdmtO5RdBVFO5V06MTQ5NzUxNTkwOTUzMTgxMA" />
+      <input type="hidden" name="next" value="bluetooth.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+             selected="selected" >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Email address</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified803f.js?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en803f.js?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists803f.js?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists803f.js?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists803f.js?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists803f.js?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists803f.js?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_en.js?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/connectivity/bluetooth.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:01:43 GMT -->
+</html>

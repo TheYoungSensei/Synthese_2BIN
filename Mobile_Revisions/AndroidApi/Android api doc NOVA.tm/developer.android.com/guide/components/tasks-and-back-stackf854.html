@@ -1,0 +1,1518 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<!-- Mirrored from developer.android.com/guide/components/tasks-and-back-stack.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:17:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="xLPnuQh6yFX2M9DpiFTckqZuUccJ26wIgNrDgrWFV1s6MTQ5NzUxNzM1NDIzNzU4MA" />
+
+  
+    <link rel="canonical" href="tasks-and-back-stackf854.html?hl=zh-tw">
+  
+
+  
+    <link rel="alternate" href="tasks-and-back-stack9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="tasks-and-back-stackf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="tasks-and-back-stack327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="tasks-and-back-stack0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="tasks-and-back-stack7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="tasks-and-back-stack232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="tasks-and-back-stack0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="tasks-and-back-stackde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="tasks-and-back-stack9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="tasks-and-back-stack6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/tasks-and-back-stack.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/tasks-and-back-stack.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/tasks-and-back-stack.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/tasks-and-back-stack.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/tasks-and-back-stack.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/tasks-and-back-stack.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/tasks-and-back-stack.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/tasks-and-back-stack.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/tasks-and-back-stack.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/tasks-and-back-stack.html?hl=pt-br" hreflang="pt-br-cn">
+  
+
+  <link rel="alternate" href="activities/tasks-and-back-stack.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../_static/f304fc21fa/images/android/faviconf854.png?hl=zh-tw">
+
+<link rel="apple-touch-icon" href="../../_static/f304fc21fa/images/android/touchicon-180f854.png?hl=zh-tw">
+
+
+<title>
+
+  工作和返回堆疊 | Android Developers
+
+</title>
+
+  <meta name="description" content="一個應用程式通常包含多個 Activity 。每個 Activity 應根據使用者可執行的特定動作類型加以設計，且要能啟動其他 Activity。 例如，電子郵件應用程式可能會有一個可顯示新訊息清單的 Activity。 當使用者選擇一則訊息，會開啟新的 Activity 以檢視該訊息。 Activity 甚至可啟動裝置上其他應用程式的 Activity。例如，如果您的應用程式想要傳送一封電子郵件訊息，您可以定義一個意圖以執行「傳送」動作並包含一些資料，像是電子郵件地址和訊息。 其他應用程式中宣告處理此意圖類型的…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../static/css/defaultc8d7.css?hl=zh-tw?v=2017061509" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../_static/f304fc21fa/js/android_3p-bundlef854.js?hl=zh-tw" type="text/javascript"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_closure_android__zh_twf854.js?hl=zh-tw"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_androidf854.js?hl=zh-tw"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../static/js/docsc8d7.js?hl=zh-tw?v=2017061509" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "zh-tw", "served": "zh-tw"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=zh-tw">
+          <img class="dac-header-logo-image" src="../../static/images/android_logof854.png?hl=zh-tw"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=zh-tw"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=zh-tw"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=zh-tw" width="18" height="19" alt="Play 管理中心">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="搜尋">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">返回</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../indexf854.html?hl=zh-tw" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="fundamentalsf854.html?hl=zh-tw" >App Fundamentals</a></li><li><a href="../practices/compatibilityf854.html?hl=zh-tw" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/permissions/indexf854.html?hl=zh-tw" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/permissions/requestingf854.html?hl=zh-tw" >Requesting Permissions</a></li><li><a href="../topics/permissions/definingf854.html?hl=zh-tw" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../platform/indexf854.html?hl=zh-tw" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../platform/j8-jackf854.html?hl=zh-tw"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../practices/verifying-apps-artf854.html?hl=zh-tw" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="indexf854.html?hl=zh-tw" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="intents-filtersf854.html?hl=zh-tw" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="intents-commonf854.html?hl=zh-tw" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="activities/indexf854.html?hl=zh-tw" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="activities/intro-activitiesf854.html?hl=zh-tw" >Introduction to Activities</a></li><li><a href="activities/activity-lifecyclef854.html?hl=zh-tw" >The Activity Lifecycle</a></li><li><a href="activities/state-changesf854.html?hl=zh-tw" >Activity State Changes</a></li><li><a href="activities/tasks-and-back-stackf854.html?hl=zh-tw" >Tasks and Back Stack</a></li><li><a href="activities/process-lifecyclef854.html?hl=zh-tw" >Processes and Application Lifecycle</a></li><li><a href="activities/parcelables-and-bundlesf854.html?hl=zh-tw" >Parcelables and Bundles</a></li><li><a href="activities/recentsf854.html?hl=zh-tw" >Recents Screen</a></li></ul></li><li><a href="fragmentsf854.html?hl=zh-tw" >Fragments</a></li><li><a href="loadersf854.html?hl=zh-tw" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="servicesf854.html?hl=zh-tw" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="bound-servicesf854.html?hl=zh-tw" >Bound Services</a></li><li><a href="aidlf854.html?hl=zh-tw" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/providers/content-providersf854.html?hl=zh-tw" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/providers/content-provider-basicsf854.html?hl=zh-tw" >Content Provider Basics</a></li><li><a href="../topics/providers/content-provider-creatingf854.html?hl=zh-tw" >Creating a Content Provider</a></li><li><a href="../topics/providers/calendar-providerf854.html?hl=zh-tw" >Calendar Provider</a></li><li><a href="../topics/providers/contacts-providerf854.html?hl=zh-tw" >Contacts Provider</a></li><li><a href="../topics/providers/document-providerf854.html?hl=zh-tw" >Open files using Storage Access Framework</a></li><li><a href="../topics/providers/create-document-providerf854.html?hl=zh-tw" >Create a Custom Document Provider</a></li></ul></li><li><a href="broadcastsf854.html?hl=zh-tw" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/appwidgets/indexf854.html?hl=zh-tw" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/appwidgets/hostf854.html?hl=zh-tw" >App Widget Host</a></li></ul></li><li><a href="processes-and-threadsf854.html?hl=zh-tw" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/indexf854.html?hl=zh-tw" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../topics/resources/providing-resourcesf854.html?hl=zh-tw" >Providing Resources</a></li><li><a href="../topics/resources/accessing-resourcesf854.html?hl=zh-tw" >Accessing Resources</a></li><li><a href="../topics/resources/runtime-changesf854.html?hl=zh-tw" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/localizationf854.html?hl=zh-tw" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/icu4j-frameworkf854.html?hl=zh-tw" >ICU4J Android Framework APIs</a></li><li><a href="../topics/resources/multilingual-supportf854.html?hl=zh-tw" >Language and Locale</a></li></ul></li><li><a href="../topics/resources/complex-xml-resourcesf854.html?hl=zh-tw" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/available-resourcesf854.html?hl=zh-tw" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/animation-resourcef854.html?hl=zh-tw" >Animation</a></li><li><a href="../topics/resources/color-list-resourcef854.html?hl=zh-tw" >Color State List</a></li><li><a href="../topics/resources/drawable-resourcef854.html?hl=zh-tw" >Drawable</a></li><li><a href="../topics/resources/layout-resourcef854.html?hl=zh-tw" >Layout</a></li><li><a href="../topics/resources/menu-resourcef854.html?hl=zh-tw" >Menu</a></li><li><a href="../topics/resources/string-resourcef854.html?hl=zh-tw" >String</a></li><li><a href="../topics/resources/style-resourcef854.html?hl=zh-tw" >Style</a></li><li><a href="../topics/resources/more-resourcesf854.html?hl=zh-tw" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/manifest/manifest-introf854.html?hl=zh-tw" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/manifest/action-elementf854.html?hl=zh-tw" >&lt;action&gt;</a></li><li><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw" >&lt;activity&gt;</a></li><li><a href="../topics/manifest/activity-alias-elementf854.html?hl=zh-tw" >&lt;activity-alias&gt;</a></li><li><a href="../topics/manifest/application-elementf854.html?hl=zh-tw" >&lt;application&gt;</a></li><li><a href="../topics/manifest/category-elementf854.html?hl=zh-tw" >&lt;category&gt;</a></li><li><a href="../topics/manifest/compatible-screens-elementf854.html?hl=zh-tw" >&lt;compatible-screens&gt;</a></li><li><a href="../topics/manifest/data-elementf854.html?hl=zh-tw" >&lt;data&gt;</a></li><li><a href="../topics/manifest/grant-uri-permission-elementf854.html?hl=zh-tw" >&lt;grant-uri-permission&gt;</a></li><li><a href="../topics/manifest/instrumentation-elementf854.html?hl=zh-tw" >&lt;instrumentation&gt;</a></li><li><a href="../topics/manifest/intent-filter-elementf854.html?hl=zh-tw" >&lt;intent-filter&gt;</a></li><li><a href="../topics/manifest/manifest-elementf854.html?hl=zh-tw" >&lt;manifest&gt;</a></li><li><a href="../topics/manifest/meta-data-elementf854.html?hl=zh-tw" >&lt;meta-data&gt;</a></li><li><a href="../topics/manifest/path-permission-elementf854.html?hl=zh-tw" >&lt;path-permission&gt;</a></li><li><a href="../topics/manifest/permission-elementf854.html?hl=zh-tw" >&lt;permission&gt;</a></li><li><a href="../topics/manifest/permission-group-elementf854.html?hl=zh-tw" >&lt;permission-group&gt;</a></li><li><a href="../topics/manifest/permission-tree-elementf854.html?hl=zh-tw" >&lt;permission-tree&gt;</a></li><li><a href="../topics/manifest/provider-elementf854.html?hl=zh-tw" >&lt;provider&gt;</a></li><li><a href="../topics/manifest/receiver-elementf854.html?hl=zh-tw" >&lt;receiver&gt;</a></li><li><a href="../topics/manifest/service-elementf854.html?hl=zh-tw" >&lt;service&gt;</a></li><li><a href="../topics/manifest/supports-gl-texture-elementf854.html?hl=zh-tw" >&lt;supports-gl-texture&gt;</a></li><li><a href="../topics/manifest/supports-screens-elementf854.html?hl=zh-tw" >&lt;supports-screens&gt;</a></li><li><a href="../topics/manifest/uses-configuration-elementf854.html?hl=zh-tw" >&lt;uses-configuration&gt;</a></li><li><a href="../topics/manifest/uses-feature-elementf854.html?hl=zh-tw" >&lt;uses-feature&gt;</a></li><li><a href="../topics/manifest/uses-library-elementf854.html?hl=zh-tw" >&lt;uses-library&gt;</a></li><li><a href="../topics/manifest/uses-permission-elementf854.html?hl=zh-tw" >&lt;uses-permission&gt;</a></li><li><a href="../topics/manifest/uses-permission-sdk-23-elementf854.html?hl=zh-tw" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../topics/manifest/uses-sdk-elementf854.html?hl=zh-tw" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/indexf854.html?hl=zh-tw" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/overviewf854.html?hl=zh-tw" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/declaring-layoutf854.html?hl=zh-tw" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/layout/linearf854.html?hl=zh-tw" >Linear Layout</a></li><li><a href="../topics/ui/layout/relativef854.html?hl=zh-tw" >Relative Layout</a></li><li><a href="../topics/ui/layout/recyclerviewf854.html?hl=zh-tw" >Recycler View</a></li><li><a href="../topics/ui/layout/listviewf854.html?hl=zh-tw" >List View</a></li><li><a href="../topics/ui/layout/gridviewf854.html?hl=zh-tw" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/controlsf854.html?hl=zh-tw" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/controls/buttonf854.html?hl=zh-tw" >Buttons</a></li><li><a href="../topics/ui/controls/checkboxf854.html?hl=zh-tw" >Checkboxes</a></li><li><a href="../topics/ui/controls/radiobuttonf854.html?hl=zh-tw" >Radio Buttons</a></li><li><a href="../topics/ui/controls/togglebuttonf854.html?hl=zh-tw" >Toggle Buttons</a></li><li><a href="../topics/ui/controls/spinnerf854.html?hl=zh-tw" >Spinners</a></li><li><a href="../topics/ui/controls/pickersf854.html?hl=zh-tw" >Pickers</a></li></ul></li><li><a href="../topics/ui/ui-eventsf854.html?hl=zh-tw" >Input Events</a></li><li><a href="../topics/ui/menusf854.html?hl=zh-tw" >Menus</a></li><li><a href="../topics/ui/settingsf854.html?hl=zh-tw" >Settings</a></li><li><a href="../topics/ui/dialogsf854.html?hl=zh-tw" >Dialogs</a></li><li><a href="../topics/ui/notifiers/notificationsf854.html?hl=zh-tw" >Notifications</a></li><li><a href="../topics/ui/notifiers/toastsf854.html?hl=zh-tw" >Toasts</a></li><li><a href="../topics/ui/shortcutsf854.html?hl=zh-tw" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/search/indexf854.html?hl=zh-tw" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/search/search-dialogf854.html?hl=zh-tw" >Creating a Search Interface</a></li><li><a href="../topics/search/adding-recent-query-suggestionsf854.html?hl=zh-tw" >Adding Recent Query Suggestions</a></li><li><a href="../topics/search/adding-custom-suggestionsf854.html?hl=zh-tw" >Adding Custom Suggestions</a></li><li><a href="../topics/search/searchable-configf854.html?hl=zh-tw" >Searchable Configuration</a></li></ul></li><li><a href="../topics/ui/multi-windowf854.html?hl=zh-tw" >Multi-Window Support</a></li><li><a href="../topics/ui/drag-dropf854.html?hl=zh-tw" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/accessibility/indexf854.html?hl=zh-tw" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/accessibility/appsf854.html?hl=zh-tw" >Making Apps More Accessible</a></li><li><a href="../topics/ui/accessibility/checklistf854.html?hl=zh-tw" >Accessibility Developer Checklist</a></li><li><a href="../topics/ui/accessibility/node-tree-debuggingf854.html?hl=zh-tw" >Using Node Tree Debugging</a></li><li><a href="../topics/ui/accessibility/servicesf854.html?hl=zh-tw" >Building Accessibility Services</a></li><li><a href="../topics/ui/accessibility/custom-viewsf854.html?hl=zh-tw" >Building Accessible Custom Views</a></li></ul></li><li><a href="../topics/ui/themesf854.html?hl=zh-tw" >Styles and Themes</a></li><li><a href="../topics/ui/custom-componentsf854.html?hl=zh-tw" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/indexf854.html?hl=zh-tw" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../topics/graphics/prop-animationf854.html?hl=zh-tw" >Property Animation</a></li><li><a href="../topics/graphics/view-animationf854.html?hl=zh-tw" >View Animation</a></li><li><a href="../topics/graphics/drawable-animationf854.html?hl=zh-tw" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/2d-graphicsf854.html?hl=zh-tw" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/vector-drawable-resourcesf854.html?hl=zh-tw" >Vector Drawable</a></li></ul></li><li><a href="../topics/graphics/openglf854.html?hl=zh-tw" >OpenGL ES</a></li><li><a href="../topics/graphics/hardware-accelf854.html?hl=zh-tw" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/indexf854.html?hl=zh-tw" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/computef854.html?hl=zh-tw" >RenderScript</a></li><li><a href="../topics/renderscript/advancedf854.html?hl=zh-tw" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/reference/overviewf854.html?hl=zh-tw" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/reference/rs_value_typesf854.html?hl=zh-tw" >Numerical Types</a></li><li><a href="../topics/renderscript/reference/rs_object_typesf854.html?hl=zh-tw" >Object Types</a></li><li><a href="../topics/renderscript/reference/rs_convertf854.html?hl=zh-tw" >Conversion Functions</a></li><li><a href="../topics/renderscript/reference/rs_mathf854.html?hl=zh-tw" >Mathematical Constants and Functions</a></li><li><a href="../topics/renderscript/reference/rs_vector_mathf854.html?hl=zh-tw" >Vector Math Functions</a></li><li><a href="../topics/renderscript/reference/rs_matrixf854.html?hl=zh-tw" >Matrix Functions</a></li><li><a href="../topics/renderscript/reference/rs_quaternionf854.html?hl=zh-tw" >Quaternion Functions</a></li><li><a href="../topics/renderscript/reference/rs_atomicf854.html?hl=zh-tw" >Atomic Update Functions</a></li><li><a href="../topics/renderscript/reference/rs_timef854.html?hl=zh-tw" >Time Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_allocation_dataf854.html?hl=zh-tw" >Allocation Data Access Functions</a></li><li><a href="../topics/renderscript/reference/rs_object_infof854.html?hl=zh-tw" >Object Characteristics Functions</a></li><li><a href="../topics/renderscript/reference/rs_for_eachf854.html?hl=zh-tw" >Kernel Invocation Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_iof854.html?hl=zh-tw" >Input/Output Functions</a></li><li><a href="../topics/renderscript/reference/rs_debugf854.html?hl=zh-tw" >Debugging Functions</a></li><li><a href="../topics/renderscript/reference/rs_graphicsf854.html?hl=zh-tw" >Graphics Functions and Types</a></li><li><a href="../topics/renderscript/reference/indexf854.html?hl=zh-tw" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/indexf854.html?hl=zh-tw" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/media-apps-overviewf854.html?hl=zh-tw" >Media Apps Overview</a></li><li><a href="../topics/media-apps/working-with-a-media-sessionf854.html?hl=zh-tw" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/audio-app/building-an-audio-appf854.html?hl=zh-tw" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/audio-app/building-a-mediabrowserservicef854.html?hl=zh-tw" >Building a Media Browser Service</a></li><li><a href="../topics/media-apps/audio-app/building-a-mediabrowser-clientf854.html?hl=zh-tw" >Building a Media Browser Client</a></li><li><a href="../topics/media-apps/audio-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/video-app/building-a-video-appf854.html?hl=zh-tw" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/video-app/building-a-video-player-activityf854.html?hl=zh-tw" >Building a Video Player Activity</a></li><li><a href="../topics/media-apps/video-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li><a href="../topics/media-apps/mediabuttonsf854.html?hl=zh-tw" >Responding to Media Buttons</a></li><li><a href="../topics/media-apps/volume-and-earphonesf854.html?hl=zh-tw" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/indexf854.html?hl=zh-tw" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/media-formatsf854.html?hl=zh-tw" >Supported Media Formats</a></li><li><a href="../topics/media/mediaplayerf854.html?hl=zh-tw" >MediaPlayer</a></li><li><a href="../topics/media/mediarecorderf854.html?hl=zh-tw" >MediaRecorder</a></li><li><a href="../topics/media/exoplayerf854.html?hl=zh-tw" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/media-routingf854.html?hl=zh-tw" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/mediarouterf854.html?hl=zh-tw" >MediaRouter API</a></li><li><a href="../topics/media/mediarouteproviderf854.html?hl=zh-tw" >MediaRouteProvider API</a></li></ul></li><li><a href="../topics/media/cameraf854.html?hl=zh-tw" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/sensors/indexf854.html?hl=zh-tw" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/location/indexf854.html?hl=zh-tw" >Location and Maps</a></li><li><a href="../topics/location/strategiesf854.html?hl=zh-tw" >Location Strategies</a></li><li><a href="../topics/sensors/sensors_overviewf854.html?hl=zh-tw" >Sensors Overview</a></li><li><a href="../topics/sensors/sensors_motionf854.html?hl=zh-tw" >Motion Sensors</a></li><li><a href="../topics/sensors/sensors_positionf854.html?hl=zh-tw" >Position Sensors</a></li><li><a href="../topics/sensors/sensors_environmentf854.html?hl=zh-tw" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/indexf854.html?hl=zh-tw" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/bluetoothf854.html?hl=zh-tw" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/bluetooth-lef854.html?hl=zh-tw" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/nfc/indexf854.html?hl=zh-tw" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/nfc/nfcf854.html?hl=zh-tw" >NFC Basics</a></li><li><a href="../topics/connectivity/nfc/advanced-nfcf854.html?hl=zh-tw" >Advanced NFC</a></li><li><a href="../topics/connectivity/nfc/hcef854.html?hl=zh-tw" >Host-based Card Emulation</a></li></ul></li><li><a href="../topics/connectivity/wifip2pf854.html?hl=zh-tw" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/usb/indexf854.html?hl=zh-tw" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/usb/accessoryf854.html?hl=zh-tw" >Accessory</a></li><li><a href="../topics/connectivity/usb/hostf854.html?hl=zh-tw" >Host</a></li></ul></li><li><a href="../topics/connectivity/sipf854.html?hl=zh-tw" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/indexf854.html?hl=zh-tw" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/copy-pastef854.html?hl=zh-tw" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/creating-input-methodf854.html?hl=zh-tw" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/image-keyboardf854.html?hl=zh-tw" >Image Keyboard</a></li></ul></li><li><a href="../topics/text/spell-checker-frameworkf854.html?hl=zh-tw" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/indexf854.html?hl=zh-tw" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/data-storagef854.html?hl=zh-tw" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/backupf854.html?hl=zh-tw" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/autobackupf854.html?hl=zh-tw" >Auto Backup</a></li><li><a href="../topics/data/keyvaluebackupf854.html?hl=zh-tw" >Key/Value Backup</a></li><li><a href="../topics/data/testingbackupf854.html?hl=zh-tw" >Testing Backup and Restore</a></li></ul></li><li><a href="../topics/data/install-locationf854.html?hl=zh-tw" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/admin/indexf854.html?hl=zh-tw" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/admin/device-adminf854.html?hl=zh-tw" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../webapps/indexf854.html?hl=zh-tw" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../webapps/targetingf854.html?hl=zh-tw" >Supporting Different Screens in Web Apps</a></li><li><a href="../webapps/webviewf854.html?hl=zh-tw" >Building Web Apps in WebView</a></li><li><a href="../webapps/migratingf854.html?hl=zh-tw" >Migrating to WebView in Android 4.4</a></li><li><a href="../webapps/debuggingf854.html?hl=zh-tw" >Debugging Web Apps</a></li><li><a href="../webapps/best-practicesf854.html?hl=zh-tw" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../practices/indexf854.html?hl=zh-tw"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../practices/screens_supportf854.html?hl=zh-tw" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../practices/screens-distributionf854.html?hl=zh-tw" >Distributing to Specific Screens</a></li><li><a href="../practices/screen-compat-modef854.html?hl=zh-tw" >Screen Compatibility Mode</a></li></ul></li><li><a href="../practices/app-design/seamlessnessf854.html?hl=zh-tw" >Designing for Seamlessness</a></li><li><a href="../practices/tablets-and-handsetsf854.html?hl=zh-tw" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=zh-tw">首頁</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=zh-tw">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=zh-tw">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=zh-tw">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=zh-tw">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=zh-tw">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=zh-tw"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=zh-tw"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">訓練</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../indexf854.html?hl=zh-tw"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=zh-tw"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">參考資料</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=zh-tw">範例</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=zh-tw"
+           >程式庫</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=zh-tw"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=zh-tw"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=zh-tw">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=zh-tw">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=zh-tw">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=zh-tw">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=zh-tw">Play 管理中心</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=zh-tw"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=zh-tw"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=zh-tw">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=zh-tw">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">工作和返回堆疊</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+<h2>本文件內容</h2>
+<ol>
+<li><a href="#ActivityState">儲存 Activity 狀態</a></li></li>
+<li><a href="#ManagingTasks">管理工作</a>
+  <ol>
+    <li><a href="#TaskLaunchModes">定義啟動模式</a></li>
+    <li><a href="#Affinities">處理親和性</a></li>
+    <li><a href="#Clearing">清除返回堆疊</a></li>
+    <li><a href="#Starting">開始工作</a></li>
+  </ol>
+</li>
+</ol>
+
+<h2>文章</h2>
+<ol>
+  <li><a href="http://android-developers.blogspot.com/2010/04/multitasking-android-way.html">  Android 的多工作業方式
+</a></li>
+</ol>
+
+<h2>另請參閱</h2>
+<ol>
+  <li><a href="https://developer.android.com/design/patterns/navigation.html?hl=zh-tw">Android 設計：導覽
+</a></li>
+  <li><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw"><code>&amp;lt;activity&amp;gt;</code> 宣示說明元素
+</a></li>
+  <li><a href="recentsf854.html?hl=zh-tw">總覽畫面</a></li>
+</ol>
+</div>
+</div>
+
+
+<p>一個應用程式通常包含多個 <a href="activitiesf854.html?hl=zh-tw">Activity</a>。每個 Activity 應根據使用者可執行的特定動作類型加以設計，且要能啟動其他 Activity。
+
+例如，電子郵件應用程式可能會有一個可顯示新訊息清單的 Activity。
+當使用者選擇一則訊息，會開啟新的 Activity 以檢視該訊息。</p>
+
+<p>Activity 甚至可啟動裝置上其他應用程式的 Activity。例如，如果您的應用程式想要傳送一封電子郵件訊息，您可以定義一個意圖以執行「傳送」動作並包含一些資料，像是電子郵件地址和訊息。
+
+其他應用程式中宣告處理此意圖類型的 Activity 就會開啟。
+在這種情況下，意圖就是要傳送電子郵件，因此電子郵件應用程式會啟動「撰寫」Activity (如果有多個 Activity 支援相同的意圖，則系統會讓使用者選擇要使用的 Activity)。
+
+電子郵件傳送後，您的 Activity 就會繼續，並將電子郵件 Activity 視為您應用程式的一部分。
+雖然 Activity 可能來自不同的應用程式，但 Android 會將兩個 Activity 放在相同的工作中，以維護使用者體驗的流暢性。
+
+<em></em></p>
+
+<p>工作是執行特定工作時，與使用者互動的 Activity 集合。
+Activity 會在堆疊 (返回堆疊<em></em>) 中依照每個 Activity 開啟的順序加以排列。
+</p>
+
+<!-- SAVE FOR WHEN THE FRAGMENT DOC IS ADDED
+<div class="sidebox-wrapper">
+<div class="sidebox">
+<h3>Adding fragments to a task's back stack</h3>
+
+<p>Your activity can also include <code><a href="https://developer.android.com/reference/android/app/Fragment.html?hl=zh-tw">Fragment</a></code>s to the back stack. For example,
+suppose you have a two-pane layout using fragments, one of which is a list view (fragment A) and the
+other being a layout to display an item from the list (fragment B). When the user selects an item
+from the list, fragment B is replaced by a new fragment (fragment C). In this case, it might be
+desireable for the user to navigate back to reveal fragment B, using the <em>Back</em> button.</p>
+<p>In order to add fragment B to the back stack so that this is possible, you must call <code><a href="https://developer.android.com/reference/android/app/FragmentTransaction.html?hl=zh-tw#addToBackStack(java.lang.String)">addToBackStack()</a></code> before you <code><a href="https://developer.android.com/reference/android/app/FragmentTransaction.html?hl=zh-tw#commit()">commit()</a></code> the transaction that replaces fragment B with fragment
+C.</p>
+<p>For more information about using fragments and adding them to the back stack, see the <code><a href="https://developer.android.com/reference/android/app/Fragment.html?hl=zh-tw">Fragment</a></code> class documentation.</p>
+
+</div>
+</div>
+-->
+
+<p>裝置主螢幕是大多數工作開始的地方。當使用者輕觸應用程式啟動組件上的某個圖示 (或主螢幕上的捷徑 ) 時，應用程式工作會移到前景。
+
+如果應用程式沒有工作 (最近未使用應用程式)，則會建立新的工作，且該應用程式的「主要」Activity 會以堆疊中的根 Activity 形式開啟。
+
+</p>
+
+<p>當目前的 Activity 啟動另一個 Activity 時，會將新的 Activity 推到堆疊的頂端並取得焦點。
+之前的 Activity 會留在堆疊中，但已停止。Activity 停止後，系統會保留其使用者介面的目前狀態。
+當使用者按下 [返回] 按鈕<em></em>，會將目前的 Activity 從堆疊頂端推出 (Activity 已終結)，並繼續進行之前的 Activity (還原其 UI 之前的狀態)。
+
+
+堆疊中的 Activity 不會重新整理，只會從堆疊推入和推出 &mdash; 由目前 Activity 啟動時推入堆疊，而當使用者使用 [返回] 按鈕離開時推出堆疊。<em></em>
+
+因此，返回堆疊會以「後進先出」的物件結構進行運作。
+
+圖 1 透過時間軸將此行為視覺化，以時間軸顯示 Activity 間的進度以及每個時間點的目前返回堆疊。
+
+</p>
+
+<img src="../../images/fundamentals/diagram_backstackf854.png?hl=zh-tw" alt="" />
+<p class="img-caption"><strong>圖 1.</strong>顯示工作中每個新 Activity 如何將項目新增到返回堆疊。
+當使用者按下 [返回] 按鈕，目前的 Activity 將會終結，而之前的 Activity 則會繼續進行。<em></em>
+
+</p>
+
+
+<p>如果使用者持續按下 [返回]<em></em>，則會持續推出堆疊中的每個 Activity 以顯示之前的 Activity，直到使用者返回主螢幕 (或到工作開始時執行的 Activity)。
+
+
+當堆疊中的 Activity 全部移除後，工作將不再存在。</p>
+
+<div class="figure" style="width:287px">
+<img src="../../images/fundamentals/diagram_multitaskingf854.png?hl=zh-tw" alt="" /> <p
+class="img-caption"><strong>圖 2.</strong>兩個工作：工作 B 在前景收到使用者互動，而工作 A 在背景等待繼續。
+</p>
+</div>
+<div class="figure" style="width:215px">
+  <img src="../../images/fundamentals/diagram_multiple_instancesf854.png?hl=zh-tw" alt="" /> <p
+class="img-caption"><strong>圖 3.</strong>單一 Activity 會具現化很多次。</p>
+</div>
+
+<p>工作是一個緊密結合的單位，當使用者開始新的工作時可以移到「背景」，或透過 [首頁] 按鈕前往主螢幕。<em></em>
+在背景時，工作中的所有 Activity 都會停止，但該工作的返回堆疊會保留下來 &mdash; 該工作純粹失去焦點，由另一個工作取而代之，如圖 2 所示。
+
+
+之後，工作可以返回「前景」，讓使用者繼續未完成的工作。
+例如，假設目前的工作 (工作 A) 的堆疊中有三個 Activity &mdash; 兩個位於目前的 Activity 下。
+使用者按下 [首頁] 按鈕，<em></em>然後從應用程式啟動新的應用程式。
+
+當主螢幕出現時，工作 A 會移到背景。
+新的應用程式啟動時，系統會啟動該應用程式的工作 (工作 B)，該應用程式會有自己的 Activity 堆疊。
+與該應用程式互動之後，使用者會再次回到首頁，並選取原來啟動工作 A 的應用程式。現在，工作 A 移到了前景 &mdash; 堆疊中的三個 Activity 全部保持不變，而堆疊中最頂端的 Activity 則會繼續進行。
+
+
+
+此時，使用者也能切換回工作 B，前往首頁並選取啟動該工作的應用程式圖示 (或從<a href="recentsf854.html?hl=zh-tw">總覽畫面</a>選取應用程式工作)。這是在 Android 執行多工作業的範例。
+
+
+
+</p>
+
+<p class="note"><strong>注意：</strong>背景可以一次執行多個工作。
+不過，如果使用者同時執行多個背景工作，系統可能會開始終結背景 Activity 以復原記憶體，導致 Activity 狀態遺失。
+請參閱下列有關 <a href="#ActivityState">Activity 狀態</a>的章節。
+</p>
+
+<p>由於返回堆疊中的 Activity 不會重新整理，如果您的應用程式允許使用者從一個以上的 Activity 中啟動特定 Activity，則會建立該 Activity 的新執行個體並推入堆疊 (而不會將 Activity 任何之前的執行個體移到最頂端)。
+
+
+因此，您應用程式中的一個 Activity 可能會具現化很多次 (甚至來自不同的工作)，如圖 3 所示。
+也因為這樣，如果使用者使用 [返回] 按鈕瀏覽之前的資訊，Activity 的每個執行個體會依開啟的順序顯示<em></em> (每個會有自己的 UI 狀態)。
+
+
+不過，如果您不希望 Activity 具現化一次以上，則可以修改這個行為。
+如需詳細步驟，請參閱下文的<a href="#ManagingTasks">管理工作</a>。</p>
+
+
+<p>摘要說明 Activity 和工作的預設行為：</p>
+
+<ul>
+  <li>當 Activity A 啟動 Activity B，Activity A 會停止，但系統會保留其狀態(例如捲軸位置和輸入表單的文字)。
+
+如果使用者在 Activity B 按下 [返回] 按鈕，<em></em>Activity A 的狀態會復原並繼續執行。
+</li>
+  <li>當使用者按下 [首頁] 按鈕離開工作，<em></em>目前的 Activity 會停止且其工作會移到背景。
+
+系統會保留工作中所有 Activity 的狀態。如果使用者稍後選取啟動工作的啟動組件圖示繼續執行工作，工作會移到前景並在堆疊頂端繼續執行 Activity。
+
+</li>
+  <li>如果使用者按下 [返回] 按鈕<em></em>，會將目前的 Activity 從堆疊推出並終結。
+
+堆疊中之前的 Activity 會繼續進行。Activity 終結後，系統將不會保留 Activity 的狀態。
+<em></em></li>
+  <li>Activity 可以具現化很多次，即使來自其他工作也一樣。</li>
+</ul>
+
+
+<div class="note design">
+<p><strong>導覽設計</strong></p>
+  <p>如需應用程式導覽如何在 Android 運作的詳細資訊，請參閱 Android 設計的<a href="https://developer.android.com/design/patterns/navigation.html?hl=zh-tw">導覽</a>指南。</p>
+</div>
+
+
+<h2 id="ActivityState">儲存 Activity 狀態</h2>
+
+<p>如上所述，系統的預設行為會在 Activity 停止時保留 Activity 的狀態。
+如此一來，當使用者瀏覽之前的 Activity 時，其使用者介面的顯示方式將與離開時一樣。
+不過，您可以 &mdash; 也<strong>應該</strong> &mdash; 使用回呼方法主動保留 Activity 的狀態，以防止 Activity 遭到終結且必須重新建立的情況。
+
+</p>
+
+<p>如果系統停止您其中一個 Activity (例如，當新的 Activity 開始或工作移到背景)，當系統需要復原系統記憶體時，可能會完全終結該 Activity。
+
+發生這種情況時，與 Activity 狀態相關的資訊都將遺失。如果發生這種情況，系統仍然知道該 Activity 位於返回堆疊中，但是當 Activity 移到堆疊頂端時，系統必須重新建立該 Activity (而不是繼續執行)。
+
+
+如果不想讓使用者的工作遺失，您應該在 Activity 中實作 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onSaveInstanceState(android.os.Bundle)">onSaveInstanceState()</a></code> 回呼方法，主動保留該工作。
+
+
+</p>
+
+<p>如需儲存 Activity 狀態的詳細資訊，請參閱 <a href="activitiesf854.html?hl=zh-tw#SavingActivityState">Activity</a> 文件。
+</p>
+
+
+
+<h2 id="ManagingTasks">管理工作</h2>
+
+<p>如上所述，Android 管理工作和返回堆疊的方式 &mdash; 將連續啟動的所有 Activity 放在相同的工作及「後進先出」堆疊中 &mdash; 對大多數應用程式而言非常好用，而且您不需擔心 Activity 與工作關聯的方式或它們如何存在於返回堆疊中。
+
+
+不過，您也許會想中斷一般的行為。
+您或許會希望應用程式的 Activity 可以在啟動時開始一個新的工作 (而不是放入目前的工作中)；或者當您啟動一個 Activity 時，您可能會想使用其現有的執行個體 (而不是在返回堆疊頂端建立新的執行個體)；又或者當使用者離開工作時，您想要清除返回堆疊中的所有 Activity，只留下根 Activity。
+
+
+
+</p>
+
+<p>如要執行這些工作及更多工作，您可以使用 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw"><code>&amp;lt;activity&amp;gt;</code></a> 宣示說明元素中的屬性，以及您傳送到 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#startActivity(android.content.Intent)">startActivity()</a></code> 之意圖中的旗標。
+
+
+</p>
+
+<p>就這個情況而言，您可以使用的主要 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw">
+<code>&amp;lt;activity&amp;gt;</code></a> 屬性包括：</p>
+
+<ul class="nolist">
+  <li><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#aff">
+  <code>taskAffinity</code></a></li>
+  <li><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#lmode">
+  <code>launchMode</code></a></li>
+  <li><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#reparent">
+  <code>allowTaskReparenting</code></a></li>
+  <li><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#clear">
+  <code>clearTaskOnLaunch</code></a></li>
+  <li><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#always">
+  <code>alwaysRetainTaskState</code></a></li>
+  <li><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#finish">
+  <code>finishOnTaskLaunch</code></a></li>
+</ul>
+
+<p>而您可以使用的主要意圖旗標包括：</p>
+
+<ul class="nolist">
+  <li><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#FLAG_ACTIVITY_NEW_TASK">FLAG_ACTIVITY_NEW_TASK</a></code></li>
+  <li><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#FLAG_ACTIVITY_CLEAR_TOP">FLAG_ACTIVITY_CLEAR_TOP</a></code></li>
+  <li><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#FLAG_ACTIVITY_SINGLE_TOP">FLAG_ACTIVITY_SINGLE_TOP</a></code></li>
+</ul>
+
+<p>在以下各節中，您將瞭解如何使用這些宣示說明屬性和意圖旗標，定義 Activity 與工作關聯的方式以及它們在返回堆疊中的行為。
+</p>
+
+<p>同時，還會分開討論工作與 Activity 如何在總覽畫面表示和進行管理。
+請參閱<a href="recentsf854.html?hl=zh-tw">總覽畫面</a>以取得詳細資訊。
+一般而言，您應該允許系統定義如何在總覽畫面中呈現工作與 Activity，而且不需要修改此行為。
+</p>
+
+<p class="caution"><strong>注意：</strong>大多數應用程式不應中斷 Activity 和工作的預設行為：
+如果您判斷修改 Activity 的預設行為是必要的，請謹慎小心並記得測試啟動期間 Activity 的可用性，以及使用 [返回] 按鈕從其他 Activity 和工作瀏覽到此 Activity 的情況。請記得測試可能會與使用者預期的行為衝突的瀏覽行為。<em></em>
+
+
+</p>
+
+
+<h3 id="TaskLaunchModes">定義啟動模式</h3>
+
+<p>啟動模式可讓您定義 Activity 的新執行個體與目前工作關聯的方式。
+您可用兩種方法定義不同的啟動模式：</p>
+<ul class="nolist">
+  <li><a href="#ManifestForTasks">使用宣示說明檔案</a>
+    <p>當您在宣示說明檔案中宣告 Activity 時，您可以指定 Activity 啟動時該如何與工作關聯。
+</li>
+  <li><a href="#IntentFlagsForTasks">使用意圖旗標</a>
+    <p>當您呼叫 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#startActivity(android.content.Intent)">startActivity()</a></code> 時，您可以在 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code> 包含一個旗標，宣告新 Activity 應如何 (或是否) 與目前的工作關聯。
+
+</p></li>
+</ul>
+
+<p>因此，如果 Activity A 啟動 Activity B，Activity B 可以在其宣示說明中定義它應如何與目前的工作 (如果有) 關聯，而且 Activity A 也能要求 Activity B 應如何與目前的工作關聯。
+
+如果這兩個 Activity 皆定義 Activity B 應如何與工作關聯，相較於 Activity B 的要求 (如宣示說明中所定義)，會優先採用 Activity A 的要求 (如意圖中所定義)。
+
+</p>
+
+<p class="note"><strong>注意：</strong>某些宣示說明檔案中提供的啟動模式可能沒有對應的意圖旗標，同樣地，某些意圖旗標提供的啟動模式無法在宣示說明中定義。
+
+</p>
+
+
+<h4 id="ManifestForTasks">使用宣示說明檔案</h4>
+
+<p>當您在宣示說明檔案中宣告 Activity 時，您可以使用 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw"><code>&amp;lt;activity&amp;gt;</code></a> 元素的 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#lmode"><code>launchMode</code></a> 屬性，指定 Activity 應如何與工作關聯。
+
+</p>
+
+<p><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#lmode"><code>launchMode</code></a> 屬性可指定應如何將 Activity 啟動至工作內的指示。
+您可以為
+<code><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#lmode">launchMode</a></code> 屬性指定四種不同的啟動模式：
+</p>
+
+<dl>
+<dt><code>"standard"</code> (預設模式)</dt>
+  <dd>預設。系統在啟動 Activity 的工作中建立新的執行個體，並將意圖路由至該處。
+Activity 可以具現化很多次，每個執行個體可屬於不同的工作，而且一個工作可以有多個執行個體。
+</dd>
+<dt><code>"singleTop"</code></dt>
+  <dd>如果 Activity 的執行個體已經出現在目前工作的頂端，系統會透過呼叫其 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onNewIntent(android.content.Intent)">onNewIntent()</a></code> 方法，將意圖路由至該執行個體，而不是建立新的 Activity 執行個體。
+
+Activity 可以具現化很多次，每個執行個體可屬於不同的工作，而且一個工作可以有多個執行個體 (但僅限於返回堆疊頂端的 Activity 不是現有的 Activity 執行個體時<em></em>)。
+
+
+  <p>例如，假設工作的返回堆疊包含根 Activity A 及 Activity B、C 及在最頂端的 D (堆疊為 A-B-C-D；D 在最頂端)。
+類型 D Activity 的意圖抵達。
+如果 D 有預設的 <code>"standard"</code> 啟動模式，則會啟動新的類別執行個體，且堆疊會變成 A-B-C-D-D。不過，如果 D 啟動模式為 <code>"singleTop"</code>，D 的現有執行個體會透過 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onNewIntent(android.content.Intent)">onNewIntent()</a></code> 接收意圖，這是因為它位於堆疊的最頂端 &mdash; 堆疊會維持 A-B-C-D。不過，如果類型 B Activity 的意圖抵達，則 B 的新執行個體會新增到堆疊中，即使其啟動模式為 <code>"singleTop"</code> 也是如此。
+
+
+
+</p>
+  <p class="note"><strong>注意：</strong>建立新的 Activity 執行個體之後，使用者可按下 [返回]<em></em> 按鈕，返回之前的 Activity。
+但是，如果處理新意圖的是現有的 Activity 執行個體，則使用者無法按下 [返回]<em></em> 按鈕回到新意圖抵達 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onNewIntent(android.content.Intent)">onNewIntent()</a></code> 之前的 Activity 狀態。
+
+
+
+</p>
+</dd>
+
+<dt><code>"singleTask"</code></dt>
+  <dd>系統會建立新的工作並在新工作的根目錄將 Activity 具現化。不過，如果 Activity 的執行個體已經出現在其他工作中，系統會透過呼叫其 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onNewIntent(android.content.Intent)">onNewIntent()</a></code> 方法，將意圖路由至現有的執行個體，而不是建立新的執行個體。
+
+一次只能有一個 Activity 執行個體。
+
+  <p class="note"><strong>注意：</strong>雖然 Activity 是在新工作中啟動，使用者仍可使用 [返回] 按鈕返回之前的 Activity。
+<em></em></p></dd>
+<dt><code>"singleInstance"</code>。</dt>
+  <dd>與 <code>"singleTask"</code> 一樣，差別在於系統不會將任何其他 Activity 啟動至保留執行個體的工作中。
+Activity 一律是其工作的唯一成員；使用此項目啟動的任何 Activity 會在個別的工作中開啟。
+</dd>
+</dl>
+
+
+<p>另外一個例子，Android 瀏覽器應用程式宣告網頁瀏覽器 Activity 應永遠在自己的工作中開啟 &mdash; 透過在 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw"><code>&amp;lt;activity&amp;gt;</code></a> 元素指定 <code>singleTask</code> 啟動模式。
+這表示如果您的應用程式發出開啟 Android 瀏覽器的意圖，其 Activity 不會與您的應用程式放在同一個工作中。<em></em>
+
+
+而是會為瀏覽器啟動新的工作，或者如果瀏覽器已經有工作在背景執行，會將該工作帶出來處理新的意圖。
+
+</p>
+
+<p>無論 Activity 在新工作啟動或與啟動該 Activity 之 Activity 的相同工作中啟動，使用者都能使用 [返回] 按鈕返回之前的 Activity。<em></em>
+不過，如果您啟動指定 <code>singleTask</code> 啟動模式的 Activity，如果該 Activity 的執行個體存在於背景工作中，則該工作會整個移到前景。
+
+此時，返回堆疊現在包含已帶出且位於堆疊頂端之工作的所有 Activity。
+
+圖 4 說明這種類型的情況。</p>
+
+<img src="../../images/fundamentals/diagram_backstack_singletask_multiactivityf854.png?hl=zh-tw" alt="" />
+<p class="img-caption"><strong>圖 4.</strong>顯示含有啟動模式 "singleTask" 的 Activity 如何新增到返回堆疊。
+如果 Activity 已經是背景工作的一部份且有自己的返回堆疊，則整個返回堆疊都會帶出來，位於目前工作的最頂端。
+
+</p>
+
+<p>如要進一步瞭解如何使用宣示說明檔案中的啟動模式，請參閱 <code><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw">&lt;activity&gt;</a></code> 元素，其中會有 <code>launchMode</code> 屬性和可接受值的詳細說明。
+
+
+</p>
+
+<p class="note"><strong>注意：</strong>您使用 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#lmode"><code>launchMode</code></a> 屬性指定的 Activity 行為可被啟動 Activity 之意圖所含的旗標所覆寫，如下一節所述。
+
+</p>
+
+
+
+<h4 id="#IntentFlagsForTasks">使用意圖旗標</h4>
+
+<p>啟動 Activity 時，您可以在傳送到 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#startActivity(android.content.Intent)">startActivity()</a></code> 的意圖中包含旗標，以修改 Activity 及其工作的預設關聯。
+您可以用來修改預設行為的旗標包括：
+</p>
+
+<p>
+  <dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#FLAG_ACTIVITY_NEW_TASK">FLAG_ACTIVITY_NEW_TASK</a></code></dt>
+    <dd>在新工作中啟動 Activity。如果工作已為您目前啟動的 Activity 執行，該工作會移到前景並復原至上個狀態，而且 Activity 會在 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onNewIntent(android.content.Intent)">onNewIntent()</a></code> 收到新的意圖。
+
+
+    <p>這會產生與 <code>"singleTask"</code> <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#lmode"><code>launchMode</code></a> 值相同的行為，如上節所述。
+</p></dd>
+  <dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#FLAG_ACTIVITY_SINGLE_TOP">FLAG_ACTIVITY_SINGLE_TOP</a></code></dt>
+    <dd>如果現在正在啟動的 Activity 是目前的 Activity (位於返回堆疊的頂端)，則現有執行個體會收到 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onNewIntent(android.content.Intent)">onNewIntent()</a></code> 呼叫，而不會建立新的 Activity 執行個體。
+
+
+    <p>這會產生與 <code>"singleTop"</code> <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#lmode"><code>launchMode</code></a> 值相同的行為，如上節所述。
+</p></dd>
+  <dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#FLAG_ACTIVITY_CLEAR_TOP">FLAG_ACTIVITY_CLEAR_TOP</a></code></dt>
+    <dd>如果正在啟動的 Activity 已在目前的工作中執行，則不會啟動新的 Activity 執行個體，而是會終結位於其上方的所有其他 Activity，且此意圖會透過 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onNewIntent(android.content.Intent)">onNewIntent()</a></code> 傳送到繼續執行的 Activity 執行個體 (現在位於頂端)。
+
+
+
+    <p>沒有任何 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#lmode"><code>launchMode</code></a> 屬性值可以產生此行為。
+</p>
+    <p><code>FLAG_ACTIVITY_CLEAR_TOP</code> 最常與 <code>FLAG_ACTIVITY_NEW_TASK</code> 搭配使用。
+一起使用時，這些旗標可以找出位於其他工作中的現有 Activity，然後將它放置於可以回應意圖的地方。
+
+ </p>
+    <p class="note"><strong>注意：</strong>如果指定 Activity 的啟動模式為 <code>"standard"</code>，它也會從堆疊中移除，改為啟動新的執行個體處理傳入的意圖。
+
+
+這是因為當啟動模式為 <code>"standard"</code> 時，一律會為新的意圖建立新的執行個體。
+ </p>
+</dd>
+</dl>
+
+
+
+
+
+<h3 id="Affinities">處理親和性</h3>
+
+<p>親和性<em></em>可指出 Activity 偏好屬於哪個工作。根據預設，相同應用程式的所有 Activity 間互相都有親和性。
+因此，根據預設，相同應用程式的所有 Activity 都偏好位於相同的工作。
+不過，您可以修改 Activity 的預設親和性。
+不同應用程式中定義的 Activity 可以共用親和性，或者相同應用程式中定義的 Activity 可以指派不同的工作親和性。
+
+</p>
+
+<p>您可以使用 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw"><code>&amp;lt;activity&amp;gt;</code></a> 元素的 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#aff"><code>taskAffinity</code></a> 屬性修改任何指定 Activity 的親和性。
+
+</p>
+
+<p><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#aff"><code>taskAffinity</code></a> 屬性使用字串值，但必須與 <a href="../topics/manifest/manifest-elementf854.html?hl=zh-tw">
+<code>&amp;lt;manifest&amp;gt;</code></a> 元素中宣告的預設封裝名稱不同，因為系統使用該名稱來識別應用程式的預設工作親和性。
+
+
+
+</p>
+
+<p>在兩種情況下會用到親和性：</p>
+<ul>
+  <li>當啟動 Activity 的意圖包含
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#FLAG_ACTIVITY_NEW_TASK">FLAG_ACTIVITY_NEW_TASK</a></code> 旗標。
+
+
+<p>根據預設，新的 Activity 會啟動至 Activity (名為 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#startActivity(android.content.Intent)">startActivity()</a></code>) 的工作中。
+系統會將它推入至與呼叫端相同的返回堆疊。
+不過，如果傳送至
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#startActivity(android.content.Intent)">startActivity()</a></code> 的意圖包含 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#FLAG_ACTIVITY_NEW_TASK">FLAG_ACTIVITY_NEW_TASK</a></code> 旗標，則系統會找尋不同的工作來放置新的 Activity。
+
+這通常是新工作。
+不過，它不一定要是新工作。如果現有工作中有與新 Activity 相同的親和性，Activity 會啟動至該工作中。
+如果沒有，會開始新的工作。</p>
+
+<p>如果此旗標導致 Activity 開始新的工作，而使用者按 [首頁] 按鈕離開它，必須要有方法可以讓使用者回來瀏覽這個工作。<em></em>
+
+有些實體 (例如，通知管理員) 總是從外部工作開始 Activity，從來不使用自己的工作，因此他們都會將 <code>FLAG_ACTIVITY_NEW_TASK</code> 放入傳送到
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#startActivity(android.content.Intent)">startActivity()</a></code> 的意圖。
+
+如果您的 Activity 可以由外部實體呼叫且可能使用此旗標，記得要提供使用者獨立的方法回到啟動的工作，例如，透過啟動組件圖示 (工作的根 Activity 有一個 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code> 意圖篩選器；請參閱下方的<a href="#Starting">開始工作</a>)。
+
+
+
+</p>
+</li>
+
+  <li>當 Activity 的<a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#reparent">
+<code>allowTaskReparenting</code></a> 屬性設為 <code>"true"</code>。
+  <p>在這種情況下，當工作移到前景時，Activity 可以從其啟動的工作移到與其有親和性的工作。
+</p>
+  <p>例如，假設將報告所選城市天氣狀況的 Activity 定義為旅遊應用程式的一部份。
+它與相同應用程式中的其他 Activity 有相同的親和性 (預設的應用程式親和性)，而且它允許與此屬性重設父代。
+當您的其中一個 Activity 開始氣象報告程式 Activity，它一開始屬於與您 Activity 相同的工作。
+
+不過，當旅遊應用程式工作移到前景，氣象報告程式 Activity 就會重新指派給該工作，並在其中顯示。
+</p>
+</li>
+</ul>
+
+<p class="note"><strong>提示：</strong>如果從使用者的角度來看 <code>.apk</code> 檔案包含一個以上的「應用程式」，您可能會想要使用 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#aff"><code>taskAffinity</code></a> 屬性對與每個「應用程式」關聯的 Activity 指派不同的親和性。
+
+</p>
+
+
+
+<h3 id="Clearing">清除返回堆疊</h3>
+
+<p>如果使用者離開工作一段很長的時間，系統會清除根 Activity 以外所有 Activity 的工作
+。當使用者再次回到工作，只會復原根 Activity。
+系統會有這樣的行為是因為在一段很長的時間後，使用者很可能會放棄他們之前在做的工作，並回到工作開始其他新的工作。
+ </p>
+
+<p>您可以使用下列一些 Activity 屬性來修改這個行為： </p>
+
+<dl>
+<dt><code><a
+href="../topics/manifest/activity-elementf854.html?hl=zh-tw#always">alwaysRetainTaskState</a></code>
+</dt>
+<dd>如果這項屬性在工作的根 Activity 中設為 <code>"true"</code>，則剛描述的預設行為不會發生。
+即使過了很長的一段時間，工作仍然會在堆疊保留所有的 Activity。
+</dd>
+
+<dt><code><a
+href="../topics/manifest/activity-elementf854.html?hl=zh-tw#clear">clearTaskOnLaunch</a></code></dt>
+<dd>如果這項屬性在工作的根 Activity 中設為 <code>"true"</code>，則剛描述的預設行為不會發生。
+即使過了很長的一段時間，工作仍然會在堆疊保留所有的 Activity。
+換句話說，它與
+<a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#always">
+<code>alwaysRetainTaskState</code></a> 相反。即便使用者只離開工作一小段時間，使用者還是會回到工作的起始狀態。
+</dd>
+
+<dt><code><a
+href="../topics/manifest/activity-elementf854.html?hl=zh-tw#finish">finishOnTaskLaunch</a></code>
+</dt>
+<dd>這項屬性與 <a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#clear"><code>clearTaskOnLaunch</code></a> 相似，但它在單一 Activity 上作業，而不是在整個工作。
+
+它也會導致任何 Activity 離開，包含根 Activity。
+如果設成 <code>"true"</code>，Activity 只會在目前的工作階段留在此工作中。
+如果使用者離開後再回到工作，該工作將不再存在。
+</dd>
+</dl>
+
+
+
+
+<h3 id="Starting">開始工作</h3>
+
+<p>您可以給予 Activity 一個意圖篩選器，將
+<code>"android.intent.action.MAIN"</code> 設定為指定的動作，
+<code>"android.intent.category.LAUNCHER"</code> 設定為指定的類別，以便將該 Activity 設定為工作的進入點。
+例如：</p>
+
+<pre>
+&lt;activity ... &gt;
+    &lt;intent-filter ... &gt;
+        &lt;action android:name="android.intent.action.MAIN" /&gt;
+        &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+    &lt;/intent-filter&gt;
+    ...
+&lt;/activity&gt;
+</pre>
+
+<p>這類意圖篩選器可在應用程式啟動組件顯示 Activity 的圖示和標籤，讓使用者啟動 Activity 並回到 Activity 啟動後任何時間建立的工作。
+
+
+</p>
+
+<p>第二項功能很重要：使用者必須能夠在離開工作後，使用此 Activity 啟動組件回到此工作。
+由於這個原因，兩個將 Activity 標示為一律啟動工作的<a href="#LaunchModes">啟動模式</a> <code>"singleTask"</code> 和
+<code>"singleInstance"</code>，應只能在 Activity 有 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_MAIN">ACTION_MAIN</a></code> 和 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code> 篩選器時才能使用。
+
+
+例如，試想如果缺少篩選器會發生什麼情況：
+意圖會啟動 <code>"singleTask"</code> Activity、起始新工作，然後使用者會花一些時間在該工作進行作業。
+之後，使用者按下 [首頁]<em></em> 按鈕。
+此工作現在會傳送到背景而且不會顯示。現在，使用者沒有辦法回到工作，這是因為應用程式啟動組件沒有代表此工作的項目。
+</p>
+
+<p>在您不希望使用者返回 Activity 的情況下，將
+<code><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw">&lt;activity&gt;</a></code> 元素的
+<a href="../topics/manifest/activity-elementf854.html?hl=zh-tw#finish"><code>finishOnTaskLaunch</code></a> 設定為 <code>"true"</code> (請參閱<a href="#Clearing">清除堆疊</a>)。
+
+</p>
+
+<p>如要進一步瞭解工作和 Activity 在總覽畫面中的顯示及管理方式，請參閱<a href="recentsf854.html?hl=zh-tw">總覽畫面</a>。
+
+</p>
+
+<!--
+<h2>Beginner's Path</h2>
+
+<p>For more information about how to use intents to
+activate other application components and publish the intents to which your components
+respond, continue with the <b><a
+href="https://developer.android.com/guide/components/intents-filters.html?hl=zh-tw">Intents and Intent
+Filters</a></b> document.</p>
+-->
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=zh-tw" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="網誌" target="_blank">網誌</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=zh-tw" title="完備支援">完備支援</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=zh-tw" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=zh-tw" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=zh-tw" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=zh-tw" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="xLPnuQh6yFX2M9DpiFTckqZuUccJ26wIgNrDgrWFV1s6MTQ5NzUxNzM1NDIzNzU4MA" />
+      <input type="hidden" name="next" value="activities/tasks-and-back-stack.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+             selected="selected" >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">電子郵件地址</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../ytblogger_lists_unifiedc8d7.js?hl=zh-tw?v=2017061509" defer></script>
+  <script src="../../android_metadata_enc8d7.js?hl=zh-tw?v=2017061509" defer></script>
+  
+  <script src="../../reference/listsc8d7.js?hl=zh-tw?v=2017061509" defer></script>
+  <script src="../../reference/gms_listsc8d7.js?hl=zh-tw?v=2017061509" defer></script>
+  <script src="../../reference/android/support/wearable/listsc8d7.js?hl=zh-tw?v=2017061509" defer></script>
+  <script src="../../reference/android/support/test/listsc8d7.js?hl=zh-tw?v=2017061509" defer></script>
+  <script src="../../reference/android/support/constraint/listsc8d7.js?hl=zh-tw?v=2017061509" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=zh-tw"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_zh-tw.js?hl=zh-tw?v=2017061509" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/components/tasks-and-back-stack.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:17:57 GMT -->
+</html>

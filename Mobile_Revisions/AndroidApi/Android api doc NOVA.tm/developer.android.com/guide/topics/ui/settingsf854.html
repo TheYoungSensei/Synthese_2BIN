@@ -1,0 +1,2067 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<!-- Mirrored from developer.android.com/guide/topics/ui/settings.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:11:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="nO1gmicnPZqYoRAP_Xze6V24w_Cr4G1-d8nmiNHjkwY6MTQ5NzUxNjc3NDY2MDcxMA" />
+
+  
+    <link rel="canonical" href="settingsf854.html?hl=zh-tw">
+  
+
+  
+    <link rel="alternate" href="settings9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="settingsf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="settings327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="settings0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="settings7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="settings232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="settings0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="settings9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="settings6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="settings.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/settings.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/settings.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/settings.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/settings.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/settings.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/settings.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/settings.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/settings.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/settings.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/settings.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="settings.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/faviconf854.png?hl=zh-tw">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-180f854.png?hl=zh-tw">
+
+
+<title>
+
+  設定 | Android Developers
+
+</title>
+
+  <meta name="description" content="應用程式通常會包含可讓使用者修改應用程式功能和行為的設定。例如，有些應用程式可讓使用者指定是否啟用通知，或指定應用程式與雲端同步資料的頻率。 如果您想要為應用程式提供設定，應該使用 Android Preference API 建置與其他 Android 應用程式使用者體驗一致的介面 (包含系統設定)。 本文件說明如何使用 Preference API 建置應用程式設定。 設定設計 如要瞭解如何設計設定，請參閱 設定 設計指南。 現在不使用 View 物件建置使用者介面，而是使用您在 XML 檔案中所宣告…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default962f.css?hl=zh-tw?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundlef854.js?hl=zh-tw" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__zh_twf854.js?hl=zh-tw"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_androidf854.js?hl=zh-tw"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs962f.js?hl=zh-tw?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "zh-tw", "served": "zh-tw"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=zh-tw">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logof854.png?hl=zh-tw"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=zh-tw"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=zh-tw"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=zh-tw" width="18" height="19" alt="Play 管理中心">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="搜尋">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">返回</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../indexf854.html?hl=zh-tw" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentalsf854.html?hl=zh-tw" >App Fundamentals</a></li><li><a href="../../practices/compatibilityf854.html?hl=zh-tw" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/indexf854.html?hl=zh-tw" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requestingf854.html?hl=zh-tw" >Requesting Permissions</a></li><li><a href="../permissions/definingf854.html?hl=zh-tw" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/indexf854.html?hl=zh-tw" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jackf854.html?hl=zh-tw"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-artf854.html?hl=zh-tw" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/indexf854.html?hl=zh-tw" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filtersf854.html?hl=zh-tw" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-commonf854.html?hl=zh-tw" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/indexf854.html?hl=zh-tw" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activitiesf854.html?hl=zh-tw" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecyclef854.html?hl=zh-tw" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changesf854.html?hl=zh-tw" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stackf854.html?hl=zh-tw" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecyclef854.html?hl=zh-tw" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundlesf854.html?hl=zh-tw" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recentsf854.html?hl=zh-tw" >Recents Screen</a></li></ul></li><li><a href="../../components/fragmentsf854.html?hl=zh-tw" >Fragments</a></li><li><a href="../../components/loadersf854.html?hl=zh-tw" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/servicesf854.html?hl=zh-tw" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-servicesf854.html?hl=zh-tw" >Bound Services</a></li><li><a href="../../components/aidlf854.html?hl=zh-tw" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providersf854.html?hl=zh-tw" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basicsf854.html?hl=zh-tw" >Content Provider Basics</a></li><li><a href="../providers/content-provider-creatingf854.html?hl=zh-tw" >Creating a Content Provider</a></li><li><a href="../providers/calendar-providerf854.html?hl=zh-tw" >Calendar Provider</a></li><li><a href="../providers/contacts-providerf854.html?hl=zh-tw" >Contacts Provider</a></li><li><a href="../providers/document-providerf854.html?hl=zh-tw" >Open files using Storage Access Framework</a></li><li><a href="../providers/create-document-providerf854.html?hl=zh-tw" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcastsf854.html?hl=zh-tw" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/indexf854.html?hl=zh-tw" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/hostf854.html?hl=zh-tw" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threadsf854.html?hl=zh-tw" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/indexf854.html?hl=zh-tw" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../resources/providing-resourcesf854.html?hl=zh-tw" >Providing Resources</a></li><li><a href="../resources/accessing-resourcesf854.html?hl=zh-tw" >Accessing Resources</a></li><li><a href="../resources/runtime-changesf854.html?hl=zh-tw" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localizationf854.html?hl=zh-tw" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-frameworkf854.html?hl=zh-tw" >ICU4J Android Framework APIs</a></li><li><a href="../resources/multilingual-supportf854.html?hl=zh-tw" >Language and Locale</a></li></ul></li><li><a href="../resources/complex-xml-resourcesf854.html?hl=zh-tw" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resourcesf854.html?hl=zh-tw" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resourcef854.html?hl=zh-tw" >Animation</a></li><li><a href="../resources/color-list-resourcef854.html?hl=zh-tw" >Color State List</a></li><li><a href="../resources/drawable-resourcef854.html?hl=zh-tw" >Drawable</a></li><li><a href="../resources/layout-resourcef854.html?hl=zh-tw" >Layout</a></li><li><a href="../resources/menu-resourcef854.html?hl=zh-tw" >Menu</a></li><li><a href="../resources/string-resourcef854.html?hl=zh-tw" >String</a></li><li><a href="../resources/style-resourcef854.html?hl=zh-tw" >Style</a></li><li><a href="../resources/more-resourcesf854.html?hl=zh-tw" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-introf854.html?hl=zh-tw" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-elementf854.html?hl=zh-tw" >&lt;action&gt;</a></li><li><a href="../manifest/activity-elementf854.html?hl=zh-tw" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-elementf854.html?hl=zh-tw" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-elementf854.html?hl=zh-tw" >&lt;application&gt;</a></li><li><a href="../manifest/category-elementf854.html?hl=zh-tw" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-elementf854.html?hl=zh-tw" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-elementf854.html?hl=zh-tw" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-elementf854.html?hl=zh-tw" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-elementf854.html?hl=zh-tw" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-elementf854.html?hl=zh-tw" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-elementf854.html?hl=zh-tw" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-elementf854.html?hl=zh-tw" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-elementf854.html?hl=zh-tw" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-elementf854.html?hl=zh-tw" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-elementf854.html?hl=zh-tw" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-elementf854.html?hl=zh-tw" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-elementf854.html?hl=zh-tw" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-elementf854.html?hl=zh-tw" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-elementf854.html?hl=zh-tw" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-elementf854.html?hl=zh-tw" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-elementf854.html?hl=zh-tw" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-elementf854.html?hl=zh-tw" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-elementf854.html?hl=zh-tw" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-elementf854.html?hl=zh-tw" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-elementf854.html?hl=zh-tw" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-elementf854.html?hl=zh-tw" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-elementf854.html?hl=zh-tw" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="indexf854.html?hl=zh-tw" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="overviewf854.html?hl=zh-tw" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="declaring-layoutf854.html?hl=zh-tw" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="layout/linearf854.html?hl=zh-tw" >Linear Layout</a></li><li><a href="layout/relativef854.html?hl=zh-tw" >Relative Layout</a></li><li><a href="layout/recyclerviewf854.html?hl=zh-tw" >Recycler View</a></li><li><a href="layout/listviewf854.html?hl=zh-tw" >List View</a></li><li><a href="layout/gridviewf854.html?hl=zh-tw" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="controlsf854.html?hl=zh-tw" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="controls/buttonf854.html?hl=zh-tw" >Buttons</a></li><li><a href="controls/checkboxf854.html?hl=zh-tw" >Checkboxes</a></li><li><a href="controls/radiobuttonf854.html?hl=zh-tw" >Radio Buttons</a></li><li><a href="controls/togglebuttonf854.html?hl=zh-tw" >Toggle Buttons</a></li><li><a href="controls/spinnerf854.html?hl=zh-tw" >Spinners</a></li><li><a href="controls/pickersf854.html?hl=zh-tw" >Pickers</a></li></ul></li><li><a href="ui-eventsf854.html?hl=zh-tw" >Input Events</a></li><li><a href="menusf854.html?hl=zh-tw" >Menus</a></li><li><a href="settingsf854.html?hl=zh-tw" >Settings</a></li><li><a href="dialogsf854.html?hl=zh-tw" >Dialogs</a></li><li><a href="notifiers/notificationsf854.html?hl=zh-tw" >Notifications</a></li><li><a href="notifiers/toastsf854.html?hl=zh-tw" >Toasts</a></li><li><a href="shortcutsf854.html?hl=zh-tw" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/indexf854.html?hl=zh-tw" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialogf854.html?hl=zh-tw" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestionsf854.html?hl=zh-tw" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestionsf854.html?hl=zh-tw" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-configf854.html?hl=zh-tw" >Searchable Configuration</a></li></ul></li><li><a href="multi-windowf854.html?hl=zh-tw" >Multi-Window Support</a></li><li><a href="drag-dropf854.html?hl=zh-tw" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="accessibility/indexf854.html?hl=zh-tw" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="accessibility/appsf854.html?hl=zh-tw" >Making Apps More Accessible</a></li><li><a href="accessibility/checklistf854.html?hl=zh-tw" >Accessibility Developer Checklist</a></li><li><a href="accessibility/node-tree-debuggingf854.html?hl=zh-tw" >Using Node Tree Debugging</a></li><li><a href="accessibility/servicesf854.html?hl=zh-tw" >Building Accessibility Services</a></li><li><a href="accessibility/custom-viewsf854.html?hl=zh-tw" >Building Accessible Custom Views</a></li></ul></li><li><a href="themesf854.html?hl=zh-tw" >Styles and Themes</a></li><li><a href="custom-componentsf854.html?hl=zh-tw" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/indexf854.html?hl=zh-tw" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../graphics/prop-animationf854.html?hl=zh-tw" >Property Animation</a></li><li><a href="../graphics/view-animationf854.html?hl=zh-tw" >View Animation</a></li><li><a href="../graphics/drawable-animationf854.html?hl=zh-tw" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphicsf854.html?hl=zh-tw" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resourcesf854.html?hl=zh-tw" >Vector Drawable</a></li></ul></li><li><a href="../graphics/openglf854.html?hl=zh-tw" >OpenGL ES</a></li><li><a href="../graphics/hardware-accelf854.html?hl=zh-tw" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/indexf854.html?hl=zh-tw" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/computef854.html?hl=zh-tw" >RenderScript</a></li><li><a href="../renderscript/advancedf854.html?hl=zh-tw" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overviewf854.html?hl=zh-tw" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_typesf854.html?hl=zh-tw" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_typesf854.html?hl=zh-tw" >Object Types</a></li><li><a href="../renderscript/reference/rs_convertf854.html?hl=zh-tw" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_mathf854.html?hl=zh-tw" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_mathf854.html?hl=zh-tw" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrixf854.html?hl=zh-tw" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternionf854.html?hl=zh-tw" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomicf854.html?hl=zh-tw" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_timef854.html?hl=zh-tw" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_dataf854.html?hl=zh-tw" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_infof854.html?hl=zh-tw" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_eachf854.html?hl=zh-tw" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_iof854.html?hl=zh-tw" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debugf854.html?hl=zh-tw" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphicsf854.html?hl=zh-tw" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/indexf854.html?hl=zh-tw" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/indexf854.html?hl=zh-tw" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overviewf854.html?hl=zh-tw" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-sessionf854.html?hl=zh-tw" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-appf854.html?hl=zh-tw" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservicef854.html?hl=zh-tw" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-clientf854.html?hl=zh-tw" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-appf854.html?hl=zh-tw" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activityf854.html?hl=zh-tw" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttonsf854.html?hl=zh-tw" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphonesf854.html?hl=zh-tw" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/indexf854.html?hl=zh-tw" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formatsf854.html?hl=zh-tw" >Supported Media Formats</a></li><li><a href="../media/mediaplayerf854.html?hl=zh-tw" >MediaPlayer</a></li><li><a href="../media/mediarecorderf854.html?hl=zh-tw" >MediaRecorder</a></li><li><a href="../media/exoplayerf854.html?hl=zh-tw" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routingf854.html?hl=zh-tw" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouterf854.html?hl=zh-tw" >MediaRouter API</a></li><li><a href="../media/mediarouteproviderf854.html?hl=zh-tw" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/cameraf854.html?hl=zh-tw" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/indexf854.html?hl=zh-tw" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/indexf854.html?hl=zh-tw" >Location and Maps</a></li><li><a href="../location/strategiesf854.html?hl=zh-tw" >Location Strategies</a></li><li><a href="../sensors/sensors_overviewf854.html?hl=zh-tw" >Sensors Overview</a></li><li><a href="../sensors/sensors_motionf854.html?hl=zh-tw" >Motion Sensors</a></li><li><a href="../sensors/sensors_positionf854.html?hl=zh-tw" >Position Sensors</a></li><li><a href="../sensors/sensors_environmentf854.html?hl=zh-tw" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/indexf854.html?hl=zh-tw" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetoothf854.html?hl=zh-tw" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-lef854.html?hl=zh-tw" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/indexf854.html?hl=zh-tw" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfcf854.html?hl=zh-tw" >NFC Basics</a></li><li><a href="../connectivity/nfc/advanced-nfcf854.html?hl=zh-tw" >Advanced NFC</a></li><li><a href="../connectivity/nfc/hcef854.html?hl=zh-tw" >Host-based Card Emulation</a></li></ul></li><li><a href="../connectivity/wifip2pf854.html?hl=zh-tw" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/indexf854.html?hl=zh-tw" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessoryf854.html?hl=zh-tw" >Accessory</a></li><li><a href="../connectivity/usb/hostf854.html?hl=zh-tw" >Host</a></li></ul></li><li><a href="../connectivity/sipf854.html?hl=zh-tw" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/indexf854.html?hl=zh-tw" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-pastef854.html?hl=zh-tw" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-methodf854.html?hl=zh-tw" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboardf854.html?hl=zh-tw" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-frameworkf854.html?hl=zh-tw" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/indexf854.html?hl=zh-tw" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storagef854.html?hl=zh-tw" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../data/backupf854.html?hl=zh-tw" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/autobackupf854.html?hl=zh-tw" >Auto Backup</a></li><li><a href="../data/keyvaluebackupf854.html?hl=zh-tw" >Key/Value Backup</a></li><li><a href="../data/testingbackupf854.html?hl=zh-tw" >Testing Backup and Restore</a></li></ul></li><li><a href="../data/install-locationf854.html?hl=zh-tw" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/indexf854.html?hl=zh-tw" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-adminf854.html?hl=zh-tw" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/indexf854.html?hl=zh-tw" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targetingf854.html?hl=zh-tw" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webviewf854.html?hl=zh-tw" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migratingf854.html?hl=zh-tw" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debuggingf854.html?hl=zh-tw" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practicesf854.html?hl=zh-tw" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/indexf854.html?hl=zh-tw"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_supportf854.html?hl=zh-tw" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distributionf854.html?hl=zh-tw" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-modef854.html?hl=zh-tw" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessnessf854.html?hl=zh-tw" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsetsf854.html?hl=zh-tw" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=zh-tw">首頁</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=zh-tw">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=zh-tw">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=zh-tw">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=zh-tw">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=zh-tw">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=zh-tw"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=zh-tw"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">訓練</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../indexf854.html?hl=zh-tw"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=zh-tw"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">參考資料</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=zh-tw">範例</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=zh-tw"
+           >程式庫</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=zh-tw"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=zh-tw"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=zh-tw">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=zh-tw">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=zh-tw">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=zh-tw">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=zh-tw">Play 管理中心</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=zh-tw"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=zh-tw"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=zh-tw">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=zh-tw">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">設定</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+<h2>本文件內容</h2>
+<ol>
+  <li><a href="#Overview">總覽</a>
+    <ol>
+      <li><a href="#SettingTypes">偏好設定</a></li>
+    </ol>
+  </li>
+  <li><a href="#DefiningPrefs">在 XML 中定義偏好設定</a>
+    <ol>
+      <li><a href="#Groups">建立設定群組</a></li>
+      <li><a href="#Intents">使用意圖</a></li>
+    </ol>
+  </li>
+  <li><a href="#Activity">建立偏好設定 Activity</a></li>
+  <li><a href="#Fragment">使用偏好設定片段</a></li>
+  <li><a href="#Defaults">設定預設值</a></li>
+  <li><a href="#PreferenceHeaders">使用偏好設定標頭</a>
+    <ol>
+      <li><a href="#CreateHeaders">建立標頭檔案</a></li>
+      <li><a href="#DisplayHeaders">顯示標頭</a></li>
+      <li><a href="#BackCompatHeaders">使用偏好設定標頭支援舊版</a></li>
+    </ol>
+  </li>
+  <li><a href="#ReadingPrefs">讀取偏好設定</a>
+    <ol>
+      <li><a href="#Listening">接聽偏好設定變更</a></li>
+    </ol>
+  </li>
+  <li><a href="#NetworkUsage">管理網路使用量</a></li>
+  <li><a href="#Custom">建置自訂偏好設定</a>
+    <ol>
+      <li><a href="#CustomSelected">指定使用者介面</a></li>
+      <li><a href="#CustomSave">儲存設定值</a></li>
+      <li><a href="#CustomInitialize">初始化目前值</a></li>
+      <li><a href="#CustomDefault">提供預設值</a></li>
+      <li><a href="#CustomSaveState">儲存和還原偏好設定狀態</a></li>
+    </ol>
+  </li>
+</ol>
+
+<h2>重要類別</h2>
+<ol>
+  <li><code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code></li>
+  <li><code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code></li>
+  <li><code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code></li>
+</ol>
+
+
+<h2>另請參閱</h2>
+<ol>
+  <li><a href="https://developer.android.com/design/patterns/settings.html?hl=zh-tw">設定設計指南</a></li>
+</ol>
+</div>
+</div>
+
+
+
+
+<p>應用程式通常會包含可讓使用者修改應用程式功能和行為的設定。例如，有些應用程式可讓使用者指定是否啟用通知，或指定應用程式與雲端同步資料的頻率。
+
+</p>
+
+<p>如果您想要為應用程式提供設定，應該使用 Android <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> API 建置與其他 Android 應用程式使用者體驗一致的介面 (包含系統設定)。
+
+本文件說明如何使用 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> API 建置應用程式設定。
+</p>
+
+<div class="note design">
+<p><strong>設定設計</strong></p>
+  <p>如要瞭解如何設計設定，請參閱<a href="https://developer.android.com/design/patterns/settings.html?hl=zh-tw">設定</a>設計指南。</p>
+</div>
+
+
+<img src="../../../images/ui/settings/settingsf854.png?hl=zh-tw" alt="" width="435" />
+<p class="img-caption"><strong>圖 1.</strong>Android 簡訊應用程式設定的螢幕擷取畫面。
+選取一個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 定義的項目可以開啟介面變更設定。
+</p>
+
+
+
+
+<h2 id="Overview">總覽</h2>
+
+<p>現在不使用 <code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-tw">View</a></code> 物件建置使用者介面，而是使用您在 XML 檔案中所宣告 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別的各種子類別來建置設定。
+
+</p>
+
+<p>一個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件是單一設定的建置區塊。
+每個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 都以項目的形式在清單中顯示，並為使用者提供適當的 UI 以修改設定。
+例如，<code><a href="https://developer.android.com/reference/android/preference/CheckBoxPreference.html?hl=zh-tw">CheckBoxPreference</a></code> 可以建立顯示核取方塊的清單項目，而 <code><a href="https://developer.android.com/reference/android/preference/ListPreference.html?hl=zh-tw">ListPreference</a></code> 可以建立開啟對話方塊 (其中包含選擇清單) 的項目。</p>
+
+<p>每個您新增的 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 都會有一個對應的鍵值配對，系統可使用此鍵值對將設定儲存到您應用程式設定的預設 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 檔案。
+
+當使用者變更設定，系統會為您更新 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 檔案中的對應值。
+您唯一需要與關聯的 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 檔案直接互動的時候，是當您需要讀取值才能根據使用者設定判斷應用程式行為時。
+
+</p>
+
+<p>儲存在 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 的每個設定值可以是下列其中一個資料類型：
+</p>
+
+<ul>
+  <li>布林值</li>
+  <li>浮動</li>
+  <li>整數</li>
+  <li>長整數</li>
+  <li>字串</li>
+  <li>字串 <code><a href="https://developer.android.com/reference/java/util/Set.html?hl=zh-tw">Set</a></code></li>
+</ul>
+
+<p>由於您的應用程式設定 UI 是使用 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件，而不是 <code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-tw">View</a></code> 物件建置，因此您需要使用專門的 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw">Activity</a></code> 或 <code><a href="https://developer.android.com/reference/android/app/Fragment.html?hl=zh-tw">Fragment</a></code> 子類別來顯示清單設定：
+
+
+</p>
+
+<ul>
+  <li>如果應用程式支援的 Android 版本早於 3.0 (API 級別 10 及較早版本)，您必須以 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 類別延伸的形式建置 Activity。
+</li>
+  <li>在 Android 3.0 及更新版本上，您應該使用傳統 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw">Activity</a></code>，它託管了顯示應用程式設定的 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code>。
+
+然而，當您有多個設定群組時，還可以使用 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 在大螢幕建立兩個面板的版面配置。
+</li>
+</ul>
+
+<p>如何設定 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 和 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 執行個體在<a href="#Activity">建立偏好設定 Activity</a> 和<a href="#Fragment">使用偏好設定片段</a>小節中有相關說明。
+</p>
+
+
+<h3 id="SettingTypes">偏好設定</h3>
+
+<p>應用程式的每個設定都會以 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別的特定子類別代表。每個子類別包含一組核心屬性，可讓您為設定指定標題等項目和預設值。
+每個子類別還提供自己專屬的屬性和使用者介面。
+例如，圖 1 顯示簡訊應用程式設定的螢幕擷取畫面。
+設定畫面中的每個清單項目都由不同的 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件支援。</p>
+
+<p>下列為幾個最常見的偏好設定：</p>
+
+<dl>
+  <dt><code><a href="https://developer.android.com/reference/android/preference/CheckBoxPreference.html?hl=zh-tw">CheckBoxPreference</a></code></dt>
+  <dd>為啟用或停用的設定顯示含有核取方塊的項目。儲存的值是布林值 (如果選取 <code>true</code>)。
+</dd>
+
+  <dt><code><a href="https://developer.android.com/reference/android/preference/ListPreference.html?hl=zh-tw">ListPreference</a></code></dt>
+  <dd>開啟含有選項按鈕清單的對話方塊。儲存的值可以是任何支援的值類型 (如上所列)。
+</dd>
+
+  <dt><code><a href="https://developer.android.com/reference/android/preference/EditTextPreference.html?hl=zh-tw">EditTextPreference</a></code></dt>
+  <dd>開啟含有 <code><a href="https://developer.android.com/reference/android/widget/EditText.html?hl=zh-tw">EditText</a></code> 小工具的對話方塊。儲存的值是 <code><a href="https://developer.android.com/reference/java/lang/String.html?hl=zh-tw">String</a></code>。</dd>
+</dl>
+
+<p>請參閱 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別，以取得所有其他子類別及其對應屬性的清單。
+</p>
+
+<p>當然，內建類別無法滿足所有需要，您的應用程式可能需要更專門的功能。
+例如，平台目前無法提供 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別以選取數字或日期。因此，您可能需要定義自己的 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 子類別。
+如需執行此操作的協助，請參閱<a href="#Custom">建置自訂偏好設定</a>。</p>
+
+
+
+<h2 id="DefiningPrefs">在 XML 中定義偏好設定</h2>
+
+<p>雖然您可以在執行階段將新的 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件具現化，但您仍應該在 XML 中定義設定清單，並在其中包含 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件的階層。
+
+使用 XML 檔案定義設定集合是較建議的做法，因為該檔案提供的易讀結構很容易更新。
+而且，雖然您仍然可以在執行階段修改集合，但您的應用程式設定通常是預先定義好的。
+</p>
+
+<p>每個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 子類別都可透過與類別名稱相符的 XML 元素進行宣告，例如 <code>&amp;lt;CheckBoxPreference&amp;gt;</code>。
+</p>
+
+<p>您必須將 XML 檔案儲存在 <code>res/xml/</code> 目錄中。雖然您可以自由命名檔案，但在傳統上會命名為 <code>preferences.xml</code>。
+您通常只需要一個檔案，因為階層 (會開啟自己的設定清單) 中的子目錄是透過 <code><a href="https://developer.android.com/reference/android/preference/PreferenceScreen.html?hl=zh-tw">PreferenceScreen</a></code> 的巢狀執行個體進行宣告。
+
+</p>
+
+<p class="note"><strong>注意：</strong>如果您想要為設定建立多個面板的版面配置，則您需要為每個片段準備個別的 XML 檔案。
+</p>
+
+<p>XML 檔案的根節點必須是 <code><a href="https://developer.android.com/reference/android/preference/PreferenceScreen.html?hl=zh-tw">&lt;PreferenceScreen&gt;</a></code> 元素。您要將每個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 新增到此元素內。您在 <code><a href="https://developer.android.com/reference/android/preference/PreferenceScreen.html?hl=zh-tw">&lt;PreferenceScreen&gt;</a></code> 元素內新增的每個子項會在設定清單中顯示為單一項目。
+
+</p>
+
+<p>例如：</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;CheckBoxPreference
+        android:key="pref_sync"
+        android:title="@string/pref_sync"
+        android:summary="@string/pref_sync_summ"
+        android:defaultValue="true" />
+    &lt;ListPreference
+        android:dependency="pref_sync"
+        android:key="pref_syncConnectionType"
+        android:title="@string/pref_syncConnectionType"
+        android:dialogTitle="@string/pref_syncConnectionType"
+        android:entries="@array/pref_syncConnectionTypes_entries"
+        android:entryValues="@array/pref_syncConnectionTypes_values"
+        android:defaultValue="@string/pref_syncConnectionTypes_default" />
+&lt;/PreferenceScreen>
+</pre>
+
+<p>此範例中有一個 <code><a href="https://developer.android.com/reference/android/preference/CheckBoxPreference.html?hl=zh-tw">CheckBoxPreference</a></code> 和一個 <code><a href="https://developer.android.com/reference/android/preference/ListPreference.html?hl=zh-tw">ListPreference</a></code>。這兩個項目都包含下列三個屬性：</p>
+
+<dl>
+  <dt><code>android:key</code></dt>
+  <dd>需要這個屬性才能保留資料值的偏好設定。它會指定當系統將此設定值儲存於 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 時要使用的唯一索引鍵 (字串)。
+
+  <p>只有在下列情況下不需要此屬性：<em></em>偏好設定為 <code><a href="https://developer.android.com/reference/android/preference/PreferenceCategory.html?hl=zh-tw">PreferenceCategory</a></code> 或 <code><a href="https://developer.android.com/reference/android/preference/PreferenceScreen.html?hl=zh-tw">PreferenceScreen</a></code>，或者偏好設定指定 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code> 進行呼叫 (搭配 <a href="#Intents"><code>&amp;lt;intent&amp;gt;</code></a> 元素) 或 <code><a href="https://developer.android.com/reference/android/app/Fragment.html?hl=zh-tw">Fragment</a></code> 進行顯示 (搭配 <a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#attr_android:fragment"><code>android:fragment</code></a> 屬性)。
+
+</p>
+  </dd>
+  <dt><code>android:title</code></dt>
+  <dd>這可為設定提供使用者可見的名稱。</dd>
+  <dt><code>android:defaultValue</code></dt>
+  <dd>這可指定系統在 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 檔案中應設定的初始值。您應該為所有設定提供預設值。
+</dd>
+</dl>
+
+<p>如需所有其他支援的屬性相關資訊，請參閱 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> (及個別子類別) 文件。</p>
+
+
+<div class="figure" style="width:300px">
+  <img src="../../../images/ui/settings/settings-titlesf854.png?hl=zh-tw" alt="" />
+  <p class="img-caption"><strong>圖 2.</strong>設定含有標題的類別。
+ <br/><b>1.</b>類別以 <code><a href="https://developer.android.com/reference/android/preference/PreferenceCategory.html?hl=zh-tw">&lt;PreferenceCategory&gt;</a></code> 元素指定。 <br/><b>2.</b>標題以 <code>android:title</code> 屬性指定。
+</p>
+</div>
+
+
+<p>如果您的設定清單超過約 10 個項目，您可以新增標題來定義設定群組，或在分開的畫面顯示這些群組。
+
+這些選項在下列幾節有詳細的描述。</p>
+
+
+<h3 id="Groups">建立設定群組</h3>
+
+<p>如果您的清單有 10 個以上的項目，掃描、理解和處理這些項目對使用者而言可能會很困難。
+如要解決這個問題，可將部分或所有設定分成不同的群組，有效地將一長串清單分成多個簡短的清單。
+
+一組包含相關設定的群組可以下列其中一種方式顯示：</p>
+
+<ul>
+  <li><a href="#Titles">使用標題</a></li>
+  <li><a href="#Subscreens">使用子畫面</a></li>
+</ul>
+
+<p>您可以使用上述一種或兩種分組技巧來整理您的應用程式設定。決定要使用哪種方法或如何分割設定時，您應該要依照 Android 設計<a href="https://developer.android.com/design/patterns/settings.html?hl=zh-tw">設定</a>指南中的指導方針進行。
+
+</p>
+
+
+<h4 id="Titles">使用標題</h4>
+
+<p>如果您想要在設定群組間使用標題區分 (如圖 2 所示)，將 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件的每個群組放入 <code><a href="https://developer.android.com/reference/android/preference/PreferenceCategory.html?hl=zh-tw">PreferenceCategory</a></code>。
+</p>
+
+<p>例如：</p>
+
+<pre>
+&lt;PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;PreferenceCategory
+        android:title="&#64;string/pref_sms_storage_title"
+        android:key="pref_key_storage_settings">
+        &lt;CheckBoxPreference
+            android:key="pref_key_auto_delete"
+            android:summary="&#64;string/pref_summary_auto_delete"
+            android:title="&#64;string/pref_title_auto_delete"
+            android:defaultValue="false"... />
+        &lt;Preference
+            android:key="pref_key_sms_delete_limit"
+            android:dependency="pref_key_auto_delete"
+            android:summary="&#64;string/pref_summary_delete_limit"
+            android:title="&#64;string/pref_title_sms_delete"... />
+        &lt;Preference
+            android:key="pref_key_mms_delete_limit"
+            android:dependency="pref_key_auto_delete"
+            android:summary="&#64;string/pref_summary_delete_limit"
+            android:title="&#64;string/pref_title_mms_delete" ... />
+    &lt;/PreferenceCategory>
+    ...
+&lt;/PreferenceScreen>
+</pre>
+
+
+<h4 id="Subscreens">使用子畫面</h4>
+
+<p>如果您想將設定群組放入子畫面 (如圖 3 所示)，將 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件的群組放入 <code><a href="https://developer.android.com/reference/android/preference/PreferenceScreen.html?hl=zh-tw">PreferenceScreen</a></code>。
+</p>
+
+<img src="../../../images/ui/settings/settings-subscreenf854.png?hl=zh-tw" alt="" />
+<p class="img-caption"><strong>圖 3.</strong>設定子畫面。<code>&amp;lt;PreferenceScreen&amp;gt;</code> 元素建立的項目會在選取時開啟獨立的清單以顯示巢狀設定。
+</p>
+
+<p>例如：</p>
+
+<pre>
+&lt;PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;!-- opens a subscreen of settings -->
+    &lt;PreferenceScreen
+        android:key="button_voicemail_category_key"
+        android:title="&#64;string/voicemail"
+        android:persistent="false">
+        &lt;ListPreference
+            android:key="button_voicemail_provider_key"
+            android:title="&#64;string/voicemail_provider" ... />
+        &lt;!-- opens another nested subscreen -->
+        &lt;PreferenceScreen
+            android:key="button_voicemail_setting_key"
+            android:title="&#64;string/voicemail_settings"
+            android:persistent="false">
+            ...
+        &lt;/PreferenceScreen>
+        &lt;RingtonePreference
+            android:key="button_voicemail_ringtone_key"
+            android:title="&#64;string/voicemail_ringtone_title"
+            android:ringtoneType="notification" ... />
+        ...
+    &lt;/PreferenceScreen>
+    ...
+&lt;/PreferenceScreen>
+</pre>
+
+
+<h3 id="Intents">使用意圖</h3>
+
+<p>在某些情況下，您可能會希望偏好設定項目開啟不同的 Activity 而不是設定畫面，例如，開啟網路瀏覽器以檢視網頁。
+如要在使用者選取偏好設定項目時呼叫 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code>，請新增 <code>&amp;lt;intent&amp;gt;</code> 元素做為對應 <code>&amp;lt;Preference&amp;gt;</code> 元素的子項。
+</p>
+
+<p>例如，您可以使用下列方法透過偏好設定項目開啟網頁：</p>
+
+<pre>
+&lt;Preference android:title="@string/prefs_web_page" >
+    &lt;intent android:action="android.intent.action.VIEW"
+            android:data="http://www.example.com" />
+&lt;/Preference>
+</pre>
+
+<p>您可以使用下列屬性建立隱含和明確意圖：</p>
+
+<dl>
+  <dt><code>android:action</code></dt>
+    <dd>根據 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#setAction(java.lang.String)">setAction()</a></code> 方法指派的動作。
+</dd>
+  <dt><code>android:data</code></dt>
+    <dd>根據 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#setData(android.net.Uri)">setData()</a></code> 方法指派的資料。</dd>
+  <dt><code>android:mimeType</code></dt>
+    <dd>根據 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#setType(java.lang.String)">setType()</a></code> 方法指派的 MIME 類型。
+</dd>
+  <dt><code>android:targetClass</code></dt>
+    <dd>根據 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#setComponent(android.content.ComponentName)">setComponent()</a></code> 方法指派的元件名稱類別部分。</dd>
+  <dt><code>android:targetPackage</code></dt>
+    <dd>根據 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#setComponent(android.content.ComponentName)">setComponent()</a></code> 方法指派的元件名稱封裝部分。</dd>
+</dl>
+
+
+
+<h2 id="Activity">建立偏好設定 Activity</h2>
+
+<p>如要在 Activity 中顯示設定，延伸 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 類別。這是傳統 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw">Activity</a></code> 類別的延伸，可根據 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件的階層顯示設定清單。當使用者進行變更時，<code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 會自動保留與每個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 關聯的設定。
+</p>
+
+<p class="note"><strong>注意：</strong>如果您針對 Android 3.0 及更新版本開發應用程式，您應該改為使用 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code>。
+前往下一個<a href="#Fragment">使用偏好設定片段</a>章節。
+</p>
+
+<p>最需要注意的一件事就是，不要在 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw#onCreate(android.os.Bundle)">onCreate()</a></code> 呼叫期間載入檢視的版面配置。您應該要呼叫 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw#addPreferencesFromResource(int)">addPreferencesFromResource()</a></code>，將您在 XML 檔案中宣告的偏好設定新增到 Activity 中。
+例如，下列為功能 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 所需的基本程式碼：
+</p>
+
+<pre>
+public class SettingsActivity extends PreferenceActivity {
+    &#64;Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.preferences);
+    }
+}
+</pre>
+
+<p>事實上，這個程式碼對某些應用程式而言已經足夠，因為使用者修改偏好設定後，系統會將變更儲存到預設 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 檔案，當您需要檢查使用者設定時，您的其他應用程式元件就能進行讀取。
+
+但是，許多應用程式需要更多一點程式碼，以接聽對偏好設定進行的變更。
+如需在 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 檔案接聽變更的相關資訊，請參閱<a href="#ReadingPrefs">讀取偏好設定</a>。
+
+</p>
+
+
+
+
+<h2 id="Fragment">使用偏好設定片段</h2>
+
+<p>如果您針對 Android 3.0 (API 級別 11) 及更新版本進行開發，您應該使用 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 顯示 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件清單。
+您可以將 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 新增到任何 Activity &mdash; 您不需要使用 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code>。
+</p>
+
+<p><a href="../../components/fragmentsf854.html?hl=zh-tw">片段</a>單就 Activity 而言，可為您的應用程式提供更有彈性的架構，無論您建置哪一種 Activity 都一樣。
+
+因此，我們建議您盡可能使用 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 來控制設定的顯示，而不要使用 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code>。</p>
+
+<p>實作 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 可以很簡單，只要定義 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw#onCreate(android.os.Bundle)">onCreate()</a></code> 方法，透過 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw#addPreferencesFromResource(int)">addPreferencesFromResource()</a></code> 載入偏好設定檔案。
+
+例如：</p>
+
+<pre>
+public static class SettingsFragment extends PreferenceFragment {
+    &#64;Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Load the preferences from an XML resource
+        addPreferencesFromResource(R.xml.preferences);
+    }
+    ...
+}
+</pre>
+
+<p>之後，您可以將此片段新增至 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw">Activity</a></code>，做法與任何其他
+<code><a href="https://developer.android.com/reference/android/app/Fragment.html?hl=zh-tw">Fragment</a></code> 一樣。例如：</p>
+
+<pre>
+public class SettingsActivity extends Activity {
+    &#64;Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Display the fragment as the main content.
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new SettingsFragment())
+                .commit();
+    }
+}
+</pre>
+
+<p class="note"><strong>注意：</strong><code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 沒有自己的 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw">Context</a></code> 物件。
+如果您需要 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw">Context</a></code> 物件，可以呼叫 <code><a href="https://developer.android.com/reference/android/app/Fragment.html?hl=zh-tw#getActivity()">getActivity()</a></code>。
+不過，必須小心，只能在片段附加到 Activity 時才能呼叫 <code><a href="https://developer.android.com/reference/android/app/Fragment.html?hl=zh-tw#getActivity()">getActivity()</a></code>。
+如果未附加片段，或是在生命週期期間中斷連結，<code><a href="https://developer.android.com/reference/android/app/Fragment.html?hl=zh-tw#getActivity()">getActivity()</a></code> 將傳回 null。
+</p>
+
+
+<h2 id="Defaults">設定預設值</h2>
+
+<p>您建立的偏好設定可能為應用程式定義了一些重要的行為，因此當使用者第一次開啟您的應用程式時，務必使用每個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 預設值來初始化關聯的 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 檔案。
+
+
+</p>
+
+<p>您必須要做的第一件事，就是使用 <code>android:defaultValue</code> 屬性指定 XML 檔案中每個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件的預設值。
+值可以是適用於對應 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件的任何資料類型。
+例如：
+</p>
+
+<pre>
+&lt;!-- default value is a boolean -->
+&lt;CheckBoxPreference
+    android:defaultValue="true"
+    ... />
+
+&lt;!-- default value is a string -->
+&lt;ListPreference
+    android:defaultValue="@string/pref_syncConnectionTypes_default"
+    ... />
+</pre>
+
+<p>之後，從您應用程式主 Activity &mdash; 以及使用者第一次進入您應用程式所使用的任何其他 Activity &mdash; 的 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onCreate(android.os.Bundle)">onCreate()</a></code> 方法呼叫 <code><a href="https://developer.android.com/reference/android/preference/PreferenceManager.html?hl=zh-tw#setDefaultValues(android.content.Context, int, boolean)">setDefaultValues()</a></code>：
+
+</p>
+
+<pre>
+PreferenceManager.setDefaultValues(this, R.xml.advanced_preferences, false);
+</pre>
+
+<p>在 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onCreate(android.os.Bundle)">onCreate()</a></code> 期間呼叫它，可確保您的應用程式正確地以預設值初始化，您的應用程式可能需要讀取這些預設值，才能判斷一些行為 (例如，使用行動網路時是否可下載資料)。
+
+
+</p>
+
+<p>這個方法採用三種引數：</p>
+<ul>
+  <li>您的應用程式 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw">Context</a></code>。</li>
+  <li>您要設定預設值之偏好設定 XML 檔案的資源 ID。</li>
+  <li>布林值指出預設值是否要設定一次以上。
+<p>如果為 <code>false</code>，系統只會在過去從未呼叫此方法時設定預設值 (或者預設值共用偏好設定檔案的 <code><a href="https://developer.android.com/reference/android/preference/PreferenceManager.html?hl=zh-tw#KEY_HAS_SET_DEFAULT_VALUES">KEY_HAS_SET_DEFAULT_VALUES</a></code> 為 false)。
+
+</p></li>
+</ul>
+
+<p>只要將第三個引數設為 <code>false</code>，您可以在每次 Activity 啟動時很安全地呼叫此方法，而不會將使用者儲存的偏好設定重設為預設值。
+
+不過，如果您將它設為 <code>true</code>，會將任何之前的值覆寫為預設值。
+</p>
+
+
+
+<h2 id="PreferenceHeaders">使用偏好設定標頭</h2>
+
+<p>在少數情況下，您可能會想將設定設計為只在第一個畫面顯示<a href="#Subscreens">子畫面</a>清單(與系統設定應用程式一樣，如圖 4 和 5 所示)。
+
+當您為 Android 3.0 及更新版本開發這類設計時，您應該使用 Android 3.0 的新「標頭」功能，而不是使用巢狀 <code><a href="https://developer.android.com/reference/android/preference/PreferenceScreen.html?hl=zh-tw">PreferenceScreen</a></code> 元素建置子畫面。
+
+</p>
+
+<p>如要使用標頭建置設定，您必須：</p>
+<ol>
+  <li>將每個設定群組分成不同的 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 執行個體。也就是說，每個設定群組需要一個獨立的 XML 檔案。
+</li>
+  <li>建立一個 XML 標頭檔案，其中列出每個設定群組以及宣告哪些片段包含對應的設定清單。
+</li>
+  <li>延伸 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 類別以託管您的設定。</li>
+  <li>實作 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw#onBuildHeaders(java.util.List<android.preference.PreferenceActivity.Header>)">onBuildHeaders()</a></code> 回呼以指定標頭檔案。
+</li>
+</ol>
+
+<p>使用這個設計最大的好處在於在大螢幕執行時，
+<code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 會自動顯示兩個面板的版面配置，如圖 4 所示。</p>
+
+<p>即使應用程式支援的 Android 版本較 3.0 舊，您還是可以建置應用程式在新版的裝置上使用 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 顯示兩個面板，同時仍然支援舊版裝置上的傳統多畫面階層 (請參閱<a href="#BackCompatHeaders">使用偏好設定標頭支援舊版</a>)。
+
+
+
+</p>
+
+<img src="../../../images/ui/settings/settings-headers-tabletf854.png?hl=zh-tw" alt="" />
+<p class="img-caption"><strong>圖 4.</strong>含標頭的兩個面板版面配置。 <br/><b>1.</b>標頭以 XML 標頭檔案定義。
+ <br/><b>2.</b>每個設定群組是由標頭檔案 <code>&amp;lt;header&amp;gt;</code> 元素指定的<code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 所定義。
+
+</p>
+
+<img src="../../../images/ui/settings/settings-headers-handsetf854.png?hl=zh-tw" alt="" />
+<p class="img-caption"><strong>圖 5.</strong>含設定標頭的手機裝置。選取項目後，關聯的 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 會取代標頭。
+
+</p>
+
+
+<h3 id="CreateHeaders" style="clear:left">建立標頭檔案</h3>
+
+<p>您標頭清單中的每個設定群組是由根 <code>&amp;lt;preference-headers&amp;gt;</code> 元素中的單一 <code>&amp;lt;header&amp;gt;</code> 元素指定。
+例如：</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;header
+        android:fragment="com.example.prefs.SettingsActivity$SettingsFragmentOne"
+        android:title="@string/prefs_category_one"
+        android:summary="@string/prefs_summ_category_one" />
+    &lt;header
+        android:fragment="com.example.prefs.SettingsActivity$SettingsFragmentTwo"
+        android:title="@string/prefs_category_two"
+        android:summary="@string/prefs_summ_category_two" >
+        &lt;!-- key/value pairs can be included as arguments for the fragment. -->
+        &lt;extra android:name="someKey" android:value="someHeaderValue" />
+    &lt;/header>
+&lt;/preference-headers>
+</pre>
+
+<p>有了 <code>android:fragment</code> 屬性，每個標頭會宣告當使用者選取標頭時，應該開啟的 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 執行個體。</p>
+
+<p><code>&amp;lt;extras&amp;gt;</code> 元素可讓您將鍵值配對傳送到 <code><a href="https://developer.android.com/reference/android/os/Bundle.html?hl=zh-tw">Bundle</a></code> 中的片段。片段可以透過呼叫 <code><a href="https://developer.android.com/reference/android/app/Fragment.html?hl=zh-tw#getArguments()">getArguments()</a></code> 擷取引數。您可以因各種理由將引數傳送到片段，但其中一個最好的理由是針對每個群組重複使用 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code> 中相同的子類別，並使用引數指定應載入片段的偏好設定 XML 檔案。
+
+</p>
+
+<p>例如，當每個標頭使用 <code>"settings"</code> 索引鍵定義 <code>&amp;lt;extra&amp;gt;</code> 引數時，下列片段可在多個設定群組重複使用：
+</p>
+
+<pre>
+public static class SettingsFragment extends PreferenceFragment {
+    &#64;Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        String settings = getArguments().getString("settings");
+        if ("notifications".equals(settings)) {
+            addPreferencesFromResource(R.xml.settings_wifi);
+        } else if ("sync".equals(settings)) {
+            addPreferencesFromResource(R.xml.settings_sync);
+        }
+    }
+}
+</pre>
+
+
+
+<h3 id="DisplayHeaders">顯示標頭</h3>
+
+<p>如要顯示偏好設定標頭，必須實作 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw#onBuildHeaders(java.util.List<android.preference.PreferenceActivity.Header>)">onBuildHeaders()</a></code> 回呼方法，並呼叫 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw#loadHeadersFromResource(int, java.util.List<android.preference.PreferenceActivity.Header>)">loadHeadersFromResource()</a></code>。
+例如：</p>
+
+<pre>
+public class SettingsActivity extends PreferenceActivity {
+    &#64;Override
+    public void onBuildHeaders(List&lt;Header> target) {
+        loadHeadersFromResource(R.xml.preference_headers, target);
+    }
+}
+</pre>
+
+<p>當使用者從標頭清單選取項目時，系統會開啟關聯的 <code><a href="https://developer.android.com/reference/android/preference/PreferenceFragment.html?hl=zh-tw">PreferenceFragment</a></code>。</p>
+
+<p class="note"><strong>注意：</strong>使用偏好設定標頭時，<code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 的子類別不需要實作 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw#onCreate(android.os.Bundle)">onCreate()</a></code> 方法，這是因為 Activity 唯一需要做的工作就是載入標頭。
+</p>
+
+
+<h3 id="BackCompatHeaders">使用偏好設定標頭支援舊版</h3>
+
+<p>如果您應用程式支援的 Android 版本比 3.0 舊，您仍然可以在 Android 3.0 及更新版本執行時，使用標頭提供兩個面板的版面配置。
+您只需要建立一個額外的偏好設定 XML 檔案，該檔案要使用行為與標頭項目 (供舊版 Android 使用) 一樣的基本 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">&lt;Preference&gt;</a></code> 元素。
+
+</p>
+
+<p>但是，不會開啟新的 <code><a href="https://developer.android.com/reference/android/preference/PreferenceScreen.html?hl=zh-tw">PreferenceScreen</a></code>，每個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">&lt;Preference&gt;</a></code> 元素會傳送一個 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code> 到 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code>，以指定要載入的偏好設定 XML 檔案。
+
+</p>
+
+<p>例如，下列為使用 Android 3.0及更新版本的偏好設定標頭 XML 檔案 (<code>res/xml/preference_headers.xml</code>)：
+</p>
+
+<pre>
+&lt;preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;header
+        android:fragment="com.example.prefs.SettingsFragmentOne"
+        android:title="@string/prefs_category_one"
+        android:summary="@string/prefs_summ_category_one" />
+    &lt;header
+        android:fragment="com.example.prefs.SettingsFragmentTwo"
+        android:title="@string/prefs_category_two"
+        android:summary="@string/prefs_summ_category_two" />
+&lt;/preference-headers>
+</pre>
+
+<p>而，這裡有個偏好設定檔案為 Android 3.0 以下版本提供相同的標頭 (<code>res/xml/preference_headers_legacy.xml</code>)：
+</p>
+
+<pre>
+&lt;PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    &lt;Preference
+        android:title="@string/prefs_category_one"
+        android:summary="@string/prefs_summ_category_one"  >
+        &lt;intent
+            android:targetPackage="com.example.prefs"
+            android:targetClass="com.example.prefs.SettingsActivity"
+            android:action="com.example.prefs.PREFS_ONE" />
+    &lt;/Preference>
+    &lt;Preference
+        android:title="@string/prefs_category_two"
+        android:summary="@string/prefs_summ_category_two" >
+        &lt;intent
+            android:targetPackage="com.example.prefs"
+            android:targetClass="com.example.prefs.SettingsActivity"
+            android:action="com.example.prefs.PREFS_TWO" />
+    &lt;/Preference>
+&lt;/PreferenceScreen>
+</pre>
+
+<p>因為 Android 3.0 已加入對 <code>&amp;lt;preference-headers&amp;gt;</code> 的支援，系統只會在 Androd 3.0 或更新版本執行時，才會呼叫 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 中的 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw#onBuildHeaders(java.util.List<android.preference.PreferenceActivity.Header>)">onBuildHeaders()</a></code>。
+如要載入「舊版」標頭檔案 (<code>preference_headers_legacy.xml</code>)，您必須檢查 Android 版本，如果版本比 Android 3.0 更舊 (<code><a href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html?hl=zh-tw#HONEYCOMB">HONEYCOMB</a></code>)，呼叫 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw#addPreferencesFromResource(int)">addPreferencesFromResource()</a></code> 以載入舊版標頭檔案。
+
+
+例如：</p>
+
+<pre>
+&#64;Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    ...
+
+    if (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.HONEYCOMB) {
+        // Load the legacy preferences headers
+        addPreferencesFromResource(R.xml.preference_headers_legacy);
+    }
+}
+
+// Called only on Honeycomb and later
+&#64;Override
+public void onBuildHeaders(List&lt;Header> target) {
+   loadHeadersFromResource(R.xml.preference_headers, target);
+}
+</pre>
+
+<p>最後一件要做的事，是處理傳送到 Activity 的 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code>，以識別要載入的偏好設定檔案。
+擷取意圖的動作，並將它與偏好設定 XML <code>&amp;lt;intent&amp;gt;</code> 標籤中使用的已知動作字串進行比對：
+</p>
+
+<pre>
+final static String ACTION_PREFS_ONE = "com.example.prefs.PREFS_ONE";
+...
+
+&#64;Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    String action = getIntent().getAction();
+    if (action != null &amp;&amp; action.equals(ACTION_PREFS_ONE)) {
+        addPreferencesFromResource(R.xml.preferences);
+    }
+    ...
+
+    else if (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.HONEYCOMB) {
+        // Load the legacy preferences headers
+        addPreferencesFromResource(R.xml.preference_headers_legacy);
+    }
+}
+</pre>
+
+<p>請注意，<code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw#addPreferencesFromResource(int)">addPreferencesFromResource()</a></code> 的連續呼叫會將所有偏好設定堆疊在單一清單中，因此請確定將條件鏈結到 else-if 陳述式時只會呼叫它一次。
+
+</p>
+
+
+
+
+
+<h2 id="ReadingPrefs">讀取偏好設定</h2>
+
+<p>根據預設，透過呼叫靜態方法 <code><a href="https://developer.android.com/reference/android/preference/PreferenceManager.html?hl=zh-tw#getDefaultSharedPreferences(android.content.Context)">PreferenceManager.getDefaultSharedPreferences()</a></code>，您應用程式中的所有偏好設定會儲存可從應用程式內任何地方存取的檔案中。
+這會傳回 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 物件，其中包含與您 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 使用之 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件關聯的所有鍵值配對。
+</p>
+
+<p>例如，下列說明如何從應用程式中的任何其他 Activity 讀取其中一個偏好設定值：
+</p>
+
+<pre>
+SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+String syncConnPref = sharedPref.getString(SettingsActivity.KEY_PREF_SYNC_CONN, "");
+</pre>
+
+
+
+<h3 id="Listening">接聽偏好設定變更</h3>
+
+<p>使用者變更其中一個偏好設定後，您想要立即收到通知的原因有好幾個。
+如要在任何偏好設定發生變更時收到回呼，實作 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.OnSharedPreferenceChangeListener.html?hl=zh-tw">SharedPreference.OnSharedPreferenceChangeListener</a></code> 介面，並呼叫 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw#registerOnSharedPreferenceChangeListener(android.content.SharedPreferences.OnSharedPreferenceChangeListener)">registerOnSharedPreferenceChangeListener()</a></code> 為 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 物件註冊接聽器。
+
+</p>
+
+<p>介面只有一個回呼方式 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.OnSharedPreferenceChangeListener.html?hl=zh-tw#onSharedPreferenceChanged(android.content.SharedPreferences, java.lang.String)">onSharedPreferenceChanged()</a></code>，而且在 Activity 中實作介面可能對您來說會更為容易。
+例如：</p>
+
+<pre>
+public class SettingsActivity extends PreferenceActivity
+                              implements OnSharedPreferenceChangeListener {
+    public static final String KEY_PREF_SYNC_CONN = "pref_syncConnectionType";
+    ...
+
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+        String key) {
+        if (key.equals(KEY_PREF_SYNC_CONN)) {
+            Preference connectionPref = findPreference(key);
+            // Set summary to be the user-description for the selected value
+            connectionPref.setSummary(sharedPreferences.getString(key, ""));
+        }
+    }
+}
+</pre>
+
+<p>在此範例中，方法會檢查是否是針對已知的偏好設定索引鍵設定進行變更。它會呼叫 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw#findPreference(java.lang.CharSequence)">findPreference()</a></code> 以取得變更的 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 物件，以便將項目摘要修改為使用者選取的描述。
+
+
+也就是說，當設定為 <code><a href="https://developer.android.com/reference/android/preference/ListPreference.html?hl=zh-tw">ListPreference</a></code> 或其他多選擇設定時，如果設定變更為顯示目前狀態 (如圖 5 顯示的休眠設定)，您應該呼叫 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#setSummary(int)">setSummary()</a></code>。
+</p>
+
+<p class="note"><strong>注意：</strong>如 Android 設計文件中有關<a href="https://developer.android.com/design/patterns/settings.html?hl=zh-tw">設定</a>的說明所述，我們建議您在每次使用者變更偏好設定時更新 <code><a href="https://developer.android.com/reference/android/preference/ListPreference.html?hl=zh-tw">ListPreference</a></code> 的摘要，以描述目前的設定。
+
+</p>
+
+<p>為了在 Activity 中正確管理生命週期，我們建議您分別在 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onResume()">onResume()</a></code> 和 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onPause()">onPause()</a></code> 回呼期間，註冊和解決註冊您的 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.OnSharedPreferenceChangeListener.html?hl=zh-tw">SharedPreferences.OnSharedPreferenceChangeListener</a></code>：
+</p>
+
+<pre>
+&#64;Override
+protected void onResume() {
+    super.onResume();
+    getPreferenceScreen().getSharedPreferences()
+            .registerOnSharedPreferenceChangeListener(this);
+}
+
+&#64;Override
+protected void onPause() {
+    super.onPause();
+    getPreferenceScreen().getSharedPreferences()
+            .unregisterOnSharedPreferenceChangeListener(this);
+}
+</pre>
+
+<p class="caution"><strong>注意：</strong>當您呼叫 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw#registerOnSharedPreferenceChangeListener(android.content.SharedPreferences.OnSharedPreferenceChangeListener)">registerOnSharedPreferenceChangeListener()</a></code> 時，偏好設定管理員目前不會在接聽器儲存強式參照。
+您必須將強式參照儲存到接聽器，否則它會很容易受記憶體回收的影響。
+我們建議您在物件的執行個體資料中保留接聽器參照，如此一來您可以在需要接聽器時隨時使用。
+
+</p>
+
+<p>例如，在下列程式碼中，呼叫器沒有保留接聽器參照。
+因此，接聽器將受到記憶體回收的支配，而且會在未來不明確的時間發生失敗：
+</p>
+
+<pre>
+prefs.registerOnSharedPreferenceChangeListener(
+  // Bad! The listener is subject to garbage collection!
+  new SharedPreferences.OnSharedPreferenceChangeListener() {
+  public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+    // listener implementation
+  }
+});
+</pre>
+
+<p>將接聽器參照儲存在物件的執行個體資料欄位中，可以在需要接聽器時隨時使用：
+</p>
+
+<pre>
+SharedPreferences.OnSharedPreferenceChangeListener listener =
+    new SharedPreferences.OnSharedPreferenceChangeListener() {
+  public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+    // listener implementation
+  }
+};
+prefs.registerOnSharedPreferenceChangeListener(listener);
+</pre>
+
+<h2 id="NetworkUsage">管理網路使用量</h2>
+
+
+<p>從 Android 4.0 開始，系統的設定應用程式允許使用者查看應用程式在前景和背景時使用了多少網路資料。
+然後，使用者可以停用個別應用程式的背景資料。
+如要避免使用者停用您的應用程式從背景存取資料，您應該有效率地使用資料連線，並允許使用者透過應用程式設定精簡您的應用程式資料使用量。
+
+<p>
+
+<p>例如，您可以讓使用者控制同步資料的頻率，無論您的應用程式只在 Wi-Fi 上執行上傳/下載、應用程式在漫遊使用資料等。
+使用者有了這些控制項，就比較不會在快要達到在系統設定中設定的限制時停用您應用程式的資料存取，因為他們可以準確地控制您應用程式使用的資料量。
+
+
+</p>
+
+<p>您在 <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code> 新增所需的偏好設定以控制應用程式的資料習慣後，您應該在宣示說明檔新增 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_MANAGE_NETWORK_USAGE">ACTION_MANAGE_NETWORK_USAGE</a></code> 的意圖篩選器。
+例如：</p>
+
+<pre>
+&lt;activity android:name="SettingsActivity" ... >
+    &lt;intent-filter>
+       &lt;action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
+       &lt;category android:name="android.intent.category.DEFAULT" />
+    &lt;/intent-filter>
+&lt;/activity>
+</pre>
+
+<p>這個意圖篩選器向系統指出，是 Activity 在控制您的應用程式資料使用量。
+因此，當使用者從系統設定應用程式檢查您的應用程式使用了多少資料量時，可以使用 [檢視應用程式設定] 按鈕啟動您的<em></em> <code><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html?hl=zh-tw">PreferenceActivity</a></code>，讓使用者精簡您應用程式使用的資料量。
+
+
+</p>
+
+
+
+
+
+
+
+<h2 id="Custom">建置自訂偏好設定</h2>
+
+<p>Android 架構包含各式各樣的 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 子類別，可讓您建置所種不同設定類型的 UI。不過，您可能會發現內建解決方案中可能沒有您所需的設定，例如數字挑選器或日期挑選器。
+
+
+在這類情況下，您需要延伸 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別或其中一個其他子類別，以建立自訂的偏好設定。
+</p>
+
+<p>當您延伸 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別時，需要執行幾個重要工作：
+</p>
+
+<ul>
+  <li>指定使用者選取設定時要顯示的使用者介面。</li>
+  <li>視需要儲存設定值。</li>
+  <li>顯示 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 時，使用目前 (或預設) 值加以初始化。
+</li>
+  <li>在系統要求時提供預設值。</li>
+  <li>如果 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 提供自己的 UI (例如對話方塊)，儲存並還原狀態以處理生命週期變更 (例如，當使用者旋轉螢幕時)。
+</li>
+</ul>
+
+<p>以下各節說明如何完成這些工作。</p>
+
+
+
+<h3 id="CustomSelected">指定使用者介面</h3>
+
+  <p>如果您直接延伸 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別，必須實作 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#onClick()">onClick()</a></code> 以定義使用者選取項目時的動作。
+
+不過，大多數自訂設定會延伸 <code><a href="https://developer.android.com/reference/android/preference/DialogPreference.html?hl=zh-tw">DialogPreference</a></code> 來顯示對話方塊，以簡化程序。
+延伸 <code><a href="https://developer.android.com/reference/android/preference/DialogPreference.html?hl=zh-tw">DialogPreference</a></code> 時，您必須在類別建構函式期間呼叫 <code><a href="https://developer.android.com/reference/android/preference/DialogPreference.html?hl=zh-tw#setDialogLayoutResource(int)">setDialogLayoutResourcs()</a></code>，以指定對話方塊的版面配置。
+</p>
+
+  <p>例如，下列為自訂 <code><a href="https://developer.android.com/reference/android/preference/DialogPreference.html?hl=zh-tw">DialogPreference</a></code> 的建構函式，該偏好設定宣告版面配置並指定預設正值和負值對話方塊按鈕的文字：
+</p>
+
+<pre>
+public class NumberPickerPreference extends DialogPreference {
+    public NumberPickerPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+        setDialogLayoutResource(R.layout.numberpicker_dialog);
+        setPositiveButtonText(android.R.string.ok);
+        setNegativeButtonText(android.R.string.cancel);
+
+        setDialogIcon(null);
+    }
+    ...
+}
+</pre>
+
+
+
+<h3 id="CustomSave">儲存設定值</h3>
+
+<p>您可以呼叫其中一個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別的 <code>persist*()</code> 方法隨時儲存設定值，例如，如果設定值是整數，使用 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#persistInt(int)">persistInt()</a></code>，或者使用 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#persistBoolean(boolean)">persistBoolean()</a></code> 儲存布林值。
+</p>
+
+<p class="note"><strong>注意：</strong>每個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 只能儲存一個資料類型，因此您必須使用適合您自訂 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 使用之資料類型的 <code>persist*()</code> 方法。
+
+</p>
+
+<p>當您選擇保留設定時，可以依據您延伸的 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別加以設定。如果您延伸 <code><a href="https://developer.android.com/reference/android/preference/DialogPreference.html?hl=zh-tw">DialogPreference</a></code>，則應該只在對話方塊因正值結果 (使用者選取 [確定] 按鈕) 關閉時保留該值。
+</p>
+
+<p>當 <code><a href="https://developer.android.com/reference/android/preference/DialogPreference.html?hl=zh-tw">DialogPreference</a></code> 關閉時，系統會呼叫 <code><a href="https://developer.android.com/reference/android/preference/DialogPreference.html?hl=zh-tw#onDialogClosed(boolean)">onDialogClosed()</a></code> 方法。這個方法包括一個布林值引數，指定使用者結果是否為「正值」&mdash; 如果值為
+<code>true</code>，則表示使用者選取正值按鈕，而您應該儲存新值。
+例如：
+</p>
+
+<pre>
+&#64;Override
+protected void onDialogClosed(boolean positiveResult) {
+    // When the user selects "OK", persist the new value
+    if (positiveResult) {
+        persistInt(mNewValue);
+    }
+}
+</pre>
+
+<p>在此範例中，<code>mNewValue</code> 是保留設定目前值的類別成員。
+呼叫 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#persistInt(int)">persistInt()</a></code> 可將值儲存到 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 檔案 (自動使用 XML 檔案中為此 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 指定的索引鍵)。
+
+</p>
+
+
+<h3 id="CustomInitialize">初始化目前值</h3>
+
+<p>當系統將您的 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 新增到畫面時，會呼叫 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#onSetInitialValue(boolean, java.lang.Object)">onSetInitialValue()</a></code> 以通知您設定是否有持續值。
+
+如果沒有持續值，這個呼叫會提供您預設值。
+</p>
+
+<p><code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#onSetInitialValue(boolean, java.lang.Object)">onSetInitialValue()</a></code> 方法會傳送布林值 <code>restorePersistedValue</code>，以指出該設定的值是否已經持續。
+
+如果是 <code>true</code>，則您應該呼叫其中一個 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別的 <code>getPersisted*()</code> 方法以擷取持續值，例如，如果為整數值，可使用 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#getPersistedInt(int)">getPersistedInt()</a></code>。
+您通常都會想要擷取持續值，如此您可以正確的更新 UI 以反映之前儲存的值。
+
+</p>
+
+<p>如果 <code>restorePersistedValue</code> 是 <code>false</code>，則您應該使用在第二引數中傳送的預設值。
+</p>
+
+<pre>
+&#64;Override
+protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
+    if (restorePersistedValue) {
+        // Restore existing state
+        mCurrentValue = this.getPersistedInt(DEFAULT_VALUE);
+    } else {
+        // Set default state from the XML attribute
+        mCurrentValue = (Integer) defaultValue;
+        persistInt(mCurrentValue);
+    }
+}
+</pre>
+
+<p>在實際上沒有持續值或沒有索引鍵的情況下，每個 <code>getPersisted*()</code> 方法會採用指定要使用之預設值的引數。
+在上述範例中，會使用本機常數來指定預設值，以避免 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#getPersistedInt(int)">getPersistedInt()</a></code> 無法傳回持續值。
+</p>
+
+<p class="caution"><strong>注意：</strong>您<strong>無法</strong>使用 <code>defaultValue</code> 作為 <code>getPersisted*()</code> 方法中的預設值，因為當 <code>restorePersistedValue</code> 為 <code>true</code> 時，其值永遠是 null。
+
+</p>
+
+
+<h3 id="CustomDefault">提供預設值</h3>
+
+<p>如果 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別的執行個體指定預設值 (包含 <code>android:defaultValue</code> 屬性)，則系統會在將物件具現化時呼叫 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#onGetDefaultValue(android.content.res.TypedArray, int)">onGetDefaultValue()</a></code>，以擷取值。
+
+您必須實作此方法，才能讓系統將預設值儲存在 <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=zh-tw">SharedPreferences</a></code> 中。
+例如：</p>
+
+<pre>
+&#64;Override
+protected Object onGetDefaultValue(TypedArray a, int index) {
+    return a.getInteger(index, DEFAULT_VALUE);
+}
+</pre>
+
+<p>方法引數可以提供您所需的所有物件：屬性陣列，以及您必須擷取之 <code>android:defaultValue</code> 的索引位置。
+您必須實作此方法以便從屬性擷取預設值的原因，是因為您必須在未定義值的情況為屬性指定一個本機預設值。
+
+</p>
+
+
+
+<h3 id="CustomSaveState">儲存和還原偏好設定狀態</h3>
+
+<p>如同版面配置中的 <code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-tw">View</a></code>，您的 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 子類別負責在 Activity 或片段重新啟動 (例如，當使用者旋轉螢幕時) 時，儲存和還原其狀態。
+
+如要正確的儲存和還原 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別的狀態，您必須實作生命週期回呼方法 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#onSaveInstanceState()">onSaveInstanceState()</a></code> 和 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#onRestoreInstanceState(android.os.Parcelable)">onRestoreInstanceState()</a></code>。
+
+</p>
+
+<p>您 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 的狀態由實作 <code><a href="https://developer.android.com/reference/android/os/Parcelable.html?hl=zh-tw">Parcelable</a></code> 介面的物件定義。
+Android 架構為您提供這類物件作為定義狀態物件的起始點：<code><a href="https://developer.android.com/reference/android/preference/Preference.BaseSavedState.html?hl=zh-tw">Preference.BaseSavedState</a></code> 類別。
+</p>
+
+<p>如要定義 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 類別儲存狀態的方法，您應該延伸 <code><a href="https://developer.android.com/reference/android/preference/Preference.BaseSavedState.html?hl=zh-tw">Preference.BaseSavedState</a></code> 類別。
+您只需要覆寫幾個方法，然後定義 <code><a href="https://developer.android.com/reference/android/preference/Preference.BaseSavedState.html?hl=zh-tw#CREATOR">CREATOR</a></code>物件。
+
+</p>
+
+<p>對於大多數應用程式而言，如果您的 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 子類別儲存整數以外的資料類型，您可以複製下列實作，然後變更處理 <code>value</code> 的行即可。
+
+</p>
+
+<pre>
+private static class SavedState extends BaseSavedState {
+    // Member that holds the setting's value
+    // Change this data type to match the type saved by your Preference
+    int value;
+
+    public SavedState(Parcelable superState) {
+        super(superState);
+    }
+
+    public SavedState(Parcel source) {
+        super(source);
+        // Get the current preference's value
+        value = source.readInt();  // Change this to read the appropriate data type
+    }
+
+    &#64;Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        // Write the preference's value
+        dest.writeInt(value);  // Change this to write the appropriate data type
+    }
+
+    // Standard creator object using an instance of this class
+    public static final Parcelable.Creator&lt;SavedState> CREATOR =
+            new Parcelable.Creator&lt;SavedState>() {
+
+        public SavedState createFromParcel(Parcel in) {
+            return new SavedState(in);
+        }
+
+        public SavedState[] newArray(int size) {
+            return new SavedState[size];
+        }
+    };
+}
+</pre>
+
+<p>將上述 <code><a href="https://developer.android.com/reference/android/preference/Preference.BaseSavedState.html?hl=zh-tw">Preference.BaseSavedState</a></code> 實作新增到您的應用程式 (通常做為 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 子類別的子類別) 之後，您需要針對 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw">Preference</a></code> 子類別實作 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#onSaveInstanceState()">onSaveInstanceState()</a></code> 和 <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=zh-tw#onRestoreInstanceState(android.os.Parcelable)">onRestoreInstanceState()</a></code> 方法。
+
+
+</p>
+
+<p>例如：</p>
+
+<pre>
+&#64;Override
+protected Parcelable onSaveInstanceState() {
+    final Parcelable superState = super.onSaveInstanceState();
+    // Check whether this Preference is persistent (continually saved)
+    if (isPersistent()) {
+        // No need to save instance state since it's persistent,
+        // use superclass state
+        return superState;
+    }
+
+    // Create instance of custom BaseSavedState
+    final SavedState myState = new SavedState(superState);
+    // Set the state's value with the class member that holds current
+    // setting value
+    myState.value = mNewValue;
+    return myState;
+}
+
+&#64;Override
+protected void onRestoreInstanceState(Parcelable state) {
+    // Check whether we saved the state in onSaveInstanceState
+    if (state == null || !state.getClass().equals(SavedState.class)) {
+        // Didn't save the state, so call superclass
+        super.onRestoreInstanceState(state);
+        return;
+    }
+
+    // Cast state to custom BaseSavedState and pass to superclass
+    SavedState myState = (SavedState) state;
+    super.onRestoreInstanceState(myState.getSuperState());
+
+    // Set this Preference's widget to reflect the restored state
+    mNumberPicker.setValue(myState.value);
+}
+</pre>
+
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=zh-tw" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="網誌" target="_blank">網誌</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=zh-tw" title="完備支援">完備支援</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=zh-tw" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=zh-tw" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=zh-tw" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=zh-tw" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="nO1gmicnPZqYoRAP_Xze6V24w_Cr4G1-d8nmiNHjkwY6MTQ5NzUxNjc3NDY2MDcxMA" />
+      <input type="hidden" name="next" value="settings.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+             selected="selected" >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">電子郵件地址</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en962f.js?hl=zh-tw?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=zh-tw"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_zh-tw.js?hl=zh-tw?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/ui/settings.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:11:46 GMT -->
+</html>

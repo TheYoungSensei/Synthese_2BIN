@@ -1,0 +1,1820 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<!-- Mirrored from developer.android.com/guide/components/intents-filters.html?hl=ru by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:06:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="TmZVdiY-p_Hbz9ADl4bwQWsBKU-i8XnpWoi3Igxdb_I6MTQ5NzUxNjMzNDA1OTIwMA" />
+
+  
+    <link rel="canonical" href="intents-filters9201.html?hl=ru">
+  
+
+  
+    <link rel="alternate" href="intents-filters9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="intents-filters327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="intents-filtersf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="intents-filters0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="intents-filters7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="intents-filters9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="intents-filtersde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="intents-filters0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="intents-filters232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="intents-filters6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="intents-filters.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="intents-filters.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../_static/f304fc21fa/images/android/favicon9201.png?hl=ru">
+
+<link rel="apple-touch-icon" href="../../_static/f304fc21fa/images/android/touchicon-1809201.png?hl=ru">
+
+
+<title>
+
+  Объекты Intent и фильтры объектов Intent | Android Developers
+
+</title>
+
+  <meta name="description" content="Intent представляет собой объект обмена сообщениями, с помощью которого можно запросить выполнение действия у компонента другого приложения . Несмотря на то, что объекты Intent упрощают обмен данными между компонентами по нескольким аспектам, в основном…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../static/css/default05ec.css?hl=ru?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../_static/f304fc21fa/js/android_3p-bundle9201.js?hl=ru" type="text/javascript"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_closure_android__ru9201.js?hl=ru"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_android9201.js?hl=ru"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../static/js/docs05ec.js?hl=ru?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ru&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ru&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ru&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ru&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "ru", "served": "ru"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=ru">
+          <img class="dac-header-logo-image" src="../../static/images/android_logo9201.png?hl=ru"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=ru"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=ru"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=ru"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=ru"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=ru" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Поиск">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Назад</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../index9201.html?hl=ru" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="fundamentals9201.html?hl=ru" >App Fundamentals</a></li><li><a href="../practices/compatibility9201.html?hl=ru" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/permissions/index9201.html?hl=ru" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/permissions/requesting9201.html?hl=ru" >Requesting Permissions</a></li><li><a href="../topics/permissions/defining9201.html?hl=ru" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../platform/index9201.html?hl=ru" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../platform/j8-jack9201.html?hl=ru"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../practices/verifying-apps-art9201.html?hl=ru" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index9201.html?hl=ru" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="intents-filters9201.html?hl=ru" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="intents-common9201.html?hl=ru" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="activities/index9201.html?hl=ru" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="activities/intro-activities9201.html?hl=ru" >Introduction to Activities</a></li><li><a href="activities/activity-lifecycle9201.html?hl=ru" >The Activity Lifecycle</a></li><li><a href="activities/state-changes9201.html?hl=ru" >Activity State Changes</a></li><li><a href="activities/tasks-and-back-stack9201.html?hl=ru" >Tasks and Back Stack</a></li><li><a href="activities/process-lifecycle9201.html?hl=ru" >Processes and Application Lifecycle</a></li><li><a href="activities/parcelables-and-bundles9201.html?hl=ru" >Parcelables and Bundles</a></li><li><a href="activities/recents9201.html?hl=ru" >Recents Screen</a></li></ul></li><li><a href="fragments9201.html?hl=ru" >Fragments</a></li><li><a href="loaders9201.html?hl=ru" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="services9201.html?hl=ru" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="bound-services9201.html?hl=ru" >Bound Services</a></li><li><a href="aidl9201.html?hl=ru" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/providers/content-providers9201.html?hl=ru" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/providers/content-provider-basics9201.html?hl=ru" >Content Provider Basics</a></li><li><a href="../topics/providers/content-provider-creating9201.html?hl=ru" >Creating a Content Provider</a></li><li><a href="../topics/providers/calendar-provider9201.html?hl=ru" >Calendar Provider</a></li><li><a href="../topics/providers/contacts-provider9201.html?hl=ru" >Contacts Provider</a></li><li><a href="../topics/providers/document-provider9201.html?hl=ru" >Open files using Storage Access Framework</a></li><li><a href="../topics/providers/create-document-provider9201.html?hl=ru" >Create a Custom Document Provider</a></li></ul></li><li><a href="broadcasts9201.html?hl=ru" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/appwidgets/index9201.html?hl=ru" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/appwidgets/host9201.html?hl=ru" >App Widget Host</a></li></ul></li><li><a href="processes-and-threads9201.html?hl=ru" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/index9201.html?hl=ru" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/overview9201.html?hl=ru" >Overview</a></li><li><a href="../topics/resources/providing-resources9201.html?hl=ru" >Providing Resources</a></li><li><a href="../topics/resources/accessing-resources9201.html?hl=ru" >Accessing Resources</a></li><li><a href="../topics/resources/runtime-changes9201.html?hl=ru" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/localization9201.html?hl=ru" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/icu4j-framework9201.html?hl=ru" >ICU4J Android Framework APIs</a></li><li><a href="../topics/resources/multilingual-support9201.html?hl=ru" >Language and Locale</a></li></ul></li><li><a href="../topics/resources/complex-xml-resources9201.html?hl=ru" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/available-resources9201.html?hl=ru" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/animation-resource9201.html?hl=ru" >Animation</a></li><li><a href="../topics/resources/color-list-resource9201.html?hl=ru" >Color State List</a></li><li><a href="../topics/resources/drawable-resource9201.html?hl=ru" >Drawable</a></li><li><a href="../topics/resources/layout-resource9201.html?hl=ru" >Layout</a></li><li><a href="../topics/resources/menu-resource9201.html?hl=ru" >Menu</a></li><li><a href="../topics/resources/string-resource9201.html?hl=ru" >String</a></li><li><a href="../topics/resources/style-resource9201.html?hl=ru" >Style</a></li><li><a href="../topics/resources/more-resources9201.html?hl=ru" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/manifest/manifest-intro9201.html?hl=ru" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/manifest/action-element9201.html?hl=ru" >&lt;action&gt;</a></li><li><a href="../topics/manifest/activity-element9201.html?hl=ru" >&lt;activity&gt;</a></li><li><a href="../topics/manifest/activity-alias-element9201.html?hl=ru" >&lt;activity-alias&gt;</a></li><li><a href="../topics/manifest/application-element9201.html?hl=ru" >&lt;application&gt;</a></li><li><a href="../topics/manifest/category-element9201.html?hl=ru" >&lt;category&gt;</a></li><li><a href="../topics/manifest/compatible-screens-element9201.html?hl=ru" >&lt;compatible-screens&gt;</a></li><li><a href="../topics/manifest/data-element9201.html?hl=ru" >&lt;data&gt;</a></li><li><a href="../topics/manifest/grant-uri-permission-element9201.html?hl=ru" >&lt;grant-uri-permission&gt;</a></li><li><a href="../topics/manifest/instrumentation-element9201.html?hl=ru" >&lt;instrumentation&gt;</a></li><li><a href="../topics/manifest/intent-filter-element9201.html?hl=ru" >&lt;intent-filter&gt;</a></li><li><a href="../topics/manifest/manifest-element9201.html?hl=ru" >&lt;manifest&gt;</a></li><li><a href="../topics/manifest/meta-data-element9201.html?hl=ru" >&lt;meta-data&gt;</a></li><li><a href="../topics/manifest/path-permission-element9201.html?hl=ru" >&lt;path-permission&gt;</a></li><li><a href="../topics/manifest/permission-element9201.html?hl=ru" >&lt;permission&gt;</a></li><li><a href="../topics/manifest/permission-group-element9201.html?hl=ru" >&lt;permission-group&gt;</a></li><li><a href="../topics/manifest/permission-tree-element9201.html?hl=ru" >&lt;permission-tree&gt;</a></li><li><a href="../topics/manifest/provider-element9201.html?hl=ru" >&lt;provider&gt;</a></li><li><a href="../topics/manifest/receiver-element9201.html?hl=ru" >&lt;receiver&gt;</a></li><li><a href="../topics/manifest/service-element9201.html?hl=ru" >&lt;service&gt;</a></li><li><a href="../topics/manifest/supports-gl-texture-element9201.html?hl=ru" >&lt;supports-gl-texture&gt;</a></li><li><a href="../topics/manifest/supports-screens-element9201.html?hl=ru" >&lt;supports-screens&gt;</a></li><li><a href="../topics/manifest/uses-configuration-element9201.html?hl=ru" >&lt;uses-configuration&gt;</a></li><li><a href="../topics/manifest/uses-feature-element9201.html?hl=ru" >&lt;uses-feature&gt;</a></li><li><a href="../topics/manifest/uses-library-element9201.html?hl=ru" >&lt;uses-library&gt;</a></li><li><a href="../topics/manifest/uses-permission-element9201.html?hl=ru" >&lt;uses-permission&gt;</a></li><li><a href="../topics/manifest/uses-permission-sdk-23-element9201.html?hl=ru" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../topics/manifest/uses-sdk-element9201.html?hl=ru" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/index9201.html?hl=ru" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/overview9201.html?hl=ru" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/declaring-layout9201.html?hl=ru" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/layout/linear9201.html?hl=ru" >Linear Layout</a></li><li><a href="../topics/ui/layout/relative9201.html?hl=ru" >Relative Layout</a></li><li><a href="../topics/ui/layout/recyclerview9201.html?hl=ru" >Recycler View</a></li><li><a href="../topics/ui/layout/listview9201.html?hl=ru" >List View</a></li><li><a href="../topics/ui/layout/gridview9201.html?hl=ru" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/controls9201.html?hl=ru" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/controls/button9201.html?hl=ru" >Buttons</a></li><li><a href="../topics/ui/controls/checkbox9201.html?hl=ru" >Checkboxes</a></li><li><a href="../topics/ui/controls/radiobutton9201.html?hl=ru" >Radio Buttons</a></li><li><a href="../topics/ui/controls/togglebutton9201.html?hl=ru" >Toggle Buttons</a></li><li><a href="../topics/ui/controls/spinner9201.html?hl=ru" >Spinners</a></li><li><a href="../topics/ui/controls/pickers9201.html?hl=ru" >Pickers</a></li></ul></li><li><a href="../topics/ui/ui-events9201.html?hl=ru" >Input Events</a></li><li><a href="../topics/ui/menus9201.html?hl=ru" >Menus</a></li><li><a href="../topics/ui/settings9201.html?hl=ru" >Settings</a></li><li><a href="../topics/ui/dialogs9201.html?hl=ru" >Dialogs</a></li><li><a href="../topics/ui/notifiers/notifications9201.html?hl=ru" >Notifications</a></li><li><a href="../topics/ui/notifiers/toasts9201.html?hl=ru" >Toasts</a></li><li><a href="../topics/ui/shortcuts9201.html?hl=ru" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/search/index9201.html?hl=ru" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/search/search-dialog9201.html?hl=ru" >Creating a Search Interface</a></li><li><a href="../topics/search/adding-recent-query-suggestions9201.html?hl=ru" >Adding Recent Query Suggestions</a></li><li><a href="../topics/search/adding-custom-suggestions9201.html?hl=ru" >Adding Custom Suggestions</a></li><li><a href="../topics/search/searchable-config9201.html?hl=ru" >Searchable Configuration</a></li></ul></li><li><a href="../topics/ui/multi-window9201.html?hl=ru" >Multi-Window Support</a></li><li><a href="../topics/ui/drag-drop9201.html?hl=ru" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/accessibility/index9201.html?hl=ru" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/accessibility/apps9201.html?hl=ru" >Making Apps More Accessible</a></li><li><a href="../topics/ui/accessibility/checklist9201.html?hl=ru" >Accessibility Developer Checklist</a></li><li><a href="../topics/ui/accessibility/node-tree-debugging9201.html?hl=ru" >Using Node Tree Debugging</a></li><li><a href="../topics/ui/accessibility/services9201.html?hl=ru" >Building Accessibility Services</a></li><li><a href="../topics/ui/accessibility/custom-views9201.html?hl=ru" >Building Accessible Custom Views</a></li></ul></li><li><a href="../topics/ui/themes9201.html?hl=ru" >Styles and Themes</a></li><li><a href="../topics/ui/custom-components9201.html?hl=ru" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/index9201.html?hl=ru" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/overview9201.html?hl=ru" >Overview</a></li><li><a href="../topics/graphics/prop-animation9201.html?hl=ru" >Property Animation</a></li><li><a href="../topics/graphics/view-animation9201.html?hl=ru" >View Animation</a></li><li><a href="../topics/graphics/drawable-animation9201.html?hl=ru" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/2d-graphics9201.html?hl=ru" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/vector-drawable-resources9201.html?hl=ru" >Vector Drawable</a></li></ul></li><li><a href="../topics/graphics/opengl9201.html?hl=ru" >OpenGL ES</a></li><li><a href="../topics/graphics/hardware-accel9201.html?hl=ru" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/index9201.html?hl=ru" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/compute9201.html?hl=ru" >RenderScript</a></li><li><a href="../topics/renderscript/advanced9201.html?hl=ru" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/reference/overview9201.html?hl=ru" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/reference/rs_value_types9201.html?hl=ru" >Numerical Types</a></li><li><a href="../topics/renderscript/reference/rs_object_types9201.html?hl=ru" >Object Types</a></li><li><a href="../topics/renderscript/reference/rs_convert9201.html?hl=ru" >Conversion Functions</a></li><li><a href="../topics/renderscript/reference/rs_math9201.html?hl=ru" >Mathematical Constants and Functions</a></li><li><a href="../topics/renderscript/reference/rs_vector_math9201.html?hl=ru" >Vector Math Functions</a></li><li><a href="../topics/renderscript/reference/rs_matrix9201.html?hl=ru" >Matrix Functions</a></li><li><a href="../topics/renderscript/reference/rs_quaternion9201.html?hl=ru" >Quaternion Functions</a></li><li><a href="../topics/renderscript/reference/rs_atomic9201.html?hl=ru" >Atomic Update Functions</a></li><li><a href="../topics/renderscript/reference/rs_time9201.html?hl=ru" >Time Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_allocation_data9201.html?hl=ru" >Allocation Data Access Functions</a></li><li><a href="../topics/renderscript/reference/rs_object_info9201.html?hl=ru" >Object Characteristics Functions</a></li><li><a href="../topics/renderscript/reference/rs_for_each9201.html?hl=ru" >Kernel Invocation Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_io9201.html?hl=ru" >Input/Output Functions</a></li><li><a href="../topics/renderscript/reference/rs_debug9201.html?hl=ru" >Debugging Functions</a></li><li><a href="../topics/renderscript/reference/rs_graphics9201.html?hl=ru" >Graphics Functions and Types</a></li><li><a href="../topics/renderscript/reference/index9201.html?hl=ru" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/index9201.html?hl=ru" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/media-apps-overview9201.html?hl=ru" >Media Apps Overview</a></li><li><a href="../topics/media-apps/working-with-a-media-session9201.html?hl=ru" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/audio-app/building-an-audio-app9201.html?hl=ru" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/audio-app/building-a-mediabrowserservice9201.html?hl=ru" >Building a Media Browser Service</a></li><li><a href="../topics/media-apps/audio-app/building-a-mediabrowser-client9201.html?hl=ru" >Building a Media Browser Client</a></li><li><a href="../topics/media-apps/audio-app/mediasession-callbacks9201.html?hl=ru" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/video-app/building-a-video-app9201.html?hl=ru" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/video-app/building-a-video-player-activity9201.html?hl=ru" >Building a Video Player Activity</a></li><li><a href="../topics/media-apps/video-app/mediasession-callbacks9201.html?hl=ru" >Media Session Callbacks</a></li></ul></li><li><a href="../topics/media-apps/mediabuttons9201.html?hl=ru" >Responding to Media Buttons</a></li><li><a href="../topics/media-apps/volume-and-earphones9201.html?hl=ru" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/index9201.html?hl=ru" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/media-formats9201.html?hl=ru" >Supported Media Formats</a></li><li><a href="../topics/media/mediaplayer9201.html?hl=ru" >MediaPlayer</a></li><li><a href="../topics/media/mediarecorder9201.html?hl=ru" >MediaRecorder</a></li><li><a href="../topics/media/exoplayer9201.html?hl=ru" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/media-routing9201.html?hl=ru" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/mediarouter9201.html?hl=ru" >MediaRouter API</a></li><li><a href="../topics/media/mediarouteprovider9201.html?hl=ru" >MediaRouteProvider API</a></li></ul></li><li><a href="../topics/media/camera9201.html?hl=ru" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/sensors/index9201.html?hl=ru" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/location/index9201.html?hl=ru" >Location and Maps</a></li><li><a href="../topics/location/strategies9201.html?hl=ru" >Location Strategies</a></li><li><a href="../topics/sensors/sensors_overview9201.html?hl=ru" >Sensors Overview</a></li><li><a href="../topics/sensors/sensors_motion9201.html?hl=ru" >Motion Sensors</a></li><li><a href="../topics/sensors/sensors_position9201.html?hl=ru" >Position Sensors</a></li><li><a href="../topics/sensors/sensors_environment9201.html?hl=ru" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/index9201.html?hl=ru" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/bluetooth9201.html?hl=ru" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/bluetooth-le9201.html?hl=ru" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/nfc/index9201.html?hl=ru" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/nfc/nfc9201.html?hl=ru" >NFC Basics</a></li><li><a href="../topics/connectivity/nfc/advanced-nfc9201.html?hl=ru" >Advanced NFC</a></li><li><a href="../topics/connectivity/nfc/hce9201.html?hl=ru" >Host-based Card Emulation</a></li></ul></li><li><a href="../topics/connectivity/wifip2p9201.html?hl=ru" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/usb/index9201.html?hl=ru" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/usb/accessory9201.html?hl=ru" >Accessory</a></li><li><a href="../topics/connectivity/usb/host9201.html?hl=ru" >Host</a></li></ul></li><li><a href="../topics/connectivity/sip9201.html?hl=ru" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/index9201.html?hl=ru" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/copy-paste9201.html?hl=ru" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/creating-input-method9201.html?hl=ru" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/image-keyboard9201.html?hl=ru" >Image Keyboard</a></li></ul></li><li><a href="../topics/text/spell-checker-framework9201.html?hl=ru" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/index9201.html?hl=ru" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/data-storage9201.html?hl=ru" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/backup9201.html?hl=ru" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/autobackup9201.html?hl=ru" >Auto Backup</a></li><li><a href="../topics/data/keyvaluebackup9201.html?hl=ru" >Key/Value Backup</a></li><li><a href="../topics/data/testingbackup9201.html?hl=ru" >Testing Backup and Restore</a></li></ul></li><li><a href="../topics/data/install-location9201.html?hl=ru" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/admin/index9201.html?hl=ru" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/admin/device-admin9201.html?hl=ru" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../webapps/index9201.html?hl=ru" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../webapps/targeting9201.html?hl=ru" >Supporting Different Screens in Web Apps</a></li><li><a href="../webapps/webview9201.html?hl=ru" >Building Web Apps in WebView</a></li><li><a href="../webapps/migrating9201.html?hl=ru" >Migrating to WebView in Android 4.4</a></li><li><a href="../webapps/debugging9201.html?hl=ru" >Debugging Web Apps</a></li><li><a href="../webapps/best-practices9201.html?hl=ru" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../practices/index9201.html?hl=ru"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../practices/screens_support9201.html?hl=ru" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../practices/screens-distribution9201.html?hl=ru" >Distributing to Specific Screens</a></li><li><a href="../practices/screen-compat-mode9201.html?hl=ru" >Screen Compatibility Mode</a></li></ul></li><li><a href="../practices/app-design/seamlessness9201.html?hl=ru" >Designing for Seamlessness</a></li><li><a href="../practices/tablets-and-handsets9201.html?hl=ru" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=ru">Начало</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=ru">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=ru">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=ru">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=ru">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=ru">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=ru"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=ru"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=ru"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Обучение</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../index9201.html?hl=ru"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=ru"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Справочники</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=ru">Примеры</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=ru"
+           >Библиотеки</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=ru"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=ru"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=ru">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=ru">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=ru">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=ru"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=ru">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=ru">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=ru"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=ru"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=ru">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=ru">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Объекты Intent и фильтры объектов Intent</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+<h2>Содержание документа</h2>
+<ol>
+  <li><a href="#Types">Типы объектов Intent</a></li>
+  <li><a href="#Building">Создание объекта Intent</a>
+    <ol>
+      <li><a href="#ExampleExplicit">Пример явного объекта Intent</a></li>
+      <li><a href="#ExampleSend">Пример неявного объекта Intent</a></li>
+      <li><a href="#ForceChooser">Принудительное использование блока выбора приложения</a></li>
+    </ol>
+  </li>
+  <li><a href="#Receiving">Получение неявного объекта Intent</a>
+    <ol>
+      <li><a href="#ExampleFilters">Примеры фильтров</a></li>
+    </ol>
+  </li>
+  <li><a href="#PendingIntent">Использование ожидающего объекта Intent</a></li>
+  <li><a href="#Resolution">Разрешение объектов Intent</a>
+    <ol>
+      <li><a href="#ActionTest">Тестирование действия</a></li>
+      <li><a href="#CategoryTest">Тестирование категории</a></li>
+      <li><a href="#DataTest">Тестирование данных</a></li>
+      <li><a href="#imatch">Сопоставление объектов Intent</a></li>
+    </ol>
+  </li>
+</ol>
+
+<h2>См. также</h2>
+<ol>
+<li><a href="https://developer.android.com/training/basics/intents/index.html?hl=ru">Взаимодействие с другими приложениями</a></li>
+<li><a href="https://developer.android.com/training/sharing/index.html?hl=ru">Общий доступ к контенту</a></li>
+</ol>
+
+</div>
+</div>
+
+
+
+
+<p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> представляет собой объект обмена сообщениями, с помощью которого можно запросить выполнение действия
+у <a href="fundamentals9201.html?hl=ru#Components">компонента другого приложения</a>.
+Несмотря на то, что объекты Intent упрощают обмен данными между компонентами по нескольким аспектам, в основном они используются
+в трех ситуациях:</p>
+
+<ul>
+<li><b>Для запуска операции:</b>
+<p>Компонент <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru">Activity</a></code> представляет собой один экран в приложении. Для запуска нового
+экземпляра компонента <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru">Activity</a></code> необходимо передать объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>
+методу<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code>. Объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>
+описывает операцию, которую требуется запустить, а также содержит все остальные необходимые данные.</p>
+
+<p>Если после завершения операции от нее требуется получить результат,
+вызовите метод <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code>. Ваша операция получит результат
+в виде отдельного объекта <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> в обратном вызове метода <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code> операции.
+Подробные сведения см. в руководстве <a href="activities9201.html?hl=ru">Операции</a>.</p></li>
+
+<li><b>Для запуска службы:</b>
+<p><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ru">Service</a></code> является компонентом, который выполняет действия в фоновом режиме
+без пользовательского интерфейса. Службу можно запустить для выполнения однократного действия
+(например, чтобы загрузить файл), передав объект<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>
+методу <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startService(android.content.Intent)">startService()</a></code>. Объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>
+описывает службу, которую требуется запустить, а также содержит все остальные необходимые данные.</p>
+
+<p>Если служба сконструирована с интерфейсом клиент-сервер, к ней
+можно установить привязку из другого компонента, передав объект<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> методу <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code></code>. Подробные сведения см. в руководстве <a href="services9201.html?hl=ru">Службы</a>.</p></li>
+
+<li><b>Для рассылки широковещательных сообщений:</b>
+<p>Широковещательное сообщение ― это сообщение, которое может принять любое приложение. Система выдает различные
+широковещательные сообщения о системных событиях, например, когда система загружается или устройство начинает заряжаться.
+Для выдачи широковещательных сообщений другим приложениям необходимо передать объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>
+методу <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#sendBroadcast(android.content.Intent)">sendBroadcast()</a></code>,
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#sendOrderedBroadcast(android.content.Intent, java.lang.String)">sendOrderedBroadcast()</a></code> или <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#sendStickyBroadcast(android.content.Intent)">sendStickyBroadcast()</a></code>.</p>
+</li>
+</ul>
+
+
+
+
+<h2 id="Types">Типы объектов Intent</h2>
+
+<p>Есть два типа объектов Intent:</p>
+
+<ul>
+<li><b>Явные объекты Intent</b> указывают компонент, который требуется запустить, по имени (
+полное имя класса). Явные объекты Intent обычно используются для запуска компонента из
+вашего собственного приложения, поскольку вам известно имя класса операции или службы, которую необходимо запустить. Например
+, можно запустить новую операцию в ответ на действие пользователя или запустить службу, чтобы загрузить
+файл в фоновом режиме.</li>
+
+<li><b>Неявные объекты Intent</b> не содержат имени конкретного компонента. Вместо этого они в целом объявляют действие,
+которое требуется выполнить, что дает возможность компоненту из другого приложения обработать этот запрос. Например, если требуется
+показать пользователю место на карте, то с помощью неявного объекта Intent можно запросить, чтобы это сделало другое приложение, в котором
+такая возможность предусмотрена.</li>
+</ul>
+
+<p>Когда создан явный объект Intent для запуска операции или службы, система немедленно
+запускает компонент приложения, указанный в объекте <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>.</p>
+
+<div class="figure" style="width:446px">
+<img src="../../images/components/intent-filters%402x9201.png?hl=ru" width="446" alt="" />
+<p class="img-caption"><strong>Рисунок 1.</strong> Схематическое изображение процесса передачи неявного объекта Intent
+по системе для запуска другой операции: <b>[1]</b> <em>Операция А</em> создает объект
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> с описанием действия и передает его методу <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code>. <b>[2]</b> Система Android ищет во всех
+приложениях фильтры Intent, которые соответствуют данному объекту Intent. Когда приложение с подходящим фильтром найдено, <b>[3]</b> система
+запускает соответствующую операцию (<em>Операция B</em>), вызвав ее метод <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru#onCreate(android.os.Bundle)">onCreate()</a></code> и передав ему объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>.
+</p>
+</div>
+
+<p>Когда создан неявный объект Intent, система Android находит подходящий компонент путем
+сравнения содержимого объекта Intent с <em>фильтрами Intent</em>, объявленными в <a href="../topics/manifest/manifest-intro9201.html?hl=ru">файлах манифеста</a> других приложений, имеющихся на
+устройстве. Если объект Intent совпадает с фильтром Intent, система запускает этот компонент и передает ему
+объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>. Если подходящими оказываются несколько фильтров Intent, система
+выводит диалоговое окно, где пользователь может выбрать приложение для выполнения данного действия.</p>
+
+<p>Фильтр Intent представляет собой выражение в файле манифеста приложения,
+указывающее типы объектов Intent, которые мог бы
+принимать компонент. Например, объявив фильтр Intent для операции,
+вы даете другим приложениям возможность напрямую запускать вашу операцию с помощью некоторого объекта Intent.
+Точно так же, если вы <em>не</em> объявите какие-либо фильтры Intent для операции, то ее можно будет запустить
+только с помощью явного объекта Intent.</p>
+
+<p class="caution"><strong>Внимание!</strong> В целях обеспечения безопасности приложения всегда используйте явный объект
+Intent при запуске <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ru">Service</a></code> и не
+объявляйте фильтры Intent для своих служб. Запуск служб с помощью неявных объектов Intent является
+рискованным с точки зрения безопасности, поскольку нельзя быть на абсолютно уверенным, какая служба отреагирует на такой объект Intent,
+а пользователь не может видеть, какая служба запускается. Начиная с Android 5.0 (уровень API 21) система
+вызывает исключение при вызове метода <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>
+с помощью неявного объекта Intent.</p>
+
+
+
+
+
+<h2 id="Building">Создание объекта Intent</h2>
+
+<p>Объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> содержит информацию, на основании которой система Android
+определяет, какой компонент требуется запустить (например, точное имя компонента или категорию
+компонентов, которые должны получить этот объект Intent), а также сведения, которые необходимы компоненту-получателю,
+чтобы надлежащим образом выполнить действие (а именно — выполняемое действие и данные, с которыми его требуется выполнить).</p>
+
+
+<p>Основные сведения, содержащиеся в объекте <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>:</p>
+
+<dl>
+
+<dt><b>Имя компонента</b></dt>
+<dd>Имя компонента, который требуется запустить.
+
+<p>Эта информация является необязательной, но именно она и делает объект Intent
+<b>явным</b>. Ее наличие означает, что объект Intent следует доставить только компоненту приложения,
+определенному по имени. При отсутствии имени компонента объект Intent является <b>неявным</b>, а
+система определяет, какой компонент получит этот объект Intent по другим сведениям, которые в нем содержатся
+(например, по действию, данным и категории &mdash; см. описание далее). Поэтому, если вам требуется запустить определенный
+компонент из своего приложения, следует указать его имя.</p>
+
+<p class="note"><strong>Примечание.</strong> При запуске <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ru">Service</a></code> следует
+<strong>всегда указывать имя компонента</strong>. В противном случае вы не сможете быть на абсолютно уверенным в том, какая служба
+отреагирует на объект Intent, а пользователь не может видеть, какая служба запускается.</p>
+
+<p>Это поле объекта <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> представляет собой объект
+<code><a href="https://developer.android.com/reference/android/content/ComponentName.html?hl=ru">ComponentName</a></code>, который можно указать с помощью полного
+имени класса целевого компонента, включая имя пакета приложения. Например,
+<code>com.example.ExampleActivity</code>. Задать имя компонента можно с помощью метода <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setComponent(android.content.ComponentName)">setComponent()</a></code>, <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setClass(android.content.Context, java.lang.Class<?>)">setClass()</a></code>, <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setClassName(java.lang.String, java.lang.String)">setClassName()</a></code> или конструктора
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>.</p>
+
+</dd>
+
+<p><dt><b>Действие</b></dt>
+<dd>Строка, определяющая стандартное действие, которое требуется выполнить (например, <em>view</em> (просмотр) или <em>pick</em> (выбор)).
+
+<p>При выдаче объектов Intent с широковещательными сообщениями это действие, которое произошло и о котором сообщается.
+Действие в значительной степени определяет, каким образом структурирована остальная часть объекта Intent,&mdash;в частности,
+что именно содержится в разделе данных и дополнительных данных.
+
+<p>Для использования объектами Intent в пределах своего приложения (либо для использования другими
+приложениями, чтобы вызывать компоненты из вашего приложения) можно указать собственные действия. Обычно же следует использовать константы действий,
+определенные классом <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> или другими классами платформы. Вот несколько
+стандартных действий для запуска операции:</p>
+
+<dl>
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#ACTION_VIEW">ACTION_VIEW</a></code></dt>
+   <dd>Используйте это действие в объекте Intent с методом <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code>, когда имеется определенная информация, которую
+   операция может показать пользователю, например, фотография в приложении галереи или адрес для
+   просмотра в картографическом приложении.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#ACTION_SEND">ACTION_SEND</a></code></dt>
+   <dd>Его еще называют объектом Intent "share" (намерение предоставить общий доступ). Это действие следует использовать в объекте Intent с методом <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code>, при наличии определенных данных, доступ к которым пользователь может
+   предоставить через другое приложение, например приложение для работы с электронной почтой или социальными сетями.</dd>
+</dl>
+
+<p>Другие константы, определяющие стандартные действия, см. в справочнике по классу <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>
+.  Другие действия определяются
+в других частях платформы Android. Например, в <code><a href="https://developer.android.com/reference/android/provider/Settings.html?hl=ru">Settings</a></code> определяются действия,
+открывающие ряд экранов приложения настройки системы.</p>
+
+<p>Действие можно указать для объекта Intent с методом <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setAction(java.lang.String)">setAction()</a></code> или конструктором <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>.</p>
+
+<p>Если вы определяете собственные действия, обязательно используйте в качестве их префикса имя пакета
+вашего приложения. Например:</p>
+<pre>static final String ACTION_TIMETRAVEL = "com.example.action.TIMETRAVEL";</pre>
+</dd>
+
+<dt><b>Данные</b></dt>
+<dd>URI (объект <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=ru">Uri</a></code>), ссылающийся на данные, с которыми будет выполняться действие и/или
+тип MIME этих данных. Тип передаваемых данных обычно определяется действием объекта Intent. Например,
+если действием является <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#ACTION_EDIT">ACTION_EDIT</a></code>, в данных должен содержаться
+URI документа, который требуется отредактировать.
+
+<p>При создании объекта Intent,
+помимо URI, зачастую бывает важно указать тип данных (их тип MIME).
+Например, операция, которая может выводить на экран изображения, скорее всего, не сможет
+воспроизвести аудиофайл, даже если и у тех, и у других данных будут одинаковые форматы URI.
+Поэтому указание типа MIME данных помогает системе Android
+найти наиболее подходящий компонент для получения вашего объекта Intent.
+Однако тип MIME иногда можно унаследовать от URI &mdash; в частности, когда данные представляют собой
+<code>content:</code> URI, который указывает, что данные находятся на устройстве и ими управляет
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ru">ContentProvider</a></code>, а это дает возможность системе видеть тип MIME данных.</p>
+
+<p>Чтобы задать только URI данных, вызовите <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setData(android.net.Uri)">setData()</a></code>.
+Чтобы задать только тип MIME, вызовите <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setType(java.lang.String)">setType()</a></code>. При необходимости
+оба этих параметра можно в явном виде задать с помощью <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setDataAndType(android.net.Uri, java.lang.String)">setDataAndType()</a></code>.</p>
+
+<p class="caution"><strong>Внимание!</strong> Если требуется задать и URI, и тип MIME,
+<strong>не</strong> вызывайте <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setData(android.net.Uri)">setData()</a></code> и
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setType(java.lang.String)">setType()</a></code>, поскольку каждый из этих методов аннулирует результат выполнения другого.
+Чтобы задать URI и тип MIME всегда используйте
+ метод <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setDataAndType(android.net.Uri, java.lang.String)">setDataAndType()</a></code>.</p>
+</dd>
+
+<p><dt><b>Категория</b></dt>
+<dd>Строка, содержащая прочие сведения о том, каким компонентом
+должна выполняться обработка этого объекта Intent.  В объект Intent можно поместить любое количество
+описаний категорий, однако большинству объектов Intent категория не требуется.
+Вот некоторые стандартные категории:
+
+<dl>
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#CATEGORY_BROWSABLE">CATEGORY_BROWSABLE</a></code></dt>
+  <dd>Целевая операция позволяет запускать себя веб-браузером для отображения данных,
+       указанных по ссылке &mdash; например, изображения или сообщения электронной почты.
+  </dd>
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code></dt>
+  <dd>Эта операция является начальной операцией задачи, она указана в
+       средстве запуска приложений системы.
+  </dd>
+</dl>
+
+<p>Полный список категорий см. в описании класса <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>
+.</p>
+
+<p>Указать категорию можно с помощью<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#addCategory(java.lang.String)">addCategory()</a></code>.</p>
+</dd>
+</dl>
+
+
+<p>Приведенные выше свойства (имя компонента, действие, данные и категория) представляют собой
+характеристики, определяющие объект Intent. На основании этих свойств система Android
+может решить, какой компонент следует запустить.</p>
+
+<p>Однако в объекте Intent может быть приведена и другая информация, которая не влияет на то,
+каким образом определяется требуемый компонент приложения. Объект Intent также может содержать:</p>
+
+<dl>
+<dt><b>Дополнительные данные</b></dt>
+<dd>Пары "ключ-значение", содержащие прочую информацию, которая необходима для выполнения запрошенного действия.
+Точно так же, как некоторые действия используют определенные виды URI данных, некоторые действия используют определенные дополнительные данные.
+
+<p>Добавлять дополнительные данные можно с помощью различных методов <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#putExtra(java.lang.String, android.os.Bundle)">putExtra()</a></code>,
+каждый из которых принимает два параметра: имя и значение ключа.
+Также можно создать объект <code><a href="https://developer.android.com/reference/android/os/Bundle.html?hl=ru">Bundle</a></code> со всеми дополнительными данными, затем вставить
+объект <code><a href="https://developer.android.com/reference/android/os/Bundle.html?hl=ru">Bundle</a></code> в объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> с помощью метода <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#putExtras(android.content.Intent)">putExtras()</a></code>.</p>
+
+<p>Например, при создании объекта Intent для отправки сообщения электронной почты с методом
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#ACTION_SEND">ACTION_SEND</a></code> можно указать получателя с помощью ключа
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#EXTRA_EMAIL">EXTRA_EMAIL</a></code>, а тему сообщения ― с помощью ключа
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#EXTRA_SUBJECT">EXTRA_SUBJECT</a></code>.</p>
+
+<p>Класс <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> указывает много констант <code>EXTRA_*</code>
+для стандартных типов данных. Если вам требуется объявить собственные дополнительные ключи (для объектов Intent, которые
+принимает ваше приложение), обязательно указывайте в качестве префикса
+имя пакета своего приложения. Например:</p>
+<pre>static final String EXTRA_GIGAWATTS = "com.example.EXTRA_GIGAWATTS";</pre>
+</dd>
+
+<dt><b>Флаги</b></dt>
+<dd>Флаги, определенные в классе <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>, которые действуют как метаданные для объекта
+Intent. Флаги должны указывать системе Android, каким образом следует запускать операцию (например, к какой
+<a href="tasks-and-back-stack9201.html?hl=ru">задаче</a> должна принадлежать операция
+) и как с ней обращаться после запуска (например, будет ли она указана в списке последних
+операций).
+
+<p>Подробные сведения см. в документе, посвященном методу <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#setFlags(int)">setFlags()</a></code>.</p>
+</dd>
+
+</dl>
+
+
+
+
+<h3 id="ExampleExplicit">Пример явного объекта Intent</h3>
+
+<p>Явные объекты Intent используются для запуска конкретных компонентов приложения, например
+определенной операции или службы. Чтобы создать явный объект Intent, задайте
+имя компонента для объекта <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> &mdash; все
+остальные свойства объекта Intent можно не задавать.</p>
+
+<p>Например, если в своем приложении вы создали службу с именем <code>DownloadService</code>,
+предназначенную для загрузки файлов из Интернета, то для ее запуска можно использовать следующий код:</p>
+
+<pre>
+// Executed in an Activity, so 'this' is the <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru">Context</a></code>
+// The fileUrl is a string URL, such as "http://www.example.com/image.png"
+Intent downloadIntent = new Intent(this, DownloadService.class);
+downloadIntent.setData(<code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=ru#parse(java.lang.String)">Uri.parse</a></code>(fileUrl));
+startService(downloadIntent);
+</pre>
+
+<p>Конструктор <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#Intent(android.content.Context, java.lang.Class<?>)">Intent(Context, Class)</a></code>
+предоставляет <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru">Context</a></code> приложению, а
+компоненту ― объект <code><a href="https://developer.android.com/reference/java/lang/Class.html?hl=ru">Class</a></code>. Фактически
+этот объект Intent явно запускает класс<code>DownloadService</code> в приложении.</p>
+
+<p>Подробные сведения о создании и запуске службы см. в  руководстве
+<a href="services9201.html?hl=ru">Службы</a>.</p>
+
+
+
+
+<h3 id="ExampleSend">Пример неявного объекта Intent</h3>
+
+<p>Неявный объект Intent указывает действие, которым может быть вызвано любое имеющееся на устройстве приложение, способное
+выполнить это действие. Неявные объекты Intent используются, когда ваше приложение не может выполнить
+то или иное действие, а другие приложения, скорее всего, могут и вы хотите, чтобы пользователь имел возможность выбрать, какое приложение для этого использовать.</p>
+
+<p>Например, если у вас есть контент и вы хотите, чтобы пользователь поделился им с другими людьми, создайте объект Intent
+с действием <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#ACTION_SEND">ACTION_SEND</a></code>
+и добавьте дополнительные данные, указывающие на контент, общий доступ к которому следует предоставить. Когда с помощью этого объекта Intent вы вызываете
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code>, пользователь сможет
+выбрать приложение, посредством которого к контенту будет предоставлен общий доступ.</p>
+
+<p class="caution"><strong>Внимание!</strong> Возможна ситуация, когда на устройстве пользователя не будет<em>никакого</em>
+приложения, которое может откликнуться на неявный объект Intent, отправленный вами методу <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code>. В этом случае вызов закончится неудачей, а работа приложения аварийно завершится. Чтобы проверить,
+будет получен ли операцией объект Intent, вызовите метод <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#resolveActivity(android.content.pm.PackageManager)">resolveActivity()</a></code> для своего объекта <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>. Если результатом будет значение, отличное от null,
+значит, имеется хотя бы одно приложение, которое способно откликнуться на объект Intent и можно вызывать
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code>. Если же результатом будет значение null,
+объект Intent не следует использовать и по возможности следует отключить функцию, которая выдает
+этот объект Intent.</p>
+
+
+<pre>
+// Create the text message with a string
+Intent sendIntent = new Intent();
+sendIntent.setAction(Intent.ACTION_SEND);
+sendIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
+sendIntent.setType("text/plain");
+
+// Verify that the intent will resolve to an activity
+if (sendIntent.resolveActivity(getPackageManager()) != null) {
+    startActivity(sendIntent);
+}
+</pre>
+
+<p class="note"><strong>Примечание.</strong> В этом случае URI не используется, а вместо этого следует объявить
+тип данных объекта Intent, чтобы указать контент, содержащийся в дополнительных данных.</p>
+
+
+<p>При вызове метода <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code> система
+анализирует все установленные приложения, чтобы определить, какие из них могут откликнуться на объект Intent этого вида (объект
+Intent с действием <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#ACTION_SEND">ACTION_SEND</a></code> и данными "text/plain"
+). Если имеется только одно подходящее приложение, оно будет сразу же открыто и получит данный объект
+Intent. Если объект Intent принимают несколько операций, система
+отображает диалоговое окно, в котором пользователь может выбрать приложение для выполнения данного действия.</p>
+
+
+<div class="figure" style="width:200px">
+  <img src="../../images/training/basics/intent-chooser9201.png?hl=ru" alt="">
+  <p class="img-caption"><strong>Рисунок 2.</strong> Диалоговое окно выбора.</p>
+</div>
+
+<h3 id="ForceChooser">Принудительное использование блока выбора приложения</h3>
+
+<p>При наличии нескольких приложений, откликающихся на ваш неявный объект Intent,
+пользователь может выбрать требуемое приложение и указать, что оно будет по умолчанию выполнять это
+действие. Это удобно в случае действия, для выполнения которого
+пользователь обычно хочет всегда использовать одно и то же приложение, например, при открытии веб-страницы (пользователи
+обычно используют один и тот же браузер).</p>
+
+<p>Однако если на объект Intent могут откликнуться несколько приложений, возможно, пользователь предпочтет каждый раз использовать другое
+приложение, поэтому следует явно выводить диалоговое окно выбора. В диалоговом окне
+выбора приложения пользователю предлагается при каждом запуске выбирать, какое приложение использовать для действия (пользователь не может выбрать приложение,
+используемое по умолчанию). Например, когда ваше приложение выполняет операцию "share" (поделиться) с помощью действия <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#ACTION_SEND">ACTION_SEND</a></code>, пользователи могут, в зависимости от ситуации, предпочесть каждый раз делать это с помощью разных приложений
+, поэтому следует всегда использовать диалоговое окно выбора, как показано на рисунке 2.</p>
+
+
+
+
+<p>Чтобы вывести на экран блок выбора приложения, создайте <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> с помощью <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#createChooser(android.content.Intent, java.lang.CharSequence)">createChooser()</a></code> и передайте его <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code>. Например:</p>
+
+<pre>
+Intent sendIntent = new Intent(Intent.ACTION_SEND);
+...
+
+// Always use string resources for UI text.
+// This says something like "Share this photo with"
+String title = getResources().getString(R.string.chooser_title);
+// Create intent to show the chooser dialog
+Intent chooser = Intent.createChooser(sendIntent, title);
+
+// Verify the original intent will resolve to at least one activity
+if (sendIntent.resolveActivity(getPackageManager()) != null) {
+    startActivity(chooser);
+}
+</pre>
+
+<p>В результате на экран будет выведено диалоговое окно со списком приложений, которые могут отреагировать на объект Intent, переданный методу <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#createChooser(android.content.Intent, java.lang.CharSequence)">createChooser()</a></code> и используют указанный текст в качестве
+заголовка диалога.</p>
+
+
+
+
+
+
+
+
+
+<h2 id="Receiving">Получение неявного объекта Intent</h2>
+
+<p>Чтобы указать, какие неявные объекты Intent может принимать ваше приложение, объявите один или несколько фильтров Intent для
+каждого компонента приложения с помощью элемента <a href="../topics/manifest/intent-filter-element9201.html?hl=ru"><code>&amp;lt;intent-filter&amp;gt;</code></a>
+в <a href="../topics/manifest/manifest-intro9201.html?hl=ru">файле манифеста</a>.
+Каждый фильтр Intent указывает тип объектов Intent, которые принимает компонент на основании действия,
+данных и категории, заданных в объекте Intent. Система передаст неявный объект Intent вашему приложению, только если
+он может пройти через один из ваших фильтров Intent.</p>
+
+<p class="note"><strong>Примечание.</strong> Явный объект Intent всегда доставляется его целевому компоненту,
+без учета любых фильтров Intent, объявленных компонентом.</p>
+
+<p>Компонент приложения должен объявлять отдельные фильтры для каждой уникальной работы, которую он может выполнить.
+Например, у операции из приложения для работы с галереей изображений может быть два фильтра: один фильтр
+для просмотра изображения, и второй для его редактирования. Когда операция запускается,
+она анализирует объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> и выбирает режим своей работы на основании информации,
+приведенной в <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> (например, показывать элементы управления редактора или нет).</p>
+
+<p>Каждый фильтр Intent определяется элементом <a href="../topics/manifest/intent-filter-element9201.html?hl=ru"><code>&amp;lt;intent-filter&amp;gt;</code></a>
+в файле манифеста приложения, указанном в объявлении соответствующего компонента приложения (например,
+в элементе <a href="../topics/manifest/activity-element9201.html?hl=ru"><code>&amp;lt;activity&amp;gt;</code></a>).
+ Внутри элемента <a href="../topics/manifest/intent-filter-element9201.html?hl=ru"><code>&amp;lt;intent-filter&amp;gt;</code></a>,
+можно указать тип объектов Intent, которые будут приниматься, с помощью одного или нескольких
+из следующих трех элементов:</p>
+
+<dl>
+<dt><a href="../topics/manifest/action-element9201.html?hl=ru"><code>&amp;lt;action&amp;gt;</code></a></dt>
+  <dd>Объявляет принимаемое действие, заданное в объекте Intent, в атрибуте <code>name</code>. Значение
+  должно быть текстовой строкой действия, а не константой класса.</dd>
+<dt><a href="../topics/manifest/data-element9201.html?hl=ru"><code>&amp;lt;data&amp;gt;</code></a></dt>
+  <dd>Объявляет тип принимаемых данных, для чего используется один или несколько атрибутов, указывающих различные
+  составные части URI данных (<code>scheme</code>, <code>host</code>, <code>port</code>,
+  <code>path</code> и т. д.) и тип MIME.</dd>
+<dt><a href="../topics/manifest/category-element9201.html?hl=ru"><code>&amp;lt;category&amp;gt;</code></a></dt>
+  <dd>Объявляет принимаемую категорию, заданную в объекте Intent, в атрибуте <code>name</code>. Значение
+  должно быть текстовой строкой действия, а не константой класса.
+
+  <p class="note"><strong>Примечание.</strong> Для получения неявных объектов Intent
+ <strong>необходимо включить</strong> категорию
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#CATEGORY_DEFAULT">CATEGORY_DEFAULT</a></code> в фильтр Intent. Методы
+  <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code> и
+  <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code> обрабатывают все объекты Intent, как если бы они объявляли
+ категорию<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#CATEGORY_DEFAULT">CATEGORY_DEFAULT</a></code>.
+  Если вы не объявляете эту категорию в своем фильтре Intent, никакие неявные объекты Intent не будут переданы в
+вашу операцию.</p>
+  </dd>
+</dl>
+
+<p>В следующем примере объявлена операция с фильтром Intent, определяющим получение объекта Intent
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#ACTION_SEND">ACTION_SEND</a></code>, когда данные относятся к типу text:</p>
+
+<pre>
+&lt;activity android:name="ShareActivity">
+    &lt;intent-filter>
+        &lt;action android:name="android.intent.action.SEND"/>
+        &lt;category android:name="android.intent.category.DEFAULT"/>
+        &lt;data android:mimeType="text/plain"/>
+    &lt;/intent-filter>
+&lt;/activity>
+</pre>
+
+<p>Можно создавать фильтры, в которых будет несколько экземпляров
+<a href="../topics/manifest/action-element9201.html?hl=ru"><code>&amp;lt;action&amp;gt;</code></a>,
+<a href="../topics/manifest/data-element9201.html?hl=ru"><code>&amp;lt;data&amp;gt;</code></a> или
+<a href="../topics/manifest/category-element9201.html?hl=ru"><code>&amp;lt;category&amp;gt;</code></a>.
+В этом случае просто нужно убедиться в том, что компонент может справиться с любыми сочетаниями
+этих элементов фильтра.</p>
+
+<p>Когда требуется обрабатывать объекты Intent нескольких видов, но только в определенных сочетаниях
+действия, типа данных и категории, необходимо создать несколько фильтров Intent.</p>
+
+
+<div class="sidebox-wrapper">
+<div class="sidebox">
+<h2>Ограничение доступа к компонентам</h2>
+<p>Использование фильтра Intent не является безопасным способом предотвращения запуска ваших компонентов
+другими приложениями. Несмотря на то, что после применения фильтров Intent компонент будет реагировать только
+на неявные объекты Intent определенного вида, другое приложение теоретически может запустить компонент вашего приложения
+с помощью явного объекта Intent, если разработчик определит имена ваших компонентов.
+Если важно, чтобы <em>только ваше собственное приложение</em> могло запускать один из ваших компонентов,
+задайте для атрибута <a href="../topics/manifest/activity-element9201.html?hl=ru#exported"><code>exported</code></a> этого компонента значение <code>"false"</code>.
+</p>
+</div>
+</div>
+
+<p>Неявный объект Intent проверяется фильтром путем сравнения объекта Intent с каждым из
+этих трех элементов. Чтобы объект Intent был доставлен компоненту, он должен пройти все три теста.
+Если он не будет соответствовать хотя бы одному из них, система Android не доставит этот объект Intent
+компоненту.  Однако, поскольку у компонента может быть несколько фильтров Intent, объект Intent, который
+не проходит через один из фильтров компонента, может пройти через другой фильтр.
+Подробные сведения о том, каким образом система принимает решения по поводу объектов Intent, см. в приведенном далее разделе
+ <a href="#Resolution">Разрешение объектов Intent</a>.</p>
+
+<p class="caution"><strong>Внимание!</strong> Чтобы случайно не запустить
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ru">Service</a></code> другого приложения, всегда используйте явные объекты Intent для запуска собственных служб и не
+объявляйте для них фильтры Intent.</p>
+
+<p class="note"><strong>Примечание.</strong>
+Фильтры Intent необходимо объявлять в файле манифеста для всех операций.
+Фильтры для приемников широковещательных сообщений можно регистрировать динамически путем вызова
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#registerReceiver(android.content.BroadcastReceiver, android.content.IntentFilter, java.lang.String, android.os.Handler)">registerReceiver()</a></code>. После этого регистрацию приемника широковещательных сообщений можно отменить с помощью <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#unregisterReceiver(android.content.BroadcastReceiver)">unregisterReceiver()</a></code>. В результате ваше приложение
+сможет воспринимать определенные объявления только в течение указанного периода времени в процессе работы
+приложения.</p>
+
+
+
+
+
+
+
+<h3 id="ExampleFilters">Примеры фильтров</h3>
+
+<p>Чтобы лучше понять различные режимы работы фильтров Intent, рассмотрите следующий фрагмент
+из файла манифеста приложения для работы с социальными сетями.</p>
+
+<pre>
+&lt;activity android:name="MainActivity">
+    &lt;!-- This activity is the main entry, should appear in app launcher -->
+    &lt;intent-filter>
+        &lt;action android:name="android.intent.action.MAIN" />
+        &lt;category android:name="android.intent.category.LAUNCHER" />
+    &lt;/intent-filter>
+&lt;/activity>
+
+&lt;activity android:name="ShareActivity">
+    &lt;!-- This activity handles "SEND" actions with text data -->
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.SEND"/>
+        &lt;category android:name="android.intent.category.DEFAULT"/>
+        &lt;data android:mimeType="text/plain"/>
+    &lt;/intent-filter&gt;
+    &lt;!-- This activity also handles "SEND" and "SEND_MULTIPLE" with media data -->
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.SEND"/>
+        &lt;action android:name="android.intent.action.SEND_MULTIPLE"/>
+        &lt;category android:name="android.intent.category.DEFAULT"/>
+        &lt;data android:mimeType="application/vnd.google.panorama360+jpg"/>
+        &lt;data android:mimeType="image/*"/>
+        &lt;data android:mimeType="video/*"/>
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;
+</pre>
+
+<p>Первая операция (<code>MainActivity</code>) является основной точкой входа приложения &mdash; это операция, которая
+открывается, когда пользователь запускает приложение нажатием на его значок:</p>
+<ul>
+  <li>Действие <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#ACTION_MAIN">ACTION_MAIN</a></code>
+ указывает на то, что это основная точка входа, и не ожидает никаких данных объекта Intent.</li>
+  <li>Категория <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code> указывает, что значок этой операции
+ следует поместить в средство запуска приложений системы. Если элемент <a href="../topics/manifest/activity-element9201.html?hl=ru"><code>&amp;lt;activity&amp;gt;</code></a>
+ не содержит указаний на конкретный значок с помощью <code>icon</code>, то система воспользуется значком из элемента <a href="../topics/manifest/application-element9201.html?hl=ru"><code>&amp;lt;application&amp;gt;</code></a>
+.</li>
+</ul>
+<p>Чтобы операция отображалась в средстве запуска приложений системы, два этих элемента необходимо связать вместе.</p>
+
+<p>Вторая операция (<code>ShareActivity</code>) предназначена для упрощения обмена текстовым и мультимедийным
+контентом. Несмотря на то, что пользователи могут входить в эту операцию, выбрав ее из <code>MainActivity</code>,
+они также могут входить в <code>ShareActivity</code> напрямую из другого приложения, которое выдает неявный объект
+Intent, соответствующий одному из двух фильтров Intent.</p>
+
+<p class="note"><strong>Примечание.</strong> Тип MIME
+(<a href="https://developers.google.com/panorama/android/?hl=ru"><code>application/vnd.google.panorama360+jpg</code></a>) является особым типом данных, указывающим на
+панорамные фотографии, с которыми можно работать с помощью API-интерфейсов <a href="https://developer.android.com/reference/com/google/android/gms/panorama/package-summary.html?hl=ru">Google
+panorama</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="PendingIntent">Использование ожидающего объекта Intent</h2>
+
+<p>Объект <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=ru">PendingIntent</a></code> является оболочкой, в которую заключается объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>. Объект <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=ru">PendingIntent</a></code>
+в основном предназначен для того, чтобы предоставлять разрешение внешним приложениям
+на использование содержащегося в нем объекта <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>, как если бы он исполнялся из
+процесса вашего собственного приложения.</p>
+
+<p>Основные варианты использования ожидающего объекта Intent:</p>
+<ul>
+  <li>Объявление объекта Intent, который должен будет исполняться, когда пользователь выполняет действие с вашим <a href="../topics/ui/notifiers/notifications9201.html?hl=ru">уведомлением</a>
+  (<code><a href="https://developer.android.com/reference/android/app/NotificationManager.html?hl=ru">NotificationManager</a></code> системы Android
+ исполняет <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>).
+  <li>Объявление объекта Intent, который должен будет исполняться, когда пользователь выполняет действие с вашим
+<a href="../topics/appwidgets/index9201.html?hl=ru">виджетом приложения</a>
+  (приложение главного экрана исполняет <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>).
+  <li>Объявление объекта Intent, который должен будет исполняться в указанное время в будущем (<code><a href="https://developer.android.com/reference/android/app/AlarmManager.html?hl=ru">AlarmManager</a></code> системы
+Android исполняет <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>).
+</ul>
+
+<p>Поскольку каждый объект <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> предназначен для обработки компонентом приложения,
+который относится к определенному типу (<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru">Activity</a></code>, <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ru">Service</a></code> или
+ <code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=ru">BroadcastReceiver</a></code>), объект <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=ru">PendingIntent</a></code> также следует создавать
+с учетом этого обстоятельства. При использовании ожидающего объекта Intent ваше приложение не будет
+исполнять объект Intent вызовом, например, <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code>. Вместо этого вам необходимо будет объявить требуемый тип компонента при создании
+<code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=ru">PendingIntent</a></code> путем вызова соответствующего метода-создателя:</p>
+
+<ul>
+  <li>Метод <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=ru#getActivity(android.content.Context, int, android.content.Intent, int)">PendingIntent.getActivity()</a></code> для
+  <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>, который запускает <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru">Activity</a></code>.</li>
+  <li>Метод <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=ru#getService(android.content.Context, int, android.content.Intent, int)">PendingIntent.getService()</a></code> для
+  <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>, который запускает <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ru">Service</a></code>.</li>
+  <li>Метод <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=ru#getBroadcast(android.content.Context, int, android.content.Intent, int)">PendingIntent.getBroadcast()</a></code> для
+  <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>, который запускает <code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=ru">BroadcastReceiver</a></code>.</li>
+</ul>
+
+<p>Если только ваше приложение не <em>принимает</em> ожидающие объекты Intent от других приложений,
+указанные выше методы создания <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=ru">PendingIntent</a></code> являются единственными методами
+<code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=ru">PendingIntent</a></code>, которые вам когда-либо понадобятся.</p>
+
+<p>Каждый метод принимает текущий <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru">Context</a></code> приложения, объект
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>, который требуется поместить в оболочку, и один или несколько флагов, указывающих,
+каким образом следует использовать объект Intent (например, можно ли использовать объект Intent неоднократно).</p>
+
+<p>Подробные сведения об использовании ожидающих объектов Intent приведены в документации по каждому
+из соответствующих вариантов использования, например, в руководствах, посвященным API-интерфейсам: <a href="../topics/ui/notifiers/notifications9201.html?hl=ru">Уведомления</a>
+и <a href="../topics/appwidgets/index9201.html?hl=ru">Виджеты приложений</a>.</p>
+
+
+
+
+
+
+
+<h2 id="Resolution">Разрешение объектов Intent</h2>
+
+
+<p>Когда система получает неявный объект Intent для запуска операции, она выполняет поиск
+наиболее подходящей операции путем сравнения объекта Intent с фильтрами Intent по трем критериям:</p>
+
+<ul>
+  <li>действие объекта Intent;
+  <li>данные объекта Intent (тип URI и данных);
+  <li>категория объекта Intent.
+</ul>
+
+<p>В следующих разделах описывается, каким образом объекты Intent сопоставляются с соответствующими компонентами,
+а именно, как должен быть фильтр Intent объявлен в файле манифеста приложения.</p>
+
+
+<h3 id="ActionTest">Тестирование действия</h3>
+
+<p>Для указания принимаемых действий объекта Intent фильтр Intent может объявлять любое (в том числе нулевое) число элементов
+<a href="../topics/manifest/action-element9201.html?hl=ru"><code>action&amp;gt;</code></a>.  Например:</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;action android:name="android.intent.action.EDIT" /&gt;
+    &lt;action android:name="android.intent.action.VIEW" /&gt;
+    ...
+&lt;/intent-filter&gt;
+</pre>
+
+<p>Чтобы пройти через этот фильтр, действие, указанное в объекте <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>,
+ должно соответствовать одному или нескольким действиям, перечисленным в фильтре.</p>
+
+<p>Если в фильтре не перечислены какие-либо действия, объекту
+Intent будет нечему соответствовать, поэтому все объекты Intent не пройдут этот тест. Однако, если в объекте <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>
+не указано действие, он пройдет тест (если в фильтре
+содержится хотя бы одно действие).</p>
+
+
+
+<h3 id="CategoryTest">Тестирование категории</h3>
+
+<p>Для указания принимаемых категорий объекта Intent фильтр Intent может объявлять любое (в том числе нулевое) число элементов
+<a href="../topics/manifest/category-element9201.html?hl=ru"><code>&amp;lt;category&amp;gt;</code></a>.  Например:</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;category android:name="android.intent.category.DEFAULT" /&gt;
+    &lt;category android:name="android.intent.category.BROWSABLE" /&gt;
+    ...
+&lt;/intent-filter&gt;
+</pre>
+
+<p>Чтобы объект Intent прошел тестирование категории, все категории, приведенные в объекте <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>,
+должны соответствовать категории из фильтра. Обратное не требуется &mdash; фильтр Intent может
+объявлять и другие категории, которых нет в объекте <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code>, объект
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru">Intent</a></code> при этом все равно пройдет тест. Поэтому объект Intent без категорий
+всегда пройдет этот тест, независимо от того, какие категории объявлены в фильтре.</p>
+
+<p class="note"><strong>Примечание.</strong>
+Система Android автоматически применяет категорию <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#CATEGORY_DEFAULT">CATEGORY_DEFAULT</a></code>
+ко всем неявным объектам Intent, которые передаются в <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startActivity(android.content.Intent)">startActivity()</a></code> и <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ru#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code>.
+Поэтому, если вы хотите, чтобы ваша операция принимала неявные объекты Intent, в ее фильтрах Intent
+должна быть указана категория для <code>"android.intent.category.DEFAULT"</code> (как
+показано в предыдущем примере <code>&amp;lt;intent-filter&amp;gt;</code>).</p>
+
+
+
+<h3 id="DataTest">Тестирование данных</h3>
+
+<p>Для указания принимаемых данных объекта Intent фильтр Intent может объявлять любое (в том числе нулевое) число элементов
+<a href="../topics/manifest/data-element9201.html?hl=ru"><code>&amp;lt;data&amp;gt;</code></a>.  Например:</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;data android:mimeType="video/mpeg" android:scheme="http" ... /&gt;
+    &lt;data android:mimeType="audio/mpeg" android:scheme="http" ... /&gt;
+    ...
+&lt;/intent-filter&gt;
+</pre>
+
+<p>Каждый элемент <code><a href="../topics/manifest/data-element9201.html?hl=ru">&lt;data&gt;</a></code>
+может конкретизировать структуру URI и тип данных (тип мультимедиа MIME).  Имеются отдельные
+атрибуты &mdash; <code>scheme</code>, <code>host</code>, <code>port</code>
+и <code>path</code> &mdash; для каждой составной части URI:
+</p>
+
+<p style="margin-left: 2em"><code>&amp;lt;scheme&amp;gt;://&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;path&amp;gt;</code></p>
+
+<p>
+Например:
+</p>
+
+<p style="margin-left: 2em"><code>content://com.example.project:200/folder/subfolder/etc</code></p>
+
+<p>В этом URI схема имеет вид <code>content</code>, узел ―  <code>com.example.project</code>,
+порт ― <code>200</code>, а путь ― <code>folder/subfolder/etc</code>.
+</p>
+
+<p>Каждый из этих атрибутов является необязательным в элементе <a href="../topics/manifest/data-element9201.html?hl=ru"><code>&amp;lt;data&amp;gt;</code></a>,
+однако имеются линейные зависимости:</p>
+<ul>
+  <li>Если схема не указана, узел игнорируется.</li>
+  <li>Если узел не указан, порт игнорируется.</li>
+  <li>Если не указана ни схема, ни узел, путь игнорируется.</li>
+</ul>
+
+<p>Когда URI, указанный в объекте Intent, сравнивается с URI из фильтра,
+сравнение выполняется только с теми составными частями URI, которые приведены в фильтре. Например:</p>
+<ul>
+  <li>Если в фильтре указана только схема, то все URI с этой схемой будет соответствовать
+фильтру.</li>
+  <li>Если в фильтре указаны схема и полномочия, но отсутствует путь, все URI
+с такими же схемой и полномочиями пройдут фильтр, а их пути учитываться не будут.</li>
+  <li>Если в фильтре указаны схема, полномочия и путь, то только URI с такими же схемой,
+полномочиями и путем пройдут фильтр.</li>
+</ul>
+
+<p class="note"><strong>Примечание.</strong> Путь может быть
+указан с подстановочным символом (*), чтобы потребовалось только частичное соответствие имени пути.</p>
+
+<p>При выполнении тестирования данных сравнивается и URI, и тип MIME, указанные в объекте Intent, с URI
+и типом MIME из фильтра.  Действуют следующие правила:
+</p>
+
+<ol type="a">
+<li>Объект Intent, который не содержит ни URI, ни тип MIME, пройдет этот
+тест, только если в фильтре не указано никаких URI или типов MIME.</li>
+
+<li>Объект Intent, в котором имеется URI, но отсутствует тип MIME (ни явный, ни тот, который можно вывести из
+URI), пройдет этот тест, только если URI соответствует формату URI из фильтра
+, а в фильтре также не указан тип MIME.</li>
+
+<li>Объект Intent, в котором имеется тип MIME, но отсутствует URI, пройдет этот тест,
+только если в фильтре указан тот же тип MIME и не указан формат URI.</li>
+
+<li>Объект Intent, в котором имеется и URI, и тип MIME (явный или тот, который можно вывести из
+URI), пройдет только часть этого теста, проверяющую тип MIME,
+в том случае, если этот тип совпадает с типом, приведенным в фильтре.  Он пройдет часть этого теста, которая проверяет URI,
+либо если его URI совпадает с URI из фильтра, либо если этот объект содержит URI <code>content:</code>
+или <code>file:</code>, а в фильтре URI не указан. Другими словами,
+предполагается, что компонент поддерживает данные <code>content:</code> и <code>file:</code>, если в его
+фильтре указан <em>только</em> тип MIME.</p></li>
+</ol>
+
+<p>
+Это последнее правило (правило (d)) отражает ожидание того,
+что компоненты будут в состоянии получать локальные данные из файла или от поставщика контента.
+Поэтому их фильтры могут содержать только тип данных, а явно
+указывать схемы <code>content:</code> и <code>file:</code> не требуется.
+Это типичный случай.  Например, такой элемент <a href="../topics/manifest/data-element9201.html?hl=ru"><code>&amp;lt;data&amp;gt;</code></a>, как
+приведенный далее, сообщает системе Android, что компонент может получать данные изображений от поставщика
+контента и выводить их на экран:
+</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;data android:mimeType="image/*" /&gt;
+    ...
+&lt;/intent-filter&gt;</pre>
+
+<p>
+Поскольку имеющиеся данные преимущественно распространяются поставщиками контента, фильтры, в которых
+указан тип данных и нет URI, вероятно, являются самыми распространенными.
+</p>
+
+<p>
+Другой стандартной конфигурацией являются фильтры со схемой и типом данных.  Например,
+такой элемент <a href="../topics/manifest/data-element9201.html?hl=ru"><code>&amp;lt;data&amp;gt;</code></a>,
+как приведенный далее, сообщает системе Android, что
+компонент может получать видеоданные из сети для выполнения действия:
+</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;data android:scheme="http" android:type="video/*" /&gt;
+    ...
+&lt;/intent-filter&gt;</pre>
+
+
+
+<h3 id="imatch">Сопоставление объектов Intent</h3>
+
+<p>Объекты Intent сопоставляются с фильтрами Intent не только для определения целевого
+компонента, который требуется активировать, но также для выявления определенных сведений о наборе
+компонентов, имеющихся на устройстве.  Например, приложение главного экрана заполняет средство запуска приложений
+путем поиска всех операций с фильтрами Intent, в которых указано действие
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#ACTION_MAIN">ACTION_MAIN</a></code> и категория
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ru#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code>.</p>
+
+<p>Ваше приложение может использовать сопоставление объектов Intent таким же образом.
+В <code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=ru">PackageManager</a></code> имеется набор методов <code>query...()</code>,
+которые возвращают все компоненты, способные принять определенный объект, а также
+схожий набор методов <code>resolve...()</code>, которые определяют наиболее подходящий
+компонент, способный реагировать на объект Intent.  Например, метод
+<code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=ru#queryIntentActivities(android.content.Intent, int)">queryIntentActivities()</a></code> возвращает передаваемый как аргумент список всех операций, которые могут выполнить
+объект Intent, а метод <code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=ru#queryIntentServices(android.content.Intent, int)">queryIntentServices()</a></code> возвращает такой же список служб.
+Ни тот, ни другой метод не активирует компоненты; они просто перечисляют те из них, которые
+могут откликнуться.  Имеется схожий метод для приемников широковещательных сообщений (
+{@link android.content.pm.PackageManager#queryBroadcastReceivers
+).
+</p>
+
+
+
+
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=ru" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Блог" target="_blank">Блог</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=ru" title="Поддержка">Поддержка</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=ru" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=ru" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=ru" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=ru" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="TmZVdiY-p_Hbz9ADl4bwQWsBKU-i8XnpWoi3Igxdb_I6MTQ5NzUxNjMzNDA1OTIwMA" />
+      <input type="hidden" name="next" value="intents-filters.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+             selected="selected" >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Адрес электронной почты</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../ytblogger_lists_unified05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../android_metadata_en05ec.js?hl=ru?v=2017061508" defer></script>
+  
+  <script src="../../reference/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../reference/gms_lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../reference/android/support/wearable/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../reference/android/support/test/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../reference/android/support/constraint/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=ru"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_ru.js?hl=ru?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/components/intents-filters.html?hl=ru by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:06:39 GMT -->
+</html>

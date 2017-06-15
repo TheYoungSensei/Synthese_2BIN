@@ -1,0 +1,1924 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="id">
+
+<!-- Mirrored from developer.android.com/guide/topics/ui/drag-drop.html?hl=id by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:10:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="snpGxw7G092o-0OjhFhOnu6C90g2vu_eLzVWKlSwBoE6MTQ5NzUxNjY1MzIxODU2MA" />
+
+  
+    <link rel="canonical" href="drag-drop0cf2.html?hl=id">
+  
+
+  
+    <link rel="alternate" href="drag-drop0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="drag-drop7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="drag-drop0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="drag-drop9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="drag-drop232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="drag-drop6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="drag-drop.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="drag-drop.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon0cf2.png?hl=id">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1800cf2.png?hl=id">
+
+
+<title>
+
+  Seret dan Lepas | Android Developers
+
+</title>
+
+  <meta name="description" content="With the Android drag&amp;#47;drop framework, you can allow your users to move data from one View to another View in the current layout using a graphical drag and drop gesture. The framework includes a drag event class, drag listeners, and helper methods …">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default8481.css?hl=id?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle0cf2.js?hl=id" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__id0cf2.js?hl=id"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android0cf2.js?hl=id"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs8481.js?hl=id?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;id&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;id&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;id&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;id&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "id", "served": "id"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=id">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo0cf2.png?hl=id"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=id"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=id"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=id"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=id"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=id" width="18" height="19" alt="Konsol Google Play">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Telusuri">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Kembali</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index0cf2.html?hl=id" >Pengantar</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals0cf2.html?hl=id" >Dasar-Dasar Aplikasi</a></li><li><a href="../../practices/compatibility0cf2.html?hl=id" >Kompatibilitas Perangkat</a></li><li><a href="../security/permissions0cf2.html?hl=id" >Izin Sistem</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index0cf2.html?hl=id" >Arsitektur Platform</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack0cf2.html?hl=id"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Gunakan Fitur Bahasa Java 8</a></li><li><a href="../../practices/verifying-apps-art0cf2.html?hl=id" >Memverifikasi Perilaku Aplikasi pada Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index0cf2.html?hl=id" >Komponen Aplikasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters0cf2.html?hl=id" >Maksud dan Filter Maksud</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common0cf2.html?hl=id" >Maksud Umum</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities0cf2.html?hl=id" >Aktivitas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments0cf2.html?hl=id" >Fragmen</a></li><li><a href="../../components/loaders0cf2.html?hl=id" >Loader</a></li><li><a href="../../components/tasks-and-back-stack0cf2.html?hl=id" >Tugas dan Back-Stack</a></li><li><a href="../../components/recents0cf2.html?hl=id" >Layar Ringkasan</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services0cf2.html?hl=id" >Layanan</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services0cf2.html?hl=id" >Layanan Terikat</a></li><li><a href="../../components/aidl0cf2.html?hl=id" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providers0cf2.html?hl=id" >Penyedia Materi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basics0cf2.html?hl=id" >Dasar-Dasar Penyedia Materi</a></li><li><a href="../providers/content-provider-creating0cf2.html?hl=id" >Membuat Penyedia Materi</a></li><li><a href="../providers/calendar-provider0cf2.html?hl=id" >Penyedia Kalender</a></li><li><a href="../providers/contacts-provider0cf2.html?hl=id" >Penyedia Kontak</a></li><li><a href="../providers/document-provider0cf2.html?hl=id" >Storage Access Framework</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index0cf2.html?hl=id" >Widget Aplikasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host0cf2.html?hl=id" >Host Widget Aplikasi</a></li></ul></li><li><a href="../../components/processes-and-threads0cf2.html?hl=id" >Proses dan Thread</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index0cf2.html?hl=id" >Sumber Daya Aplikasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview0cf2.html?hl=id" >Ringkasan</a></li><li><a href="../resources/providing-resources0cf2.html?hl=id" >Menyediakan Sumber Daya</a></li><li><a href="../resources/accessing-resources0cf2.html?hl=id" >Mengakses Sumber Daya</a></li><li><a href="../resources/runtime-changes0cf2.html?hl=id" >Menangani Perubahan Waktu Proses</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization0cf2.html?hl=id" >Pelokalan</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework0cf2.html?hl=id" >ICU4J Android Framework API</a></li><li><a href="../resources/multilingual-support0cf2.html?hl=id" >Bahasa dan Lokal</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources0cf2.html?hl=id" >Tipe Sumber Daya</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource0cf2.html?hl=id" >Animasi</a></li><li><a href="../resources/color-list-resource0cf2.html?hl=id" >Daftar Status Warna</a></li><li><a href="../resources/drawable-resource0cf2.html?hl=id" >Dapat digambar</a></li><li><a href="../resources/layout-resource0cf2.html?hl=id" >Layout</a></li><li><a href="../resources/menu-resource0cf2.html?hl=id" >Menu</a></li><li><a href="../resources/string-resource0cf2.html?hl=id" >String</a></li><li><a href="../resources/style-resource0cf2.html?hl=id" >Gaya</a></li><li><a href="../resources/more-resources0cf2.html?hl=id" >Tipe Selengkapnya</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro0cf2.html?hl=id" >Manifes Aplikasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element0cf2.html?hl=id" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element0cf2.html?hl=id" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element0cf2.html?hl=id" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element0cf2.html?hl=id" >&lt;application&gt;</a></li><li><a href="../manifest/category-element0cf2.html?hl=id" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element0cf2.html?hl=id" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element0cf2.html?hl=id" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element0cf2.html?hl=id" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element0cf2.html?hl=id" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element0cf2.html?hl=id" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element0cf2.html?hl=id" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element0cf2.html?hl=id" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element0cf2.html?hl=id" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element0cf2.html?hl=id" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element0cf2.html?hl=id" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element0cf2.html?hl=id" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element0cf2.html?hl=id" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element0cf2.html?hl=id" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element0cf2.html?hl=id" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element0cf2.html?hl=id" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element0cf2.html?hl=id" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element0cf2.html?hl=id" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element0cf2.html?hl=id" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element0cf2.html?hl=id" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element0cf2.html?hl=id" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element0cf2.html?hl=id" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element0cf2.html?hl=id" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index0cf2.html?hl=id" >Antarmuka Pengguna</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="overview0cf2.html?hl=id" >Ringkasan</a></li><li class="nav-section"><div class="nav-section-header"><a href="declaring-layout0cf2.html?hl=id" >Layout</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="layout/linear0cf2.html?hl=id" >Layout Linier</a></li><li><a href="layout/relative0cf2.html?hl=id" >Layout Relatif</a></li><li><a href="layout/listview0cf2.html?hl=id" >Tampilan Daftar</a></li><li><a href="layout/gridview0cf2.html?hl=id" >Tampilan Petak</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="controls0cf2.html?hl=id" >Kontrol Masukan</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="controls/button0cf2.html?hl=id" >Tombol</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=id" >Bidang Teks</a></li><li><a href="controls/checkbox0cf2.html?hl=id" >Kotak Centang</a></li><li><a href="controls/radiobutton0cf2.html?hl=id" >Tombol Radio</a></li><li><a href="controls/togglebutton0cf2.html?hl=id" >Tombol Toggle</a></li><li><a href="controls/spinner0cf2.html?hl=id" >Spinner</a></li><li><a href="controls/pickers0cf2.html?hl=id" >Picker</a></li></ul></li><li><a href="ui-events0cf2.html?hl=id" >Kejadian Masukan</a></li><li><a href="menus0cf2.html?hl=id" >Menu</a></li><li><a href="settings0cf2.html?hl=id" >Setelan</a></li><li><a href="dialogs0cf2.html?hl=id" >Dialog</a></li><li><a href="notifiers/notifications0cf2.html?hl=id" >Notifikasi</a></li><li><a href="notifiers/toasts0cf2.html?hl=id" >Toast</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index0cf2.html?hl=id" >Penelusuran</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog0cf2.html?hl=id" >Membuat Antarmuka Penelusuran</a></li><li><a href="../search/adding-recent-query-suggestions0cf2.html?hl=id" >Menambahkan Saran Kueri Terbaru</a></li><li><a href="../search/adding-custom-suggestions0cf2.html?hl=id" >Menambahkan Saran Khusus</a></li><li><a href="../search/searchable-config0cf2.html?hl=id" >Konfigurasi yang Dapat Ditelusuri</a></li></ul></li><li><a href="multi-window0cf2.html?hl=id" >Dukungan Multi-Jendela</a></li><li><a href="drag-drop0cf2.html?hl=id" >Seret dan Lepas</a></li><li class="nav-section"><div class="nav-section-header"><a href="accessibility/index0cf2.html?hl=id" >Aksesibilitas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="accessibility/apps0cf2.html?hl=id" >Membuat Aplikasi Mudah Diakses</a></li><li><a href="accessibility/checklist0cf2.html?hl=id" >Daftar Periksa Developer Aksesibilitas</a></li><li><a href="accessibility/services0cf2.html?hl=id" >Membuat Layanan Aksesibilitas</a></li></ul></li><li><a href="themes0cf2.html?hl=id" >Gaya dan Tema</a></li><li><a href="custom-components0cf2.html?hl=id" >Komponen Khusus</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index0cf2.html?hl=id" >Animasi dan Grafik</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview0cf2.html?hl=id" >Ringkasan</a></li><li><a href="../graphics/prop-animation0cf2.html?hl=id" >Animasi Properti</a></li><li><a href="../graphics/view-animation0cf2.html?hl=id" >Animasi Tampilan</a></li><li><a href="../graphics/drawable-animation0cf2.html?hl=id" >Animasi Dapat Digambar</a></li><li><a href="../graphics/2d-graphics0cf2.html?hl=id" >Kanvas dan Sumber Daya Dapat Digambar</a></li><li><a href="../graphics/opengl0cf2.html?hl=id" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel0cf2.html?hl=id" >Akselerasi Perangkat Keras</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index0cf2.html?hl=id" >Komputasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute0cf2.html?hl=id" >RenderScript</a></li><li><a href="../renderscript/advanced0cf2.html?hl=id" >RenderScript Lanjutan</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview0cf2.html?hl=id" >Referensi API Waktu Proses</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types0cf2.html?hl=id" >Tipe Numerik</a></li><li><a href="../renderscript/reference/rs_object_types0cf2.html?hl=id" >Tipe Objek</a></li><li><a href="../renderscript/reference/rs_convert0cf2.html?hl=id" >Fungsi Konversi</a></li><li><a href="../renderscript/reference/rs_math0cf2.html?hl=id" >Fungsi dan Konstanta Matematis</a></li><li><a href="../renderscript/reference/rs_vector_math0cf2.html?hl=id" >Fungsi Matematika Vektor</a></li><li><a href="../renderscript/reference/rs_matrix0cf2.html?hl=id" >Fungsi Matriks</a></li><li><a href="../renderscript/reference/rs_quaternion0cf2.html?hl=id" >Fungsi Kuaternion</a></li><li><a href="../renderscript/reference/rs_atomic0cf2.html?hl=id" >Fungsi Pembaruan Atomik</a></li><li><a href="../renderscript/reference/rs_time0cf2.html?hl=id" >Tipe dan Fungsi Waktu</a></li><li><a href="../renderscript/reference/rs_allocation_data0cf2.html?hl=id" >Fungsi Akses Data Alokasi</a></li><li><a href="../renderscript/reference/rs_object_info0cf2.html?hl=id" >Fungsi Karakteristik Objek</a></li><li><a href="../renderscript/reference/rs_for_each0cf2.html?hl=id" >Tipe dan Fungsi Pemanggilan Kernel</a></li><li><a href="../renderscript/reference/rs_io0cf2.html?hl=id" >Fungsi Masukan/Keluaran</a></li><li><a href="../renderscript/reference/rs_debug0cf2.html?hl=id" >Fungsi Debug</a></li><li><a href="../renderscript/reference/rs_graphics0cf2.html?hl=id" >Tipe dan Fungsi Grafik</a></li><li><a href="../renderscript/reference/index0cf2.html?hl=id" >Indeks</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index0cf2.html?hl=id" >Media dan Kamera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer0cf2.html?hl=id" >Pemutaran Media</a></li><li><a href="../media/mediarouter0cf2.html?hl=id" >Router Media</a></li><li><a href="../media/mediarouteprovider0cf2.html?hl=id" >Penyedia Rute Media</a></li><li><a href="../media/exoplayer0cf2.html?hl=id" >ExoPlayer</a></li><li><a href="../media/media-formats0cf2.html?hl=id" >Format Media yang Didukung</a></li><li><a href="../media/mediarecorder0cf2.html?hl=id" >Perekaman Audio</a></li><li><a href="../media/jetplayer0cf2.html?hl=id" >JetPlayer</a></li><li><a href="../media/camera0cf2.html?hl=id" >Kamera</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index0cf2.html?hl=id" >Lokasi dan Sensor</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index0cf2.html?hl=id" >Lokasi dan Peta</a></li><li><a href="../location/strategies0cf2.html?hl=id" >Strategi Lokasi</a></li><li><a href="../sensors/sensors_overview0cf2.html?hl=id" >Ringkasan Sensor</a></li><li><a href="../sensors/sensors_motion0cf2.html?hl=id" >Sensor Gerak</a></li><li><a href="../sensors/sensors_position0cf2.html?hl=id" >Sensor Posisi</a></li><li><a href="../sensors/sensors_environment0cf2.html?hl=id" >Sensor Lingkungan</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index0cf2.html?hl=id" >Konektivitas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth0cf2.html?hl=id" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le0cf2.html?hl=id" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index0cf2.html?hl=id" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc0cf2.html?hl=id" >Dasar-Dasar NFC</a></li><li><a href="../connectivity/nfc/advanced-nfc0cf2.html?hl=id" >NFC Lanjutan</a></li><li><a href="../connectivity/nfc/hce0cf2.html?hl=id" >Emulasi Kartu Berbasis Host</a></li></ul></li><li><a href="../connectivity/wifip2p0cf2.html?hl=id" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index0cf2.html?hl=id" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory0cf2.html?hl=id" >Aksesori</a></li><li><a href="../connectivity/usb/host0cf2.html?hl=id" >Host</a></li></ul></li><li><a href="../connectivity/sip0cf2.html?hl=id" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index0cf2.html?hl=id" >Teks dan Masukan</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste0cf2.html?hl=id" >Salin dan Tempel</a></li><li><a href="../text/creating-input-method0cf2.html?hl=id" >Membuat IME</a></li><li><a href="../text/spell-checker-framework0cf2.html?hl=id" >Pemeriksa Ejaan</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index0cf2.html?hl=id" >Storage Data</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage0cf2.html?hl=id" >Opsi Storage</a></li><li><a href="../data/backup0cf2.html?hl=id" >Pencadangan Data</a></li><li><a href="../data/install-location0cf2.html?hl=id" >Lokasi Pemasangan Aplikasi</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=id" >Pustaka</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=id" >Pustaka Dukungan</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=id" >Fitur</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=id" >Persiapan</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=id" >Riwayat Revisi</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=id" >Data Binding Library</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=id" >Testing Support Library</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=id" >Referensi API</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index0cf2.html?hl=id" >Administrasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin0cf2.html?hl=id" >Kebijakan Perangkat</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index0cf2.html?hl=id" >Aplikasi Web</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting0cf2.html?hl=id" >Mendukung Layar Berbeda di Aplikasi Web</a></li><li><a href="../../webapps/webview0cf2.html?hl=id" >Membuat Aplikasi Web di WebView</a></li><li><a href="../../webapps/migrating0cf2.html?hl=id" >Beralih ke WebView di Android 4.4</a></li><li><a href="../../webapps/debugging0cf2.html?hl=id" >Men-debug Aplikasi Web</a></li><li><a href="../../webapps/best-practices0cf2.html?hl=id" >Praktik Terbaik untuk Aplikasi Web</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index0cf2.html?hl=id"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Praktik terbaik" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Praktik Terbaik</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support0cf2.html?hl=id" >Mendukung Beberapa Layar</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution0cf2.html?hl=id" >Mendistribusikan ke Layar Tertentu</a></li><li><a href="../../practices/screen-compat-mode0cf2.html?hl=id" >Mode Kompatibilitas Layar</a></li></ul></li><li><a href="../../practices/tablets-and-handsets0cf2.html?hl=id" >Mendukung Tablet dan Handset</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=id">Beranda</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=id">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=id">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=id">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=id">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=id">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=id"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=id"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=id"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Pelatihan</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index0cf2.html?hl=id"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=id"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Referensi</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=id">Sampel</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=id"
+           >Pustaka</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=id"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=id"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=id">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=id">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=id">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=id"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=id">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=id">Konsol Google Play</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=id"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=id"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=id">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=id">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Seret dan Lepas</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+    <div id="qv">
+        <h2>Tampilan Cepat</h2>
+            <ul>
+                <li>
+                    Memungkinkan pengguna untuk memindah data dalam layout Aktivitas Anda menggunakan isyarat grafis.
+                </li>
+                <li>
+                    Mendukung operasi di samping perpindahan data.
+                </li>
+                <li>
+                    Hanya bekerja dalam satu aplikasi.
+                </li>
+                <li>
+                    Memerlukan API 11.
+                </li>
+            </ul>
+        <h2>Dalam dokumen ini</h2>
+        <ol>
+            <li>
+                <a href="#AboutDragging">Ringkasan</a>
+                <ol>
+                    <li>
+                        <a href="#DragDropLifecycle">Proses seret/lepas</a>
+                    </li>
+                    <li>
+                        <a href="#AboutDragListeners">Event listener penyeretan dan metode callback</a>
+                    </li>
+                    <li>
+                        <a href="#AboutDragEvent">Kejadian seret</a>
+                    </li>
+                    <li>
+                        <a href="#AboutDragShadowBuilder">
+                        Bayangan penyeretan</a>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <a href="#DesignDragOperation">Mendesain Operasi Seret dan Lepas</a>
+                <ol>
+                    <li>
+                        <a href="#StartDrag">Memulai penyeretan</a>
+                    </li>
+                    <li>
+                        <a href="#HandleStart">Merespons awal penyeretan</a>
+                    </li>
+                    <li>
+                        <a href="#HandleDuring">Menangani kejadian selama penyeretan</a>
+                    </li>
+                    <li>
+                        <a href="#HandleDrop">Merespons pelepasan</a>
+                    </li>
+                    <li>
+                        <a href="#HandleEnd">Merespons akhir penyeretan</a>
+                    </li>
+                    <li>
+                        <a href="#RespondEventSample">Merespons kejadian seret: sebuah contoh</a>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+        <h2>Kelas-kelas utama</h2>
+        <ol>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id">View</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.OnLongClickListener.html?hl=id">OnLongClickListener</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=id">OnDragListener</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id">DragEvent</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">DragShadowBuilder</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/content/ClipData.html?hl=id">ClipData</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=id">ClipDescription</a></code>
+            </li>
+        </ol>
+        <h2>Contoh-Contoh Terkait</h2>
+        <ol>
+            <li>
+                <a href="https://developer.android.com/resources/samples/HoneycombGallery/index.html?hl=id">
+                Galeri Honeycomb</a>.
+            </li>
+            <li>
+                <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/DragAndDropDemo.html?hl=id">
+DragAndDropDemo.java</a> dan
+                <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/DraggableDot.html?hl=id">
+DraggableDot.java</a> di <a href="https://developer.android.com/resources/samples/ApiDemos/index.html?hl=id">API Demos</a>.
+            </li>
+        </ol>
+        <h2>Lihat juga</h2>
+        <ol>
+            <li>
+            <a href="../providers/content-providers0cf2.html?hl=id">Penyedia Materi</a>
+            </li>
+            <li>
+                <a href="ui-events0cf2.html?hl=id">Kejadian Masukan</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<p>
+    Dengan kerangka kerja seret/lepas Android, Anda bisa memungkinkan pengguna memindah data
+    dari satu Tampilan ke Tampilan lain dalam layout saat ini dengan menggunakan isyarat grafis seret dan lepas.
+    Kerangka kerja ini berisi kelas kejadian seret, listener penyeretan, serta kelas dan metode helper.
+</p>
+<p>
+    Walaupun kerangka kerja ini terutama didesain untuk perpindahan data, Anda bisa menggunakannya
+    untuk aksi UI lainnya. Misalnya, Anda bisa membuat aplikasi yang mencampur warna bila pengguna
+    menyeret sebuah ikon warna di atas ikon lain. Akan tetapi, bagian selebihnya dari topik ini menjelaskan
+    kerangka kerja dalam artian perpindahan data.
+</p>
+<h2 id="AboutDragging">Ringkasan</h2>
+<p>
+    Operasi seret dan lepas dimulai bila pengguna membuat semacam isyarat yang Anda kenal sebagai
+    pertanda untuk mulai menyeret data. Sebagai respons, aplikasi Anda akan memberi tahu sistem bahwa penyeretan
+    sedang dimulai. Panggilan sistem akan kembali ke aplikasi Anda untuk mengambil representasi data
+    yang sedang diseret. Saat jari pengguna menggerakkan representasi ("bayangan penyeretan")
+    di atas layout saat ini, sistem akan mengirim kejadian seret objek event listener penyeretan dan
+    metode callback kejadian seret bersama objek <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id">View</a></code> di layout.
+    Setelah pengguna melepas bayangan penyeretan, sistem akan mengakhiri operasi seret.
+</p>
+<p>
+    Anda membuat objek event listener penyeretan ("listener") dari kelas yang mengimplementasikan
+    <code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=id">View.OnDragListener</a></code>. Anda menyetel objek event listener penyeretan untuk Tampilan
+    dengan metode
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#setOnDragListener(android.view.View.OnDragListener)">setOnDragListener()</a></code> objek Tampilan.
+    Setiap objek Tampilan juga memiliki metode callback <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#onDragEvent(android.view.DragEvent)">onDragEvent()</a></code>.
+ Keduanya dijelaskan lebih detail di bagian
+    <a href="#AboutDragListeners">Event listener penyeretan dan metode callback</a>.
+</p>
+<p class="note">
+    <strong>Catatan</strong>: Demi kemudahan, bagian-bagian berikut merujuk ke rutin
+    yang menerima kejadian seret sebagai "event listener penyeretan", walaupun sebenarnya
+    berupa metode callback.
+</p>
+<p>
+    Saat memulai penyeretan, Anda menyertakan data yang akan dipindah dan metadata yang menjelaskan
+    data ini sebagai bagian dari panggilan ke sistem. Selama penyeretan, sistem akan mengirim kejadian seret ke
+    event listener penyeretan atau metode callback setiap Tampilan dalam layout. Listener atau metode callback
+    bisa menggunakan metadata tersebut untuk memutuskan apakah ingin menerima data tersebut bila dilepaskan.
+    Jika pengguna melepaskan data di atas objek Tampilan, dan listener atau metode callback
+    objek Tampilan itu sebelumnya telah memberi tahu sistem bahwa ia ingin menerima pelepasan itu, maka sistem akan mengirim
+    data tersebut ke listener atau metode callback di kejadian seret.
+</p>
+<p>
+    Aplikasi Anda akan memberi tahu sistem untuk memulai penyeretan dengan memanggil
+    metode <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>.
+ Hal ini akan memberi tahu sistem untuk mulai mengirim kejadian seret. Metode ini juga mengirim data yang
+    sedang Anda seret.
+</p>
+<p>
+    Anda bisa memanggil
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+    untuk Tampilan yang dilampirkan dalam layout saat ini. Sistem hanya menggunakan objek Tampilan untuk mendapatkan akses
+    ke setelan global di layout Anda.
+</p>
+<p>
+    Setelah aplikasi Anda memanggil
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>,
+    bagian selebihnya dari proses ini akan menggunakan kejadian yang dikirim sistem ke objek Tampilan dalam
+    layout saat ini.
+</p>
+<h3 id="DragDropLifecycle">Proses seret/lepas</h3>
+<p>
+    Pada dasarnya ada empat langkah atau status dalam proses seret dan lepas:
+</p>
+<dl>
+    <dt>
+        <em>Dimulai</em>
+    </dt>
+    <dd>
+        Sebagai respons terhadap isyarat pengguna untuk memulai penyeretan, aplikasi Anda akan memanggil
+        <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+        untuk memberi tahu sistem agar memulai penyeretan. Argumen
+        <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+        menyediakan data yang akan diseret, metadata untuk data ini, dan callback untuk menggambar
+        bayangan penyeretan.
+        <p>
+            Sistem terlebih dahulu akan merespons dengan memanggil kembali ke aplikasi untuk mendapatkan bayangan penyeretan. Sistem
+            kemudian menampilkan bayangan penyeretan pada perangkat.
+        </p>
+        <p>
+            Berikutnya, sistem akan mengirim kejadian seret dengan tipe aksi
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code> ke event listener penyeretan untuk
+            semua objek Tampilan dalam layout saat ini. Untuk melanjutkan penerimaan kejadian seret,
+            termasuk kemungkinan kejadian lepas, event listener penyeretan harus mengembalikan <code>true</code>.
+            Ini akan mendaftarkan listener pada sistem. Hanya listener terdaftar yang melanjutkan untuk
+            menerima kejadian seret. Pada poin ini, listener juga bisa mengubah penampilan
+            objek Tampilan untuk menunjukkan bahwa listener bisa menerima kejadian lepas.
+        </p>
+        <p>
+            Jika event listener penyeretan mengembalikan <code>false</code>, maka ia tidak akan menerima
+            kejadian seret untuk operasi saat ini hingga sistem mengirim kejadian seret bersama tipe aksi
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>. Dengan mengirim <code>false</code>, listener
+            memberi tahu sistem bahwa ia tidak tertarik dengan operasi seret dan
+            tidak ingin menerima data yang diseret.
+        </p>
+    </dd>
+    <dt>
+        <em>Melanjutkan</em>
+    </dt>
+    <dd>
+        Pengguna melanjutkan penyeretan. Saat bayangan penyeretan berpotongan dengan kotak pembatas objek Tampilan
+        sistem akan mengirim satu atau beberapa kejadian seret ke event listener penyeretan objek Tampilan
+        (jika telah didaftarkan untuk menerima kejadian). Listener dapat memilih apakah akan
+        mengubah penampilan objek Tampilannya sebagai respons terhadap kejadian. Misalnya, jika kejadian
+        menunjukkan bahwa bayangan penyeretan telah memasuki kotak pembatas Tampilan
+        (tipe aksi <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code>), listener
+        bisa bereaksi dengan menyoroti Tampilannya.
+    </dd>
+    <dt>
+        <em>Dilepaskan</em>
+    </dt>
+    <dd>
+        Pengguna melepaskan bayangan penyeretan dalam kotak pembatas Tampilan yang bisa menerima
+        data. Sistem akan mengirimi listener objek Tampilan sebuah kejadian seret dengan tipe aksi
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>. Kejadian seret berisi data yang telah
+        diteruskan ke sistem dalam panggilan ke
+        <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+        yang telah memulai operasi. Listener diharapkan untuk mengembalikan boolean <code>true</code> ke
+        sistem jika kode untuk menerima pelepasan tersebut berhasil.
+        <p>
+            Perhatikan, langkah ini hanya terjadi jika pengguna melepaskan bayangan penyeretan dalam kotak pembatas
+            Tampilan yang listener-nya telah didaftarkan untuk menerima kejadian seret. Jika pengguna melepaskan
+            bayangan penyeretan dalam situasi lain, maka tidak ada kejadian seret <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>
+      yang dikirim.
+        </p>
+    </dd>
+    <dt>
+        <em>Diakhiri</em>
+    </dt>
+    <dd>
+        Setelah pengguna melepaskan bayangan penyeretan, dan setelah sistem mengirim (jika perlu)
+        kejadian seret bersama tipe aksi <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>, sistem akan mengirim
+        kejadian seret bersama tipe aksi <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> untuk
+        menunjukkan bahwa operasi seret telah selesai. Ini telah selesai tidak peduli di mana pengguna melepaskan
+        bayangan penyeretan. Kejadian dikirim ke setiap listener yang telah didaftarkan untuk menerima
+        kejadian seret, sekalipun listener menerima kejadian <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>.
+    </dd>
+</dl>
+<p>
+    Masing-masing dari keempat langkah ini dijelaskan lebih detail di bagian
+    <a href="#DesignDragOperation">Mendesain Operasi Seret dan Lepas</a>.
+</p>
+<h3 id="AboutDragListeners">Event listener penyeretan dan metode callback</h3>
+<p>
+    Sebuah Tampilan menerima kejadian seret bersama event listener penyeretan yang mengimplementasikan
+    <code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=id">View.OnDragListener</a></code> atau bersama metode callback
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#onDragEvent(android.view.DragEvent)">onDragEvent(DragEvent)</a></code>.
+    Bila sistem memanggil metode atau listener, sistem akan meneruskan
+    objek <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id">DragEvent</a></code> ke sana.
+</p>
+<p>
+    Mungkin Anda akan menggunakan listener dalam banyak kasus. Bila mendesain UI, Anda biasanya
+    tidak menjadikan kelas-kelas Tampilan sebagai subkelas, namun menggunakan metode callback akan memaksa Anda untuk melakukan hal ini agar dapat
+    mengganti metode. Sebagai perbandingan, Anda bisa mengimplementasikan satu kelas listener kemudian menggunakannya bersama
+    sejumlah objek Tampilan yang berbeda. Anda juga bisa mengimplementasikannya sebagai kelas inline anonim. Untuk
+    menyetel listener objek Tampilan, panggil
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#setOnDragListener(android.view.View.OnDragListener)">setOnDragListener()</a></code>.
+</p>
+<p>
+    Anda bisa memiliki listener maupun metode callback untuk objek Tampilan. Jika ini terjadi,
+    sistem akan memanggil listener terlebih dahulu. Sistem tidak memanggil metode callback kecuali jika
+    listener mengembalikan <code>false</code>.
+</p>
+<p>
+    Kombinasi metode <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#onDragEvent(android.view.DragEvent)">onDragEvent(DragEvent)</a></code> dan
+    <code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=id">View.OnDragListener</a></code> analog dengan kombinasi
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#onTouchEvent(android.view.MotionEvent)">onTouchEvent()</a></code> dan
+    <code><a href="https://developer.android.com/reference/android/view/View.OnTouchListener.html?hl=id">View.OnTouchListener</a></code> yang digunakan bersama kejadian sentuh.
+</p>
+<h3 id="AboutDragEvent">Kejadian seret</h3>
+<p>
+    Sistem akan mengirim kejadian seret dalam bentuk objek <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id">DragEvent</a></code>. Objek
+    berisi tipe aksi yang memberi tahu listener apa yang terjadi dalam proses
+    seret/lepaskan. Objek berisi data lainnya, bergantung pada tipe aksi.
+</p>
+<p>
+    Untuk mendapatkan tipe aksi, listener memanggil <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getAction()">getAction()</a></code>. Ada
+    enam kemungkinan nilai, yang didefinisikan oleh konstanta dalam kelas <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id">DragEvent</a></code>. Semua ini
+    dicantumkan dalam <a href="#table1">tabel 1</a>.
+</p>
+<p>
+    Objek <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id">DragEvent</a></code> juga berisi data yang disediakan aplikasi Anda
+    ke sistem dalam panggilan ke
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>.
+    Sebagian data hanya berlaku untuk tipe aksi tertentu. Data yang berlaku untuk setiap tipe aksi
+    dirangkum dalam <a href="#table2">tabel 2</a>. Juga dijelaskan secara detail bersama
+    kejadian yang valid untuk data tersebut di bagian
+    <a href="#DesignDragOperation">Mendesain Operasi Seret dan Lepas</a>.
+</p>
+<p class="table-caption" id="table1">
+  <strong>Tabel 1.</strong> Tipe aksi DragEvent
+</p>
+<table>
+    <tr>
+        <th scope="col">Nilai getAction()</th>
+        <th scope="col">Arti</th>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code></td>
+        <td>
+            Sebuah event listener penyeretan objek Tampilan menerima tipe aksi kejadian ini tepat setelah
+            aplikasi memanggil
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> dan
+            mendapatkan bayangan penyeretan.
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code></td>
+        <td>
+            Sebuah event listener penyeretan objek Tampilan menerima tipe aksi kejadian ini bila bayangan penyeretan
+            baru saja memasuki kotak pembatas Tampilan. Ini adalah tipe aksi kejadian pertama
+            yang diterima listener bila bayangan penyeretan memasuki kotak pembatas. Jika listener ingin
+            melanjutkan penerimaan kejadian seret untuk operasi ini, ia harus mengembalikan boolean
+            <code>true</code> ke sistem.
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code></td>
+        <td>
+            Sebuah event listener penyeretan objek Tampilan menerima tipe aksi kejadian ini setelah ia menerima kejadian
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> saat jendela penyeretan
+            masih dalam kotak pembatas Tampilan.
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code></td>
+        <td>
+            Sebuah event listener penyeretan objek Tampilan menerima tipe aksi kejadian ini setelah ia menerima
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> dan setidaknya satu kejadian
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code>, dan setelah pengguna memindah
+            jendela penyeretan ke luar kotak pembatas Tampilan.
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code></td>
+        <td>
+            Sebuah event listener penyeretan objek Tampilan menerima tipe aksi kejadian ini bila pengguna
+            melepaskan jendela penyeretan di atas objek Tampilan. Tipe aksi ini hanya dikirim ke listener objek Tampilan
+            jika listener mengembalikan boolean <code>true</code> sebagai respons terhadap
+            kejadian seret <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code>. Tipe aksi ini tidak
+            dikirim jika pengguna melepaskan bayangan penyeretan pada Tampilan yang listener-nya tidak terdaftar,
+            atau jika pengguna melepaskan bayangan penyeretan pada sesuatu yang bukan menjadi bagian
+            layout saat ini.
+            <p>
+                Listener diharapkan untuk mengembalikan boolean <code>true</code> jika berhasil
+                memproses pelepasan. Jika tidak maka ia harus mengembalikan <code>false</code>.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code></td>
+        <td>
+            Sebuah event listener penyeretan objek Tampilan menerima tipe aksi kejadian ini
+            bila sistem mengakhiri operasi seret. Tipe aksi ini tidak harus
+            didahului oleh kejadian <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>. Jika sistem mengirim
+            sebuah <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>, menerima tipe aksi
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> tidak akan menyiratkan
+            bahwa operasi pelepasan berhasil. Listener harus memanggil
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getResult()">getResult()</a></code> untuk mendapatkan nilai yang telah
+            dikembalikan sebagai respons terhadap <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>. Jika sebuah kejadian
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code> belum dikirim, maka
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getResult()">getResult()</a></code> akan mengembalikan <code>false</code>.
+        </td>
+    </tr>
+</table>
+<p class="table-caption" id="table2">
+  <strong>Tabel 2.</strong> Data DragEvent yang valid oleh tipe aksi</p>
+<table>
+    <tr>
+        <th scope="col">Nilai <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getAction()">getAction()</a></code></th>
+        <th scope="col">Nilai <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getClipDescription()">getClipDescription()</a></code></th>
+        <th scope="col">Nilai <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getLocalState()">getLocalState()</a></code></th>
+        <th scope="col">Nilai <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getX()">getX()</a></code></th>
+        <th scope="col">Nilai <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getY()">getY()</a></code></th>
+        <th scope="col">Nilai <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getClipData()">getClipData()</a></code></th>
+        <th scope="col">Nilai <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getResult()">getResult()</a></code></th>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">X</td>
+    </tr>
+</table>
+<p>
+    Metode <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getAction()">getAction()</a></code>,
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#describeContents()">describeContents()</a></code>,
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#writeToParcel(android.os.Parcel, int)">writeToParcel()</a></code>, dan
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#toString()">toString()</a></code> selalu mengembalikan data yang valid.
+</p>
+<p>
+    Jika sebuah metode tidak berisi data yang valid untuk tipe aksi tertentu, ia akan mengembalikan
+    <code>null</code> atau 0, bergantung pada tipe hasilnya.
+</p>
+<h3 id="AboutDragShadowBuilder">
+    Bayangan penyeretan
+</h3>
+<p>
+    Selama operasi seret dan lepas, sistem akan menampilkan gambar yang diseret pengguna.
+    Untuk perpindahan data, gambar ini mewakili data yang sedang diseret. Untuk operasi lainnya,
+    gambar ini mewakili sebagian aspek operasi seret.
+</p>
+<p>
+    Gambar ini disebut bayangan penyeretan. Anda membuatnya dengan beberapa metode yang dideklarasikan untuk objek
+    <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">View.DragShadowBuilder</a></code>, kemudian meneruskannya ke sistem bila Anda
+    mulai menyeret menggunakan
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>.
+    Sebagai bagian dari responsnya terhadap
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>,
+    sistem memanggil metode callback yang Anda definisikan dalam
+    <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">View.DragShadowBuilder</a></code> untuk memperoleh bayangan penyeretan.
+</p>
+<p>
+    Kelas <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">View.DragShadowBuilder</a></code> memiliki dua konstruktor:
+</p>
+    <dl>
+    <dt><code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id#View.DragShadowBuilder(android.view.View)">View.DragShadowBuilder(View)</a></code></dt>
+    <dd>
+        Konstruktor ini menerima semua objek
+        <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id">View</a></code> aplikasi. Konstruktor menyimpan objek Tampilan
+        dalam objek <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">View.DragShadowBuilder</a></code>, jadi selama
+        callback Anda bisa mengaksesnya saat Anda membangun bayangan penyeretan.
+        Ia tidak harus dikaitkan dengan Tampilan (jika ada) yang dipilih pengguna
+        untuk memulai operasi penyeretan.
+        <p>
+            Jika Anda menggunakan proses ini konstruktor, Anda tidak harus memperluas
+            <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">View.DragShadowBuilder</a></code> atau mengganti metodenya. Secara default,
+            Anda akan mendapatkan bayangan penyeretan yang sama penampilannya dengan Tampilan yang Anda teruskan sebagai
+            argumen, dipusatkan di bawah lokasi pengguna menyentuh layar.
+        </p>
+    </dd>
+    <dt><code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id#View.DragShadowBuilder()">View.DragShadowBuilder()</a></code></dt>
+    <dd>
+        Jika Anda menggunakan konstruktor ini, tidak ada objek Tampilan yang tersedia dalam objek
+        <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">View.DragShadowBuilder</a></code> (bidang ini disetel ke <code>null</code>).
+        Jika Anda menggunakan konstruktor ini, dan tidak memperluas
+        <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">View.DragShadowBuilder</a></code> atau mengganti metodenya,
+        Anda akan mendapatkan bayangan penyeretan yang tak terlihat.
+        Sistem <em>tidak</em> memberikan kesalahan.
+    </dd>
+</dl>
+<p>
+    Kelas <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">View.DragShadowBuilder</a></code> memiliki dua metode:
+</p>
+<dl>
+    <dt>
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id#onProvideShadowMetrics(android.graphics.Point, android.graphics.Point)">onProvideShadowMetrics()</a></code>
+    </dt>
+    <dd>
+        Sistem akan segera memanggil metode ini setelah Anda memanggil
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>. Gunakan ini
+        untuk mengirim dimensi dan titik sentuh bayangan penyeretan ke sistem. Metode ini memiliki dua
+        argumen:
+        <dl>
+            <dt><em>dimensions</em></dt>
+            <dd>
+                Objek <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=id">Point</a></code>. Lebar bayangan penyeretan ada di
+                <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=id#x">x</a></code> dan tingginya ada di
+                <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=id#y">y</a></code>.
+            </dd>
+            <dt><em>touch_point</em></dt>
+            <dd>
+                Objek <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=id">Point</a></code>. Titik sentuh adalah lokasi dalam
+                bayangan penyeretan yang harus berada di bawah jari pengguna selama penyeretan. Posisi X
+                ada di <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=id#x">x</a></code> dan posisi Y ada di
+                <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=id#y">y</a></code>
+            </dd>
+        </dl>
+    </dd>
+    <dt>
+       <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id#onDrawShadow(android.graphics.Canvas)">onDrawShadow()</a></code>
+    </dt>
+    <dd>
+        Begitu selesai memanggil
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id#onProvideShadowMetrics(android.graphics.Point, android.graphics.Point)">onProvideShadowMetrics()</a></code>
+        sistem akan memanggil
+        <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id#onDrawShadow(android.graphics.Canvas)">onDrawShadow()</a></code> untuk mendapatkan
+        bayangan penyeretan itu sendiri. Metode ini memiliki argumen tunggal, sebuah objek <code><a href="https://developer.android.com/reference/android/graphics/Canvas.html?hl=id">Canvas</a></code>
+        yang dibangun sistem dari parameter yang Anda sediakan dalam
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id#onProvideShadowMetrics(android.graphics.Point, android.graphics.Point)">onProvideShadowMetrics()</a></code>
+        Gunakan ini untuk menggambar bayangan penyeretan dalam objek <code><a href="https://developer.android.com/reference/android/graphics/Canvas.html?hl=id">Canvas</a></code> yang disediakan.
+    </dd>
+</dl>
+<p>
+    Untuk meningkatkan kinerja, Anda harus mempertahankan ukuran bayangan penyeretan agar tetap kecil. Untuk item tunggal,
+    Anda mungkin perlu menggunakan ikon. Untuk multi-pilihan, Anda mungkin perlu menggunakan beberapa ikon dalam satu tumpukan
+    daripada beberapa gambar penuh yang tersebar di seluruh layar.
+</p>
+<h2 id="DesignDragOperation">Mendesain Operasi Seret dan Lepas</h2>
+<p>
+    Bagian ini menunjukkan langkah-demi-langkah bagaimana memulai penyeretan, cara merespons kejadian selama
+    penyeretan, cara merespons kejadian lepas, dan cara mengakhiri operasi seret dan lepas.
+</p>
+<h3 id="StartDrag">Memulai penyeretan</h3>
+<p>
+    Pengguna memulai penyeretan dengan isyarat menyeret, biasanya dengan menekan lama, pada objek Tampilan.
+    Sebagai respons, Anda harus melakukan yang berikut ini:
+</p>
+<ol>
+     <li>
+        Bila perlu, buat <code><a href="https://developer.android.com/reference/android/content/ClipData.html?hl=id">ClipData</a></code> dan
+        <code><a href="https://developer.android.com/reference/android/content/ClipData.Item.html?hl=id">ClipData.Item</a></code> untuk data yang sedang dipindahkan. Sebagai bagian dari
+        objek ClipData, pasok metadata yang disimpan di objek <code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=id">ClipDescription</a></code>
+        dalam ClipData. Untuk operasi seret dan lepas yang tidak mewakili perpindahan data,
+        Anda mungkin perlu menggunakan <code>null</code> sebagai ganti objek sesungguhnya.
+        <p>
+            Misalnya, cuplikan kode ini menunjukkan cara merespons penekanan lama pada ImageView
+            dengan membuat objek ClipData berisi tag atau label
+            ImageView. Setelah cuplikan ini, cuplikan berikutnya menunjukkan cara mengganti metode dalam
+            <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">View.DragShadowBuilder</a></code>:
+        </p>
+<pre>
+// Create a string for the ImageView label
+private static final String IMAGEVIEW_TAG = &quot;icon bitmap&quot;
+
+// Creates a new ImageView
+ImageView imageView = new ImageView(this);
+
+// Sets the bitmap for the ImageView from an icon bit map (defined elsewhere)
+imageView.setImageBitmap(mIconBitmap);
+
+// Sets the tag
+imageView.setTag(IMAGEVIEW_TAG);
+
+    ...
+
+// Sets a long click listener for the ImageView using an anonymous listener object that
+// implements the OnLongClickListener interface
+imageView.setOnLongClickListener(new View.OnLongClickListener() {
+
+    // Defines the one method for the interface, which is called when the View is long-clicked
+    public boolean onLongClick(View v) {
+
+    // Create a new ClipData.
+    // This is done in two steps to provide clarity. The convenience method
+    // ClipData.newPlainText() can create a plain text ClipData in one step.
+
+    // Create a new ClipData.Item from the ImageView object's tag
+    ClipData.Item item = new ClipData.Item(v.getTag());
+
+    // Create a new ClipData using the tag as a label, the plain text MIME type, and
+    // the already-created item. This will create a new ClipDescription object within the
+    // ClipData, and set its MIME type entry to &quot;text/plain&quot;
+    ClipData dragData = new ClipData(v.getTag(),ClipData.MIMETYPE_TEXT_PLAIN,item);
+
+    // Instantiates the drag shadow builder.
+    View.DragShadowBuilder myShadow = new MyDragShadowBuilder(imageView);
+
+    // Starts the drag
+
+            v.startDrag(dragData,  // the data to be dragged
+                        myShadow,  // the drag shadow builder
+                        null,      // no need to use local data
+                        0          // flags (not currently used, set to 0)
+            );
+
+    }
+}
+</pre>
+    </li>
+    <li>
+        Cuplikan kode berikut ini mendefinisikan <code>myDragShadowBuilder</code>
+        Cuplikan ini membuat bayangan penyeretan untuk menyeret TextView sebagai persegi panjang abu-abu kecil:
+<pre>
+    private static class MyDragShadowBuilder extends View.DragShadowBuilder {
+
+    // The drag shadow image, defined as a drawable thing
+    private static Drawable shadow;
+
+        // Defines the constructor for myDragShadowBuilder
+        public MyDragShadowBuilder(View v) {
+
+            // Stores the View parameter passed to myDragShadowBuilder.
+            super(v);
+
+            // Creates a draggable image that will fill the Canvas provided by the system.
+            shadow = new ColorDrawable(Color.LTGRAY);
+        }
+
+        // Defines a callback that sends the drag shadow dimensions and touch point back to the
+        // system.
+        &#64;Override
+        public void onProvideShadowMetrics (Point size, Point touch) {
+            // Defines local variables
+            private int width, height;
+
+            // Sets the width of the shadow to half the width of the original View
+            width = getView().getWidth() / 2;
+
+            // Sets the height of the shadow to half the height of the original View
+            height = getView().getHeight() / 2;
+
+            // The drag shadow is a ColorDrawable. This sets its dimensions to be the same as the
+            // Canvas that the system will provide. As a result, the drag shadow will fill the
+            // Canvas.
+            shadow.setBounds(0, 0, width, height);
+
+            // Sets the size parameter's width and height values. These get back to the system
+            // through the size parameter.
+            size.set(width, height);
+
+            // Sets the touch point's position to be in the middle of the drag shadow
+            touch.set(width / 2, height / 2);
+        }
+
+        // Defines a callback that draws the drag shadow in a Canvas that the system constructs
+        // from the dimensions passed in onProvideShadowMetrics().
+        &#64;Override
+        public void onDrawShadow(Canvas canvas) {
+
+            // Draws the ColorDrawable in the Canvas passed in from the system.
+            shadow.draw(canvas);
+        }
+    }
+</pre>
+        <p class="note">
+            <strong>Catatan:</strong> Ingatlah bahwa Anda tidak harus memperluas
+            <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id">View.DragShadowBuilder</a></code>. Konstruktor
+            <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=id#View.DragShadowBuilder(android.view.View)">View.DragShadowBuilder(View)</a></code> akan membuat
+            bayangan penyeretan default yang sama ukurannya dengan argumen Tampilan yang diteruskan kepadanya, dengan
+            titik sentuh yang berpusat dalam bayangan penyeretan.
+        </p>
+    </li>
+</ol>
+<h3 id="HandleStart">Merespons awal penyeretan</h3>
+<p>
+    Selama operasi penyeretan, sistem akan menugaskan kejadian seret ke event listener penyeretan
+    objek Tampilan dalam layout saat ini. Listener akan beraksi
+    dengan memanggil <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getAction()">getAction()</a></code> untuk mendapatkan tipe aksi.
+    Pada awal penyeretan, metode ini akan mengembalikan <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code>.
+</p>
+<p>
+    Sebagai respons terhadap kejadian dengan tipe aksi <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code>,
+    listener harus melakukan yang berikut ini:
+</p>
+<ol>
+    <li>
+        Panggil <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getClipDescription()">getClipDescription()</a></code> untuk mendapatkan
+        <code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=id">ClipDescription</a></code>. Gunakan metode tipe MIME di
+        <code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=id">ClipDescription</a></code> untuk melihat apakah listener bisa menerima data yang sedang
+        diseret.
+        <p>
+            Jika operasi seret dan lepas tidak mewakili perpindahan data, hal ini mungkin tidak
+            diperlukan.
+        </p>
+    </li>
+    <li>
+        Jika listener bisa merima pelepasan, ia akan mengembalikan <code>true</code>. Ini akan memberi tahu
+        sistem untuk melanjutkan mengirim kejadian seret ke listener.
+        Jika tidak bisa menerima pelepasan, ia akan mengembalikan <code>false</code>, dan sistem
+        akan menghentikan pengiriman kejadian seret hingga sistem mengirim
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>.
+    </li>
+</ol>
+<p>
+    Perhatikan, untuk kejadian <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code>, metode
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id">DragEvent</a></code> berikut ini tidak valid:
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getClipData()">getClipData()</a></code>, <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getX()">getX()</a></code>,
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getY()">getY()</a></code>, dan <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getResult()">getResult()</a></code>.
+</p>
+<h3 id="HandleDuring">Menangani kejadian selama penyeretan</h3>
+<p>
+    Selama penyeretan, listener yang mengembalikan <code>true</code> sebagai respons terhadap
+    kejadian seret <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code> akan terus menerima
+    kejadian seret. Tipe kejadian seret yang diterima listener selama penyeretan bergantung pada lokasi
+    bayangan penyeretan dan visibilitas Tampilan listener.
+</p>
+<p>
+    Selama penyeretan, listener terutama akan menggunakan kejadian seret untuk memutuskan apakah akan mengubah
+    penampilan Tampilannya.
+</p>
+<p>
+    Selama penyeretan, <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getAction()">getAction()</a></code> mengembalikan salah satu dari tiga
+    nilai:
+</p>
+<ul>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code>:
+        Listener akan menerimanya bila titik sentuh
+        (titik di layar di bawah jari pengguna) telah memasuki kotak pembatas
+        Tampilan listener.
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code>: Setelah listener menerima kejadian
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code>, dan sebelum menerima kejadian
+        A<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code>, ia akan menerima kejadian
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code> baru setiap kali titik sentuh berpindah.
+        Metode-metode <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getX()">getX()</a></code> dan <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getY()">getY()</a></code>
+        mengembalikan koordinat X dan Y dari titik sentuh tersebut.
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code>:  Kejadian ini dikirim ke listener yang
+        sebelumnya telah menerima <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code>, setelah
+        bayangan penyeretan tidak lagi berada dalam kotak pembatas Tampilan listener.
+    </li>
+</ul>
+<p>
+    Listener tidak perlu bereaksi pada salah satu tipe aksi ini. Jika listener mengembalikan sebuah
+    nilai ke sistem, nilai itu akan diabaikan. Inilah beberapa panduan untuk merespons setiap
+    tipe aksi ini:
+</p>
+<ul>
+    <li>
+        Sebagai respons terhadap <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> atau
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code>, listener bisa mengubah penampilan
+        Tampilan untuk menunjukkan bahwa ia sedang menerima pelepasan.
+    </li>
+    <li>
+        Sebuah kejadian dengan tipe aksi <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code> berisi
+        data yang valid untuk <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getX()">getX()</a></code> dan
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getY()">getY()</a></code>, yang menyangkut lokasi titik sentuh.
+        Listener mungkin perlu menggunakan informasi ini untuk mengubah penampilan bagian itu pada
+        Tampilan yaitu pada titik sentuh. Listener juga bisa menggunakan informasi ini
+        untuk menentukan posisi persis untuk tempat pengguna akan melepaskan bayangan penyeretan.
+    </li>
+    <li>
+        Sebagai respons terhadap <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code>, listener akan menyetel ulang
+        perubahan penampilan yang diterapkannya sebagai respons terhadap
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> atau
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code>. Ini menunjukkan pada pengguna bahwa
+        Tampilan tersebut tidak lagi menjadi target pelepasan yang segera terjadi.
+    </li>
+</ul>
+<h3 id="HandleDrop">Merespons pelepasan</h3>
+<p>
+    Bila pengguna melepaskan bayangan penyeretan pada Tampilan dalam aplikasi, dan Tampilan itu sebelumnya
+    telah melaporkan bahwa ia bisa menerima materi yang sedang diseret, sistem akan menugaskan kejadian seret
+    ke Tampilan itu bersama tipe aksi <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>. Listener
+    akan melakukan yang berikut ini:
+</p>
+<ol>
+    <li>
+        Memanggil <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getClipData()">getClipData()</a></code> untuk mendapatkan objek
+        <code><a href="https://developer.android.com/reference/android/content/ClipData.html?hl=id">ClipData</a></code> yang semula disediakan dalam panggilan
+        ke
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=id#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+        dan menyimpannya. Jika operasi seret dan lepas tidak mewakili perpindahan data,
+        hal ini mungkin tidak diperlukan.
+    </li>
+    <li>
+        Mengembalikan boolean <code>true</code> untuk menunjukkan bahwa pelepasan telah berhasil diproses, atau
+        boolean <code>false</code> jika tidak berhasil. Nilai yang dikembalikan menjadi nilai yang dikembalikan oleh
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getResult()">getResult()</a></code> untuk kejadian
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>.
+        <p>
+            Perhatikan, jika sistem tidak mengirim kejadian <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>,
+            nilai <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getResult()">getResult()</a></code> untuk kejadian
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> adalah <code>false</code>.
+        </p>
+    </li>
+</ol>
+<p>
+    Untuk kejadian <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>,
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getX()">getX()</a></code> dan <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getY()">getY()</a></code>
+    akan mengembalikan posisi X dan Y dari titik penyeretan pada saat pelepasan, dengan menggunakan sistem koordinat
+    Tampilan yang menerima pelepasan.
+</p>
+<p>
+    Sistem tidak memungkinkan pengguna melepaskan bayangan penyeretan pada Tampilan yang listener-nya tidak
+    menerima kejadian seret. Sistem juga akan memungkinkan pengguna melepaskan bayangan penyeretan
+    pada daerah kosong di UI aplikasi, atau pada area di luar aplikasi Anda.
+    Di semua kasus ini, sistem tidak mengirim kejadian bersama tipe aksi
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>, walaupun ia mengirim kejadian
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>.
+</p>
+<h3 id="HandleEnd">Merespons akhir penyeretan</h3>
+<p>
+    Begitu pengguna melepaskan bayangan penyeretan, sistem akan mengirim
+    kejadian seret ke semua event listener penyeretan dalam aplikasi Anda, bersama tipe aksi
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>. Ini menunjukkan bahwa operasi penyeretan telah
+    selesai.
+</p>
+<p>
+    Setiap listener akan melakukan yang berikut ini:
+</p>
+<ol>
+    <li>
+        Jika listener mengubah penampilan objek Tampilannya selama operasi, ia akan menyetel ulang
+        Tampilan ke penampilan default-nya. Ini adalah petunjuk visual kepada pengguna bahwa operasi
+        telah selesai.
+    </li>
+    <li>
+        Listener secara opsional bisa memanggil <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getResult()">getResult()</a></code> untuk mengetahui selengkapnya
+        tentang operasi tersebut. Jika listener mengembalikan <code>true</code> sebagai respons terhadap kejadian
+        tipe aksi <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>, maka
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getResult()">getResult()</a></code> akan mengembalikan boolean <code>true</code>. Di semua
+        kasus lainnya, <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#getResult()">getResult()</a></code> akan mengembalikan boolean <code>false</code>,
+        termasuk bila sistem tidak mengirim kejadian
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=id#ACTION_DROP">ACTION_DROP</a></code>.
+    </li>
+    <li>
+        Listener akan mengembalikan boolean <code>true</code> ke sistem.
+    </li>
+</ol>
+<p>
+</p>
+<h3 id="RespondEventSample">Merespons kejadian seret: sebuah contoh</h3>
+<p>
+    Semua kejadian seret mula-mula diterima oleh metode atau listener kejadian seret. Cuplikan kode
+    berikut adalah contoh sederhana dari reaksi terhadap kejadian seret di listener:
+</p>
+<pre>
+// Creates a new drag event listener
+mDragListen = new myDragEventListener();
+
+View imageView = new ImageView(this);
+
+// Sets the drag event listener for the View
+imageView.setOnDragListener(mDragListen);
+
+...
+
+protected class myDragEventListener implements View.OnDragListener {
+
+    // This is the method that the system calls when it dispatches a drag event to the
+    // listener.
+    public boolean onDrag(View v, DragEvent event) {
+
+        // Defines a variable to store the action type for the incoming event
+        final int action = event.getAction();
+
+        // Handles each of the expected events
+        switch(action) {
+
+            case DragEvent.ACTION_DRAG_STARTED:
+
+                // Determines if this View can accept the dragged data
+                if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+
+                    // As an example of what your application might do,
+                    // applies a blue color tint to the View to indicate that it can accept
+                    // data.
+                    v.setColorFilter(Color.BLUE);
+
+                    // Invalidate the view to force a redraw in the new tint
+                    v.invalidate();
+
+                    // returns true to indicate that the View can accept the dragged data.
+                    return true;
+
+                }
+
+                // Returns false. During the current drag and drop operation, this View will
+                // not receive events again until ACTION_DRAG_ENDED is sent.
+                return false;
+
+            case DragEvent.ACTION_DRAG_ENTERED:
+
+                // Applies a green tint to the View. Return true; the return value is ignored.
+
+                v.setColorFilter(Color.GREEN);
+
+                // Invalidate the view to force a redraw in the new tint
+                v.invalidate();
+
+                return true;
+
+            case DragEvent.ACTION_DRAG_LOCATION:
+
+                // Ignore the event
+                return true;
+
+            case DragEvent.ACTION_DRAG_EXITED:
+
+                // Re-sets the color tint to blue. Returns true; the return value is ignored.
+                v.setColorFilter(Color.BLUE);
+
+                // Invalidate the view to force a redraw in the new tint
+                v.invalidate();
+
+                return true;
+
+            case DragEvent.ACTION_DROP:
+
+                // Gets the item containing the dragged data
+                ClipData.Item item = event.getClipData().getItemAt(0);
+
+                // Gets the text data from the item.
+                dragData = item.getText();
+
+                // Displays a message containing the dragged data.
+                Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_LONG);
+
+                // Turns off any color tints
+                v.clearColorFilter();
+
+                // Invalidates the view to force a redraw
+                v.invalidate();
+
+                // Returns true. DragEvent.getResult() will return true.
+                return true;
+
+            case DragEvent.ACTION_DRAG_ENDED:
+
+                // Turns off any color tinting
+                v.clearColorFilter();
+
+                // Invalidates the view to force a redraw
+                v.invalidate();
+
+                // Does a getResult(), and displays what happened.
+                if (event.getResult()) {
+                    Toast.makeText(this, "The drop was handled.", Toast.LENGTH_LONG);
+
+                } else {
+                    Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_LONG);
+
+                }
+
+                // returns true; the value is ignored.
+                return true;
+
+            // An unknown action type was received.
+            default:
+                Log.e("DragDrop Example","Unknown action type received by OnDragListener.");
+                break;
+        }
+
+        return false;
+    }
+};
+</pre>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=id" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=id" title="Dukungan">Dukungan</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=id" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=id" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=id" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=id" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="snpGxw7G092o-0OjhFhOnu6C90g2vu_eLzVWKlSwBoE6MTQ5NzUxNjY1MzIxODU2MA" />
+      <input type="hidden" name="next" value="drag-drop.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+             selected="selected" >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Alamat email</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified8481.js?hl=id?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en8481.js?hl=id?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists8481.js?hl=id?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists8481.js?hl=id?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists8481.js?hl=id?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists8481.js?hl=id?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists8481.js?hl=id?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=id"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_id.js?hl=id?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/ui/drag-drop.html?hl=id by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:10:44 GMT -->
+</html>

@@ -1,0 +1,1171 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<!-- Mirrored from developer.android.com/guide/topics/media-apps/audio-app/building-a-mediabrowserservice.html?hl=ru by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:07:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="hcE45oZuzv-lnv8e-0xvE7LSSISaZTvMZQj7gt7cm9A6MTQ5NzUxNjQyOTIwMjE2MA" />
+
+  
+    <link rel="canonical" href="building-a-mediabrowserservice.html">
+  
+
+  
+    <link rel="alternate" href="building-a-mediabrowserservice.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/media-apps/audio-app/building-a-mediabrowserservice.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="building-a-mediabrowserservice.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../../_static/f304fc21fa/images/android/favicon9201.png?hl=ru">
+
+<link rel="apple-touch-icon" href="../../../../_static/f304fc21fa/images/android/touchicon-1809201.png?hl=ru">
+
+
+<title>
+
+  Building a Media Browser Service | Android Developers
+
+</title>
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../../static/css/default05ec.css?hl=ru?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../../_static/f304fc21fa/js/android_3p-bundle9201.js?hl=ru" type="text/javascript"></script>
+<script src="../../../../_static/f304fc21fa/js/script_foot_closure_android__ru9201.js?hl=ru"></script>
+<script src="../../../../_static/f304fc21fa/js/script_foot_android9201.js?hl=ru"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../../static/js/docs05ec.js?hl=ru?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              None
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ru&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ru&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "ru", "served": "en"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=ru">
+          <img class="dac-header-logo-image" src="../../../../static/images/android_logo9201.png?hl=ru"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=ru"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=ru"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=ru"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=ru"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=ru" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Поиск">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Назад</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../../index9201.html?hl=ru" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../../components/fundamentals9201.html?hl=ru" >App Fundamentals</a></li><li><a href="../../../practices/compatibility9201.html?hl=ru" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../permissions/index9201.html?hl=ru" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../permissions/requesting9201.html?hl=ru" >Requesting Permissions</a></li><li><a href="../../permissions/defining9201.html?hl=ru" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../../platform/index9201.html?hl=ru" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../../platform/j8-jack9201.html?hl=ru"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../../practices/verifying-apps-art9201.html?hl=ru" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../../components/index9201.html?hl=ru" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../../components/intents-filters9201.html?hl=ru" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../../components/intents-common9201.html?hl=ru" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../../components/activities/index9201.html?hl=ru" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../../components/activities/intro-activities9201.html?hl=ru" >Introduction to Activities</a></li><li><a href="../../../components/activities/activity-lifecycle9201.html?hl=ru" >The Activity Lifecycle</a></li><li><a href="../../../components/activities/state-changes9201.html?hl=ru" >Activity State Changes</a></li><li><a href="../../../components/activities/tasks-and-back-stack9201.html?hl=ru" >Tasks and Back Stack</a></li><li><a href="../../../components/activities/process-lifecycle9201.html?hl=ru" >Processes and Application Lifecycle</a></li><li><a href="../../../components/activities/parcelables-and-bundles9201.html?hl=ru" >Parcelables and Bundles</a></li><li><a href="../../../components/activities/recents9201.html?hl=ru" >Recents Screen</a></li></ul></li><li><a href="../../../components/fragments9201.html?hl=ru" >Fragments</a></li><li><a href="../../../components/loaders9201.html?hl=ru" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../../components/services9201.html?hl=ru" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../../components/bound-services9201.html?hl=ru" >Bound Services</a></li><li><a href="../../../components/aidl9201.html?hl=ru" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../providers/content-providers9201.html?hl=ru" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../providers/content-provider-basics9201.html?hl=ru" >Content Provider Basics</a></li><li><a href="../../providers/content-provider-creating9201.html?hl=ru" >Creating a Content Provider</a></li><li><a href="../../providers/calendar-provider9201.html?hl=ru" >Calendar Provider</a></li><li><a href="../../providers/contacts-provider9201.html?hl=ru" >Contacts Provider</a></li><li><a href="../../providers/document-provider9201.html?hl=ru" >Open files using Storage Access Framework</a></li><li><a href="../../providers/create-document-provider9201.html?hl=ru" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../../components/broadcasts9201.html?hl=ru" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../appwidgets/index9201.html?hl=ru" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../appwidgets/host9201.html?hl=ru" >App Widget Host</a></li></ul></li><li><a href="../../../components/processes-and-threads9201.html?hl=ru" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../resources/index9201.html?hl=ru" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../resources/overview9201.html?hl=ru" >Overview</a></li><li><a href="../../resources/providing-resources9201.html?hl=ru" >Providing Resources</a></li><li><a href="../../resources/accessing-resources9201.html?hl=ru" >Accessing Resources</a></li><li><a href="../../resources/runtime-changes9201.html?hl=ru" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../resources/localization9201.html?hl=ru" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../resources/icu4j-framework9201.html?hl=ru" >ICU4J Android Framework APIs</a></li><li><a href="../../resources/multilingual-support9201.html?hl=ru" >Language and Locale</a></li></ul></li><li><a href="../../resources/complex-xml-resources9201.html?hl=ru" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../resources/available-resources9201.html?hl=ru" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../resources/animation-resource9201.html?hl=ru" >Animation</a></li><li><a href="../../resources/color-list-resource9201.html?hl=ru" >Color State List</a></li><li><a href="../../resources/drawable-resource9201.html?hl=ru" >Drawable</a></li><li><a href="../../resources/layout-resource9201.html?hl=ru" >Layout</a></li><li><a href="../../resources/menu-resource9201.html?hl=ru" >Menu</a></li><li><a href="../../resources/string-resource9201.html?hl=ru" >String</a></li><li><a href="../../resources/style-resource9201.html?hl=ru" >Style</a></li><li><a href="../../resources/more-resources9201.html?hl=ru" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../manifest/manifest-intro9201.html?hl=ru" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../manifest/action-element9201.html?hl=ru" >&lt;action&gt;</a></li><li><a href="../../manifest/activity-element9201.html?hl=ru" >&lt;activity&gt;</a></li><li><a href="../../manifest/activity-alias-element9201.html?hl=ru" >&lt;activity-alias&gt;</a></li><li><a href="../../manifest/application-element9201.html?hl=ru" >&lt;application&gt;</a></li><li><a href="../../manifest/category-element9201.html?hl=ru" >&lt;category&gt;</a></li><li><a href="../../manifest/compatible-screens-element9201.html?hl=ru" >&lt;compatible-screens&gt;</a></li><li><a href="../../manifest/data-element9201.html?hl=ru" >&lt;data&gt;</a></li><li><a href="../../manifest/grant-uri-permission-element9201.html?hl=ru" >&lt;grant-uri-permission&gt;</a></li><li><a href="../../manifest/instrumentation-element9201.html?hl=ru" >&lt;instrumentation&gt;</a></li><li><a href="../../manifest/intent-filter-element9201.html?hl=ru" >&lt;intent-filter&gt;</a></li><li><a href="../../manifest/manifest-element9201.html?hl=ru" >&lt;manifest&gt;</a></li><li><a href="../../manifest/meta-data-element9201.html?hl=ru" >&lt;meta-data&gt;</a></li><li><a href="../../manifest/path-permission-element9201.html?hl=ru" >&lt;path-permission&gt;</a></li><li><a href="../../manifest/permission-element9201.html?hl=ru" >&lt;permission&gt;</a></li><li><a href="../../manifest/permission-group-element9201.html?hl=ru" >&lt;permission-group&gt;</a></li><li><a href="../../manifest/permission-tree-element9201.html?hl=ru" >&lt;permission-tree&gt;</a></li><li><a href="../../manifest/provider-element9201.html?hl=ru" >&lt;provider&gt;</a></li><li><a href="../../manifest/receiver-element9201.html?hl=ru" >&lt;receiver&gt;</a></li><li><a href="../../manifest/service-element9201.html?hl=ru" >&lt;service&gt;</a></li><li><a href="../../manifest/supports-gl-texture-element9201.html?hl=ru" >&lt;supports-gl-texture&gt;</a></li><li><a href="../../manifest/supports-screens-element9201.html?hl=ru" >&lt;supports-screens&gt;</a></li><li><a href="../../manifest/uses-configuration-element9201.html?hl=ru" >&lt;uses-configuration&gt;</a></li><li><a href="../../manifest/uses-feature-element9201.html?hl=ru" >&lt;uses-feature&gt;</a></li><li><a href="../../manifest/uses-library-element9201.html?hl=ru" >&lt;uses-library&gt;</a></li><li><a href="../../manifest/uses-permission-element9201.html?hl=ru" >&lt;uses-permission&gt;</a></li><li><a href="../../manifest/uses-permission-sdk-23-element9201.html?hl=ru" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../../manifest/uses-sdk-element9201.html?hl=ru" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../ui/index9201.html?hl=ru" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../ui/overview9201.html?hl=ru" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../ui/declaring-layout9201.html?hl=ru" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../ui/layout/linear9201.html?hl=ru" >Linear Layout</a></li><li><a href="../../ui/layout/relative9201.html?hl=ru" >Relative Layout</a></li><li><a href="../../ui/layout/recyclerview9201.html?hl=ru" >Recycler View</a></li><li><a href="../../ui/layout/listview9201.html?hl=ru" >List View</a></li><li><a href="../../ui/layout/gridview9201.html?hl=ru" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../ui/controls9201.html?hl=ru" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../ui/controls/button9201.html?hl=ru" >Buttons</a></li><li><a href="../../ui/controls/checkbox9201.html?hl=ru" >Checkboxes</a></li><li><a href="../../ui/controls/radiobutton9201.html?hl=ru" >Radio Buttons</a></li><li><a href="../../ui/controls/togglebutton9201.html?hl=ru" >Toggle Buttons</a></li><li><a href="../../ui/controls/spinner9201.html?hl=ru" >Spinners</a></li><li><a href="../../ui/controls/pickers9201.html?hl=ru" >Pickers</a></li></ul></li><li><a href="../../ui/ui-events9201.html?hl=ru" >Input Events</a></li><li><a href="../../ui/menus9201.html?hl=ru" >Menus</a></li><li><a href="../../ui/settings9201.html?hl=ru" >Settings</a></li><li><a href="../../ui/dialogs9201.html?hl=ru" >Dialogs</a></li><li><a href="../../ui/notifiers/notifications9201.html?hl=ru" >Notifications</a></li><li><a href="../../ui/notifiers/toasts9201.html?hl=ru" >Toasts</a></li><li><a href="../../ui/shortcuts9201.html?hl=ru" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../search/index9201.html?hl=ru" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../search/search-dialog9201.html?hl=ru" >Creating a Search Interface</a></li><li><a href="../../search/adding-recent-query-suggestions9201.html?hl=ru" >Adding Recent Query Suggestions</a></li><li><a href="../../search/adding-custom-suggestions9201.html?hl=ru" >Adding Custom Suggestions</a></li><li><a href="../../search/searchable-config9201.html?hl=ru" >Searchable Configuration</a></li></ul></li><li><a href="../../ui/multi-window9201.html?hl=ru" >Multi-Window Support</a></li><li><a href="../../ui/drag-drop9201.html?hl=ru" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../ui/accessibility/index9201.html?hl=ru" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../ui/accessibility/apps9201.html?hl=ru" >Making Apps More Accessible</a></li><li><a href="../../ui/accessibility/checklist9201.html?hl=ru" >Accessibility Developer Checklist</a></li><li><a href="../../ui/accessibility/node-tree-debugging9201.html?hl=ru" >Using Node Tree Debugging</a></li><li><a href="../../ui/accessibility/services9201.html?hl=ru" >Building Accessibility Services</a></li><li><a href="../../ui/accessibility/custom-views9201.html?hl=ru" >Building Accessible Custom Views</a></li></ul></li><li><a href="../../ui/themes9201.html?hl=ru" >Styles and Themes</a></li><li><a href="../../ui/custom-components9201.html?hl=ru" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../graphics/index9201.html?hl=ru" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../graphics/overview9201.html?hl=ru" >Overview</a></li><li><a href="../../graphics/prop-animation9201.html?hl=ru" >Property Animation</a></li><li><a href="../../graphics/view-animation9201.html?hl=ru" >View Animation</a></li><li><a href="../../graphics/drawable-animation9201.html?hl=ru" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../graphics/2d-graphics9201.html?hl=ru" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../graphics/vector-drawable-resources9201.html?hl=ru" >Vector Drawable</a></li></ul></li><li><a href="../../graphics/opengl9201.html?hl=ru" >OpenGL ES</a></li><li><a href="../../graphics/hardware-accel9201.html?hl=ru" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../renderscript/index9201.html?hl=ru" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../renderscript/compute9201.html?hl=ru" >RenderScript</a></li><li><a href="../../renderscript/advanced9201.html?hl=ru" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../renderscript/reference/overview9201.html?hl=ru" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../renderscript/reference/rs_value_types9201.html?hl=ru" >Numerical Types</a></li><li><a href="../../renderscript/reference/rs_object_types9201.html?hl=ru" >Object Types</a></li><li><a href="../../renderscript/reference/rs_convert9201.html?hl=ru" >Conversion Functions</a></li><li><a href="../../renderscript/reference/rs_math9201.html?hl=ru" >Mathematical Constants and Functions</a></li><li><a href="../../renderscript/reference/rs_vector_math9201.html?hl=ru" >Vector Math Functions</a></li><li><a href="../../renderscript/reference/rs_matrix9201.html?hl=ru" >Matrix Functions</a></li><li><a href="../../renderscript/reference/rs_quaternion9201.html?hl=ru" >Quaternion Functions</a></li><li><a href="../../renderscript/reference/rs_atomic9201.html?hl=ru" >Atomic Update Functions</a></li><li><a href="../../renderscript/reference/rs_time9201.html?hl=ru" >Time Functions and Types</a></li><li><a href="../../renderscript/reference/rs_allocation_data9201.html?hl=ru" >Allocation Data Access Functions</a></li><li><a href="../../renderscript/reference/rs_object_info9201.html?hl=ru" >Object Characteristics Functions</a></li><li><a href="../../renderscript/reference/rs_for_each9201.html?hl=ru" >Kernel Invocation Functions and Types</a></li><li><a href="../../renderscript/reference/rs_io9201.html?hl=ru" >Input/Output Functions</a></li><li><a href="../../renderscript/reference/rs_debug9201.html?hl=ru" >Debugging Functions</a></li><li><a href="../../renderscript/reference/rs_graphics9201.html?hl=ru" >Graphics Functions and Types</a></li><li><a href="../../renderscript/reference/index9201.html?hl=ru" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../index9201.html?hl=ru" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps-overview9201.html?hl=ru" >Media Apps Overview</a></li><li><a href="../working-with-a-media-session9201.html?hl=ru" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="building-an-audio-app9201.html?hl=ru" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="building-a-mediabrowserservice9201.html?hl=ru" >Building a Media Browser Service</a></li><li><a href="building-a-mediabrowser-client9201.html?hl=ru" >Building a Media Browser Client</a></li><li><a href="mediasession-callbacks9201.html?hl=ru" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../video-app/building-a-video-app9201.html?hl=ru" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../video-app/building-a-video-player-activity9201.html?hl=ru" >Building a Video Player Activity</a></li><li><a href="../video-app/mediasession-callbacks9201.html?hl=ru" >Media Session Callbacks</a></li></ul></li><li><a href="../mediabuttons9201.html?hl=ru" >Responding to Media Buttons</a></li><li><a href="../volume-and-earphones9201.html?hl=ru" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../media/index9201.html?hl=ru" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../media/media-formats9201.html?hl=ru" >Supported Media Formats</a></li><li><a href="../../media/mediaplayer9201.html?hl=ru" >MediaPlayer</a></li><li><a href="../../media/mediarecorder9201.html?hl=ru" >MediaRecorder</a></li><li><a href="../../media/exoplayer9201.html?hl=ru" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../media/media-routing9201.html?hl=ru" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../media/mediarouter9201.html?hl=ru" >MediaRouter API</a></li><li><a href="../../media/mediarouteprovider9201.html?hl=ru" >MediaRouteProvider API</a></li></ul></li><li><a href="../../media/camera9201.html?hl=ru" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../sensors/index9201.html?hl=ru" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../location/index9201.html?hl=ru" >Location and Maps</a></li><li><a href="../../location/strategies9201.html?hl=ru" >Location Strategies</a></li><li><a href="../../sensors/sensors_overview9201.html?hl=ru" >Sensors Overview</a></li><li><a href="../../sensors/sensors_motion9201.html?hl=ru" >Motion Sensors</a></li><li><a href="../../sensors/sensors_position9201.html?hl=ru" >Position Sensors</a></li><li><a href="../../sensors/sensors_environment9201.html?hl=ru" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../connectivity/index9201.html?hl=ru" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../connectivity/bluetooth9201.html?hl=ru" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../connectivity/bluetooth-le9201.html?hl=ru" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../connectivity/nfc/index9201.html?hl=ru" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../connectivity/nfc/nfc9201.html?hl=ru" >NFC Basics</a></li><li><a href="../../connectivity/nfc/advanced-nfc9201.html?hl=ru" >Advanced NFC</a></li><li><a href="../../connectivity/nfc/hce9201.html?hl=ru" >Host-based Card Emulation</a></li></ul></li><li><a href="../../connectivity/wifip2p9201.html?hl=ru" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../connectivity/usb/index9201.html?hl=ru" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../connectivity/usb/accessory9201.html?hl=ru" >Accessory</a></li><li><a href="../../connectivity/usb/host9201.html?hl=ru" >Host</a></li></ul></li><li><a href="../../connectivity/sip9201.html?hl=ru" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../text/index9201.html?hl=ru" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../text/copy-paste9201.html?hl=ru" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../text/creating-input-method9201.html?hl=ru" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../text/image-keyboard9201.html?hl=ru" >Image Keyboard</a></li></ul></li><li><a href="../../text/spell-checker-framework9201.html?hl=ru" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../data/index9201.html?hl=ru" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../data/data-storage9201.html?hl=ru" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../data/backup9201.html?hl=ru" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../data/autobackup9201.html?hl=ru" >Auto Backup</a></li><li><a href="../../data/keyvaluebackup9201.html?hl=ru" >Key/Value Backup</a></li><li><a href="../../data/testingbackup9201.html?hl=ru" >Testing Backup and Restore</a></li></ul></li><li><a href="../../data/install-location9201.html?hl=ru" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../admin/index9201.html?hl=ru" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../admin/device-admin9201.html?hl=ru" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../../webapps/index9201.html?hl=ru" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../../webapps/targeting9201.html?hl=ru" >Supporting Different Screens in Web Apps</a></li><li><a href="../../../webapps/webview9201.html?hl=ru" >Building Web Apps in WebView</a></li><li><a href="../../../webapps/migrating9201.html?hl=ru" >Migrating to WebView in Android 4.4</a></li><li><a href="../../../webapps/debugging9201.html?hl=ru" >Debugging Web Apps</a></li><li><a href="../../../webapps/best-practices9201.html?hl=ru" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../../practices/index9201.html?hl=ru"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../../practices/screens_support9201.html?hl=ru" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../../practices/screens-distribution9201.html?hl=ru" >Distributing to Specific Screens</a></li><li><a href="../../../practices/screen-compat-mode9201.html?hl=ru" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../../practices/app-design/seamlessness9201.html?hl=ru" >Designing for Seamlessness</a></li><li><a href="../../../practices/tablets-and-handsets9201.html?hl=ru" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=ru">Начало</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=ru">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=ru">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=ru">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=ru">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=ru">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=ru"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=ru"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=ru"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Обучение</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../../index9201.html?hl=ru"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=ru"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Справочники</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=ru">Примеры</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=ru"
+           >Библиотеки</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=ru"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=ru"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=ru">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=ru">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=ru">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=ru"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=ru">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=ru">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=ru"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=ru"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=ru">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=ru">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Building a Media Browser Service</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+<div id="qv-wrapper">
+<div id="qv">
+
+    <h2>In this document</h2>
+    <ol>
+      <li><a href="#init-session">Initialize the media session</a></li>
+      <li><a href="#client-connections">Manage client connections</a></li>
+      <li><a href="#service-lifecycle">The media browser service lifecycle</a></li>
+      <li><a href="#mediastyle-notifications">Using MediaStyle notifications with a foreground service</a></li>
+    </ol>
+
+</div>
+
+</div>
+
+
+<p>Your app must declare the <code>MediaBrowserService</code> with an intent-filter in its manifest. You can choose your own service name; in the following example, it is "MediaPlaybackService."</p>
+<pre class="prettyprint"><code>&lt;service android:name=&quot;.MediaPlaybackService&quot;&gt;
+ &lt;intent-filter&gt;
+  &lt;action android:name=&quot;android.media.browse.MediaBrowserService&quot; /&gt;
+ &lt;/intent-filter&gt;
+&lt;/service&gt;
+</code></pre>
+
+<p><p class="note"><b>Note: </b>The recommended implementation of <code>MediaBrowserService</code>
+  is <code><a href="https://developer.android.com/reference/android/support/v4/media/MediaBrowserServiceCompat.html?hl=ru">MediaBrowserServiceCompat</a></code>.
+  which is defined in the
+  <a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=ru#v4-media-compat">media-compat support library</a>.
+  Throughout this page the term "MediaBrowserService" refers to an instance of
+  of <code>MediaBrowserServiceCompat</code>.</p></p>
+<h2 id="init-session">Initialize the media session</h2>
+<p>When the service receives the <code>onCreate()</code> lifecycle callback method it should perform these steps:</p>
+<ul>
+<li>Create and <a href="../working-with-a-media-session9201.html?hl=ru#init-session">initialize the media session</a></li>
+<li>Set the media session callback</li>
+<li>Set the media session token</li>
+</ul>
+<p>The <code>onCreate()</code> code below demonstrates these steps:</p>
+<pre class="prettyprint"><code>public class MediaPlaybackService extends MediaBrowserServiceCompat {
+  private MediaSessionCompat mMediaSession;
+  private PlaybackStateCompat.Builder mStateBuilder;
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+
+    // Create a MediaSessionCompat
+    mMediaSession = new MediaSessionCompat(context, LOG_TAG);
+
+    // Enable callbacks from MediaButtons and TransportControls
+    mMediaSession.setFlags(
+      MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
+      MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
+
+    // Set an initial PlaybackState with ACTION_PLAY, so media buttons can start the player
+    mStateBuilder = new PlaybackStateCompat.Builder()
+                    .setActions(
+                        PlaybackStateCompat.ACTION_PLAY |
+                        PlaybackStateCompat.ACTION_PLAY_PAUSE);
+    mMediaSession.setPlaybackState(mStateBuilder.build());
+
+    // MySessionCallback() has methods that handle callbacks from a media controller
+    mMediaSession.setCallback(new MySessionCallback());
+
+    // Set the session's token so that client activities can communicate with it.
+    setSessionToken(mMediaSession.getSessionToken());
+  }
+}
+</code></pre>
+
+<h2 id="client-connections">Manage client connections</h2>
+<p>A <code>MediaBrowserService</code> has two methods that handle client connections:
+<code><a href="https://developer.android.com/reference/android/support/v4/media/MediaBrowserServiceCompat.html?hl=ru#onGetRoot(java.lang.String, int, android.os.Bundle)">onGetRoot()</a></code> controls
+access to the service, and
+<code><a href="https://developer.android.com/reference/android/support/v4/media/MediaBrowserServiceCompat.html?hl=ru#onLoadChildren(java.lang.String, android.support.v4.media.MediaBrowserServiceCompat.Result&lt;java.util.List&lt;android.support.v4.media.MediaBrowserCompat.MediaItem&gt;&gt;)">onLoadChildren()</a></code>
+provides the ability for a client to build and display a menu of the <code>MediaBrowserService</code>'s content hierarchy.</p>
+<h3 id="controlling_client_connections_with_ongetroot">Controlling client connections with <code>onGetRoot()</code></h3>
+<p>The <code>onGetRoot()</code> method returns the root node of the content hierarchy. If the
+method returns null, the connection is refused.</p>
+<p>To allow all clients to connect to your service and browse its media content,
+<code>onGetRoot()</code> should return a non-null BrowserRoot with a root ID. To allow
+connections to your service without browsing, return a non-null BrowserRoot with
+a null root ID.</p>
+<p>A typical implementation of <code>onGetRoot()</code> might look like this:</p>
+<pre class="prettyprint"><code>@Override
+public BrowserRoot onGetRoot(String clientPackageName, int clientUid,
+    Bundle rootHints) {
+
+    // (Optional) Control the level of access for the specified package name.
+    // You'll need to write your own logic to do this.
+   if (allowBrowsing(clientPackageName, clientUid)) {
+      // Returns a root ID, so clients can use onLoadChildren() to retrieve the content hierarchy
+      return new BrowserRoot(MY_MEDIA_ROOT_ID, null);
+    }
+   else {
+      // Clients can connect, but since the BrowserRoot is an empty string
+      // onLoadChildren will return nothing. This disables the ability to browse for content.
+      return new BrowserRoot(&quot;&quot;, null);
+    }
+}
+</code></pre>
+
+<p>In some cases, you might want to implement a white/blacklist scheme to control connections. For an example of whitelisting, see the <a href="https://github.com/googlesamples/android-UniversalMusicPlayer/blob/master/mobile/src/main/java/com/example/android/uamp/PackageValidator.java">PackageValidator</a> class in the <a href="https://github.com/googlesamples/android-UniversalMusicPlayer">Universal Android Music Player</a> sample app.</p>
+<aside class="note"><strong>Note:</strong><span> You should consider providing different content hierarchies depending on
+what type of client is making the query. In particular, Android Auto limits how
+users interact with audio apps. For more information, see <a href="https://developer.android.com/training/auto/audio/index.html?hl=ru#build_hierarchy">Playing Audio for
+Auto</a>. You
+can look at the <code>clientPackageName</code> at connection time to determine the client
+type, and return a different <code>BrowserRoot</code> depending on the client (or <code>rootHints</code>
+if any).</span></aside>
+<h3 id="communicating_content_with_onloadchildren">Communicating content with <code>onLoadChildren()</code></h3>
+<p>After the client connects, it can traverse the content hierarchy by making repeated calls to <code>MediaBrowserCompat.subscribe()</code> to build a local representation of the UI. The <code>subscribe()</code> method sends the callback <code>onLoadChildren()</code> to the service, which returns a list of <code><a href="https://developer.android.com/reference/android/media/browse/MediaBrowser.MediaItem.html?hl=ru">MediaBrowser.MediaItem</a></code> objects.</p>
+<p>Each MediaItem has a unique ID string, which is an opaque token. When a client wants to open a submenu or play an item, it passes the ID. Your service is responsible for associating the ID with the appropriate menu node or content item.</p>
+<p>A simple implementation of <code>onLoadChildren()</code> might look like this:</p>
+<pre class="prettyprint"><code>@Override
+public void onLoadChildren(final String parentMediaId,
+    final Result&lt;List&lt;MediaItem&gt;&gt; result) {
+
+  //  Browsing not allowed
+  if (TextUtils.isEmpty(parentMediaId)) {
+   result.sendResult(null);
+   return;
+  }
+
+  // Assume for example that the music catalog is already loaded/cached.
+
+  List&lt;MediaItem&gt; mediaItems = new ArrayList&lt;&gt;();
+
+  // Check if this is the root menu:
+  if (MY_MEDIA_ROOT_ID.equals(parentMediaId)) {
+
+      // build the MediaItem objects for the top level,
+      // and put them in the mediaItems list
+  } else {
+
+      // examine the passed parentMediaId to see which submenu we're at,
+      // and put the children of that menu in the mediaItems list
+  }
+  result.sendResult(mediaItems);
+}
+</code></pre>
+
+<p><p class="note"><b>Note: </b><code>MediaItem</code> objects delivered by the MediaBrowserService
+  should not contain icon bitmaps. Use a <code>Uri</code> instead by calling
+  <code><a href="https://developer.android.com/reference/android/media/MediaDescription.Builder.html?hl=ru#setIconUri(android.net.Uri)">setIconUri()</a></code>
+  when you build the <code><a href="https://developer.android.com/reference/android/media/MediaDescription.html?hl=ru">MediaDescription</a></code> for each item.
+  </p></p>
+<p>For examples of how to implement <code>onLoadChildren()</code>, see the <a href="https://developer.android.com/samples/MediaBrowserService/index.html?hl=ru">MediaBrowserService</a> and <a href="https://github.com/googlesamples/android-UniversalMusicPlayer">Universal Android Music Player</a> sample apps.</p>
+<h2 id="service-lifecycle">The media browser service lifecycle</h2>
+<p>The behavior of an Android <a href="../../../components/services9201.html?hl=ru">service</a> depends on whether it is <em>started</em> or <em>bound </em>to one or more clients. After a service is created, it can be started, bound, or both. In all of these states, it is fully functional and can perform the work it's designed to do. The difference is how long the service will exist. A bound service is not destroyed until all its bound clients unbind. A started service can be explicitly stopped and destroyed (assuming it is no longer bound to any clients).</p>
+<p>When a <code>MediaBrowser</code> running in another activity connects to a <code>MediaBrowserService</code>, it binds the activity to the service, making the service bound (but not started). This default behavior is built into the <code>MediaBrowserServiceCompat</code> class.</p>
+<p>A service that is only bound (and not started) is destroyed when all of its clients unbind. If your UI activity disconnects at this point, the service is destroyed. This isn't a problem if you haven't played any music yet. However, when playback starts, the user probably expects to continue listening even after switching apps. You don't want to destroy the player when you unbind the UI to work with another app.</p>
+<p>For this reason, you need to be sure that the service is started when it begins
+to play by calling <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#startService(android.content.Intent)">startService()</a></code>. A
+started service must be explicitly stopped, whether or not it's bound. This
+ensures that your player continues to perform even if the controlling UI
+activity unbinds.</p>
+<p>To stop a started service, call <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#stopService(android.content.Intent)">Context.stopService()</a></code> or <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ru#stopSelf()">stopSelf()</a></code>. The system stops and destroys the service as soon as possible. However, if one or more clients are still bound to the service, the call to stop the service is delayed until all its clients unbind.</p>
+<p>The lifecycle of the <code>MediaBrowserService</code> is controlled by the way it is created, the number of clients that have are to it, and the calls it receives from media session callbacks. To summarize:</p>
+<ul>
+<li>The service is created when it is started in response to a media button or when an activity binds to it (after connecting via its <code>MediaBrowser</code>).</li>
+<li>The media session <code>onPlay()</code> callback should include code that calls <code>startService()</code>. This ensures that the service starts and continues to run, even when all UI <code>MediaBrowser</code> activities that are bound to it unbind.</li>
+<li>The <code>onStop()</code> callback should call <code>stopSelf()</code>. If the service was started, this stops it. In addition, the service is destroyed if there are no activities bound to it. Otherwise, the service remains bound until all its activities unbind. (If a subsequent <code>startService()</code> call is received before the service is destroyed, the pending stop is cancelled.)</li>
+</ul>
+<p>The following flowchart demonstrates how the lifecycle of a service is managed. The variable counter tracks the number of bound clients:</p>
+<p><img alt="Service Lifecycle" src="../images/service-lifecycle9201.png?hl=ru" title="service lifecycle" /></p>
+<h2 id="mediastyle-notifications">Using MediaStyle notifications with a foreground service</h2>
+<p>When a service is playing, it should be running in the foreground. This lets the system know that the service is performing a useful function and should not be killed if the system is low on memory. A foreground service must display a notification so the user knows about it and can optionally control it. The <code>onPlay()</code> callback should put the service in the foreground. (Note that this is a special meaning of "foreground." While Android considers the service in the foreground for purposes of process management, to the user the player is playing in the background while some other app is visible in the "foreground" on the screen.)</p>
+<p>When a service runs in the foreground, it must display a <a href="../../ui/notifiers/notifications9201.html?hl=ru">notification</a>, ideally with one or more transport controls. The notification should also include useful information from the session's metadata.</p>
+<p>Build and display the notification when the player starts playing. The best place to do this is inside the <code>MediaSessionCompat.Callback.onPlay()</code> method.</p>
+<p>The example below uses the
+<code><a href="https://developer.android.com/reference/android/support/v7/app/NotificationCompat.MediaStyle.html?hl=ru">NotificationCompat.MediaStyle</a></code>,
+which is designed for media apps. It shows how to build a notification that displays metadata and transport controls. The convenience method
+<code><a href="https://developer.android.com/reference/android/support/v4/media/session/MediaSessionCompat.html?hl=ru#getController()">getController()</a></code>
+allows you to create a media controller directly from your media session.</p>
+<pre class="prettyprint"><code>// Given a media session and its context (usually the component containing the session)
+// Create a NotificationCompat.Builder
+
+// Get the session's metadata
+MediaControllerCompat controller = mediaSession.getController();
+MediaMetadataCompat mediaMetadata = controller.getMetadata();
+MediaDescriptionCompat description = mediaMetadata.getDescription();
+
+NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+
+builder
+// Add the metadata for the currently playing track
+    .setContentTitle(description.getTitle())
+    .setContentText(description.getSubtitle())
+    .setSubText(description.getDescription())
+    .setLargeIcon(description.getIconBitmap())
+
+// Enable launching the player by clicking the notification
+    .setContentIntent(controller.getSessionActivity())
+
+// Stop the service when the notification is swiped away
+    .setDeleteIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(this,
+       PlaybackStateCompat.ACTION_STOP))
+
+// Make the transport controls visible on the lockscreen
+    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+
+// Add an app icon and set its accent color
+// Be careful about the color
+    .setSmallIcon(R.drawable.notification_icon)
+    .setColor(ContextCompat.getColor(this, R.color.primaryDark))
+
+// Add a pause button
+      .addAction(new NotificationCompat.Action(
+          R.drawable.pause, getString(R.string.pause),
+          MediaButtonReceiver.buildMediaButtonPendingIntent(this,
+              PlaybackStateCompat.ACTION_PLAY_PAUSE)))
+
+// Take advantage of MediaStyle features
+    .setStyle(new NotificationCompat.MediaStyle()
+      .setMediaSession(mediaSession.getSessionToken())
+      .setShowActionsInCompactView(0)
+// Add a cancel button
+      .setShowCancelButton(true)
+      .setCancelButtonIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(this,
+          PlaybackStateCompat.ACTION_STOP));
+
+// Display the notification and place the service in the foreground
+startForeground(id, builder.build());
+</code></pre>
+
+<p>When using MediaStyle notifications, be aware of the behavior of these
+NotificationCompat settings:</p>
+<ul>
+<li>When you use <code><a href="https://developer.android.com/reference/android/app/Notification.Builder.html?hl=ru#setContentIntent(android.app.PendingIntent)">setContentIntent()</a></code>, your service starts automatically when the notification
+  is clicked, a handy feature.</li>
+<li>In an "untrusted" situation
+  like the lockscreen, the default visibility for notification contents is <code><a href="https://developer.android.com/reference/android/app/Notification.html?hl=ru#VISIBILITY_PRIVATE">VISIBILITY_PRIVATE</a></code>.  You probably want to see the
+  transport controls on the lockscreen, so <code><a href="https://developer.android.com/reference/android/app/Notification.html?hl=ru#VISIBILITY_PUBLIC">VISIBILITY_PUBLIC</a></code> is the way to go.</li>
+<li>Be careful when you set the background color. In an ordinary notification in
+  Android version 5.0 or later, the color is applied only to the background of the
+  small app icon. But for MediaStyle notifications prior to Android 7.0, the color
+  is used for the entire notification background. Test your background color. Go
+  gentle on the eyes and avoid extremely bright or fluorescent colors.</li>
+</ul>
+<p>These settings are available only when you are using NotificationCompat.MediaStyle:</p>
+<ul>
+<li>Use <code><a href="https://developer.android.com/reference/android/support/v7/app/NotificationCompat.MediaStyle.html?hl=ru#setMediaSession(android.support.v4.media.session.MediaSessionCompat.Token)">setMediaSession()</a></code>
+  to associate the notification with your session. This allows third-party apps
+  and companion devices to access and control the session.</li>
+<li>Use <code><a href="https://developer.android.com/reference/android/support/v7/app/NotificationCompat.MediaStyle.html?hl=ru#setShowActionsInCompactView(int...)">setShowActionsInCompactView()</a></code> to add up to 3 actions to be shown in
+  the notification's standard-sized contentView. (Here the pause button is
+  specified.)</li>
+<li>In Android 5.0 (API level 21) and later you can swipe away a notification to stop the
+  player once the service is no longer running in the foreground. You can't do
+  this in earlier versions. To allow users to remove the notification and stop playback
+  before Android 5.0 (API level 21), you can add a cancel button in the upper-right corner of the
+  notification by calling <code><a href="https://developer.android.com/reference/android/support/v7/app/NotificationCompat.MediaStyle.html?hl=ru#setShowCancelButton(boolean)">setShowCancelButton(true)</a></code> and <code><a href="https://developer.android.com/reference/android/support/v7/app/NotificationCompat.MediaStyle.html?hl=ru#setCancelButtonIntent(android.app.PendingIntent)">setCancelButtonIntent()</a></code>.</li>
+</ul>
+<p>When you add the pause and cancel buttons, you'll need a PendingIntent to attach
+to the playback action. The method <code><a href="https://developer.android.com/reference/android/support/v4/media/session/MediaButtonReceiver.html?hl=ru#buildMediaButtonPendingIntent(android.content.Context, long)">MediaButtonReceiver.buildMediaButtonPendingIntent()</a></code> does the job of converting
+a PlaybackState action into a PendingIntent.</p>
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=ru" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Блог" target="_blank">Блог</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=ru" title="Поддержка">Поддержка</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=ru" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=ru" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=ru" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=ru" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="hcE45oZuzv-lnv8e-0xvE7LSSISaZTvMZQj7gt7cm9A6MTQ5NzUxNjQyOTIwMjE2MA" />
+      <input type="hidden" name="next" value="/guide/topics/media-apps/audio-app/building-a-mediabrowserservice.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+             selected="selected" >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Адрес электронной почты</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../../ytblogger_lists_unified05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../../../android_metadata_en05ec.js?hl=ru?v=2017061508" defer></script>
+  
+  <script src="../../../../reference/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../../../reference/gms_lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../../../reference/android/support/wearable/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../../../reference/android/support/test/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../../../reference/android/support/constraint/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=ru"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_ru.js?hl=ru?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/media-apps/audio-app/building-a-mediabrowserservice.html?hl=ru by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:07:35 GMT -->
+</html>

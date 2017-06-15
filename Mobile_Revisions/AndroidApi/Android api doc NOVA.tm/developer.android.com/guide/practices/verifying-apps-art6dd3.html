@@ -1,0 +1,1239 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<!-- Mirrored from developer.android.com/guide/practices/verifying-apps-art.html?hl=pt-br by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:04:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="TN22osdHHKnEv1tGu0AhhF8662cVmWRohUn-vFm20ow6MTQ5NzUxNjA3MjQ0NjA3MA" />
+
+  
+    <link rel="canonical" href="verifying-apps-art6dd3.html?hl=pt-br">
+  
+
+  
+    <link rel="alternate" href="verifying-apps-art.html" hreflang="en">
+  
+    <link rel="alternate" href="verifying-apps-art0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="verifying-apps-art6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="verifying-apps-art7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="verifying-apps-art9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="verifying-apps-art232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="verifying-apps-art0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/practices/verifying-apps-art.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/practices/verifying-apps-art.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/practices/verifying-apps-art.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/practices/verifying-apps-art.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/practices/verifying-apps-art.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/practices/verifying-apps-art.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/practices/verifying-apps-art.html?hl=id" hreflang="id-cn">
+  
+
+  <link rel="alternate" href="verifying-apps-art.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../_static/f304fc21fa/images/android/favicon6dd3.png?hl=pt-br">
+
+<link rel="apple-touch-icon" href="../../_static/f304fc21fa/images/android/touchicon-1806dd3.png?hl=pt-br">
+
+
+<title>
+
+  Verificação do comportamento do aplicativo no Android Runtime (ART) | Android Developers
+
+</title>
+
+  <meta name="description" content="The Android runtime (ART) is the default runtime for devices running Android 5.0 (API level 21) and higher. This runtime offers a number of features that improve performance and smoothness of the Android platform and apps. You can find more information…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../static/css/default9fbc.css?hl=pt-br?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../_static/f304fc21fa/js/android_3p-bundle6dd3.js?hl=pt-br" type="text/javascript"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_closure_android__pt_br6dd3.js?hl=pt-br"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_android6dd3.js?hl=pt-br"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../static/js/docs9fbc.js?hl=pt-br?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;pt-br&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;pt-br&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;pt-br&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;pt-br&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "pt-br", "served": "pt-br"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=pt-br">
+          <img class="dac-header-logo-image" src="../../static/images/android_logo6dd3.png?hl=pt-br"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=pt-br"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=pt-br"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=pt-br"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=pt-br"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=pt-br" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Pesquisa">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Voltar</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../index6dd3.html?hl=pt-br" >Introdução</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../components/fundamentals6dd3.html?hl=pt-br" >Fundamentos de aplicativos</a></li><li><a href="compatibility6dd3.html?hl=pt-br" >Compatibilidade do dispositivo</a></li><li><a href="../topics/security/permissions6dd3.html?hl=pt-br" >Permissões do sistema</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../platform/index6dd3.html?hl=pt-br" >Arquitetura da plataforma</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../platform/j8-jack6dd3.html?hl=pt-br"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use recursos de linguagem do Java 8</a></li><li><a href="verifying-apps-art6dd3.html?hl=pt-br" >Verificação do comportamento do aplicativo no Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../components/index6dd3.html?hl=pt-br" >Componentes de aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../components/intents-filters6dd3.html?hl=pt-br" >Intents e filtros de intent</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../components/intents-common6dd3.html?hl=pt-br" >Intents comuns</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../components/activities6dd3.html?hl=pt-br" >Atividades</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../components/fragments6dd3.html?hl=pt-br" >Fragmentos</a></li><li><a href="../components/loaders6dd3.html?hl=pt-br" >Carregadores</a></li><li><a href="../components/tasks-and-back-stack6dd3.html?hl=pt-br" >Tarefas e pilha de retorno</a></li><li><a href="../components/recents6dd3.html?hl=pt-br" >Tela de visão geral</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../components/services6dd3.html?hl=pt-br" >Serviços</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../components/bound-services6dd3.html?hl=pt-br" >Serviços vinculados</a></li><li><a href="../components/aidl6dd3.html?hl=pt-br" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/providers/content-providers6dd3.html?hl=pt-br" >Provedores de conteúdo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/providers/content-provider-basics6dd3.html?hl=pt-br" >Fundamentos do provedor de conteúdo</a></li><li><a href="../topics/providers/content-provider-creating6dd3.html?hl=pt-br" >Criação de um provedor de conteúdo</a></li><li><a href="../topics/providers/calendar-provider6dd3.html?hl=pt-br" >Provedor de agenda</a></li><li><a href="../topics/providers/contacts-provider6dd3.html?hl=pt-br" >Provedor de contatos</a></li><li><a href="../topics/providers/document-provider6dd3.html?hl=pt-br" >Estrutura de acesso ao armazenamento</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/appwidgets/index6dd3.html?hl=pt-br" >Widgets do aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/appwidgets/host6dd3.html?hl=pt-br" >Host de widgets do aplicativo</a></li></ul></li><li><a href="../components/processes-and-threads6dd3.html?hl=pt-br" >Processos e encadeamentos</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/index6dd3.html?hl=pt-br" >Recursos do aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/overview6dd3.html?hl=pt-br" >Visão geral</a></li><li><a href="../topics/resources/providing-resources6dd3.html?hl=pt-br" >Fornecimento de recursos</a></li><li><a href="../topics/resources/accessing-resources6dd3.html?hl=pt-br" >Acesso aos recursos</a></li><li><a href="../topics/resources/runtime-changes6dd3.html?hl=pt-br" >Processamento de alterações em tempo de execução</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/localization6dd3.html?hl=pt-br" >Localização</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/icu4j-framework6dd3.html?hl=pt-br" >APIs de estrutura do Android para ICU4J</a></li><li><a href="../topics/resources/multilingual-support6dd3.html?hl=pt-br" >Idioma e localidade</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/available-resources6dd3.html?hl=pt-br" >Tipos de recursos</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/animation-resource6dd3.html?hl=pt-br" >Animação</a></li><li><a href="../topics/resources/color-list-resource6dd3.html?hl=pt-br" >Lista de estados de cores</a></li><li><a href="../topics/resources/drawable-resource6dd3.html?hl=pt-br" >Desenhável</a></li><li><a href="../topics/resources/layout-resource6dd3.html?hl=pt-br" >Layout</a></li><li><a href="../topics/resources/menu-resource6dd3.html?hl=pt-br" >Menu</a></li><li><a href="../topics/resources/string-resource6dd3.html?hl=pt-br" >Cadeia de caracteres</a></li><li><a href="../topics/resources/style-resource6dd3.html?hl=pt-br" >Estilo</a></li><li><a href="../topics/resources/more-resources6dd3.html?hl=pt-br" >Mais tipos</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/manifest/manifest-intro6dd3.html?hl=pt-br" >Manifesto do aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/manifest/action-element6dd3.html?hl=pt-br" >&lt;action&gt;</a></li><li><a href="../topics/manifest/activity-element6dd3.html?hl=pt-br" >&lt;activity&gt;</a></li><li><a href="../topics/manifest/activity-alias-element6dd3.html?hl=pt-br" >&lt;activity-alias&gt;</a></li><li><a href="../topics/manifest/application-element6dd3.html?hl=pt-br" >&lt;application&gt;</a></li><li><a href="../topics/manifest/category-element6dd3.html?hl=pt-br" >&lt;category&gt;</a></li><li><a href="../topics/manifest/compatible-screens-element6dd3.html?hl=pt-br" >&lt;compatible-screens&gt;</a></li><li><a href="../topics/manifest/data-element6dd3.html?hl=pt-br" >&lt;data&gt;</a></li><li><a href="../topics/manifest/grant-uri-permission-element6dd3.html?hl=pt-br" >&lt;grant-uri-permission&gt;</a></li><li><a href="../topics/manifest/instrumentation-element6dd3.html?hl=pt-br" >&lt;instrumentation&gt;</a></li><li><a href="../topics/manifest/intent-filter-element6dd3.html?hl=pt-br" >&lt;intent-filter&gt;</a></li><li><a href="../topics/manifest/manifest-element6dd3.html?hl=pt-br" >&lt;manifest&gt;</a></li><li><a href="../topics/manifest/meta-data-element6dd3.html?hl=pt-br" >&lt;meta-data&gt;</a></li><li><a href="../topics/manifest/path-permission-element6dd3.html?hl=pt-br" >&lt;path-permission&gt;</a></li><li><a href="../topics/manifest/permission-element6dd3.html?hl=pt-br" >&lt;permission&gt;</a></li><li><a href="../topics/manifest/permission-group-element6dd3.html?hl=pt-br" >&lt;permission-group&gt;</a></li><li><a href="../topics/manifest/permission-tree-element6dd3.html?hl=pt-br" >&lt;permission-tree&gt;</a></li><li><a href="../topics/manifest/provider-element6dd3.html?hl=pt-br" >&lt;provider&gt;</a></li><li><a href="../topics/manifest/receiver-element6dd3.html?hl=pt-br" >&lt;receiver&gt;</a></li><li><a href="../topics/manifest/service-element6dd3.html?hl=pt-br" >&lt;service&gt;</a></li><li><a href="../topics/manifest/supports-gl-texture-element6dd3.html?hl=pt-br" >&lt;supports-gl-texture&gt;</a></li><li><a href="../topics/manifest/supports-screens-element6dd3.html?hl=pt-br" >&lt;supports-screens&gt;</a></li><li><a href="../topics/manifest/uses-configuration-element6dd3.html?hl=pt-br" >&lt;uses-configuration&gt;</a></li><li><a href="../topics/manifest/uses-feature-element6dd3.html?hl=pt-br" >&lt;uses-feature&gt;</a></li><li><a href="../topics/manifest/uses-library-element6dd3.html?hl=pt-br" >&lt;uses-library&gt;</a></li><li><a href="../topics/manifest/uses-permission-element6dd3.html?hl=pt-br" >&lt;uses-permission&gt;</a></li><li><a href="../topics/manifest/uses-permission-sdk-23-element6dd3.html?hl=pt-br" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../topics/manifest/uses-sdk-element6dd3.html?hl=pt-br" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/index6dd3.html?hl=pt-br" >Interface do usuário</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/overview6dd3.html?hl=pt-br" >Visão geral</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/declaring-layout6dd3.html?hl=pt-br" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/layout/linear6dd3.html?hl=pt-br" >Layout linear</a></li><li><a href="../topics/ui/layout/relative6dd3.html?hl=pt-br" >Layout relativo</a></li><li><a href="../topics/ui/layout/listview6dd3.html?hl=pt-br" >Exibição em lista</a></li><li><a href="../topics/ui/layout/gridview6dd3.html?hl=pt-br" >Exibição em grade</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/controls6dd3.html?hl=pt-br" >Controles de entrada</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/controls/button6dd3.html?hl=pt-br" >Botões</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=pt-br" >Campos de texto</a></li><li><a href="../topics/ui/controls/checkbox6dd3.html?hl=pt-br" >Caixas de seleção</a></li><li><a href="../topics/ui/controls/radiobutton6dd3.html?hl=pt-br" >Botões de opção</a></li><li><a href="../topics/ui/controls/togglebutton6dd3.html?hl=pt-br" >Botões de alternância</a></li><li><a href="../topics/ui/controls/spinner6dd3.html?hl=pt-br" >Controles giratórios</a></li><li><a href="../topics/ui/controls/pickers6dd3.html?hl=pt-br" >Seletores</a></li></ul></li><li><a href="../topics/ui/ui-events6dd3.html?hl=pt-br" >Eventos de entrada</a></li><li><a href="../topics/ui/menus6dd3.html?hl=pt-br" >Menus</a></li><li><a href="../topics/ui/settings6dd3.html?hl=pt-br" >Configurações</a></li><li><a href="../topics/ui/dialogs6dd3.html?hl=pt-br" >Caixas de diálogo</a></li><li><a href="../topics/ui/notifiers/notifications6dd3.html?hl=pt-br" >Notificações</a></li><li><a href="../topics/ui/notifiers/toasts6dd3.html?hl=pt-br" >Avisos</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/search/index6dd3.html?hl=pt-br" >Busca</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/search/search-dialog6dd3.html?hl=pt-br" >Criação de uma interface de pesquisa</a></li><li><a href="../topics/search/adding-recent-query-suggestions6dd3.html?hl=pt-br" >Adição de sugestões recentes de consulta</a></li><li><a href="../topics/search/adding-custom-suggestions6dd3.html?hl=pt-br" >Adição de sugestões personalizadas</a></li><li><a href="../topics/search/searchable-config6dd3.html?hl=pt-br" >Configuração pesquisável</a></li></ul></li><li><a href="../topics/ui/multi-window6dd3.html?hl=pt-br" >Compatibilidade com várias janelas</a></li><li><a href="../topics/ui/drag-drop6dd3.html?hl=pt-br" >Arrastar e soltar</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/accessibility/index6dd3.html?hl=pt-br" >Acessibilidade</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/accessibility/apps6dd3.html?hl=pt-br" >Para tornar os aplicativos acessíveis</a></li><li><a href="../topics/ui/accessibility/checklist6dd3.html?hl=pt-br" >Lista de verificação de acessibilidade do desenvolvedor</a></li><li><a href="../topics/ui/accessibility/services6dd3.html?hl=pt-br" >Criação de serviços de acessibilidade</a></li></ul></li><li><a href="../topics/ui/themes6dd3.html?hl=pt-br" >Estilos e temas</a></li><li><a href="../topics/ui/custom-components6dd3.html?hl=pt-br" >Componentes personalizados</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/index6dd3.html?hl=pt-br" >Animação e gráficos</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/overview6dd3.html?hl=pt-br" >Visão geral</a></li><li><a href="../topics/graphics/prop-animation6dd3.html?hl=pt-br" >Animação de propriedade</a></li><li><a href="../topics/graphics/view-animation6dd3.html?hl=pt-br" >Exibição de animação</a></li><li><a href="../topics/graphics/drawable-animation6dd3.html?hl=pt-br" >Animação de desenhável</a></li><li><a href="../topics/graphics/2d-graphics6dd3.html?hl=pt-br" >Tela e desenháveis</a></li><li><a href="../topics/graphics/opengl6dd3.html?hl=pt-br" >OpenGL ES</a></li><li><a href="../topics/graphics/hardware-accel6dd3.html?hl=pt-br" >Aceleração de hardware</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/index6dd3.html?hl=pt-br" >Computação</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/compute6dd3.html?hl=pt-br" >RenderScript</a></li><li><a href="../topics/renderscript/advanced6dd3.html?hl=pt-br" >RenderScript avançado</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/reference/overview6dd3.html?hl=pt-br" >Referência da API de tempo de execução</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/reference/rs_value_types6dd3.html?hl=pt-br" >Tipos numéricos</a></li><li><a href="../topics/renderscript/reference/rs_object_types6dd3.html?hl=pt-br" >Tipos de objeto</a></li><li><a href="../topics/renderscript/reference/rs_convert6dd3.html?hl=pt-br" >Funções de conversão</a></li><li><a href="../topics/renderscript/reference/rs_math6dd3.html?hl=pt-br" >Constantes e funções matemáticas</a></li><li><a href="../topics/renderscript/reference/rs_vector_math6dd3.html?hl=pt-br" >Funções matemáticas de vetores</a></li><li><a href="../topics/renderscript/reference/rs_matrix6dd3.html?hl=pt-br" >Funções de matriz</a></li><li><a href="../topics/renderscript/reference/rs_quaternion6dd3.html?hl=pt-br" >Funções de quaternion</a></li><li><a href="../topics/renderscript/reference/rs_atomic6dd3.html?hl=pt-br" >Funções de atualização atômicas</a></li><li><a href="../topics/renderscript/reference/rs_time6dd3.html?hl=pt-br" >Funções e tipos de tempo</a></li><li><a href="../topics/renderscript/reference/rs_allocation_data6dd3.html?hl=pt-br" >Funções de acesso a dados de alocação</a></li><li><a href="../topics/renderscript/reference/rs_object_info6dd3.html?hl=pt-br" >Funções de características de objetos</a></li><li><a href="../topics/renderscript/reference/rs_for_each6dd3.html?hl=pt-br" >Funções e tipos de invocação de kernel</a></li><li><a href="../topics/renderscript/reference/rs_io6dd3.html?hl=pt-br" >Funções de entrada/saída</a></li><li><a href="../topics/renderscript/reference/rs_debug6dd3.html?hl=pt-br" >Funções de deputação</a></li><li><a href="../topics/renderscript/reference/rs_graphics6dd3.html?hl=pt-br" >Funções e tipos de gráfico</a></li><li><a href="../topics/renderscript/reference/index6dd3.html?hl=pt-br" >Índice</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/index6dd3.html?hl=pt-br" >Mídia e câmera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/mediaplayer6dd3.html?hl=pt-br" >Reprodução de mídia</a></li><li><a href="../topics/media/mediarouter6dd3.html?hl=pt-br" >Roteador de mídia</a></li><li><a href="../topics/media/mediarouteprovider6dd3.html?hl=pt-br" >Provedor de roteamento de mídia</a></li><li><a href="../topics/media/exoplayer6dd3.html?hl=pt-br" >ExoPlayer</a></li><li><a href="../topics/media/media-formats6dd3.html?hl=pt-br" >Formatos de mídia suportados</a></li><li><a href="../topics/media/mediarecorder6dd3.html?hl=pt-br" >Captura de áudio</a></li><li><a href="../topics/media/jetplayer6dd3.html?hl=pt-br" >JetPlayer</a></li><li><a href="../topics/media/camera6dd3.html?hl=pt-br" >Câmera</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/sensors/index6dd3.html?hl=pt-br" >Localização e sensores</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/location/index6dd3.html?hl=pt-br" >Localização e mapas</a></li><li><a href="../topics/location/strategies6dd3.html?hl=pt-br" >Estratégias de localização</a></li><li><a href="../topics/sensors/sensors_overview6dd3.html?hl=pt-br" >Visão geral de sensores</a></li><li><a href="../topics/sensors/sensors_motion6dd3.html?hl=pt-br" >Sensores de movimento</a></li><li><a href="../topics/sensors/sensors_position6dd3.html?hl=pt-br" >Sensores de posição</a></li><li><a href="../topics/sensors/sensors_environment6dd3.html?hl=pt-br" >Sensores de ambiente</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/index6dd3.html?hl=pt-br" >Conectividade</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/bluetooth6dd3.html?hl=pt-br" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/bluetooth-le6dd3.html?hl=pt-br" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/nfc/index6dd3.html?hl=pt-br" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/nfc/nfc6dd3.html?hl=pt-br" >Fundamentos de NFC</a></li><li><a href="../topics/connectivity/nfc/advanced-nfc6dd3.html?hl=pt-br" >NFC avançado</a></li><li><a href="../topics/connectivity/nfc/hce6dd3.html?hl=pt-br" >Emulação de cartão com base em host</a></li></ul></li><li><a href="../topics/connectivity/wifip2p6dd3.html?hl=pt-br" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/usb/index6dd3.html?hl=pt-br" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/usb/accessory6dd3.html?hl=pt-br" >Acessório</a></li><li><a href="../topics/connectivity/usb/host6dd3.html?hl=pt-br" >Host</a></li></ul></li><li><a href="../topics/connectivity/sip6dd3.html?hl=pt-br" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/index6dd3.html?hl=pt-br" >Texto e entrada</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/copy-paste6dd3.html?hl=pt-br" >Copiar e colar</a></li><li><a href="../topics/text/creating-input-method6dd3.html?hl=pt-br" >Criação de um IME</a></li><li><a href="../topics/text/spell-checker-framework6dd3.html?hl=pt-br" >Verificador ortográfico</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/index6dd3.html?hl=pt-br" >Armazenamento de dados</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/data-storage6dd3.html?hl=pt-br" >Opções de armazenamento</a></li><li><a href="../topics/data/backup6dd3.html?hl=pt-br" >Backup de dados</a></li><li><a href="../topics/data/install-location6dd3.html?hl=pt-br" >Local da instalação do aplicativo</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=pt-br" >Bibliotecas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=pt-br" >Biblioteca de suporte</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=pt-br" >Recursos</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=pt-br" >Configuração</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=pt-br" >Histórico de revisão</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=pt-br" >Data Binding Library</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=pt-br" >Testing Support Library</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=pt-br" >Referência da API</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/admin/index6dd3.html?hl=pt-br" >Administração</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/admin/device-admin6dd3.html?hl=pt-br" >Políticas do dispositivo</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../webapps/index6dd3.html?hl=pt-br" >Aplicativos Web</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../webapps/targeting6dd3.html?hl=pt-br" >Suporte a diferentes telas em aplicativos Web</a></li><li><a href="../webapps/webview6dd3.html?hl=pt-br" >Criação de aplicativos Web no WebView</a></li><li><a href="../webapps/migrating6dd3.html?hl=pt-br" >Migração do WebView para o Android 4.4</a></li><li><a href="../webapps/debugging6dd3.html?hl=pt-br" >Depuração de aplicativos Web</a></li><li><a href="../webapps/best-practices6dd3.html?hl=pt-br" >Práticas recomendadas para aplicativos Web</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index6dd3.html?hl=pt-br"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Prática recomendada" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Práticas recomendadas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="screens_support6dd3.html?hl=pt-br" >Compatibilidade com várias telas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="screens-distribution6dd3.html?hl=pt-br" >Distribuição para telas específicas</a></li><li><a href="screen-compat-mode6dd3.html?hl=pt-br" >Modo de compatibilidade da tela</a></li></ul></li><li><a href="tablets-and-handsets6dd3.html?hl=pt-br" >Compatibilidade com tablets e celulares</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=pt-br">Início</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=pt-br">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=pt-br">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=pt-br">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=pt-br">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=pt-br">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=pt-br"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=pt-br"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=pt-br"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Treinamento</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../index6dd3.html?hl=pt-br"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=pt-br"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Referência</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=pt-br">Amostras</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=pt-br"
+           >Bibliotecas</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=pt-br"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=pt-br"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=pt-br">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=pt-br">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=pt-br">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=pt-br"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=pt-br">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=pt-br">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=pt-br"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=pt-br"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=pt-br">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=pt-br">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Verificação do comportamento do aplicativo no Android Runtime (ART)</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+  <div id="qv">
+    <h2 id="Contents">
+      Neste documento
+    </h2>
+
+    <ol>
+      <li>
+        <a href="#GC_Migration">Solução de problemas de coleta de lixo (GC)</a>
+      </li>
+
+      <li>
+        <a href="#JNI_Issues">Prevenção de problemas de JNI</a>
+        <ol>
+          <li>
+            <a href="#JNI_and_GC">Verificação do código JNI para problemas de
+            coleta de lixo</a>
+          </li>
+
+          <li>
+            <a href="#Error_Handling">Tratamento de erros</a>
+          </li>
+
+          <li>
+            <a href="#Object_Model_Changes">Mudanças no modelo de objeto</a>
+          </li>
+        </ol>
+      </li>
+
+      <li>
+        <a href="#Stack_Size">Prevenção de problemas de tamanho da pilha</a>
+      </li>
+
+      <li>
+        <a href="#AOT_Fails">Correção de problemas de compilação de AOT</a>
+      </li>
+
+      <li>
+        <a href="#Reporting_Problems">Relatar problemas</a>
+      </li>
+    </ol>
+
+    <h2>
+      Veja também
+    </h2>
+
+    <ol>
+      <li>
+        <a href="http://source.android.com/devices/tech/dalvik/art.html?hl=pt-br">Introdução ao
+        ART</a>
+      </li>
+
+      <li>
+        <a href="http://android-developers.blogspot.com/2011/07/debugging-android-jni-with-checkjni.html">
+        Depuração do Android JNI com o CheckJNI</a>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<p>
+  O Android Runtime (ART) é o tempo de execução padrão para dispositivos que executam o Android
+ 5.0 (nível de API 21) e versões posteriores. Esse tempo de execução oferece diversos recursos
+ que melhoram o desempenho e a estabilidade da plataforma e dos aplicativos Android.
+  Saiba mais sobre os novos recursos do ART em <a href="http://source.android.com/devices/tech/dalvik/art.html?hl=pt-br">Introdução ao
+ ART</a>.
+</p>
+
+<p>
+  No entanto, algumas técnicas que funcionam na Dalvik não funcionam no ART. Este
+ documento apresenta considerações necessárias ao migrar um
+ aplicativo existente para que ele seja compatível com o ART. A maioria dos aplicativos deve funcionar com o
+ ART.
+</p>
+
+<h2 id="GC_Migration">Solução de problemas de coleta de lixo (GC)</h2>
+
+<p>Na Dalvik, é conveniente que os aplicativos chamem <code><a href="https://developer.android.com/reference/java/lang/System.html?hl=pt-br#gc()">System.gc()</a></code> explicitamente para solicitar a coleta de lixo (GC). Isso deve ser
+menos necessário com o ART, especialmente se você estiver invocando a coleta de lixo
+para evitar ocorrências tipo <a href="https://developer.android.com/tools/debugging/debugging-memory.html?hl=pt-br#LogMessages"><code>GC_FOR_ALLOC</code></a>
+ou para reduzir a fragmentação. Você pode verificar qual tempo de execução está em uso
+chamando <code><a href="https://developer.android.com/reference/java/lang/System.html?hl=pt-br#getProperty(java.lang.String)">System.getProperty("java.vm.version")</a></code>. Se o ART estiver em uso, o valor da propriedade
+será <code>"2.0.0"</code> ou mais.</p>
+
+<p>Além disso, um coletor de lixo com compactação está sendo desenvolvimento no <a href="https://source.android.com/?hl=pt-br">Android Open-Source Project (AOSP)</a> para
+melhorar o gerenciamento de memória. Por esse motivo, evite o uso de técnicas
+incompatíveis com a GC com compactação (como salvar ponteiros em dados
+de instância de objeto). Isso é especialmente importante para aplicativos que usam a
+Java Native Interface (JNI). Para saber mais, consulte <a href="#JNI_Issues">Prevenção de problemas de JNI</a>.</p>
+
+<h2 id="JNI_Issues">Prevenção de problemas de JNI</h2>
+
+<p>A JNI do ART é ligeiramente mais rígida do que a da Dalvik. É altamente recomendável
+usar o modo CheckJNI para identificar problemas comuns. Se seu aplicativo usa código C/C++
+, consulte o seguinte artigo:</p>
+
+<p><a href="http://android-developers.blogspot.com/2011/07/debugging-android-jni-with-checkjni.html">Depuração do
+Android JNI com o CheckJNI</a></p>
+
+<h3 id="JNI_and_GC">Verificação do código JNI para problemas de coleta de lixo</h3>
+
+<p>O ART tem um coletor de lixo com compactação em desenvolvimento no
+Android Open Source Project (AOSP). Quando esse coletor estiver
+em uso, os objetos poderão ser movidos na memória. Se usar código C/C++, não
+execute operações incompatíveis com a GC com compactação. Nós temos um
+CheckJNI aprimorado para identificar problemas em potencial (conforme é descrito em <a href="http://android-developers.blogspot.com/2011/11/jni-local-reference-changes-in-ics.html">Mudanças
+na referência local da JNI em ICS</a>).</p>
+
+<p>Uma área que deve ser um foco de atenção é o uso das funções
+<code>Get...ArrayElements()</code> e <code>Release...ArrayElements()</code>
+. Em tempos de execução com GC sem compactação, as funções
+<code>Get...ArrayElements()</code> normalmente retornam uma referência à
+memória real compatível com o objeto de matriz. Se você fizer uma alteração em um dos
+elementos de matriz retornados, o objeto de matriz em si alterará (e os argumentos
+para <code>Release...ArrayElements()</code> geralmente são ignorados). No entanto,
+se a GC com compactação estiver em uso, as funções <code>Get...ArrayElements()</code> poderão
+retornar uma cópia da memória. Se você utilizar incorretamente a referência enquanto a GC com compactação estiver
+em uso, isso pode fazer com que a memória seja corrompida ou causar outros problemas. Por exemplo:</p>
+
+<ul>
+
+  <li>Se você fizer alterações nos elementos de matriz retornados, chame
+ a função <code>Release...ArrayElements()</code> apropriada quando terminar
+ para garantir que as alterações feitas sejam copiadas corretamente para o objeto
+ de matriz subjacente.</li>
+
+  <li>Quando liberar os elementos de matriz de memória, você deve usar o modo
+ apropriado dependendo das alterações feitas:
+
+    <ul>
+
+      <li>Se você não tiver feito alterações nos elementos de matriz, use o modo
+      <code>JNI_ABORT</code>, que libera a memória sem copiar
+      as alterações para o objeto de matriz subjacente.</li>
+
+      <li>Se tiver feito alterações na matriz e não precise mais da
+      referência, use o código <code>0</code> (que atualiza o objeto de matriz e libera
+      a cópia da memória).</li>
+
+      <li>Se tiver feito alterações na matriz que queira salvar permanentemente e deseje
+      manter a cópia da matriz, use <code>JNI_COMMIT</code> (que atualiza
+      o objeto de matriz subjacente e mantém a cópia).</li>
+
+    </ul>
+
+  </li>
+
+  <li>Ao chamar <code>Release...ArrayElements()</code>, retorne o mesmo
+ ponteiro que foi originalmente retornado por <code>Get...ArrayElements()</code>. Por
+ exemplo, se não for seguro incrementar o ponteiro original (para verificar
+ os elementos de matriz retornados), passe o ponteiro incrementado para
+ <code>Release...ArrayElements()</code>. Passar esse ponteiro modificado pode fazer
+ com que a memória incorreta seja liberada, resultando no corrompimento da memória.</li>
+
+</ul>
+
+<h3 id="Error_Handling">Tratamento de erros</h3>
+
+<p>A JNI do ART gera erros em diversos casos nos quais a Dalvik não o faz. (Novamente,
+você pode identificar muitos desses casos ao realizar testes com o CheckJNI.)</p>
+
+<p>Por exemplo, se <code>RegisterNatives</code> for chamado com um método que
+não exista (talvez por ter sido removido por uma ferramenta como o
+<strong>ProGuard</strong>), o ART agora gera <code><a href="https://developer.android.com/reference/java/lang/NoSuchMethodError.html?hl=pt-br">NoSuchMethodError</a></code>:</p>
+
+<pre class="no-pretty-print">
+08-12 17:09:41.082 13823 13823 E AndroidRuntime: FATAL EXCEPTION: main
+08-12 17:09:41.082 13823 13823 E AndroidRuntime: java.lang.NoSuchMethodError:
+    no static or non-static method
+    "Lcom/foo/Bar;.native_frob(Ljava/lang/String;)I"
+08-12 17:09:41.082 13823 13823 E AndroidRuntime:
+    at java.lang.Runtime.nativeLoad(Native Method)
+08-12 17:09:41.082 13823 13823 E AndroidRuntime:
+    at java.lang.Runtime.doLoad(Runtime.java:421)
+08-12 17:09:41.082 13823 13823 E AndroidRuntime:
+    at java.lang.Runtime.loadLibrary(Runtime.java:362)
+08-12 17:09:41.082 13823 13823 E AndroidRuntime:
+    at java.lang.System.loadLibrary(System.java:526)
+</pre>
+
+<p>O ART também registra um erro (visível no logcat) se <code>RegisterNatives</code> for
+chamado sem métodos:</p>
+
+<pre class="no-pretty-print">
+W/art     ( 1234): JNI RegisterNativeMethods: attempt to register 0 native
+methods for &lt;classname>
+</pre>
+
+<p>Além disso, as funções de JNI <code>GetFieldID()</code> e
+<code>GetStaticFieldID()</code> agora geram <code><a href="https://developer.android.com/reference/java/lang/NoSuchFieldError.html?hl=pt-br">NoSuchFieldError</a></code>
+em vez de simplesmente retornarem nulas. Da mesma forma, <code>GetMethodID()</code> e
+<code>GetStaticMethodID()</code> agora geram <code><a href="https://developer.android.com/reference/java/lang/NoSuchMethodError.html?hl=pt-br">NoSuchMethodError</a></code>.
+Isso pode causar falhas de CheckJNI devido às exceções não gerenciais ou às
+exceções geradas para chamadores Java do código nativo. Isso torna
+especialmente importante o teste de aplicativos compatíveis com o ART com o modo CheckJNI.</p>
+
+<p>O ART espera que os usuários dos métodos <code>CallNonvirtual...Method()</code> da JNI
+(como <code>CallNonvirtualVoidMethod()</code>) usem a classe de declaração
+do método, não uma subclasse, conforme é exigido pela especificação da JNI.</p>
+
+<h2 id="Stack_Size">Prevenção de problemas de tamanho da pilha</h2>
+
+<p>A Dalvik tinha pilhas separadas para códigos Java e nativos, com um tamanho
+de pilha Java padrão de 32 kB e um tamanho de pilha nativa padrão de 1 MB. O ART tem uma pilha
+unificada para proporcionar uma localidade melhor. Normalmente, o tamanho da pilha <code><a href="https://developer.android.com/reference/java/lang/Thread.html?hl=pt-br">Thread</a></code> do ART
+deve ser aproximadamente igual ao da Dalvik. No entanto, se você definir
+tamanhos de pilha explicitamente, pode ser necessário modificar esses valores para aplicativos executados no
+ART.</p>
+
+<ul>
+
+  <li>No Java, verifique as chamadas para o construtor <code><a href="https://developer.android.com/reference/java/lang/Thread.html?hl=pt-br#Thread(java.lang.ThreadGroup, java.lang.Runnable, java.lang.String, long)">Thread</a></code> que especificam um tamanho de
+ pilha explícito. Por exemplo, você precisará aumentar o tamanho se <code><a href="https://developer.android.com/reference/java/lang/StackOverflowError.html?hl=pt-br">StackOverflowError</a></code> ocorrer.</li>
+
+  <li>Em C/C++, verifique o uso de <code>pthread_attr_setstack()</code> e
+ <code>pthread_attr_setstacksize()</code> para threads que também executam código Java via
+ JNI. Veja um exemplo do erro registrado quando um aplicativo tenta chamar
+ <code>AttachCurrentThread()</code> da JNI quando o tamanho do thread é pequeno demais:
+
+<pre class="no-pretty-print">F/art: art/runtime/thread.cc:435]
+    Attempt to attach a thread with a too-small stack (16384 bytes)</pre>
+  </li>
+
+</ul>
+
+<h2 id="Object_Model_Changes">Mudanças no modelo de objeto</h2>
+
+<p>A Dalvik incorretamente permitiu que subclasses modificassem métodos package-private.
+O ART emite um aviso nesses casos:</p>
+
+<pre class="no-pretty-print">
+Before Android 4.1, method void com.foo.Bar.quux()
+would have incorrectly overridden the package-private method in
+com.quux.Quux
+</pre>
+
+<p>Se você pretende modificar o método de uma classe em um pacote diferente, declare esse
+método como <code>public</code> ou <code>protected</code>.</p>
+
+<p><code><a href="https://developer.android.com/reference/java/lang/Object.html?hl=pt-br">Object</a></code> agora tem campos privados. Aplicativos que refletem em campos
+em suas hierarquias de classes devem evitar tentativas de examinar os
+campos de <code><a href="https://developer.android.com/reference/java/lang/Object.html?hl=pt-br">Object</a></code>. Por exemplo, se você estiver iterando uma hierarquia de
+classes como parte de uma estrutura de serialização, pare quando
+
+<pre>Class.getSuperclass() == java.lang.Object.class</pre>
+
+em vez de continuar até o método retornar <code>null</code>.</p>
+
+<p>O proxy <code><a href="https://developer.android.com/reference/java/lang/reflect/InvocationHandler.html?hl=pt-br#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])">InvocationHandler.invoke()</a></code> agora recebe <code>null</code> se não houver
+argumentos em vez de uma matriz vazia. Esse comportamento foi documentado anteriormente, mas
+não corretamente gerenciado na Dalvik. Versões anteriores do <a href="https://code.google.com/p/mockito/?hl=pt-br">Mockito</a> têm dificuldades
+com isso, portanto, use uma versão atualizada do Mockito ao realizar testes com o ART.</p>
+
+<h2 id="AOT_Fails">Correção de problemas de compilação de AOT</h2>
+
+<p>A compilação Java Ahead-Of-Time (AOT) do ART deve funcionar com todos os códigos Java
+padrão. A compilação é executada pela ferramenta
+<code>dex2oat</code> do ART. Se tiver problemas relacionados ao
+<code>dex2oat</code> no momento da instalação, entre em contato (consulte <a href="#Reporting_Problems">Relatar problemas</a>) para que os corrijamos assim
+que possível. Algumas observações necessárias:</p>
+
+<ul>
+
+  <li>O ART realiza uma verificação de bytecode mais rígida no momento da instalação do que a Dalvik.
+  O código produzido por ferramentas de compilação Android devem funcionar normalmente. Entretanto, algumas
+ ferramentas de pós-processamento (especialmente ferramentas que realizam ofuscação) podem produzir
+ arquivos inválidos que são tolerados pela Dalvik, mas rejeitados pelo ART. Nós temos trabalhado
+ com fornecedores de ferramentas para descobrir e corrigir esses problemas. Em muitos casos, obter
+ as versões mais recentes das suas ferramentas e regenerar os arquivos DEX pode corrigir
+ os problemas.</li>
+
+  <li>Alguns problemas típicos que são sinalizados pelo verificador do ART:
+    <ul>
+      <li>controle de fluxo inválido</li>
+      <li><code>moniterenter</code>/<code>moniterexit</code> não balanceado</li>
+      <li>tamanho de lista de tipo de parâmetro 0</li>
+    </ul>
+  </li>
+
+  <li>Alguns aplicativos têm dependências no formato de arquivo <code>.odex</code> instalado
+ em <code>/system/framework</code>, <code>/data/dalvik-cache</code> ou
+ no diretório de saída otimizado do <code><a href="https://developer.android.com/reference/dalvik/system/DexClassLoader.html?hl=pt-br">DexClassLoader</a></code>. Esses
+ arquivos agora são arquivos ELF e não uma forma estendida dos arquivos DEX. Embora o ART tente
+ seguir as mesmas regras de nomenclatura e bloqueio que a Dalvik, os aplicativos não devem depender
+ do formato de arquivo, pois ele está sujeito a mudança sem aviso prévio.</li>
+
+
+
+<h2 id="Reporting_Problems">Relatar problemas</h2>
+
+<p>Em caso de problemas não causados pela JNI do aplicativo, relate-os
+pelo Android Open Source Project Issue Tracker em <a href="https://code.google.com/p/android/issues/list?hl=pt-br">https://code.google.com/p/android/issues/list</a>.
+Inclua um <code>"adb bugreport"</code> e um link para o aplicativo na Google
+Play Store, se disponível. Caso contrário, se possível, anexe um APK que reproduza
+o problema. Observe que os problemas (inclusive os anexos) podem ser visualizados
+publicamente.</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=pt-br" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=pt-br" title="Suporte">Suporte</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=pt-br" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=pt-br" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=pt-br" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=pt-br" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="TN22osdHHKnEv1tGu0AhhF8662cVmWRohUn-vFm20ow6MTQ5NzUxNjA3MjQ0NjA3MA" />
+      <input type="hidden" name="next" value="/guide/practices/verifying-apps-art.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+             selected="selected" >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Endereço de e-mail</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../ytblogger_lists_unified9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../android_metadata_en9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  
+  <script src="../../reference/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../reference/gms_lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../reference/android/support/wearable/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../reference/android/support/test/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../reference/android/support/constraint/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=pt-br"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_pt-br.js?hl=pt-br?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/practices/verifying-apps-art.html?hl=pt-br by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:04:08 GMT -->
+</html>

@@ -1,0 +1,2095 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/calendar-provider.html?hl=vi by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:05:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="GXbFPqgSVpa9canRc0O_BBLhKY9nqLlaVcG8TL0uW1U6MTQ5NzUxNjIwODg0Nzk1MA" />
+
+  
+    <link rel="canonical" href="calendar-provider327f.html?hl=vi">
+  
+
+  
+    <link rel="alternate" href="calendar-providerf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="calendar-provider9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="calendar-provider327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="calendar-provider0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="calendar-provider7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="calendar-provider0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="calendar-provider.html" hreflang="en">
+  
+    <link rel="alternate" href="calendar-provider232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="calendar-provider9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="calendar-providerde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="calendar-provider6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=pt-br" hreflang="pt-br-cn">
+  
+
+  <link rel="alternate" href="calendar-provider.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon327f.png?hl=vi">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-180327f.png?hl=vi">
+
+
+<title>
+
+  Trình cung cấp Lịch | Android Developers
+
+</title>
+
+  <meta name="description" content="Trình cung cấp Lịch là một kho lưu trữ các sự kiện lịch của người dùng. API Trình cung cấp Lịch cho phép bạn thực hiện truy vấn, chèn, cập nhật và xóa các thao tác trên lịch, sự kiện, người dự, nhắc nhở, v.v. API Trình cung cấp Lịch có thể được sử dụng…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default0c0e.css?hl=vi?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle327f.js?hl=vi" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__vi327f.js?hl=vi"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android327f.js?hl=vi"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs0c0e.js?hl=vi?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;vi&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;vi&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;vi&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;vi&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "vi", "served": "vi"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=vi">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo327f.png?hl=vi"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=vi"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=vi"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=vi"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=vi"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=vi" width="18" height="19" alt="Bảng điều khiển Play">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Tìm kiếm">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Quay lại</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index327f.html?hl=vi" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals327f.html?hl=vi" >App Fundamentals</a></li><li><a href="../../practices/compatibility327f.html?hl=vi" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/index327f.html?hl=vi" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requesting327f.html?hl=vi" >Requesting Permissions</a></li><li><a href="../permissions/defining327f.html?hl=vi" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index327f.html?hl=vi" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack327f.html?hl=vi"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-art327f.html?hl=vi" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index327f.html?hl=vi" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters327f.html?hl=vi" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common327f.html?hl=vi" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/index327f.html?hl=vi" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activities327f.html?hl=vi" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecycle327f.html?hl=vi" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changes327f.html?hl=vi" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stack327f.html?hl=vi" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecycle327f.html?hl=vi" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundles327f.html?hl=vi" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recents327f.html?hl=vi" >Recents Screen</a></li></ul></li><li><a href="../../components/fragments327f.html?hl=vi" >Fragments</a></li><li><a href="../../components/loaders327f.html?hl=vi" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services327f.html?hl=vi" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services327f.html?hl=vi" >Bound Services</a></li><li><a href="../../components/aidl327f.html?hl=vi" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="content-providers327f.html?hl=vi" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="content-provider-basics327f.html?hl=vi" >Content Provider Basics</a></li><li><a href="content-provider-creating327f.html?hl=vi" >Creating a Content Provider</a></li><li><a href="calendar-provider327f.html?hl=vi" >Calendar Provider</a></li><li><a href="contacts-provider327f.html?hl=vi" >Contacts Provider</a></li><li><a href="document-provider327f.html?hl=vi" >Open files using Storage Access Framework</a></li><li><a href="create-document-provider327f.html?hl=vi" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcasts327f.html?hl=vi" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index327f.html?hl=vi" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host327f.html?hl=vi" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threads327f.html?hl=vi" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index327f.html?hl=vi" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview327f.html?hl=vi" >Overview</a></li><li><a href="../resources/providing-resources327f.html?hl=vi" >Providing Resources</a></li><li><a href="../resources/accessing-resources327f.html?hl=vi" >Accessing Resources</a></li><li><a href="../resources/runtime-changes327f.html?hl=vi" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization327f.html?hl=vi" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework327f.html?hl=vi" >ICU4J Android Framework APIs</a></li><li><a href="../resources/multilingual-support327f.html?hl=vi" >Language and Locale</a></li></ul></li><li><a href="../resources/complex-xml-resources327f.html?hl=vi" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources327f.html?hl=vi" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource327f.html?hl=vi" >Animation</a></li><li><a href="../resources/color-list-resource327f.html?hl=vi" >Color State List</a></li><li><a href="../resources/drawable-resource327f.html?hl=vi" >Drawable</a></li><li><a href="../resources/layout-resource327f.html?hl=vi" >Layout</a></li><li><a href="../resources/menu-resource327f.html?hl=vi" >Menu</a></li><li><a href="../resources/string-resource327f.html?hl=vi" >String</a></li><li><a href="../resources/style-resource327f.html?hl=vi" >Style</a></li><li><a href="../resources/more-resources327f.html?hl=vi" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro327f.html?hl=vi" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element327f.html?hl=vi" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element327f.html?hl=vi" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element327f.html?hl=vi" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element327f.html?hl=vi" >&lt;application&gt;</a></li><li><a href="../manifest/category-element327f.html?hl=vi" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element327f.html?hl=vi" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element327f.html?hl=vi" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element327f.html?hl=vi" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element327f.html?hl=vi" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element327f.html?hl=vi" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element327f.html?hl=vi" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element327f.html?hl=vi" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element327f.html?hl=vi" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element327f.html?hl=vi" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element327f.html?hl=vi" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element327f.html?hl=vi" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element327f.html?hl=vi" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element327f.html?hl=vi" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element327f.html?hl=vi" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element327f.html?hl=vi" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element327f.html?hl=vi" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element327f.html?hl=vi" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element327f.html?hl=vi" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element327f.html?hl=vi" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element327f.html?hl=vi" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element327f.html?hl=vi" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element327f.html?hl=vi" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index327f.html?hl=vi" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview327f.html?hl=vi" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout327f.html?hl=vi" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear327f.html?hl=vi" >Linear Layout</a></li><li><a href="../ui/layout/relative327f.html?hl=vi" >Relative Layout</a></li><li><a href="../ui/layout/recyclerview327f.html?hl=vi" >Recycler View</a></li><li><a href="../ui/layout/listview327f.html?hl=vi" >List View</a></li><li><a href="../ui/layout/gridview327f.html?hl=vi" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls327f.html?hl=vi" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button327f.html?hl=vi" >Buttons</a></li><li><a href="../ui/controls/checkbox327f.html?hl=vi" >Checkboxes</a></li><li><a href="../ui/controls/radiobutton327f.html?hl=vi" >Radio Buttons</a></li><li><a href="../ui/controls/togglebutton327f.html?hl=vi" >Toggle Buttons</a></li><li><a href="../ui/controls/spinner327f.html?hl=vi" >Spinners</a></li><li><a href="../ui/controls/pickers327f.html?hl=vi" >Pickers</a></li></ul></li><li><a href="../ui/ui-events327f.html?hl=vi" >Input Events</a></li><li><a href="../ui/menus327f.html?hl=vi" >Menus</a></li><li><a href="../ui/settings327f.html?hl=vi" >Settings</a></li><li><a href="../ui/dialogs327f.html?hl=vi" >Dialogs</a></li><li><a href="../ui/notifiers/notifications327f.html?hl=vi" >Notifications</a></li><li><a href="../ui/notifiers/toasts327f.html?hl=vi" >Toasts</a></li><li><a href="../ui/shortcuts327f.html?hl=vi" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index327f.html?hl=vi" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog327f.html?hl=vi" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestions327f.html?hl=vi" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestions327f.html?hl=vi" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-config327f.html?hl=vi" >Searchable Configuration</a></li></ul></li><li><a href="../ui/multi-window327f.html?hl=vi" >Multi-Window Support</a></li><li><a href="../ui/drag-drop327f.html?hl=vi" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index327f.html?hl=vi" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps327f.html?hl=vi" >Making Apps More Accessible</a></li><li><a href="../ui/accessibility/checklist327f.html?hl=vi" >Accessibility Developer Checklist</a></li><li><a href="../ui/accessibility/node-tree-debugging327f.html?hl=vi" >Using Node Tree Debugging</a></li><li><a href="../ui/accessibility/services327f.html?hl=vi" >Building Accessibility Services</a></li><li><a href="../ui/accessibility/custom-views327f.html?hl=vi" >Building Accessible Custom Views</a></li></ul></li><li><a href="../ui/themes327f.html?hl=vi" >Styles and Themes</a></li><li><a href="../ui/custom-components327f.html?hl=vi" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index327f.html?hl=vi" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview327f.html?hl=vi" >Overview</a></li><li><a href="../graphics/prop-animation327f.html?hl=vi" >Property Animation</a></li><li><a href="../graphics/view-animation327f.html?hl=vi" >View Animation</a></li><li><a href="../graphics/drawable-animation327f.html?hl=vi" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphics327f.html?hl=vi" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resources327f.html?hl=vi" >Vector Drawable</a></li></ul></li><li><a href="../graphics/opengl327f.html?hl=vi" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel327f.html?hl=vi" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index327f.html?hl=vi" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute327f.html?hl=vi" >RenderScript</a></li><li><a href="../renderscript/advanced327f.html?hl=vi" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview327f.html?hl=vi" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types327f.html?hl=vi" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_types327f.html?hl=vi" >Object Types</a></li><li><a href="../renderscript/reference/rs_convert327f.html?hl=vi" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_math327f.html?hl=vi" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_math327f.html?hl=vi" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrix327f.html?hl=vi" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternion327f.html?hl=vi" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomic327f.html?hl=vi" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_time327f.html?hl=vi" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_data327f.html?hl=vi" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_info327f.html?hl=vi" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_each327f.html?hl=vi" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_io327f.html?hl=vi" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debug327f.html?hl=vi" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphics327f.html?hl=vi" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/index327f.html?hl=vi" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/index327f.html?hl=vi" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overview327f.html?hl=vi" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-session327f.html?hl=vi" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-app327f.html?hl=vi" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservice327f.html?hl=vi" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-client327f.html?hl=vi" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacks327f.html?hl=vi" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-app327f.html?hl=vi" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activity327f.html?hl=vi" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacks327f.html?hl=vi" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttons327f.html?hl=vi" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphones327f.html?hl=vi" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index327f.html?hl=vi" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formats327f.html?hl=vi" >Supported Media Formats</a></li><li><a href="../media/mediaplayer327f.html?hl=vi" >MediaPlayer</a></li><li><a href="../media/mediarecorder327f.html?hl=vi" >MediaRecorder</a></li><li><a href="../media/exoplayer327f.html?hl=vi" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routing327f.html?hl=vi" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouter327f.html?hl=vi" >MediaRouter API</a></li><li><a href="../media/mediarouteprovider327f.html?hl=vi" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/camera327f.html?hl=vi" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index327f.html?hl=vi" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index327f.html?hl=vi" >Location and Maps</a></li><li><a href="../location/strategies327f.html?hl=vi" >Location Strategies</a></li><li><a href="../sensors/sensors_overview327f.html?hl=vi" >Sensors Overview</a></li><li><a href="../sensors/sensors_motion327f.html?hl=vi" >Motion Sensors</a></li><li><a href="../sensors/sensors_position327f.html?hl=vi" >Position Sensors</a></li><li><a href="../sensors/sensors_environment327f.html?hl=vi" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index327f.html?hl=vi" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth327f.html?hl=vi" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le327f.html?hl=vi" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index327f.html?hl=vi" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc327f.html?hl=vi" >NFC Basics</a></li><li><a href="../connectivity/nfc/advanced-nfc327f.html?hl=vi" >Advanced NFC</a></li><li><a href="../connectivity/nfc/hce327f.html?hl=vi" >Host-based Card Emulation</a></li></ul></li><li><a href="../connectivity/wifip2p327f.html?hl=vi" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index327f.html?hl=vi" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory327f.html?hl=vi" >Accessory</a></li><li><a href="../connectivity/usb/host327f.html?hl=vi" >Host</a></li></ul></li><li><a href="../connectivity/sip327f.html?hl=vi" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index327f.html?hl=vi" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste327f.html?hl=vi" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-method327f.html?hl=vi" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboard327f.html?hl=vi" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-framework327f.html?hl=vi" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index327f.html?hl=vi" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage327f.html?hl=vi" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../data/backup327f.html?hl=vi" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/autobackup327f.html?hl=vi" >Auto Backup</a></li><li><a href="../data/keyvaluebackup327f.html?hl=vi" >Key/Value Backup</a></li><li><a href="../data/testingbackup327f.html?hl=vi" >Testing Backup and Restore</a></li></ul></li><li><a href="../data/install-location327f.html?hl=vi" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index327f.html?hl=vi" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin327f.html?hl=vi" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index327f.html?hl=vi" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting327f.html?hl=vi" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webview327f.html?hl=vi" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migrating327f.html?hl=vi" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debugging327f.html?hl=vi" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practices327f.html?hl=vi" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index327f.html?hl=vi"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support327f.html?hl=vi" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution327f.html?hl=vi" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-mode327f.html?hl=vi" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessness327f.html?hl=vi" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsets327f.html?hl=vi" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=vi">Trang chủ</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=vi">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=vi">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=vi">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=vi">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=vi">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=vi"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=vi"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=vi"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Đào tạo</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index327f.html?hl=vi"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=vi"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Tham chiếu</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=vi">Mẫu</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=vi"
+           >Thư viện</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=vi"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=vi"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=vi">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=vi">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=vi">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=vi"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=vi">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=vi">Bảng điều khiển Play</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=vi"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=vi"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=vi">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=vi">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Trình cung cấp Lịch</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+    <h2>Trong tài liệu này</h2>
+    <ol>
+  <li><a href="#overview">Nội dung Cơ bản</a></li>
+  <li><a href="#manifest">Quyền của Người dùng</a></li>
+  <li><a href="#calendar">Bảng Lịch</a>
+<ol>
+      <li><a href="#query">Truy vấn một lịch</a></li>
+      <li><a href="#modify-calendar">Sửa đổi một lịch</a></li>
+      <li><a href="#insert-calendar">Chèn một lịch</a></li>
+    </ol>
+  </li>
+  <li><a href="#events">Bảng Sự kiện</a>
+<ol>
+      <li><a href="#add-event">Thêm Sự kiện</a></li>
+      <li><a href="#update-event">Cập nhật Sự kiện</a></li>
+      <li><a href="#delete-event">Xóa Sự kiện</a></li>
+    </ol>
+  </li>
+  <li><a href="#attendees">Bảng Người dự</a>
+<ol>
+      <li><a href="#add-attendees">Thêm Người dự</a></li>
+    </ol>
+  </li>
+  <li><a href="#reminders">Bảng Nhắc nhở</a>
+<ol>
+      <li><a href="#add-reminders">Thêm Nhắc nhở</a></li>
+    </ol>
+  </li>
+  <li><a href="#instances">Bảng Thực thể</a>
+  <ol>
+      <li><a href="#query-instances">Truy vấn bảng Thực thể</a></li>
+  </ol></li>
+  <li><a href="#intents">Ý định Lịch</a>
+  <ol>
+      <li><a href="#intent-insert">Sử dụng ý định để chèn một sự kiện</a></li>
+      <li><a href="#intent-edit">Sử dụng ý định để chỉnh sửa một sự kiện</a></li>
+      <li><a href="#intent-view">Sử dụng ý định để xem dữ liệu lịch</a></li>
+    </ol>
+  </li>
+
+  <li><a href="#sync-adapter">Trình điều hợp Đồng bộ</a></li>
+</ol>
+
+    <h2>Lớp khóa</h2>
+    <ol>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=vi">CalendarContract.Calendars</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=vi">CalendarContract.Events</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Attendees.html?hl=vi">CalendarContract.Attendees</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=vi">CalendarContract.Reminders</a></code></li>
+    </ol>
+</div>
+</div>
+
+<p>Trình cung cấp Lịch là một kho lưu trữ các sự kiện lịch của người dùng. API
+Trình cung cấp Lịch cho phép bạn thực hiện truy vấn, chèn, cập nhật và xóa
+các thao tác trên lịch, sự kiện, người dự, nhắc nhở, v.v.</p>
+
+
+<p>API Trình cung cấp Lịch có thể được sử dụng bởi các ứng dụng và trình điều hợp đồng bộ. Các quy tắc
+thay đổi tùy vào loại chương trình đang thực hiện lệnh gọi. Tài liệu này
+tập trung chủ yếu vào việc sử dụng API Trình cung cấp Lịch như một ứng dụng. Để bàn
+về việc các trình điều hợp đồng bộ khác nhau như thế nào, hãy xem phần
+<a href="#sync-adapter">Trình điều hợp Đồng bộ</a>.</p>
+
+
+<p>Thông thường, để đọc hoặc ghi dữ liệu lịch, bản kê khai của ứng dụng phải
+bao gồm các quyền thích hợp của người dùng, được nêu trong phần <a href="#manifest">Quyền
+của Người dùng</a>. Để thực hiện các thao tác chung dễ hơn, Trình cung cấp
+Lịch đưa ra một tập hợp ý định, như được mô tả trong phần <a href="#intents">Ý định
+Lịch</a>. Những ý định này đưa người dùng tới ứng dụng Lịch để chèn, xem,
+và chỉnh sửa sự kiện. Người dùng tương tác với ứng dụng Lịch rồi
+quay lại ứng dụng ban đầu. Vì thế, ứng dụng của bạn không cần yêu cầu quyền,
+và cũng không cần cung cấp một giao diện người dùng để xem hoặc tạo sự kiện.</p>
+
+<h2 id="overview">Nội dung Cơ bản</h2>
+
+<p><a href="content-providers327f.html?hl=vi">Các trình cung cấp nội dung</a> sẽ lưu trữ dữ liệu và cho phép truy cập
+ứng dụng. Trình cung cấp nội dung được nền tảng Android giới thiệu (bao gồm Trình cung cấp Lịch) thường trình bày dữ liệu như một tập hợp gồm nhiều bảng dựa trên một
+mô hình cơ sở dữ liệu quan hệ, trong đó mỗi hàng là một bản ghi và mỗi cột là dữ liệu thuộc
+một loại và có ý nghĩa cụ thể. Thông qua API Trình cung cấp Lịch, các ứng dụng
+và trình điều hợp đồng bộ có thể nhận được quyền truy cập đọc/ghi vào các bảng trong cơ sở dữ liệu là nơi chứa
+dữ liệu lịch của người dùng.</p>
+
+<p>Mọi trình cung cấp nội dung đều đưa ra một URI công khai (được bẻ dòng như một đối tượng
+<code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=vi">Uri</a></code>
+) để xác định tập dữ liệu của nó một cách duy nhất.  Trình cung cấp nội dung mà kiểm soát nhiều
+ tập dữ liệu (nhiều bảng) sẽ đưa ra một URI riêng cho từng bảng.  Tất cả
+URI cho trình cung cấp đều bắt đầu bằng xâu "content://".  Điều này
+sẽ xác định dữ liệu là đang được kiểm soát bởi một trình cung cấp nội dung. Trình cung cấp
+Lịch định nghĩa các hằng số cho URI đối với từng lớp (bảng) của nó. Những URI
+này có định dạng <code><em>&lt;class&gt;</em>.CONTENT_URI</code>. Ví
+dụ, <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=vi#CONTENT_URI">Events.CONTENT_URI</a></code>.</p>
+
+<p>Hình 1 cho biết biểu diễn đồ họa của mô hình dữ liệu Trình cung cấp Lịch. Nó cho biết
+các bảng chính và các trường liên kết chúng với nhau.</p>
+
+<img src="../../../images/providers/datamodel327f.png?hl=vi" alt="Calendar Provider Data Model" />
+<p class="img-caption"><strong>Hình 1.</strong> Mô hình dữ liệu Trình cung cấp Lịch.</p>
+
+<p>Một người dùng có thể có nhiều lịch, và các lịch khác nhau có thể được liên kết với các loại tài khoản khác nhau (Google Calendar, Exchange, v.v.).</p>
+
+<p><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi">CalendarContract</a></code> sẽ định nghĩa mô hình dữ liệu của thông tin liên quan tới lịch và sự kiện. Dữ liệu này được lưu trữ trong nhiều bảng như liệt kê bên dưới.</p>
+
+<table>
+  <tr>
+    <th>Bảng (Lớp)</th>
+    <th>Mô tả</th>
+  </tr>
+  <tr>
+    <td><p><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=vi">CalendarContract.Calendars</a></code></p></td>
+
+    <td>Bảng này chứa
+thông tin riêng của lịch. Mỗi hàng trong bảng này chứa chi tiết của
+một lịch duy nhất, chẳng hạn như tên, màu, thông tin đồng bộ, v.v.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=vi">CalendarContract.Events</a></code></td>
+
+    <td>Bảng này chứa
+thông tin riêng theo sự kiện. Mỗi hàng trong bảng có thông tin cho một
+sự kiện duy nhất&mdash;ví dụ: tiêu đề sự kiện, địa điểm, thời gian bắt đầu
+, thời gian kết thúc, v.v. Sự kiện có thể xảy ra một lần hoặc lặp lại nhiều lần. Người dự,
+nhắc nhở, và các tính chất mở rộng được lưu trữ trong các bảng riêng.
+Mỗi mục đều có một <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#EVENT_ID">EVENT_ID</a></code>
+tham chiếu tới <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=vi#_ID">_ID</a></code> trong bảng Sự kiện.</td>
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi">CalendarContract.Instances</a></code></td>
+
+    <td>Bảng này chứa
+thời gian bắt đầu và thời gian kết thúc của mỗi lần xảy ra một sự kiện. Mỗi hàng trong bảng này
+đại diện cho một lần xảy ra sự kiện. Với các sự kiện xảy ra một lần thì có một ánh xạ 1:1
+của thực thể tới sự kiện. Đối với các sự kiện định kỳ, nhiều hàng sẽ tự động
+ được khởi tạo tương ứng với nhiều lần xảy ra sự kiện đó.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Attendees.html?hl=vi">CalendarContract.Attendees</a></code></td>
+
+    <td>Bảng này chứa
+thông tin về người dự (khách) của sự kiện. Mỗi hàng đại diện một khách duy nhất của
+một sự kiện. Nó quy định loại khách và phản hồi tham dự của khách
+cho một sự kiện.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=vi">CalendarContract.Reminders</a></code></td>
+
+    <td>Bảng này chứa
+dữ liệu về cảnh báo/thông báo. Mỗi hàng đại diện một cảnh báo duy nhất cho một sự kiện. Một
+sự kiện có thể có nhiều nhắc nhở. Số nhắc nhở tối đa của một sự kiện
+được quy định trong
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=vi#MAX_REMINDERS">MAX_REMINDERS</a></code>,
+được đặt bởi trình điều hợp đồng bộ đang
+sở hữu lịch đã cho. Nhắc nhở được quy định bằng số phút trước khi diễn ra sự kiện
+và có một phương pháp để xác định cách người dùng sẽ được cảnh báo.</td>
+  </tr>
+
+</table>
+
+<p>API Trình cung cấp Lịch được thiết kế để linh hoạt và mạnh mẽ. Đồng
+thời, điều quan trọng là phải cung cấp một trải nghiệm người dùng cuối tốt và
+bảo vệ sự toàn vẹn của lịch và dữ liệu lịch. Để làm điều này, sau đây là một số
+điều cần ghi nhớ khi sử dụng API này:</p>
+
+<ul>
+
+<li><strong>Chèn, cập nhật, và xem sự kiện lịch.</strong> Để trực tiếp chèn, sửa đổi, và đọc sự kiện từ Trình cung cấp Lịch, bạn cần <a href="#manifest">các quyền</a> phù hợp. Tuy nhiên, nếu bạn không đang xây dựng một ứng dụng lịch hoặc trình điều hợp đồng bộ chính thức, việc yêu cầu những quyền này là không cần thiết. Thay vào đó, bạn có thể sử dụng những ý định được cung cấp bởi ứng dụng Lịch của Android để chuyển giao các thao tác đọc và ghi cho ứng dụng đó. Khi bạn sử dụng ý định, ứng dụng của bạn sẽ gửi người dùng tới ứng dụng Lịch để thực hiện thao tác mong muốn
+trong một mẫu được điền trước. Sau khi xong, họ sẽ được trả về ứng dụng của bạn.
+Bằng việc thiết kế ứng dụng của bạn để thực hiện các thao tác thường gặp thông qua Lịch,
+bạn cung cấp cho người dùng một giao diện người dùng nhất quán, thiết thực. Đây là phương pháp
+được khuyến cáo nên dùng. Để biết thêm thông tin, hãy xem phần <a href="#intents">Ý định
+Lịch</a>.</p>
+
+
+<li><strong>Trình điều hợp đồng bộ.</strong> Trình điều hợp đồng bộ có chức năng đồng bộ dữ liệu lịch
+lên thiết bị của một người dùng bằng một máy chủ hoặc nguồn dữ liệu khác. Trong bảng
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=vi">CalendarContract.Calendars</a></code> và
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=vi">CalendarContract.Events</a></code>,
+có các cột để cho trình điều hợp đồng bộ sử dụng.
+Trình cung cấp và ứng dụng không nên sửa đổi chúng. Trên thực tế, chúng không
+hiển thị trừ khi được truy cập như một trình điều hợp đồng bộ. Để biết thêm thông tin về
+trình điều hợp đồng bộ, hãy xem phần <a href="#sync-adapter">Trình điều hợp Đồng bộ</a>.</li>
+
+</ul>
+
+
+<h2 id="manifest">Quyền của Người dùng</h2>
+
+<p>Để đọc dữ liệu lịch, một ứng dụng phải bao gồm quyền <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=vi#READ_CALENDAR">READ_CALENDAR</a></code> trong tệp bản kê khai của mình. Nó
+phải bao gồm quyền <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=vi#WRITE_CALENDAR">WRITE_CALENDAR</a></code>
+để xóa, chèn hoặc cập nhật dữ liệu lịch:</p>
+
+<pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;...&gt;
+    &lt;uses-sdk android:minSdkVersion=&quot;14&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_CALENDAR&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_CALENDAR&quot; /&gt;
+    ...
+&lt;/manifest&gt;
+</pre>
+
+
+<h2 id="calendar">Bảng Lịch</h2>
+
+<p>Bảng <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=vi">CalendarContract.Calendars</a></code> chứa thông tin chi tiết
+cho từng lịch. Các cột
+Lịch sau có thể ghi được bởi cả ứng dụng và <a href="#sync-adapter">trình điều hợp đồng bộ</a>.
+Để xem danh sách đầy đủ về các trường được hỗ trợ, hãy xem tài liệu tham khảo
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=vi">CalendarContract.Calendars</a></code>.</p>
+<table>
+  <tr>
+    <th>Hằng số</th>
+    <th>Mô tả</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=vi#NAME">NAME</a></code></td>
+    <td>Tên của lịch.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=vi#CALENDAR_DISPLAY_NAME">CALENDAR_DISPLAY_NAME</a></code></td>
+    <td>Tên của lịch này mà được hiển thị cho người dùng.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=vi#VISIBLE">VISIBLE</a></code></td>
+
+    <td>Một boolean cho biết lịch có được chọn để hiển thị hay không. Giá trị
+bằng 0 cho biết các sự kiện liên kết với lịch này sẽ không được
+hiển thị.  Giá trị bằng 1 cho biết các sự kiện liên kết với lịch này sẽ được
+hiển thị. Giá trị này ảnh hưởng tới việc khởi tạo hàng trong bảng <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi">CalendarContract.Instances</a></code>.</td>
+
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=vi#SYNC_EVENTS">SYNC_EVENTS</a></code></td>
+
+    <td>Một boolean cho biết lịch sẽ được đồng bộ và có các sự kiện
+của mình được lưu trữ trên thiết bị hay không. Giá trị bằng 0 tức là không đồng bộ lịch này hay
+lưu giữ các sự kiện của nó lên thiết bị.  Giá trị bằng 1 tức là đồng bộ các sự kiện cho lịch này
+và lưu trữ các sự kiện của nó lên thiết bị.</td>
+  </tr>
+</table>
+
+<h3 id="query">Truy vấn một lịch</h3>
+
+<p>Sau đây là một ví dụ về cách nhận được lịch do một người dùng
+cụ thể sở hữu. Để đơn giản, trong ví dụ này, thao tác truy vấn được thể hiện trong
+ luồng giao diện người dùng ("luồng chính"). Trong thực hành, nên làm điều này trong một luồng
+không đồng bộ thay vì trên luồng chính. Để bàn thêm, hãy xem phần
+<a href="../../components/loaders327f.html?hl=vi">Trình tải</a>. Nếu bạn đang không chỉ
+đọc dữ liệu mà còn sửa đổi nó, hãy xem <code><a href="https://developer.android.com/reference/android/content/AsyncQueryHandler.html?hl=vi">AsyncQueryHandler</a></code>.
+</p>
+
+
+<pre>
+// Projection array. Creating indices for this array instead of doing
+// dynamic lookups improves performance.
+public static final String[] EVENT_PROJECTION = new String[] {
+    Calendars._ID,                           // 0
+    Calendars.ACCOUNT_NAME,                  // 1
+    Calendars.CALENDAR_DISPLAY_NAME,         // 2
+    Calendars.OWNER_ACCOUNT                  // 3
+};
+
+// The indices for the projection array above.
+private static final int PROJECTION_ID_INDEX = 0;
+private static final int PROJECTION_ACCOUNT_NAME_INDEX = 1;
+private static final int PROJECTION_DISPLAY_NAME_INDEX = 2;
+private static final int PROJECTION_OWNER_ACCOUNT_INDEX = 3;</pre>
+
+
+<div class="sidebox-wrapper"> <div class="sidebox"> <h3>Tại sao bạn phải nêu
+ACCOUNT_TYPE?</h3> <p>Nếu bạn truy vấn trên một <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=vi#ACCOUNT_NAME">Calendars.ACCOUNT_NAME</a></code>, bạn cũng phải nêu
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=vi#ACCOUNT_TYPE">Calendars.ACCOUNT_TYPE</a></code>
+trong lựa chọn. Đó là vì một tài khoản đã cho chỉ
+được coi là duy nhất nếu có cả <code>ACCOUNT_NAME</code> và
+<code>ACCOUNT_TYPE</code> của nó. <code>ACCOUNT_TYPE</code> là xâu tương ứng với
+trình xác thực tài khoản mà đã được sử dụng khi tài khoản đó được đăng ký với
+<code><a href="https://developer.android.com/reference/android/accounts/AccountManager.html?hl=vi">AccountManager</a></code>. Cũng có một loại tài khoản đặc biệt gọi là <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code> dành cho các lịch
+không liên kết với một tài khoản thiết bị. Tài khoản <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code> không được
+đồng bộ.</p> </div> </div>
+
+
+<p> Trong phần tiếp theo của ví dụ, bạn sẽ xây dựng truy vấn của mình. Lựa chọn
+này sẽ quy định các tiêu chí cho truy vấn. Trong ví dụ này, truy vấn đang tìm
+các lịch có <code>ACCOUNT_NAME</code>
+"sampleuser@google.com", <code>ACCOUNT_TYPE</code>
+"com.google", và <code>OWNER_ACCOUNT</code>
+"sampleuser@google.com". Nếu bạn muốn xem tất cả lịch mà một người dùng
+đã xem, không chỉ các lịch mà người dùng sở hữu, hãy bỏ qua <code>OWNER_ACCOUNT</code>.
+Truy vấn sẽ trả về đối tượng <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=vi">Cursor</a></code>
+mà bạn có thể sử dụng để xem xét tập kết quả được trả về bởi truy vấn
+cơ sở dữ liệu. Để bàn thêm về việc sử dụng các truy vấn trong trình cung cấp nội dung,
+hãy xem phần <a href="content-providers327f.html?hl=vi">Trình cung cấp Nội dung</a>.</p>
+
+
+<pre>// Run query
+Cursor cur = null;
+ContentResolver cr = getContentResolver();
+Uri uri = Calendars.CONTENT_URI;
+String selection = "((" + Calendars.ACCOUNT_NAME + " = ?) AND ("
+                        + Calendars.ACCOUNT_TYPE + " = ?) AND ("
+                        + Calendars.OWNER_ACCOUNT + " = ?))";
+String[] selectionArgs = new String[] {"sampleuser@gmail.com", "com.google",
+        "sampleuser@gmail.com"};
+// Submit the query and get a Cursor object back.
+cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);</pre>
+
+<p>Phần tiếp theo sử dụng con chạy để duyệt qua tập kết quả. Nó sử dụng
+các hằng số được thiết lập ngay từ đầu ví dụ để trả về các giá trị
+cho mỗi trường.</p>
+
+<pre>// Use the cursor to step through the returned records
+while (cur.moveToNext()) {
+    long calID = 0;
+    String displayName = null;
+    String accountName = null;
+    String ownerName = null;
+
+    // Get the field values
+    calID = cur.getLong(PROJECTION_ID_INDEX);
+    displayName = cur.getString(PROJECTION_DISPLAY_NAME_INDEX);
+    accountName = cur.getString(PROJECTION_ACCOUNT_NAME_INDEX);
+    ownerName = cur.getString(PROJECTION_OWNER_ACCOUNT_INDEX);
+
+    // Do something with the values...
+
+   ...
+}
+</pre>
+
+<h3 id="modify-calendar">Sửa đổi một lịch</h3>
+
+<p>Để thực hiện cập nhật một lịch, bạn có thể cung cấp <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=vi#_ID">_ID</a></code> của lịch hoặc dưới dạng ID được nối vào cho
+Uri
+
+(<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=vi#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>)
+hoặc dưới dạng mục chọn đầu tiên. Lựa chọn
+nên bắt đầu bằng <code>&quot;_id=?&quot;</code>, và
+<code>selectionArg</code> đầu tiên sẽ là <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=vi#_ID">_ID</a></code> của lịch.
+Bạn cũng có thể thực hiện cập nhật bằng cách mã hóa ID trong URI. Ví dụ này thay đổi tên hiển thị
+của một lịch bằng cách sử dụng phương pháp
+(<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=vi#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>)
+:</p>
+
+<pre>private static final String DEBUG_TAG = "MyActivity";
+...
+long calID = 2;
+ContentValues values = new ContentValues();
+// The new display name for the calendar
+values.put(Calendars.CALENDAR_DISPLAY_NAME, &quot;Trevor's Calendar&quot;);
+Uri updateUri = ContentUris.withAppendedId(Calendars.CONTENT_URI, calID);
+int rows = getContentResolver().update(updateUri, values, null, null);
+Log.i(DEBUG_TAG, &quot;Rows updated: &quot; + rows);</pre>
+
+<h3 id="insert-calendar">Chèn một lịch</h2>
+
+<p>Lịch được thiết kế để được quản lý chủ yếu bởi một trình điều hợp đồng bộ, vì vậy bạn chỉ nên
+chèn các lịch mới như một trình điều hợp đồng bộ. Phần lớn thì các ứng dụng
+chỉ có thể thực hiện những thay đổi bề mặt về lịch chẳng hạn như thay đổi tên hiển thị. Nếu
+một ứng dụng cần tạo một lịch cục bộ, nó có thể làm điều này bằng cách thực hiện
+chèn lịch dưới dạng một trình điều hợp đồng bộ, sử dụng <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=vi#ACCOUNT_TYPE">ACCOUNT_TYPE</a></code> của <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code>.
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code>
+là một loại tài khoản đặc biệt dành cho các lịch không
+liên kết với một tài khoản thiết bị. Các lịch loại này không được đồng bộ với một máy chủ. Để
+bàn về trình điều hợp đồng bộ, hãy xem phần <a href="#sync-adapter">Trình điều hợp Đồng bộ</a>.</p>
+
+<h2 id="events">Bảng Sự kiện</h2>
+
+<p>Bảng <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=vi">CalendarContract.Events</a></code> chứa thông tin chi tiết
+cho các sự kiện riêng lẻ. Để thêm, cập nhật hoặc xóa sự kiện, ứng dụng phải
+bao gồm quyền <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=vi#WRITE_CALENDAR">WRITE_CALENDAR</a></code> trong
+<a href="#manifest">tệp bản kê khai</a> của mình.</p>
+
+<p>Các cột Sự kiện sau có thể ghi được bởi cả ứng dụng và trình điều hợp
+đồng bộ. Để xem danh sách đầy đủ về các trường được hỗ trợ, hãy xem tài liệu tham khảo <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=vi">CalendarContract.Events</a></code>.</p>
+
+<table>
+  <tr>
+    <th>Hằng số</th>
+    <th>Mô tả</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#CALENDAR_ID">CALENDAR_ID</a></code></td>
+    <td><code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=vi#_ID">_ID</a></code> của lịch mà chứa sự kiện.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#ORGANIZER">ORGANIZER</a></code></td>
+    <td>E-mail của người tổ chức (người chủ) của sự kiện.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#TITLE">TITLE</a></code></td>
+    <td>Tiêu đề của sự kiện.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#EVENT_LOCATION">EVENT_LOCATION</a></code></td>
+    <td>Nơi sự kiện diễn ra. </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#DESCRIPTION">DESCRIPTION</a></code></td>
+    <td>Mô tả sự kiện.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#DTSTART">DTSTART</a></code></td>
+    <td>Thời gian sự kiện bắt đầu tính bằng mili giây UTC trôi qua kể từ giờ epoch. </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#DTEND">DTEND</a></code></td>
+    <td>Thời gian sự kiện kết thúc tính bằng mili giây UTC trôi qua kể từ giờ epoch. </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#EVENT_TIMEZONE">EVENT_TIMEZONE</a></code></td>
+    <td>Múi giờ của sự kiện.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#EVENT_END_TIMEZONE">EVENT_END_TIMEZONE</a></code></td>
+    <td>Múi giờ của thời điểm kết thúc sự kiện.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#DURATION">DURATION</a></code></td>
+
+    <td>Thời lượng của sự kiện theo định dạng <a href="http://tools.ietf.org/html/rfc5545#section-3.8.2.5">RFC5545</a>.
+Ví dụ, giá trị bằng <code>&quot;PT1H&quot;</code> cho biết sự kiện sẽ kéo dài
+một giờ và giá trị bằng <code>&quot;P2W&quot;</code> cho biết
+thời lượng là 2 tuần. </td>
+
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#ALL_DAY">ALL_DAY</a></code></td>
+
+    <td>Giá trị bằng 1 cho biết sự kiện này chiếm cả ngày, được xác định bởi
+múi giờ tại địa phương. Giá trị bằng 0 cho biết đó là một sự kiện thường xuyên mà có thể bắt đầu
+và kết thúc vào bất cứ lúc nào trong một ngày.</td>
+
+
+  </tr>
+
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#RRULE">RRULE</a></code></td>
+
+    <td>Quy tắc lặp lại đối với định dạng sự kiện. Ví
+dụ, <code>&quot;FREQ=WEEKLY;COUNT=10;WKST=SU&quot;</code>. Bạn có thể tìm thêm
+nhiều ví dụ hơn <a href="http://tools.ietf.org/html/rfc5545#section-3.8.5.3">ở đây</a>.</td>
+
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#RDATE">RDATE</a></code></td>
+    <td>Ngày lặp lại đối với sự kiện.
+    Bạn thường sử dụng <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#RDATE">RDATE</a></code>
+    cùng với <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#RRULE">RRULE</a></code>
+    để định nghĩa một tập tổng hợp
+các trường hợp xảy ra lặp lại. Để bàn thêm, hãy xem phần <a href="http://tools.ietf.org/html/rfc5545#section-3.8.5.2">RFC5545 spec</a>.</td>
+</tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#AVAILABILITY">AVAILABILITY</a></code></td>
+
+    <td>Xem sự kiện này được tính là thời gian bận hay là thời gian rảnh có thể được
+xếp lại lịch. </td>
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#GUESTS_CAN_MODIFY">GUESTS_CAN_MODIFY</a></code></td>
+    <td>Khách có thể sửa đổi sự kiện được hay không. </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#GUESTS_CAN_INVITE_OTHERS">GUESTS_CAN_INVITE_OTHERS</a></code></td>
+    <td>Khách có thể mời khách khác được hay không. </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#GUESTS_CAN_SEE_GUESTS">GUESTS_CAN_SEE_GUESTS</a></code></td>
+    <td>Khách có thể xem danh sách người dự được hay không.</td>
+  </tr>
+</table>
+
+<h3 id="add-event">Thêm Sự kiện</h3>
+
+<p>Khi ứng dụng của bạn chèn một sự kiện mới, chúng tôi khuyến cáo bạn nên sử dụng một Ý định
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_INSERT">INSERT</a></code>, như được mô tả trong <a href="#intent-insert">Sử dụng ý định để chèn một sự kiện</a>. Tuy nhiên, nếu
+cần, bạn có thể chèn sự kiện trực tiếp. Phần này mô tả cách làm điều
+này.</p>
+
+
+<p>Sau đây là các quy tắc để chèn một sự kiện mới: </p>
+<ul>
+
+  <li>Bạn phải đưa vào <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#CALENDAR_ID">CALENDAR_ID</a></code> và <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#DTSTART">DTSTART</a></code>.</li>
+
+<li>Bạn phải đưa vào một <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#EVENT_TIMEZONE">EVENT_TIMEZONE</a></code>. Để nhận một danh sách
+các ID múi giờ được cài đặt của hệ thống, hãy sử dụng <code><a href="https://developer.android.com/reference/java/util/TimeZone.html?hl=vi#getAvailableIDs()">getAvailableIDs()</a></code>. Lưu ý rằng quy tắc này không áp dụng nếu
+bạn đang chèn một sự kiện thông qua Ý định <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_INSERT">INSERT</a></code> như được mô tả trong <a href="#intent-insert">Sử dụng ý định để chèn một sự kiện</a>&mdash;trong kịch bản
+đó, một múi giờ mặc định sẽ được cung cấp.</li>
+
+  <li>Đối với các sự kiện không định kỳ, bạn phải đưa vào <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#DTEND">DTEND</a></code>. </li>
+
+
+  <li>Đối với các sự kiện định kỳ, bạn phải đưa vào một <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#DURATION">DURATION</a></code> bên cạnh <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#RRULE">RRULE</a></code> hay <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#RDATE">RDATE</a></code>. Lưu ý rằng quy tắc này không áp dụng nếu
+bạn đang chèn một sự kiện thông qua Ý định <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_INSERT">INSERT</a></code> như được mô tả trong <a href="#intent-insert">Sử dụng ý định để chèn một sự kiện</a>&mdash;trong kịch bản
+đó, bạn có thể sử dụng một <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#RRULE">RRULE</a></code> cùng với <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#DTSTART">DTSTART</a></code> và <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#DTEND">DTEND</a></code>, và ứng dụng Lịch
+sẽ tự động chuyển nó thành một thời lượng.</li>
+
+</ul>
+
+<p>Sau đây là một ví dụ về cách chèn một sự kiện. Ví dụ này đang được thực hiện trong luồng
+UI để cho đơn giản. Trong thực hành, chèn và cập nhật nên được thực hiện trong một
+luồng không đồng bộ để di chuyển hành động vào một luồng chạy ngầm. Để biết thêm
+thông tin, hãy xem phần <code><a href="https://developer.android.com/reference/android/content/AsyncQueryHandler.html?hl=vi">AsyncQueryHandler</a></code>.</p>
+
+
+<pre>
+long calID = 3;
+long startMillis = 0;
+long endMillis = 0;
+Calendar beginTime = Calendar.getInstance();
+beginTime.set(2012, 9, 14, 7, 30);
+startMillis = beginTime.getTimeInMillis();
+Calendar endTime = Calendar.getInstance();
+endTime.set(2012, 9, 14, 8, 45);
+endMillis = endTime.getTimeInMillis();
+...
+
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+values.put(Events.DTSTART, startMillis);
+values.put(Events.DTEND, endMillis);
+values.put(Events.TITLE, &quot;Jazzercise&quot;);
+values.put(Events.DESCRIPTION, &quot;Group workout&quot;);
+values.put(Events.CALENDAR_ID, calID);
+values.put(Events.EVENT_TIMEZONE, "America/Los_Angeles");
+Uri uri = cr.insert(Events.CONTENT_URI, values);
+
+// get the event ID that is the last element in the Uri
+long eventID = Long.parseLong(uri.getLastPathSegment());
+//
+// ... do something with event ID
+//
+//</pre>
+
+<p class="note"><strong>Lưu ý:</strong> Xem cách mà ví dụ này bắt được ID
+sự kiện sau khi sự kiện được tạo. Đây là cách dễ nhất để nhận được một ID sự kiện. Bạn thường
+cần ID sự kiện để thực hiện các thao tác lịch khác&mdash;ví dụ: để thêm
+người dự hoặc nhắc nhở vào một sự kiện.</p>
+
+
+<h3 id="update-event">Cập nhật Sự kiện</h3>
+
+<p>Khi ứng dụng của bạn muốn cho phép người dùng chỉnh sửa một sự kiện, chúng tôi khuyến cáo
+bạn nên sử dụng một Ý định <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_EDIT">EDIT</a></code> như được mô tả
+trong <a href="#intent-edit">Sử dụng ý định để chỉnh sửa một sự kiện</a>.
+Tuy nhiên, nếu cần, bạn có thể chỉnh sửa sự kiện trực tiếp. Để thực hiện cập nhật
+một Sự kiện, bạn có thể cung cấp <code>_ID</code> của sự kiện
+hoặc dưới dạng ID được nối vào cho Uri (<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=vi#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>)
+hoặc dưới dạng mục chọn đầu tiên.
+Lựa chọn nên bắt đầu bằng <code>&quot;_id=?&quot;</code>, và
+<code>selectionArg</code> đầu tiên nên là <code>_ID</code> của sự kiện. Bạn cũng có thể
+thực hiện cập nhật bằng cách sử dụng một lựa chọn không có ID. Sau đây là một ví dụ về cách cập nhật một
+sự kiện. Nó thay đổi tiêu đề của sự kiện bằng cách sử dụng phương pháp
+<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=vi#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>
+:</p>
+
+
+<pre>private static final String DEBUG_TAG = "MyActivity";
+...
+long eventID = 188;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+Uri updateUri = null;
+// The new title for the event
+values.put(Events.TITLE, &quot;Kickboxing&quot;);
+updateUri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+int rows = getContentResolver().update(updateUri, values, null, null);
+Log.i(DEBUG_TAG, &quot;Rows updated: &quot; + rows);  </pre>
+
+<h3 id="delete-event">Xóa Sự kiện</h3>
+
+<p>Bạn có thể xóa một sự kiện hoặc theo <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=vi#_ID">_ID</a></code> của nó như một ID được nối trên URI, hoặc bằng cách sử dụng
+lựa chọn tiêu chuẩn. Nếu sử dụng một ID được nối, bạn không thể lựa chọn đồng thời.
+Có hai kiểu xóa: như một ứng dụng và như một trình điều hợp đồng bộ. Xóa
+như một ứng dụng sẽ đặt cột <em>đã xóa</em> thành 1. Cờ này sẽ báo cho
+trình điều hợp đồng bộ rằng hàng đó đã được xóa và rằng việc xóa này nên
+được truyền tới máy chủ. Xóa trình điều hợp đồng bộ sẽ gỡ bỏ sự kiện khỏi
+cơ sở dữ liệu cùng với tất cả dữ liệu được liên kết của nó. Sau đây là một ví dụ về ứng dụng
+xóa một sự kiện thông qua <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=vi#_ID">_ID</a></code> của nó:</p>
+
+
+<pre>private static final String DEBUG_TAG = "MyActivity";
+...
+long eventID = 201;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+Uri deleteUri = null;
+deleteUri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+int rows = getContentResolver().delete(deleteUri, null, null);
+Log.i(DEBUG_TAG, &quot;Rows deleted: &quot; + rows);
+</pre>
+
+<h2 id="attendees">Bảng Người dự</h2>
+
+<p>Mỗi hàng của bảng <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Attendees.html?hl=vi">CalendarContract.Attendees</a></code> đại diện
+cho một người dự hoặc khách duy nhất của một sự kiện. Gọi
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=vi#query(android.content.ContentResolver, long, java.lang.String[])">query()</a></code>
+sẽ trả về một danh sách người dự cho sự kiện
+với <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#EVENT_ID">EVENT_ID</a></code> đã cho.
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#EVENT_ID">EVENT_ID</a></code> này
+phải khớp với <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=vi#_ID">_ID</a></code> của một sự kiện cụ thể.</p>
+
+<p>Bảng sau liệt kê các trường
+có thể ghi được. Khi chèn một người dự mới, bạn phải điền tất cả
+ngoại trừ <code>ATTENDEE_NAME</code>.
+</p>
+
+
+<table>
+  <tr>
+    <th>Hằng số</th>
+    <th>Mô tả</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#EVENT_ID">EVENT_ID</a></code></td>
+    <td>ID của sự kiện.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#ATTENDEE_NAME">ATTENDEE_NAME</a></code></td>
+    <td>Tên của người dự.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#ATTENDEE_EMAIL">ATTENDEE_EMAIL</a></code></td>
+    <td>Địa chỉ e-mail của người dự.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#ATTENDEE_RELATIONSHIP">ATTENDEE_RELATIONSHIP</a></code></td>
+    <td><p>Mối quan hệ của người dự với sự kiện. Một trong:</p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#RELATIONSHIP_ATTENDEE">RELATIONSHIP_ATTENDEE</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#RELATIONSHIP_NONE">RELATIONSHIP_NONE</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#RELATIONSHIP_ORGANIZER">RELATIONSHIP_ORGANIZER</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#RELATIONSHIP_PERFORMER">RELATIONSHIP_PERFORMER</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#RELATIONSHIP_SPEAKER">RELATIONSHIP_SPEAKER</a></code></li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#ATTENDEE_TYPE">ATTENDEE_TYPE</a></code></td>
+    <td><p>Loại người dự. Một trong: </p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#TYPE_REQUIRED">TYPE_REQUIRED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#TYPE_OPTIONAL">TYPE_OPTIONAL</a></code></li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#ATTENDEE_STATUS">ATTENDEE_STATUS</a></code></td>
+    <td><p>Trạng thái tham dự của người dự. Một trong:</p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#ATTENDEE_STATUS_ACCEPTED">ATTENDEE_STATUS_ACCEPTED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#ATTENDEE_STATUS_DECLINED">ATTENDEE_STATUS_DECLINED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#ATTENDEE_STATUS_INVITED">ATTENDEE_STATUS_INVITED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#ATTENDEE_STATUS_NONE">ATTENDEE_STATUS_NONE</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#ATTENDEE_STATUS_TENTATIVE">ATTENDEE_STATUS_TENTATIVE</a></code></li>
+    </ul></td>
+  </tr>
+</table>
+
+<h3 id="add-attendees">Thêm Người dự</h3>
+
+<p>Sau đây là một ví dụ về cách thêm một người dự vào một sự kiện. Lưu ý rằng
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#EVENT_ID">EVENT_ID</a></code>
+là bắt buộc:</p>
+
+<pre>
+long eventID = 202;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+values.put(Attendees.ATTENDEE_NAME, &quot;Trevor&quot;);
+values.put(Attendees.ATTENDEE_EMAIL, &quot;trevor@example.com&quot;);
+values.put(Attendees.ATTENDEE_RELATIONSHIP, Attendees.RELATIONSHIP_ATTENDEE);
+values.put(Attendees.ATTENDEE_TYPE, Attendees.TYPE_OPTIONAL);
+values.put(Attendees.ATTENDEE_STATUS, Attendees.ATTENDEE_STATUS_INVITED);
+values.put(Attendees.EVENT_ID, eventID);
+Uri uri = cr.insert(Attendees.CONTENT_URI, values);
+</pre>
+
+<h2 id="reminders">Bảng Nhắc nhở</h2>
+
+<p>Mỗi hàng của bảng <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=vi">CalendarContract.Reminders</a></code> đại diện
+cho một nhắc nhở của một sự kiện. Gọi
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=vi#query(android.content.ContentResolver, long, java.lang.String[])">query()</a></code>  sẽ trả về một danh sách nhắc nhở cho
+sự kiện với
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=vi#EVENT_ID">EVENT_ID</a></code> đã cho.</p>
+
+
+<p>Bảng sau liệt kê các trường ghi được đối với nhắc nhở. Tất cả đều phải được
+đưa vào khi chèn một nhắc nhở mới. Lưu ý rằng các trình điều hợp đồng bộ quy định
+các loại nhắc nhở chúng hỗ trợ trong bảng <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=vi">CalendarContract.Calendars</a></code>. Xem
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=vi#ALLOWED_REMINDERS">ALLOWED_REMINDERS</a></code>
+để biết chi tiết.</p>
+
+
+<table>
+  <tr>
+    <th>Hằng số</th>
+    <th>Mô tả</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=vi#EVENT_ID">EVENT_ID</a></code></td>
+    <td>ID của sự kiện.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=vi#MINUTES">MINUTES</a></code></td>
+    <td>Số phút trước khi diễn ra sự kiện mà nhắc nhở cần báo.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=vi#METHOD">METHOD</a></code></td>
+    <td><p>Phương pháp báo thức, như được đặt trên máy chủ. Một trong:</p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=vi#METHOD_ALERT">METHOD_ALERT</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=vi#METHOD_DEFAULT">METHOD_DEFAULT</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=vi#METHOD_EMAIL">METHOD_EMAIL</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=vi#METHOD_SMS">METHOD_SMS</a></code></li>
+    </ul></td>
+  </tr>
+</table>
+
+<h3 id="add-reminders">Thêm Nhắc nhở</h3>
+
+<p>Ví dụ này thêm nhắc nhở vào một sự kiện. Nhắc nhở sẽ báo 15
+phút trước khi xảy ra sự kiện.</p>
+<pre>
+long eventID = 221;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+values.put(Reminders.MINUTES, 15);
+values.put(Reminders.EVENT_ID, eventID);
+values.put(Reminders.METHOD, Reminders.METHOD_ALERT);
+Uri uri = cr.insert(Reminders.CONTENT_URI, values);</pre>
+
+<h2 id="instances">Bảng Thực thể</h2>
+
+<p>Bảng
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi">CalendarContract.Instances</a></code> chứa
+thời gian bắt đầu và thời gian kết thúc của các lần xảy ra một sự kiện. Mỗi hàng trong bảng này
+đại diện cho một lần xảy ra sự kiện. Bảng thực thể không ghi được và chỉ
+đưa ra một cách để truy vấn các lần xảy ra sự kiện. </p>
+
+<p>Bảng sau liệt kê một số trường mà bạn có thể truy vấn đối với một thực thể. Lưu ý
+rằng múi giờ được định nghĩa bởi
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarCache.html?hl=vi#KEY_TIMEZONE_TYPE">KEY_TIMEZONE_TYPE</a></code>
+và
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarCache.html?hl=vi#KEY_TIMEZONE_INSTANCES">KEY_TIMEZONE_INSTANCES</a></code>.</p>
+
+
+<table>
+  <tr>
+    <th>Hằng số</th>
+    <th>Mô tả</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi#BEGIN">BEGIN</a></code></td>
+    <td>Thời gian bắt đầu của thực thể, tính bằng mili giây UTC.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi#END">END</a></code></td>
+    <td>Thời gian kết thúc của thực thể, tính bằng mili giây UTC.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi#END_DAY">END_DAY</a></code></td>
+
+    <td>Ngày kết thúc theo lịch Julian của thực thể theo múi giờ
+của Lịch.
+
+</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi#END_MINUTE">END_MINUTE</a></code></td>
+
+    <td>Phút kết thúc của thực thể được xác định từ nửa đêm theo múi giờ
+của Lịch.</td>
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi#EVENT_ID">EVENT_ID</a></code></td>
+    <td><code>_ID</code> của sự kiện đối với thực thể này.</td>
+  </tr>
+    <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi#START_DAY">START_DAY</a></code></td>
+    <td>Ngày bắt đầu theo lịch Julian của thực thể theo múi giờ của Lịch.
+ </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi#START_MINUTE">START_MINUTE</a></code></td>
+
+    <td>Phút bắt đầu của thực thể được xác định từ nửa đêm theo múi giờ
+của Lịch.
+</td>
+
+  </tr>
+
+</table>
+
+<h3 id="query-instances">Truy vấn bảng Thực thể</h3>
+
+<p>Để truy vấn bảng Thực thể, bạn cần chỉ định một khoảng thời gian cho truy vấn
+trong URI. Trong ví dụ này, <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi">CalendarContract.Instances</a></code>
+có quyền truy cập trường <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#TITLE">TITLE</a></code> thông qua việc
+triển khai giao diện <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi">CalendarContract.EventsColumns</a></code> của nó.
+Nói cách khác, <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#TITLE">TITLE</a></code> được trả về qua một
+chế độ xem cơ sở dữ liệu, chứ không qua việc truy vấn bảng <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=vi">CalendarContract.Instances</a></code> thô.</p>
+
+<pre>
+private static final String DEBUG_TAG = "MyActivity";
+public static final String[] INSTANCE_PROJECTION = new String[] {
+    Instances.EVENT_ID,      // 0
+    Instances.BEGIN,         // 1
+    Instances.TITLE          // 2
+  };
+
+// The indices for the projection array above.
+private static final int PROJECTION_ID_INDEX = 0;
+private static final int PROJECTION_BEGIN_INDEX = 1;
+private static final int PROJECTION_TITLE_INDEX = 2;
+...
+
+// Specify the date range you want to search for recurring
+// event instances
+Calendar beginTime = Calendar.getInstance();
+beginTime.set(2011, 9, 23, 8, 0);
+long startMillis = beginTime.getTimeInMillis();
+Calendar endTime = Calendar.getInstance();
+endTime.set(2011, 10, 24, 8, 0);
+long endMillis = endTime.getTimeInMillis();
+
+Cursor cur = null;
+ContentResolver cr = getContentResolver();
+
+// The ID of the recurring event whose instances you are searching
+// for in the Instances table
+String selection = Instances.EVENT_ID + " = ?";
+String[] selectionArgs = new String[] {"207"};
+
+// Construct the query with the desired date range.
+Uri.Builder builder = Instances.CONTENT_URI.buildUpon();
+ContentUris.appendId(builder, startMillis);
+ContentUris.appendId(builder, endMillis);
+
+// Submit the query
+cur =  cr.query(builder.build(),
+    INSTANCE_PROJECTION,
+    selection,
+    selectionArgs,
+    null);
+
+while (cur.moveToNext()) {
+    String title = null;
+    long eventID = 0;
+    long beginVal = 0;
+
+    // Get the field values
+    eventID = cur.getLong(PROJECTION_ID_INDEX);
+    beginVal = cur.getLong(PROJECTION_BEGIN_INDEX);
+    title = cur.getString(PROJECTION_TITLE_INDEX);
+
+    // Do something with the values.
+    Log.i(DEBUG_TAG, "Event:  " + title);
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeInMillis(beginVal);
+    DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    Log.i(DEBUG_TAG, "Date: " + formatter.format(calendar.getTime()));
+    }
+ }</pre>
+
+<h2 id="intents">Ý định Lịch</h2>
+<p>Ứng dụng của bạn không cần <a href="#manifest">quyền</a> để ghi và đọc dữ liệu lịch. Thay vào đó, nó có thể sử dụng những ý định được cung cấp bởi ứng dụng Lịch của Android để chuyển giao các thao tác đọc và ghi cho ứng dụng đó. Bảng sau đây liệt kê các ý định được Trình cung cấp Lịch hỗ trợ:</p>
+<table>
+  <tr>
+    <th>Hành động</th>
+    <th>URI</th>
+
+    <th>Mô tả</th>
+    <th>Phụ thêm</th>
+  </tr>
+  <tr>
+    <td><br>
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_VIEW">VIEW</a></code> <br></td>
+    <td><p><code>content://com.android.calendar/time/&lt;ms_since_epoch&gt;</code></p>
+    Bạn cũng có thể tham khảo tới URI bằng
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#CONTENT_URI">CalendarContract.CONTENT_URI</a></code>.
+Để xem một ví dụ về cách sử dụng ý định này, hãy xem <a href="calendar-provider327f.html?hl=vi#intent-view">Sử dụng ý định để xem dữ liệu lịch</a>.
+
+    </td>
+    <td>Mở lịch đến thời gian được chỉ định bởi <code>&lt;ms_since_epoch&gt;</code>.</td>
+    <td>Không có.</td>
+  </tr>
+  <tr>
+    <td><p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_VIEW">VIEW</a></code> </p>
+
+     </td>
+    <td><p><code>content://com.android.calendar/events/&lt;event_id&gt;</code></p>
+
+    Bạn cũng có thể tham khảo tới URI bằng
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=vi#CONTENT_URI">Events.CONTENT_URI</a></code>.
+Để xem một ví dụ về cách sử dụng ý định này, hãy xem <a href="calendar-provider327f.html?hl=vi#intent-view">Sử dụng ý định để xem dữ liệu lịch</a>.
+
+    </td>
+    <td>Xem sự kiện được chỉ định bởi <code>&lt;event_id&gt;</code>.</td>
+
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code><br>
+      <br>
+      <br>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code></td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_EDIT">EDIT</a></code> </td>
+    <td><p><code>content://com.android.calendar/events/&lt;event_id&gt;</code></p>
+
+  Bạn cũng có thể tham khảo tới URI bằng
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=vi#CONTENT_URI">Events.CONTENT_URI</a></code>.
+Để xem một ví dụ về cách sử dụng ý định này, hãy xem <a href="calendar-provider327f.html?hl=vi#intent-edit">Sử dụng ý định để chỉnh sửa một sự kiện</a>.
+
+
+    </td>
+    <td>Chỉnh sửa sự kiện được chỉ định bởi <code>&lt;event_id&gt;</code>.</td>
+
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code><br>
+      <br>
+      <br>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code></td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_EDIT">EDIT</a></code> <br>
+    <br>
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_INSERT">INSERT</a></code> </td>
+    <td><p><code>content://com.android.calendar/events</code></p>
+
+   Bạn cũng có thể tham khảo tới URI bằng
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=vi#CONTENT_URI">Events.CONTENT_URI</a></code>.
+Để xem một ví dụ về cách sử dụng ý định này, hãy xem <a href="calendar-provider327f.html?hl=vi#intent-insert">Sử dụng ý định để chèn một sự kiện</a>.
+
+    </td>
+
+    <td>Tạo một sự kiện.</td>
+    <td>Bất kỳ phụ thêm nào được liệt kê trong bảng bên dưới.</td>
+  </tr>
+</table>
+
+<p>Bảng sau đây liệt kê các phụ thêm ý định được Trình cung cấp Lịch hỗ trợ:
+</p>
+<table>
+  <tr>
+    <th>Phụ thêm Ý định</th>
+    <th>Mô tả</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#TITLE">Events.TITLE</a></code></td>
+    <td>Tên cho sự kiện.</td>
+  </tr>
+  <tr>
+
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code></td>
+    <td>Thời gian bắt đầu sự kiện tính bằng mili giây trôi qua kể từ giờ epoch.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code></td>
+
+    <td>Thời gian kết thúc sự kiện tính bằng mili giây trôi qua kể từ giờ epoch.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#EXTRA_EVENT_ALL_DAY">CalendarContract.EXTRA_EVENT_ALL_DAY</a></code></td>
+
+    <td>Một boolean cho biết đó là một sự kiện cả ngày. Giá trị có thể bằng
+<code>true</code> hoặc <code>false</code>.</td> </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#EVENT_LOCATION">Events.EVENT_LOCATION</a></code></td>
+
+    <td>Địa điểm của sự kiện.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#DESCRIPTION">Events.DESCRIPTION</a></code></td>
+
+    <td>Mô tả sự kiện.</td>
+  </tr>
+  <tr>
+    <td>
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#EXTRA_EMAIL">Intent.EXTRA_EMAIL</a></code></td>
+    <td>Địa chỉ e-mail của những người cần mời dưới dạng một danh sách phân cách bởi dấu phẩy.</td>
+  </tr>
+  <tr>
+    <td>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#RRULE">Events.RRULE</a></code></td>
+    <td>Quy tắc lặp lại đối với sự kiện.</td>
+  </tr>
+  <tr>
+    <td>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#ACCESS_LEVEL">Events.ACCESS_LEVEL</a></code></td>
+
+    <td>Sự kiện là riêng tư hay công khai.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=vi#AVAILABILITY">Events.AVAILABILITY</a></code></td>
+
+    <td>Xem sự kiện này tính là thời gian bận hay là thời gian rảnh có thể được xếp lại lịch.</td>
+
+</table>
+<p>Các phần sau mô tả cách sử dụng những ý định này.</p>
+
+
+<h3 id="intent-insert">Sử dụng ý định để chèn một sự kiện</h3>
+
+<p>Sử dụng Ý định <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_INSERT">INSERT</a></code> cho phép
+ứng dụng của bạn chuyển giao tác vụ chèn sự kiện cho bản thân Lịch.
+Bằng cách này, ứng dụng của bạn thậm chí không cần phải có quyền <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=vi#WRITE_CALENDAR">WRITE_CALENDAR</a></code> được bao gồm trong <a href="#manifest">tệp bản kê khai</a> của mình.</p>
+
+
+<p>Khi người dùng chạy một ứng dụng mà sử dụng cách này, ứng dụng sẽ gửi
+chúng tới Lịch để hoàn thành việc thêm một sự kiện. Ý định <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_INSERT">INSERT</a></code> sử dụng các trường phụ thêm để
+điền trước vào một mẫu bằng các chi tiết của sự kiện trong Lịch. Khi đó, người dùng có thể
+hủy bỏ sự kiện, chỉnh sửa mẫu nếu cần, hoặc lưu sự kiện vào lịch
+của mình.</p>
+
+
+
+<p>Sau đây là một đoạn mã HTML lập biểu một sự kiện vào ngày 19/1/2012, diễn ra
+từ 7:30 sáng đến 8:30 sáng. Lưu ý điều sau đây về đoạn mã HTML này:</p>
+
+<ul>
+  <li>Nó quy định <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=vi#CONTENT_URI">Events.CONTENT_URI</a></code>
+ là Uri.</li>
+
+  <li>Nó sử dụng các trường phụ <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code> và <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code> để điền trước thời gian của sự kiện
+vào mẫu. Các giá trị đối với những thời gian này phải tính bằng mili giây UTC
+trôi qua kể từ giờ epoch.</li>
+
+  <li>Nó sử dụng trường phụ <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#EXTRA_EMAIL">Intent.EXTRA_EMAIL</a></code>
+để cung cấp một danh sách người được mời phân cách bằng dấu phẩy, được chỉ định theo địa chỉ e-mail.</li>
+
+</ul>
+<pre>
+Calendar beginTime = Calendar.getInstance();
+beginTime.set(2012, 0, 19, 7, 30);
+Calendar endTime = Calendar.getInstance();
+endTime.set(2012, 0, 19, 8, 30);
+Intent intent = new Intent(Intent.ACTION_INSERT)
+        .setData(Events.CONTENT_URI)
+        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+        .putExtra(Events.TITLE, &quot;Yoga&quot;)
+        .putExtra(Events.DESCRIPTION, &quot;Group class&quot;)
+        .putExtra(Events.EVENT_LOCATION, &quot;The gym&quot;)
+        .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
+        .putExtra(Intent.EXTRA_EMAIL, &quot;rowan@example.com,trevor@example.com&quot;);
+startActivity(intent);
+</pre>
+
+<h3 id="intent-edit">Sử dụng ý định để chỉnh sửa một sự kiện</h3>
+
+<p>Bạn có thể cập nhật một sự kiện trực tiếp như được mô tả trong phần <a href="#update-event">Cập nhật sự kiện</a>. Nhưng việc sử dụng Ý định <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_EDIT">EDIT</a></code> cho phép một ứng dụng
+không có quyền được chuyển giao chỉnh sửa sự kiện cho ứng dụng Lịch.
+Khi người dùng hoàn thành chỉnh sửa sự kiện của mình trong Lịch, họ được trả về ứng dụng
+ban đầu.</p> <p>Sau đây là một ví dụ về ý định đặt một tiêu đề mới
+cho một sự kiện được quy định và cho phép người dùng chỉnh sửa sự kiện trong Lịch.</p>
+
+
+<pre>long eventID = 208;
+Uri uri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+Intent intent = new Intent(Intent.ACTION_EDIT)
+    .setData(uri)
+    .putExtra(Events.TITLE, &quot;My New Title&quot;);
+startActivity(intent);</pre>
+
+<h3 id="intent-view">Sử dụng ý định để xem dữ liệu lịch</h3>
+<p>Trình cung cấp Lịch giới thiệu hai cách khác nhau để sử dụng Ý định <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_VIEW">VIEW</a></code>:</p>
+<ul>
+  <li>Để mở Lịch tới một ngày cụ thể.</li>
+  <li>Để xem một sự kiện.</li>
+
+</ul>
+<p>Sau đây là một ví dụ cho biết cách mở Lịch tới một ngày cụ thể:</p>
+<pre>// A date-time specified in milliseconds since the epoch.
+long startMillis;
+...
+Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+builder.appendPath(&quot;time&quot;);
+ContentUris.appendId(builder, startMillis);
+Intent intent = new Intent(Intent.ACTION_VIEW)
+    .setData(builder.build());
+startActivity(intent);</pre>
+
+<p>Sau đây là một ví dụ cho biết cách mở một sự kiện để xem:</p>
+<pre>long eventID = 208;
+...
+Uri uri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+Intent intent = new Intent(Intent.ACTION_VIEW)
+   .setData(uri);
+startActivity(intent);
+</pre>
+
+
+<h2 id="sync-adapter">Trình điều hợp Đồng bộ</h2>
+
+
+<p>Chỉ có vài điểm khác nhau nhỏ giữa cách một ứng dụng và cách một trình điều hợp đồng bộ
+truy cập Trình cung cấp Lịch:</p>
+
+<ul>
+  <li>Trình điều hợp đồng bộ cần chỉ định rằng nó là một trình điều hợp đồng bộ bằng cách đặt <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=vi#CALLER_IS_SYNCADAPTER">CALLER_IS_SYNCADAPTER</a></code> thành <code>true</code>.</li>
+
+
+  <li>Trình điều hợp đồng bộ cần cung cấp một <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=vi#ACCOUNT_NAME">ACCOUNT_NAME</a></code> và một <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=vi#ACCOUNT_TYPE">ACCOUNT_TYPE</a></code> làm tham số truy vấn trong URI. </li>
+
+  <li>Trình điều hợp đồng bộ có quyền truy nhập ghi vào nhiều cột hơn ứng dụng hay widget.
+  Ví dụ, một ứng dụng chỉ có thể sửa đổi một vài đặc điểm của một lịch,
+  chẳng hạn như tên lịch, tên hiển thị, thiết đặt hiển thị, và lịch có được
+  đồng bộ hay không. Nếu so sánh, một trình điều hợp đồng bộ có thể truy cập không chỉ những cột đó, mà còn nhiều cột khác,
+  chẳng hạn như màu lịch, múi giờ, mức truy nhập, địa điểm, v.v.
+Tuy nhiên, trình điều hợp đồng bộ bị hạn chế đối với <code>ACCOUNT_NAME</code> và
+<code>ACCOUNT_TYPE</code> mà nó quy định.</li> </ul>
+
+<p>Sau đây là một phương pháp hữu ích hơn mà bạn có thể sử dụng để trả về một URI để dùng với một trình điều hợp đồng bộ:</p>
+<pre> static Uri asSyncAdapter(Uri uri, String account, String accountType) {
+    return uri.buildUpon()
+        .appendQueryParameter(android.provider.CalendarContract.CALLER_IS_SYNCADAPTER,&quot;true&quot;)
+        .appendQueryParameter(Calendars.ACCOUNT_NAME, account)
+        .appendQueryParameter(Calendars.ACCOUNT_TYPE, accountType).build();
+ }
+</pre>
+<p>Để biết việc triển khai mẫu trình điều hợp đồng bộ (không liên quan cụ thể tới Lịch), hãy xem phần
+<a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=vi">SampleSyncAdapter</a>.
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=vi" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=vi" title="Hỗ trợ">Hỗ trợ</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=vi" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=vi" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=vi" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=vi" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="GXbFPqgSVpa9canRc0O_BBLhKY9nqLlaVcG8TL0uW1U6MTQ5NzUxNjIwODg0Nzk1MA" />
+      <input type="hidden" name="next" value="/guide/topics/providers/calendar-provider.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+             selected="selected" >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Địa chỉ email</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en0c0e.js?hl=vi?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=vi"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_vi.js?hl=vi?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/calendar-provider.html?hl=vi by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:05:26 GMT -->
+</html>

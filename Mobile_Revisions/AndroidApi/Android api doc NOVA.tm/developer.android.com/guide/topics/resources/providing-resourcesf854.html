@@ -1,0 +1,2028 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<!-- Mirrored from developer.android.com/guide/topics/resources/providing-resources.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:11:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="9X_SCb0wOHGLgFBchuX2ZLkL53BCRI3rUBKAO7c9huY6MTQ5NzUxNjczOTE5MTQ3MA" />
+
+  
+    <link rel="canonical" href="providing-resourcesf854.html?hl=zh-tw">
+  
+
+  
+    <link rel="alternate" href="providing-resources9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="providing-resources327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="providing-resourcesf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="providing-resources7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="providing-resources0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="providing-resources232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="providing-resourcesde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="providing-resources0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="providing-resources9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="providing-resources6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="providing-resources.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/resources/providing-resources.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="providing-resources.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/faviconf854.png?hl=zh-tw">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-180f854.png?hl=zh-tw">
+
+
+<title>
+
+  提供資源 | Android Developers
+
+</title>
+
+  <meta name="description" content="您應該一律將應用程式資源具體化，例如影像和程式碼字串，以便單獨維護它們。 同時，您還應該將替代資源分組到特殊命名的資源目錄中，為特定裝置設定提供替代資源。 Android 會在執行階段根據目前的設定使用適當的資源。 例如，您可能會想根據螢幕大小提供不同的 UI 版面配置，或者根據語言設定提供不同的字串。 具體化您的應用程式資源後，可以使用在專案 R 類別中產生的資源 ID 來存取它們。 在應用程式使用資源的方法在 存取資源 中有相關討論。 本文件說明如何在 Android 專案分組您的資源，並為特定裝置設定提供替代資源…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default962f.css?hl=zh-tw?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundlef854.js?hl=zh-tw" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__zh_twf854.js?hl=zh-tw"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_androidf854.js?hl=zh-tw"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs962f.js?hl=zh-tw?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "zh-tw", "served": "zh-tw"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=zh-tw">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logof854.png?hl=zh-tw"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=zh-tw"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=zh-tw"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=zh-tw" width="18" height="19" alt="Play 管理中心">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="搜尋">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">返回</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../indexf854.html?hl=zh-tw" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentalsf854.html?hl=zh-tw" >App Fundamentals</a></li><li><a href="../../practices/compatibilityf854.html?hl=zh-tw" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/indexf854.html?hl=zh-tw" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requestingf854.html?hl=zh-tw" >Requesting Permissions</a></li><li><a href="../permissions/definingf854.html?hl=zh-tw" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/indexf854.html?hl=zh-tw" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jackf854.html?hl=zh-tw"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-artf854.html?hl=zh-tw" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/indexf854.html?hl=zh-tw" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filtersf854.html?hl=zh-tw" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-commonf854.html?hl=zh-tw" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/indexf854.html?hl=zh-tw" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activitiesf854.html?hl=zh-tw" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecyclef854.html?hl=zh-tw" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changesf854.html?hl=zh-tw" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stackf854.html?hl=zh-tw" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecyclef854.html?hl=zh-tw" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundlesf854.html?hl=zh-tw" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recentsf854.html?hl=zh-tw" >Recents Screen</a></li></ul></li><li><a href="../../components/fragmentsf854.html?hl=zh-tw" >Fragments</a></li><li><a href="../../components/loadersf854.html?hl=zh-tw" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/servicesf854.html?hl=zh-tw" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-servicesf854.html?hl=zh-tw" >Bound Services</a></li><li><a href="../../components/aidlf854.html?hl=zh-tw" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providersf854.html?hl=zh-tw" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basicsf854.html?hl=zh-tw" >Content Provider Basics</a></li><li><a href="../providers/content-provider-creatingf854.html?hl=zh-tw" >Creating a Content Provider</a></li><li><a href="../providers/calendar-providerf854.html?hl=zh-tw" >Calendar Provider</a></li><li><a href="../providers/contacts-providerf854.html?hl=zh-tw" >Contacts Provider</a></li><li><a href="../providers/document-providerf854.html?hl=zh-tw" >Open files using Storage Access Framework</a></li><li><a href="../providers/create-document-providerf854.html?hl=zh-tw" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcastsf854.html?hl=zh-tw" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/indexf854.html?hl=zh-tw" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/hostf854.html?hl=zh-tw" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threadsf854.html?hl=zh-tw" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="indexf854.html?hl=zh-tw" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="providing-resourcesf854.html?hl=zh-tw" >Providing Resources</a></li><li><a href="accessing-resourcesf854.html?hl=zh-tw" >Accessing Resources</a></li><li><a href="runtime-changesf854.html?hl=zh-tw" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="localizationf854.html?hl=zh-tw" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="icu4j-frameworkf854.html?hl=zh-tw" >ICU4J Android Framework APIs</a></li><li><a href="multilingual-supportf854.html?hl=zh-tw" >Language and Locale</a></li></ul></li><li><a href="complex-xml-resourcesf854.html?hl=zh-tw" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="available-resourcesf854.html?hl=zh-tw" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="animation-resourcef854.html?hl=zh-tw" >Animation</a></li><li><a href="color-list-resourcef854.html?hl=zh-tw" >Color State List</a></li><li><a href="drawable-resourcef854.html?hl=zh-tw" >Drawable</a></li><li><a href="layout-resourcef854.html?hl=zh-tw" >Layout</a></li><li><a href="menu-resourcef854.html?hl=zh-tw" >Menu</a></li><li><a href="string-resourcef854.html?hl=zh-tw" >String</a></li><li><a href="style-resourcef854.html?hl=zh-tw" >Style</a></li><li><a href="more-resourcesf854.html?hl=zh-tw" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-introf854.html?hl=zh-tw" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-elementf854.html?hl=zh-tw" >&lt;action&gt;</a></li><li><a href="../manifest/activity-elementf854.html?hl=zh-tw" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-elementf854.html?hl=zh-tw" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-elementf854.html?hl=zh-tw" >&lt;application&gt;</a></li><li><a href="../manifest/category-elementf854.html?hl=zh-tw" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-elementf854.html?hl=zh-tw" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-elementf854.html?hl=zh-tw" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-elementf854.html?hl=zh-tw" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-elementf854.html?hl=zh-tw" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-elementf854.html?hl=zh-tw" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-elementf854.html?hl=zh-tw" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-elementf854.html?hl=zh-tw" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-elementf854.html?hl=zh-tw" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-elementf854.html?hl=zh-tw" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-elementf854.html?hl=zh-tw" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-elementf854.html?hl=zh-tw" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-elementf854.html?hl=zh-tw" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-elementf854.html?hl=zh-tw" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-elementf854.html?hl=zh-tw" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-elementf854.html?hl=zh-tw" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-elementf854.html?hl=zh-tw" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-elementf854.html?hl=zh-tw" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-elementf854.html?hl=zh-tw" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-elementf854.html?hl=zh-tw" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-elementf854.html?hl=zh-tw" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-elementf854.html?hl=zh-tw" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-elementf854.html?hl=zh-tw" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/indexf854.html?hl=zh-tw" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overviewf854.html?hl=zh-tw" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layoutf854.html?hl=zh-tw" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linearf854.html?hl=zh-tw" >Linear Layout</a></li><li><a href="../ui/layout/relativef854.html?hl=zh-tw" >Relative Layout</a></li><li><a href="../ui/layout/recyclerviewf854.html?hl=zh-tw" >Recycler View</a></li><li><a href="../ui/layout/listviewf854.html?hl=zh-tw" >List View</a></li><li><a href="../ui/layout/gridviewf854.html?hl=zh-tw" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controlsf854.html?hl=zh-tw" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/buttonf854.html?hl=zh-tw" >Buttons</a></li><li><a href="../ui/controls/checkboxf854.html?hl=zh-tw" >Checkboxes</a></li><li><a href="../ui/controls/radiobuttonf854.html?hl=zh-tw" >Radio Buttons</a></li><li><a href="../ui/controls/togglebuttonf854.html?hl=zh-tw" >Toggle Buttons</a></li><li><a href="../ui/controls/spinnerf854.html?hl=zh-tw" >Spinners</a></li><li><a href="../ui/controls/pickersf854.html?hl=zh-tw" >Pickers</a></li></ul></li><li><a href="../ui/ui-eventsf854.html?hl=zh-tw" >Input Events</a></li><li><a href="../ui/menusf854.html?hl=zh-tw" >Menus</a></li><li><a href="../ui/settingsf854.html?hl=zh-tw" >Settings</a></li><li><a href="../ui/dialogsf854.html?hl=zh-tw" >Dialogs</a></li><li><a href="../ui/notifiers/notificationsf854.html?hl=zh-tw" >Notifications</a></li><li><a href="../ui/notifiers/toastsf854.html?hl=zh-tw" >Toasts</a></li><li><a href="../ui/shortcutsf854.html?hl=zh-tw" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/indexf854.html?hl=zh-tw" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialogf854.html?hl=zh-tw" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestionsf854.html?hl=zh-tw" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestionsf854.html?hl=zh-tw" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-configf854.html?hl=zh-tw" >Searchable Configuration</a></li></ul></li><li><a href="../ui/multi-windowf854.html?hl=zh-tw" >Multi-Window Support</a></li><li><a href="../ui/drag-dropf854.html?hl=zh-tw" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/indexf854.html?hl=zh-tw" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/appsf854.html?hl=zh-tw" >Making Apps More Accessible</a></li><li><a href="../ui/accessibility/checklistf854.html?hl=zh-tw" >Accessibility Developer Checklist</a></li><li><a href="../ui/accessibility/node-tree-debuggingf854.html?hl=zh-tw" >Using Node Tree Debugging</a></li><li><a href="../ui/accessibility/servicesf854.html?hl=zh-tw" >Building Accessibility Services</a></li><li><a href="../ui/accessibility/custom-viewsf854.html?hl=zh-tw" >Building Accessible Custom Views</a></li></ul></li><li><a href="../ui/themesf854.html?hl=zh-tw" >Styles and Themes</a></li><li><a href="../ui/custom-componentsf854.html?hl=zh-tw" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/indexf854.html?hl=zh-tw" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../graphics/prop-animationf854.html?hl=zh-tw" >Property Animation</a></li><li><a href="../graphics/view-animationf854.html?hl=zh-tw" >View Animation</a></li><li><a href="../graphics/drawable-animationf854.html?hl=zh-tw" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphicsf854.html?hl=zh-tw" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resourcesf854.html?hl=zh-tw" >Vector Drawable</a></li></ul></li><li><a href="../graphics/openglf854.html?hl=zh-tw" >OpenGL ES</a></li><li><a href="../graphics/hardware-accelf854.html?hl=zh-tw" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/indexf854.html?hl=zh-tw" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/computef854.html?hl=zh-tw" >RenderScript</a></li><li><a href="../renderscript/advancedf854.html?hl=zh-tw" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overviewf854.html?hl=zh-tw" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_typesf854.html?hl=zh-tw" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_typesf854.html?hl=zh-tw" >Object Types</a></li><li><a href="../renderscript/reference/rs_convertf854.html?hl=zh-tw" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_mathf854.html?hl=zh-tw" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_mathf854.html?hl=zh-tw" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrixf854.html?hl=zh-tw" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternionf854.html?hl=zh-tw" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomicf854.html?hl=zh-tw" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_timef854.html?hl=zh-tw" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_dataf854.html?hl=zh-tw" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_infof854.html?hl=zh-tw" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_eachf854.html?hl=zh-tw" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_iof854.html?hl=zh-tw" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debugf854.html?hl=zh-tw" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphicsf854.html?hl=zh-tw" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/indexf854.html?hl=zh-tw" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/indexf854.html?hl=zh-tw" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overviewf854.html?hl=zh-tw" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-sessionf854.html?hl=zh-tw" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-appf854.html?hl=zh-tw" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservicef854.html?hl=zh-tw" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-clientf854.html?hl=zh-tw" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-appf854.html?hl=zh-tw" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activityf854.html?hl=zh-tw" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttonsf854.html?hl=zh-tw" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphonesf854.html?hl=zh-tw" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/indexf854.html?hl=zh-tw" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formatsf854.html?hl=zh-tw" >Supported Media Formats</a></li><li><a href="../media/mediaplayerf854.html?hl=zh-tw" >MediaPlayer</a></li><li><a href="../media/mediarecorderf854.html?hl=zh-tw" >MediaRecorder</a></li><li><a href="../media/exoplayerf854.html?hl=zh-tw" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routingf854.html?hl=zh-tw" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouterf854.html?hl=zh-tw" >MediaRouter API</a></li><li><a href="../media/mediarouteproviderf854.html?hl=zh-tw" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/cameraf854.html?hl=zh-tw" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/indexf854.html?hl=zh-tw" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/indexf854.html?hl=zh-tw" >Location and Maps</a></li><li><a href="../location/strategiesf854.html?hl=zh-tw" >Location Strategies</a></li><li><a href="../sensors/sensors_overviewf854.html?hl=zh-tw" >Sensors Overview</a></li><li><a href="../sensors/sensors_motionf854.html?hl=zh-tw" >Motion Sensors</a></li><li><a href="../sensors/sensors_positionf854.html?hl=zh-tw" >Position Sensors</a></li><li><a href="../sensors/sensors_environmentf854.html?hl=zh-tw" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/indexf854.html?hl=zh-tw" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetoothf854.html?hl=zh-tw" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-lef854.html?hl=zh-tw" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/indexf854.html?hl=zh-tw" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfcf854.html?hl=zh-tw" >NFC Basics</a></li><li><a href="../connectivity/nfc/advanced-nfcf854.html?hl=zh-tw" >Advanced NFC</a></li><li><a href="../connectivity/nfc/hcef854.html?hl=zh-tw" >Host-based Card Emulation</a></li></ul></li><li><a href="../connectivity/wifip2pf854.html?hl=zh-tw" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/indexf854.html?hl=zh-tw" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessoryf854.html?hl=zh-tw" >Accessory</a></li><li><a href="../connectivity/usb/hostf854.html?hl=zh-tw" >Host</a></li></ul></li><li><a href="../connectivity/sipf854.html?hl=zh-tw" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/indexf854.html?hl=zh-tw" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-pastef854.html?hl=zh-tw" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-methodf854.html?hl=zh-tw" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboardf854.html?hl=zh-tw" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-frameworkf854.html?hl=zh-tw" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/indexf854.html?hl=zh-tw" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storagef854.html?hl=zh-tw" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../data/backupf854.html?hl=zh-tw" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/autobackupf854.html?hl=zh-tw" >Auto Backup</a></li><li><a href="../data/keyvaluebackupf854.html?hl=zh-tw" >Key/Value Backup</a></li><li><a href="../data/testingbackupf854.html?hl=zh-tw" >Testing Backup and Restore</a></li></ul></li><li><a href="../data/install-locationf854.html?hl=zh-tw" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/indexf854.html?hl=zh-tw" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-adminf854.html?hl=zh-tw" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/indexf854.html?hl=zh-tw" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targetingf854.html?hl=zh-tw" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webviewf854.html?hl=zh-tw" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migratingf854.html?hl=zh-tw" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debuggingf854.html?hl=zh-tw" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practicesf854.html?hl=zh-tw" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/indexf854.html?hl=zh-tw"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_supportf854.html?hl=zh-tw" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distributionf854.html?hl=zh-tw" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-modef854.html?hl=zh-tw" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessnessf854.html?hl=zh-tw" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsetsf854.html?hl=zh-tw" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=zh-tw">首頁</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=zh-tw">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=zh-tw">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=zh-tw">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=zh-tw">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=zh-tw">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=zh-tw"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=zh-tw"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">訓練</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../indexf854.html?hl=zh-tw"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=zh-tw"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">參考資料</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=zh-tw">範例</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=zh-tw"
+           >程式庫</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=zh-tw"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=zh-tw"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=zh-tw">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=zh-tw">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=zh-tw">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=zh-tw">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=zh-tw">Play 管理中心</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=zh-tw"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=zh-tw"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=zh-tw">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=zh-tw">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">提供資源</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+  <h2>快速檢視</h2>
+  <ul>
+    <li>不同類型的資源屬於 <code>res/</code> 中不同的子目錄</li>
+    <li>替代資源提供特定設定資源檔案</li>
+    <li>始終要包含預設資源，如此應用程式才不會依賴特定裝置設定
+</li>
+  </ul>
+  <h2>本文件內容</h2>
+  <ol>
+    <li><a href="#ResourceTypes">分組資源類型</a></li>
+    <li><a href="#AlternativeResources">提供替代資源</a>
+      <ol>
+        <li><a href="#QualifierRules">限定詞名稱規則</a></li>
+        <li><a href="#AliasResources">建立別名資源</a></li>
+      </ol>
+    </li>
+    <li><a href="#Compatibility">使用資源提供最佳的裝置相容性</a></li>
+    <li><a href="#BestMatch">Android 如何尋找最相符的資源</a></li>
+  </ol>
+
+  <h2>另請參閱</h2>
+  <ol>
+    <li><a href="accessing-resourcesf854.html?hl=zh-tw">存取資源</a></li>
+    <li><a href="available-resourcesf854.html?hl=zh-tw">資源類型</a></li>
+    <li><a href="../../practices/screens_supportf854.html?hl=zh-tw">支援多個螢幕</a>
+</li>
+  </ol>
+</div>
+</div>
+
+<p>您應該一律將應用程式資源具體化，例如影像和程式碼字串，以便單獨維護它們。
+同時，您還應該將替代資源分組到特殊命名的資源目錄中，為特定裝置設定提供替代資源。
+Android 會在執行階段根據目前的設定使用適當的資源。
+例如，您可能會想根據螢幕大小提供不同的 UI 版面配置，或者根據語言設定提供不同的字串。
+
+</p>
+
+<p>具體化您的應用程式資源後，可以使用在專案 <code>R</code> 類別中產生的資源 ID 來存取它們。
+在應用程式使用資源的方法在<a href="accessing-resourcesf854.html?hl=zh-tw">存取資源</a>中有相關討論。
+
+本文件說明如何在 Android 專案分組您的資源，並為特定裝置設定提供替代資源。
+</p>
+
+
+<h2 id="ResourceTypes">分組資源類型</h2>
+
+<p>您應該將每個資源類型放在專案
+<code>res/</code> 目錄的特定子目錄中。例如，下列為簡單專案的檔案階層：</p>
+
+<pre class="classic no-pretty-print">
+MyProject/
+    src/  <span style="color:black">
+        MyActivity.java  </span>
+    res/
+        drawable/  <span style="color:black">
+            graphic.png  </span>
+        layout/  <span style="color:black">
+            main.xml
+            info.xml</span>
+        mipmap/  <span style="color:black">
+            icon.png </span>
+        values/  <span style="color:black">
+            strings.xml  </span>
+</pre>
+
+<p>如您在此範例所見，<code>res/</code> 目錄包含所有資源 (在子目錄中)：一個影像資源、兩個版面配置資源、啟動器圖示的 <code>mipmap/</code> 目錄，以及字串資源檔案。
+
+資源目錄名稱非常重要，在表 1 有相關說明。
+</p>
+
+<p class="note"><strong>注意：</strong>如需有關使用 mipmap 資料夾的詳細資訊，請參閱<a href="https://developer.android.com/tools/projects/index.html?hl=zh-tw#mipmap">管理專案總覽</a>。
+</p>
+
+<p class="table-caption" id="table1"><strong>表 1.</strong>專案 <code>res/</code> 目錄內部支援資源目錄。
+</p>
+
+<table>
+  <tr>
+    <th scope="col">目錄</th>
+    <th scope="col">資源類型</th>
+  </tr>
+
+  <tr>
+    <td><code>animator/</code></td>
+    <td>定義<a href="../graphics/prop-animationf854.html?hl=zh-tw">屬性動畫</a>的 XML 檔案。
+</td>
+  </tr>
+
+  <tr>
+    <td><code>anim/</code></td>
+    <td>定義 <a href="../graphics/view-animationf854.html?hl=zh-tw#tween-animation">tween 動畫</a>的 XML 檔案。
+(屬性動畫也能儲存在這個目錄中，但建議將屬性動畫放在<code>animator/</code> 目錄中，以區分這兩個類型。)
+
+</td>
+  </tr>
+
+  <tr>
+    <td><code>color/</code></td>
+    <td>定義色彩狀態清單的 XML 檔案。請參閱<a href="color-list-resourcef854.html?hl=zh-tw">色彩狀態清單資源</a>
+</td>
+  </tr>
+
+  <tr>
+    <td><code>drawable/</code></td>
+
+    <td><p>編譯成下列可繪項目資源子類型的點陣圖檔案 (<code>.png</code>、<code>.9.png</code>、<code>.jpg</code>、<code>.gif</code>) 或 XML 檔案：
+</p>
+      <ul>
+        <li>點陣圖檔案</li>
+        <li>九宮格影像 (可重新調整大小的點陣圖)</li>
+        <li>狀態清單</li>
+        <li>形狀</li>
+        <li>動畫可繪項目</li>
+        <li>其他可繪項目</li>
+      </ul>
+      <p>請參閱<a href="drawable-resourcef854.html?hl=zh-tw">可繪項目資源</a>。</p>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>mipmap/</code></td>
+    <td>適用於不同啟動器圖示密度的可繪項目檔案。如需有關使用 <code>mipmap/</code> 資料夾管理啟動器圖示的詳細資訊，請參閱<a href="https://developer.android.com/tools/project/index.html?hl=zh-tw#mipmap">管理專案總覽</a>。
+
+</td>
+  </tr>
+
+  <tr>
+    <td><code>layout/</code></td>
+    <td>定義使用者介面版面配置的 XML 檔案。
+        請參閱<a href="layout-resourcef854.html?hl=zh-tw">版面配置資源</a>。</td>
+  </tr>
+
+  <tr>
+    <td><code>menu/</code></td>
+    <td>定義應用程式選單 (例如，選項選單、操作選單或子選單) 的 XML 檔案。
+請參閱<a href="menu-resourcef854.html?hl=zh-tw">選單資源</a>。</td>
+  </tr>
+
+  <tr>
+    <td><code>raw/</code></td>
+    <td><p>以原始格式儲存的任意檔案。如要使用原始
+<code><a href="https://developer.android.com/reference/java/io/InputStream.html?hl=zh-tw">InputStream</a></code> 開啟這些資源，使用資源 ID 呼叫 <code><a href="https://developer.android.com/reference/android/content/res/Resources.html?hl=zh-tw#openRawResource(int)">Resources.openRawResource()</a></code>，資源 ID 為 <code>R.raw.&lt;em&gt;filename&lt;/em&gt;</code>。</p>
+      <p>然而，如果您需要存取原始檔案名稱和檔案階層，可以考慮將一些資源儲存在 <code>assets/</code> 目錄中 (而不是 <code>res/raw/</code>)。
+位於 <code>assets/</code> 的檔案不會有資源 ID，因此您只能使用 <code><a href="https://developer.android.com/reference/android/content/res/AssetManager.html?hl=zh-tw">AssetManager</a></code> 讀取它們。
+</p></td>
+  </tr>
+
+  <tr>
+    <td><code>values/</code></td>
+    <td><p>包含簡單值 (例如，字串、整數和色彩) 的 XML 檔案。</p>
+      <p>位於其他 <code>res/</code> 子目錄的 XML 資源檔案會根據 XML 檔案名稱定義單一資源，而位於 <code>values/</code> 目錄的檔案則會描述多個資源。
+針對這個目錄中的檔案，<code>&amp;lt;resources&amp;gt;</code> 元素的每個子項都會定義單一資源。
+
+例如，<code>&amp;lt;string&amp;gt;</code> 元素建立一個
+<code>R.string</code> 資源，<code>&amp;lt;color&amp;gt;</code> 元素建立一個 <code>R.color</code>資源。
+</p>
+      <p>由於每個資源都是以自己的 XML 元素定義，您可以依照自己的喜好命名檔案，並將不同的資源類型放在一個檔案中。
+然而，為了更加清楚，您可以將唯一資源類型放在不同的檔案中。
+例如，針對您可以在此目錄建立的資源，這裡提供一些檔案名稱慣例：
+</p>
+      <ul>
+        <li>arrays.xml 適用於資源陣列 (<a href="more-resourcesf854.html?hl=zh-tw#TypedArray">具類型的陣列</a>)。</li>
+        <li>colors.xml 適用於<a href="more-resourcesf854.html?hl=zh-tw#Color">色彩值</a></li>
+        <li>dimens.xml 適用於<a href="more-resourcesf854.html?hl=zh-tw#Dimension">維度值</a>。</li>
+        <li>strings.xml 適用於<a href="string-resourcef854.html?hl=zh-tw">字串值</a>。
+</li>
+        <li>styles.xml 適用於<a href="style-resourcef854.html?hl=zh-tw">樣式</a>。</li>
+      </ul>
+      <p>請參閱<a href="string-resourcef854.html?hl=zh-tw">字串資源</a>、
+<a href="style-resourcef854.html?hl=zh-tw">樣式資源</a>和
+<a href="more-resourcesf854.html?hl=zh-tw">更多資源類型</a>。</p>
+    </td>
+  </tr>
+
+  <tr>
+    <td><code>xml/</code></td>
+    <td>可以在執行階段讀取的任意 XML 檔案，方法是呼叫 <code><a href="https://developer.android.com/reference/android/content/res/Resources.html?hl=zh-tw#getXml(int)">Resources.getXML()</a></code>。各種 XML 設定檔案都必須儲存在這裡，例如<a href="../search/searchable-configf854.html?hl=zh-tw">可搜尋項目設定</a>。
+
+<!-- or preferences configuration. --></td>
+  </tr>
+</table>
+
+<p class="caution"><strong>注意：</strong>千萬不要將資源檔案直接儲存在
+<code>res/</code> 目錄內 &mdash; 會發生編譯錯誤。</p>
+
+<p>如需特定資源類型的詳細資訊，請參閱<a href="available-resourcesf854.html?hl=zh-tw">資源類型</a>文件。</p>
+
+<p>您儲存在表 1 定義之子目錄的資源是您的「預設」資源。
+也就是說，這些資源會定義您應用程式的預設設計和內容。
+然而，不同類型的 Android 平台裝置可能需要不同類型的資源。
+例如，如果裝置的螢幕大於一般螢幕，則您需要提供不同的版面配置資源，以充分利用額外的螢幕空間。
+或者，如果裝置有不同的語言設定，則您需要提供不同的字串資源，以翻譯您使用者介面中的文字。
+
+如要為不同裝置設定提供這些不同的資源，除了預設資源之外，您還需要提供替代資源。
+
+</p>
+
+
+<h2 id="AlternativeResources">提供替代資源</h2>
+
+
+<div class="figure" style="width:429px">
+<img src="../../../images/resources/resource_devices_diagram2f854.png?hl=zh-tw" height="167" alt="" />
+<p class="img-caption">
+<strong>圖 1.</strong>兩個不同的裝置，個別使用不同的版面配置資源。</p>
+</div>
+
+<p>幾乎每個應用程式都應提供替代資源以支援特定裝置設定。
+例如，您應該為不同的螢幕密度包含替代可繪項目資源，並為不同語言提供替代字串資源。
+Android 會在執行階段偵測目前的裝置設定，並為您的應用程式載入適當的資源。
+
+</p>
+
+<p>如要為一組資源指定特定設定的替代項目：</p>
+<ol>
+  <li>在 <code>res/</code> 建立一個新的目錄，命名的格式為 <code>&lt;em&gt;&amp;lt;resources_name&amp;gt;&lt;/em&gt;-&lt;em&gt;&amp;lt;config_qualifier&amp;gt;&lt;/em&gt;</code>。
+    <ul>
+      <li><em><code>&amp;lt;resources_name&amp;gt;</code></em> 是對應預設資源 (定義在表 1) 的目錄名稱。
+</li>
+      <li><em><code>&amp;lt;qualifier&amp;gt;</code></em> 是用來指定要使用這些資源之個別設定的名稱 (定義在表 2)。
+</li>
+    </ul>
+    <p>您可以附加一個以上的 <em><code>&amp;lt;qualifier&amp;gt;</code></em>。使用破折號分隔每個項目。
+</p>
+    <p class="caution"><strong>注意：</strong>附加多個限定詞時，您必須以表 2 列出的相同順序放置它們。
+如果限定詞的順序錯誤，將會忽略該資源。
+</p>
+  </li>
+  <li>將各個替代資源儲存在這個新的目錄。資源檔案的名稱必須和預設資源檔案的名稱完全相同。
+</li>
+</ol>
+
+<p>例如，這裡有些預設和替代資源：</p>
+
+<pre class="classic no-pretty-print">
+res/
+    drawable/   <span style="color:black">
+        icon.png
+        background.png    </span>
+    drawable-hdpi/  <span style="color:black">
+        icon.png
+        background.png  </span>
+</pre>
+
+<p><code>hdpi</code> 限定詞代表該目錄的資源適用於高密度螢幕裝置。
+這些可繪項目目錄中的影像大小已調整為符合特定螢幕密度，但是檔案名稱完全相同。
+
+如此一來，您用來參照 <code>icon.png</code> 或 <code>background.png</code> 影像的資源 ID 一律都會相同，但 Android 會透過比對裝置設定資訊和資源目錄名稱中的限定詞，選擇最符合目前裝置的每個資源版本。
+
+</p>
+
+<p>Android 支援多種設定限定詞，而且您可以將多個限定詞加到一個目錄名稱，並用破折號分隔每個限定詞。
+表 2 依優先等級列出有效的設定限定詞 &mdash; 如果您針對一個資源目錄使用多個限定詞，您必須依表格中列出的順序將它們新增到目錄名稱。
+
+
+</p>
+
+
+<p class="table-caption" id="table2"><strong>表 2.</strong>設定限定詞名稱。
+</p>
+<table>
+    <tr>
+        <th>設定</th>
+        <th>限定詞值</th>
+        <th>描述</th>
+    </tr>
+    <tr id="MccQualifier">
+      <td>MCC 和 MNC</td>
+      <td>範例：<br/>
+        <code>mcc310</code><br/>
+        <code><nobr>mcc310-mnc004</nobr></code><br/>
+        <code>mcc208-mnc00</code><br/>
+        等等。
+      </td>
+      <td>
+        <p>行動裝置國家/地區代碼 (MCC) 後面會選擇性加上裝置 SIM 卡上的行動裝置網路代碼 (MNC)
+。例如，<code>mcc310</code> 代表美國地區的所有行動通訊業者、
+        <code>mcc310-mnc004</code> 代表美國地區的 Verizon，以及 <code>mcc208-mnc00</code> 代表法國地區的 Orange。
+</p>
+        <p>如果裝置使用無線電連線 (GSM 手機)，MCC 和 MNC 值都會來自SIM 卡。
+</p>
+        <p>您也可以單獨使用 MCC (例如，在應用程式包含國家特定法律資源)。
+如果您只需根據語言進行指定，則改為使用「語言和區域」<em></em>限定詞 (稍後將會討論)。
+如果您決定使用 MCC 和 MNC 限定詞，應謹慎使用，並測試是否可按預期運作。
+</p>
+        <p>另請查看設定欄位 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#mcc">mcc</a></code> 和 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#mnc">mnc</a></code>，分別提供目前的行動裝置國家代碼和行動裝置網路代碼。
+</p>
+      </td>
+    </tr>
+    <tr id="LocaleQualifier">
+      <td>語言和區域</td>
+      <td>範例：<br/>
+        <code>en</code><br/>
+        <code>fr</code><br/>
+        <code>en-rUS</code><br/>
+        <code>fr-rFR</code><br/>
+        <code>fr-rCA</code><br/>
+        等等。
+      </td>
+      <td><p>語言是以兩個字母的 <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639-1</a> 語言代碼定義，後面可以視需要加上兩個字母的 <a href="http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html">ISO 3166-1-alpha-2</a> 區域代碼 (前面加上小寫 "<code>r</code>")。
+
+
+
+        </p><p>
+        代碼「沒有」<em></em>大小寫之分；<code>r</code> 首碼是用來區分區域部分。
+
+        您不能只指定區域。</p>
+        <p>如果使用者在系統設定變更其語言，此設定就會在應用程式生命週期內發生變更。
+請參閱<a href="runtime-changesf854.html?hl=zh-tw">處理執行階段變更</a>，以瞭解這會如何在執行階段期間影響您的應用程式。
+</p>
+        <p>請參閱<a href="localizationf854.html?hl=zh-tw">當地語系化</a>，以取得將您的應用程式當地語系化成其他語言的詳細指南。
+</p>
+        <p>另請查看 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#locale">locale</a></code> 設定欄位，這會提供目前的地區設定。
+</p>
+      </td>
+    </tr>
+    <tr id="LayoutDirectionQualifier">
+      <td>版面配置方向</td>
+      <td><code>ldrtl</code><br/>
+        <code>ldltr</code><br/>
+      </td>
+      <td><p>應用程式的版面配置方向。<code>ldrtl</code> 代表「版面配置方向右至左」。
+      <code>ldltr</code> 代表「版面配置方向左至右」，而且是預設隱含值。
+      </p>
+      <p>這適用於任何資源，例如版面配置、可繪項目或值。
+      </p>
+      <p>例如，如果您想針對阿拉伯語言提供一些特定版面配置，以及為任何其他「右至左」語言 (像是波斯文或希伯來文) 提供幾個一般版面配置，則程式碼如下：
+
+      </p>
+<pre class="classic no-pretty-print">
+res/
+    layout/   <span style="color:black">
+        main.xml  </span>(Default layout)
+    layout-ar/  <span style="color:black">
+        main.xml  </span>(Specific layout for Arabic)
+    layout-ldrtl/  <span style="color:black">
+        main.xml  </span>(Any "right-to-left" language, except
+                  for Arabic, because the "ar" language qualifier
+                  has a higher precedence.)
+</pre>
+        <p class="note"><strong>注意：</strong>如要為您的應用程式啟用右至左版面配置功能，您必須將 <a href="../manifest/application-elementf854.html?hl=zh-tw#supportsrtl"><code>supportsRtl</code></a> 設成 <code>"true"</code>，以及將 <a href="../manifest/uses-sdk-elementf854.html?hl=zh-tw#target"><code>targetSdkVersion</code></a> 設成 17 或更高。
+</p>
+        <p>已新增至 API 級別 17。<em></em></p>
+      </td>
+    </tr>
+    <tr id="SmallestScreenWidthQualifier">
+      <td>smallestWidth</td>
+      <td><code>sw&lt;N&gt;dp</code><br/><br/>
+        範例：<br/>
+        <code>sw320dp</code><br/>
+        <code>sw600dp</code><br/>
+        <code>sw720dp</code><br/>
+        等等。
+      </td>
+      <td>
+        <p>螢幕的基本大小，也就是可用
+螢幕區域的最短維度。具體而言，裝置的 smallestWidth 是螢幕最短的可用高度和寬度 (您也可以把它當成螢幕的「最小寬度」)。
+您可以使用此限定詞確保無論螢幕目前的方向為何，您的應用程式至少有 <code>&amp;lt;N&amp;gt;</code> dps 的寬度可供 UI 使用。
+
+</p>
+        <p>例如，如果您的版面配置需要隨時保持至少 600 dp 的最小螢幕區域維度，則您可以使用此限定詞建立版面配置資源 <code>res/layout-sw600dp/</code>。
+系統只會在可用螢幕的最小維度至少是 600dp 時使用這些資源，無論 600dp 的長度對使用者而言是高度或寬度都一樣。
+
+smallestWidth 是螢幕的固定螢幕大小特性；<strong>裝置的 smallestWidth 不會隨著螢幕方向的改變而變更。</strong>
+</p>
+        <p>裝置的 smallestWidth 會將螢幕裝飾和系統 UI 列入計算。例如，如果裝置的螢幕上有一些永久的 UI 元素，且這些元素佔用了 smallestWidth 座標軸上的空間，系統會宣告 smallestWidth 小於實際螢幕大小，因為這些是 UI 無法使用的螢幕像素。
+
+
+因此，您使用的值應該是版面配置所需的實際最小維度<em></em> (這個值通常是您版面配置支援的「最小寬度」，無論螢幕目前的方向為何都一樣)。
+
+</p>
+        <p>您可以針對一般螢幕大小在這裡使用的一些值：</p>
+        <ul>
+          <li>320 適用於採用以下螢幕設定的裝置：
+            <ul>
+              <li>240x320 ldpi (QVGA 手機)</li>
+              <li>320x480 mdpi (手機)</li>
+              <li>480x800 hdpi (高密度手機)</li>
+            </ul>
+          </li>
+          <li>480 適用於 480x800 mdpi 這類螢幕 (平板電腦/手機)。</li>
+          <li>600 適用於 600x1024 mdpi 這類螢幕 (7" 平板電腦)。</li>
+          <li>720 適用於 720x1280 mdpi 這類螢幕 (10" 平板電腦)。</li>
+        </ul>
+        <p>當您的應用程式為 smallestWidth 限定詞提供多個值不相同的資源目錄時，系統會使用最接近 (不超過)裝置 smallestWidth 的值。
+
+ </p>
+        <p>已新增至 API 級別 13。<em></em></p>
+        <p>另請查看 <a href="../manifest/supports-screens-elementf854.html?hl=zh-tw#requiresSmallest"><code>android:requiresSmallestWidthDp</code></a> 屬性，該屬性會宣告與您應用程式相容的最小 smallestWidth，以及 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#smallestScreenWidthDp">smallestScreenWidthDp</a></code> 設定欄位，此欄位保留裝置的 smallestWidth 值。
+
+</p>
+        <p>如需設計不同螢幕及使用此限定詞的詳細資訊，請參閱<a href="../../practices/screens_supportf854.html?hl=zh-tw">支援多個螢幕</a>開發人員指南。
+
+</p>
+      </td>
+    </tr>
+    <tr id="ScreenWidthQualifier">
+      <td>可用寬度</td>
+      <td><code>w&lt;N&gt;dp</code><br/><br/>
+        範例：<br/>
+        <code>w720dp</code><br/>
+        <code>w1024dp</code><br/>
+        等等。
+      </td>
+      <td>
+        <p>指定資源應使用的最小可用螢幕寬度，以 <code>dp</code> 單位計算 &mdash; 由 <code>&lt;N&gt;</code> 值定義。
+這個設定值會隨著螢幕方向變更為橫向或直向而改變，以符合目前實際的寬度。
+
+</p>
+        <p>當您的應用程式為這個設定提供多個值不相同的資源目錄時，系統會使用最接近 (不超過) 裝置目前螢幕寬度的值。
+
+這個值會將螢幕裝飾列入計算，因此如果裝置顯示的左邊緣或右邊緣有一些永久的 UI 元素，則會使用比實際螢幕大小更小的寬度值，將這些 UI 元素列入計算並減少應用程式的可用空間。
+
+
+
+</p>
+        <p>已新增至 API 級別 13。<em></em></p>
+        <p>另請查看 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#screenWidthDp">screenWidthDp</a></code> 設定欄位，該欄位保留目前的螢幕寬度。
+</p>
+        <p>如需設計不同螢幕及使用此限定詞的詳細資訊，請參閱<a href="../../practices/screens_supportf854.html?hl=zh-tw">支援多個螢幕</a>開發人員指南。
+
+</p>
+      </td>
+    </tr>
+    <tr id="ScreenHeightQualifier">
+      <td>可用高度</td>
+      <td><code>h&lt;N&gt;dp</code><br/><br/>
+        範例：<br/>
+        <code>h720dp</code><br/>
+        <code>h1024dp</code><br/>
+        等等。
+      </td>
+      <td>
+        <p>指定資源應使用的最小可用螢幕高度，以「dp」單位計算 &mdash; 由 <code>&lt;N&gt;</code> 值定義。
+這個設定值會隨著螢幕方向變更為橫向或直向而改變，以符合目前實際的高度。
+
+</p>
+        <p>當您的應用程式為這個設定提供多個值不相同的資源目錄時，系統會使用最接近 (不超過) 裝置目前螢幕高度的值。
+
+這個值會將螢幕裝飾列入計算，因此如果裝置顯示的上邊緣或下邊緣有一些永久的 UI 元素，則會使用比實際螢幕大小更小的高度值，將這些 UI 元素列入計算並減少應用程式的可用空間。
+
+
+
+不固定的螢幕裝飾 (例如，可在全螢幕時隱藏的手機狀態列) 在這裡不<em></em>列入計算，標題列或動作列這類視窗裝飾也不會列入計算，因此應用程式必須做好準備因應比其指定還小的空間。
+
+
+
+
+        <p>已新增至 API 級別 13。<em></em></p>
+        <p>另請查看 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#screenHeightDp">screenHeightDp</a></code> 設定欄位，該欄位保留目前的螢幕寬度。
+</p>
+        <p>如需設計不同螢幕及使用此限定詞的詳細資訊，請參閱<a href="../../practices/screens_supportf854.html?hl=zh-tw">支援多個螢幕</a>開發人員指南。
+
+</p>
+      </td>
+    </tr>
+    <tr id="ScreenSizeQualifier">
+      <td>螢幕大小</td>
+      <td>
+        <code>small</code><br/>
+        <code>normal</code><br/>
+        <code>large</code><br/>
+        <code>xlarge</code>
+      </td>
+      <td>
+        <ul class="nolist">
+        <li><code>small</code>：與低密度 QVGA 螢幕大小相似的螢幕
+。小螢幕的最低版面配置大小約 320x426 dp 單位。
+範例包含 QVGA 低密度和 VGA 高密度。
+</li>
+        <li><code>normal</code>：與中密度 HVGA 螢幕大小相似的螢幕。
+一般螢幕的最低版面配置大小約 320x470 dp 單位。
+這類螢幕的範例有 WQVGA 低密度、HVGA 中密度、WVGA高密度。
+
+</li>
+        <li><code>large</code>：與中密度 VGA 螢幕大小相似的螢幕。
+
+        大螢幕的最低版面配置大小約 480x640 dp 單位。
+        範例包含 VGA 和 WVGA 中密度螢幕。</li>
+        <li><code>xlarge</code>：比傳統中密度 HVGA 螢幕大很多的螢幕。
+超大螢幕的最低版面配置大小約 720x960 dp 單位。
+在大多數情況下，使用超大螢幕的裝置由於尺寸過大無法放入口袋，因此最有可能是平板電腦樣式的裝置。
+
+已新增至 API 級別 9。<em></em></li>
+        </ul>
+        <p class="note"><strong>注意：</strong>使用大小限定詞不代表資源僅適用於該大小的螢幕。<em></em>
+如果您提供的替代資源沒有更符合目前裝置設定的限定詞，系統將使用<a href="#BestMatch">最符合</a>的資源。
+
+</p>
+        <p class="caution"><strong>注意：</strong>如果所有資源都使用比目前螢幕更大<em></em>的大小限定詞，系統將不會<strong></strong>使用這些資源，您的應用程式將會在執行階段當機 (例如，如果所有版面配置資源都標記為 <code>xlarge</code> 限定詞，但裝置為一般大小螢幕)。
+
+</p>
+        <p>已新增至 API 級別 4。<em></em></p>
+
+        <p>請參閱<a href="../../practices/screens_supportf854.html?hl=zh-tw">支援多個螢幕</a>以取得詳細資訊。
+</p>
+        <p>另請查看 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#screenLayout">screenLayout</a></code> 設定欄位，該欄位會指出螢幕為小螢幕、一般螢幕或大螢幕。
+
+</p>
+      </td>
+    </tr>
+    <tr id="ScreenAspectQualifier">
+      <td>螢幕外觀</td>
+      <td>
+        <code>long</code><br/>
+        <code>notlong</code>
+      </td>
+      <td>
+        <ul class="nolist">
+          <li><code>long</code>：長螢幕，例如 WQVGA、WVGA、FWVGA</li>
+          <li><code>notlong</code>：非長螢幕，例如 QVGA、HVGA、VGA</li>
+        </ul>
+        <p>已新增至 API 級別 4。<em></em></p>
+        <p>這純粹是依照螢幕的外觀比例來判定 (「長」螢幕是較寬的螢幕)。這與螢幕方向無關。
+</p>
+        <p>另請查看 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#screenLayout">screenLayout</a></code> 設定欄位，該欄位會指出螢幕是否為長螢幕。
+</p>
+      </td>
+    </tr>
+    <tr id="OrientationQualifier">
+      <td>螢幕方向</td>
+      <td>
+        <code>port</code><br/>
+        <code>land</code>  <!-- <br/>
+        <code>square</code>  -->
+      </td>
+      <td>
+        <ul class="nolist">
+          <li><code>port</code>：裝置的方向為直向 (垂直)</li>
+          <li><code>land</code>：裝置的方向為橫向 (水平)</li>
+          <!-- Square mode is currently not used. -->
+        </ul>
+        <p>如果使用者旋轉螢幕，此設定就會在應用程式生命週期內發生變更。
+請參閱<a href="runtime-changesf854.html?hl=zh-tw">處理執行階段變更</a>，以瞭解這會如何在執行階段期間影響您的應用程式。
+</p>
+        <p>另請查看 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#orientation">orientation</a></code> 設定欄位，該欄位會指出目前的裝置方向。
+</p>
+      </td>
+    </tr>
+    <tr id="UiModeQualifier">
+      <td>UI 模式</td>
+      <td>
+        <code>car</code><br/>
+        <code>desk</code><br/>
+        <code>television</code><br/>
+        <code>appliance</code>
+        <code>watch</code>
+      </td>
+      <td>
+        <ul class="nolist">
+          <li><code>car</code>：在車用座架顯示的裝置</li>
+          <li><code>desk</code>：在桌面座架顯示的裝置</li>
+          <li><code>television</code>：在電視上顯示的裝置，提供在離使用者很遠的大螢幕上顯示 UI 的「十英呎」體驗，主要透過 DPAD 或其他非指標互動指定方向。
+
+
+</li>
+          <li><code>appliance</code>：做為設備使用的裝置，沒有顯示器
+</li>
+          <li><code>watch</code>：裝置有佩戴在手腕上的顯示器</li>
+        </ul>
+        <p>已新增至 API 級別 8、電視已新增至 API 13、手錶已新增至 API 20。<em></em></p>
+        <p>如要瞭解從座架插入或移除裝置時，您的應用程式可以如何回應的相關資訊，請參閱<a href="https://developer.android.com/training/monitoring-device-state/docking-monitoring.html?hl=zh-tw">判斷和監控座架狀態和類型</a>。
+
+</p>
+        <p>如果使用者將裝置放入座架，此設定就會在應用程式生命週期內發生變更。
+您可以使用 <code><a href="https://developer.android.com/reference/android/app/UiModeManager.html?hl=zh-tw">UiModeManager</a></code> 啟用或停用這些模式。請參閱<a href="runtime-changesf854.html?hl=zh-tw">處理執行階段變更</a>，以瞭解這會如何在執行階段期間影響您的應用程式。
+</p>
+      </td>
+    </tr>
+    <tr id="NightQualifier">
+      <td>夜間模式</td>
+      <td>
+        <code>night</code><br/>
+        <code>notnight</code>
+      </td>
+      <td>
+        <ul class="nolist">
+          <li><code>night</code>：夜間時間</li>
+          <li><code>notnight</code>：日間模式</li>
+        </ul>
+        <p>已新增至 API 級別 8。<em></em></p>
+        <p>如果從自動模式 (預設) 的夜間模式離開，在這種情況下模式會隨著日間時間變更，此設定就會在應用程式生命週期內發生變更。
+您可以使用 <code><a href="https://developer.android.com/reference/android/app/UiModeManager.html?hl=zh-tw">UiModeManager</a></code> 啟用或停用這個模式。
+請參閱<a href="runtime-changesf854.html?hl=zh-tw">處理執行階段變更</a>，以瞭解這會如何在執行階段期間影響您的應用程式。
+</p>
+      </td>
+    </tr>
+    <tr id="DensityQualifier">
+      <td>螢幕像素密度 (dpi)</td>
+      <td>
+        <code>ldpi</code><br/>
+        <code>mdpi</code><br/>
+        <code>hdpi</code><br/>
+        <code>xhdpi</code><br/>
+        <code>xxhdpi</code><br/>
+        <code>xxxhdpi</code><br/>
+        <code>nodpi</code><br/>
+        <code>tvdpi</code>
+      </td>
+      <td>
+        <ul class="nolist">
+          <li><code>ldpi</code>：低密度螢幕；約 120dpi。</li>
+          <li><code>mdpi</code>：中密度 (在傳統 HVGA) 螢幕；約 160dpi。
+</li>
+          <li><code>hdpi</code>：高密度螢幕；約 240dpi。</li>
+          <li><code>xhdpi</code>：特高密度螢幕；約 320dpi。已新增至 API 級別 8。
+<em></em></li>
+          <li><code>xxhdpi</code>：特特高密度螢幕；約 480dpi。已新增至 API 級別 16。
+<em></em></li>
+          <li><code>xxxhdpi</code>：特特特高密度使用 (僅限啟動器圖示，請參閱支援多個螢幕中的<a href="../../practices/screens_supportf854.html?hl=zh-tw#xxxhdpi-note">注意</a><em></em>)；約 640dpi。
+
+已新增至 API 級別 18。
+<em></em></li>
+          <li><code>nodpi</code>：如果您不想縮放點陣圖資源以符合裝置密度，可使用此設定。
+</li>
+          <li><code>tvdpi</code>：介於 mdpi 和 hdpi 的螢幕；約 213dpi。這不屬於「主要」密度群組。
+這大部分用於電視，大多數應用程式應該不需要用到 &mdash;mdpi 和 hdpi 資源對大多數應用程式已經足夠，系統將視需要縮放它們。
+
+這個限定詞由 API 級別 13 導入。</li>
+        </ul>
+        <p>六個主要密度之間有一個 3:4:6:8:12:16 縮放比例 (忽略tvdpi 密度)。
+因此，ldpi 的 9x9 點陣圖等同於 mdpi 的 12x12 點陣圖、hdpi 的 18x18 點陣圖、xhdpi 的 24x24 點陣圖，以此類推。
+</p>
+        <p>如果您覺得影像資源在電視或其他特定裝置上看起來不夠美觀，而想嘗試 tvdpi 資源，比例因數為 1.33*mdpi。
+例如，mdpi 螢幕上的 100px x 100px 影像在 tvdpi 螢幕應該是 133px x 133px。
+</p>
+        <p class="note"><strong>注意：</strong>使用密度限定詞不代表資源僅適用於該密度的螢幕。
+<em></em>如果您提供的替代資源沒有更符合目前裝置設定的限定詞，系統將使用<a href="#BestMatch">最符合</a>的資源。
+
+</p>
+        <p>請參閱<a href="../../practices/screens_supportf854.html?hl=zh-tw">支援多個螢幕</a>，深入瞭解如何處理不同的螢幕密度，以及 Android會如何縮放點陣圖以符合目前的密度。
+
+</p>
+       </td>
+    </tr>
+    <tr id="TouchscreenQualifier">
+      <td>觸控螢幕類型</td>
+      <td>
+        <code>notouch</code><br/>
+        <code>finger</code>
+      </td>
+      <td>
+        <ul class="nolist">
+          <li><code>notouch</code>：沒有觸控螢幕的裝置。</li>
+          <li><code>finger</code>：裝置含有觸控螢幕，其目的是透過使用者的手指進行方向互動。
+</li>
+        </ul>
+        <p>另請查看 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#touchscreen">touchscreen</a></code> 設定欄位，該欄位會指出裝置的觸控螢幕類型。
+</p>
+      </td>
+    </tr>
+    <tr id="KeyboardAvailQualifier">
+      <td>鍵盤可用性</td>
+      <td>
+        <code>keysexposed</code><br/>
+        <code>keyshidden</code><br/>
+        <code>keyssoft</code>
+      </td>
+      <td>
+        <ul class="nolist">
+          <li><code>keysexposed</code>：裝置包含鍵盤。如果裝置啟用軟體鍵盤 (可能性很高)，即使沒有將硬體鍵盤展示給使用者或甚至裝置沒有硬體鍵盤時，都可使用此設定。
+
+<em></em>如果沒有提供或已停用軟體鍵盤，則只能在展示硬體鍵盤時使用此設定。
+
+</li>
+          <li><code>keyshidden</code>：裝置有可用的硬體鍵盤但已隱藏起來，且裝置沒有啟用軟體鍵盤。
+<em></em><em></em></li>
+          <li><code>keyssoft</code>：裝置已啟用軟體鍵盤，無論是可見或不可見。
+</li>
+        </ul>
+        <p>如果您提供 <code>keysexposed</code> 資源但沒有 <code>keyssoft</code>資源，只要系統已啟用軟體鍵盤，無論鍵盤是否可見，系統都會使用 <code>keysexposed</code> 資源。
+
+</p>
+        <p>如果使用者開啟硬體鍵盤，此設定就會在應用程式生命週期內發生變更。
+請參閱<a href="runtime-changesf854.html?hl=zh-tw">處理執行階段變更</a>，以瞭解這會如何在執行階段期間影響您的應用程式。
+</p>
+        <p>另請查看設定欄位 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#hardKeyboardHidden">hardKeyboardHidden</a></code> 和 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#keyboardHidden">keyboardHidden</a></code>，這兩個欄位會分別指出硬體鍵盤的可見度，以及任何其他類型鍵盤 (包含軟體) 的可見度。
+</p>
+      </td>
+    </tr>
+    <tr id="ImeQualifier">
+      <td>主要文字輸入方式</td>
+      <td>
+        <code>nokeys</code><br/>
+        <code>qwerty</code><br/>
+        <code>12key</code>
+      </td>
+      <td>
+        <ul class="nolist">
+          <li><code>nokeys</code>：裝置沒有硬體按鍵可輸入文字。</li>
+          <li><code>qwerty</code>：裝置有硬體 qwerty 軟體鍵盤，無論使用者是否可見。
+
+</li>
+          <li><code>12key</code>：裝置有硬體 12 鍵鍵盤，無論使用者是否可見。
+</li>
+        </ul>
+        <p>另請查看 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#keyboard">keyboard</a></code> 設定欄位，該欄位會指出可用的主要文字輸入方式。
+</p>
+      </td>
+    </tr>
+    <tr id="NavAvailQualifier">
+      <td>導覽鍵可用性</td>
+      <td>
+        <code>navexposed</code><br/>
+        <code>navhidden</code>
+      </td>
+      <td>
+        <ul class="nolist">
+          <li><code>navexposed</code>：使用者可使用導覽鍵。</li>
+          <li><code>navhidden</code>：不提供導覽鍵 (例如，位於密合蓋子的後方)。
+</li>
+        </ul>
+        <p>如果使用者顯示導覽鍵，此設定就會在應用程式生命週期內發生變更。
+請參閱<a href="runtime-changesf854.html?hl=zh-tw">處理執行階段變更</a>，以瞭解這會如何在執行階段期間影響您的應用程式。
+</p>
+        <p>另請查看 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#navigationHidden">navigationHidden</a></code> 設定欄位，該欄位會指出導覽鍵是否隱藏起來。
+</p>
+      </td>
+    </tr>
+    <tr id="NavigationQualifier">
+      <td>主要的非觸控導覽方式</td>
+      <td>
+        <code>nonav</code><br/>
+        <code>dpad</code><br/>
+        <code>trackball</code><br/>
+        <code>wheel</code>
+      </td>
+      <td>
+        <ul class="nolist">
+          <li><code>nonav</code>：裝置除了使用觸控螢幕之外沒有其他導覽設施。
+</li>
+          <li><code>dpad</code>：裝置有導覽用的方向鍵 (d-pad)。</li>
+          <li><code>trackball</code>：裝置有導覽用的軌跡球。</li>
+          <li><code>wheel</code>：裝置有導覽用的方向輪 (不常見)。</li>
+        </ul>
+        <p>另請查看 <code><a href="https://developer.android.com/reference/android/content/res/Configuration.html?hl=zh-tw#navigation">navigation</a></code> 設定欄位，該欄位會指出可用的導覽方式類型。
+</p>
+      </td>
+    </tr>
+<!-- DEPRECATED
+    <tr>
+      <td>Screen dimensions</td>
+      <td>Examples:<br/>
+        <code>320x240</code><br/>
+        <code>640x480</code><br/>
+        etc.
+      </td>
+      <td>
+        <p>The larger dimension must be specified first. <strong>This configuration is deprecated
+and should not be used</strong>. Instead use "screen size," "wider/taller screens," and "screen
+orientation" described above.</p>
+      </td>
+    </tr>
+-->
+    <tr id="VersionQualifier">
+      <td>平台版本 (API 級別)</td>
+      <td>範例：<br/>
+        <code>v3</code><br/>
+        <code>v4</code><br/>
+        <code>v7</code><br/>
+        等等。</td>
+      <td>
+        <p>裝置支援的 API 級別。例如，<code>v1</code> 代表 API 級別1 (裝置安裝 Android 1.0 以上版本)，以及 <code>v4</code> 代表 API 級別 4 (裝置安裝 Android1.6 以上版本)。
+
+請參閱 <a href="../manifest/uses-sdk-elementf854.html?hl=zh-tw#ApiLevels">Android API 級別</a>文件以取得有關這些值的詳細資訊。
+</p>
+      </td>
+    </tr>
+</table>
+
+
+<p class="note"><strong>注意：</strong>有些設定限定詞從 Android1.0 就已新增，因此並非所有 Android 版本都支援所有限定詞。
+使用新的限定詞會以隱含的方式新增平台版本的限定詞，因此較舊的裝置一定會忽略它。
+例如，使用
+ <code>w600dp</code> 限定詞最自動包含 <code>v13</code> 限定詞，因為可用寬度限定詞是 API 級別 13 的新項目。
+為了避免發生任何問題，永遠要包含一組預設資源 (一組沒有限定詞的資源<em></em>)。
+如需詳細資訊，請參閱<a href="#Compatibility">使用資源提供最佳的裝置相容性</a>一節。
+
+</p>
+
+
+
+<h3 id="QualifierRules">限定詞名稱規則</h3>
+
+<p>這裡有一些使用設定限定詞名稱的規則：</p>
+
+<ul>
+    <li>您可以為一組資源指定多個限定詞，以破折號分隔。例如，
+<code>drawable-en-rUS-land</code> 適用於橫向的美國英文裝置。
+</li>
+    <li>限定詞的順序必須與<a href="#table2">表 2</a> 所列的一樣。例如：
+
+      <ul>
+        <li>錯誤：<code>drawable-hdpi-port/</code></li>
+        <li>正確：<code>drawable-port-hdpi/</code></li>
+      </ul>
+    </li>
+    <li>替代資源目錄不可為巢狀。例如，您不能有
+<code>res/drawable/drawable-en/</code>。</li>
+    <li>值有大小寫之分。資源編譯器會將目錄名稱轉換為小寫再處理，以避免有大小寫之分的檔案系統發生問題。
+
+名稱中的任何大寫只是為了方便閱讀。</li>
+    <li>每個限定詞類型只支援一個值。例如，如果您想在西班牙文和法文使用相同的可繪項目檔案，則不能將目錄命名為 <em></em>
+<code>drawable-rES-rFR/</code>。
+您必須有兩個資源目錄，例如
+<code>drawable-rES/</code> 和 <code>drawable-rFR/</code>，這兩個目錄要包含適當的檔案。
+但是，您不需要實際將相同的檔案複製到這兩位置。您可以為資源建立別名。
+請參閱下方的
+<a href="#AliasResources">建立別名資源</a>。</li>
+</ul>
+
+<p>當您將替代資源儲存到以這些限定詞命名的目錄後，Android 會根據目前的裝置設定自動將資源套用到您的應用程式。
+
+每次要求資源時，Android 會檢查包含要求之資源檔案的替代資源目錄，然後<a href="#BestMatch">尋找最符合的資源
+</a> (下方有相關討論)。
+如果沒有符合特定裝置設定的替代資源，則 Android 會使用對應的預設資源 (特定資源類型的資源組，不含設定限定詞)。
+
+
+</p>
+
+
+
+<h3 id="AliasResources">建立別名資源</h3>
+
+<p>如果您要將資源用於一個以上的裝置設定 (但不想以預設資源的形式提供)，您不需要將相同的資源放入一個以上的替代資源目錄。
+
+您可以 (在某些情況下) 建立一個替代資源，將它做為儲存在您預設資源目錄的資源別名。
+
+</p>
+
+<p class="note"><strong>注意：</strong>並非所有資源都提供為其他資源建立別名的機制。
+特別是動畫、選單、原始項目和其他在 <code>xml/</code> 目錄中未指定的資源都不提供這項功能。
+</p>
+
+<p>例如，想像您有一個應用程式圖示 <code>icon.png</code>，且必須為不同的地區設定提供唯一的版本。
+但是，加拿大英文和加拿大法文這兩個地區設定必須使用相同的版本。
+您可能會假設必須在加拿大英文和加拿大法文這兩個資源目錄中複製相同的影像，但並不需要這樣做。
+
+您可以將這兩個地區設定的影像儲存成 <code>icon_ca.png</code> (<code>icon.png</code> 以外的任何名稱)，然後將該影像放入預設的 <code>res/drawable/</code> 目錄。
+
+之後，在 <code>res/drawable-en-rCA/</code> 建立一個 <code>icon.xml</code> 檔案，以及建立 <code>res/drawable-fr-rCA/</code>，用於參照使用 <code>&amp;lt;bitmap&amp;gt;</code> 元素的 <code>icon_ca.png</code> 資源。
+這樣可以讓您只儲存一個版本的 PNG 檔案，以及指向該檔案的兩個小 XML 檔案。
+(範例 XML 檔案如下所示。)</p>
+
+
+<h4>可繪項目</h4>
+
+<p>如要為現有的可繪項目建立別名，請使用 <code>&amp;lt;bitmap&amp;gt;</code> 元素。
+例如：</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/icon_ca" />
+</pre>
+
+<p>如果您將此檔案儲存成 <code>icon.xml</code> (在替代資源目錄中，像是
+<code>res/drawable-en-rCA/</code>)，系統會將它編譯成可當作 <code>R.drawable.icon</code> 參照的資源，但它實際上是 <code>R.drawable.icon_ca</code> 資源 (儲存在 <code>res/drawable/</code>) 的別名。
+</p>
+
+
+<h4>版面配置</h4>
+
+<p>如要為現有的可繪項目建立別名，請使用以 <code>&amp;lt;merge&amp;gt;</code> 包裝的<code>&amp;lt;include&amp;gt;</code> 元素。
+例如：</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;merge>
+    &lt;include layout="@layout/main_ltr"/>
+&lt;/merge>
+</pre>
+
+<p>如果您將此檔案儲存成 <code>main.xml</code>，系統會將它編譯成可當作 <code>R.layout.main</code> 參照的資源，但它實際上是 <code>R.layout.main_ltr</code> 資源的別名。
+
+</p>
+
+
+<h4>字串和其他簡單值</h4>
+
+<p>如要為現有的字串建立別名，只要將所需字串的資源 ID 當作新字串的值即可。
+例如：</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;resources>
+    &lt;string name="hello">Hello&lt;/string>
+    &lt;string name="hi">@string/hello&lt;/string>
+&lt;/resources>
+</pre>
+
+<p><code>R.string.hi</code> 資源現在是 <code>R.string.hello</code> 的別名。</p>
+
+<p> <a href="more-resourcesf854.html?hl=zh-tw">其他簡易值</a>的運作方法也一樣。
+例如，一個顏色：</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;resources>
+    &lt;color name="yellow">#f00&lt;/color>
+    &lt;color name="highlight">@color/red&lt;/color>
+&lt;/resources>
+</pre>
+
+
+
+
+<h2 id="Compatibility">使用資源提供最佳的裝置相容性</h2>
+
+<p>如要讓您的應用程式支援多個裝置設定，務必要為您應用程式使用的每個資源類型提供預設資源。
+</p>
+
+<p>例如，如果您的應用程式支援多個語言，一律要包含一個 <code>values/</code> 目錄 (儲存字串的位置)，其中「不包含」<em></em><a href="#LocaleQualifier">語言和區域限定詞</a>。如果您將所有字串檔案放在含有語言和區域限定詞的目錄中，當執行應用程式的裝置，其語言設定不受字串支援時，應用程式就會當機。
+
+不過，只要您提供預設 <code>values/</code> 資源，
+應用程式就能正常運作 (即便使用者不懂該語言 &mdash; 仍然比當機好)。
+</p>
+
+<p>同樣地，如果您根據螢幕方向提供不同的版面配置資源，您應該選擇一個方向做為您的預設值。
+例如，不要在 <code>layout-land/</code> 提供橫向版面配置資源及在 <code>layout-port/</code> 提供直向版面配置資源，而是留下一個做為預設值，例如 <code>layout/</code> 做為橫向和 <code>layout-port/</code> 做為直向。
+</p>
+
+<p>提供預設資源很重要，這不只是因為您的應用程式可能執行您未預期到的設定，還因為新的 Android 版本有時候會新增舊版不支援的設定限定詞。
+
+如果您使用新的資源限定詞，但與舊版 Android 保持程式碼相容，則舊版 Android 執行您的應用程式時，如果您沒有提供預設資源，應用程式就會當機，這是因為它無法使用以新限定詞命名的資源。
+
+
+例如，如果您的 <a href="../manifest/uses-sdk-elementf854.html?hl=zh-tw#min"><code>minSdkVersion</code></a> 設為 4，而且您讓所有可繪項目資源具備使用<a href="#NightQualifier">夜間模式</a>的資格 (已新增到 API 級別 8 的 <code>night</code> 或 <code>notnight</code>)，則 API 級別 4 裝置將無法存取您的可繪項目資源且會當機。
+在這種情況下，您可能會想要將 <code>notnight</code> 當作預設資源，因此您應該要排除該限定詞，讓您的可繪項目資源成為 <code>drawable/</code> 或 <code>drawable-night/</code>。
+
+</p>
+
+<p>因此，如要提供最佳的裝置相容性，請務必針對應用程式正常執行所需的資源提供預設資源。
+然後，使用設定限定詞為特定裝置設定建立替代資源。
+</p>
+
+<p>這個規則有一個例外狀況：如果您應用程式的 <a href="../manifest/uses-sdk-elementf854.html?hl=zh-tw#min"><code>minSdkVersion</code></a> 為 4 或高，當您提供含有<em></em><a href="#DensityQualifier">螢幕密度</a>限定詞的替代可繪項目資源時，則不需要預設可繪項目資源。
+
+即使沒有預設可繪項目資源，Android 仍然可從替代螢幕密度中找到最符合的項目，並視需要縮放點陣圖。
+
+不過，為了在所有裝置類型獲得最佳體驗，您應該為這三種密度類型提供替代可繪項目。
+</p>
+
+
+
+<h2 id="BestMatch">Android 如何尋找最相符的資源</h2>
+
+<p>當您要求已提供替代項目的資源時，Android 會根據目前的裝置設定，選擇執行階段要使用的替代資源。
+為了示範 Android 如何選取替代資源，假設下列可繪項目目錄分別包含相同影像的不同版本：
+
+</p>
+
+<pre class="classic no-pretty-print">
+drawable/
+drawable-en/
+drawable-fr-rCA/
+drawable-en-port/
+drawable-en-notouch-12key/
+drawable-port-ldpi/
+drawable-port-notouch-12key/
+</pre>
+
+<p>同時假設裝置設定如下：</p>
+
+<p style="margin-left:1em;">
+地區設定 = <code>en-GB</code> <br/>
+螢幕方向 = <code>port</code> <br/>
+螢幕像素密度 = <code>hdpi</code> <br/>
+觸控螢幕類型 = <code>notouch</code> <br/>
+主要文字輸入方式 = <code>12key</code>
+</p>
+
+<p>Android 透過比對裝置設定和可用的替代資源，從 <code>drawable-en-port</code> 選取可繪項目。
+</p>
+
+<p>系統使用下列邏輯決定要使用的資源：
+</p>
+
+
+<div class="figure" style="width:371px">
+<img src="../../../images/resources/res-selection-flowchartf854.png?hl=zh-tw" alt="" height="471" />
+<p class="img-caption"><strong>圖 2.</strong>Android 如何尋找最相符資源的流程圖。
+</p>
+</div>
+
+
+<ol>
+  <li>排除與裝置設定衝突的資源檔案。
+    <p>已排除 <code>drawable-fr-rCA/</code> 目錄，因為它與 <code>en-GB</code> 地區設定衝突。
+</p>
+<pre class="classic no-pretty-print">
+drawable/
+drawable-en/
+<strike>drawable-fr-rCA/</strike>
+drawable-en-port/
+drawable-en-notouch-12key/
+drawable-port-ldpi/
+drawable-port-notouch-12key/
+</pre>
+<p class="note"><strong>例外狀況：</strong>螢幕像素密度是唯一沒有因為衝突而被排除的限定詞。
+即使裝置的螢幕密度是 hdpi 但仍然沒有排除
+<code>drawable-port-ldpi/</code>，因為此刻每個螢幕密度都視為相符。
+如需詳細資訊，請參閱<a href="../../practices/screens_supportf854.html?hl=zh-tw">支援多個螢幕</a>文件。
+</p></li>
+
+  <li>在清單 (<a href="#table2">表 2</a>) 中選擇 (下一個) 最高優先等級的限定詞(從 MCC 往下移動)。
+ </li>
+  <li>有任何資源目錄包含此限定詞嗎？  </li>
+    <ul>
+      <li>如果沒有，回到步驟 2 查看下一個限定詞。(在此範例中，回答一直是「否」，直到語言限定詞為止。)
+</li>
+      <li>如果有，繼續到步驟 4。</li>
+    </ul>
+  </li>
+
+  <li>排除不包含此限定詞的來源目錄。在此範例中，系統排除所有不包含語言限定詞的目錄：
+</li>
+<pre class="classic no-pretty-print">
+<strike>drawable/</strike>
+drawable-en/
+drawable-en-port/
+drawable-en-notouch-12key/
+<strike>drawable-port-ldpi/</strike>
+<strike>drawable-port-notouch-12key/</strike>
+</pre>
+<p class="note"><strong>例外狀況：</strong>如果提到的限定詞是螢幕像素密度，Android 會選擇最符合裝置螢幕密度的選項。一般而言，Android 偏好縮小較大的原始影像以放大較小的原始影像。
+
+
+請參閱<a href="../../practices/screens_supportf854.html?hl=zh-tw">支援多個螢幕</a>。
+</p>
+  </li>
+
+  <li>重複步驟 2、3 和 4，直到剩下一個目錄為止。在此範例中，螢幕方向是下個有相符項目的限定詞。
+因此，將排除沒有指定螢幕方向的資源：
+
+<pre class="classic no-pretty-print">
+<strike>drawable-en/</strike>
+drawable-en-port/
+<strike>drawable-en-notouch-12key/</strike>
+</pre>
+<p>剩下的目錄是 <code>drawable-en-port</code>。</p>
+  </li>
+</ol>
+
+<p>雖然會針對每個要求的資源執行此程序，但系統還是會進一步最佳化某些方面。
+其中一個最佳化是一旦知道裝置設定，它將排除永遠無法符合的替代資源。
+例如，如果設定語言是英文 ("en")，則語言限定詞設定為不是英文的任何資源目錄永遠都不會包含在檢查的資源集區內 (但仍會包含<em>不含</em>語言限定詞的資源目錄)。
+
+
+</p>
+
+<p>根據螢幕大小限定詞選取資源時，如果沒有最符合的資源，系統會使用適用於比目前螢幕更小之螢幕設計的資源 (例如，如有需要，大型螢幕會使用一般大小螢幕資源)。
+
+然而，如果唯一可用的資源比目前螢幕<em>更大</em>，系統將<strong>不會</strong>使用這些資源，如果沒有其他資源符合裝置設定，則應用程式將會當機 (例如，如果所有版面配置資源都標記為 <code>xlarge</code> 限定詞，但裝置為一般大小螢幕)。
+
+
+
+</p>
+
+<p class="note"><strong>注意：</strong>限定詞的優先等級<em></em> (在<a href="#table2">表 2</a>) 比完全符合裝置的限定詞數量更重要。
+例如，在上述步驟 4，清單的最後一個選擇包含三個完全符合裝置的限定詞 (方向、觸控螢幕類型和輸入方法)，而 <code>drawable-en</code> 只有一個相符的參數(語言)。
+
+
+然而，語言的優先等級高於這些其他限定詞，因此將排除
+<code>drawable-port-notouch-12key</code>。</p>
+
+<p>如需深入瞭解在應用程式使用資源的方法，請繼續閱讀<a href="accessing-resourcesf854.html?hl=zh-tw">存取資源</a>。</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=zh-tw" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="網誌" target="_blank">網誌</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=zh-tw" title="完備支援">完備支援</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=zh-tw" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=zh-tw" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=zh-tw" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=zh-tw" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="9X_SCb0wOHGLgFBchuX2ZLkL53BCRI3rUBKAO7c9huY6MTQ5NzUxNjczOTE5MTQ3MA" />
+      <input type="hidden" name="next" value="providing-resources.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+             selected="selected" >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">電子郵件地址</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en962f.js?hl=zh-tw?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=zh-tw"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_zh-tw.js?hl=zh-tw?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/resources/providing-resources.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:11:30 GMT -->
+</html>

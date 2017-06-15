@@ -1,0 +1,1819 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<!-- Mirrored from developer.android.com/guide/components/intents-filters.html?hl=vi by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:05:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="Euyeezx-D62AhqIGA4XcU0IUpA_9kbcMO6PR2pGQ6_U6MTQ5NzUxNjE5NzQ5Nzg4MA" />
+
+  
+    <link rel="canonical" href="intents-filters327f.html?hl=vi">
+  
+
+  
+    <link rel="alternate" href="intents-filters9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="intents-filters327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="intents-filtersf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="intents-filters0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="intents-filters7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="intents-filters9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="intents-filtersde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="intents-filters0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="intents-filters232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="intents-filters6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="intents-filters.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="intents-filters.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../_static/f304fc21fa/images/android/favicon327f.png?hl=vi">
+
+<link rel="apple-touch-icon" href="../../_static/f304fc21fa/images/android/touchicon-180327f.png?hl=vi">
+
+
+<title>
+
+  Ý định và Bộ lọc Ý định | Android Developers
+
+</title>
+
+  <meta name="description" content="Intent là một đối tượng nhắn tin mà bạn có thể sử dụng để yêu cầu một hành động từ một thành phần ứng dụng khác. Mặc dù các ý định sẽ tạo điều kiện cho giao tiếp giữa các thành phần bằng một vài cách, có ba trường hợp sử dụng cơ bản: Activity biểu diễn…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../static/css/default0c0e.css?hl=vi?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../_static/f304fc21fa/js/android_3p-bundle327f.js?hl=vi" type="text/javascript"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_closure_android__vi327f.js?hl=vi"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_android327f.js?hl=vi"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../static/js/docs0c0e.js?hl=vi?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;vi&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;vi&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;vi&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;vi&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "vi", "served": "vi"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=vi">
+          <img class="dac-header-logo-image" src="../../static/images/android_logo327f.png?hl=vi"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=vi"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=vi"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=vi"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=vi"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=vi" width="18" height="19" alt="Bảng điều khiển Play">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Tìm kiếm">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Quay lại</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../index327f.html?hl=vi" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="fundamentals327f.html?hl=vi" >App Fundamentals</a></li><li><a href="../practices/compatibility327f.html?hl=vi" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/permissions/index327f.html?hl=vi" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/permissions/requesting327f.html?hl=vi" >Requesting Permissions</a></li><li><a href="../topics/permissions/defining327f.html?hl=vi" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../platform/index327f.html?hl=vi" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../platform/j8-jack327f.html?hl=vi"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../practices/verifying-apps-art327f.html?hl=vi" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index327f.html?hl=vi" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="intents-filters327f.html?hl=vi" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="intents-common327f.html?hl=vi" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="activities/index327f.html?hl=vi" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="activities/intro-activities327f.html?hl=vi" >Introduction to Activities</a></li><li><a href="activities/activity-lifecycle327f.html?hl=vi" >The Activity Lifecycle</a></li><li><a href="activities/state-changes327f.html?hl=vi" >Activity State Changes</a></li><li><a href="activities/tasks-and-back-stack327f.html?hl=vi" >Tasks and Back Stack</a></li><li><a href="activities/process-lifecycle327f.html?hl=vi" >Processes and Application Lifecycle</a></li><li><a href="activities/parcelables-and-bundles327f.html?hl=vi" >Parcelables and Bundles</a></li><li><a href="activities/recents327f.html?hl=vi" >Recents Screen</a></li></ul></li><li><a href="fragments327f.html?hl=vi" >Fragments</a></li><li><a href="loaders327f.html?hl=vi" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="services327f.html?hl=vi" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="bound-services327f.html?hl=vi" >Bound Services</a></li><li><a href="aidl327f.html?hl=vi" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/providers/content-providers327f.html?hl=vi" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/providers/content-provider-basics327f.html?hl=vi" >Content Provider Basics</a></li><li><a href="../topics/providers/content-provider-creating327f.html?hl=vi" >Creating a Content Provider</a></li><li><a href="../topics/providers/calendar-provider327f.html?hl=vi" >Calendar Provider</a></li><li><a href="../topics/providers/contacts-provider327f.html?hl=vi" >Contacts Provider</a></li><li><a href="../topics/providers/document-provider327f.html?hl=vi" >Open files using Storage Access Framework</a></li><li><a href="../topics/providers/create-document-provider327f.html?hl=vi" >Create a Custom Document Provider</a></li></ul></li><li><a href="broadcasts327f.html?hl=vi" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/appwidgets/index327f.html?hl=vi" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/appwidgets/host327f.html?hl=vi" >App Widget Host</a></li></ul></li><li><a href="processes-and-threads327f.html?hl=vi" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/index327f.html?hl=vi" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/overview327f.html?hl=vi" >Overview</a></li><li><a href="../topics/resources/providing-resources327f.html?hl=vi" >Providing Resources</a></li><li><a href="../topics/resources/accessing-resources327f.html?hl=vi" >Accessing Resources</a></li><li><a href="../topics/resources/runtime-changes327f.html?hl=vi" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/localization327f.html?hl=vi" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/icu4j-framework327f.html?hl=vi" >ICU4J Android Framework APIs</a></li><li><a href="../topics/resources/multilingual-support327f.html?hl=vi" >Language and Locale</a></li></ul></li><li><a href="../topics/resources/complex-xml-resources327f.html?hl=vi" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/available-resources327f.html?hl=vi" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/animation-resource327f.html?hl=vi" >Animation</a></li><li><a href="../topics/resources/color-list-resource327f.html?hl=vi" >Color State List</a></li><li><a href="../topics/resources/drawable-resource327f.html?hl=vi" >Drawable</a></li><li><a href="../topics/resources/layout-resource327f.html?hl=vi" >Layout</a></li><li><a href="../topics/resources/menu-resource327f.html?hl=vi" >Menu</a></li><li><a href="../topics/resources/string-resource327f.html?hl=vi" >String</a></li><li><a href="../topics/resources/style-resource327f.html?hl=vi" >Style</a></li><li><a href="../topics/resources/more-resources327f.html?hl=vi" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/manifest/manifest-intro327f.html?hl=vi" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/manifest/action-element327f.html?hl=vi" >&lt;action&gt;</a></li><li><a href="../topics/manifest/activity-element327f.html?hl=vi" >&lt;activity&gt;</a></li><li><a href="../topics/manifest/activity-alias-element327f.html?hl=vi" >&lt;activity-alias&gt;</a></li><li><a href="../topics/manifest/application-element327f.html?hl=vi" >&lt;application&gt;</a></li><li><a href="../topics/manifest/category-element327f.html?hl=vi" >&lt;category&gt;</a></li><li><a href="../topics/manifest/compatible-screens-element327f.html?hl=vi" >&lt;compatible-screens&gt;</a></li><li><a href="../topics/manifest/data-element327f.html?hl=vi" >&lt;data&gt;</a></li><li><a href="../topics/manifest/grant-uri-permission-element327f.html?hl=vi" >&lt;grant-uri-permission&gt;</a></li><li><a href="../topics/manifest/instrumentation-element327f.html?hl=vi" >&lt;instrumentation&gt;</a></li><li><a href="../topics/manifest/intent-filter-element327f.html?hl=vi" >&lt;intent-filter&gt;</a></li><li><a href="../topics/manifest/manifest-element327f.html?hl=vi" >&lt;manifest&gt;</a></li><li><a href="../topics/manifest/meta-data-element327f.html?hl=vi" >&lt;meta-data&gt;</a></li><li><a href="../topics/manifest/path-permission-element327f.html?hl=vi" >&lt;path-permission&gt;</a></li><li><a href="../topics/manifest/permission-element327f.html?hl=vi" >&lt;permission&gt;</a></li><li><a href="../topics/manifest/permission-group-element327f.html?hl=vi" >&lt;permission-group&gt;</a></li><li><a href="../topics/manifest/permission-tree-element327f.html?hl=vi" >&lt;permission-tree&gt;</a></li><li><a href="../topics/manifest/provider-element327f.html?hl=vi" >&lt;provider&gt;</a></li><li><a href="../topics/manifest/receiver-element327f.html?hl=vi" >&lt;receiver&gt;</a></li><li><a href="../topics/manifest/service-element327f.html?hl=vi" >&lt;service&gt;</a></li><li><a href="../topics/manifest/supports-gl-texture-element327f.html?hl=vi" >&lt;supports-gl-texture&gt;</a></li><li><a href="../topics/manifest/supports-screens-element327f.html?hl=vi" >&lt;supports-screens&gt;</a></li><li><a href="../topics/manifest/uses-configuration-element327f.html?hl=vi" >&lt;uses-configuration&gt;</a></li><li><a href="../topics/manifest/uses-feature-element327f.html?hl=vi" >&lt;uses-feature&gt;</a></li><li><a href="../topics/manifest/uses-library-element327f.html?hl=vi" >&lt;uses-library&gt;</a></li><li><a href="../topics/manifest/uses-permission-element327f.html?hl=vi" >&lt;uses-permission&gt;</a></li><li><a href="../topics/manifest/uses-permission-sdk-23-element327f.html?hl=vi" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../topics/manifest/uses-sdk-element327f.html?hl=vi" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/index327f.html?hl=vi" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/overview327f.html?hl=vi" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/declaring-layout327f.html?hl=vi" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/layout/linear327f.html?hl=vi" >Linear Layout</a></li><li><a href="../topics/ui/layout/relative327f.html?hl=vi" >Relative Layout</a></li><li><a href="../topics/ui/layout/recyclerview327f.html?hl=vi" >Recycler View</a></li><li><a href="../topics/ui/layout/listview327f.html?hl=vi" >List View</a></li><li><a href="../topics/ui/layout/gridview327f.html?hl=vi" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/controls327f.html?hl=vi" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/controls/button327f.html?hl=vi" >Buttons</a></li><li><a href="../topics/ui/controls/checkbox327f.html?hl=vi" >Checkboxes</a></li><li><a href="../topics/ui/controls/radiobutton327f.html?hl=vi" >Radio Buttons</a></li><li><a href="../topics/ui/controls/togglebutton327f.html?hl=vi" >Toggle Buttons</a></li><li><a href="../topics/ui/controls/spinner327f.html?hl=vi" >Spinners</a></li><li><a href="../topics/ui/controls/pickers327f.html?hl=vi" >Pickers</a></li></ul></li><li><a href="../topics/ui/ui-events327f.html?hl=vi" >Input Events</a></li><li><a href="../topics/ui/menus327f.html?hl=vi" >Menus</a></li><li><a href="../topics/ui/settings327f.html?hl=vi" >Settings</a></li><li><a href="../topics/ui/dialogs327f.html?hl=vi" >Dialogs</a></li><li><a href="../topics/ui/notifiers/notifications327f.html?hl=vi" >Notifications</a></li><li><a href="../topics/ui/notifiers/toasts327f.html?hl=vi" >Toasts</a></li><li><a href="../topics/ui/shortcuts327f.html?hl=vi" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/search/index327f.html?hl=vi" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/search/search-dialog327f.html?hl=vi" >Creating a Search Interface</a></li><li><a href="../topics/search/adding-recent-query-suggestions327f.html?hl=vi" >Adding Recent Query Suggestions</a></li><li><a href="../topics/search/adding-custom-suggestions327f.html?hl=vi" >Adding Custom Suggestions</a></li><li><a href="../topics/search/searchable-config327f.html?hl=vi" >Searchable Configuration</a></li></ul></li><li><a href="../topics/ui/multi-window327f.html?hl=vi" >Multi-Window Support</a></li><li><a href="../topics/ui/drag-drop327f.html?hl=vi" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/accessibility/index327f.html?hl=vi" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/accessibility/apps327f.html?hl=vi" >Making Apps More Accessible</a></li><li><a href="../topics/ui/accessibility/checklist327f.html?hl=vi" >Accessibility Developer Checklist</a></li><li><a href="../topics/ui/accessibility/node-tree-debugging327f.html?hl=vi" >Using Node Tree Debugging</a></li><li><a href="../topics/ui/accessibility/services327f.html?hl=vi" >Building Accessibility Services</a></li><li><a href="../topics/ui/accessibility/custom-views327f.html?hl=vi" >Building Accessible Custom Views</a></li></ul></li><li><a href="../topics/ui/themes327f.html?hl=vi" >Styles and Themes</a></li><li><a href="../topics/ui/custom-components327f.html?hl=vi" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/index327f.html?hl=vi" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/overview327f.html?hl=vi" >Overview</a></li><li><a href="../topics/graphics/prop-animation327f.html?hl=vi" >Property Animation</a></li><li><a href="../topics/graphics/view-animation327f.html?hl=vi" >View Animation</a></li><li><a href="../topics/graphics/drawable-animation327f.html?hl=vi" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/2d-graphics327f.html?hl=vi" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/vector-drawable-resources327f.html?hl=vi" >Vector Drawable</a></li></ul></li><li><a href="../topics/graphics/opengl327f.html?hl=vi" >OpenGL ES</a></li><li><a href="../topics/graphics/hardware-accel327f.html?hl=vi" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/index327f.html?hl=vi" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/compute327f.html?hl=vi" >RenderScript</a></li><li><a href="../topics/renderscript/advanced327f.html?hl=vi" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/reference/overview327f.html?hl=vi" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/reference/rs_value_types327f.html?hl=vi" >Numerical Types</a></li><li><a href="../topics/renderscript/reference/rs_object_types327f.html?hl=vi" >Object Types</a></li><li><a href="../topics/renderscript/reference/rs_convert327f.html?hl=vi" >Conversion Functions</a></li><li><a href="../topics/renderscript/reference/rs_math327f.html?hl=vi" >Mathematical Constants and Functions</a></li><li><a href="../topics/renderscript/reference/rs_vector_math327f.html?hl=vi" >Vector Math Functions</a></li><li><a href="../topics/renderscript/reference/rs_matrix327f.html?hl=vi" >Matrix Functions</a></li><li><a href="../topics/renderscript/reference/rs_quaternion327f.html?hl=vi" >Quaternion Functions</a></li><li><a href="../topics/renderscript/reference/rs_atomic327f.html?hl=vi" >Atomic Update Functions</a></li><li><a href="../topics/renderscript/reference/rs_time327f.html?hl=vi" >Time Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_allocation_data327f.html?hl=vi" >Allocation Data Access Functions</a></li><li><a href="../topics/renderscript/reference/rs_object_info327f.html?hl=vi" >Object Characteristics Functions</a></li><li><a href="../topics/renderscript/reference/rs_for_each327f.html?hl=vi" >Kernel Invocation Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_io327f.html?hl=vi" >Input/Output Functions</a></li><li><a href="../topics/renderscript/reference/rs_debug327f.html?hl=vi" >Debugging Functions</a></li><li><a href="../topics/renderscript/reference/rs_graphics327f.html?hl=vi" >Graphics Functions and Types</a></li><li><a href="../topics/renderscript/reference/index327f.html?hl=vi" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/index327f.html?hl=vi" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/media-apps-overview327f.html?hl=vi" >Media Apps Overview</a></li><li><a href="../topics/media-apps/working-with-a-media-session327f.html?hl=vi" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/audio-app/building-an-audio-app327f.html?hl=vi" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/audio-app/building-a-mediabrowserservice327f.html?hl=vi" >Building a Media Browser Service</a></li><li><a href="../topics/media-apps/audio-app/building-a-mediabrowser-client327f.html?hl=vi" >Building a Media Browser Client</a></li><li><a href="../topics/media-apps/audio-app/mediasession-callbacks327f.html?hl=vi" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/video-app/building-a-video-app327f.html?hl=vi" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/video-app/building-a-video-player-activity327f.html?hl=vi" >Building a Video Player Activity</a></li><li><a href="../topics/media-apps/video-app/mediasession-callbacks327f.html?hl=vi" >Media Session Callbacks</a></li></ul></li><li><a href="../topics/media-apps/mediabuttons327f.html?hl=vi" >Responding to Media Buttons</a></li><li><a href="../topics/media-apps/volume-and-earphones327f.html?hl=vi" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/index327f.html?hl=vi" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/media-formats327f.html?hl=vi" >Supported Media Formats</a></li><li><a href="../topics/media/mediaplayer327f.html?hl=vi" >MediaPlayer</a></li><li><a href="../topics/media/mediarecorder327f.html?hl=vi" >MediaRecorder</a></li><li><a href="../topics/media/exoplayer327f.html?hl=vi" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/media-routing327f.html?hl=vi" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/mediarouter327f.html?hl=vi" >MediaRouter API</a></li><li><a href="../topics/media/mediarouteprovider327f.html?hl=vi" >MediaRouteProvider API</a></li></ul></li><li><a href="../topics/media/camera327f.html?hl=vi" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/sensors/index327f.html?hl=vi" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/location/index327f.html?hl=vi" >Location and Maps</a></li><li><a href="../topics/location/strategies327f.html?hl=vi" >Location Strategies</a></li><li><a href="../topics/sensors/sensors_overview327f.html?hl=vi" >Sensors Overview</a></li><li><a href="../topics/sensors/sensors_motion327f.html?hl=vi" >Motion Sensors</a></li><li><a href="../topics/sensors/sensors_position327f.html?hl=vi" >Position Sensors</a></li><li><a href="../topics/sensors/sensors_environment327f.html?hl=vi" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/index327f.html?hl=vi" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/bluetooth327f.html?hl=vi" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/bluetooth-le327f.html?hl=vi" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/nfc/index327f.html?hl=vi" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/nfc/nfc327f.html?hl=vi" >NFC Basics</a></li><li><a href="../topics/connectivity/nfc/advanced-nfc327f.html?hl=vi" >Advanced NFC</a></li><li><a href="../topics/connectivity/nfc/hce327f.html?hl=vi" >Host-based Card Emulation</a></li></ul></li><li><a href="../topics/connectivity/wifip2p327f.html?hl=vi" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/usb/index327f.html?hl=vi" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/usb/accessory327f.html?hl=vi" >Accessory</a></li><li><a href="../topics/connectivity/usb/host327f.html?hl=vi" >Host</a></li></ul></li><li><a href="../topics/connectivity/sip327f.html?hl=vi" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/index327f.html?hl=vi" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/copy-paste327f.html?hl=vi" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/creating-input-method327f.html?hl=vi" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/image-keyboard327f.html?hl=vi" >Image Keyboard</a></li></ul></li><li><a href="../topics/text/spell-checker-framework327f.html?hl=vi" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/index327f.html?hl=vi" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/data-storage327f.html?hl=vi" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/backup327f.html?hl=vi" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/autobackup327f.html?hl=vi" >Auto Backup</a></li><li><a href="../topics/data/keyvaluebackup327f.html?hl=vi" >Key/Value Backup</a></li><li><a href="../topics/data/testingbackup327f.html?hl=vi" >Testing Backup and Restore</a></li></ul></li><li><a href="../topics/data/install-location327f.html?hl=vi" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/admin/index327f.html?hl=vi" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/admin/device-admin327f.html?hl=vi" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../webapps/index327f.html?hl=vi" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../webapps/targeting327f.html?hl=vi" >Supporting Different Screens in Web Apps</a></li><li><a href="../webapps/webview327f.html?hl=vi" >Building Web Apps in WebView</a></li><li><a href="../webapps/migrating327f.html?hl=vi" >Migrating to WebView in Android 4.4</a></li><li><a href="../webapps/debugging327f.html?hl=vi" >Debugging Web Apps</a></li><li><a href="../webapps/best-practices327f.html?hl=vi" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../practices/index327f.html?hl=vi"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../practices/screens_support327f.html?hl=vi" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../practices/screens-distribution327f.html?hl=vi" >Distributing to Specific Screens</a></li><li><a href="../practices/screen-compat-mode327f.html?hl=vi" >Screen Compatibility Mode</a></li></ul></li><li><a href="../practices/app-design/seamlessness327f.html?hl=vi" >Designing for Seamlessness</a></li><li><a href="../practices/tablets-and-handsets327f.html?hl=vi" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=vi">Trang chủ</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=vi">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=vi">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=vi">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=vi">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=vi">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=vi"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=vi"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=vi"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Đào tạo</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../index327f.html?hl=vi"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=vi"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Tham chiếu</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=vi">Mẫu</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=vi"
+           >Thư viện</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=vi"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=vi"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=vi">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=vi">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=vi">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=vi"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=vi">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=vi">Bảng điều khiển Play</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=vi"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=vi"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=vi">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=vi">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Ý định và Bộ lọc Ý định</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+<h2>Trong tài liệu này</h2>
+<ol>
+  <li><a href="#Types">Các Loại Ý định</a></li>
+  <li><a href="#Building">Xây dựng một Ý định</a>
+    <ol>
+      <li><a href="#ExampleExplicit">Ví dụ về ý định biểu thị</a></li>
+      <li><a href="#ExampleSend">Ví dụ về ý định không biểu thị</a></li>
+      <li><a href="#ForceChooser">Bắt buộc một bộ chọn ứng dụng</a></li>
+    </ol>
+  </li>
+  <li><a href="#Receiving">Nhận một Ý định Không biểu thị</a>
+    <ol>
+      <li><a href="#ExampleFilters">Ví dụ về bộ lọc</a></li>
+    </ol>
+  </li>
+  <li><a href="#PendingIntent">Sử dụng một Ý định Chờ</a></li>
+  <li><a href="#Resolution">Giải quyết Ý định</a>
+    <ol>
+      <li><a href="#ActionTest">Kiểm tra hành động</a></li>
+      <li><a href="#CategoryTest">Kiểm tra thể loại</a></li>
+      <li><a href="#DataTest">Kiểm tra dữ liệu</a></li>
+      <li><a href="#imatch">So khớp ý định</a></li>
+    </ol>
+  </li>
+</ol>
+
+<h2>Xem thêm</h2>
+<ol>
+<li><a href="https://developer.android.com/training/basics/intents/index.html?hl=vi">Tương tác với các Ứng dụng khác</a></li>
+<li><a href="https://developer.android.com/training/sharing/index.html?hl=vi">Chia sẻ Nội dung</a></li>
+</ol>
+
+</div>
+</div>
+
+
+
+
+<p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> là một đối tượng nhắn tin mà bạn có thể sử dụng để yêu cầu một hành động
+từ một <a href="fundamentals327f.html?hl=vi#Components">thành phần ứng dụng</a> khác.
+Mặc dù các ý định sẽ tạo điều kiện cho giao tiếp giữa các thành phần bằng một vài cách, có ba
+trường hợp sử dụng cơ bản:</p>
+
+<ul>
+<li><b>Để bắt đầu một hoạt động:</b>
+<p><code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi">Activity</a></code> biểu diễn một màn hình đơn trong một ứng dụng. Bạn có thể bắt đầu một thực thể
+mới của một <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi">Activity</a></code> bằng cách chuyển <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>
+sang <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code>. <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>
+mô tả hoạt động cần bắt đầu và mang theo mọi dữ liệu cần thiết.</p>
+
+<p>Nếu bạn muốn nhận một kết quả từ hoạt động khi nó hoàn thành,
+hãy gọi <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code>. Hoạt động của bạn nhận được kết quả
+dưới dạng một đối tượng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> riêng biệt trong lệnh gọi lại <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code> của hoạt động của bạn.
+Để biết thêm thông tin, hãy xem hướng dẫn <a href="activities327f.html?hl=vi">Hoạt động</a>.</p></li>
+
+<li><b>Để bắt đầu một dịch vụ:</b>
+<p><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi">Service</a></code> là một thành phần có chức năng thực hiện các thao tác dưới nền
+mà không cần giao diện người dùng. Bạn có thể bắt đầu một dịch vụ để thực hiện một thao tác một lần
+(chẳng hạn như tải xuống một tệp) bằng cách chuyển <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>
+tới <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startService(android.content.Intent)">startService()</a></code>. <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>
+mô tả dịch vụ cần bắt đầu và mang theo mọi dữ liệu cần thiết.</p>
+
+<p>Nếu dịch vụ được thiết kế với một giao diện máy khách-máy chủ, bạn có thể gắn kết với dịch vụ
+từ một thành phần khác bằng cách chuyển <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> sang <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code></code>. Để biết thêm thông tin, hãy xem hướng dẫn <a href="services327f.html?hl=vi">Dịch vụ</a>.</p></li>
+
+<li><b>Để chuyển một quảng bá:</b>
+<p>Quảng bá là một tin nhắn mà bất kỳ ứng dụng nào cũng có thể nhận được. Hệ thống sẽ chuyển các quảng bá
+khác nhau tới các sự kiện hệ thống, chẳng hạn như khi hệ thống khởi động hoặc thiết bị bắt đầu sạc.
+Bạn có thể chuyển một quảng bá tới các ứng dụng khác bằng cách chuyển một <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>
+tới <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#sendBroadcast(android.content.Intent)">sendBroadcast()</a></code>,
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#sendOrderedBroadcast(android.content.Intent, java.lang.String)">sendOrderedBroadcast()</a></code>, hoặc <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#sendStickyBroadcast(android.content.Intent)">sendStickyBroadcast()</a></code>.</p>
+</li>
+</ul>
+
+
+
+
+<h2 id="Types">Các Loại Ý định</h2>
+
+<p>Có hai loại ý định:</p>
+
+<ul>
+<li><b>Ý định biểu thị</b> quy định thành phần cần bắt đầu theo tên (tên lớp hoàn toàn đạt tiêu chuẩn
+). Thường bạn sẽ sử dụng một ý định biểu thị để bắt đầu một thành phần trong
+ứng dụng của chính mình, vì bạn biết tên lớp của hoạt động hay dịch vụ mà mình muốn bắt đầu. Ví dụ
+, bắt đầu một hoạt động mới để hồi đáp một hành động của người dùng hay bắt đầu một dịch vụ để tải xuống
+tệp dưới nền.</li>
+
+<li><b>Ý định không biểu thị</b> không chỉ định một thành phần cụ thể mà thay vào đó, sẽ khai báo một hành động thông thường
+cần thực hiện, cho phép một thành phần từ một ứng dụng khác xử lý nó. Ví dụ, nếu bạn muốn
+hiển thị cho người dùng một vị trí trên bản đồ, bạn có thể sử dụng một ý định không biểu thị để yêu cầu một ứng dụng
+có khả năng khác hiển thị một vị trí được chỉ định trên bản đồ.</li>
+</ul>
+
+<p>Khi bạn tạo một ý định biểu thị để bắt đầu một hoạt động hoặc dịch vụ, hệ thống ngay lập tức
+sẽ bắt đầu thành phần ứng dụng được quy định trong đối tượng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>.</p>
+
+<div class="figure" style="width:446px">
+<img src="../../images/components/intent-filters%402x327f.png?hl=vi" width="446" alt="" />
+<p class="img-caption"><strong>Hình 1.</strong> Minh họa về cách một ý định không biểu thị được
+chuyển thông qua hệ thống để bắt đầu một hoạt động khác: <b>[1]</b> <em>Hoạt động A</em> tạo một
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> bằng một mô tả hành động và chuyển nó cho <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code>. <b>[2]</b> Hệ thống Android tìm kiếm tất cả
+ứng dụng xem có một bộ lọc ý định khớp với ý định đó không. Khi tìm thấy kết quả khớp, <b>[3]</b> hệ thống
+sẽ bắt đầu hoạt động so khớp đó (<em>Hoạt động B</em>) bằng cách gọi ra phương pháp <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#onCreate(android.os.Bundle)">onCreate()</a></code> và chuyển nó cho <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>.
+</p>
+</div>
+
+<p>Khi bạn tạo một ý định không biểu thị, hệ thống Android sẽ tìm kiếm thành phần phù hợp để bắt đầu
+bằng cách so sánh nội dung của ý định với các <em>bộ lọc ý định</em> được khai báo trong <a href="../topics/manifest/manifest-intro327f.html?hl=vi">tệp bản kê khai</a> của các ứng dụng khác trên
+thiết bị. Nếu ý định khớp với một bộ lọc ý định, hệ thống sẽ bắt đầu thành phần đó và chuyển cho nó
+đối tượng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>. Nếu có nhiều bộ lọc ý định tương thích, hệ thống
+sẽ hiển thị một hộp thoại để người dùng có thể chọn ứng dụng sẽ sử dụng.</p>
+
+<p>Bộ lọc ý định là một biểu thức trong tệp bản kê khai của một ứng dụng, có chức năng
+chỉ định loại ý định mà thành phần
+muốn nhận. Ví dụ, bằng cách khai báo một bộ lọc ý định cho một hoạt động,
+bạn giúp các ứng dụng khác có thể trực tiếp bắt đầu hoạt động của mình với một loại ý định nhất định.
+Tương tự, nếu bạn <em>không</em> khai báo bất kỳ bộ lọc ý định nào cho một hoạt động, khi đó nó chỉ có thể
+được bắt đầu bằng một ý định biểu thị.</p>
+
+<p class="caution"><strong>Chú ý:</strong> Để đảm bảo ứng dụng của bạn được bảo mật, luôn sử dụng một ý định
+biểu thị khi bắt đầu một <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi">Service</a></code> và không được
+khai báo bộ lọc ý định cho các dịch vụ của bạn. Việc sử dụng một ý định không biểu thị để bắt đầu một dịch vụ sẽ là một nguy cơ
+về bảo mật vì bạn không thể chắc chắn dịch vụ nào sẽ hồi đáp ý định đó,
+và người dùng không thể thấy dịch vụ nào bắt đầu. Bắt đầu với Android 5.0 (API mức 21), hệ thống
+sẽ đưa ra lỗi ngoại lệ nếu bạn gọi <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>
+bằng một ý định không biểu thị.</p>
+
+
+
+
+
+<h2 id="Building">Xây dựng một Ý định</h2>
+
+<p>Đối tượng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> mang thông tin mà hệ thống Android sử dụng
+để xác định thành phần nào sẽ bắt đầu (chẳng hạn như tên thành phần chính xác hoặc thể loại
+thành phần mà sẽ nhận ý định), cộng với thông tin mà thành phần nhận sử dụng để
+thực hiện hành động cho phù hợp (chẳng hạn như hành động sẽ thực hiện và dữ liệu để dựa vào đó mà thực hiện).</p>
+
+
+<p>Thông tin chính chứa trong một <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> như sau:</p>
+
+<dl>
+
+<dt><b>Tên thành phần</b></dt>
+<dd>Tên của thành phần sẽ bắt đầu.
+
+<p>Nội dung này không bắt buộc, nhưng đó là một thông tin trọng yếu để khiến một ý định trở nên
+<b>biểu thị</b>, có nghĩa là ý định nên chỉ được chuyển tới thành phần ứng dụng
+được xác định bởi tên thành phần đó. Nếu thiếu một tên thành phần, ý định trở thành <b>không biểu thị</b> và hệ thống
+sẽ quyết định thành phần nào nhận ý định đó dựa trên các thông tin còn lại của ý định
+(chẳng hạn như hành động, dữ liệu và thể loại&mdash;được mô tả bên dưới). Vì vậy, nếu bạn bắt đầu một thành phần
+cụ thể trong ứng dụng của mình, bạn nên chỉ định tên thành phần.</p>
+
+<p class="note"><strong>Lưu ý:</strong> Khi bắt đầu một <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi">Service</a></code>, bạn nên
+<strong>luôn chỉ định tên thành phần</strong>. Nếu không, bạn không thể chắc chắn dịch vụ nào
+sẽ hồi đáp ý định và người dùng không thể thấy dịch vụ nào bắt đầu.</p>
+
+<p>Trường này của <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> là một đối tượng
+<code><a href="https://developer.android.com/reference/android/content/ComponentName.html?hl=vi">ComponentName</a></code> mà bạn có thể chỉ định bằng cách sử dụng một tên lớp
+hoàn toàn đủ tiêu chuẩn của thành phần đích, bao gồm tên gói của ứng dụng. Ví dụ,
+<code>com.example.ExampleActivity</code>. Bạn có thể đặt tên thành phần bằng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setComponent(android.content.ComponentName)">setComponent()</a></code>, <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setClass(android.content.Context, java.lang.Class<?>)">setClass()</a></code>, <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setClassName(java.lang.String, java.lang.String)">setClassName()</a></code>, hoặc bằng
+ hàm dựng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>.</p>
+
+</dd>
+
+<p><dt><b>Hành động</b></dt>
+<dd>Một xâu quy định hành động thông thường sẽ thực hiện (chẳng hạn như <em>xem</em> hoặc <em>chọn</em>).
+
+<p>Trong trường hợp một ý định quảng bá, đây là hành động đã diễn ra và đang được báo cáo.
+Hành động này quyết định phần lớn cách thức xác định cấu trúc phần còn lại của ý định&mdash;đặc biệt là
+những gì chứa trong dữ liệu và phụ thêm.
+
+<p>Bạn có thể quy định các hành động của chính mình để các ý định bên trong ứng dụng của bạn sử dụng (hoặc để
+các ứng dụng khác sử dụng nhằm gọi ra các thành phần trong ứng dụng của mình), nhưng bạn nên thường xuyên sử dụng hằng số hành động
+được định nghĩa bởi lớp <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> hoặc các lớp khuôn khổ khác. Sau đây là một số
+hành động thường dùng để bắt đầu một hoạt động:</p>
+
+<dl>
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_VIEW">ACTION_VIEW</a></code></dt>
+   <dd>Sử dụng hành động này trong một ý định với <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code> khi bạn có một số thông tin mà
+   một hoạt động có thể hiển thị cho người dùng, chẳng hạn như ảnh để xem trong một ứng dụng bộ sưu tập ảnh, hay địa chỉ để
+   xem trong ứng dụng bản đồ.</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_SEND">ACTION_SEND</a></code></dt>
+   <dd>Còn được biết đến như là ý định "chia sẻ", bạn nên sử dụng kiểu này trong một ý định với <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code> khi bạn có một số dữ liệu mà người dùng có thể
+   chia sẻ thông qua một ứng dụng khác, chẳng hạn như một ứng dụng e-mail hay ứng dụng chia sẻ mạng xã hội.</dd>
+</dl>
+
+<p>Xem tham chiếu lớp <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> để biết thêm
+hằng số có chức năng định nghĩa các hành động thông thường.  Những hành động khác được định nghĩa
+ở phần khác trong khuôn khổ Android, chẳng hạn như trong <code><a href="https://developer.android.com/reference/android/provider/Settings.html?hl=vi">Settings</a></code> đối với những hành động
+có chức năng mở màn hình cụ thể trong ứng dụng Cài đặt của hệ thống.</p>
+
+<p>Bạn có thể quy định hành động cho một ý định với <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setAction(java.lang.String)">setAction()</a></code> hoặc với một hàm dựng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>.</p>
+
+<p>Nếu bạn định nghĩa các hành động của chính mình, nhớ nêu tên gói ứng dụng của bạn
+làm tiền tố. Ví dụ:</p>
+<pre>static final String ACTION_TIMETRAVEL = "com.example.action.TIMETRAVEL";</pre>
+</dd>
+
+<dt><b>Dữ liệu</b></dt>
+<dd>URI (một đối tượng <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=vi">Uri</a></code>) tham chiếu dữ liệu sẽ được hành động dựa trên nó và/hoặc kiểu MIME
+của dữ liệu đó. Kiểu dữ liệu được cung cấp thường sẽ bị chi phối bởi hành động của ý định. Ví
+dụ, nếu hành động là <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_EDIT">ACTION_EDIT</a></code>, dữ liệu cần chứa
+URI của tài liệu cần chỉnh sửa.
+
+<p>Khi tạo một ý định,
+một điều thường quan trọng đó là quy định kiểu dữ liệu (kiểu MIME của nó) ngoài URI của nó.
+Ví dụ, một hoạt động có thể hiển thị hình ảnh có thể sẽ không
+phát được tệp âm thanh, ngay cả khi định dạng URI có thể tương tự.
+Vì thế, việc quy định kiểu MIME cho dữ liệu của bạn sẽ giúp hệ thống
+Android tìm được thành phần tốt nhất để nhận ý định của bạn.
+Tuy nhiên, kiểu MIME đôi khi có thể được suy ra từ URI&mdash;cụ thể, khi dữ liệu là một URI
+<code>content:</code>, có chức năng cho biết dữ liệu nằm trên thiết bị và được kiểm soát bởi một
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=vi">ContentProvider</a></code>, điều này khiến kiểu MIME của dữ liệu hiển thị đối với hệ thống.</p>
+
+<p>Để chỉ đặt URI dữ liệu, hãy gọi <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setData(android.net.Uri)">setData()</a></code>.
+Để chỉ đặt kiểu MIME, hãy gọi <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setType(java.lang.String)">setType()</a></code>. Nếu cần, bạn
+bạn có thể công khai đặt cả hai với <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setDataAndType(android.net.Uri, java.lang.String)">setDataAndType()</a></code>.</p>
+
+<p class="caution"><strong>Chú ý:</strong> Nếu bạn muốn đặt cả URI và kiểu MIME,
+<strong>không</strong> gọi <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setData(android.net.Uri)">setData()</a></code> và
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setType(java.lang.String)">setType()</a></code> vì chúng sẽ vô hiệu hóa giá trị của nhau.
+Luôn sử dụng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setDataAndType(android.net.Uri, java.lang.String)">setDataAndType()</a></code> để đặt cả
+URI và kiểu MIME.</p>
+</dd>
+
+<p><dt><b>Thể loại</b></dt>
+<dd>Một xâu chứa thông tin bổ sung về kiểu thành phần
+sẽ xử lý ý định.  Trong một ý định có thể chứa
+nhiều mô tả thể loại, nhưng hầu hết các ý định lại không yêu cầu thể loại.
+Sau đây là một số thể loại thường gặp:
+
+<dl>
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#CATEGORY_BROWSABLE">CATEGORY_BROWSABLE</a></code></dt>
+  <dd>Hoạt động mục tiêu cho phép chính nó được bắt đầu bởi một trình duyệt web để hiển thị dữ liệu
+       được một liên kết tham chiếu&mdash;chẳng hạn như một hình ảnh hay thư e-mail.
+  </dd>
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code></dt>
+  <dd>Hoạt động là hoạt động ban đầu của một tác vụ và được liệt kê trong
+       trình khởi chạy ứng dụng của hệ thống.
+  </dd>
+</dl>
+
+<p>Xem mô tả lớp <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> để biết danh sách đầy đủ về các
+thể loại.</p>
+
+<p>Bạn có thể quy định một thể loại bằng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#addCategory(java.lang.String)">addCategory()</a></code>.</p>
+</dd>
+</dl>
+
+
+<p>Những tính chất này được liệt kê ở trên (tên thành phần, hành động, dữ liệu và thể loại) biểu hiện các
+đặc điểm xác định của một ý định. Bằng cách đọc những tính chất này, hệ thống Android
+có thể quyết định nó sẽ bắt đầu thành phần ứng dụng nào.</p>
+
+<p>Tuy nhiên, một ý định có thể mang thông tin bổ sung không ảnh hưởng tới
+cách nó được giải quyết đối với một thành phần ứng dụng. Một ý định cũng có thể cung cấp:</p>
+
+<dl>
+<dt><b>Phụ thêm</b></dt>
+<dd>Các cặp khóa-giá trị mang thông tin bổ sung cần thiết để hoàn thành hành động được yêu cầu.
+Giống như việc một số hành động sử dụng các kiểu URI dữ liệu riêng, một số hành động cũng sử dụng các phần phụ thêm riêng.
+
+<p>Bạn có thể thêm dữ liệu phụ thêm bằng các phương pháp <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#putExtra(java.lang.String, android.os.Bundle)">putExtra()</a></code> khác nhau,
+mỗi phương pháp chấp nhận hai tham số: tên khóa và giá trị.
+Bạn cũng có thể tạo một đối tượng <code><a href="https://developer.android.com/reference/android/os/Bundle.html?hl=vi">Bundle</a></code> bằng tất cả dữ liệu phụ thêm, sau đó chèn
+ <code><a href="https://developer.android.com/reference/android/os/Bundle.html?hl=vi">Bundle</a></code> vào <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> bằng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#putExtras(android.content.Intent)">putExtras()</a></code>.</p>
+
+<p>Ví dụ, khi tạo một ý định để gửi một e-mail bằng
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_SEND">ACTION_SEND</a></code>, bạn có thể chỉ định người nhận "tới" bằng khóa
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#EXTRA_EMAIL">EXTRA_EMAIL</a></code>, và chỉ định "chủ đề" bằng khóa
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#EXTRA_SUBJECT">EXTRA_SUBJECT</a></code>.</p>
+
+<p>Lớp <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> quy định nhiều hằng số <code>EXTRA_*</code> cho
+các kiểu dữ liệu chuẩn hóa. Nếu bạn cần khai báo các khóa phụ thêm của riêng mình (cho những ý định
+mà ứng dụng của bạn nhận), hãy chắc chắn nêu tên gói ứng dụng của bạn
+làm tiền tố. Ví dụ:</p>
+<pre>static final String EXTRA_GIGAWATTS = "com.example.EXTRA_GIGAWATTS";</pre>
+</dd>
+
+<dt><b>Cờ</b></dt>
+<dd>Cờ được định nghĩa trong lớp <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> có chức năng như siêu dữ liệu cho
+ý định. Cờ có thể chỉ lệnh hệ thống Android về cách khởi chạy một hoạt động (ví dụ, hoạt động sẽ thuộc về
+<a href="tasks-and-back-stack327f.html?hl=vi">tác vụ</a> nào
+) và cách xử lý sau khi nó được khởi chạy (ví dụ, nó có thuộc về danh sách hoạt động
+gần đây hay không).
+
+<p>Để biết thêm thông tin, hãy xem phương pháp <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#setFlags(int)">setFlags()</a></code>.</p>
+</dd>
+
+</dl>
+
+
+
+
+<h3 id="ExampleExplicit">Ví dụ về ý định biểu thị</h3>
+
+<p>Ý định biểu thị là ý định mà bạn sử dụng để khởi chạy một thành phần ứng dụng cụ thể
+chẳng hạn như một hoạt động hay dịch vụ cụ thể trong ứng dụng của bạn. Để tạo một ý định biểu thị, hãy định nghĩa
+tên thành phần cho đối tượng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> &mdash;tất cả các
+tính chất ý định khác đều không bắt buộc.</p>
+
+<p>Ví dụ, nếu bạn đã xây dựng một dịch vụ trong ứng dụng của mình, đặt tên là <code>DownloadService</code>,
+được thiết kế để tải xuống một tệp từ web, bạn có thể bắt đầu nó bằng mã sau:</p>
+
+<pre>
+// Executed in an Activity, so 'this' is the <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi">Context</a></code>
+// The fileUrl is a string URL, such as "http://www.example.com/image.png"
+Intent downloadIntent = new Intent(this, DownloadService.class);
+downloadIntent.setData(<code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=vi#parse(java.lang.String)">Uri.parse</a></code>(fileUrl));
+startService(downloadIntent);
+</pre>
+
+<p>Hàm dựng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#Intent(android.content.Context, java.lang.Class<?>)">Intent(Context, Class)</a></code>
+cung cấp cho ứng dụng <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi">Context</a></code> và thành phần
+một đối tượng <code><a href="https://developer.android.com/reference/java/lang/Class.html?hl=vi">Class</a></code>. Như vậy,
+ý định này rõ ràng sẽ bắt đầu lớp <code>DownloadService</code> trong ứng dụng.</p>
+
+<p>Để biết thêm thông tin về việc xây dựng và bắt đầu một dịch vụ, hãy xem hướng dẫn
+<a href="services327f.html?hl=vi">Dịch vụ</a>.</p>
+
+
+
+
+<h3 id="ExampleSend">Ví dụ về ý định không biểu thị</h3>
+
+<p>Ý định không biểu thị quy định một hành động mà có thể gọi ra bất kỳ ứng dụng nào trên thiết bị mà có
+khả năng thực hiện hành động đó. Việc sử dụng ý định không biểu thị có ích khi ứng dụng của bạn không thể thực hiện
+hành động, nhưng các ứng dụng khác có thể và bạn muốn người dùng chọn ứng dụng sẽ sử dụng.</p>
+
+<p>Ví dụ, nếu bạn có nội dung mà mình muốn người dùng chia sẻ với người khác, hãy tạo một ý định
+với hành động <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_SEND">ACTION_SEND</a></code> và
+bổ sung phần phụ thêm quy định nội dung sẽ chia sẻ. Khi bạn gọi
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code> bằng ý định đó, người dùng có thể
+chọn một ứng dụng để chia sẻ nội dung thông qua đó.</p>
+
+<p class="caution"><strong>Chú ý:</strong> Có thể là người dùng sẽ không có <em>bất kỳ</em>
+ứng dụng nào xử lý được ý định không biểu thị mà bạn gửi tới <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code>. Nếu chuyện đó xảy ra, phương pháp gọi sẽ thất bại và ứng dụng của bạn sẽ gặp lỗi. Để xác minh rằng
+một hoạt động sẽ nhận được ý định, hãy gọi <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#resolveActivity(android.content.pm.PackageManager)">resolveActivity()</a></code> trên đối tượng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> của bạn. Nếu kết quả không rỗng
+thì có ít nhất một ứng dụng có thể xử lý ý định và sẽ an toàn nếu gọi
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code>. Nếu kết quả rỗng,
+bạn không nên sử dụng ý định và, nếu có thể, bạn nên vô hiệu hóa tính năng phát hành
+ý định.</p>
+
+
+<pre>
+// Create the text message with a string
+Intent sendIntent = new Intent();
+sendIntent.setAction(Intent.ACTION_SEND);
+sendIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
+sendIntent.setType("text/plain");
+
+// Verify that the intent will resolve to an activity
+if (sendIntent.resolveActivity(getPackageManager()) != null) {
+    startActivity(sendIntent);
+}
+</pre>
+
+<p class="note"><strong>Lưu ý:</strong> Trong trường hợp này, URI không được sử dụng, nhưng kiểu dữ liệu của ý định
+sẽ được khai báo để quy định nội dung được thực hiện bởi phần phụ thêm.</p>
+
+
+<p>Khi <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code> được gọi, hệ thống
+sẽ kiểm tra tất cả ứng dụng đã cài đặt để xác định những ứng dụng có thể xử lý kiểu ý định này (một
+ý định với hành động <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_SEND">ACTION_SEND</a></code> và có mang dữ liệu
+"văn bản/thuần"). Nếu chỉ có một ứng dụng có thể xử lý nó, ứng dụng đó sẽ mở ngay lập tức và được cấp cho
+ý định. Nếu có nhiều hoạt động chấp nhận ý định, hệ thống
+sẽ hiển thị một hộp thoại để người dùng có thể chọn ứng dụng sẽ sử dụng.</p>
+
+
+<div class="figure" style="width:200px">
+  <img src="../../images/training/basics/intent-chooser327f.png?hl=vi" alt="">
+  <p class="img-caption"><strong>Hình 2.</strong> Hộp thoại bộ chọn.</p>
+</div>
+
+<h3 id="ForceChooser">Bắt buộc một bộ chọn ứng dụng</h3>
+
+<p>Khi có nhiều hơn một ứng dụng hồi đáp ý định không biểu thị của bạn,
+người dùng có thể chọn ứng dụng nào sẽ sử dụng và đặt ứng dụng đó làm lựa chọn mặc định cho
+hành động. Điều này tốt khi thực hiện một hành động mà người dùng
+có thể muốn sử dụng ứng dụng tương tự từ lúc này trở đi, chẳng hạn như khi mở một trang web (người dùng
+thường thích ưu tiên sử dụng chỉ một trình duyệt web).</p>
+
+<p>Tuy nhiên, nếu nhiều ứng dụng có thể hồi đáp ý định và người dùng có thể muốn sử dụng mỗi
+lần một ứng dụng khác, bạn nên công khai hiển thị một hộp thoại bộ chọn. Hộp thoại bộ chọn yêu cầu
+người dùng phải chọn ứng dụng sẽ sử dụng mỗi lần cho hành động (người dùng không thể chọn một ứng dụng mặc định cho
+hành động). Ví dụ, khi ứng dụng của bạn thực hiện "chia sẻ" với hành động <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_SEND">ACTION_SEND</a></code>, người dùng có thể muốn chia sẻ bằng cách sử dụng một ứng dụng khác tùy vào
+tình hình thực tế của họ, vì thế bạn nên luôn sử dụng hộp thoại bộ chọn như minh họa trong hình 2.</p>
+
+
+
+
+<p>Để hiển thị bộ chọn, hãy tạo một <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> bằng cách sử dụng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#createChooser(android.content.Intent, java.lang.CharSequence)">createChooser()</a></code> và chuyển nó sang <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code>. Ví dụ:</p>
+
+<pre>
+Intent sendIntent = new Intent(Intent.ACTION_SEND);
+...
+
+// Always use string resources for UI text.
+// This says something like "Share this photo with"
+String title = getResources().getString(R.string.chooser_title);
+// Create intent to show the chooser dialog
+Intent chooser = Intent.createChooser(sendIntent, title);
+
+// Verify the original intent will resolve to at least one activity
+if (sendIntent.resolveActivity(getPackageManager()) != null) {
+    startActivity(chooser);
+}
+</pre>
+
+<p>Một hộp thoại hiển thị với một danh sách ứng dụng hồi đáp lại ý định được chuyển sang phương pháp <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#createChooser(android.content.Intent, java.lang.CharSequence)">createChooser()</a></code> và sử dụng văn bản được cung cấp làm
+tiêu đề của hộp thoại.</p>
+
+
+
+
+
+
+
+
+
+<h2 id="Receiving">Nhận một Ý định Không biểu thị</h2>
+
+<p>Để quảng cáo những ý định không biểu thị mà ứng dụng của bạn có thể nhận, hãy khai báo một hoặc nhiều bộ lọc ý định cho
+từng thành phần ứng dụng của bạn với một phần tử <a href="../topics/manifest/intent-filter-element327f.html?hl=vi"><code>&amp;lt;intent-filter&amp;gt;</code></a>
+trong <a href="../topics/manifest/manifest-intro327f.html?hl=vi">tệp bản kê khai của mình</a>.
+Mỗi bộ lọc ý định sẽ quy định loại ý định mà nó chấp nhận dựa trên hành động,
+dữ liệu và thể loại của ý định. Hệ thống sẽ chỉ chuyển một ý định không biểu thị tới thành phần ứng dụng của bạn nếu
+ý định đó có thể chuyển qua một trong các bộ lọc ý định của bạn.</p>
+
+<p class="note"><strong>Lưu ý:</strong> Ý định biểu thị luôn được chuyển tới mục tiêu của mình,
+không phụ thuộc vào bất kỳ bộ lọc ý định nào mà thành phần khai báo.</p>
+
+<p>Một thành phần ứng dụng nên khai báo các bộ lọc riêng cho từng công việc duy nhất mà nó có thể thực hiện.
+Ví dụ, một hoạt động trong một ứng dụng bộ sưu tập ảnh có thể có hai bộ lọc: một bộ lọc
+để xem một hình ảnh và một bộ lọc để chỉnh sửa một hình ảnh. Khi hoạt động bắt đầu,
+nó sẽ kiểm tra <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> và quyết định cách xử lý dựa trên thông tin
+trong <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> (chẳng hạn như có hiển thị các điều khiển của trình chỉnh sửa hoặc không).</p>
+
+<p>Mỗi bộ lọc ý định sẽ được định nghĩa bởi một phần tử <a href="../topics/manifest/intent-filter-element327f.html?hl=vi"><code>&amp;lt;intent-filter&amp;gt;</code></a>
+trong tệp bản kê khai của ứng dụng, được lồng trong thành phần ứng dụng tương ứng (chẳng hạn như
+một phần tử <a href="../topics/manifest/activity-element327f.html?hl=vi"><code>&amp;lt;activity&amp;gt;</code></a>
+). Bên trong <a href="../topics/manifest/intent-filter-element327f.html?hl=vi"><code>&amp;lt;intent-filter&amp;gt;</code></a>,
+bạn có thể quy định loại ý định sẽ chấp nhận bằng cách sử dụng một hoặc nhiều
+phần tử trong ba phần tử sau:</p>
+
+<dl>
+<dt><a href="../topics/manifest/action-element327f.html?hl=vi"><code>&amp;lt;action&amp;gt;</code></a></dt>
+  <dd>Khai báo hành động ý định được chấp nhận, trong thuộc tính <code>name</code>. Giá trị
+  phải là giá trị xâu ký tự của một hành động chứ không phải hằng số lớp.</dd>
+<dt><a href="../topics/manifest/data-element327f.html?hl=vi"><code>&amp;lt;data&amp;gt;</code></a></dt>
+  <dd>Khai báo kiểu dữ liệu được chấp nhận, bằng cách sử dụng một hoặc nhiều thuộc tính quy định
+  các khía cạnh của URI dữ liệu (<code>scheme</code>, <code>host</code>, <code>port</code>,
+  <code>path</code>, v.v.) và kiểu MIME.</dd>
+<dt><a href="../topics/manifest/category-element327f.html?hl=vi"><code>&amp;lt;category&amp;gt;</code></a></dt>
+  <dd>Khai báo thể loại ý định được chấp nhận, trong thuộc tính <code>name</code>. Giá trị
+  phải là giá trị xâu ký tự của một hành động chứ không phải hằng số lớp.
+
+  <p class="note"><strong>Lưu ý:</strong> Để nhận các ý định không biểu thị, bạn
+  <strong>phải nêu</strong> thể loại
+  <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#CATEGORY_DEFAULT">CATEGORY_DEFAULT</a></code> trong bộ lọc ý định. Các phương pháp
+  <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code> và
+  <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code> xử lý tất cả ý định
+  như thể chúng khai báo thể loại <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#CATEGORY_DEFAULT">CATEGORY_DEFAULT</a></code>.
+  Nếu bạn không khai báo thể loại này trong bộ lọc ý định của mình, không có ý định không biểu thị nào sẽ phân giải thành
+  hoạt động của bạn.</p>
+  </dd>
+</dl>
+
+<p>Ví dụ, sau đây là một khai báo hoạt động với một bộ lọc ý định để nhận một ý định
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_SEND">ACTION_SEND</a></code> khi kiểu dữ liệu là văn bản:</p>
+
+<pre>
+&lt;activity android:name="ShareActivity">
+    &lt;intent-filter>
+        &lt;action android:name="android.intent.action.SEND"/>
+        &lt;category android:name="android.intent.category.DEFAULT"/>
+        &lt;data android:mimeType="text/plain"/>
+    &lt;/intent-filter>
+&lt;/activity>
+</pre>
+
+<p>Không sao nếu tạo một bộ lọc chứa nhiều hơn một thực thể của
+<a href="../topics/manifest/action-element327f.html?hl=vi"><code>&amp;lt;action&amp;gt;</code></a>,
+<a href="../topics/manifest/data-element327f.html?hl=vi"><code>&amp;lt;data&amp;gt;</code></a>, hoặc
+<a href="../topics/manifest/category-element327f.html?hl=vi"><code>&amp;lt;category&amp;gt;</code></a>.
+Nếu làm vậy, bạn chỉ cần chắc chắn rằng thành phần có thể xử lý bất kỳ và tất cả các cách kết hợp
+những phần tử bộ lọc đó.</p>
+
+<p>Khi bạn muốn xử lý nhiều kiểu ý định, nhưng chỉ theo các cách kết hợp cụ thể giữa
+hành động, dữ liệu và kiểu thể loại, khi đó bạn cần tạo nhiều bộ lọc ý định.</p>
+
+
+<div class="sidebox-wrapper">
+<div class="sidebox">
+<h2>Hạn chế truy cập vào các thành phần</h2>
+<p>Sử dụng một bộ lọc ý định không phải là một cách bảo mật để ngăn các ứng dụng khác bắt đầu
+các thành phần của bạn. Mặc dù bộ lọc ý định hạn chế một thành phần chỉ hồi đáp
+một số kiểu ý định không biểu thị nhất định, một ứng dụng khác có thể có khả năng bắt đầu thành phần ứng dụng của bạn
+bằng cách sử dụng ý định biểu thị nếu nhà phát triển xác định tên thành phần của bạn.
+Nếu điều quan trọng là <em>chỉ ứng dụng của chính bạn</em> mới có thể bắt đầu một trong các thành phần của bạn,
+hãy đặt thuộc tính <a href="../topics/manifest/activity-element327f.html?hl=vi#exported"><code>exported</code></a> thành <code>"false"</code> cho thành phần đó.
+</p>
+</div>
+</div>
+
+<p>Ý định không biểu thị sẽ được kiểm tra dựa trên một bộ lọc bằng cách so sánh ý định với từng phần tử trong số
+ba phần tử. Để được chuyển tới thành phần, ý định phải vượt qua tất cả ba lần kiểm tra.
+Nếu không khớp với thậm chí chỉ một lần thì hệ thống Android sẽ không chuyển ý định tới
+thành phần.  Tuy nhiên, vì một thành phần có thể có nhiều bộ lọc ý định, ý định mà không chuyển qua
+một trong các bộ lọc của thành phần có thể chuyển qua trên một bộ lọc khác.
+Bạn có thể tìm hiểu thêm thông tin về cách hệ thống giải quyết ý định trong phần bên dưới
+về <a href="#Resolution">Giải quyết Ý định</a>.</p>
+
+<p class="caution"><strong>Chú ý:</strong> Để tránh vô ý chạy
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi">Service</a></code> của một ứng dụng khác, hãy luôn sử dụng một ý định biểu thị để bắt đầu dịch vụ của chính bạn và không được
+khai báo các bộ lọc ý định cho dịch vụ của bạn.</p>
+
+<p class="note"><strong>Lưu ý:</strong>
+Đối với tất cả hoạt động, bạn phải khai báo các bộ lọc ý định của mình trong một tệp bản kê khai.
+Tuy nhiên, các bộ lọc cho hàm nhận quảng bá có thể được đăng ký linh hoạt bằng cách gọi
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#registerReceiver(android.content.BroadcastReceiver, android.content.IntentFilter, java.lang.String, android.os.Handler)">registerReceiver()</a></code>. Sau đó, bạn có thể bỏ đăng ký hàm nhận đó bằng <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#unregisterReceiver(android.content.BroadcastReceiver)">unregisterReceiver()</a></code>. Làm vậy sẽ cho phép ứng dụng của bạn
+lắng nghe các quảng bá cụ thể chỉ trong một khoảng thời gian xác định trong khi ứng dụng của bạn
+đang chạy.</p>
+
+
+
+
+
+
+
+<h3 id="ExampleFilters">Ví dụ về bộ lọc</h3>
+
+<p>Để hiểu hơn về một số hành vi của bộ lọc ý định, hãy xem đoạn mã HTML sau
+từ tệp bản kê khai của một ứng dụng chia sẻ mạng xã hội.</p>
+
+<pre>
+&lt;activity android:name="MainActivity">
+    &lt;!-- This activity is the main entry, should appear in app launcher -->
+    &lt;intent-filter>
+        &lt;action android:name="android.intent.action.MAIN" />
+        &lt;category android:name="android.intent.category.LAUNCHER" />
+    &lt;/intent-filter>
+&lt;/activity>
+
+&lt;activity android:name="ShareActivity">
+    &lt;!-- This activity handles "SEND" actions with text data -->
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.SEND"/>
+        &lt;category android:name="android.intent.category.DEFAULT"/>
+        &lt;data android:mimeType="text/plain"/>
+    &lt;/intent-filter&gt;
+    &lt;!-- This activity also handles "SEND" and "SEND_MULTIPLE" with media data -->
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.SEND"/>
+        &lt;action android:name="android.intent.action.SEND_MULTIPLE"/>
+        &lt;category android:name="android.intent.category.DEFAULT"/>
+        &lt;data android:mimeType="application/vnd.google.panorama360+jpg"/>
+        &lt;data android:mimeType="image/*"/>
+        &lt;data android:mimeType="video/*"/>
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;
+</pre>
+
+<p>Hoạt động thứ nhất, <code>MainActivity</code>, là điểm mục nhập chính của ứng dụng&mdash;hoạt động này
+sẽ mở khi người dùng khởi tạo ban đầu ứng dụng bằng biểu tượng trình khởi chạy:</p>
+<ul>
+  <li>Hành động <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_MAIN">ACTION_MAIN</a></code> thể hiện
+  đây là điểm mục nhập chính và không yêu cầu bất kỳ dữ liệu ý định nào.</li>
+  <li>Thể loại <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code> cho biết rằng biểu tượng
+  của hoạt động này nên được đặt trong trình khởi chạy ứng dụng của hệ thống. Nếu phần tử <a href="../topics/manifest/activity-element327f.html?hl=vi"><code>&amp;lt;activity&amp;gt;</code></a>
+  không quy định một biểu tượng bằng <code>icon</code>, khi đó hệ thống sẽ sử dụng biểu tượng từ phần tử <a href="../topics/manifest/application-element327f.html?hl=vi"><code>&amp;lt;application&amp;gt;</code></a>
+.</li>
+</ul>
+<p>Hai nội dung này phải được ghép đôi cùng nhau để hoạt động xuất hiện trong trình khởi chạy ứng dụng.</p>
+
+<p>Hoạt động thứ hai, <code>ShareActivity</code>, có mục đích để tạo điều kiện chia sẻ nội dung văn bản và
+phương tiện. Mặc dù người dùng có thể nhập hoạt động này bằng cách điều hướng tới nó từ <code>MainActivity</code>,
+họ cũng có thể nhập <code>ShareActivity</code> trực tiếp từ một ứng dụng khác mà phát hành
+ý định không biểu thị khớp với một trong hai bộ lọc ý định.</p>
+
+<p class="note"><strong>Lưu ý:</strong> Kiểu MIME,
+<a href="https://developers.google.com/panorama/android/?hl=vi"><code>application/vnd.google.panorama360+jpg</code></a>, là một kiểu dữ liệu đặc biệt quy định
+ảnh chụp toàn cảnh mà bạn có thể xử lý bằng các API <a href="https://developer.android.com/reference/com/google/android/gms/panorama/package-summary.html?hl=vi">Google
+panorama</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="PendingIntent">Sử dụng một Ý định Chờ</h2>
+
+<p>Đối tượng <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=vi">PendingIntent</a></code> là một trình bao bọc xung quanh một đối tượng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>. Mục đích chính của một <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=vi">PendingIntent</a></code>
+ là cấp quyền cho một ứng dụng ngoài
+để sử dụng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> chứa trong nó như thể nó được thực thi từ tiến trình
+của chính ứng dụng của bạn.</p>
+
+<p>Các trường hợp sử dụng chính đối với một ý định chờ bao gồm:</p>
+<ul>
+  <li>Khai báo một ý định cần được thực thi khi người dùng thực hiện một hành động bằng <a href="../topics/ui/notifiers/notifications327f.html?hl=vi">Thông báo</a> của bạn
+  (<code><a href="https://developer.android.com/reference/android/app/NotificationManager.html?hl=vi">NotificationManager</a></code>
+  của hệ thống Android thực thi <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>).
+  <li>Khai báo một ý định cần được thực thi khi người dùng thực hiện một hành động bằng
+  <a href="../topics/appwidgets/index327f.html?hl=vi">App Widget</a> của bạn
+  (ứng dụng màn hình Trang chủ thực thi <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>).
+  <li>Khai báo một ý định cần được thực thi tại một thời điểm xác định trong tương lai (
+<code><a href="https://developer.android.com/reference/android/app/AlarmManager.html?hl=vi">AlarmManager</a></code> của hệ thống Android thực thi <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>).
+</ul>
+
+<p>Vì mỗi đối tượng <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> được thiết kế để được xử lý bởi một
+loại thành phần ứng dụng cụ thể (hoặc là <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi">Activity</a></code>, <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi">Service</a></code>, hay
+ <code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=vi">BroadcastReceiver</a></code>), vì thế <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=vi">PendingIntent</a></code> cũng
+phải được tạo lập với cân nhắc tương tự. Khi sử dụng một ý định chờ, ứng dụng của bạn sẽ không
+thực thi ý định bằng một lệnh gọi chẳng hạn như <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code>. Thay vào đó, bạn phải khai báo loại thành phần theo ý định khi bạn tạo lập
+<code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=vi">PendingIntent</a></code> bằng cách gọi phương pháp trình tạo lập tương ứng:</p>
+
+<ul>
+  <li><code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=vi#getActivity(android.content.Context, int, android.content.Intent, int)">PendingIntent.getActivity()</a></code> đối với một
+  <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> mà bắt đầu <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi">Activity</a></code>.</li>
+  <li><code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=vi#getService(android.content.Context, int, android.content.Intent, int)">PendingIntent.getService()</a></code> đối với một
+  <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> mà bắt đầu <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi">Service</a></code>.</li>
+  <li><code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=vi#getBroadcast(android.content.Context, int, android.content.Intent, int)">PendingIntent.getBroadcast()</a></code> đối với một
+  <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> mà bắt đầu <code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=vi">BroadcastReceiver</a></code>.</li>
+</ul>
+
+<p>Trừ khi ứng dụng của bạn đang <em>nhận</em> ý định chờ từ các ứng dụng khác,
+các phương pháp để tạo lập <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=vi">PendingIntent</a></code> trên là những phương pháp
+<code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=vi">PendingIntent</a></code> duy nhất mà bạn sẽ cần.</p>
+
+<p>Mỗi phương pháp sẽ lấy ứng dụng <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi">Context</a></code> hiện tại,
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> mà bạn muốn bao bọc, và một hoặc nhiều cờ quy định
+cách thức sử dụng ý định (chẳng hạn như ý định có thể được sử dụng nhiều hơn một lần hay không).</p>
+
+<p>Bạn có thể tham khảo thêm thông tin về việc sử dụng ý định chờ trong tài liệu cho từng
+trường hợp sử dụng tương ứng chẳng hạn như trong hướng dẫn về API <a href="../topics/ui/notifiers/notifications327f.html?hl=vi">Thông báo</a>
+và <a href="../topics/appwidgets/index327f.html?hl=vi">App Widgets</a>.</p>
+
+
+
+
+
+
+
+<h2 id="Resolution">Giải quyết Ý định</h2>
+
+
+<p>Khi hệ thống nhận được một ý định không biểu thị nhằm bắt đầu một hoạt động, nó sẽ tìm
+hoạt động tốt nhất cho ý định đó bằng cách so sánh ý định với các bộ lọc ý định dựa trên ba phương diện:</p>
+
+<ul>
+  <li>Hành động của ý định
+  <li>Dữ liệu của ý định (cả URI và kiểu dữ liệu)
+  <li>Thể loại của ý định
+</ul>
+
+<p>Các phần sau mô tả cách một ý định được so khớp với (các) thành phần phù hợp
+về phương diện bộ lọc ý định được khai báo như thế nào trong tệp bản kê khai của một ứng dụng.</p>
+
+
+<h3 id="ActionTest">Kiểm tra hành động</h3>
+
+<p>Để quy định các hành động của ý định được chấp nhận, một bộ lọc ý định có thể khai báo 0 phần tử
+<a href="../topics/manifest/action-element327f.html?hl=vi"><code>&amp;lt;action&amp;gt;</code></a> hoặc nhiều hơn.  Ví dụ:</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;action android:name="android.intent.action.EDIT" /&gt;
+    &lt;action android:name="android.intent.action.VIEW" /&gt;
+    ...
+&lt;/intent-filter&gt;
+</pre>
+
+<p>Để vượt qua bộ lọc này, hành động được quy định trong <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>
+  phải khớp với một trong các hành động được liệt kê trong bộ lọc.</p>
+
+<p>Nếu bộ lọc không liệt kê bất kỳ hành động nào thì sẽ không có gì để
+ý định so khớp, vì thế tất cả ý định sẽ không vượt qua kiểm tra. Tuy nhiên, nếu một <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>
+không quy định một hành động, nó sẽ vượt qua kiểm tra (miễn là bộ lọc
+chứa ít nhất một hành động).</p>
+
+
+
+<h3 id="CategoryTest">Kiểm tra thể loại</h3>
+
+<p>Để quy định các thể loại của ý định được chấp nhận, một bộ lọc ý định có thể khai báo 0 phần tử
+<a href="../topics/manifest/category-element327f.html?hl=vi"><code>&amp;lt;category&amp;gt;</code></a> hoặc nhiều hơn.  Ví dụ:</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;category android:name="android.intent.category.DEFAULT" /&gt;
+    &lt;category android:name="android.intent.category.BROWSABLE" /&gt;
+    ...
+&lt;/intent-filter&gt;
+</pre>
+
+<p>Để một ý định vượt qua kiểm tra thể loại, mỗi thể loại trong <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code>
+phải khớp với một thể loại trong bộ lọc. Trường hợp ngược lại là không cần thiết&mdash;bộ lọc ý định có thể
+khai báo nhiều thể loại hơn được quy định trong <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> và
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi">Intent</a></code> sẽ vẫn vượt qua. Vì thế, ý định không có thể loại
+luôn vượt qua kiểm tra này, không phụ thuộc vào những thể loại nào được khai báo trong bộ lọc.</p>
+
+<p class="note"><strong>Lưu ý:</strong>
+Android sẽ tự động áp dụng thể loại <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#CATEGORY_DEFAULT">CATEGORY_DEFAULT</a></code>
+cho tất cả ý định không biểu thị được chuyển tới <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startActivity(android.content.Intent)">startActivity()</a></code> và <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code>.
+Vì thế, nếu bạn muốn hoạt động của mình nhận ý định không biểu thị, nó phải
+nêu một thể loại cho <code>"android.intent.category.DEFAULT"</code> trong các bộ lọc ý định của mình (như
+được minh họa trong ví dụ <code>&amp;lt;intent-filter&amp;gt;</code> trước đó.</p>
+
+
+
+<h3 id="DataTest">Kiểm tra dữ liệu</h3>
+
+<p>Để quy định dữ liệu của ý định được chấp nhận, một bộ lọc ý định có thể khai báo 0 phần tử
+<a href="../topics/manifest/data-element327f.html?hl=vi"><code>&amp;lt;data&amp;gt;</code></a> hoặc nhiều hơn.  Ví dụ:</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;data android:mimeType="video/mpeg" android:scheme="http" ... /&gt;
+    &lt;data android:mimeType="audio/mpeg" android:scheme="http" ... /&gt;
+    ...
+&lt;/intent-filter&gt;
+</pre>
+
+<p>Mỗi phần tử <code><a href="../topics/manifest/data-element327f.html?hl=vi">&lt;data&gt;</a></code>
+có thể quy định một cấu trúc URI và kiểu dữ liệu (kiểu phương tiện MIME).  Có các thuộc tính
+riêng &mdash; <code>scheme</code>, <code>host</code>, <code>port</code>,
+và <code>path</code> &mdash; cho từng phần của URI:
+</p>
+
+<p style="margin-left: 2em"><code>&amp;lt;scheme&amp;gt;://&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;path&amp;gt;</code></p>
+
+<p>
+Ví dụ:
+</p>
+
+<p style="margin-left: 2em"><code>content://com.example.project:200/folder/subfolder/etc</code></p>
+
+<p>Trong URI này, lược đồ là <code>content</code>, máy chủ là <code>com.example.project</code>,
+cổng là <code>200</code>, và đường dẫn là <code>folder/subfolder/etc</code>.
+</p>
+
+<p>Mỗi thuộc tính sau đều không bắt buộc trong một phần tử <a href="../topics/manifest/data-element327f.html?hl=vi"><code>&amp;lt;data&amp;gt;</code></a>,
+nhưng có sự phụ thuộc mang tính chất tuyến tính:</p>
+<ul>
+  <li>Nếu không quy định một lược đồ thì máy chủ bị bỏ qua.</li>
+  <li>Nếu không quy định một máy chủ thì cổng bị bỏ qua.</li>
+  <li>Nếu không quy định cả lược đồ và máy chủ thì đường dẫn bị bỏ qua.</li>
+</ul>
+
+<p>Khi URI trong một ý định được so sánh với đặc tả URI trong một bộ lọc,
+nó chỉ được so sánh với các bộ phận của URI được nêu trong bộ lọc. Ví dụ:</p>
+<ul>
+  <li>Nếu một bộ lọc chỉ quy định một lược đồ, tất cả URI có lược đồ đó sẽ khớp
+với bộ lọc.</li>
+  <li>Nếu một bộ lọc quy định một lược đồ và thẩm quyền nhưng không có đường dẫn, tất cả URI
+với cùng lược đồ và thẩm quyền sẽ thông qua bộ lọc, không phụ thuộc vào đường dẫn của nó.</li>
+  <li>Nếu bộ lọc quy định một lược đồ, thẩm quyền và đường dẫn, chỉ những URI có cùng lược đồ,
+thẩm quyền và đường dẫn mới thông qua bộ lọc.</li>
+</ul>
+
+<p class="note"><strong>Lưu ý:</strong> Đặc tả đường dẫn có thể
+chứa một ký tự đại diện dấu sao (*) để yêu cầu chỉ khớp một phần với tên đường dẫn.</p>
+
+<p>Kiểm tra dữ liệu so sánh cả URI và kiểu MIME trong ý định với một URI
+và kiểu MIME được quy định trong bộ lọc.  Các quy tắc như sau:
+</p>
+
+<ol type="a">
+<li>Một ý định mà không chứa URI cũng như kiểu MIME sẽ chỉ vượt qua
+kiểm tra nếu bộ lọc không quy định bất kỳ URI hay kiểu MIME nào.</li>
+
+<li>Một ý định chứa URI nhưng không có kiểu MIME (không biểu thị cũng như suy luận được từ
+URI) sẽ chỉ vượt qua kiểm tra nếu URI của nó khớp với định dạng URI của bộ lọc
+và bộ lọc tương tự không quy định một kiểu MIME.</li>
+
+<li>Một ý định chứa kiểu MIME nhưng không chứa URI sẽ chỉ vượt qua kiểm tra
+nếu bộ lọc liệt kê cùng kiểu MIME và không quy định một định dạng URI.</li>
+
+<li>Ý định mà chứa cả URI và kiểu MIME (hoặc biểu thị hoặc suy ra được từ
+URI) sẽ chỉ vượt qua phần kiểu MIME của kiểm tra nếu kiểu đó
+khớp với kiểu được liệt kê trong bộ lọc.  Nó vượt qua phần URI của kiểm tra
+nếu URI của nó khớp với một URI trong bộ lọc hoặc nếu nó có một <code>content:</code>
+hoặc <code>file:</code> URI và bộ lọc không quy định một URI. Nói cách khác,
+một thành phần được giả định là hỗ trợ dữ liệu <code>content:</code> và <code>file:</code> nếu
+bộ lọc của nó liệt kê <em>chỉ</em> một kiểu MIME.</p></li>
+</ol>
+
+<p>
+Quy tắc cuối cùng này, quy tắc (d), phản ánh kỳ vọng
+rằng các thành phần có thể nhận được dữ liệu cục bộ từ một tệp hoặc trình cung cấp nội dung.
+Vì thế, các bộ lọc của chúng có thể chỉ liệt kê một kiểu dữ liệu và không cần công khai
+nêu tên <code>content:</code> và các lược đồ <code>file:</code>.
+Đây là một trường hợp điển hình.  Phần tử <a href="../topics/manifest/data-element327f.html?hl=vi"><code>&amp;lt;data&amp;gt;</code></a> như
+ sau, ví dụ, sẽ thông báo cho Android biết rằng thành phần có thể nhận được dữ liệu ảnh từ một trình cung cấp
+nội dung và sẽ hiển thị nó:
+</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;data android:mimeType="image/*" /&gt;
+    ...
+&lt;/intent-filter&gt;</pre>
+
+<p>
+Vì hầu hết dữ liệu có sẵn đều được cấp phát bởi các trình cung cấp nội dung, những bộ lọc mà
+quy định một kiểu dữ liệu chứ không phải URI có lẽ là phổ biến nhất.
+</p>
+
+<p>
+Một cấu hình phổ biến khác đó là các bộ lọc có một lược đồ và một kiểu dữ liệu.  Ví
+dụ, một phần tử <a href="../topics/manifest/data-element327f.html?hl=vi"><code>&amp;lt;data&amp;gt;</code></a>
+như sau thông báo cho Android rằng
+thành phần có thể truy xuất dữ liệu video từ mạng để thực hiện hành động:
+</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;data android:scheme="http" android:type="video/*" /&gt;
+    ...
+&lt;/intent-filter&gt;</pre>
+
+
+
+<h3 id="imatch">So khớp ý định</h3>
+
+<p>Các ý định được so khớp với các bộ lọc ý định không chỉ để khám phá một thành phần
+mục tiêu cần kích hoạt, mà còn để khám phá điều gì đó về tập hợp
+các thành phần trên thiết bị.  Ví dụ, ứng dụng Trang chủ đưa trình khởi chạy ứng dụng
+vào bằng cách tìm tất cả hoạt động có bộ lọc ý định mà quy định hành động
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#ACTION_MAIN">ACTION_MAIN</a></code> và thể loại
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=vi#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code>.</p>
+
+<p>Ứng dụng của bạn có thể sử dụng so khớp ý định theo cách tương tự.
+<code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=vi">PackageManager</a></code> có một tập hợp các phương pháp<code>query...()</code>
+trả về tất cả thành phần có thể chấp nhận một ý định cụ thể, và
+một chuỗi các phương pháp <code>resolve...()</code> tương tự để xác định thành phần
+tốt nhất nhằm hồi đáp lại một ý định.  Ví dụ,
+<code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=vi#queryIntentActivities(android.content.Intent, int)">queryIntentActivities()</a></code> sẽ trả về một danh sách tất cả hoạt động có thể thực hiện
+ý định được chuyển qua như một tham đối, và <code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=vi#queryIntentServices(android.content.Intent, int)">queryIntentServices()</a></code> trả về một danh sách dịch vụ tương tự.
+Cả hai phương pháp đều không kích hoạt các thành phần; chúng chỉ liệt kê những thành phần
+có thể hồi đáp.  Có một phương pháp tương tự,
+<code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=vi#queryBroadcastReceivers(android.content.Intent, int)">queryBroadcastReceivers()</a></code>, dành cho hàm nhận quảng bá.
+</p>
+
+
+
+
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=vi" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=vi" title="Hỗ trợ">Hỗ trợ</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=vi" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=vi" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=vi" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=vi" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="Euyeezx-D62AhqIGA4XcU0IUpA_9kbcMO6PR2pGQ6_U6MTQ5NzUxNjE5NzQ5Nzg4MA" />
+      <input type="hidden" name="next" value="intents-filters.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+             selected="selected" >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Địa chỉ email</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../ytblogger_lists_unified0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../android_metadata_en0c0e.js?hl=vi?v=2017061508" defer></script>
+  
+  <script src="../../reference/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../reference/gms_lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../reference/android/support/wearable/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../reference/android/support/test/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../reference/android/support/constraint/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=vi"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_vi.js?hl=vi?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/components/intents-filters.html?hl=vi by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:05:19 GMT -->
+</html>

@@ -1,0 +1,2144 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="id">
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/content-provider-basics.html?hl=id by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:10:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="l-n2MMhlrlfnFH6fY8rbfFU6Sc2027o08fVIUDdpZjw6MTQ5NzUxNjYwMDM0NzU3MA" />
+
+  
+    <link rel="canonical" href="content-provider-basics0cf2.html?hl=id">
+  
+
+  
+    <link rel="alternate" href="content-provider-basics7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="content-provider-basics.html" hreflang="en">
+  
+    <link rel="alternate" href="content-provider-basics327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="content-provider-basics9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="content-provider-basics232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="content-provider-basics0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="content-provider-basics6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="content-provider-basics0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="content-provider-basicsf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="content-provider-basics9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=ru" hreflang="ru-cn">
+  
+
+  <link rel="alternate" href="content-provider-basics.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon0cf2.png?hl=id">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1800cf2.png?hl=id">
+
+
+<title>
+
+  Dasar-Dasar Penyedia Materi | Android Developers
+
+</title>
+
+  <meta name="description" content="A content provider manages access to a central repository of data. A provider is part of an Android application, which often provides its own UI for working with the data. However, content providers are primarily intended to be used by other applications…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default8481.css?hl=id?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle0cf2.js?hl=id" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__id0cf2.js?hl=id"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android0cf2.js?hl=id"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs8481.js?hl=id?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;id&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;id&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;id&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;id&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "id", "served": "id"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=id">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo0cf2.png?hl=id"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=id"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=id"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=id"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=id"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=id" width="18" height="19" alt="Konsol Google Play">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Telusuri">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Kembali</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index0cf2.html?hl=id" >Pengantar</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals0cf2.html?hl=id" >Dasar-Dasar Aplikasi</a></li><li><a href="../../practices/compatibility0cf2.html?hl=id" >Kompatibilitas Perangkat</a></li><li><a href="../security/permissions0cf2.html?hl=id" >Izin Sistem</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index0cf2.html?hl=id" >Arsitektur Platform</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack0cf2.html?hl=id"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Gunakan Fitur Bahasa Java 8</a></li><li><a href="../../practices/verifying-apps-art0cf2.html?hl=id" >Memverifikasi Perilaku Aplikasi pada Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index0cf2.html?hl=id" >Komponen Aplikasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters0cf2.html?hl=id" >Maksud dan Filter Maksud</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common0cf2.html?hl=id" >Maksud Umum</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities0cf2.html?hl=id" >Aktivitas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments0cf2.html?hl=id" >Fragmen</a></li><li><a href="../../components/loaders0cf2.html?hl=id" >Loader</a></li><li><a href="../../components/tasks-and-back-stack0cf2.html?hl=id" >Tugas dan Back-Stack</a></li><li><a href="../../components/recents0cf2.html?hl=id" >Layar Ringkasan</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services0cf2.html?hl=id" >Layanan</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services0cf2.html?hl=id" >Layanan Terikat</a></li><li><a href="../../components/aidl0cf2.html?hl=id" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="content-providers0cf2.html?hl=id" >Penyedia Materi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="content-provider-basics0cf2.html?hl=id" >Dasar-Dasar Penyedia Materi</a></li><li><a href="content-provider-creating0cf2.html?hl=id" >Membuat Penyedia Materi</a></li><li><a href="calendar-provider0cf2.html?hl=id" >Penyedia Kalender</a></li><li><a href="contacts-provider0cf2.html?hl=id" >Penyedia Kontak</a></li><li><a href="document-provider0cf2.html?hl=id" >Storage Access Framework</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index0cf2.html?hl=id" >Widget Aplikasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host0cf2.html?hl=id" >Host Widget Aplikasi</a></li></ul></li><li><a href="../../components/processes-and-threads0cf2.html?hl=id" >Proses dan Thread</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index0cf2.html?hl=id" >Sumber Daya Aplikasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview0cf2.html?hl=id" >Ringkasan</a></li><li><a href="../resources/providing-resources0cf2.html?hl=id" >Menyediakan Sumber Daya</a></li><li><a href="../resources/accessing-resources0cf2.html?hl=id" >Mengakses Sumber Daya</a></li><li><a href="../resources/runtime-changes0cf2.html?hl=id" >Menangani Perubahan Waktu Proses</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization0cf2.html?hl=id" >Pelokalan</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework0cf2.html?hl=id" >ICU4J Android Framework API</a></li><li><a href="../resources/multilingual-support0cf2.html?hl=id" >Bahasa dan Lokal</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources0cf2.html?hl=id" >Tipe Sumber Daya</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource0cf2.html?hl=id" >Animasi</a></li><li><a href="../resources/color-list-resource0cf2.html?hl=id" >Daftar Status Warna</a></li><li><a href="../resources/drawable-resource0cf2.html?hl=id" >Dapat digambar</a></li><li><a href="../resources/layout-resource0cf2.html?hl=id" >Layout</a></li><li><a href="../resources/menu-resource0cf2.html?hl=id" >Menu</a></li><li><a href="../resources/string-resource0cf2.html?hl=id" >String</a></li><li><a href="../resources/style-resource0cf2.html?hl=id" >Gaya</a></li><li><a href="../resources/more-resources0cf2.html?hl=id" >Tipe Selengkapnya</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro0cf2.html?hl=id" >Manifes Aplikasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element0cf2.html?hl=id" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element0cf2.html?hl=id" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element0cf2.html?hl=id" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element0cf2.html?hl=id" >&lt;application&gt;</a></li><li><a href="../manifest/category-element0cf2.html?hl=id" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element0cf2.html?hl=id" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element0cf2.html?hl=id" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element0cf2.html?hl=id" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element0cf2.html?hl=id" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element0cf2.html?hl=id" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element0cf2.html?hl=id" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element0cf2.html?hl=id" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element0cf2.html?hl=id" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element0cf2.html?hl=id" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element0cf2.html?hl=id" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element0cf2.html?hl=id" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element0cf2.html?hl=id" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element0cf2.html?hl=id" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element0cf2.html?hl=id" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element0cf2.html?hl=id" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element0cf2.html?hl=id" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element0cf2.html?hl=id" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element0cf2.html?hl=id" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element0cf2.html?hl=id" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element0cf2.html?hl=id" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element0cf2.html?hl=id" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element0cf2.html?hl=id" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index0cf2.html?hl=id" >Antarmuka Pengguna</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview0cf2.html?hl=id" >Ringkasan</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout0cf2.html?hl=id" >Layout</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear0cf2.html?hl=id" >Layout Linier</a></li><li><a href="../ui/layout/relative0cf2.html?hl=id" >Layout Relatif</a></li><li><a href="../ui/layout/listview0cf2.html?hl=id" >Tampilan Daftar</a></li><li><a href="../ui/layout/gridview0cf2.html?hl=id" >Tampilan Petak</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls0cf2.html?hl=id" >Kontrol Masukan</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button0cf2.html?hl=id" >Tombol</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=id" >Bidang Teks</a></li><li><a href="../ui/controls/checkbox0cf2.html?hl=id" >Kotak Centang</a></li><li><a href="../ui/controls/radiobutton0cf2.html?hl=id" >Tombol Radio</a></li><li><a href="../ui/controls/togglebutton0cf2.html?hl=id" >Tombol Toggle</a></li><li><a href="../ui/controls/spinner0cf2.html?hl=id" >Spinner</a></li><li><a href="../ui/controls/pickers0cf2.html?hl=id" >Picker</a></li></ul></li><li><a href="../ui/ui-events0cf2.html?hl=id" >Kejadian Masukan</a></li><li><a href="../ui/menus0cf2.html?hl=id" >Menu</a></li><li><a href="../ui/settings0cf2.html?hl=id" >Setelan</a></li><li><a href="../ui/dialogs0cf2.html?hl=id" >Dialog</a></li><li><a href="../ui/notifiers/notifications0cf2.html?hl=id" >Notifikasi</a></li><li><a href="../ui/notifiers/toasts0cf2.html?hl=id" >Toast</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index0cf2.html?hl=id" >Penelusuran</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog0cf2.html?hl=id" >Membuat Antarmuka Penelusuran</a></li><li><a href="../search/adding-recent-query-suggestions0cf2.html?hl=id" >Menambahkan Saran Kueri Terbaru</a></li><li><a href="../search/adding-custom-suggestions0cf2.html?hl=id" >Menambahkan Saran Khusus</a></li><li><a href="../search/searchable-config0cf2.html?hl=id" >Konfigurasi yang Dapat Ditelusuri</a></li></ul></li><li><a href="../ui/multi-window0cf2.html?hl=id" >Dukungan Multi-Jendela</a></li><li><a href="../ui/drag-drop0cf2.html?hl=id" >Seret dan Lepas</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index0cf2.html?hl=id" >Aksesibilitas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps0cf2.html?hl=id" >Membuat Aplikasi Mudah Diakses</a></li><li><a href="../ui/accessibility/checklist0cf2.html?hl=id" >Daftar Periksa Developer Aksesibilitas</a></li><li><a href="../ui/accessibility/services0cf2.html?hl=id" >Membuat Layanan Aksesibilitas</a></li></ul></li><li><a href="../ui/themes0cf2.html?hl=id" >Gaya dan Tema</a></li><li><a href="../ui/custom-components0cf2.html?hl=id" >Komponen Khusus</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index0cf2.html?hl=id" >Animasi dan Grafik</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview0cf2.html?hl=id" >Ringkasan</a></li><li><a href="../graphics/prop-animation0cf2.html?hl=id" >Animasi Properti</a></li><li><a href="../graphics/view-animation0cf2.html?hl=id" >Animasi Tampilan</a></li><li><a href="../graphics/drawable-animation0cf2.html?hl=id" >Animasi Dapat Digambar</a></li><li><a href="../graphics/2d-graphics0cf2.html?hl=id" >Kanvas dan Sumber Daya Dapat Digambar</a></li><li><a href="../graphics/opengl0cf2.html?hl=id" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel0cf2.html?hl=id" >Akselerasi Perangkat Keras</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index0cf2.html?hl=id" >Komputasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute0cf2.html?hl=id" >RenderScript</a></li><li><a href="../renderscript/advanced0cf2.html?hl=id" >RenderScript Lanjutan</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview0cf2.html?hl=id" >Referensi API Waktu Proses</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types0cf2.html?hl=id" >Tipe Numerik</a></li><li><a href="../renderscript/reference/rs_object_types0cf2.html?hl=id" >Tipe Objek</a></li><li><a href="../renderscript/reference/rs_convert0cf2.html?hl=id" >Fungsi Konversi</a></li><li><a href="../renderscript/reference/rs_math0cf2.html?hl=id" >Fungsi dan Konstanta Matematis</a></li><li><a href="../renderscript/reference/rs_vector_math0cf2.html?hl=id" >Fungsi Matematika Vektor</a></li><li><a href="../renderscript/reference/rs_matrix0cf2.html?hl=id" >Fungsi Matriks</a></li><li><a href="../renderscript/reference/rs_quaternion0cf2.html?hl=id" >Fungsi Kuaternion</a></li><li><a href="../renderscript/reference/rs_atomic0cf2.html?hl=id" >Fungsi Pembaruan Atomik</a></li><li><a href="../renderscript/reference/rs_time0cf2.html?hl=id" >Tipe dan Fungsi Waktu</a></li><li><a href="../renderscript/reference/rs_allocation_data0cf2.html?hl=id" >Fungsi Akses Data Alokasi</a></li><li><a href="../renderscript/reference/rs_object_info0cf2.html?hl=id" >Fungsi Karakteristik Objek</a></li><li><a href="../renderscript/reference/rs_for_each0cf2.html?hl=id" >Tipe dan Fungsi Pemanggilan Kernel</a></li><li><a href="../renderscript/reference/rs_io0cf2.html?hl=id" >Fungsi Masukan/Keluaran</a></li><li><a href="../renderscript/reference/rs_debug0cf2.html?hl=id" >Fungsi Debug</a></li><li><a href="../renderscript/reference/rs_graphics0cf2.html?hl=id" >Tipe dan Fungsi Grafik</a></li><li><a href="../renderscript/reference/index0cf2.html?hl=id" >Indeks</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index0cf2.html?hl=id" >Media dan Kamera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer0cf2.html?hl=id" >Pemutaran Media</a></li><li><a href="../media/mediarouter0cf2.html?hl=id" >Router Media</a></li><li><a href="../media/mediarouteprovider0cf2.html?hl=id" >Penyedia Rute Media</a></li><li><a href="../media/exoplayer0cf2.html?hl=id" >ExoPlayer</a></li><li><a href="../media/media-formats0cf2.html?hl=id" >Format Media yang Didukung</a></li><li><a href="../media/mediarecorder0cf2.html?hl=id" >Perekaman Audio</a></li><li><a href="../media/jetplayer0cf2.html?hl=id" >JetPlayer</a></li><li><a href="../media/camera0cf2.html?hl=id" >Kamera</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index0cf2.html?hl=id" >Lokasi dan Sensor</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index0cf2.html?hl=id" >Lokasi dan Peta</a></li><li><a href="../location/strategies0cf2.html?hl=id" >Strategi Lokasi</a></li><li><a href="../sensors/sensors_overview0cf2.html?hl=id" >Ringkasan Sensor</a></li><li><a href="../sensors/sensors_motion0cf2.html?hl=id" >Sensor Gerak</a></li><li><a href="../sensors/sensors_position0cf2.html?hl=id" >Sensor Posisi</a></li><li><a href="../sensors/sensors_environment0cf2.html?hl=id" >Sensor Lingkungan</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index0cf2.html?hl=id" >Konektivitas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth0cf2.html?hl=id" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le0cf2.html?hl=id" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index0cf2.html?hl=id" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc0cf2.html?hl=id" >Dasar-Dasar NFC</a></li><li><a href="../connectivity/nfc/advanced-nfc0cf2.html?hl=id" >NFC Lanjutan</a></li><li><a href="../connectivity/nfc/hce0cf2.html?hl=id" >Emulasi Kartu Berbasis Host</a></li></ul></li><li><a href="../connectivity/wifip2p0cf2.html?hl=id" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index0cf2.html?hl=id" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory0cf2.html?hl=id" >Aksesori</a></li><li><a href="../connectivity/usb/host0cf2.html?hl=id" >Host</a></li></ul></li><li><a href="../connectivity/sip0cf2.html?hl=id" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index0cf2.html?hl=id" >Teks dan Masukan</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste0cf2.html?hl=id" >Salin dan Tempel</a></li><li><a href="../text/creating-input-method0cf2.html?hl=id" >Membuat IME</a></li><li><a href="../text/spell-checker-framework0cf2.html?hl=id" >Pemeriksa Ejaan</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index0cf2.html?hl=id" >Storage Data</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage0cf2.html?hl=id" >Opsi Storage</a></li><li><a href="../data/backup0cf2.html?hl=id" >Pencadangan Data</a></li><li><a href="../data/install-location0cf2.html?hl=id" >Lokasi Pemasangan Aplikasi</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=id" >Pustaka</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=id" >Pustaka Dukungan</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=id" >Fitur</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=id" >Persiapan</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=id" >Riwayat Revisi</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=id" >Data Binding Library</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=id" >Testing Support Library</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=id" >Referensi API</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index0cf2.html?hl=id" >Administrasi</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin0cf2.html?hl=id" >Kebijakan Perangkat</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index0cf2.html?hl=id" >Aplikasi Web</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting0cf2.html?hl=id" >Mendukung Layar Berbeda di Aplikasi Web</a></li><li><a href="../../webapps/webview0cf2.html?hl=id" >Membuat Aplikasi Web di WebView</a></li><li><a href="../../webapps/migrating0cf2.html?hl=id" >Beralih ke WebView di Android 4.4</a></li><li><a href="../../webapps/debugging0cf2.html?hl=id" >Men-debug Aplikasi Web</a></li><li><a href="../../webapps/best-practices0cf2.html?hl=id" >Praktik Terbaik untuk Aplikasi Web</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index0cf2.html?hl=id"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Praktik terbaik" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Praktik Terbaik</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support0cf2.html?hl=id" >Mendukung Beberapa Layar</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution0cf2.html?hl=id" >Mendistribusikan ke Layar Tertentu</a></li><li><a href="../../practices/screen-compat-mode0cf2.html?hl=id" >Mode Kompatibilitas Layar</a></li></ul></li><li><a href="../../practices/tablets-and-handsets0cf2.html?hl=id" >Mendukung Tablet dan Handset</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=id">Beranda</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=id">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=id">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=id">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=id">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=id">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=id"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=id"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=id"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Pelatihan</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index0cf2.html?hl=id"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=id"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Referensi</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=id">Sampel</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=id"
+           >Pustaka</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=id"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=id"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=id">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=id">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=id">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=id"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=id">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=id">Konsol Google Play</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=id"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=id"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=id">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=id">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Dasar-Dasar Penyedia Materi</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+<!-- In this document -->
+<h2>Dalam dokumen ini</h2>
+<ol>
+    <li>
+        <a href="#Basics">Ringkasan</a>
+        <ol>
+            <li>
+                <a href="#ClientProvider">Mengakses penyedia</a>
+            </li>
+            <li>
+                <a href="#ContentURIs">URI Materi</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#SimpleQuery">Mengambil Data dari Penyedia</a>
+        <ol>
+            <li>
+                <a href="#RequestPermissions">Meminta izin akses baca</a>
+            </li>
+            <li>
+                <a href="#Query">Membuat kueri</a>
+            </li>
+            <li>
+                <a href="#DisplayResults">Menampilkan hasil kueri</a>
+            </li>
+            <li>
+                <a href="#GettingResults">Mendapatkan data dari hasil kueri</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#Permissions">Izin Penyedia Materi</a>
+    </li>
+    <li>
+        <a href="#Modifications">Menyisipkan, Memperbarui, dan Menghapus Data</a>
+        <ol>
+            <li>
+                <a href="#Inserting">Menyisipkan data</a>
+            </li>
+            <li>
+                <a href="#Updating">Memperbarui data</a>
+            </li>
+            <li>
+                <a href="#Deleting">Menghapus data</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#DataTypes">Tipe Data Penyedia</a>
+    </li>
+    <li>
+        <a href="#AltForms">Bentuk-Bentuk Alternatif Akses Penyedia</a>
+        <ol>
+            <li>
+                <a href="#Batch">Akses batch</a>
+            </li>
+            <li>
+                <a href="#Intents">Akses data melalui maksud</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#ContractClasses">Kelas-kelas Kontrak</a>
+    </li>
+    <li>
+        <a href="#MIMETypeReference">Acuan Tipe MIME</a>
+    </li>
+</ol>
+
+    <!-- Key Classes -->
+<h2>Kelas-kelas utama</h2>
+    <ol>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=id">ContentProvider</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id">ContentResolver</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=id">Uri</a></code>
+        </li>
+    </ol>
+
+    <!-- Related Samples -->
+<h2>Contoh-Contoh Terkait</h2>
+    <ol>
+        <li>
+        <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/List2.html?hl=id">
+        Kursor (Aplikasi Orang)</a>
+        </li>
+        <li>
+        <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/List7.html?hl=id">
+        Kursor (Ponsel)</a>
+        </li>
+    </ol>
+
+    <!-- See also -->
+<h2>Lihat juga</h2>
+    <ol>
+        <li>
+            <a href="content-provider-creating0cf2.html?hl=id">
+            Membuat Penyedia Materi</a>
+        </li>
+        <li>
+            <a href="calendar-provider0cf2.html?hl=id">
+            Penyedia Kalender</a>
+        </li>
+    </ol>
+</div>
+</div>
+
+    <!-- Intro paragraphs -->
+<p>
+    Penyedia materi mengelola akses ke repositori data pusat. Penyedia
+    adalah bagian dari aplikasi Android, yang sering menyediakan UI-nya sendiri untuk menggunakan
+    data. Akan tetapi, penyedia materi terutama dimaksudkan untuk digunakan oleh
+    aplikasi lain, yang mengakses penyedia itu melalui objek klien penyedia. Bersama-sama, penyedia
+    dan klien penyedia menawarkan antarmuka standar yang konsisten ke data yang juga menangani
+    komunikasi antar-proses dan akses data aman.
+</p>
+<p>
+    Topik ini menerangkan dasar-dasar dari hal-hal berikut:
+</p>
+    <ul>
+        <li>Cara kerja penyedia materi.</li>
+        <li>API yang Anda gunakan untuk mengambil data dari penyedia materi.</li>
+        <li>API yang Anda gunakan untuk menyisipkan, memperbarui, atau menghapus data dalam penyedia materi.</li>
+        <li>Fitur API lainnya yang memudahkan kita menggunakan penyedia.</li>
+    </ul>
+
+    <!-- Basics -->
+<h2 id="Basics">Ringkasan</h2>
+<p>
+    Penyedia materi menyajikan data ke aplikasi eksternal sebagai satu atau beberapa tabel yang
+    serupa dengan tabel-tabel yang ditemukan dalam database relasional. Sebuah baris mewakili instance beberapa tipe
+    data yang dikumpulkan penyedia, dan tiap kolom dalam baris mewakili sepotong
+    data yang dikumpulkan untuk sebuah instance.
+</p>
+<p>
+    Misalnya, salah satu penyedia bawaan di platform Android adalah kamus pengguna, yang
+    menyimpan ejaan kata-kata tidak-standar yang ingin disimpan pengguna. Tabel 1 mengilustrasikan
+    wujud data yang mungkin ada dalam tabel penyedia ini:
+</p>
+<p class="table-caption">
+    <strong>Tabel 1:</strong> Contoh tabel kamus pengguna.
+</p>
+<table id="table1" style="width: 50%;">
+    <tr>
+        <th style="width:20%" align="center" scope="col">word</th>
+        <th style="width:20%" align="center" scope="col">app id</th>
+        <th style="width:20%" align="center" scope="col">frequency</th>
+        <th style="width:20%" align="center" scope="col">locale</th>
+        <th style="width:20%" align="center" scope="col">_ID</th>
+    </tr>
+    <tr>
+        <td align="center" scope="row">mapreduce</td>
+        <td align="center">user1</td>
+        <td align="center">100</td>
+        <td align="center">en_US</td>
+        <td align="center">1</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">precompiler</td>
+        <td align="center">user14</td>
+        <td align="center">200</td>
+        <td align="center">fr_FR</td>
+        <td align="center">2</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">applet</td>
+        <td align="center">user2</td>
+        <td align="center">225</td>
+        <td align="center">fr_CA</td>
+        <td align="center">3</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">const</td>
+        <td align="center">user1</td>
+        <td align="center">255</td>
+        <td align="center">pt_BR</td>
+        <td align="center">4</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">int</td>
+        <td align="center">user5</td>
+        <td align="center">100</td>
+        <td align="center">en_UK</td>
+        <td align="center">5</td>
+    </tr>
+</table>
+<p>
+    Dalam tabel 1, tiap baris mewakili instance sebuah kata yang mungkin tidak
+    ditemukan dalam kamus standar. Tiap kolom mewakili beberapa data untuk kata itu, misalnya
+    bahasa lokal tempat kata itu ditemukan kali pertama. Header kolom adalah nama kolom yang disimpan dalam
+    penyedia. Untuk mengacu ke bahasa lokal suatu baris, Anda mengacu ke kolom <code>locale</code>-nya. Untuk
+    penyedia ini, kolom <code>_ID</code> berfungsi sebagai "kunci utama" kolom yang
+    dipelihara oleh penyedia secara otomatis.
+</p>
+<p class="note">
+    <strong>Catatan:</strong> Penyedia tidak diharuskan memiliki kunci utama, dan tidak diharuskan
+    menggunakan <code>_ID</code> sebagai nama kolom kunci utama jika kunci itu ada. Akan tetapi,
+    jika Anda ingin mengikat data dari penyedia ke <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=id">ListView</a></code>, salah satu
+    nama kolom harus <code>_ID</code>. Ketentuan ini dijelaskan secara lebih detail di bagian
+    <a href="#DisplayResults">Menampilkan hasil kueri</a>.
+</p>
+<h3 id="ClientProvider">Mengakses penyedia</h3>
+<p>
+    Aplikasi mengakses data dari penyedia materi dengan
+    sebuah objek klien <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id">ContentResolver</a></code>. Objek ini memiliki metode yang memanggil
+    metode dengan nama identik dalam objek penyedia, instance salah satu
+    subkelas konkret dari <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=id">ContentProvider</a></code>. Metode-metode
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id">ContentResolver</a></code> menyediakan fungsi-fungsi dasar
+    "CRUD" (create, retrieve, update, dan delete - buat, ambil, perbarui, dan hapus)) pada storage yang persisten.
+</p>
+<p>
+    Objek <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id">ContentResolver</a></code> dalam
+    proses aplikasi klien dan objek <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=id">ContentProvider</a></code> dalam aplikasi yang memiliki
+    penyedia itu secara otomatis akan menangani komunikasi antar-proses.
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=id">ContentProvider</a></code> juga berfungsi sebagai layer abstraksi antara
+    repositori datanya dan penampilan eksternal data sebagai tabel.
+</p>
+<p class="note">
+    <strong>Catatan:</strong> Untuk mengakses penyedia, aplikasi Anda biasanya harus meminta
+    izin tertentu dalam file manifesnya. Hal ini dijelaskan lebih detail di bagian
+    <a href="#Permissions">Izin Penyedia Materi</a>
+</p>
+<p>
+    Misalnya, untuk mendapatkan daftar kata dan lokalnya dari Penyedia Kamus Pengguna,
+    Anda memanggil <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code>.
+    Metode <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">query()</a></code> memanggil metode
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=id#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentProvider.query()</a></code> yang didefinisikan oleh
+    Penyedia Kamus Pengguna. Baris-baris kode berikut menunjukkan sebuah
+    panggilan <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code>:
+<p>
+<pre>
+// Queries the user dictionary and returns results
+mCursor = getContentResolver().query(
+    UserDictionary.Words.CONTENT_URI,   // The content URI of the words table
+    mProjection,                        // The columns to return for each row
+    mSelectionClause                    // Selection criteria
+    mSelectionArgs,                     // Selection criteria
+    mSortOrder);                        // The sort order for the returned rows
+</pre>
+<p>
+    Tabel 2 menampilkan bagaimana argumen ke
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">query(Uri,projection,selection,selectionArgs,sortOrder)</a></code> cocok dengan sebuah pernyataan SELECT di SQL:
+</p>
+<p class="table-caption">
+    <strong>Tabel 2:</strong> Query() dibandingkan dengan kueri SQL.
+</p>
+<table id="table2" style="width: 75%;">
+    <tr>
+        <th style="width:25%" align="center" scope="col">Argumen query()</th>
+        <th style="width:25%" align="center" scope="col">Kata kunci/parameter SELECT</th>
+        <th style="width:50%" align="center" scope="col">Catatan</th>
+    </tr>
+    <tr>
+        <td align="center"><code>Uri</code></td>
+        <td align="center"><code>FROM <em>table_name</em></code></td>
+        <td><code>Uri</code> memetakan ke tabel dalam penyedia yang bernama <em>table_name</em>.</td>
+    </tr>
+    <tr>
+        <td align="center"><code>projection</code></td>
+        <td align="center"><code><em>col,col,col,...</em></code></td>
+        <td>
+            <code>projection</code> adalah larik kolom yang harus disertakan untuk tiap baris
+            yang diambil.
+        </td>
+    </tr>
+    <tr>
+        <td align="center"><code>selection</code></td>
+        <td align="center"><code>WHERE <em>col</em> = <em>value</em></code></td>
+        <td><code>selection</code> menetapkan kriteria untuk memilih baris.</td>
+    </tr>
+    <tr>
+        <td align="center"><code>selectionArgs</code></td>
+        <td align="center">
+            (Tidak ada padanan persis. Argumen pemilihan mengganti Placeholder <code>?</code> dalam
+            klausa pemilihan.)
+        </td>
+    </tr>
+    <tr>
+        <td align="center"><code>sortOrder</code></td>
+        <td align="center"><code>ORDER BY <em>col,col,...</em></code></td>
+        <td>
+            <code>sortOrder</code> menetapkan urutan munculnya baris dalam
+            <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code> yang dikembalikan.
+        </td>
+    </tr>
+</table>
+<h3 id="ContentURIs">URI Materi</h3>
+<p>
+    <strong>URI materi</strong> adalah URI yang mengidentifikasi data dalam penyedia. URI Materi
+    menyertakan nama simbolis seluruh penyedia (<strong>otoritas</strong>nya) dan sebuah
+    nama yang menunjuk ke tabel (<strong>jalur</strong>). Bila Anda memanggil
+    metode klien untuk mengakses tabel dalam penyedia, URI materi untuk tabel itu adalah salah satu
+    argumennya.
+</p>
+<p>
+    Dalam baris kode sebelumnya, konstanta
+    <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html?hl=id#CONTENT_URI">CONTENT_URI</a></code> mengandung URI materi dari
+    tabel "words" kamus pengguna. Objek <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id">ContentResolver</a></code>
+    akan mem-parse otoritas URI, dan menggunakannya untuk "mengetahui" penyedia dengan
+    membandingkan otoritas tersebut dengan sebuah tabel sistem berisi penyedia yang dikenal. 
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id">ContentResolver</a></code>    kemudian bisa mengirim argumen kueri ke penyedia
+    yang benar.
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=id">ContentProvider</a></code> menggunakan bagian jalur dari URI materi untuk memilih
+    tabel yang akan diakses. Penyedia biasanya memiliki <strong>jalur</strong> untuk tiap tabel yang dieksposnya.
+</p>
+<p>
+    Dalam baris kode sebelumnya, URI lengkap untuk tabel "words" adalah:
+</p>
+<pre>
+content://user_dictionary/words
+</pre>
+<p>
+    ketika string <code>user_dictionary</code> adalah otoritas penyedia, dan
+    string <code>words</code> adalah jalur tabel. String
+    <code>content://</code> (<strong>skema</strong>) selalu ada,
+    dan mengidentifikasinya sebagai URI materi.
+</p>
+<p>
+    Banyak penyedia yang memungkinkan Anda mengakses satu baris dalam tabel dengan menambahkan sebuah nilai ID
+    ke akhir URI. Misalnya, untuk mengambil sebuah baris yang <code>_ID</code>-nya adalah
+    <code>4</code> dari kamus pengguna, Anda bisa menggunakan URI materi ini:
+</p>
+<pre>
+Uri singleUri = ContentUris.withAppendedId(UserDictionary.Words.CONTENT_URI,4);
+</pre>
+<p>
+    Anda akan sering menggunakan nilai-nilai ID bila telah mengambil satu set baris kemudian ingin memperbarui atau menghapus
+    salah satunya.
+</p>
+<p class="note">
+    <strong>Catatan:</strong> Kelas-kelas <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=id">Uri</a></code> dan <code><a href="https://developer.android.com/reference/android/net/Uri.Builder.html?hl=id">Uri.Builder</a></code>
+    berisi metode praktis untuk membangun objek URI yang tersusun dengan baik dari string. Kelas
+    <code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=id">ContentUris</a></code> berisi metode praktis untuk menambahkan nilai id ke
+    URI. Cuplikan kode sebelumnya menggunakan <code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=id#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code> untuk menambahkan ID ke URI materi UserDictionary.
+</p>
+
+
+    <!-- Retrieving Data from the Provider -->
+<h2 id="SimpleQuery">Mengambil Data dari Penyedia</h2>
+<p>
+    Bagian ini menerangkan cara mengambil data dari penyedia, dengan menggunakan Penyedia Kamus Pengguna
+    sebagai contoh.
+</p>
+<p class="note">
+    Demi kejelasan, cuplikan kode di bagian ini memanggil
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code> pada "UI thread"". Akan tetapi, dalam
+    kode sesungguhnya, Anda harus melakukan kueri secara asinkron pada sebuah thread terpisah. Satu cara melakukannya
+    adalah menggunakan kelas <code><a href="https://developer.android.com/reference/android/content/CursorLoader.html?hl=id">CursorLoader</a></code>, yang dijelaskan
+    lebih detail dalam panduan <a href="../../components/loaders0cf2.html?hl=id">
+    Loader</a>. Juga, baris-baris kode tersebut hanyalah cuplikan; tidak menunjukkan sebuah aplikasi
+     lengkap.
+</p>
+<p>
+    Untuk mengambil data dari penyedia, ikutilah langkah-langkah dasar ini:
+</p>
+<ol>
+   <li>
+        Minta izin akses baca untuk penyedia itu.
+   </li>
+   <li>
+        Definisikan kode yang mengirim kueri ke penyedia.
+   </li>
+</ol>
+<h3 id="RequestPermissions">Meminta izin akses baca</h3>
+<p>
+    Untuk mengambil data dari penyedia, aplikasi Anda memerlukan "izin akses baca" untuk
+    penyedia itu. Anda tidak bisa meminta izin ini saat waktu proses; sebagai gantinya, Anda harus menetapkan bahwa
+    Anda memerlukan izin ini dalam manifes, dengan menggunakan elemen
+<code><a href="../manifest/uses-permission-element0cf2.html?hl=id">&lt;uses-permission&gt;</a></code>
+    dan nama persis izin yang didefinisikan oleh
+    penyedia itu. Bila menetapkan elemen ini dalam manifes, Anda secara efektif "meminta"
+    izin ini untuk aplikasi Anda. Bila pengguna memasang aplikasi Anda, mereka secara implisit akan memberikan
+    permintaan ini.
+</p>
+<p>
+    Untuk menemukan nama persis dari izin akses baca untuk penyedia yang sedang Anda gunakan, serta
+    nama-nama izin akses lain yang digunakan oleh penyedia, lihatlah dalam
+    dokumentasi penyedia.
+</p>
+<p>
+    Peran izin dalam yang mengakses penyedia dijelaskan lebih detail di bagian
+    <a href="#Permissions">Izin Penyedia Materi</a>.
+</p>
+<p>
+    Penyedia Kamus Pengguna mendefinisikan izin
+    <code>android.permission.READ_USER_DICTIONARY</code> dalam file manifesnya, sehingga
+    aplikasi yang ingin membaca dari penyedia itu harus meminta izin ini.
+</p>
+<!-- Constructing the query -->
+<h3 id="Query">Membuat kueri</h3>
+<p>
+    Langkah berikutnya dalam mengambil data dari penyedia adalah melakukan kueri. Cuplikan kode pertama ini
+    mendefinisikan beberapa variabel untuk mengakses Penyedia Kamus Pengguna:
+</p>
+<pre class="prettyprint">
+
+// A "projection" defines the columns that will be returned for each row
+String[] mProjection =
+{
+    UserDictionary.Words._ID,    // Contract class constant for the _ID column name
+    UserDictionary.Words.WORD,   // Contract class constant for the word column name
+    UserDictionary.Words.LOCALE  // Contract class constant for the locale column name
+};
+
+// Defines a string to contain the selection clause
+String mSelectionClause = null;
+
+// Initializes an array to contain selection arguments
+String[] mSelectionArgs = {""};
+
+</pre>
+<p>
+    Cuplikan berikutnya menampilkan cara menggunakan
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code>, dengan menggunakan Penyedia Kamus Pengguna
+    sebagai contoh. Kueri klien penyedia serupa dengan kueri SQL, dan berisi satu
+    set kolom yang akan dikembalikan, satu set kriteria pemilihan, dan urutan sortir.
+</p>
+<p>
+    Set kolom yang harus dikembalikan kueri disebut dengan <strong>proyeksi</strong>
+    (variabel <code>mProjection</code>).
+</p>
+<p>
+    Ekspresi yang menetapkan baris yang harus diambil dipecah menjadi klausa pemilihan dan
+    argumen pemilihan. Klausa pemilihan adalah kombinasi ekspresi logis dan Boolean,
+    nama kolom, dan nilai (variabel <code>mSelectionClause</code>). Jika Anda menetapkan
+    parameter <code>?</code> yang bisa diganti, bukannya nilai, metode kueri akan mengambil nilai
+    dari larik argumen pemilihan (variabel <code>mSelectionArgs</code>).
+</p>
+<p>
+    Dalam cuplikan berikutnya, jika pengguna tidak memasukkan sebuah kata, klausa pemilihan akan diatur ke
+    <code>null</code>, dan kueri mengembalikan semua kata dalam penyedia. Jika pengguna memasukkan
+    sebuah kata, klausa pemilihan akan diatur ke <code>UserDictionary.Words.WORD + " = ?"</code> dan
+    elemen pertama larik argumen pemilihan diatur ke kata yang dimasukkan pengguna.
+</p>
+<pre class="prettyprint">
+/*
+ * This defines a one-element String array to contain the selection argument.
+ */
+String[] mSelectionArgs = {""};
+
+// Gets a word from the UI
+mSearchString = mSearchWord.getText().toString();
+
+// Remember to insert code here to check for invalid or malicious input.
+
+// If the word is the empty string, gets everything
+if (TextUtils.isEmpty(mSearchString)) {
+    // Setting the selection clause to null will return all words
+    mSelectionClause = null;
+    mSelectionArgs[0] = "";
+
+} else {
+    // Constructs a selection clause that matches the word that the user entered.
+    mSelectionClause = UserDictionary.Words.WORD + " = ?";
+
+    // Moves the user's input string to the selection arguments.
+    mSelectionArgs[0] = mSearchString;
+
+}
+
+// Does a query against the table and returns a Cursor object
+mCursor = getContentResolver().query(
+    UserDictionary.Words.CONTENT_URI,  // The content URI of the words table
+    mProjection,                       // The columns to return for each row
+    mSelectionClause                   // Either null, or the word the user entered
+    mSelectionArgs,                    // Either empty, or the string the user entered
+    mSortOrder);                       // The sort order for the returned rows
+
+// Some providers return null if an error occurs, others throw an exception
+if (null == mCursor) {
+    /*
+     * Insert code here to handle the error. Be sure not to use the cursor! You may want to
+     * call android.util.Log.e() to log this error.
+     *
+     */
+// If the Cursor is empty, the provider found no matches
+} else if (mCursor.getCount() &lt; 1) {
+
+    /*
+     * Insert code here to notify the user that the search was unsuccessful. This isn't necessarily
+     * an error. You may want to offer the user the option to insert a new row, or re-type the
+     * search term.
+     */
+
+} else {
+    // Insert code here to do something with the results
+
+}
+</pre>
+<p>
+    Kueri ini merupakan analog dengan pernyataan SQL:
+</p>
+<pre>
+SELECT _ID, word, locale FROM words WHERE word = &lt;userinput&gt; ORDER BY word ASC;
+</pre>
+<p>
+    Dalam pernyataan SQL ini, nama kolom yang sesungguhnya digunakan sebagai ganti konstanta kelas kontrak.
+</p>
+<h4 id="Injection">Melindungi dari masukan merusak</h4>
+<p>
+    Jika data dikelola oleh penyedia materi berada dalam database SQL, memasukkan data tak dipercaya eksternal
+    ke dalam pernyataan SQL mentah bisa menyebabkan injeksi SQL.
+</p>
+<p>
+    Perhatikan klausa pemilihan ini:
+</p>
+<pre>
+// Constructs a selection clause by concatenating the user's input to the column name
+String mSelectionClause =  "var = " + mUserInput;
+</pre>
+<p>
+    Jika melakukannya, Anda akan membuat pengguna menyambungkan SQL merusak ke pernyataan SQL Anda.
+    Misalnya, pengguna bisa memasukkan "nothing; DROP TABLE *;"  untuk <code>mUserInput</code>, yang
+    akan menghasilkan klausa pemilihan <code>var = nothing; DROP TABLE *;</code>. Karena
+    klausa pemilihan diperlakukan sebagai pernyataan SQL, hal ini bisa menyebabkan penyedia itu menghapus semua
+    tabel dalam database SQLite yang mendasarinya (kecuali penyedia disiapkan untuk menangkap upaya
+    <a href="http://en.wikipedia.org/wiki/SQL_injection">injeksi SQL</a>).
+</p>
+<p>
+    Untuk menghindari masalah ini, gunakan klausa pemilihan yang menggunakan <code>?</code> sebagai
+    parameter yang bisa diganti dan larik argumen pemilihan yang terpisah. Bila Anda melakukannya, masukan pengguna
+    akan dibatasi secara langsung pada kueri agar tidak ditafsirkan sebagai bagian dari pernyataan SQL.
+    Karena tidak diperlakukan sebagai SQL, masukan pengguna tidak bisa menyuntikkan SQL merusak. Sebagai ganti menggunakan
+    penyambungan untuk menyertakan masukan pengguna, gunakan klausa pemilihan ini:
+</p>
+<pre>
+// Constructs a selection clause with a replaceable parameter
+String mSelectionClause =  "var = ?";
+</pre>
+<p>
+    Buat larik argumen pemilihan seperti ini:
+</p>
+<pre>
+// Defines an array to contain the selection arguments
+String[] selectionArgs = {""};
+</pre>
+<p>
+    Masukkan nilai dalam larik argumen pemilihan seperti ini:
+</p>
+<pre>
+// Sets the selection argument to the user's input
+selectionArgs[0] = mUserInput;
+</pre>
+<p>
+    Sebuah klausa pemilihan yang menggunakan <code>?</code> sebagai parameter yang bisa diganti dan sebuah larik 
+    argumen pemilihan adalah cara yang lebih disukai untuk menyebutkan pemilihan, sekalipun penyedia tidak
+    dibuat berdasarkan database SQL.
+</p>
+<!-- Displaying the results -->
+<h3 id="DisplayResults">Menampilkan hasil kueri</h3>
+<p>
+    Metode klien <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code> selalu
+    mengembalikan <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code> berisi kolom-kolom yang ditetapkan oleh proyeksi
+    kueri untuk baris yang cocok dengan kriteria pemilihan kueri. Objek
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code> menyediakan akses baca acak ke baris dan kolom yang
+    dimuatnya. Dengan metode <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code>, Anda bisa mengulang baris-baris dalam
+    hasil, menentukan tipe data tiap kolom, mengambil data dari kolom, dan memeriksa
+    properti lain dari hasil. Beberapa implementasi <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code> akan
+    memperbarui objek secara otomatis bila data penyedia berubah, atau memicu metode dalam objek pengamat
+    bila <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code> berubah, atau keduanya.
+</p>
+<p class="note">
+    <strong>Catatan:</strong> Penyedia bisa membatasi akses ke kolom berdasarkan sifat
+    objek yang melakukan kueri. Misalnya, Penyedia Kontak membatasi akses untuk beberapa kolom pada
+    adaptor sinkronisasi, sehingga tidak akan mengembalikannya ke aktivitas atau layanan.
+</p>
+<p>
+    Jika tidak ada baris yang cocok dengan kriteria pemilihan, penyedia
+    akan mengembalikan objek <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code> dengan
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id#getCount()">Cursor.getCount()</a></code> adalah 0 (kursor kosong).
+</p>
+<p>
+    Jika terjadi kesalahan internal, hasil kueri akan bergantung pada penyedia tertentu. Penyedia bisa
+    memilih untuk mengembalikan <code>null</code>, atau melontarkan <code><a href="https://developer.android.com/reference/java/lang/Exception.html?hl=id">Exception</a></code>.
+</p>
+<p>
+    Karena <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code> adalah "daftar" baris, cara yang cocok untuk menampilkan
+    materi <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code> adalah menautkannya dengan <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=id">ListView</a></code>
+    melalui <code><a href="https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html?hl=id">SimpleCursorAdapter</a></code>.
+</p>
+<p>
+    Cuplikan berikut melanjutkan kode dari cuplikan sebelumnya. Cuplikan ini membuat
+    objek <code><a href="https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html?hl=id">SimpleCursorAdapter</a></code> berisi <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code>
+    yang diambil oleh kueri, dan mengatur objek ini menjadi adaptor bagi
+    <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=id">ListView</a></code>:
+</p>
+<pre class="prettyprint">
+// Defines a list of columns to retrieve from the Cursor and load into an output row
+String[] mWordListColumns =
+{
+    UserDictionary.Words.WORD,   // Contract class constant containing the word column name
+    UserDictionary.Words.LOCALE  // Contract class constant containing the locale column name
+};
+
+// Defines a list of View IDs that will receive the Cursor columns for each row
+int[] mWordListItems = { R.id.dictWord, R.id.locale};
+
+// Creates a new SimpleCursorAdapter
+mCursorAdapter = new SimpleCursorAdapter(
+    getApplicationContext(),               // The application's Context object
+    R.layout.wordlistrow,                  // A layout in XML for one row in the ListView
+    mCursor,                               // The result from the query
+    mWordListColumns,                      // A string array of column names in the cursor
+    mWordListItems,                        // An integer array of view IDs in the row layout
+    0);                                    // Flags (usually none are needed)
+
+// Sets the adapter for the ListView
+mWordList.setAdapter(mCursorAdapter);
+</pre>
+<p class="note">
+    <strong>Catatan:</strong> Untuk mendukung <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=id">ListView</a></code> dengan
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code>, kursor harus berisi kolom bernama <code>_ID</code>.
+    Karena itu, kueri yang ditampilkan sebelumnya mengambil kolom <code>_ID</code> untuk
+    tabel "words", walaupun <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=id">ListView</a></code> tidak menampilkannya.
+    Pembatasan ini juga menjelaskan mengapa sebagian besar penyedia memiliki kolom <code>_ID</code> untuk masing-masing
+    tabelnya.
+</p>
+
+        <!-- Getting data from query results -->
+<h3 id="GettingResults">Mendapatkan data dari hasil kueri</h3>
+<p>
+    Daripada sekadar menampilkan hasil kueri, Anda bisa menggunakannya untuk tugas-tugas lain. Misalnya,
+    Anda bisa mengambil ejaan dari kamus pengguna kemudian mencarinya dalam
+    penyedia lain. Caranya, ulangi baris-baris dalam <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code>:
+</p>
+<pre class="prettyprint">
+
+// Determine the column index of the column named "word"
+int index = mCursor.getColumnIndex(UserDictionary.Words.WORD);
+
+/*
+ * Only executes if the cursor is valid. The User Dictionary Provider returns null if
+ * an internal error occurs. Other providers may throw an Exception instead of returning null.
+ */
+
+if (mCursor != null) {
+    /*
+     * Moves to the next row in the cursor. Before the first movement in the cursor, the
+     * "row pointer" is -1, and if you try to retrieve data at that position you will get an
+     * exception.
+     */
+    while (mCursor.moveToNext()) {
+
+        // Gets the value from the column.
+        newWord = mCursor.getString(index);
+
+        // Insert code here to process the retrieved word.
+
+        ...
+
+        // end of while loop
+    }
+} else {
+
+    // Insert code here to report an error if the cursor is null or the provider threw an exception.
+}
+</pre>
+<p>
+    Implementasi <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code> berisi beberapa metode "get" untuk
+    mengambil berbagai tipe data dari objek. Misalnya, cuplikan sebelumnya
+    menggunakan <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id#getString(int)">getString()</a></code>. Implementasi juga memiliki
+    metode <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id#getType(int)">getType()</a></code> yang mengembalikan nilai yang menunjukkan
+    tipe data kolom.
+</p>
+
+
+    <!-- Requesting permissions -->
+<h2 id="Permissions">Izin Penyedia Materi</h2>
+<p>
+    Aplikasi penyedia bisa menetapkan izin yang harus dimiliki aplikasi lain untuk
+    mengakses data penyedia. Izin ini akan memastikan bahwa pengguna mengetahui data
+    yang coba diakses oleh aplikasi. Berdasarkan ketentuan penyedia, aplikasi lain
+    meminta izin yang diperlukannya untuk mengakses penyedia. Pengguna akhir akan melihat
+    izin yang diminta saat memasang aplikasi.
+</p>
+<p>
+    Jika aplikasi penyedia tidak menetapkan izin apa pun, maka aplikasi lain tidak memiliki
+    akses ke data penyedia. Akan tetapi, komponen-komponen dalam aplikasi penyedia selalu memiliki
+    akses penuh untuk baca dan tulis, izin apa pun yang ditetapkan.
+</p>
+<p>
+    Seperti disebutkan sebelumnya, Penyedia Kamus Pengguna mensyaratkan izin
+    <code>android.permission.READ_USER_DICTIONARY</code> untuk mengambil data darinya.
+    Penyedia memiliki izin <code>android.permission.WRITE_USER_DICTIONARY</code>
+    yang terpisah untuk menyisipkan, memperbarui, atau menghapus data.
+</p>
+<p>
+    Untuk mendapatkan izin yang diperlukan untuk mengakses penyedia, aplikasi memintanya dengan elemen
+<code><a href="../manifest/uses-permission-element0cf2.html?hl=id">&lt;uses-permission&gt;</a></code>
+    dalam file manifesnya. Bila Android Package Manager memasang aplikasi, pengguna
+    harus menyetujui semua izin yang diminta aplikasi. Jika pengguna menyetujui semuanya, 
+    Package Manager akan melanjutkan pemasangan; jika pengguna tidak menyetujuinya, Package Manager
+    membatalkan pemasangan.
+</p>
+<p>
+    Elemen
+<code><a href="../manifest/uses-permission-element0cf2.html?hl=id">&lt;uses-permission&gt;</a></code>
+    berikut meminta akses baca ke Penyedia Kamus Pengguna:
+</p>
+<pre>
+    &lt;uses-permission android:name="android.permission.READ_USER_DICTIONARY"&gt;
+</pre>
+<p>
+    Dampak izin pada akses penyedia dijelaskan secara lebih detail dalam panduan
+    <a href="https://developer.android.com/training/articles/security-tips.html?hl=id">Keamanan dan Izin</a>.
+</p>
+
+
+<!-- Inserting, Updating, and Deleting Data -->
+<h2 id="Modifications">Menyisipkan, Memperbarui, dan Menghapus Data</h2>
+<p>
+    Lewat cara yang sama dengan cara mengambil data dari penyedia, Anda juga menggunakan interaksi antara
+    klien penyedia dan <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=id">ContentProvider</a></code> penyedia untuk memodifikasi data.
+    Anda memanggil metode <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id">ContentResolver</a></code> dengan argumen yang diteruskan ke
+    metode <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=id">ContentProvider</a></code> yang sesuai. Penyedia dan klien penyedia
+    menangani secara otomatis keamanan dan komunikasi antar-proses.
+</p>
+<h3 id="Inserting">Menyisipkan data</h3>
+<p>
+    Untuk menyisipkan data ke penyedia, Anda memanggil metode
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#insert(android.net.Uri, android.content.ContentValues)">ContentResolver.insert()</a></code>.
+ Metode ini menyisipkan sebuah baris baru ke penyedia itu dan mengembalikan URI materi untuk baris itu.
+    Cuplikan ini menampilkan cara menyisipkan sebuah kata baru ke Penyedia Kamus Pengguna:
+</p>
+<pre class="prettyprint">
+// Defines a new Uri object that receives the result of the insertion
+Uri mNewUri;
+
+...
+
+// Defines an object to contain the new values to insert
+ContentValues mNewValues = new ContentValues();
+
+/*
+ * Sets the values of each column and inserts the word. The arguments to the "put"
+ * method are "column name" and "value"
+ */
+mNewValues.put(UserDictionary.Words.APP_ID, "example.user");
+mNewValues.put(UserDictionary.Words.LOCALE, "en_US");
+mNewValues.put(UserDictionary.Words.WORD, "insert");
+mNewValues.put(UserDictionary.Words.FREQUENCY, "100");
+
+mNewUri = getContentResolver().insert(
+    UserDictionary.Word.CONTENT_URI,   // the user dictionary content URI
+    mNewValues                          // the values to insert
+);
+</pre>
+<p>
+    Data untuk baris baru masuk ke dalam satu objek <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=id">ContentValues</a></code>, yang
+    serupa bentuknya dengan kursor satu-baris. Kolom dalam objek ini tidak perlu memiliki
+    tipe data yang sama, dan jika Anda tidak ingin menetapkan nilai sama sekali, Anda bisa mengatur kolom
+    ke <code>null</code> dengan menggunakan <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=id#putNull(java.lang.String)">ContentValues.putNull()</a></code>.
+</p>
+<p>
+    Cuplikan ini tidak menambahkan kolom <code>_ID</code>, karena kolom ini dipelihara
+    secara otomatis. Penyedia menetapkan sebuah nilai unik <code>_ID</code> ke setiap baris yang
+    ditambahkan. Penyedia biasanya menggunakan nilai ini sebagai kunci utama tabel.
+</p>
+<p>
+    URI materi yang dikembalikan dalam <code>newUri</code> akan mengidentifikasi baris yang baru ditambahkan, dengan
+    format berikut:
+</p>
+<pre>
+content://user_dictionary/words/&lt;id_value&gt;
+</pre>
+<p>
+    <code>&lt;id_value&gt;</code> adalah materi <code>_ID</code> untuk baris baru.
+    Kebanyakan penyedia bisa mendeteksi bentuk URI materi ini secara otomatis kemudian melakukan
+    operasi yang diminta pada baris tersebut.
+</p>
+<p>
+    Untuk mendapatkan nilai <code>_ID</code> dari <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=id">Uri</a></code> yang dikembalikan, panggil
+    <code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=id#parseId(android.net.Uri)">ContentUris.parseId()</a></code>.
+</p>
+<h3 id="Updating">Memperbarui data</h3>
+<p>
+    Untuk memperbarui sebuah baris, gunakan objek <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=id">ContentValues</a></code> dengan
+    nilai-nilai yang diperbarui, persis seperti yang Anda lakukan pada penyisipan, dan kriteria pemilihan persis seperti yang Anda lakukan pada kueri.
+    Metode klien yang Anda gunakan adalah
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">ContentResolver.update()</a></code>. Anda hanya perlu menambahkan
+    nilai-nilai ke objek <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=id">ContentValues</a></code> untuk kolom yang sedang Anda perbarui. Jika Anda
+    ingin mengosongkan isi kolom, setel nilai ke <code>null</code>.
+</p>
+<p>
+    Cuplikan berikut mengubah semua baris yang kolom lokalnya memiliki bahasa "en" ke
+    lokal <code>null</code>. Nilai hasil adalah jumlah baris yang diperbarui:
+</p>
+<pre>
+// Defines an object to contain the updated values
+ContentValues mUpdateValues = new ContentValues();
+
+// Defines selection criteria for the rows you want to update
+String mSelectionClause = UserDictionary.Words.LOCALE +  "LIKE ?";
+String[] mSelectionArgs = {"en_%"};
+
+// Defines a variable to contain the number of updated rows
+int mRowsUpdated = 0;
+
+...
+
+/*
+ * Sets the updated value and updates the selected words.
+ */
+mUpdateValues.putNull(UserDictionary.Words.LOCALE);
+
+mRowsUpdated = getContentResolver().update(
+    UserDictionary.Words.CONTENT_URI,   // the user dictionary content URI
+    mUpdateValues                       // the columns to update
+    mSelectionClause                    // the column to select on
+    mSelectionArgs                      // the value to compare to
+);
+</pre>
+<p>
+    Anda juga harus membersihkan masukan pengguna bila memanggil
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">ContentResolver.update()</a></code>. Untuk mengetahui selengkapnya tentang
+    hal ini, bacalah bagian <a href="#Injection">Melindungi dari masukan merusak</a>.
+</p>
+<h3 id="Deleting">Menghapus data</h3>
+<p>
+    Menghapus baris serupa dengan mengambil baris data: Anda menetapkan kriteria pemilihan untuk baris
+    yang ingin Anda hapus dan metode klien akan mengembalikan jumlah baris yang dihapus.
+    Cuplikan berikut menghapus baris yang appid-nya sama dengan "user". Metode mengembalikan
+    jumlah baris yang dihapus.
+</p>
+<pre>
+
+// Defines selection criteria for the rows you want to delete
+String mSelectionClause = UserDictionary.Words.APP_ID + " LIKE ?";
+String[] mSelectionArgs = {"user"};
+
+// Defines a variable to contain the number of rows deleted
+int mRowsDeleted = 0;
+
+...
+
+// Deletes the words that match the selection criteria
+mRowsDeleted = getContentResolver().delete(
+    UserDictionary.Words.CONTENT_URI,   // the user dictionary content URI
+    mSelectionClause                    // the column to select on
+    mSelectionArgs                      // the value to compare to
+);
+</pre>
+<p>
+    Anda juga harus membersihkan masukan pengguna bila memanggil
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#delete(android.net.Uri, java.lang.String, java.lang.String[])">ContentResolver.delete()</a></code>. Untuk mengetahui selengkapnya tentang
+    hal ini, bacalah bagian <a href="#Injection">Melindungi dari masukan merusak</a>.
+</p>
+<!-- Provider Data Types -->
+<h2 id="DataTypes">Tipe Data Penyedia</h2>
+<p>
+    Penyedia materi bisa menawarkan berbagai tipe data. Penyedia Kamus Pengguna hanya menawarkan
+    teks, namun penyedia juga bisa menawarkan format berikut:
+</p>
+    <ul>
+        <li>
+            integer
+        </li>
+        <li>
+            long integer (long)
+        </li>
+        <li>
+            floating point
+        </li>
+        <li>
+            long floating point (double)
+        </li>
+    </ul>
+<p>
+    Tipe data lain yang sering digunakan penyedia adalah Binary Large OBject (BLOB) yang diimplementasikan sebagai
+    larik byte 64 KB. Anda bisa melihat tipe data yang tersedia dengan memperhatikan metode "get" 
+    kelas <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id">Cursor</a></code>.
+</p>
+<p>
+    Tipe data tiap kolom dalam penyedia biasanya tercantum dalam dokumentasinya.
+    Tipe data untuk Penyedia Kamus Pengguna tercantum dalam dokumentasi acuan
+    untuk kelas kontraknya <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html?hl=id">UserDictionary.Words</a></code> (kelas kontrak
+    dijelaskan di bagian <a href="#ContractClasses">Kelas-kelas Kontrak</a>).
+    Anda juga bisa menentukan tipe data dengan memanggil <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=id#getType(int)">Cursor.getType()</a></code>.
+</p>
+<p>
+    Penyedia juga memelihara informasi tipe data MIME untuk tiap URI materi yang didefinisikannya. Anda bisa
+    menggunakan informasi tipe MIME untuk mengetahui apakah aplikasi Anda bisa menangani data yang
+    disediakan penyedia, atau memilih tipe penanganan berdasarkan tipe MIME. Anda biasanya memerlukan
+    tipe MIME saat menggunakan penyedia yang berisi
+    struktur atau file data yang kompleks. Misalnya, tabel <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=id">ContactsContract.Data</a></code>
+    dalam Penyedia Kontak menggunakan tipe MIME untuk memberi label tipe data kontak yang disimpan di tiap
+    baris. Untuk mendapatkan tipe MIME yang sesuai dengan URI materi, panggil
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#getType(android.net.Uri)">ContentResolver.getType()</a></code>.
+</p>
+<p>
+    Bagian <a href="#MIMETypeReference">Acuan Tipe MIME</a> menerangkan 
+    sintaks tipe MIME baik yang standar maupun khusus.
+</p>
+
+
+<!-- Alternative Forms of Provider Access -->
+<h2 id="AltForms">Bentuk-Bentuk Alternatif Akses Penyedia</h2>
+<p>
+    Tiga bentuk alternatif akses penyedia adalah penting dalam development aplikasi:
+</p>
+<ul>
+    <li>
+        <a href="#Batch">Akses batch</a>: Anda bisa membuat sebuah batch panggilan akses dengan metode-metode dalam
+        kelas <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=id">ContentProviderOperation</a></code>, kemudian menerapkannya dengan
+        <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">ContentResolver.applyBatch()</a></code>.
+    </li>
+    <li>
+        Kueri asinkron: Anda harus melakukan kueri dalam thread terpisah. Satu cara melakukannya adalah
+        menggunakan objek <code><a href="https://developer.android.com/reference/android/content/CursorLoader.html?hl=id">CursorLoader</a></code>. Contoh-contoh dalam panduan
+        <a href="../../components/loaders0cf2.html?hl=id">Loader</a> memperagakan
+        cara melakukannya.
+    </li>
+    <li>
+        <a href="#Intents">Akses data melalui maksud</a>: Walaupun tidak bisa mengirim maksud
+        ke penyedia secara langsung, Anda bisa mengirim maksud ke aplikasi penyedia, yang
+        biasanya paling lengkap dibekali untuk memodifikasi data penyedia.
+    </li>
+</ul>
+<p>
+    Akses batch dan modifikasi melalui maksud dijelaskan dalam bagian-bagian berikut.
+</p>
+<h3 id="Batch">Akses batch</h3>
+<p>
+    Akses batch ke penyedia berguna untuk menyisipkan baris dalam jumlah besar, atau menyisipkan
+    baris ke dalam beberapa tabel dalam panggilan metode yang sama, atau biasanya melakukan satu set
+    operasi lintas batas proses sebagai transaksi (operasi atomik).
+</p>
+<p>
+    Untuk mengakses penyedia dalam "mode batch",
+    buat satu larik objek <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=id">ContentProviderOperation</a></code>, kemudian
+    kirim larik itu ke penyedia materi dengan
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">ContentResolver.applyBatch()</a></code>. Anda meneruskan
+    <em>otoritas</em> penyedia materi ke metode ini, daripada URI materi tertentu.
+    Ini memungkinkan tiap objek <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=id">ContentProviderOperation</a></code> dalam larik untuk bekerja
+    terhadap tabel yang berbeda. Panggilan ke <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=id#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">ContentResolver.applyBatch()</a></code> mengembalikan satu larik hasil.
+</p>
+<p>
+    Keterangan kelas kontrak <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=id">ContactsContract.RawContacts</a></code>
+    menyertakan cuplikan kode yang memperagakan penyisipan batch. Contoh aplikasi
+    <a href="https://developer.android.com/resources/samples/ContactManager/index.html?hl=id">Contacts Manager</a>
+    berisi contoh akses batch dalam file sumber <code>ContactAdder.java</code>-nya
+.
+</p>
+<div class="sidebox-wrapper">
+<div class="sidebox">
+<h2>Menampilkan data dengan aplikasi pembantu</h2>
+<p>
+    Jika aplikasi Anda <em>memang</em> memiliki izin akses, Anda masih mungkin perlu menggunakan
+    maksud untuk menampilkan data dalam aplikasi lain. Misalnya, aplikasi Kalender menerima
+    maksud <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=id#ACTION_VIEW">ACTION_VIEW</a></code>, yang menampilkan tanggal atau kejadian tertentu.
+    Hal ini memungkinkan Anda menampilkan informasi kalender tanpa harus membuat UI sendiri.
+    Untuk mengetahui selengkapnya tentang fitur ini, lihat panduan
+    <a href="calendar-provider0cf2.html?hl=id">Penyedia Kalender</a>.
+</p>
+<p>
+    Aplikasi yang Anda kirimi maksud tidak harus aplikasi
+    yang terkait dengan penyedia. Misalnya, Anda bisa mengambil satu kontak dari
+    Penyedia Kontak, kemudian mengirim maksud <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=id#ACTION_VIEW">ACTION_VIEW</a></code>
+    berisi URI materi untuk gambar kontak itu ke penampil gambar.
+</p>
+</div>
+</div>
+<h3 id="Intents">Akses data melalui maksud</h3>
+<p>
+    Maksud bisa menyediakan akses tidak langsung ke penyedia materi. Anda memperbolehkan pengguna mengakses
+    data dalam penyedia sekalipun aplikasi Anda tidak memiliki izin akses, baik dengan
+    mendapatkan maksud yang dihasilkan aplikasi yang memiliki izin, atau dengan mengaktifkan
+    aplikasi yang memiliki izin dan membiarkan pengguna melakukan pekerjaan di dalamnya.
+</p>
+<h4>Mendapatkan akses dengan izin sementara</h4>
+<p>
+    Anda bisa mengakses data dalam penyedia materi, sekalipun tidak memiliki
+    izin akses yang sesuai, dengan mengirimkan maksud ke aplikasi yang memang memiliki izin dan
+    menerima hasil berupa maksud berisi izin "URI".
+    Inilah izin untuk URI materi tertentu yang berlaku hingga aktivitas yang menerima
+    izin selesai. Aplikasi yang memiliki izin tetap akan memberikan
+    izin sementara dengan menyetel flag dalam maksud yang dihasilkan:
+</p>
+<ul>
+    <li>
+        <strong>Izin baca:</strong>
+        <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=id#FLAG_GRANT_READ_URI_PERMISSION">FLAG_GRANT_READ_URI_PERMISSION</a></code>
+    </li>
+    <li>
+        <strong>Izin tulis:</strong>
+        <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=id#FLAG_GRANT_WRITE_URI_PERMISSION">FLAG_GRANT_WRITE_URI_PERMISSION</a></code>
+    </li>
+</ul>
+<p class="note">
+    <strong>Catatan:</strong> Flag ini tidak memberikan akses baca atau tulis umum ke penyedia
+    yang otoritasnya dimuat dalam URI materi. Aksesnya hanya untuk URI itu sendiri.
+</p>
+<p>
+    Penyedia mendefinisikan izin URI untuk URI materi dalam manifesnya, dengan menggunakan atribut
+<code><a href="../manifest/provider-element0cf2.html?hl=id#gprmsn">android:grantUriPermission</a></code>
+    dari elemen
+<code><a href="../manifest/provider-element0cf2.html?hl=id">&lt;provider&gt;</a></code>,
+    serta elemen anak
+<code><a href="../manifest/grant-uri-permission-element0cf2.html?hl=id">&lt;grant-uri-permission&gt;</a></code>
+    dari elemen
+<code><a href="../manifest/provider-element0cf2.html?hl=id">&lt;provider&gt;</a></code>
+. Mekanisme izin URI dijelaskan secara lebih detail dalam panduan
+    <a href="https://developer.android.com/training/articles/security-tips.html?hl=id">Keamanan dan Izin</a>,
+    di bagian "Izin URI".
+</p>
+<p>
+    Misalnya, Anda bisa mengambil data untuk satu kontak di Penyedia Kontak, sekalipun tidak
+    memiliki izin <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=id#READ_CONTACTS">READ_CONTACTS</a></code>. Anda mungkin ingin melakukan
+    ini dalam aplikasi yang mengirim kartu ucapan elektronik ke seorang kenalan pada hari ulang tahunnya. Sebagai ganti
+    meminta <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=id#READ_CONTACTS">READ_CONTACTS</a></code>, yang memberi Anda akses ke semua
+    kontak pengguna dan semua informasinya, Anda lebih baik membiarkan pengguna mengontrol
+    kontak-kontak yang akan digunakan oleh aplikasi Anda. Caranya, gunakan proses berikut:
+</p>
+<ol>
+    <li>
+        Aplikasi Anda akan mengirim maksud berisi aksi
+        <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=id#ACTION_PICK">ACTION_PICK</a></code> dan tipe MIME "contacts"
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=id#CONTENT_ITEM_TYPE">CONTENT_ITEM_TYPE</a></code>, dengan menggunakan
+        metode <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=id#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code>.
+    </li>
+    <li>
+        Karena maksud ini cocok dengan filter maksud untuk
+        aktivitas "pemilihan" Aplikasi Orang, aktivitas akan muncul ke latar depan.
+    </li>
+    <li>
+        Dalam aktivitas pemilihan, pengguna memilih sebuah
+        kontak untuk diperbarui. Bila ini terjadi, aktivitas pemilihan akan memanggil
+        <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=id#setResult(int)">setResult(resultcode, intent)</a></code>
+        untuk membuat maksud yang akan diberikan kembali ke aplikasi Anda. Maksud berisi URI materi
+        kontak yang dipilih pengguna, dan flag "tambahan"
+        <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=id#FLAG_GRANT_READ_URI_PERMISSION">FLAG_GRANT_READ_URI_PERMISSION</a></code>. Semua flag ini memberikan
+        izin URI ke aplikasi Anda untuk membaca data kontak yang ditunjuk oleh
+        URI materi. Aktivitas pemilihan kemudian memanggil <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=id#finish()">finish()</a></code> untuk
+        mengembalikan kontrol ke aplikasi Anda.
+    </li>
+    <li>
+        Aktivitas Anda akan kembali ke latar depan, dan sistem akan memanggil metode
+        <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=id#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code>
+        aktivitas Anda. Metode ini menerima maksud yang dihasilkan oleh aktivitas pemilihan dalam
+        Aplikasi Orang.
+    </li>
+    <li>
+        Dengan URI materi dari maksud yang dihasilkan, Anda bisa membaca data kontak
+        dari Penyedia Kontak, sekalipun Anda tidak meminta izin akses baca tetap
+        ke penyedia dalam manifes Anda. Anda kemudian bisa mendapatkan informasi hari ulang tahun si kontak
+        atau alamat emailnya, kemudian mengirim kartu ucapan elektronik.
+    </li>
+</ol>
+<h4>Menggunakan aplikasi lain</h4>
+<p>
+    Satu cara mudah untuk memungkinkan pengguna memodifikasi data yang izin aksesnya tidak Anda miliki adalah
+    mengaktifkan aplikasi yang memiliki izin dan membiarkan pengguna melakukan pekerjaannya di sana.
+</p>
+<p>
+    Misalnya, aplikasi Kalender menerima
+    maksud <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=id#ACTION_INSERT">ACTION_INSERT</a></code>, yang memungkinkan Anda mengaktifkan
+    UI penyisipan aplikasi itu. Anda bisa meneruskan data "tambahan" dalam maksud ini, yang digunakan aplikasi
+    untuk mengisi dahulu UI-nya. Karena kejadian berulang memiliki sintaks yang rumit,
+    cara yang lebih disukai untuk menyisipkan kejadian ke dalam Penyedia Kalender adalah mengaktifkan aplikasi Kalender dengan
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=id#ACTION_INSERT">ACTION_INSERT</a></code> kemudian membiarkan pengguna menyisipkan kejadian di sana.
+</p>
+<!-- Contract Classes -->
+<h2 id="ContractClasses">Kelas-kelas Kontrak</h2>
+<p>
+    Kelas kontrak mendefinisikan konstanta yang membantu aplikasi menggunakan URI materi, nama
+    kolom, tindakan maksud, dan fitur lain pada penyedia materi. Kelas kontrak tidak
+    disertakan secara otomatis bersama penyedia; developer penyedia harus mendefinisikannya kemudian
+    membuatnya tersedia bagi developer lain. Banyak penyedia yang disertakan pada platform Android
+    memiliki kelas kontrak yang sesuai dalam <code><a href="https://developer.android.com/reference/android/provider/package-summary.html?hl=id">android.provider</a></code> paketnya.
+</p>
+<p>
+    Misalnya, Penyedia Kamus Pengguna memiliki kelas kontrak
+    <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.html?hl=id">UserDictionary</a></code> yang berisi URI materi dan konstanta nama kolom. URI
+    materi untuk tabel "words" didefinisikan dalam konstanta
+    <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html?hl=id#CONTENT_URI">UserDictionary.Words.CONTENT_URI</a></code>.
+    Kelas <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html?hl=id">UserDictionary.Words</a></code> juga berisi konstanta nama kolom,
+    yang digunakan dalam cuplikan contoh pada panduan ini. Misalnya, sebuah proyeksi kueri bisa
+    didefinisikan sebagai:
+</p>
+<pre>
+String[] mProjection =
+{
+    UserDictionary.Words._ID,
+    UserDictionary.Words.WORD,
+    UserDictionary.Words.LOCALE
+};
+</pre>
+<p>
+    Kelas kontrak lain adalah <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.html?hl=id">ContactsContract</a></code> untuk Penyedia Kontak.
+    Dokumentasi acuan untuk kelas ini menyertakan contoh cuplikan kode. Salah satu
+    subkelasnya, <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Intents.Insert.html?hl=id">ContactsContract.Intents.Insert</a></code>, adalah
+    kelas kontrak yang berisi konstanta untuk maksud dan data maksud.
+</p>
+
+
+<!-- MIME Type Reference -->
+<h2 id="MIMETypeReference">Acuan Tipe MIME</h2>
+<p>
+    Penyedia materi bisa mengembalikan tipe media MIME standar, atau string tipe MIME khusus, atau keduanya.
+</p>
+<p>
+    Tipe MIME memiliki format
+</p>
+<pre>
+<em>type</em>/<em>subtype</em>
+</pre>
+<p>
+    Misalnya, tipe MIME <code>text/html</code> yang dikenal luas memiliki tipe <code>text</code> dan
+    subtipe <code>html</code>. Jika penyedia mengembalikan tipe ini untuk sebuah URI, artinya
+    kueri dengan URI itu akan mengembalikan teks berisi tag HTML.
+</p>
+<p>
+    String tipe MIME khusus, yang juga disebut dengan tipe MIME "khusus-vendor", memiliki nilai-nilai
+    <em>tipe</em> dan <em>subtipe</em> yang lebih kompleks. Nilai <em>tipe</em> selalu
+</p>
+<pre>
+vnd.android.cursor.<strong>dir</strong>
+</pre>
+<p>
+    untuk beberapa baris, atau
+</p>
+<pre>
+vnd.android.cursor.<strong>item</strong>
+</pre>
+<p>
+    untuk satu baris.
+</p>
+<p>
+    <em>Subtipe</em> adalah khusus penyedia. Penyedia bawaan Android biasanya memiliki subtipe
+    sederhana. Misalnya, bila aplikasi Kontak membuat satu baris untuk nomor ponsel,
+    aplikasi akan menyetel tipe MIME berikut di baris itu:
+</p>
+<pre>
+vnd.android.cursor.item/phone_v2
+</pre>
+<p>
+    Perhatikan bahwa nilai subtipe adalah sekadar <code>phone_v2</code>.
+</p>
+<p>
+    Developer penyedia lain bisa membuat pola subtipe sendiri berdasarkan
+    otoritas dan nama-nama tabel penyedia. Misalnya, perhatikan penyedia yang berisi jadwal kereta api.
+    Otoritas penyedia adalah <code>com.example.trains</code>, dan berisi tabel-tabel
+    Line1, Line2, dan Line3. Untuk merespons URI materi
+</p>
+<p>
+<pre>
+content://com.example.trains/Line1
+</pre>
+<p>
+    untuk tabel Line1, penyedia mengembalikan tipe MIME
+</p>
+<pre>
+vnd.android.cursor.<strong>dir</strong>/vnd.example.line1
+</pre>
+<p>
+     Untuk merespons URI materi
+</p>
+<pre>
+content://com.example.trains/Line2/5
+</pre>
+<p>
+    untuk baris 5 di tabel Line2, penyedia mengembalikan tipe MIME
+</p>
+<pre>
+vnd.android.cursor.<strong>item</strong>/vnd.example.line2
+</pre>
+<p>
+    Kebanyakan penyedia materi mendefinisikan konstanta kelas kontrak untuk tipe MIME yang digunakannya. Kelas kontrak 
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=id">ContactsContract.RawContacts</a></code> pada Penyedia Kontak
+    misalnya, mendefinisikan konstanta
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=id#CONTENT_ITEM_TYPE">CONTENT_ITEM_TYPE</a></code> untuk tipe MIME
+    baris kontak mentah tunggal.
+</p>
+<p>
+    URI materi untuk baris-baris tunggal dijelaskan di bagian
+    <a href="#ContentURIs">URI Materi</a>.
+</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=id" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=id" title="Dukungan">Dukungan</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=id" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=id" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=id" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=id" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="l-n2MMhlrlfnFH6fY8rbfFU6Sc2027o08fVIUDdpZjw6MTQ5NzUxNjYwMDM0NzU3MA" />
+      <input type="hidden" name="next" value="content-provider-basics.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+             selected="selected" >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Alamat email</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified8481.js?hl=id?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en8481.js?hl=id?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists8481.js?hl=id?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists8481.js?hl=id?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists8481.js?hl=id?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists8481.js?hl=id?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists8481.js?hl=id?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=id"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_id.js?hl=id?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/content-provider-basics.html?hl=id by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:10:12 GMT -->
+</html>

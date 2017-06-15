@@ -1,0 +1,1924 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from developer.android.com/guide/topics/ui/drag-drop.html?hl=zh-cn by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:15:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="0U14OShxYFGsNPdzbg_IPEH5dcJmmYilHHi_JatMfMo6MTQ5NzUxNzA0MDMxMTIwMA" />
+
+  
+    <link rel="canonical" href="drag-drop0b8e.html?hl=zh-cn">
+  
+
+  
+    <link rel="alternate" href="drag-drop0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="drag-drop7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="drag-drop0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="drag-drop9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="drag-drop232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="drag-drop6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="drag-drop.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="drag-drop.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon0b8e.png?hl=zh-cn">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1800b8e.png?hl=zh-cn">
+
+
+<title>
+
+  拖放 | Android Developers
+
+</title>
+
+  <meta name="description" content="With the Android drag&amp;#47;drop framework, you can allow your users to move data from one View to another View in the current layout using a graphical drag and drop gesture. The framework includes a drag event class, drag listeners, and helper methods …">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default414d.css?hl=zh-cn?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle0b8e.js?hl=zh-cn" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__zh_cn0b8e.js?hl=zh-cn"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android0b8e.js?hl=zh-cn"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs414d.js?hl=zh-cn?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-cn&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-cn&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "zh-cn", "served": "zh-cn"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=zh-cn">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo0b8e.png?hl=zh-cn"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=zh-cn"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=zh-cn"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=zh-cn"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=zh-cn"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=zh-cn" width="18" height="19" alt="Play 控制台">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="搜索">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">返回</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index0b8e.html?hl=zh-cn" >简介</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals0b8e.html?hl=zh-cn" >应用基础知识</a></li><li><a href="../../practices/compatibility0b8e.html?hl=zh-cn" >设备兼容性</a></li><li><a href="../security/permissions0b8e.html?hl=zh-cn" >系统权限</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index0b8e.html?hl=zh-cn" >平台架构</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack0b8e.html?hl=zh-cn"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 の機能" zh-tw-lang="Java 8 の機能">使用 Java 8 语言功能</a></li><li><a href="../../practices/verifying-apps-art0b8e.html?hl=zh-cn" >在 Android Runtime (ART) 上验证应用行为</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index0b8e.html?hl=zh-cn" >应用组件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters0b8e.html?hl=zh-cn" >Intent 和 Intent 过滤器</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common0b8e.html?hl=zh-cn" >通用 Intent</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities0b8e.html?hl=zh-cn" >Activity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments0b8e.html?hl=zh-cn" >片段</a></li><li><a href="../../components/loaders0b8e.html?hl=zh-cn" >加载器</a></li><li><a href="../../components/tasks-and-back-stack0b8e.html?hl=zh-cn" >任务和返回栈</a></li><li><a href="../../components/recents0b8e.html?hl=zh-cn" >概览屏幕</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services0b8e.html?hl=zh-cn" >服务</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services0b8e.html?hl=zh-cn" >绑定服务</a></li><li><a href="../../components/aidl0b8e.html?hl=zh-cn" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providers0b8e.html?hl=zh-cn" >内容提供程序</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basics0b8e.html?hl=zh-cn" >内容提供程序基础知识</a></li><li><a href="../providers/content-provider-creating0b8e.html?hl=zh-cn" >创建内容提供程序</a></li><li><a href="../providers/calendar-provider0b8e.html?hl=zh-cn" >日历提供程序</a></li><li><a href="../providers/contacts-provider0b8e.html?hl=zh-cn" >联系人提供程序</a></li><li><a href="../providers/document-provider0b8e.html?hl=zh-cn" >存储访问框架</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index0b8e.html?hl=zh-cn" >应用小部件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host0b8e.html?hl=zh-cn" >应用小部件主机</a></li></ul></li><li><a href="../../components/processes-and-threads0b8e.html?hl=zh-cn" >进程和线程</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index0b8e.html?hl=zh-cn" >应用资源</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview0b8e.html?hl=zh-cn" >概览</a></li><li><a href="../resources/providing-resources0b8e.html?hl=zh-cn" >提供资源</a></li><li><a href="../resources/accessing-resources0b8e.html?hl=zh-cn" >访问资源</a></li><li><a href="../resources/runtime-changes0b8e.html?hl=zh-cn" >处理运行时变更</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization0b8e.html?hl=zh-cn" >本地化</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework0b8e.html?hl=zh-cn" >ICU4J Android 框架 API</a></li><li><a href="../resources/multilingual-support0b8e.html?hl=zh-cn" >语言和语言区域</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources0b8e.html?hl=zh-cn" >资源类型</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource0b8e.html?hl=zh-cn" >动画</a></li><li><a href="../resources/color-list-resource0b8e.html?hl=zh-cn" >颜色状态列表</a></li><li><a href="../resources/drawable-resource0b8e.html?hl=zh-cn" >可绘制对象</a></li><li><a href="../resources/layout-resource0b8e.html?hl=zh-cn" >布局</a></li><li><a href="../resources/menu-resource0b8e.html?hl=zh-cn" >菜单</a></li><li><a href="../resources/string-resource0b8e.html?hl=zh-cn" >字符串</a></li><li><a href="../resources/style-resource0b8e.html?hl=zh-cn" >样式</a></li><li><a href="../resources/more-resources0b8e.html?hl=zh-cn" >其他类型</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro0b8e.html?hl=zh-cn" >应用清单</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element0b8e.html?hl=zh-cn" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element0b8e.html?hl=zh-cn" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element0b8e.html?hl=zh-cn" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element0b8e.html?hl=zh-cn" >&lt;application&gt;</a></li><li><a href="../manifest/category-element0b8e.html?hl=zh-cn" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element0b8e.html?hl=zh-cn" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element0b8e.html?hl=zh-cn" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element0b8e.html?hl=zh-cn" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element0b8e.html?hl=zh-cn" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element0b8e.html?hl=zh-cn" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element0b8e.html?hl=zh-cn" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element0b8e.html?hl=zh-cn" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element0b8e.html?hl=zh-cn" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element0b8e.html?hl=zh-cn" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element0b8e.html?hl=zh-cn" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element0b8e.html?hl=zh-cn" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element0b8e.html?hl=zh-cn" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element0b8e.html?hl=zh-cn" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element0b8e.html?hl=zh-cn" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element0b8e.html?hl=zh-cn" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element0b8e.html?hl=zh-cn" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element0b8e.html?hl=zh-cn" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element0b8e.html?hl=zh-cn" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element0b8e.html?hl=zh-cn" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element0b8e.html?hl=zh-cn" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element0b8e.html?hl=zh-cn" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element0b8e.html?hl=zh-cn" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index0b8e.html?hl=zh-cn" >用户界面</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="overview0b8e.html?hl=zh-cn" >概览</a></li><li class="nav-section"><div class="nav-section-header"><a href="declaring-layout0b8e.html?hl=zh-cn" >布局</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="layout/linear0b8e.html?hl=zh-cn" >线性布局</a></li><li><a href="layout/relative0b8e.html?hl=zh-cn" >相对布局</a></li><li><a href="layout/listview0b8e.html?hl=zh-cn" >列表视图</a></li><li><a href="layout/gridview0b8e.html?hl=zh-cn" >网格视图</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="controls0b8e.html?hl=zh-cn" >输入控件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="controls/button0b8e.html?hl=zh-cn" >按钮</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=zh-cn" >文本字段</a></li><li><a href="controls/checkbox0b8e.html?hl=zh-cn" >复选框</a></li><li><a href="controls/radiobutton0b8e.html?hl=zh-cn" >单选按钮</a></li><li><a href="controls/togglebutton0b8e.html?hl=zh-cn" >切换按钮</a></li><li><a href="controls/spinner0b8e.html?hl=zh-cn" >微调框</a></li><li><a href="controls/pickers0b8e.html?hl=zh-cn" >选取器</a></li></ul></li><li><a href="ui-events0b8e.html?hl=zh-cn" >输入事件</a></li><li><a href="menus0b8e.html?hl=zh-cn" >菜单</a></li><li><a href="settings0b8e.html?hl=zh-cn" >设置</a></li><li><a href="dialogs0b8e.html?hl=zh-cn" >对话框</a></li><li><a href="notifiers/notifications0b8e.html?hl=zh-cn" >通知</a></li><li><a href="notifiers/toasts0b8e.html?hl=zh-cn" >Toast</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index0b8e.html?hl=zh-cn" >搜索</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog0b8e.html?hl=zh-cn" >创建搜索界面</a></li><li><a href="../search/adding-recent-query-suggestions0b8e.html?hl=zh-cn" >添加近期查询建议</a></li><li><a href="../search/adding-custom-suggestions0b8e.html?hl=zh-cn" >添加自定义建议</a></li><li><a href="../search/searchable-config0b8e.html?hl=zh-cn" >可搜索配置</a></li></ul></li><li><a href="multi-window0b8e.html?hl=zh-cn" >多窗口支持</a></li><li><a href="drag-drop0b8e.html?hl=zh-cn" >拖放</a></li><li class="nav-section"><div class="nav-section-header"><a href="accessibility/index0b8e.html?hl=zh-cn" >无障碍功能</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="accessibility/apps0b8e.html?hl=zh-cn" >为应用设置无障碍功能</a></li><li><a href="accessibility/checklist0b8e.html?hl=zh-cn" >无障碍功能开发者检查单</a></li><li><a href="accessibility/services0b8e.html?hl=zh-cn" >构建无障碍服务</a></li></ul></li><li><a href="themes0b8e.html?hl=zh-cn" >样式和主题</a></li><li><a href="custom-components0b8e.html?hl=zh-cn" >自定义组件</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index0b8e.html?hl=zh-cn" >动画和图形</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview0b8e.html?hl=zh-cn" >概览</a></li><li><a href="../graphics/prop-animation0b8e.html?hl=zh-cn" >属性动画</a></li><li><a href="../graphics/view-animation0b8e.html?hl=zh-cn" >视图动画</a></li><li><a href="../graphics/drawable-animation0b8e.html?hl=zh-cn" >可绘制动画</a></li><li><a href="../graphics/2d-graphics0b8e.html?hl=zh-cn" >画布和可绘制对象</a></li><li><a href="../graphics/opengl0b8e.html?hl=zh-cn" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel0b8e.html?hl=zh-cn" >硬件加速</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index0b8e.html?hl=zh-cn" >计算</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute0b8e.html?hl=zh-cn" >RenderScript</a></li><li><a href="../renderscript/advanced0b8e.html?hl=zh-cn" >高级 RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview0b8e.html?hl=zh-cn" >Runtime API 参考</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types0b8e.html?hl=zh-cn" >数字类型</a></li><li><a href="../renderscript/reference/rs_object_types0b8e.html?hl=zh-cn" >对象类型</a></li><li><a href="../renderscript/reference/rs_convert0b8e.html?hl=zh-cn" >转换函数</a></li><li><a href="../renderscript/reference/rs_math0b8e.html?hl=zh-cn" >数学常量和函数</a></li><li><a href="../renderscript/reference/rs_vector_math0b8e.html?hl=zh-cn" >矢量数学函数</a></li><li><a href="../renderscript/reference/rs_matrix0b8e.html?hl=zh-cn" >矩阵函数</a></li><li><a href="../renderscript/reference/rs_quaternion0b8e.html?hl=zh-cn" >四元数函数</a></li><li><a href="../renderscript/reference/rs_atomic0b8e.html?hl=zh-cn" >原子更新函数</a></li><li><a href="../renderscript/reference/rs_time0b8e.html?hl=zh-cn" >时间函数和类型</a></li><li><a href="../renderscript/reference/rs_allocation_data0b8e.html?hl=zh-cn" >分配数据访问函数</a></li><li><a href="../renderscript/reference/rs_object_info0b8e.html?hl=zh-cn" >对象特性函数</a></li><li><a href="../renderscript/reference/rs_for_each0b8e.html?hl=zh-cn" >内核调用函数和类型</a></li><li><a href="../renderscript/reference/rs_io0b8e.html?hl=zh-cn" >输入/输出函数</a></li><li><a href="../renderscript/reference/rs_debug0b8e.html?hl=zh-cn" >调试函数</a></li><li><a href="../renderscript/reference/rs_graphics0b8e.html?hl=zh-cn" >图形函数和类型</a></li><li><a href="../renderscript/reference/index0b8e.html?hl=zh-cn" >索引</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index0b8e.html?hl=zh-cn" >媒体和相机</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer0b8e.html?hl=zh-cn" >媒体回放</a></li><li><a href="../media/mediarouter0b8e.html?hl=zh-cn" >媒体路由器</a></li><li><a href="../media/mediarouteprovider0b8e.html?hl=zh-cn" >媒体路由提供程序</a></li><li><a href="../media/exoplayer0b8e.html?hl=zh-cn" >ExoPlayer</a></li><li><a href="../media/media-formats0b8e.html?hl=zh-cn" >支持的媒体格式</a></li><li><a href="../media/mediarecorder0b8e.html?hl=zh-cn" >音频采集</a></li><li><a href="../media/jetplayer0b8e.html?hl=zh-cn" >JetPlayer</a></li><li><a href="../media/camera0b8e.html?hl=zh-cn" >相机</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index0b8e.html?hl=zh-cn" >位置和传感器</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index0b8e.html?hl=zh-cn" >位置和地图</a></li><li><a href="../location/strategies0b8e.html?hl=zh-cn" >位置策略</a></li><li><a href="../sensors/sensors_overview0b8e.html?hl=zh-cn" >传感器概览</a></li><li><a href="../sensors/sensors_motion0b8e.html?hl=zh-cn" >运动传感器</a></li><li><a href="../sensors/sensors_position0b8e.html?hl=zh-cn" >位置传感器</a></li><li><a href="../sensors/sensors_environment0b8e.html?hl=zh-cn" >环境传感器</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index0b8e.html?hl=zh-cn" >连接</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth0b8e.html?hl=zh-cn" >蓝牙</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le0b8e.html?hl=zh-cn" >蓝牙低功耗</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index0b8e.html?hl=zh-cn" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc0b8e.html?hl=zh-cn" >NFC 基础知识</a></li><li><a href="../connectivity/nfc/advanced-nfc0b8e.html?hl=zh-cn" >高级 NFC</a></li><li><a href="../connectivity/nfc/hce0b8e.html?hl=zh-cn" >基于主机的卡模拟</a></li></ul></li><li><a href="../connectivity/wifip2p0b8e.html?hl=zh-cn" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index0b8e.html?hl=zh-cn" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory0b8e.html?hl=zh-cn" >配件</a></li><li><a href="../connectivity/usb/host0b8e.html?hl=zh-cn" >主机</a></li></ul></li><li><a href="../connectivity/sip0b8e.html?hl=zh-cn" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index0b8e.html?hl=zh-cn" >文本和输入</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste0b8e.html?hl=zh-cn" >复制和粘贴</a></li><li><a href="../text/creating-input-method0b8e.html?hl=zh-cn" >创建 IME</a></li><li><a href="../text/spell-checker-framework0b8e.html?hl=zh-cn" >拼写检查程序</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index0b8e.html?hl=zh-cn" >数据存储</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage0b8e.html?hl=zh-cn" >存储选项</a></li><li><a href="../data/backup0b8e.html?hl=zh-cn" >数据备份</a></li><li><a href="../data/install-location0b8e.html?hl=zh-cn" >应用安装位置</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=zh-cn" >库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=zh-cn" >支持库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=zh-cn" >功能</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=zh-cn" >设置</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=zh-cn" >修订历史记录</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=zh-cn" >数据绑定库</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=zh-cn" >测试支持库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=zh-cn" >API 参考</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index0b8e.html?hl=zh-cn" >管理</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin0b8e.html?hl=zh-cn" >设备政策</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index0b8e.html?hl=zh-cn" >网络应用</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting0b8e.html?hl=zh-cn" >在网络应用中支持不同屏幕</a></li><li><a href="../../webapps/webview0b8e.html?hl=zh-cn" >在 WebView 中构建网络应用</a></li><li><a href="../../webapps/migrating0b8e.html?hl=zh-cn" >迁移到 Android 4.4 中的 WebView</a></li><li><a href="../../webapps/debugging0b8e.html?hl=zh-cn" >调试网络应用</a></li><li><a href="../../webapps/best-practices0b8e.html?hl=zh-cn" >网络应用最佳做法</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index0b8e.html?hl=zh-cn"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="最佳做法" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">最佳做法</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support0b8e.html?hl=zh-cn" >支持多种屏幕</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution0b8e.html?hl=zh-cn" >分配到特定屏幕</a></li><li><a href="../../practices/screen-compat-mode0b8e.html?hl=zh-cn" >屏幕兼容性模式</a></li></ul></li><li><a href="../../practices/tablets-and-handsets0b8e.html?hl=zh-cn" >支持平板电脑和手机</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=zh-cn">首页</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=zh-cn">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=zh-cn">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=zh-cn">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=zh-cn">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=zh-cn">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=zh-cn"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=zh-cn"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=zh-cn"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">培训</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index0b8e.html?hl=zh-cn"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=zh-cn"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">参考网页</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=zh-cn">示例</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=zh-cn"
+           >库</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=zh-cn"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=zh-cn"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=zh-cn">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=zh-cn">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=zh-cn">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=zh-cn"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=zh-cn">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=zh-cn">Play 控制台</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=zh-cn"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=zh-cn"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=zh-cn">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=zh-cn">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">拖放</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+    <div id="qv">
+        <h2>内容快览</h2>
+            <ul>
+                <li>
+                    允许用户使用图形化手势在您的活动布局中移动数据。
+                </li>
+                <li>
+                    支持数据移动以外的操作。
+                </li>
+                <li>
+                    仅可在单一应用中使用。
+                </li>
+                <li>
+                    需要 API 11。
+                </li>
+            </ul>
+        <h2>本文内容</h2>
+        <ol>
+            <li>
+                <a href="#AboutDragging">概览</a>
+                <ol>
+                    <li>
+                        <a href="#DragDropLifecycle">拖放过程</a>
+                    </li>
+                    <li>
+                        <a href="#AboutDragListeners">拖拽事件侦听器和回调方法</a>
+                    </li>
+                    <li>
+                        <a href="#AboutDragEvent">拖拽事件</a>
+                    </li>
+                    <li>
+                        <a href="#AboutDragShadowBuilder">拖拽阴影</a>
+
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <a href="#DesignDragOperation">设计拖放操作</a>
+                <ol>
+                    <li>
+                        <a href="#StartDrag">开始拖拽</a>
+                    </li>
+                    <li>
+                        <a href="#HandleStart">响应拖拽开始</a>
+                    </li>
+                    <li>
+                        <a href="#HandleDuring">在拖拽过程中处理事件</a>
+                    </li>
+                    <li>
+                        <a href="#HandleDrop">响应放下</a>
+                    </li>
+                    <li>
+                        <a href="#HandleEnd">响应拖拽结束</a>
+                    </li>
+                    <li>
+                        <a href="#RespondEventSample">响应拖拽事件：示例</a>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+        <h2>关键类</h2>
+        <ol>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn">View</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.OnLongClickListener.html?hl=zh-cn">OnLongClickListener</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=zh-cn">OnDragListener</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn">DragEvent</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">DragShadowBuilder</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/content/ClipData.html?hl=zh-cn">ClipData</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=zh-cn">ClipDescription</a></code>
+            </li>
+        </ol>
+        <h2>相关示例</h2>
+        <ol>
+            <li>
+                <a href="https://developer.android.com/resources/samples/HoneycombGallery/index.html?hl=zh-cn">Honeycomb Gallery</a>。
+
+            </li>
+            <li>
+                <a href="https://developer.android.com/resources/samples/ApiDemos/index.html?hl=zh-cn">Api 演示</a>中的 <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/DragAndDropDemo.html?hl=zh-cn">DragAndDropDemo.java</a> 和 <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/DraggableDot.html?hl=zh-cn">DraggableDot.java</a>。
+
+
+
+            </li>
+        </ol>
+        <h2>另请参阅</h2>
+        <ol>
+            <li>
+            <a href="../providers/content-providers0b8e.html?hl=zh-cn">内容提供程序</a>
+            </li>
+            <li>
+                <a href="ui-events0b8e.html?hl=zh-cn">输入事件</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<p>
+    借助 Android 拖放框架，可允许您的用户使用图形化拖放手势，将数据从当前布局中的一个视图移到另一个视图。
+
+    该框架包括拖拽事件类、拖拽侦听器以及帮助程序方法和类。
+</p>
+<p>
+    尽管该框架主要为数据移动而设计，但也可以将其用于其他 UI 操作。
+例如，您可以创建一个应用，在用户将一个颜色图标拖到另一个图标上面时进行颜色混合。
+不过，本主题的其余部分将从数据移动方面介绍该框架。
+
+</p>
+<h2 id="AboutDragging">概览</h2>
+<p>
+    当用户做出某种您识别为开始拖拽数据的手势时，拖放操作开始。
+作为响应，您的应用会告知系统正在开始拖拽。
+系统回调应用，以获取正在拖拽的数据的表示。
+用户手指在当前布局上移动此表示（“拖拽阴影”）的过程中，系统将拖拽事件发送到与布局中的 <code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn">View</a></code> 对象相关联的拖拽事件侦听器对象和拖拽事件回调方法。
+
+
+    用户释放拖拽阴影后，系统立即结束拖拽操作。
+</p>
+<p>
+    从实现 <code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=zh-cn">View.OnDragListener</a></code> 的类创建拖拽事件侦听器对象（“listeners”）。
+使用视图对象的
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#setOnDragListener(android.view.View.OnDragListener)">setOnDragListener()</a></code> 方法为视图设置拖拽事件侦听器对象。
+
+    每个视图对象还有一个 <code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#onDragEvent(android.view.DragEvent)">onDragEvent()</a></code> 回调方法。
+在<a href="#AboutDragListeners">拖拽事件侦听器和回调方法</a>部分对以上两者进行了更详细的说明。
+
+</p>
+<p class="note">
+    <strong>注：</strong>为简便起见，以下部分将接收拖拽事件的例程称为“拖拽事件侦听器”，即便它实际可能是一个回调方法也是如此。
+
+
+</p>
+<p>
+    在开始拖拽时，将您想要移动的数据和描述此数据的元数据均包含在系统调用中。
+在拖拽期间，系统会将拖拽事件发送到布局中每个视图的拖拽事件侦听器或回调方法。
+这些侦听器或回调方法可使用元数据来确定其在数据被放下时是否想要接受这些数据。
+
+    如果用户将数据放到某个视图对象上，并且该视图对象的侦听器或回调方法之前已告知系统它想要接受放下的数据，则系统会将该数据发送到拖拽事件中的侦听器或回调方法。
+
+
+</p>
+<p>
+    您的应用通过调用
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> 方法告知系统开始拖拽。
+这将告知系统开始发送拖拽事件。该方法还会发送正在拖拽的数据。
+
+</p>
+<p>
+    您可以为当前布局中任意已连接的视图调用
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>。
+系统仅使用视图对象获取布局中的全局设置访问权限。
+
+</p>
+<p>
+    应用调用
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> 之后，该过程的剩余部分将使用系统发送给当前布局中的视图对象的事件。
+
+
+</p>
+<h3 id="DragDropLifecycle">拖放过程</h3>
+<p>
+    拖放过程基本包含四个步骤或状态：
+</p>
+<dl>
+    <dt>
+        <em>开始</em>
+    </dt>
+    <dd>
+        为响应用户开始拖拽的手势，您的应用将调用
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>，告知系统开始拖拽。
+参数
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> 提供了将要拖拽的数据、此数据的元数据，以及用于绘制拖拽阴影的回调。
+
+
+        <p>
+            系统首先通过回调应用进行响应，以获取拖拽阴影。然后在设备上显示拖拽阴影。
+
+        </p>
+        <p>
+            接下来，系统将具有操作类型
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code> 的拖拽事件发送到当前布局中所有视图对象的拖拽事件侦听器。
+要继续接收拖拽事件（包括可能的放下事件），拖拽事件侦听器必须返回 <code>true</code>。
+
+            这将在系统中注册该侦听器。只有已注册的侦听器才能继续接收拖拽事件。
+此时，侦听器也可以更改其视图对象的外观，以表明该侦听器可以接受放下事件。
+
+        </p>
+        <p>
+            如果拖拽事件侦听器返回 <code>false</code>，则它将不会接收当前操作的拖拽事件，直至系统发送具有操作类型
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> 的拖拽事件为止。
+通过发送 <code>false</code>，侦听器告知系统，它对拖拽操作不感兴趣，不想接受拖拽的数据。
+
+
+        </p>
+    </dd>
+    <dt>
+        <em>继续</em>
+    </dt>
+    <dd>
+        用户继续拖拽。在拖拽阴影与某个视图对象的边界框相交时，系统将向视图对象的拖拽事件侦听器（如果该侦听器已注册接收事件）发送一个或多个拖拽事件。
+
+侦听器可以选择更改其视图对象的外观以响应该事件。
+例如，如果该事件指示拖拽阴影已进入视图的边界框（操作类型 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code>），则侦听器可通过突出显示其视图来做出反应。
+
+
+
+    </dd>
+    <dt>
+        <em>放下</em>
+    </dt>
+    <dd>
+        用户在可接受数据的视图的边界框内释放拖拽阴影。
+系统向视图对象的侦听器发送具有操作类型
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 的拖拽事件。该拖拽事件包含在启动操作的
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> 调用中传递给系统的数据。
+
+如果成功执行了用于接受放下事件的代码，侦听器预期将向系统返回布尔值 <code>true</code>。
+
+        <p>
+            请注意，仅当用户在其侦听器已注册接收拖拽事件的视图的边界框内放下拖拽阴影时，才会发生这一步。
+如果用户在其他任何情况下释放拖拽阴影，将不会发送任何 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 拖拽事件。
+
+
+        </p>
+    </dd>
+    <dt>
+        <em>结束</em>
+    </dt>
+    <dd>
+        在用户释放拖放阴影并且系统发出（如果有必要）具有操作类型 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 的拖拽事件后，系统将发出具有操作类型 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> 的拖拽事件，指示拖拽操作结束。
+
+
+不论用户在哪里释放拖放阴影都会执行此操作。
+该事件将被发送到已注册接收拖拽事件的每个侦听器（即使该侦听器接收过 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 事件）。
+
+    </dd>
+</dl>
+<p>
+    
+<a href="#DesignDragOperation">设计拖放操作</a>部分对以上四个步骤分别进行了更详尽的说明。
+</p>
+<h3 id="AboutDragListeners">拖拽事件侦听器和回调方法</h3>
+<p>
+    视图使用实现
+<code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=zh-cn">View.OnDragListener</a></code> 的拖拽事件侦听器，或者使用其
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#onDragEvent(android.view.DragEvent)">onDragEvent(DragEvent)</a></code> 回调函数来接收拖拽事件。
+    当系统调用该方法或侦听器时，会向其传递给一个 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn">DragEvent</a></code> 对象。
+
+</p>
+<p>
+    在多数情况下，您可能希望使用侦听器。在设计 UI 时，通常不会将视图类划入子类，但使用回调方法会迫使您这样做，以便重写该方法。
+
+相比之下，您可以实现一个侦听器类，然后将其与多个不同的视图对象配合使用。
+也可以将其实现为匿名内联类。要设置视图对象的侦听器，请调用
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#setOnDragListener(android.view.View.OnDragListener)">setOnDragListener()</a></code>。
+
+</p>
+<p>
+    您可能同时拥有视图对象的侦听器和回调方法。如果出现这种情况，系统会首先调用侦听器。
+除非侦听器返回 <code>false</code>，否则系统不会调用回调方法。
+
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#onDragEvent(android.view.DragEvent)">onDragEvent(DragEvent)</a></code> 方法和
+<code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=zh-cn">View.OnDragListener</a></code> 的组合与用于触摸事件的 <code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#onTouchEvent(android.view.MotionEvent)">onTouchEvent()</a></code> 和
+<code><a href="https://developer.android.com/reference/android/view/View.OnTouchListener.html?hl=zh-cn">View.OnTouchListener</a></code> 组合类似。
+
+</p>
+<h3 id="AboutDragEvent">拖拽事件</h3>
+<p>
+    系统以 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn">DragEvent</a></code> 对象的形式发出拖拽事件。该对象包含的操作类型会告知侦听器拖放过程中所发生的情况。
+
+根据操作类型，该对象还包含其他数据。
+</p>
+<p>
+    要获取操作类型，侦听程序可调用 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getAction()">getAction()</a></code>。可能的值有六个，由 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn">DragEvent</a></code> 类中的常量定义。
+<a href="#table1">表 1</a> 中列出了这些值。
+
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn">DragEvent</a></code> 对象还包含您的应用在
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> 调用中提供给系统的数据。
+
+    其中一些数据仅对特定的操作类型有效。<a href="#table2">表 2</a> 中概括了每种操作类型的有效数据。在<a href="#DesignDragOperation">设计拖放操作</a>部分也详尽描述了该数据及其适用的事件。
+
+
+
+</p>
+<p class="table-caption" id="table1">
+  <strong>表 1.</strong> DragEvent 操作类型
+</p>
+<table>
+    <tr>
+        <th scope="col">getAction() 值</th>
+        <th scope="col">含义</th>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code></td><td>视图对象的拖拽事件侦听器在应用调用
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> 并获得拖拽阴影之后立即收到此事件操作类型。</td>
+
+
+
+
+
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code></td><td>视图对象的拖拽事件侦听器在拖拽阴影刚刚进入视图的边界框时收到此事件操作类型。
+
+
+这是侦听器在拖拽阴影进入边界框时收到的第一个事件操作类型。
+如果侦听器想要继续接收此操作的拖拽事件，必须向系统返回布尔值 <code>true</code>。</td>
+
+
+
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code></td><td>视图对象的拖拽事件侦听器在收到
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> 事件后并且拖拽阴影仍在该视图的边界框内时收到此事件操作类型。</td>
+
+
+
+
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code></td><td>视图对象的拖拽事件侦听器在收到
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> 和至少一个
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code> 事件，并且用户已将拖拽阴影移到该视图的边界框以外后收到此事件操作类型。</td>
+
+
+
+
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code></td><td>视图对象的拖拽事件侦听器在用户将拖拽阴影释放到视图对象上面时收到此事件操作类型。
+
+
+仅当视图对象的侦听器在响应
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code> 拖拽事件时返回了布尔值 <code>true</code>，才会将此操作类型发送至该侦听器。
+如果用户将拖拽阴影释放到未注册侦听器的视图上或用户将拖拽阴影释放到不属于当前布局的任何视图上，则不会发送此操作类型。
+
+
+
+            <p>
+                侦听器如果成功处理了放下操作，预期将返回布尔值 <code>true</code>。
+否则，它应该返回 <code>false</code>。
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code></td><td>视图对象的拖拽事件侦听器在系统结束拖拽操作时收到此事件操作类型。
+
+
+此操作类型不一定在 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 事件之后。
+如果系统发送了 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code>，收到
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> 操作类型并不表示放下操作成功。
+
+侦听器必须调用
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getResult()">getResult()</a></code> 以获得响应 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 时所返回的值。
+如果没有发送
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 事件，则
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getResult()">getResult()</a></code> 将返回 <code>false</code>。</td>
+
+    </tr>
+</table>
+<p class="table-caption" id="table2">
+  <strong>表 2.</strong> 按操作类型列出的有效 DragEvent 数据</p>
+<table>
+    <tr>
+        <th scope="col"><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getAction()">getAction()</a></code> 值</th>
+        <th scope="col"><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getClipDescription()">getClipDescription()</a></code> 值</th>
+        <th scope="col"><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getLocalState()">getLocalState()</a></code> 值</th>
+        <th scope="col"><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getX()">getX()</a></code> 值</th>
+        <th scope="col"><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getY()">getY()</a></code> 值</th>
+        <th scope="col"><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getClipData()">getClipData()</a></code> 值</th>
+        <th scope="col"><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getResult()">getResult()</a></code> 值</th>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">X</td>
+    </tr>
+</table>
+<p>
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getAction()">getAction()</a></code>、<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#describeContents()">describeContents()</a></code>、<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#writeToParcel(android.os.Parcel, int)">writeToParcel()</a></code> 和
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#toString()">toString()</a></code> 方法始终返回有效数据。
+
+
+</p>
+<p>
+    如果某个方法不包含特定操作类型的有效数据，则根据其结果类型，将会返回 <code>null</code> 或 0。
+
+</p>
+<h3 id="AboutDragShadowBuilder">
+    拖拽阴影
+</h3>
+<p>
+    在拖放操作期间，系统会显示用户拖拽的图像。
+    对于数据移动，此图像表示正在拖拽的数据。对于其他操作，此图像表示拖拽操作的某个方面。
+
+</p>
+<p>
+    此图像被称为拖拽阴影。您使用为
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">View.DragShadowBuilder</a></code> 对象声明的方法创建拖拽阴影，然后在使用
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>开始拖拽时将其传递给系统。
+
+    作为系统对
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> 的响应的一部分，系统会调用您在
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">View.DragShadowBuilder</a></code> 中定义的回调方法以获取拖拽阴影。
+
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">View.DragShadowBuilder</a></code> 类有两个构造函数：
+</p>
+    <dl>
+    <dt><code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn#View.DragShadowBuilder(android.view.View)">View.DragShadowBuilder(View)</a></code></dt>
+    <dd>
+        此构造函数可接受应用的任何
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn">View</a></code> 对象。该构造函数在 <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">View.DragShadowBuilder</a></code> 对象中存储视图对象，因此在回调期间，您可以在构造拖拽阴影时访问它。
+
+
+        它不一定必须与用户选择开始拖拽操作的视图（如果有）相关联。
+
+        <p>
+            如果使用此构造函数，则无需扩展
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">View.DragShadowBuilder</a></code> 或重写其方法。默认情况下，您将获得外观与您作为参数传递的视图相同的拖拽阴影，并且中心点位于用户触摸屏幕的位置。
+
+
+        </p>
+    </dd>
+    <dt><code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn#View.DragShadowBuilder()">View.DragShadowBuilder()</a></code></dt>
+    <dd>
+        如果使用此构造函数，则
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">View.DragShadowBuilder</a></code> 对象中没有任何可用的视图对象（该字段被设为 <code>null</code>）。
+        如果使用此构造函数并且没有扩展
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">View.DragShadowBuilder</a></code> 或重写其方法，您将获得不可见的拖拽阴影。
+
+        系统<em>不会</em>给出错误。
+    </dd>
+</dl>
+<p>
+    <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">View.DragShadowBuilder</a></code> 类有两个方法：
+</p>
+<dl>
+    <dt>
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn#onProvideShadowMetrics(android.graphics.Point, android.graphics.Point)">onProvideShadowMetrics()</a></code>
+    </dt>
+    <dd>
+        系统会在您调用
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> 后立即调用此方法。使用此方法将拖拽阴影的尺寸和触摸点发送给系统。
+此方法具有两个参数：
+
+        <dl>
+            <dt><em>dimensions</em></dt>
+            <dd>
+                一个 <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=zh-cn">Point</a></code> 对象。拖拽阴影的宽度存储在
+<code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=zh-cn#x">x</a></code> 中，高度存储在
+<code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=zh-cn#y">y</a></code> 中。
+            </dd>
+            <dt><em>touch_point</em></dt>
+            <dd>
+                一个 <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=zh-cn">Point</a></code> 对象。触摸点是在拖拽操作期间，拖拽阴影内应该处于用户手指下面的位置。
+其 X 位置存储在 <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=zh-cn#x">x</a></code> 中，Y 位置存储在
+<code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=zh-cn#y">y</a></code> 中。
+
+            </dd>
+        </dl>
+    </dd>
+    <dt>
+       <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn#onDrawShadow(android.graphics.Canvas)">onDrawShadow()</a></code>
+    </dt>
+    <dd>
+        在调用
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn#onProvideShadowMetrics(android.graphics.Point, android.graphics.Point)">onProvideShadowMetrics()</a></code> 之后，系统会立即调用
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn#onDrawShadow(android.graphics.Canvas)">onDrawShadow()</a></code> 以获得拖拽阴影本身。
+
+该方法只有一个参数，即系统从您在
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn#onProvideShadowMetrics(android.graphics.Point, android.graphics.Point)">onProvideShadowMetrics()</a></code> 中提供的参数构建的 <code><a href="https://developer.android.com/reference/android/graphics/Canvas.html?hl=zh-cn">Canvas</a></code> 对象
+使用此方法在提供的 <code><a href="https://developer.android.com/reference/android/graphics/Canvas.html?hl=zh-cn">Canvas</a></code> 对象中绘制拖拽阴影。
+
+    </dd>
+</dl>
+<p>
+    为提高性能，应保持较小的拖拽阴影大小。对于单一项，您可能希望使用图标。
+对于多项选择，您可能希望使用堆栈中的图标，而不是在屏幕上展开完整的图像。
+
+</p>
+<h2 id="DesignDragOperation">设计拖放操作</h2>
+<p>
+    本部分展示有关如何开始拖拽、如何在拖拽期间响应事件、如何响应放下事件以及如何结束拖放操作的分步说明。
+
+</p>
+<h3 id="StartDrag">开始拖拽</h3>
+<p>
+    用户使用拖拽手势（通常是长按视图对象）开始拖拽。
+    作为响应，您应该执行以下操作：
+</p>
+<ol>
+     <li>
+        如果有必要，为正在移动的数据创建 <code><a href="https://developer.android.com/reference/android/content/ClipData.html?hl=zh-cn">ClipData</a></code> 和
+<code><a href="https://developer.android.com/reference/android/content/ClipData.Item.html?hl=zh-cn">ClipData.Item</a></code>。作为 ClipData 对象的一部分，提供存储在 ClipData 内的 <code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=zh-cn">ClipDescription</a></code> 对象中的元数据。
+
+对于不提供数据移动的拖放操作，您可能需要使用 <code>null</code> 而不是实际对象。
+
+        <p>
+            例如，以下代码片段显示了如何通过创建包含 ImageView 标记或标签的 ClipData 对象来响应对 ImageView 的长按操作。
+
+此片段之后的下一个片段显示了如何重写
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">View.DragShadowBuilder</a></code> 中的方法：
+        </p>
+<pre>
+// Create a string for the ImageView label
+private static final String IMAGEVIEW_TAG = &quot;icon bitmap&quot;
+
+// Creates a new ImageView
+ImageView imageView = new ImageView(this);
+
+// Sets the bitmap for the ImageView from an icon bit map (defined elsewhere)
+imageView.setImageBitmap(mIconBitmap);
+
+// Sets the tag
+imageView.setTag(IMAGEVIEW_TAG);
+
+    ...
+
+// Sets a long click listener for the ImageView using an anonymous listener object that
+// implements the OnLongClickListener interface
+imageView.setOnLongClickListener(new View.OnLongClickListener() {
+
+    // Defines the one method for the interface, which is called when the View is long-clicked
+    public boolean onLongClick(View v) {
+
+    // Create a new ClipData.
+    // This is done in two steps to provide clarity. The convenience method
+    // ClipData.newPlainText() can create a plain text ClipData in one step.
+
+    // Create a new ClipData.Item from the ImageView object's tag
+    ClipData.Item item = new ClipData.Item(v.getTag());
+
+    // Create a new ClipData using the tag as a label, the plain text MIME type, and
+    // the already-created item. This will create a new ClipDescription object within the
+    // ClipData, and set its MIME type entry to &quot;text/plain&quot;
+    ClipData dragData = new ClipData(v.getTag(),ClipData.MIMETYPE_TEXT_PLAIN,item);
+
+    // Instantiates the drag shadow builder.
+    View.DragShadowBuilder myShadow = new MyDragShadowBuilder(imageView);
+
+    // Starts the drag
+
+            v.startDrag(dragData,  // the data to be dragged
+                        myShadow,  // the drag shadow builder
+                        null,      // no need to use local data
+                        0          // flags (not currently used, set to 0)
+            );
+
+    }
+}
+</pre>
+    </li>
+    <li>
+        以下代码片段定义了 <code>myDragShadowBuilder</code>
+它会创建灰色小方框形式的拖拽阴影用于拖拽 TextView：
+<pre>
+    private static class MyDragShadowBuilder extends View.DragShadowBuilder {
+
+    // The drag shadow image, defined as a drawable thing
+    private static Drawable shadow;
+
+        // Defines the constructor for myDragShadowBuilder
+        public MyDragShadowBuilder(View v) {
+
+            // Stores the View parameter passed to myDragShadowBuilder.
+            super(v);
+
+            // Creates a draggable image that will fill the Canvas provided by the system.
+            shadow = new ColorDrawable(Color.LTGRAY);
+        }
+
+        // Defines a callback that sends the drag shadow dimensions and touch point back to the
+        // system.
+        &#64;Override
+        public void onProvideShadowMetrics (Point size, Point touch) {
+            // Defines local variables
+            private int width, height;
+
+            // Sets the width of the shadow to half the width of the original View
+            width = getView().getWidth() / 2;
+
+            // Sets the height of the shadow to half the height of the original View
+            height = getView().getHeight() / 2;
+
+            // The drag shadow is a ColorDrawable. This sets its dimensions to be the same as the
+            // Canvas that the system will provide. As a result, the drag shadow will fill the
+            // Canvas.
+            shadow.setBounds(0, 0, width, height);
+
+            // Sets the size parameter's width and height values. These get back to the system
+            // through the size parameter.
+            size.set(width, height);
+
+            // Sets the touch point's position to be in the middle of the drag shadow
+            touch.set(width / 2, height / 2);
+        }
+
+        // Defines a callback that draws the drag shadow in a Canvas that the system constructs
+        // from the dimensions passed in onProvideShadowMetrics().
+        &#64;Override
+        public void onDrawShadow(Canvas canvas) {
+
+            // Draws the ColorDrawable in the Canvas passed in from the system.
+            shadow.draw(canvas);
+        }
+    }
+</pre>
+        <p class="note">
+            <strong>注：</strong>请记住，您无需扩展
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn">View.DragShadowBuilder</a></code>。构造函数
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=zh-cn#View.DragShadowBuilder(android.view.View)">View.DragShadowBuilder(View)</a></code> 以拖拽阴影的中心为触摸点，创建与传递给它的视图参数大小相同的默认拖拽阴影。
+
+
+        </p>
+    </li>
+</ol>
+<h3 id="HandleStart">响应拖拽开始</h3>
+<p>
+    在拖拽操作期间，系统会将拖拽事件分发到当前布局中的视图对象的拖拽事件侦听器。
+侦听器应通过调用 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getAction()">getAction()</a></code> 做出反应，以获取操作类型。
+
+    拖拽开始时，此方法将返回 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code>。
+</p>
+<p>
+    在响应具有操作类型 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code> 的事件时，侦听器应执行以下操作：
+
+</p>
+<ol>
+    <li>
+        调用 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getClipDescription()">getClipDescription()</a></code> 以获取
+<code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=zh-cn">ClipDescription</a></code>。使用
+<code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=zh-cn">ClipDescription</a></code> 中 MIME 类型的方法查看侦听器能否接受正在拖拽的数据。
+
+        <p>
+            如果拖放操作不表示数据移动，这可能不是必要的。
+
+        </p>
+    </li>
+    <li>
+        如果侦听器可接受放下操作，则应返回 <code>true</code>。这将告知系统继续向侦听器发送拖拽事件。
+
+        如果它不能接受放下操作，则应返回 <code>false</code>，系统将停止发送拖拽事件，直至其发出
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>。
+
+    </li>
+</ol>
+<p>
+    请注意，对于 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code> 事件，以下这些 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn">DragEvent</a></code> 方法全部无效：
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getClipData()">getClipData()</a></code>、<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getX()">getX()</a></code>、<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getY()">getY()</a></code> 和 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getResult()">getResult()</a></code>。
+
+
+</p>
+<h3 id="HandleDuring">在拖拽过程中处理事件</h3>
+<p>
+    在拖拽期间，返回 <code>true</code> 以响应 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code> 拖拽事件的侦听器会继续接收拖拽事件。
+
+侦听器在拖拽期间接收的拖拽事件类型取决于拖拽阴影的位置和侦听器视图的可见性。
+
+</p>
+<p>
+    在拖拽期间，侦听器主要使用拖拽事件来确定其是否应更改其视图的外观。
+
+</p>
+<p>
+    在拖拽期间，<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getAction()">getAction()</a></code> 将返回以下三个值中的一个：
+
+</p>
+<ul>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code>：
+        侦听器在触摸点（用户手指下面的屏幕点）进入侦听器视图的边界框时收到此事件。
+
+
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code>：在侦听器收到
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> 事件之后以及收到 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code> 事件之前，它会在触摸点每次移动时收到新的
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code> 事件。
+
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getX()">getX()</a></code> 和 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getY()">getY()</a></code> 方法会返回触摸点的 X 和 Y 坐标。
+
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code>：此事件在拖拽阴影不再在侦听器视图的边界框内之后，被发送到之前收到 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> 的侦听器。
+
+
+    </li>
+</ul>
+<p>
+    该侦听器不需要对以上任何操作类型做出反应。如果侦听器向系统返回值，该值将被忽略。
+以下是响应上述各个操作类型时的一些准则：
+
+</p>
+<ul>
+    <li>
+        在响应 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> 或
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code> 时，侦听器可以更改视图的外观，以指示它将要接收放下操作。
+
+    </li>
+    <li>
+        具有操作类型 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code> 的事件包含对应于触摸点位置的 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getX()">getX()</a></code> 和
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getY()">getY()</a></code> 的有效数据。
+
+        侦听器可能希望使用此信息来更改位于触摸点的视图部分外观。
+侦听器也可以使用此信息来确定用户计划将拖拽阴影拖到的确切位置。
+
+    </li>
+    <li>
+        在响应 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code> 时，侦听器应重置其在响应
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> 或
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code> 时所应用的任何外观更改。
+这向用户指明，该视图不再是迫在眉睫的放下目标。
+
+    </li>
+</ul>
+<h3 id="HandleDrop">响应放下</h3>
+<p>
+    当用户将拖拽阴影释放到应用中的某个视图上并且该视图之前已报告它能接受所拖拽的内容时，系统会向该视图分发具有操作类型 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 的拖拽事件。
+
+侦听器应执行以下操作：
+
+</p>
+<ol>
+    <li>
+        调用 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getClipData()">getClipData()</a></code> 以获取最初在
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=zh-cn#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> 调用中提供的
+<code><a href="https://developer.android.com/reference/android/content/ClipData.html?hl=zh-cn">ClipData</a></code> 对象并存储该对象。
+
+如果拖放操作不表示数据移动，这可能不是必要的。
+
+    </li>
+    <li>
+        返回布尔值 <code>true</code> 指示已成功处理放下操作，或者，如果处理失败，则返回布尔值 <code>false</code>。
+返回的值将成为
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getResult()">getResult()</a></code> 针对 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> 事件返回的值。
+
+        <p>
+            请注意，如果系统没有发出 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 事件，则
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> 事件的 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getResult()">getResult()</a></code> 值为 <code>false</code>。
+
+        </p>
+    </li>
+</ol>
+<p>
+    对于 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 事件，<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getX()">getX()</a></code> 和 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getY()">getY()</a></code> 将使用收到放下操作的视图的坐标系，返回拖拽点在放下时刻的 X 和 Y 位置。
+
+
+
+</p>
+<p>
+    系统允许用户将拖拽阴影释放到侦听器未接收拖拽事件的视图上。
+它也允许用户在空的应用 UI 区域或在应用以外的区域释放拖拽阴影。
+
+    上述所有情况下，系统都不会发送具有操作类型
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 的事件，不过它会发出
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> 事件。
+</p>
+<h3 id="HandleEnd">响应拖拽结束</h3>
+<p>
+    系统会在用户释放拖放阴影后，立即向应用中的所有拖拽事件侦听器发送具有操作类型
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> 的拖拽事件。
+此事件指示拖拽操作结束。
+
+</p>
+<p>
+    每个侦听器应执行以下操作：
+</p>
+<ol>
+    <li>
+        如果侦听器在操作期间更改了其视图对象的外观，则应该将视图重置为其默认外观。
+这是通知用户操作结束的视觉指示。
+
+    </li>
+    <li>
+        侦听器可以选择调用 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getResult()">getResult()</a></code> 以了解关于该操作的更多信息。
+如果侦听器在响应 <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 操作类型的事件时返回了 <code>true</code>，则
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getResult()">getResult()</a></code> 将返回布尔值 <code>true</code>。
+在其他所有情况下，<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#getResult()">getResult()</a></code> 均返回布尔值 <code>false</code>，包括系统未发出
+<code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=zh-cn#ACTION_DROP">ACTION_DROP</a></code> 事件的任何情况。
+
+
+    </li>
+    <li>
+        侦听器应该向系统返回布尔值 <code>true</code>。
+    </li>
+</ol>
+<p>
+</p>
+<h3 id="RespondEventSample">响应拖拽事件：示例</h3>
+<p>
+    所有拖拽事件最初都由拖拽事件方法或侦听器接收。以下代码片段是在侦听器中对拖拽事件做出反应的简单示例：
+
+</p>
+<pre>
+// Creates a new drag event listener
+mDragListen = new myDragEventListener();
+
+View imageView = new ImageView(this);
+
+// Sets the drag event listener for the View
+imageView.setOnDragListener(mDragListen);
+
+...
+
+protected class myDragEventListener implements View.OnDragListener {
+
+    // This is the method that the system calls when it dispatches a drag event to the
+    // listener.
+    public boolean onDrag(View v, DragEvent event) {
+
+        // Defines a variable to store the action type for the incoming event
+        final int action = event.getAction();
+
+        // Handles each of the expected events
+        switch(action) {
+
+            case DragEvent.ACTION_DRAG_STARTED:
+
+                // Determines if this View can accept the dragged data
+                if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+
+                    // As an example of what your application might do,
+                    // applies a blue color tint to the View to indicate that it can accept
+                    // data.
+                    v.setColorFilter(Color.BLUE);
+
+                    // Invalidate the view to force a redraw in the new tint
+                    v.invalidate();
+
+                    // returns true to indicate that the View can accept the dragged data.
+                    return true;
+
+                }
+
+                // Returns false. During the current drag and drop operation, this View will
+                // not receive events again until ACTION_DRAG_ENDED is sent.
+                return false;
+
+            case DragEvent.ACTION_DRAG_ENTERED:
+
+                // Applies a green tint to the View. Return true; the return value is ignored.
+
+                v.setColorFilter(Color.GREEN);
+
+                // Invalidate the view to force a redraw in the new tint
+                v.invalidate();
+
+                return true;
+
+            case DragEvent.ACTION_DRAG_LOCATION:
+
+                // Ignore the event
+                return true;
+
+            case DragEvent.ACTION_DRAG_EXITED:
+
+                // Re-sets the color tint to blue. Returns true; the return value is ignored.
+                v.setColorFilter(Color.BLUE);
+
+                // Invalidate the view to force a redraw in the new tint
+                v.invalidate();
+
+                return true;
+
+            case DragEvent.ACTION_DROP:
+
+                // Gets the item containing the dragged data
+                ClipData.Item item = event.getClipData().getItemAt(0);
+
+                // Gets the text data from the item.
+                dragData = item.getText();
+
+                // Displays a message containing the dragged data.
+                Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_LONG);
+
+                // Turns off any color tints
+                v.clearColorFilter();
+
+                // Invalidates the view to force a redraw
+                v.invalidate();
+
+                // Returns true. DragEvent.getResult() will return true.
+                return true;
+
+            case DragEvent.ACTION_DRAG_ENDED:
+
+                // Turns off any color tinting
+                v.clearColorFilter();
+
+                // Invalidates the view to force a redraw
+                v.invalidate();
+
+                // Does a getResult(), and displays what happened.
+                if (event.getResult()) {
+                    Toast.makeText(this, "The drop was handled.", Toast.LENGTH_LONG);
+
+                } else {
+                    Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_LONG);
+
+                }
+
+                // returns true; the value is ignored.
+                return true;
+
+            // An unknown action type was received.
+            default:
+                Log.e("DragDrop Example","Unknown action type received by OnDragListener.");
+                break;
+        }
+
+        return false;
+    }
+};
+</pre>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=zh-cn" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="博客" target="_blank">博客</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=zh-cn" title="支持">支持</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=zh-cn" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=zh-cn" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=zh-cn" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=zh-cn" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="0U14OShxYFGsNPdzbg_IPEH5dcJmmYilHHi_JatMfMo6MTQ5NzUxNzA0MDMxMTIwMA" />
+      <input type="hidden" name="next" value="drag-drop.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+             selected="selected" >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Email 地址</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en414d.js?hl=zh-cn?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=zh-cn"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_zh-cn.js?hl=zh-cn?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/ui/drag-drop.html?hl=zh-cn by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:15:09 GMT -->
+</html>

@@ -1,0 +1,1598 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="id">
+
+<!-- Mirrored from developer.android.com/guide/practices/optimizing-for-3.0.html?hl=id by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:19:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="UruypioV4hRew3L-yhesNWfWp4_dWrDZbsVZAFCZV1k6MTQ5NzUxNzg3NDMwMzQ4MA" />
+
+  
+    <link rel="canonical" href="optimizing-for-3.0.html">
+  
+
+  
+    <link rel="alternate" href="optimizing-for-3.0.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/practices/optimizing-for-3.0.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="optimizing-for-3.0.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../_static/f304fc21fa/images/android/favicon0cf2.png?hl=id">
+
+<link rel="apple-touch-icon" href="../../_static/f304fc21fa/images/android/touchicon-1800cf2.png?hl=id">
+
+
+<title>
+
+  Optimizing Apps for Android 3.0 | Android Developers
+
+</title>
+
+  <meta name="description" content="This document has been deprecated. To learn about how you can optimize your app for both tablets and handsets, please read the guide to Supporting Tablets and Handsets . Android 3.0 introduces several features that allow you to enhance your user&amp;#39;s…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../static/css/default2fcb.css?hl=id?v=2017061509" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../_static/f304fc21fa/js/android_3p-bundle0cf2.js?hl=id" type="text/javascript"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_closure_android__id0cf2.js?hl=id"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_android0cf2.js?hl=id"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../static/js/docs2fcb.js?hl=id?v=2017061509" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;id&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;id&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "id", "served": "en"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=id">
+          <img class="dac-header-logo-image" src="../../static/images/android_logo0cf2.png?hl=id"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=id"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=id"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=id"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=id"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=id" width="18" height="19" alt="Konsol Google Play">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Telusuri">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Kembali</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../index0cf2.html?hl=id" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../components/fundamentals0cf2.html?hl=id" >App Fundamentals</a></li><li><a href="compatibility0cf2.html?hl=id" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/permissions/index0cf2.html?hl=id" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/permissions/requesting0cf2.html?hl=id" >Requesting Permissions</a></li><li><a href="../topics/permissions/defining0cf2.html?hl=id" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../platform/index0cf2.html?hl=id" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../platform/j8-jack0cf2.html?hl=id"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="verifying-apps-art0cf2.html?hl=id" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../components/index0cf2.html?hl=id" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../components/intents-filters0cf2.html?hl=id" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../components/intents-common0cf2.html?hl=id" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../components/activities/index0cf2.html?hl=id" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../components/activities/intro-activities0cf2.html?hl=id" >Introduction to Activities</a></li><li><a href="../components/activities/activity-lifecycle0cf2.html?hl=id" >The Activity Lifecycle</a></li><li><a href="../components/activities/state-changes0cf2.html?hl=id" >Activity State Changes</a></li><li><a href="../components/activities/tasks-and-back-stack0cf2.html?hl=id" >Tasks and Back Stack</a></li><li><a href="../components/activities/process-lifecycle0cf2.html?hl=id" >Processes and Application Lifecycle</a></li><li><a href="../components/activities/parcelables-and-bundles0cf2.html?hl=id" >Parcelables and Bundles</a></li><li><a href="../components/activities/recents0cf2.html?hl=id" >Recents Screen</a></li></ul></li><li><a href="../components/fragments0cf2.html?hl=id" >Fragments</a></li><li><a href="../components/loaders0cf2.html?hl=id" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../components/services0cf2.html?hl=id" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../components/bound-services0cf2.html?hl=id" >Bound Services</a></li><li><a href="../components/aidl0cf2.html?hl=id" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/providers/content-providers0cf2.html?hl=id" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/providers/content-provider-basics0cf2.html?hl=id" >Content Provider Basics</a></li><li><a href="../topics/providers/content-provider-creating0cf2.html?hl=id" >Creating a Content Provider</a></li><li><a href="../topics/providers/calendar-provider0cf2.html?hl=id" >Calendar Provider</a></li><li><a href="../topics/providers/contacts-provider0cf2.html?hl=id" >Contacts Provider</a></li><li><a href="../topics/providers/document-provider0cf2.html?hl=id" >Open files using Storage Access Framework</a></li><li><a href="../topics/providers/create-document-provider0cf2.html?hl=id" >Create a Custom Document Provider</a></li></ul></li><li><a href="../components/broadcasts0cf2.html?hl=id" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/appwidgets/index0cf2.html?hl=id" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/appwidgets/host0cf2.html?hl=id" >App Widget Host</a></li></ul></li><li><a href="../components/processes-and-threads0cf2.html?hl=id" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/index0cf2.html?hl=id" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/overview0cf2.html?hl=id" >Overview</a></li><li><a href="../topics/resources/providing-resources0cf2.html?hl=id" >Providing Resources</a></li><li><a href="../topics/resources/accessing-resources0cf2.html?hl=id" >Accessing Resources</a></li><li><a href="../topics/resources/runtime-changes0cf2.html?hl=id" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/localization0cf2.html?hl=id" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/icu4j-framework0cf2.html?hl=id" >ICU4J Android Framework APIs</a></li><li><a href="../topics/resources/multilingual-support0cf2.html?hl=id" >Language and Locale</a></li></ul></li><li><a href="../topics/resources/complex-xml-resources0cf2.html?hl=id" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/available-resources0cf2.html?hl=id" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/animation-resource0cf2.html?hl=id" >Animation</a></li><li><a href="../topics/resources/color-list-resource0cf2.html?hl=id" >Color State List</a></li><li><a href="../topics/resources/drawable-resource0cf2.html?hl=id" >Drawable</a></li><li><a href="../topics/resources/layout-resource0cf2.html?hl=id" >Layout</a></li><li><a href="../topics/resources/menu-resource0cf2.html?hl=id" >Menu</a></li><li><a href="../topics/resources/string-resource0cf2.html?hl=id" >String</a></li><li><a href="../topics/resources/style-resource0cf2.html?hl=id" >Style</a></li><li><a href="../topics/resources/more-resources0cf2.html?hl=id" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/manifest/manifest-intro0cf2.html?hl=id" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/manifest/action-element0cf2.html?hl=id" >&lt;action&gt;</a></li><li><a href="../topics/manifest/activity-element0cf2.html?hl=id" >&lt;activity&gt;</a></li><li><a href="../topics/manifest/activity-alias-element0cf2.html?hl=id" >&lt;activity-alias&gt;</a></li><li><a href="../topics/manifest/application-element0cf2.html?hl=id" >&lt;application&gt;</a></li><li><a href="../topics/manifest/category-element0cf2.html?hl=id" >&lt;category&gt;</a></li><li><a href="../topics/manifest/compatible-screens-element0cf2.html?hl=id" >&lt;compatible-screens&gt;</a></li><li><a href="../topics/manifest/data-element0cf2.html?hl=id" >&lt;data&gt;</a></li><li><a href="../topics/manifest/grant-uri-permission-element0cf2.html?hl=id" >&lt;grant-uri-permission&gt;</a></li><li><a href="../topics/manifest/instrumentation-element0cf2.html?hl=id" >&lt;instrumentation&gt;</a></li><li><a href="../topics/manifest/intent-filter-element0cf2.html?hl=id" >&lt;intent-filter&gt;</a></li><li><a href="../topics/manifest/manifest-element0cf2.html?hl=id" >&lt;manifest&gt;</a></li><li><a href="../topics/manifest/meta-data-element0cf2.html?hl=id" >&lt;meta-data&gt;</a></li><li><a href="../topics/manifest/path-permission-element0cf2.html?hl=id" >&lt;path-permission&gt;</a></li><li><a href="../topics/manifest/permission-element0cf2.html?hl=id" >&lt;permission&gt;</a></li><li><a href="../topics/manifest/permission-group-element0cf2.html?hl=id" >&lt;permission-group&gt;</a></li><li><a href="../topics/manifest/permission-tree-element0cf2.html?hl=id" >&lt;permission-tree&gt;</a></li><li><a href="../topics/manifest/provider-element0cf2.html?hl=id" >&lt;provider&gt;</a></li><li><a href="../topics/manifest/receiver-element0cf2.html?hl=id" >&lt;receiver&gt;</a></li><li><a href="../topics/manifest/service-element0cf2.html?hl=id" >&lt;service&gt;</a></li><li><a href="../topics/manifest/supports-gl-texture-element0cf2.html?hl=id" >&lt;supports-gl-texture&gt;</a></li><li><a href="../topics/manifest/supports-screens-element0cf2.html?hl=id" >&lt;supports-screens&gt;</a></li><li><a href="../topics/manifest/uses-configuration-element0cf2.html?hl=id" >&lt;uses-configuration&gt;</a></li><li><a href="../topics/manifest/uses-feature-element0cf2.html?hl=id" >&lt;uses-feature&gt;</a></li><li><a href="../topics/manifest/uses-library-element0cf2.html?hl=id" >&lt;uses-library&gt;</a></li><li><a href="../topics/manifest/uses-permission-element0cf2.html?hl=id" >&lt;uses-permission&gt;</a></li><li><a href="../topics/manifest/uses-permission-sdk-23-element0cf2.html?hl=id" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../topics/manifest/uses-sdk-element0cf2.html?hl=id" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/index0cf2.html?hl=id" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/overview0cf2.html?hl=id" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/declaring-layout0cf2.html?hl=id" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/layout/linear0cf2.html?hl=id" >Linear Layout</a></li><li><a href="../topics/ui/layout/relative0cf2.html?hl=id" >Relative Layout</a></li><li><a href="../topics/ui/layout/recyclerview0cf2.html?hl=id" >Recycler View</a></li><li><a href="../topics/ui/layout/listview0cf2.html?hl=id" >List View</a></li><li><a href="../topics/ui/layout/gridview0cf2.html?hl=id" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/controls0cf2.html?hl=id" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/controls/button0cf2.html?hl=id" >Buttons</a></li><li><a href="../topics/ui/controls/checkbox0cf2.html?hl=id" >Checkboxes</a></li><li><a href="../topics/ui/controls/radiobutton0cf2.html?hl=id" >Radio Buttons</a></li><li><a href="../topics/ui/controls/togglebutton0cf2.html?hl=id" >Toggle Buttons</a></li><li><a href="../topics/ui/controls/spinner0cf2.html?hl=id" >Spinners</a></li><li><a href="../topics/ui/controls/pickers0cf2.html?hl=id" >Pickers</a></li></ul></li><li><a href="../topics/ui/ui-events0cf2.html?hl=id" >Input Events</a></li><li><a href="../topics/ui/menus0cf2.html?hl=id" >Menus</a></li><li><a href="../topics/ui/settings0cf2.html?hl=id" >Settings</a></li><li><a href="../topics/ui/dialogs0cf2.html?hl=id" >Dialogs</a></li><li><a href="../topics/ui/notifiers/notifications0cf2.html?hl=id" >Notifications</a></li><li><a href="../topics/ui/notifiers/toasts0cf2.html?hl=id" >Toasts</a></li><li><a href="../topics/ui/shortcuts0cf2.html?hl=id" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/search/index0cf2.html?hl=id" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/search/search-dialog0cf2.html?hl=id" >Creating a Search Interface</a></li><li><a href="../topics/search/adding-recent-query-suggestions0cf2.html?hl=id" >Adding Recent Query Suggestions</a></li><li><a href="../topics/search/adding-custom-suggestions0cf2.html?hl=id" >Adding Custom Suggestions</a></li><li><a href="../topics/search/searchable-config0cf2.html?hl=id" >Searchable Configuration</a></li></ul></li><li><a href="../topics/ui/multi-window0cf2.html?hl=id" >Multi-Window Support</a></li><li><a href="../topics/ui/drag-drop0cf2.html?hl=id" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/accessibility/index0cf2.html?hl=id" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/accessibility/apps0cf2.html?hl=id" >Making Apps More Accessible</a></li><li><a href="../topics/ui/accessibility/checklist0cf2.html?hl=id" >Accessibility Developer Checklist</a></li><li><a href="../topics/ui/accessibility/node-tree-debugging0cf2.html?hl=id" >Using Node Tree Debugging</a></li><li><a href="../topics/ui/accessibility/services0cf2.html?hl=id" >Building Accessibility Services</a></li><li><a href="../topics/ui/accessibility/custom-views0cf2.html?hl=id" >Building Accessible Custom Views</a></li></ul></li><li><a href="../topics/ui/themes0cf2.html?hl=id" >Styles and Themes</a></li><li><a href="../topics/ui/custom-components0cf2.html?hl=id" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/index0cf2.html?hl=id" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/overview0cf2.html?hl=id" >Overview</a></li><li><a href="../topics/graphics/prop-animation0cf2.html?hl=id" >Property Animation</a></li><li><a href="../topics/graphics/view-animation0cf2.html?hl=id" >View Animation</a></li><li><a href="../topics/graphics/drawable-animation0cf2.html?hl=id" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/2d-graphics0cf2.html?hl=id" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/vector-drawable-resources0cf2.html?hl=id" >Vector Drawable</a></li></ul></li><li><a href="../topics/graphics/opengl0cf2.html?hl=id" >OpenGL ES</a></li><li><a href="../topics/graphics/hardware-accel0cf2.html?hl=id" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/index0cf2.html?hl=id" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/compute0cf2.html?hl=id" >RenderScript</a></li><li><a href="../topics/renderscript/advanced0cf2.html?hl=id" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/reference/overview0cf2.html?hl=id" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/reference/rs_value_types0cf2.html?hl=id" >Numerical Types</a></li><li><a href="../topics/renderscript/reference/rs_object_types0cf2.html?hl=id" >Object Types</a></li><li><a href="../topics/renderscript/reference/rs_convert0cf2.html?hl=id" >Conversion Functions</a></li><li><a href="../topics/renderscript/reference/rs_math0cf2.html?hl=id" >Mathematical Constants and Functions</a></li><li><a href="../topics/renderscript/reference/rs_vector_math0cf2.html?hl=id" >Vector Math Functions</a></li><li><a href="../topics/renderscript/reference/rs_matrix0cf2.html?hl=id" >Matrix Functions</a></li><li><a href="../topics/renderscript/reference/rs_quaternion0cf2.html?hl=id" >Quaternion Functions</a></li><li><a href="../topics/renderscript/reference/rs_atomic0cf2.html?hl=id" >Atomic Update Functions</a></li><li><a href="../topics/renderscript/reference/rs_time0cf2.html?hl=id" >Time Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_allocation_data0cf2.html?hl=id" >Allocation Data Access Functions</a></li><li><a href="../topics/renderscript/reference/rs_object_info0cf2.html?hl=id" >Object Characteristics Functions</a></li><li><a href="../topics/renderscript/reference/rs_for_each0cf2.html?hl=id" >Kernel Invocation Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_io0cf2.html?hl=id" >Input/Output Functions</a></li><li><a href="../topics/renderscript/reference/rs_debug0cf2.html?hl=id" >Debugging Functions</a></li><li><a href="../topics/renderscript/reference/rs_graphics0cf2.html?hl=id" >Graphics Functions and Types</a></li><li><a href="../topics/renderscript/reference/index0cf2.html?hl=id" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/index0cf2.html?hl=id" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/media-apps-overview0cf2.html?hl=id" >Media Apps Overview</a></li><li><a href="../topics/media-apps/working-with-a-media-session0cf2.html?hl=id" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/audio-app/building-an-audio-app0cf2.html?hl=id" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/audio-app/building-a-mediabrowserservice0cf2.html?hl=id" >Building a Media Browser Service</a></li><li><a href="../topics/media-apps/audio-app/building-a-mediabrowser-client0cf2.html?hl=id" >Building a Media Browser Client</a></li><li><a href="../topics/media-apps/audio-app/mediasession-callbacks0cf2.html?hl=id" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/video-app/building-a-video-app0cf2.html?hl=id" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/video-app/building-a-video-player-activity0cf2.html?hl=id" >Building a Video Player Activity</a></li><li><a href="../topics/media-apps/video-app/mediasession-callbacks0cf2.html?hl=id" >Media Session Callbacks</a></li></ul></li><li><a href="../topics/media-apps/mediabuttons0cf2.html?hl=id" >Responding to Media Buttons</a></li><li><a href="../topics/media-apps/volume-and-earphones0cf2.html?hl=id" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/index0cf2.html?hl=id" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/media-formats0cf2.html?hl=id" >Supported Media Formats</a></li><li><a href="../topics/media/mediaplayer0cf2.html?hl=id" >MediaPlayer</a></li><li><a href="../topics/media/mediarecorder0cf2.html?hl=id" >MediaRecorder</a></li><li><a href="../topics/media/exoplayer0cf2.html?hl=id" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/media-routing0cf2.html?hl=id" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/mediarouter0cf2.html?hl=id" >MediaRouter API</a></li><li><a href="../topics/media/mediarouteprovider0cf2.html?hl=id" >MediaRouteProvider API</a></li></ul></li><li><a href="../topics/media/camera0cf2.html?hl=id" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/sensors/index0cf2.html?hl=id" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/location/index0cf2.html?hl=id" >Location and Maps</a></li><li><a href="../topics/location/strategies0cf2.html?hl=id" >Location Strategies</a></li><li><a href="../topics/sensors/sensors_overview0cf2.html?hl=id" >Sensors Overview</a></li><li><a href="../topics/sensors/sensors_motion0cf2.html?hl=id" >Motion Sensors</a></li><li><a href="../topics/sensors/sensors_position0cf2.html?hl=id" >Position Sensors</a></li><li><a href="../topics/sensors/sensors_environment0cf2.html?hl=id" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/index0cf2.html?hl=id" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/bluetooth0cf2.html?hl=id" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/bluetooth-le0cf2.html?hl=id" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/nfc/index0cf2.html?hl=id" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/nfc/nfc0cf2.html?hl=id" >NFC Basics</a></li><li><a href="../topics/connectivity/nfc/advanced-nfc0cf2.html?hl=id" >Advanced NFC</a></li><li><a href="../topics/connectivity/nfc/hce0cf2.html?hl=id" >Host-based Card Emulation</a></li></ul></li><li><a href="../topics/connectivity/wifip2p0cf2.html?hl=id" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/usb/index0cf2.html?hl=id" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/usb/accessory0cf2.html?hl=id" >Accessory</a></li><li><a href="../topics/connectivity/usb/host0cf2.html?hl=id" >Host</a></li></ul></li><li><a href="../topics/connectivity/sip0cf2.html?hl=id" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/index0cf2.html?hl=id" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/copy-paste0cf2.html?hl=id" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/creating-input-method0cf2.html?hl=id" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/image-keyboard0cf2.html?hl=id" >Image Keyboard</a></li></ul></li><li><a href="../topics/text/spell-checker-framework0cf2.html?hl=id" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/index0cf2.html?hl=id" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/data-storage0cf2.html?hl=id" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/backup0cf2.html?hl=id" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/autobackup0cf2.html?hl=id" >Auto Backup</a></li><li><a href="../topics/data/keyvaluebackup0cf2.html?hl=id" >Key/Value Backup</a></li><li><a href="../topics/data/testingbackup0cf2.html?hl=id" >Testing Backup and Restore</a></li></ul></li><li><a href="../topics/data/install-location0cf2.html?hl=id" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/admin/index0cf2.html?hl=id" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/admin/device-admin0cf2.html?hl=id" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../webapps/index0cf2.html?hl=id" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../webapps/targeting0cf2.html?hl=id" >Supporting Different Screens in Web Apps</a></li><li><a href="../webapps/webview0cf2.html?hl=id" >Building Web Apps in WebView</a></li><li><a href="../webapps/migrating0cf2.html?hl=id" >Migrating to WebView in Android 4.4</a></li><li><a href="../webapps/debugging0cf2.html?hl=id" >Debugging Web Apps</a></li><li><a href="../webapps/best-practices0cf2.html?hl=id" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index0cf2.html?hl=id"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="screens_support0cf2.html?hl=id" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="screens-distribution0cf2.html?hl=id" >Distributing to Specific Screens</a></li><li><a href="screen-compat-mode0cf2.html?hl=id" >Screen Compatibility Mode</a></li></ul></li><li><a href="app-design/seamlessness0cf2.html?hl=id" >Designing for Seamlessness</a></li><li><a href="tablets-and-handsets0cf2.html?hl=id" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=id">Beranda</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=id">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=id">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=id">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=id">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=id">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=id"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=id"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=id"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Pelatihan</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../index0cf2.html?hl=id"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=id"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Referensi</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=id">Sampel</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=id"
+           >Pustaka</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=id"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=id"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=id">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=id">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=id">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=id"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=id">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=id">Konsol Google Play</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=id"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=id"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=id">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=id">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Optimizing Apps for Android 3.0</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="deprecatedSticker">
+  <a href="#"
+     onclick="$('#naMessage').show();$('#deprecatedSticker').hide();return false">
+    <strong>This doc is deprecated</strong></a>
+</div>
+
+
+<div id="naMessage" style="display:block">
+<div><p><strong>This document has been deprecated.</strong></p>
+ <p>To learn about how you can  optimize your app for both tablets and handsets, please
+read the guide to <a href="tablets-and-handsets0cf2.html?hl=id">Supporting Tablets and
+Handsets</a>.</p>
+
+ <input style="margin-top:1em;padding:5px" type="button"
+        value="That's nice, but I still want to read this document"
+onclick="$('#naMessage').hide();$('#deprecatedSticker').show()" />
+</div>
+</div>
+
+
+
+
+
+
+<div id="qv-wrapper">
+<div id="qv">
+<h2>In this document</h2>
+<ol>
+<li><a href="#Setup">Setting Up Your SDK with Android 3.0</a></li>
+<li><a href="#Optimizing">Optimizing Your App for Tablets</a></li>
+<li><a href="#Upgrading">Upgrading or Developing a New App for Tablets</a></li>
+<li><a href="#ManagingAppDist">Managing App Distribution Based on Screen Configuration</a>
+  <ol>
+    <li><a href="#FilteringTabletApps">Filtering a tablet app from mobile devices</a></li>
+    <li><a href="#FilteringMobileApps">Filtering a mobile device app from tablets</a></li>
+  </ol>
+</li>
+<li><a href="#Issues">Other Issues</a>
+  <ol>
+    <li><a href="#Landscape">Adding support for landscape screens</a></li>
+    <li><a href="#Telephony">Using telephony or other variable features</a></li>
+  </ol>
+</li>
+</ol>
+
+<h2>See also</h2>
+
+<ol>
+  <li><a href="tablets-and-handsets0cf2.html?hl=id">Supporting Tablets
+and Handsets</a></li>
+  <li><a
+href="https://developer.android.com/tools/support-library/index.html?hl=id">Compatibility Library</a></li>
+  <li><a href="http://code.google.com/p/iosched/?hl=id">Google I/O App source code</a></li>
+</ol>
+
+</div>
+</div>
+
+<p>Android 3.0 introduces several features that allow
+you to enhance your user's experience on tablets and similar devices. Any application you've already
+published is compatible with devices running Android 3.0, by default, because Android applications
+are forward-compatible. However, new tablet devices running Android 3.0 are now available to the
+public and provide users a new Android experience on a larger screen, so you should make sure
+your application looks and works great on the new platform and new device form-factors.</p>
+
+<p>This document shows how you can optimize your existing application for Android 3.0 and
+maintain compatibility with older versions or upgrade your application completely with new APIs.</p>
+
+
+<p><b>To get started:</b></p>
+
+<ol>
+  <li><a href="#Setup">Set up your SDK with Android 3.0</a>.
+    <p>Install the Android 3.0 platform, new tools, and set up a new AVD.</p></li>
+  <li>Choose to either optimize or upgrade:
+    <ol type="a">
+      <li><a href="#Optimizing">Optimize your app for tablets and similar devices</a>.
+        <p>Read this section if you have an existing application and want to
+maintain compatibility with older versions of Android. All you need to do is update your
+manifest file to declare support for Android 3.0, test your application on the new platform, and
+add extra resources to support extra large screens, as appropriate.</p>
+      </li>
+      <li><a href="#Upgrading">Upgrade or develop a new app for tablets and similar devices</a>.
+        <p>Read this section if you want to upgrade your application to use APIs introduced in
+Android 3.0 or create a new application targeted to tablets and similar devices. Compared to
+upgrading to previous versions of Android, there's nothing different about upgrading to Android 3.0.
+This section introduces some of the key features and APIs you should use to make an
+application that's fully enhanced for tablets.</p></li>
+    </ol>
+  </li>
+  <li>Consider whether you need to <a href="#ManagingAppDist">manage the distribution of your
+application based on screen configuration</a>.</li>
+  <li>Then review some <a href="#Issue">other issues</a> you might encounter when developing
+for tablets and similar devices.</li>
+</ol>
+
+
+<h2 id="Setup">Set Up Your SDK with Android 3.0</h2>
+
+<p>To start testing and developing your application on Android 3.0, set up your existing Android
+SDK with the new platform:</p>
+
+<ol>
+  <li><a href="https://developer.android.com/studio/intro/update.html?hl=id#launching">Launch the Android SDK
+Manager</a> and install the following:
+    <ul>
+      <li>SDK Platform Android 3.0</li>
+      <li>Android SDK Tools, revision 10</li>
+      <li>Android SDK Platform-tools, revision 3</li>
+      <li>Documentation for Android SDK, API 11</li>
+      <li>Samples for SDK API 11</li>
+    </ul>
+  </li>
+  <li><a href="https://developer.android.com/tools/devices/managing-avds.html?hl=id">Create an AVD</a> for a tablet-type
+device:
+  <p>Set the target to "Android 3.0" and the skin to "WXGA" (the default skin).</p></li>
+</ol>
+
+<p>The best way to test your application on Android 3.0 is to use real hardware running Android 3.0,
+such as the <a href="http://www.motorola.com/staticfiles/Consumers/XOOM/index.html">Motorola
+Xoom</a>. Of course, you can also use the Android emulator on your development machine, but because
+the Android emulator must simulate the ARM instruction set on your computer and the WXGA screen is
+significantly larger than a typical virtual device, emulator performance is much slower than a real
+device.</p>
+
+<h3>About emulator performance</h3>
+
+<p>Initializing the emulator can be slow and can take several minutes, depending on
+your hardware. When the emulator is booting, there is limited user feedback, so please be patient
+and wait until you see the home screen (or lock screen) appear. </p>
+
+<p>However, you don't need to boot the emulator each time you rebuild your
+application&mdash;typically you only need to boot at the start of a session and keep it running.
+Also see the tip below for information about using a snapshot to drastically reduce startup time
+after the first initialization. </p>
+
+<p>General performance in the emulator is also slow. We're working hard to resolve the performance
+issues and it will improve in future tools releases. If you don't yet have a real device running
+Android 3.0, the emulator is still best way to evaluate your application's appearance and
+functionality on Android 3.0.</p>
+
+<p class="note"><strong>Tip:</strong> To improve the startup time for the emulator, enable snapshots
+for the AVD when you create it with the AVD Manager (there's a checkbox in the AVD creator
+to <strong>Enable</strong> snapshots). Then, start the AVD from the AVD manager and check <b>Launch
+from snapshot</b> and <b>Save to snapshot</b>. This way, when you close the emulator, a snapshot of
+the AVD state is saved and used to quickly relaunch the AVD next time. However, when you choose to
+save a snapshot, the emulator will be slow to close, so you might want to disable <b>Save to
+snapshot</b> after you've acquired an initial snapshot (after you close the AVD for the first
+time).</p>
+
+
+
+<h2 id="Optimizing">Optimizing Your App for Tablets</h2>
+
+<p>If you've already developed an application for an earlier version of Android, there are a few
+things you can do to optimize it for a tablet-style experience on Android 3.0 without changing the
+minimum version required (you don't need to change your manifest's <a
+href="../topics/manifest/uses-sdk-element0cf2.html?hl=id#min"><code>android:minSdkVersion</code></a>).</p>
+
+<p class="note"><strong>Note:</strong> All Android applications are forward-compatible, so
+there's nothing you <em>have to</em> do&mdash;if your application is a good citizen of the Android
+APIs, your app should work fine on devices running Android 3.0. However, in order to provide users
+a better experience when using your app on an Android 3.0 tablet or similar-size device, you
+should update your application to inherit the new system theme and provide some optimizations for
+larger screens.</p>
+
+<p>Here are a few things you can do to optimize your application for devices running Android
+3.0:</p>
+
+<ol>
+  <li><b>Test your current application on Android 3.0</b>
+    <ol>
+      <li>Build your application as-is and install it on your Android 3.0 AVD (created above during
+<a href="#Setup">setup</a>).</li>
+      <li>Perform your usual tests to be sure everything works and looks as expected.</li>
+    </ol>
+  </li>
+
+  <li><b>Apply the new "holographic" theme to your application</b>
+    <ol>
+      <li>Open your manifest file and update the <a
+href="../topics/manifest/uses-sdk-element0cf2.html?hl=id"><code>&lt;uses-sdk&gt;</code></a> element to
+set <a
+href="../topics/manifest/uses-sdk-element0cf2.html?hl=id#target"><code>android:targetSdkVersion</code></a> to <code>"11"</code>. For example:
+<pre>
+&lt;manifest ... >
+    &lt;uses-sdk android:minSdkVersion="4"
+              android:targetSdkVersion="11" /&gt;
+    &lt;application ... >
+        ...
+    &lt;application>
+&lt;/manifest>
+</pre>
+    <p>By targeting the Android 3.0 platform, the system automatically applies the holographic theme
+to each activity when your application runs on an Android 3.0 device. The holographic theme
+provides a new design for widgets, such as buttons and text boxes, and new styles for other
+visual elements. This is the standard theme for applications built for Android 3.0, so your
+application will look and feel consistent with the system and other applications when it is
+enabled.</p>
+    <p>Additionally, when an activity uses the holographic theme, the system enables the <a
+href="https://developer.android.com/training/appbar/index.html?hl=id">Action Bar</a> for the activity and removes the
+Options Menu button in the system bar. The Action Bar
+replaces the traditional title bar at the top of the activity window and provides the user access to
+the activity's Options Menu.</p>
+      </li>
+      <li>Build your application against the same version of the Android platform you have been
+using previously (such as the version declared in your <a
+href="../topics/manifest/uses-sdk-element0cf2.html?hl=id#min"><code>android:minSdkVersion</code></a>),
+but install it on the Android 3.0 AVD. (You should not build against Android 3.0 unless you are
+using new APIs.) Repeat your tests to be sure that your user interface works well with the
+holographic theme.
+        <p class="note"><strong>Note:</strong> If you have applied other themes directly to your
+activities, they will override the inherited holographic theme. To resolve this, you can use
+the <a href="../topics/resources/providing-resources0cf2.html?hl=id#VersionQualifier">platform
+version qualifier</a> to provide an alternative theme for Android 3.0 devices that's based on the
+holographic theme. For more information, read how to <a
+href="../topics/ui/themes0cf2.html?hl=id#SelectATheme">select a theme based on platform
+version</a>.</p>
+    </ol>
+  </li>
+
+  <li><b>Supply alternative layout resources for xlarge screens</b>
+    <p>By providing <a
+href="../topics/resources/providing-resources0cf2.html?hl=id#AlternativeResources">alternative
+resources</a> when running on extra large screens (using the <code>xlarge</code> resource
+qualifier), you can improve the user experience of your application on tablet-type devices without
+using new APIs.</p>
+    <p>For example, here are some things to consider when creating a new layout for extra large
+screens:</p>
+    <ul>
+      <li>Landscape layout: The "normal" orientation for tablet-type devices is usually landscape
+(wide), so you should be sure that your activities offer a layout that's optimized for a wide
+viewing area. <p>You can specify landscape resources with the <code>land</code> resource
+qualifier, but if you want alternative resources for an extra large landscape screen, you
+should use both the <code>xlarge</code> and <code>land</code> qualifiers. For example, <code>res/layout-xlarge-land/</code>. The order of the qualifier names is important; see <a
+href="../topics/resources/providing-resources0cf2.html?hl=id#AlternativeResources">
+Providing Alternative Resources</a> for more information.</p></li>
+      <li>Button position and size: Consider whether the position and size of the most common
+buttons in your UI make them easily accessible while holding a tablet with two hands. In some
+cases, you might need to resize buttons, especially if they use <code>"wrap_content"</code>
+as the width value. To enlarge the buttons, if necessary, you should either: add
+extra padding to the button; specify dimension values with <code>dp</code> units; or use <code>android:layout_weight</code> when the button is in a <a
+href="../topics/ui/declaring-layout51da.html?hl=id#linearlayout">linear layout</a>. Use your
+best judgment of proportions for each screen size&mdash;you don't want the buttons to be too big,
+either.</li>
+      <li>Font sizes: Be sure your application uses <code>sp</code> units when setting font
+sizes. This alone should ensure a readable experience on tablet-style devices, because it is a
+scale-independent pixel unit, which will resize as appropriate for the current screen configuration.
+In some cases, however, you still might want to consider larger font sizes for <code>xlarge</code>
+configurations.</li>
+    </ul>
+    <p>In general, always be sure that your application follows the <a
+href="screens_support0cf2.html?hl=id#screen-independence">Best Practices
+for Screen Independence</a>.</p>
+  </li>
+</ol>
+
+
+
+
+<h2 id="Upgrading">Upgrading or Developing a New App for Tablets</h2>
+
+<div class="sidebox-wrapper">
+<div class="sidebox">
+  <h3>Use the Compatibility Library to remain backward-compatible</h3>
+<p>It is possible for you to upgrade your application with some new
+APIs <em>and</em> remain compatible with older versions of Android. Usually, this requires that you
+use techniques such as reflection to check for the availability of certain APIs at runtime. However,
+to help you add features from Android 3.0 without requiring you to change your <a
+href="../topics/manifest/uses-sdk-element0cf2.html?hl=id#min"><code>android:minSdkVersion</code></a>
+or build target, we're providing a static library called the <a
+href="https://developer.android.com/tools/support-library/index.html?hl=id">Compatibility Library</a>
+(downloadable from the Android SDK Manager).</p>
+<p>This library includes APIs for <a
+href="../components/fragments0cf2.html?hl=id">fragments</a>, <a
+href="../components/loaders0cf2.html?hl=id">loaders</a>, and some updated classes. By
+simply adding this library to your Android project, you can use these APIs in your application and
+remain compatible with Android 1.6. For information about how to get the library and start
+using it in your application, see the <a
+href="https://developer.android.com/tools/support-library/index.html?hl=id">Compatibility Library</a> document.</p>
+</div>
+</div>
+
+
+<p>If you want to develop an application that's fully enhanced for tablet-type devices running
+Android 3.0, then you need to use new APIs in Android 3.0. This section introduces some of
+the new features you should use.</p>
+
+
+<h3>Declare the minimum system version</h3>
+
+<p>The first thing to do when you upgrade or create a project for Android 3.0 is set your manifest's
+<a href="../topics/manifest/uses-sdk-element0cf2.html?hl=id#min"><code>android:minSdkVersion</code></a> to <code>"11"</code>. This declares that your application uses APIs available
+in Android 3.0 and greater, so it should not be available to devices running an older version of
+Android. For example:</p>
+
+<pre>
+&lt;manifest ... >
+    &lt;uses-sdk android:minSdkVersion="11" /&gt;
+    &lt;application ... >
+        ...
+    &lt;application>
+&lt;/manifest>
+</pre>
+
+<p>Not only is this necessary in order to declare the minimum API level your application requires,
+but it enables the new holographic theme to each of your activities. The holographic theme is the
+standard theme for the Android 3.0 system and all applications designed for it. It includes new
+designs for the system widgets and overall appearance.</p>
+
+<p>Additionally, the holographic theme enables the Action Bar for each activity.</p>
+
+
+<h3>Use the Action Bar</h3>
+
+<p>The Action Bar is a widget for activities that replaces the traditional title bar at the top of
+the screen. By default, the Action Bar includes the application logo on the left side, followed by
+the activity title, and access to items from the Options Menu in a drop-down list on the right
+side.</p>
+
+<p>You can enable items from the Options Menu to appear directly in the Action Bar as
+"action items" by adding <code>showAsAction="ifRoom"</code> to specific menu items in your <a
+href="../topics/resources/menu-resource0cf2.html?hl=id">menu resource</a>. You can also add
+navigation features to the Action Bar, such as tabs, and use the application icon to navigate to
+your application's "home" activity or to navigate "up" the application's activity hierarchy.</p>
+
+<p>For more information, read <a href="https://developer.android.com/training/appbar/index.html?hl=id">Using the
+Action Bar</a>.</p>
+
+
+
+<h3>Divide your activities into fragments</h3>
+
+<p>A fragment represents a behavior or a portion of user interface in an activity. You can think of
+a fragment as a modular section of an activity, which has its own lifecycle, receives its own input
+events, and which you can add or remove while the activity is running. Fragments are an optional
+component for your activities that allow you to build a multi-pane UI and reuse them in multiple
+activities. If you're building an application for tablets, we recommend that you use fragments to
+create activities that offer a more dynamic and flexible user interface.</p>
+
+<p>For example, a news application can use one fragment to show a list of articles on the left and
+another fragment to display an article on the right&mdash;both fragments appear in one activity,
+side by side, and each fragment has its own set of lifecycle callback methods and handles its own
+input events. Thus, instead of using one activity to select an article and another activity to
+read the article, the user can select an article and read it all within the same activity.</p>
+
+<p>For more information, read the <a
+href="../components/fragments0cf2.html?hl=id">Fragments</a> document.</p>
+
+
+<h3>Use new animation APIs for transitions</h3>
+
+<p>An all-new animation framework allows you to animate arbitrary properties of any object
+(such as a View, Drawable, Fragment, or anything else). You can define several animation aspects
+(such as duration, repeat, interpolation, and more) for an object's int, float, and hexadecimal
+color values, by default. That is, when an object has a property field for one of these types, you
+can change its value over time to affect an animation.</p>
+
+<p>The <code><a href="https://developer.android.com/reference/android/view/View.html?hl=id">View</a></code> class also provides new APIs that leverage the new animation
+framework, allowing you to easily apply 2D and 3D transformations to views in your activity layout.
+New transformations are made possible with a set of object properties that define the view's layout
+position, orientation, transparency and more.</p>
+
+<p>For more information, read the <a
+href="../topics/graphics/prop-animation0cf2.html?hl=id">Property Animation</a> document.</p>
+
+
+<h3>Enable hardware acceleration</h3>
+
+<p>Android 3.0 adds a hardware-accelerated OpenGL renderer that gives a performance boost to most 2D
+graphics operations. You can enable hardware-accelerated rendering in your application by setting
+<code>android:hardwareAccelerated="true"</code> in your manifest's <a
+href="../topics/manifest/application-element0cf2.html?hl=id"><code>&lt;application&gt;</code></a>
+element or for individual <a href="../topics/manifest/activity-element0cf2.html?hl=id"><code>&lt;activity&gt;</code></a> elements. Hardware acceleration results in smoother animations, smoother
+scrolling, and overall better performance and response to user interaction. When enabled, be sure
+that you thoroughly test your application on a device that supports hardware acceleration.</p>
+
+
+<h3>Enhance your app widgets</h3>
+
+<p>App widgets allow users to access information from your application directly from the Home
+screen and interact with ongoing services (such as preview their email and control music playback).
+Android 3.0 enhances these capabilities by enabling collections, created with widgets such as
+<code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=id">ListView</a></code>, <code><a href="https://developer.android.com/reference/android/widget/GridView.html?hl=id">GridView</a></code>, and the new <code><a href="https://developer.android.com/reference/android/widget/StackView.html?hl=id">StackView</a></code>. These widgets allow you to create more interactive app
+widgets, such as one with a scrolling list, and can automatically update their data through a <code><a href="https://developer.android.com/reference/android/widget/RemoteViewsService.html?hl=id">RemoteViewsService</a></code>.</p>
+
+<p>Additionally, you should create a preview image of your app widget using the Widget Preview
+application (pre-installed in an Android 3.0 AVD) and reference it with the <code><a href="https://developer.android.com/reference/android/appwidget/AppWidgetProviderInfo.html?hl=id#previewImage">android:previewImage</a></code> attribute, so that users
+can see what the app widget looks like before adding it to their Home screen.</p>
+
+
+<h3>Add other new features</h3>
+
+<p>Android 3.0 introduces many more APIs that you might find valuable for your
+application, such as drag and drop APIs, new Bluetooth APIs, a system-wide clipboard framework, a
+new graphics engine called Renderscript, and more.</p>
+
+<p>To learn more about the APIs mentioned above and more, see the <a
+href="https://developer.android.com/about/versions/android-3.0.html?hl=id">Android 3.0 Platform</a> document.</p>
+
+
+<h3>Look at some samples</h3>
+
+<p>Many of the new features and APIs that are described above and in the <a
+href="https://developer.android.com/about/versions/android-3.0.html?hl=id#api">Android 3.0 Platform</a> document also have accompanying
+samples that allow you to preview the effects and can help you understand how to use them. To get
+the samples, download them from the SDK repository <a href="https://developer.android.com/studio/intro/update.html?hl=id"
+>using the Android SDK Manager</a>. After downloading the samples ("Samples for SDK API
+11"), you can find them in <code>&lt;sdk_root&gt;/samples/android-11/</code>. The following list
+provides links to the browsable source code for some of the samples:</p>
+
+<ul>
+  <li><a href="https://developer.android.com/resources/samples/HoneycombGallery/index.html?hl=id">Honeycomb Gallery</a>:
+Demonstrates many new APIs in Android 3.0, including fragments, the action bar, drag and drop, and
+animations.</li>
+  <li><a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/index.html?hl=id#Fragment">
+Fragments</a>: Various samples that demonstrate fragment layouts, back stack, restoring state, and
+more.</li>
+  <li><a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/ActionBarMechanics.html?hl=id"
+>Action Bar</a>: Samples that demonstrate various Action Bar features, such as tabs, logos, and
+action items.</li>
+  <li><a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/content/ClipboardSample.html?hl=id"
+>Clipboard</a>: An example of how to use the clipboard for copy and paste operations.</li>
+  <li><a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/DragAndDropDemo.html?hl=id">
+Drag and Drop</a>: An example of how to perform drag and drop with new View events.</li>
+  <li><a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/List15.html?hl=id">
+Multi-choice List</a>: An example of how to provide multiple-choice selection for ListView and
+GridView.</li>
+  <li><a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/LoaderThrottle.html?hl=id">
+Content Loaders</a>: An example using new Loader APIs to asynchronously load data.</li>
+  <li><a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/animation/index.html?hl=id">
+Property Animation</a>: Several samples using the new animation APIs to animate object
+properties.</li>
+  <li><a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/SearchViewActionBar.html?hl=id">
+Search View Widget</a>: Example using the new search widget in the Action Bar (as an
+"action view").</li>
+  <li><a
+href="https://developer.android.com/resources/samples/RenderScript/index.html?hl=id">Renderscript</a>: Contains several
+different applications that demonstrate using renderscript APIs for computations and 3D
+graphics.</li>
+</ul>
+
+
+
+<h2 id="ManagingAppDist">Managing App Distribution Based on Screen Configuration</h2>
+
+<p>If your manifest file has either <a
+href="../topics/manifest/uses-sdk-element0cf2.html?hl=id#min"><code>android:minSdkVersion</code></a>
+or <a href="../topics/manifest/uses-sdk-element0cf2.html?hl=id#target"><code>android:targetSdkVersion</code></a> set to <code>"4"</code> or higher, then the Android system will scale your
+application's layout and assets to fit the current device screen, whether the device screen is
+smaller or larger than the one for which you originally designed your application. As such, you
+should always test your application on real or <a
+href="https://developer.android.com/tools/devices/index.html?hl=id">virtual devices</a> with various screen sizes
+and densities.</p>
+
+<p>Although we recommend that you design your application to function properly on multiple
+configurations of screen size and density, you can instead choose to limit the distribution of your
+application to certain types of screens, such as only tablets or only mobile devices. To do so, you
+can add elements to your Android manifest file that enable filtering based on screen configuration
+by external services such as Google Play.</p>
+
+<p>However, before you decide to restrict your application to certain screen configurations, you
+should understand the techniques for <a
+href="screens_support0cf2.html?hl=id">supporting multiple screens</a> and employ
+them to the best of your ability. By supporting multiple screens, your application can be made
+available to the greatest number of users with different devices.</p>
+
+
+<h3 id="FilteringTabletApps">Filtering a tablet application from mobile devices</h3>
+
+<p>If the system scaling adversely affects your application UI when scaling your application down
+for smaller screens, you should add <a
+href="../topics/resources/providing-resources0cf2.html?hl=id#AlternativeResources">alternative
+layouts</a> for smaller screens to adjust your layout. However, sometimes your layout still might
+not fit a smaller screen or you've explicitly designed your application only for tablets and other
+large devices. In this case, you can manage the availability of your application to smaller screens
+by using the <a href="../topics/manifest/supports-screens-element0cf2.html?hl=id"><code>&lt;supports-screens&gt;</code></a> manifest element.</p>
+
+<p>For example, if you want your application to be available only to extra large
+screens, you can declare the element in your manifest like this:</p>
+
+<pre>
+&lt;manifest ... >
+    ...
+    &lt;supports-screens android:smallScreens="false"
+                      android:normalScreens="false"
+                      android:largeScreens="false"
+                      android:xlargeScreens="true" /&gt;
+    &lt;application ... >
+        ...
+    &lt;application>
+&lt;/manifest>
+</pre>
+
+<p>External services such as Google Play read this manifest element and use it to ensure that
+your application is available only to devices with an extra large screen.</p>
+
+<p class="note"><strong>Note:</strong> If you use the <a
+href="../topics/manifest/supports-screens-element0cf2.html?hl=id"><code>&lt;supports-screens&gt;</code></a> element for the reverse scenario (when your application is not compatible
+with <em>larger</em> screens) and set the larger screen size attributes to <code>"false"</code>, then
+external services such as Google Play <strong>do not</strong> apply filtering. Your application
+will still be available to larger screens, but when it runs, it will not fill the screen&mdash;the
+system will draw it in a "postage stamp" window that's the same relative size as the screen size
+that your application does support. If you want to prevent your application from being downloaded on
+larger screens, see the following section.</p>
+
+
+<h3 id="FilteringMobileApps">Filtering a mobile device application from tablets</h3>
+
+<p>Because Android automatically scales applications to fit larger screens, you shouldn't
+need to filter your application from larger screens. However, you might discover that your
+application can't scale up or perhaps you've decided to publish two versions of your application
+that each deliver different features for different screen configurations, so you don't want
+larger devices to download the version designed for smaller screens. In such a case, you can
+use the <a href="../topics/manifest/compatible-screens-element0cf2.html?hl=id"><code>&lt;compatible-screens&gt;</code></a> element to manage the distribution of your application based on the
+combination of screen size and density. External services such as
+Google Play uses this information to apply filtering to your application, so that only devices
+that have a screen configuration with which you declare compatibility can download your
+application.</p>
+
+<p>The <a href="../topics/manifest/compatible-screens-element0cf2.html?hl=id"><code>&lt;compatible-screens&gt;</code></a> element must contain one or more <code>&lt;screen&gt;</code> elements,
+which each specify a screen configuration with which your application is compatible, using both
+the <code>android:screenSize</code> and <code>android:screenDensity</code> attributes. Each <code>&lt;screen&gt;</code> element <strong>must include both attributes</strong> to specify an individual
+screen configuration&mdash;if either attribute is missing, then the element is invalid
+(external services such as Google Play will ignore it).</p>
+
+<p>For example, if your application is compatible with only small and normal screens, regardless
+of screen density, then you must specify eight different <code>&lt;screen&gt;</code> elements,
+because each screen size has four density configurations. You must declare each one of
+these; any combination of size and density that you do <em>not</em> specify is considered a screen
+configuration with which your application is <em>not</em> compatible. Here's what the manifest
+entry looks like if your application is compatible with only small and normal screens:</p>
+
+<pre>
+&lt;manifest ... >
+    ...
+    &lt;compatible-screens>
+        &lt;!-- all small size screens -->
+        &lt;screen android:screenSize="small" android:screenDensity="ldpi" />
+        &lt;screen android:screenSize="small" android:screenDensity="mdpi" />
+        &lt;screen android:screenSize="small" android:screenDensity="hdpi" />
+        &lt;screen android:screenSize="small" android:screenDensity="xhdpi" />
+        &lt;!-- all normal size screens -->
+        &lt;screen android:screenSize="normal" android:screenDensity="ldpi" />
+        &lt;screen android:screenSize="normal" android:screenDensity="mdpi" />
+        &lt;screen android:screenSize="normal" android:screenDensity="hdpi" />
+        &lt;screen android:screenSize="normal" android:screenDensity="xhdpi" />
+    &lt;/compatible-screens>
+    &lt;application ... >
+        ...
+    &lt;application>
+&lt;/manifest>
+</pre>
+
+<p class="note"><strong>Note:</strong> Although you can also use the <a
+href="../topics/manifest/compatible-screens-element0cf2.html?hl=id"><code>&lt;compatible-screens&gt;</code></a> element for the reverse scenario (when your application is not
+compatible with smaller screens), it's easier if you instead use the <a
+href="../topics/manifest/supports-screens-element0cf2.html?hl=id"><code>&lt;supports-screens&gt;</code></a> as discussed in the previous section, because it doesn't require you
+to specify each screen density your application supports.</p>
+
+<p>Remember, you should strive to make your application available to as many devices as possible by
+applying all necessary techniques for <a
+href="screens_support0cf2.html?hl=id">supporting multiple screens</a>. You should
+then use the <a href="../topics/manifest/compatible-screens-element0cf2.html?hl=id"><code>&lt;compatible-screens&gt;</code></a> element to filter your application from certain devices only when you
+cannot offer compatibility on all screen configurations or you have decided to provide
+multiple versions of your application, each for a different set of screen configurations.</p>
+
+
+
+<h2 id="Issues">Other Issues</h2>
+
+<p>Whether you decide to optimize or upgrade your application for tablet-type devices, you
+should be aware that the functionality and availability of your application on new devices
+might be affected by the following issues:</p>
+
+<ul>
+  <li><a href="#Landscape">Tablets are often designed for use in the landscape orientation</a>
+  <p>Tablets and similar devices often have a screen that uses the landscape orientation
+by default. If your application assumes a portrait orientation or locks into portrait
+orientation, you should update your application to support landscape.</p></li>
+  <li><a href="#Telephony">Not all devices have telephony or other features</a>
+  <p>If your application declares the <code>"android.hardware.telephony"</code> feature in the manifest,
+then it will not be available to devices that do not offer telephony (such as tablets), based on
+Google Play filtering. If your application can function properly without telephony, you should
+update your application to gracefully disable the telephony features when not available on a
+device.</p></li>
+</ul>
+
+
+<h3 id="Landscape">Adding support for landscape screens</h3>
+
+<p>Although tablets can rotate to operate in any orientation, they are often designed for
+landscape orientation and that is how most users will use them. So, you should ensure that your
+application can function in landscape. Even if you want to avoid rotating the screen while your
+application is running, you should not assume that portrait is the device's default orientation. You
+should either ensure that your layout is usable in both portrait and landscape orientations or
+provide an <a href="../topics/resources/providing-resources0cf2.html?hl=id#AlternativeResources"
+>alternative layout resource</a> for landscape orientation.</p>
+
+<p>If you believe your application or game provides its best experience when the screen is tall,
+consider that tablets and similar devices have a screen that's as tall or taller in landscape
+orientation than a phone in portrait orientation. With that in mind, you might be able to add a
+landscape design that adds padding or extra landscape scenery on the left and right sides, so
+the primary screen space still remains taller than it is wide.</p>
+
+<p>Ideally, your application should handle all orientation changes instead of locking into one
+orientation. When the user rotates the screen, the system restarts the current activity by calling
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=id#onDestroy()">onDestroy()</a></code> and <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=id#onCreate(android.os.Bundle)">onCreate()</a></code>) in immediate succession. You should design your activity to account for these changes
+in the lifecycle, so the activity can save and restore its state. You can learn about the
+necessary lifecycle callback methods and how to save and restore the activity state in the <a
+href="../components/activities0cf2.html?hl=id#Lifecycle">Activities</a>
+document. If your activity state is more complex and cannot retain it using the normal
+lifecycle callback methods, you can use alternative techniques described in <a
+href="../topics/resources/runtime-changes0cf2.html?hl=id">Handling Runtime Changes</a>.</p>
+
+<p>In the worst-case scenario, however, you can avoid orientation changes by using the <a
+href="../topics/manifest/activity-element0cf2.html?hl=id#screen"><code>android:screenOrientation</code></a> attribute in the <a
+href="../topics/manifest/activity-element0cf2.html?hl=id"><code>&lt;activity&gt;</code></a>
+element. Instead of locking the orientation in landscape or portrait, however, you should
+specify a value of <code>"nosensor"</code>. This way, your activity uses whatever orientation the
+device specifies as its natural orientation and the screen will not rotate. You should still
+avoid using the <a
+href="../topics/manifest/activity-element0cf2.html?hl=id#screen"><code>android:screenOrientation</code></a> attribute, but because it's sometimes necessary to lock the
+screen into one orientation, it's best if you do so in a way that uses the device's natural
+orientation instead of assuming one specific orientation.</p>
+
+<p>If your application uses the orientation sensors, such as the accelerometer (with the <code><a href="https://developer.android.com/reference/android/hardware/SensorManager.html?hl=id">SensorManager</a></code> APIs), also be aware that the landscape screen can also cause
+problems, due to false assumptions about which orientation is the natural position. For more
+information about how you should properly handle rotation changes when using the orientation
+sensors, read the blog post, <a
+href="http://android-developers.blogspot.com/2010/09/one-screen-turn-deserves-another.html">One
+Screen Turn Deserves Another</a>.</p>
+
+
+
+<h3 id="Telephony">Using telephony or other variable features</h3>
+
+<p>Tablets and similar devices might not include support for telephony, so they can't make
+traditional phone calls or handle SMS. Some devices might also omit
+other hardware features, such as Bluetooth. If your application uses these features, then your
+manifest file probably already includes (or should include) a declaration of the feature with the <a
+href="../topics/manifest/uses-feature-element0cf2.html?hl=id"><code>&lt;uses-feature&gt;</code></a>
+element. Doing so prevents devices that do not declare support for the feature from downloading
+your applications. For example:</p>
+
+<pre>&lt;uses-feature android:name="android.hardware.telephony" /></pre>
+
+<p>By default, this declares that your application <em>requires</em> telephony features. So,
+external services such as Google Play use this information to filter your application from
+devices that do not offer telephony.</p>
+
+<p>If, however, your application uses, but does not require the feature, you should
+add to this element, <code>android:required="false"</code>. For example:</p>
+
+<pre>&lt;uses-feature android:name="android.hardware.telephony" android:required="false" /></pre>
+
+<p>This indicates that your application uses the feature, but is still functional if the feature is
+not available. So, it should still be available to devices that don't provide telephony hardware
+(or telephony features), such as tablets.</p>
+
+<p>Then in your application code, you must gracefully disable the features that use telephony
+when it's not available. You can check whether the feature is available using <code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=id#hasSystemFeature(java.lang.String)">PackageManager.hasSystemFeature()</a></code>. For
+example:</p>
+
+<pre>
+PackageManager pm = getPackageManager();
+boolean hasTelephony = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
+</pre>
+
+<p>For more information about these
+issues and how to future-proof your application for different hardware, read the blog post <a
+href="http://android-developers.blogspot.com/2010/10/five-steps-to-future-hardware-happiness.html">
+The Five Steps to Future Hardware Happiness</a>.</p>
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=id" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=id" title="Dukungan">Dukungan</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=id" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=id" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=id" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=id" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="UruypioV4hRew3L-yhesNWfWp4_dWrDZbsVZAFCZV1k6MTQ5NzUxNzg3NDMwMzQ4MA" />
+      <input type="hidden" name="next" value="optimizing-for-3.0.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+             selected="selected" >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Alamat email</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../ytblogger_lists_unified2fcb.js?hl=id?v=2017061509" defer></script>
+  <script src="../../android_metadata_en2fcb.js?hl=id?v=2017061509" defer></script>
+  
+  <script src="../../reference/lists2fcb.js?hl=id?v=2017061509" defer></script>
+  <script src="../../reference/gms_lists2fcb.js?hl=id?v=2017061509" defer></script>
+  <script src="../../reference/android/support/wearable/lists2fcb.js?hl=id?v=2017061509" defer></script>
+  <script src="../../reference/android/support/test/lists2fcb.js?hl=id?v=2017061509" defer></script>
+  <script src="../../reference/android/support/constraint/lists2fcb.js?hl=id?v=2017061509" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=id"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_id.js?hl=id?v=2017061509" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/practices/optimizing-for-3.0.html?hl=id by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:19:28 GMT -->
+</html>

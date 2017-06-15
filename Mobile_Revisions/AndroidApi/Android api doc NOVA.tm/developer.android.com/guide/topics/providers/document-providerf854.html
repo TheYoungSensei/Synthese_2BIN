@@ -1,0 +1,1869 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/document-provider.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:11:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="N7VcvJvnSVEJMGVgV5cj373AscKrua6qG2nJIX0eL8M6MTQ5NzUxNjczNDcyNzAzMA" />
+
+  
+    <link rel="canonical" href="document-providerf854.html?hl=zh-tw">
+  
+
+  
+    <link rel="alternate" href="document-provider7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="document-provider.html" hreflang="en">
+  
+    <link rel="alternate" href="document-provider9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="document-provider9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="document-provider327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="document-provider0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="document-providerde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="document-providerf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="document-provider6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="document-provider0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="document-provider232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/document-provider.html?hl=ko" hreflang="ko-cn">
+  
+
+  <link rel="alternate" href="document-provider.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/faviconf854.png?hl=zh-tw">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-180f854.png?hl=zh-tw">
+
+
+<title>
+
+  儲存空間存取架構 | Android Developers
+
+</title>
+
+  <meta name="description" content="Android 4.4 (API 級別 19) 導入了「儲存空間存取架構」(Storage Access Framework (SAF))，SAF 可方便使用者透過偏好的文件儲存空間供應程式開啟文件、圖片等其他檔案。 提供簡單易用的標準 UI 可讓使用者在各種應用程式和供應程式中，以相同的方式瀏覽檔案及存取近期開啟的檔案。 雲端或本機儲存服務可實作會封裝服務本身的 DocumentsProvider，藉此加入這個生態系統。您只需編寫幾行程式碼，即可將需要存取供應程式文件的用戶端應用程式與 SAF …">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default962f.css?hl=zh-tw?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundlef854.js?hl=zh-tw" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__zh_twf854.js?hl=zh-tw"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_androidf854.js?hl=zh-tw"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs962f.js?hl=zh-tw?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "zh-tw", "served": "zh-tw"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=zh-tw">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logof854.png?hl=zh-tw"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=zh-tw"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=zh-tw"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=zh-tw" width="18" height="19" alt="Play 管理中心">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="搜尋">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">返回</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../indexf854.html?hl=zh-tw" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentalsf854.html?hl=zh-tw" >App Fundamentals</a></li><li><a href="../../practices/compatibilityf854.html?hl=zh-tw" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/indexf854.html?hl=zh-tw" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requestingf854.html?hl=zh-tw" >Requesting Permissions</a></li><li><a href="../permissions/definingf854.html?hl=zh-tw" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/indexf854.html?hl=zh-tw" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jackf854.html?hl=zh-tw"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-artf854.html?hl=zh-tw" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/indexf854.html?hl=zh-tw" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filtersf854.html?hl=zh-tw" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-commonf854.html?hl=zh-tw" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/indexf854.html?hl=zh-tw" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activitiesf854.html?hl=zh-tw" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecyclef854.html?hl=zh-tw" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changesf854.html?hl=zh-tw" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stackf854.html?hl=zh-tw" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecyclef854.html?hl=zh-tw" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundlesf854.html?hl=zh-tw" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recentsf854.html?hl=zh-tw" >Recents Screen</a></li></ul></li><li><a href="../../components/fragmentsf854.html?hl=zh-tw" >Fragments</a></li><li><a href="../../components/loadersf854.html?hl=zh-tw" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/servicesf854.html?hl=zh-tw" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-servicesf854.html?hl=zh-tw" >Bound Services</a></li><li><a href="../../components/aidlf854.html?hl=zh-tw" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="content-providersf854.html?hl=zh-tw" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="content-provider-basicsf854.html?hl=zh-tw" >Content Provider Basics</a></li><li><a href="content-provider-creatingf854.html?hl=zh-tw" >Creating a Content Provider</a></li><li><a href="calendar-providerf854.html?hl=zh-tw" >Calendar Provider</a></li><li><a href="contacts-providerf854.html?hl=zh-tw" >Contacts Provider</a></li><li><a href="document-providerf854.html?hl=zh-tw" >Open files using Storage Access Framework</a></li><li><a href="create-document-providerf854.html?hl=zh-tw" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcastsf854.html?hl=zh-tw" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/indexf854.html?hl=zh-tw" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/hostf854.html?hl=zh-tw" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threadsf854.html?hl=zh-tw" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/indexf854.html?hl=zh-tw" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../resources/providing-resourcesf854.html?hl=zh-tw" >Providing Resources</a></li><li><a href="../resources/accessing-resourcesf854.html?hl=zh-tw" >Accessing Resources</a></li><li><a href="../resources/runtime-changesf854.html?hl=zh-tw" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localizationf854.html?hl=zh-tw" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-frameworkf854.html?hl=zh-tw" >ICU4J Android Framework APIs</a></li><li><a href="../resources/multilingual-supportf854.html?hl=zh-tw" >Language and Locale</a></li></ul></li><li><a href="../resources/complex-xml-resourcesf854.html?hl=zh-tw" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resourcesf854.html?hl=zh-tw" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resourcef854.html?hl=zh-tw" >Animation</a></li><li><a href="../resources/color-list-resourcef854.html?hl=zh-tw" >Color State List</a></li><li><a href="../resources/drawable-resourcef854.html?hl=zh-tw" >Drawable</a></li><li><a href="../resources/layout-resourcef854.html?hl=zh-tw" >Layout</a></li><li><a href="../resources/menu-resourcef854.html?hl=zh-tw" >Menu</a></li><li><a href="../resources/string-resourcef854.html?hl=zh-tw" >String</a></li><li><a href="../resources/style-resourcef854.html?hl=zh-tw" >Style</a></li><li><a href="../resources/more-resourcesf854.html?hl=zh-tw" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-introf854.html?hl=zh-tw" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-elementf854.html?hl=zh-tw" >&lt;action&gt;</a></li><li><a href="../manifest/activity-elementf854.html?hl=zh-tw" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-elementf854.html?hl=zh-tw" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-elementf854.html?hl=zh-tw" >&lt;application&gt;</a></li><li><a href="../manifest/category-elementf854.html?hl=zh-tw" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-elementf854.html?hl=zh-tw" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-elementf854.html?hl=zh-tw" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-elementf854.html?hl=zh-tw" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-elementf854.html?hl=zh-tw" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-elementf854.html?hl=zh-tw" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-elementf854.html?hl=zh-tw" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-elementf854.html?hl=zh-tw" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-elementf854.html?hl=zh-tw" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-elementf854.html?hl=zh-tw" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-elementf854.html?hl=zh-tw" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-elementf854.html?hl=zh-tw" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-elementf854.html?hl=zh-tw" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-elementf854.html?hl=zh-tw" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-elementf854.html?hl=zh-tw" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-elementf854.html?hl=zh-tw" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-elementf854.html?hl=zh-tw" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-elementf854.html?hl=zh-tw" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-elementf854.html?hl=zh-tw" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-elementf854.html?hl=zh-tw" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-elementf854.html?hl=zh-tw" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-elementf854.html?hl=zh-tw" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-elementf854.html?hl=zh-tw" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/indexf854.html?hl=zh-tw" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overviewf854.html?hl=zh-tw" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layoutf854.html?hl=zh-tw" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linearf854.html?hl=zh-tw" >Linear Layout</a></li><li><a href="../ui/layout/relativef854.html?hl=zh-tw" >Relative Layout</a></li><li><a href="../ui/layout/recyclerviewf854.html?hl=zh-tw" >Recycler View</a></li><li><a href="../ui/layout/listviewf854.html?hl=zh-tw" >List View</a></li><li><a href="../ui/layout/gridviewf854.html?hl=zh-tw" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controlsf854.html?hl=zh-tw" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/buttonf854.html?hl=zh-tw" >Buttons</a></li><li><a href="../ui/controls/checkboxf854.html?hl=zh-tw" >Checkboxes</a></li><li><a href="../ui/controls/radiobuttonf854.html?hl=zh-tw" >Radio Buttons</a></li><li><a href="../ui/controls/togglebuttonf854.html?hl=zh-tw" >Toggle Buttons</a></li><li><a href="../ui/controls/spinnerf854.html?hl=zh-tw" >Spinners</a></li><li><a href="../ui/controls/pickersf854.html?hl=zh-tw" >Pickers</a></li></ul></li><li><a href="../ui/ui-eventsf854.html?hl=zh-tw" >Input Events</a></li><li><a href="../ui/menusf854.html?hl=zh-tw" >Menus</a></li><li><a href="../ui/settingsf854.html?hl=zh-tw" >Settings</a></li><li><a href="../ui/dialogsf854.html?hl=zh-tw" >Dialogs</a></li><li><a href="../ui/notifiers/notificationsf854.html?hl=zh-tw" >Notifications</a></li><li><a href="../ui/notifiers/toastsf854.html?hl=zh-tw" >Toasts</a></li><li><a href="../ui/shortcutsf854.html?hl=zh-tw" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/indexf854.html?hl=zh-tw" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialogf854.html?hl=zh-tw" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestionsf854.html?hl=zh-tw" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestionsf854.html?hl=zh-tw" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-configf854.html?hl=zh-tw" >Searchable Configuration</a></li></ul></li><li><a href="../ui/multi-windowf854.html?hl=zh-tw" >Multi-Window Support</a></li><li><a href="../ui/drag-dropf854.html?hl=zh-tw" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/indexf854.html?hl=zh-tw" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/appsf854.html?hl=zh-tw" >Making Apps More Accessible</a></li><li><a href="../ui/accessibility/checklistf854.html?hl=zh-tw" >Accessibility Developer Checklist</a></li><li><a href="../ui/accessibility/node-tree-debuggingf854.html?hl=zh-tw" >Using Node Tree Debugging</a></li><li><a href="../ui/accessibility/servicesf854.html?hl=zh-tw" >Building Accessibility Services</a></li><li><a href="../ui/accessibility/custom-viewsf854.html?hl=zh-tw" >Building Accessible Custom Views</a></li></ul></li><li><a href="../ui/themesf854.html?hl=zh-tw" >Styles and Themes</a></li><li><a href="../ui/custom-componentsf854.html?hl=zh-tw" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/indexf854.html?hl=zh-tw" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../graphics/prop-animationf854.html?hl=zh-tw" >Property Animation</a></li><li><a href="../graphics/view-animationf854.html?hl=zh-tw" >View Animation</a></li><li><a href="../graphics/drawable-animationf854.html?hl=zh-tw" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphicsf854.html?hl=zh-tw" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resourcesf854.html?hl=zh-tw" >Vector Drawable</a></li></ul></li><li><a href="../graphics/openglf854.html?hl=zh-tw" >OpenGL ES</a></li><li><a href="../graphics/hardware-accelf854.html?hl=zh-tw" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/indexf854.html?hl=zh-tw" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/computef854.html?hl=zh-tw" >RenderScript</a></li><li><a href="../renderscript/advancedf854.html?hl=zh-tw" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overviewf854.html?hl=zh-tw" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_typesf854.html?hl=zh-tw" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_typesf854.html?hl=zh-tw" >Object Types</a></li><li><a href="../renderscript/reference/rs_convertf854.html?hl=zh-tw" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_mathf854.html?hl=zh-tw" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_mathf854.html?hl=zh-tw" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrixf854.html?hl=zh-tw" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternionf854.html?hl=zh-tw" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomicf854.html?hl=zh-tw" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_timef854.html?hl=zh-tw" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_dataf854.html?hl=zh-tw" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_infof854.html?hl=zh-tw" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_eachf854.html?hl=zh-tw" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_iof854.html?hl=zh-tw" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debugf854.html?hl=zh-tw" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphicsf854.html?hl=zh-tw" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/indexf854.html?hl=zh-tw" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/indexf854.html?hl=zh-tw" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overviewf854.html?hl=zh-tw" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-sessionf854.html?hl=zh-tw" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-appf854.html?hl=zh-tw" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservicef854.html?hl=zh-tw" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-clientf854.html?hl=zh-tw" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-appf854.html?hl=zh-tw" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activityf854.html?hl=zh-tw" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttonsf854.html?hl=zh-tw" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphonesf854.html?hl=zh-tw" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/indexf854.html?hl=zh-tw" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formatsf854.html?hl=zh-tw" >Supported Media Formats</a></li><li><a href="../media/mediaplayerf854.html?hl=zh-tw" >MediaPlayer</a></li><li><a href="../media/mediarecorderf854.html?hl=zh-tw" >MediaRecorder</a></li><li><a href="../media/exoplayerf854.html?hl=zh-tw" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routingf854.html?hl=zh-tw" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouterf854.html?hl=zh-tw" >MediaRouter API</a></li><li><a href="../media/mediarouteproviderf854.html?hl=zh-tw" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/cameraf854.html?hl=zh-tw" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/indexf854.html?hl=zh-tw" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/indexf854.html?hl=zh-tw" >Location and Maps</a></li><li><a href="../location/strategiesf854.html?hl=zh-tw" >Location Strategies</a></li><li><a href="../sensors/sensors_overviewf854.html?hl=zh-tw" >Sensors Overview</a></li><li><a href="../sensors/sensors_motionf854.html?hl=zh-tw" >Motion Sensors</a></li><li><a href="../sensors/sensors_positionf854.html?hl=zh-tw" >Position Sensors</a></li><li><a href="../sensors/sensors_environmentf854.html?hl=zh-tw" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/indexf854.html?hl=zh-tw" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetoothf854.html?hl=zh-tw" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-lef854.html?hl=zh-tw" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/indexf854.html?hl=zh-tw" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfcf854.html?hl=zh-tw" >NFC Basics</a></li><li><a href="../connectivity/nfc/advanced-nfcf854.html?hl=zh-tw" >Advanced NFC</a></li><li><a href="../connectivity/nfc/hcef854.html?hl=zh-tw" >Host-based Card Emulation</a></li></ul></li><li><a href="../connectivity/wifip2pf854.html?hl=zh-tw" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/indexf854.html?hl=zh-tw" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessoryf854.html?hl=zh-tw" >Accessory</a></li><li><a href="../connectivity/usb/hostf854.html?hl=zh-tw" >Host</a></li></ul></li><li><a href="../connectivity/sipf854.html?hl=zh-tw" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/indexf854.html?hl=zh-tw" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-pastef854.html?hl=zh-tw" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-methodf854.html?hl=zh-tw" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboardf854.html?hl=zh-tw" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-frameworkf854.html?hl=zh-tw" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/indexf854.html?hl=zh-tw" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storagef854.html?hl=zh-tw" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../data/backupf854.html?hl=zh-tw" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/autobackupf854.html?hl=zh-tw" >Auto Backup</a></li><li><a href="../data/keyvaluebackupf854.html?hl=zh-tw" >Key/Value Backup</a></li><li><a href="../data/testingbackupf854.html?hl=zh-tw" >Testing Backup and Restore</a></li></ul></li><li><a href="../data/install-locationf854.html?hl=zh-tw" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/indexf854.html?hl=zh-tw" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-adminf854.html?hl=zh-tw" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/indexf854.html?hl=zh-tw" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targetingf854.html?hl=zh-tw" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webviewf854.html?hl=zh-tw" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migratingf854.html?hl=zh-tw" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debuggingf854.html?hl=zh-tw" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practicesf854.html?hl=zh-tw" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/indexf854.html?hl=zh-tw"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_supportf854.html?hl=zh-tw" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distributionf854.html?hl=zh-tw" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-modef854.html?hl=zh-tw" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessnessf854.html?hl=zh-tw" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsetsf854.html?hl=zh-tw" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=zh-tw">首頁</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=zh-tw">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=zh-tw">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=zh-tw">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=zh-tw">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=zh-tw">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=zh-tw"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=zh-tw"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">訓練</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../indexf854.html?hl=zh-tw"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=zh-tw"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">參考資料</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=zh-tw">範例</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=zh-tw"
+           >程式庫</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=zh-tw"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=zh-tw"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=zh-tw">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=zh-tw">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=zh-tw">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=zh-tw">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=zh-tw">Play 管理中心</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=zh-tw"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=zh-tw"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=zh-tw">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=zh-tw">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">儲存空間存取架構</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+<h2>本文件內容
+<a href="#" onclick="hideNestedItems('#toc44',this);return false;" class="header-toggle">
+        <span class="more">顯示更多</span>
+        <span class="less" style="display:none">顯示較少</span></a></h2>
+<ol id="toc44" class="hide-nested">
+    <li>
+        <a href="#overview">總覽</a>
+    </li>
+    <li>
+        <a href="#flow">控管流程</a>
+    </li>
+    <li>
+        <a href="#client">編寫用戶端應用程式</a>
+        <ol>
+        <li><a href="#search">搜尋文件</a></li>
+        <li><a href="#process">處理結果</a></li>
+        <li><a href="#metadata">檢查文件中繼資料</a></li>
+        <li><a href="#open">開啟文件</a></li>
+        <li><a href="#create">建立新文件</a></li>
+        <li><a href="#delete">刪除文件</a></li>
+        <li><a href="#edit">編輯文件</a></li>
+        <li><a href="#permissions">保留權限</a></li>
+        </ol>
+    </li>
+    <li><a href="#custom">編寫自訂文件供應程式</a>
+        <ol>
+        <li><a href="#manifest">宣示說明</a></li>
+        <li><a href="#contract">合約</a></li>
+        <li><a href="#subclass">將 DocumentsProvider 設為子類別</a></li>
+        <li><a href="#security">安全性</a></li>
+        </ol>
+    </li>
+
+</ol>
+<h2>重要類別</h2>
+<ol>
+    <li><code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw">DocumentsProvider</a></code></li>
+    <li><code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.html?hl=zh-tw">DocumentsContract</a></code></li>
+</ol>
+
+<h2>相關影片</h2>
+
+<ol>
+    <li><a href="http://www.youtube.com/watch?v=zxHVeXbK1P4&amp;hl=zh-tw">DevBytes：
+Android 4.4 儲存空間存取架構：供應程式</a></li>
+     <li><a href="http://www.youtube.com/watch?v=UFj9AEz0DHQ&amp;hl=zh-tw">DevBytes：
+Android 4.4 儲存空間存取架構：用戶端</a></li>
+</ol>
+
+
+<h2>程式碼範例</h2>
+
+<ol>
+    <li><a href="https://developer.android.com/samples/StorageProvider/index.html?hl=zh-tw">儲存空間供應程式</a>
+</li>
+     <li><a href="https://developer.android.com/samples/StorageClient/index.html?hl=zh-tw">StorageClient</a>
+</li>
+</ol>
+
+<h2>另請參閱</h2>
+<ol>
+    <li>
+        <a href="content-provider-basicsf854.html?hl=zh-tw">
+        內容供應程式基本概念
+        </a>
+    </li>
+</ol>
+
+</div>
+</div>
+
+
+<p>Android 4.4 (API 級別 19) 導入了「儲存空間存取架構」(Storage Access Framework (SAF))，SAF 可方便使用者透過偏好的文件儲存空間供應程式開啟文件、圖片等其他檔案。
+
+提供簡單易用的標準 UI 可讓使用者在各種應用程式和供應程式中，以相同的方式瀏覽檔案及存取近期開啟的檔案。
+</p>
+
+<p>雲端或本機儲存服務可實作會封裝服務本身的
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw">DocumentsProvider</a></code>，藉此加入這個生態系統。您只需編寫幾行程式碼，即可將需要存取供應程式文件的用戶端應用程式與 SAF 整合。
+
+</p>
+
+<p>SAF 內含下列項目：</p>
+
+<ul>
+<li><strong>文件供應程式</strong> &mdash; 可讓儲存服務 (例如 Google 雲端硬碟) 顯示所管理檔案的內容供應程式。
+文件供應程式是當作
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw">DocumentsProvider</a></code> 類別的子類別使用。文件供應程式結構定義是以傳統檔案階層為依據，不論您為文件供應程式設定的資料儲存方式為何。Android 平台內建數種文件供應程式，例如「下載」、「圖片」和「影片」。
+
+
+
+</li>
+
+<li><strong>用戶端應用程式</strong> &mdash; 可呼叫
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_OPEN_DOCUMENT">ACTION_OPEN_DOCUMENT</a></code> 和 (或)
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_CREATE_DOCUMENT">ACTION_CREATE_DOCUMENT</a></code> 意圖及接收文件供應程式所傳回檔案的自訂應用程式。
+</li>
+
+<li><strong>挑選器</strong> &mdash; 可讓使用者透過所有符合用戶端應用程式搜尋條件的文件供應程式存取文件的系統 UI。
+</li>
+</ul>
+
+<p>以下是 SAF 提供的部分功能：</p>
+<ul>
+<li>可讓使用者透過所有文件供應程式 (而非單一應用程式) 瀏覽內容。</li>
+<li>可將文件供應程式所擁有文件的存取權永久授予您的應用程式，
+方便使用者透過相關供應程式新增、編輯、儲存及刪除檔案。
+</li>
+<li>支援多個使用者帳戶和暫時性的根目錄，例如只在插入電腦時才會顯示的 USB 儲存空間供應程式。
+ </li>
+</ul>
+
+<h2 id ="overview">總覽</h2>
+
+<p>SAF 是以內容供應程式 (<code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw">DocumentsProvider</a></code> 類別的子類別) 為基礎。
+「文件供應程式」<em></em>中的資料結構採用如下所示的傳統檔案階層：
+</p>
+<p><img src="../../../images/providers/storage_datamodelf854.png?hl=zh-tw" alt="data model" /></p>
+<p class="img-caption"><strong>圖 1.</strong>文件供應程式資料模型。「根目錄」會指向單一「文件」，接著該文件會展開成樹狀結構的分支。請注意下列事項：
+</p>
+
+<p></p>
+<ul>
+
+<li>每個文件供應程式都會回報一或多個「根目錄」(也就是文件樹狀結構的起始點)。每個根目錄都有專屬的 <code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Root.html?hl=zh-tw#COLUMN_ROOT_ID">COLUMN_ROOT_ID</a></code>，可導向至代表該根目錄所含內容的某份文件 (某個目錄)。根目錄的設計架構是動態的，能夠支援多重帳戶、暫時性 USB 儲存裝置或使用者登入/登出等使用狀況。
+
+
+
+
+
+</li>
+
+<li>每個根目錄都內含一份文件，而該文件會指向 N<em></em> 份文件的 1，每份文件又可指向另外 N<em></em> 份文件的 1。
+ </li>
+
+<li>每個儲存空間後端都會透過唯一的
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw#COLUMN_DOCUMENT_ID">COLUMN_DOCUMENT_ID</a></code> 來參照個別檔案，藉此顯示這些檔案及目錄。文件 ID 不得重複而且一旦核發便不得更改，原因在於裝置重新啟動時會將這些 ID 用於永久 URI 授權。
+
+
+</li>
+
+
+<li>文件可以是可開啟的檔案 (類型為 MIME) 或內含其他文件的目錄 (類型為
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw#MIME_TYPE_DIR">MIME_TYPE_DIR</a></code> MIME )。
+</li>
+
+<li>每份文件的功能會視
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw#COLUMN_FLAGS">COLUMN_FLAGS</a></code> 而有所不同，例如 <code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw#FLAG_SUPPORTS_WRITE">FLAG_SUPPORTS_WRITE</a></code>、
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw#FLAG_SUPPORTS_DELETE">FLAG_SUPPORTS_DELETE</a></code> 和
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw#FLAG_SUPPORTS_THUMBNAIL">FLAG_SUPPORTS_THUMBNAIL</a></code>。相同的 <code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw#COLUMN_DOCUMENT_ID">COLUMN_DOCUMENT_ID</a></code> 可以納入多個目錄中。
+
+
+</li>
+</ul>
+
+<h2 id="flow">控管流程</h2>
+<p>如上所述，文件供應程式資料模型是以傳統檔案階層為基礎。
+不過，您可以自己偏好的方式儲存您的資料，只要所儲存資料可透過 <code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw">DocumentsProvider</a></code> API 存取即可。例如，您可以將資料存放在標籤式的雲端儲存空間。
+
+</p>
+
+<p>圖 2 是相片應用程式如何使用 SAF 存取已儲存資料的說明範例：
+</p>
+<p><img src="../../../images/providers/storage_dataflowf854.png?hl=zh-tw" alt="app" /></p>
+
+<p class="img-caption"><strong>圖 2.</strong>儲存空間存取架構</p>
+
+<p>請注意下列事項：</p>
+<ul>
+
+<li>在 SAF 中，供應程式與用戶端無法直接進行互動。
+用戶端必須取得相關權限才能與檔案進行互動 (也就是讀取、編輯、建立或刪除檔案)。
+</li>
+
+<li>應用程式 (在此範例中為相片應用程式) 觸發
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_OPEN_DOCUMENT">ACTION_OPEN_DOCUMENT</a></code> 或 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_CREATE_DOCUMENT">ACTION_CREATE_DOCUMENT</a></code> 意圖後，互動程序便會開始。意圖可能包括用於縮小條件範圍的篩選器 &mdash; 例如「將所有內含　MIME 類型『圖片』的可開啟檔案提供給我」。
+
+</li>
+
+<li>一旦觸發意圖，系統挑選器就會前往所有已註冊的供應程式，並且向使用者顯示相符的內容根目錄。
+</li>
+
+<li>即便底層文件供應程式可能不盡相同，挑選器仍會提供使用者可用於存取文件的標準介面。
+例如圖 2 中的 Google 雲端硬碟供應程式、USB 供應程式和雲端供應程式。
+</li>
+</ul>
+
+<p>圖 3 顯示的是使用者搜尋指定 Google 雲端硬碟帳戶中的圖片時所用的挑選器：
+</p>
+
+<p><img src="../../../images/providers/storage_pickerf854.png?hl=zh-tw" width="340" alt="picker" style="border:2px solid #ddd" /></p>
+
+<p class="img-caption"><strong>圖 3.</strong>挑選器</p>
+
+<p>使用者選取 Google 雲端硬碟後，系統就會顯示相關圖片 (如圖 4 所示)。
+此時，使用者即可與這些圖片進行供應程式和用戶端應用程式支援的互動。
+
+
+<p><img src="../../../images/providers/storage_photosf854.png?hl=zh-tw" width="340" alt="picker" style="border:2px solid #ddd" /></p>
+
+<p class="img-caption"><strong>圖 4.</strong>相關圖片</p>
+
+<h2 id="client">編寫用戶端應用程式</h2>
+
+<p>如果您想讓應用程式在搭載 Android 4.3 以下版本的裝置上從其他應用程式擷取檔案，您的應用程式就必須呼叫 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_PICK">ACTION_PICK</a></code>或 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_GET_CONTENT">ACTION_GET_CONTENT</a></code> 意圖。
+
+接著，使用者必須選取某款應用程式來選取檔案，而且選定的應用程式必須提供使用者介面，讓使用者瀏覽及挑選可用的檔案。
+
+ </p>
+
+<p>針對搭載 Android 4.4 以上版本的裝置，您的應用程式還可以呼叫
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_OPEN_DOCUMENT">ACTION_OPEN_DOCUMENT</a></code> 意圖，以顯示系統所控管的挑選器 UI，方便使用者瀏覽其他應用程式提供的所有檔案。
+
+透過這個單一 UI，使用者可以從任何受支援的應用程式挑選檔案。
+</p>
+
+<p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_OPEN_DOCUMENT">ACTION_OPEN_DOCUMENT</a></code> 並不是 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_GET_CONTENT">ACTION_GET_CONTENT</a></code> 的替代意圖，實際上應呼叫的意圖取決於您應用程式的需求。
+
+</p>
+
+<ul>
+<li>如果您只想讓應用程式讀取/匯入資料，請呼叫 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_GET_CONTENT">ACTION_GET_CONTENT</a></code>，
+以便應用程式匯入資料 (例如圖片檔) 的複本。
+</li>
+
+<li>如果您想將文件供應程式所擁有文件的存取權永久授予您的應用程式，請呼叫 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_OPEN_DOCUMENT">ACTION_OPEN_DOCUMENT</a></code>。
+
+例如可讓使用者編輯文件供應程式中所儲存圖片的相片編輯應用程式。
+ </li>
+
+</ul>
+
+
+<p>本節說明如何根據
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_OPEN_DOCUMENT">ACTION_OPEN_DOCUMENT</a></code> 和
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_CREATE_DOCUMENT">ACTION_CREATE_DOCUMENT</a></code> 意圖編寫用戶端應用程式。</p>
+
+
+<h3 id="search">搜尋文件</h3>
+
+<p>
+以下程式碼片段採用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_OPEN_DOCUMENT">ACTION_OPEN_DOCUMENT</a></code>，可搜尋內含圖片檔的文件供應程式：
+
+</p>
+
+<pre>private static final int READ_REQUEST_CODE = 42;
+...
+/**
+ * Fires an intent to spin up the &quot;file chooser&quot; UI and select an image.
+ */
+public void performFileSearch() {
+
+    // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file
+    // browser.
+    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+
+    // Filter to only show results that can be &quot;opened&quot;, such as a
+    // file (as opposed to a list of contacts or timezones)
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+    // Filter to show only images, using the image MIME data type.
+    // If one wanted to search for ogg vorbis files, the type would be &quot;audio/ogg&quot;.
+    // To search for all documents available via installed storage providers,
+    // it would be &quot;*/*&quot;.
+    intent.setType(&quot;image/*&quot;);
+
+    startActivityForResult(intent, READ_REQUEST_CODE);
+}</pre>
+
+<p>請注意下列事項：</p>
+<ul>
+<li>當應用程式觸發 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_OPEN_DOCUMENT">ACTION_OPEN_DOCUMENT</a></code> 意圖時，挑選器便會啟動並顯示所有相符的文件供應程式。
+</li>
+
+<li>將 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#CATEGORY_OPENABLE">CATEGORY_OPENABLE</a></code> 這個類別加入意圖中可篩選搜尋結果，限定系統只顯示可開啟的文件 (例如圖片檔)。
+</li>
+
+<li>使用 <code>intent.setType("image/*")</code> 陳述式可進一步篩選搜尋結果，顯示系統只顯示內含 MIME 類型圖片的文件。
+</li>
+</ul>
+
+<h3 id="results">處理結果</h3>
+
+<p>使用者在挑選器中選取某份文件後，便會呼叫
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code>。指向所選文件的 URI 包含在 <code>resultData</code> 參數中。
+
+請使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#getData()">getData()</a></code> 擷取 URI，然後使用該 URI 擷取使用者所需的文件。
+例如：
+</p>
+
+<pre>&#64;Override
+public void onActivityResult(int requestCode, int resultCode,
+        Intent resultData) {
+
+    // The ACTION_OPEN_DOCUMENT intent was sent with the request code
+    // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
+    // response to some other intent, and the code below shouldn't run at all.
+
+    if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+        // The document selected by the user won't be returned in the intent.
+        // Instead, a URI to that document will be contained in the return intent
+        // provided to this method as a parameter.
+        // Pull that URI using resultData.getData().
+        Uri uri = null;
+        if (resultData != null) {
+            uri = resultData.getData();
+            Log.i(TAG, "Uri: " + uri.toString());
+            showImage(uri);
+        }
+    }
+}
+</pre>
+
+<h3 id="metadata">檢查文件中繼資料</h3>
+
+<p>取得文件的 URI 後，您就可以存取該文件的中繼資料。以下程式碼片段會擷取 URI 所指定文件的中繼資料並且加以記錄：
+</p>
+
+<pre>public void dumpImageMetaData(Uri uri) {
+
+    // The query, since it only applies to a single document, will only return
+    // one row. There's no need to filter, sort, or select fields, since we want
+    // all fields for one document.
+    Cursor cursor = getActivity().getContentResolver()
+            .query(uri, null, null, null, null, null);
+
+    try {
+    // moveToFirst() returns false if the cursor has 0 rows.  Very handy for
+    // &quot;if there's anything to look at, look at it&quot; conditionals.
+        if (cursor != null &amp;&amp; cursor.moveToFirst()) {
+
+            // Note it's called &quot;Display Name&quot;.  This is
+            // provider-specific, and might not necessarily be the file name.
+            String displayName = cursor.getString(
+                    cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+            Log.i(TAG, &quot;Display Name: &quot; + displayName);
+
+            int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
+            // If the size is unknown, the value stored is null.  But since an
+            // int can't be null in Java, the behavior is implementation-specific,
+            // which is just a fancy term for &quot;unpredictable&quot;.  So as
+            // a rule, check if it's null before assigning to an int.  This will
+            // happen often:  The storage API allows for remote files, whose
+            // size might not be locally known.
+            String size = null;
+            if (!cursor.isNull(sizeIndex)) {
+                // Technically the column stores an int, but cursor.getString()
+                // will do the conversion automatically.
+                size = cursor.getString(sizeIndex);
+            } else {
+                size = &quot;Unknown&quot;;
+            }
+            Log.i(TAG, &quot;Size: &quot; + size);
+        }
+    } finally {
+        cursor.close();
+    }
+}
+</pre>
+
+<h3 id="open-client">開啟文件</h3>
+
+<p>取得文件的 URI 後，您就可以開啟該文件或是對該文件執行任何所需操作。
+</p>
+
+<h4>點陣圖</h4>
+
+<p>以下範例可開啟 <code><a href="https://developer.android.com/reference/android/graphics/Bitmap.html?hl=zh-tw">Bitmap</a></code>：</p>
+
+<pre>private Bitmap getBitmapFromUri(Uri uri) throws IOException {
+    ParcelFileDescriptor parcelFileDescriptor =
+            getContentResolver().openFileDescriptor(uri, "r");
+    FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+    Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+    parcelFileDescriptor.close();
+    return image;
+}
+</pre>
+
+<p>請注意，請不要針對 UI 執行緒進行這項作業，請在背景中使用 <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=zh-tw">AsyncTask</a></code> 進行。
+開啟點陣圖後，您就可以在 <code><a href="https://developer.android.com/reference/android/widget/ImageView.html?hl=zh-tw">ImageView</a></code> 中顯示該點陣圖。
+
+</p>
+
+<h4>取得 InputStream</h4>
+
+<p>以下範例可從 URI 中取得 <code><a href="https://developer.android.com/reference/java/io/InputStream.html?hl=zh-tw">InputStream</a></code>。在這個程式碼片段中，系統會將每行檔案解讀為單一字串：
+</p>
+
+<pre>private String readTextFromUri(Uri uri) throws IOException {
+    InputStream inputStream = getContentResolver().openInputStream(uri);
+    BufferedReader reader = new BufferedReader(new InputStreamReader(
+            inputStream));
+    StringBuilder stringBuilder = new StringBuilder();
+    String line;
+    while ((line = reader.readLine()) != null) {
+        stringBuilder.append(line);
+    }
+    fileInputStream.close();
+    parcelFileDescriptor.close();
+    return stringBuilder.toString();
+}
+</pre>
+
+<h3 id="create">建立新文件</h3>
+
+<p>應用程式可在文件供應程式中使用
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_CREATE_DOCUMENT">ACTION_CREATE_DOCUMENT</a></code> 意圖建立新文件。
+如要建立新檔案，請將 MIME 類型和檔案名稱提供給意圖，然後使用專屬的要求程式碼執行該意圖。
+系統會為您完成其餘的作業：</p>
+
+
+<pre>
+// Here are some examples of how you might call this method.
+// The first parameter is the MIME type, and the second parameter is the name
+// of the file you are creating:
+//
+// createFile("text/plain", "foobar.txt");
+// createFile("image/png", "mypicture.png");
+
+// Unique request code.
+private static final int WRITE_REQUEST_CODE = 43;
+...
+private void createFile(String mimeType, String fileName) {
+    Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+
+    // Filter to only show results that can be &quot;opened&quot;, such as
+    // a file (as opposed to a list of contacts or timezones).
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+    // Create a file with the requested MIME type.
+    intent.setType(mimeType);
+    intent.putExtra(Intent.EXTRA_TITLE, fileName);
+    startActivityForResult(intent, WRITE_REQUEST_CODE);
+}
+</pre>
+
+<p>建立新文件後，您可在
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code> 中取得該文件的 URI，
+以便繼續在其中編寫程式碼。</p>
+
+<h3 id="delete">刪除文件</h3>
+
+<p>如果您已取得文件的 URI，而且文件的
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw#COLUMN_FLAGS">Document.COLUMN_FLAGS</a></code> 含有
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw#FLAG_SUPPORTS_DELETE">SUPPORTS_DELETE</a></code>，您就可以刪除該文件。
+
+例如：</p>
+
+<pre>
+DocumentsContract.deleteDocument(getContentResolver(), uri);
+</pre>
+
+<h3 id="edit">編輯文件</h3>
+
+<p>您可以使用 SAF 即時編輯文字文件。以下程式碼片段會觸發 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_OPEN_DOCUMENT">ACTION_OPEN_DOCUMENT</a></code> 意圖並使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#CATEGORY_OPENABLE">CATEGORY_OPENABLE</a></code> 類別限制系統只顯示可開啟的文件。
+
+
+
+此外，這個程式碼還會進一步篩選搜尋結果，讓系統只顯示文字檔：</p>
+
+<pre>
+private static final int EDIT_REQUEST_CODE = 44;
+/**
+ * Open a file for writing and append some text to it.
+ */
+ private void editDocument() {
+    // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's
+    // file browser.
+    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+
+    // Filter to only show results that can be &quot;opened&quot;, such as a
+    // file (as opposed to a list of contacts or timezones).
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+    // Filter to show only text files.
+    intent.setType(&quot;text/plain&quot;);
+
+    startActivityForResult(intent, EDIT_REQUEST_CODE);
+}
+</pre>
+
+<p>接著，您可以利用 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code> (詳情請參閱<a href="#results">處理結果</a>) 呼叫程式碼執行編輯動作。以下程式碼片段會利用 <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=zh-tw">ContentResolver</a></code> 取得 <code><a href="https://developer.android.com/reference/java/io/FileOutputStream.html?hl=zh-tw">FileOutputStream</a></code>。
+
+
+在預設情況下，這個程式碼片段會使用「寫入」模式。這種方法可索取最少量的所需存取權，因此如果您只需要寫入存取權，請勿要求讀取/寫入：
+
+</p>
+
+<pre>private void alterDocument(Uri uri) {
+    try {
+        ParcelFileDescriptor pfd = getActivity().getContentResolver().
+                openFileDescriptor(uri, "w");
+        FileOutputStream fileOutputStream =
+                new FileOutputStream(pfd.getFileDescriptor());
+        fileOutputStream.write(("Overwritten by MyCloud at " +
+                System.currentTimeMillis() + "\n").getBytes());
+        // Let the document provider know you're done by closing the stream.
+        fileOutputStream.close();
+        pfd.close();
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}</pre>
+
+<h3 id="permissions">保留權限</h3>
+
+<p>應用程式開啟要讀取或寫入的檔案後，系統會將該檔案的 URI 權限授予您的應用程式。
+除非使用者重新啟動裝置，否則這項權限會持續保持有效狀態。不過，假如您的應用程式為圖片編輯應用程式，而您希望使用者可直接透過您的應用程式存取他們最近編輯的 5 張圖片。如果使用者重新啟動的裝置，就您必須將使用者傳回系統挑選器來搜尋所需檔案，而這並非最佳做法。
+
+
+
+</p>
+
+<p>為了避免這種情況發生，您可以保留系統授予您應用程式的權限。實際上，您的應用程式會「取得」系統授予的永久性 URI 權限。
+
+這種權限可讓使用者持續透過您的應用程式存取檔案，即使其裝置重新啟動也無妨：
+</p>
+
+
+<pre>final int takeFlags = intent.getFlags()
+            &amp; (Intent.FLAG_GRANT_READ_URI_PERMISSION
+            | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+// Check for the freshest data.
+getContentResolver().takePersistableUriPermission(uri, takeFlags);</pre>
+
+<p>除了上述指示外，您還需要完成最後一個步驟。您儲存了您的應用程式最近存取的 URI，但這些 URI 有可能已失效 &mdash; 原因在於其他應用程式刪除或修改了文件。
+
+因此，建議您一律呼叫
+<code>getContentResolver().takePersistableUriPermission()</code> 檢查最新資料。
+</p>
+
+<h2 id="custom">編寫自訂文件供應程式</h2>
+
+<p>
+如果您想開發可提供檔案儲存服務 (例如雲端儲存服務) 的應用程式，可以編寫自訂文件供應程式透過 SAF 提供您的檔案。
+
+本節說明如何編寫這類程式。
+</p>
+
+
+<h3 id="manifest">宣示說明</h3>
+
+<p>如要實作自訂文件供應程式，請將以下項目加入應用程式的宣示說明：
+</p>
+<ul>
+
+<li>19 以上的 API 級別目標。</li>
+
+<li>宣告自訂儲存空間供應程式的
+<code>&lt;provider&gt;</code> 元素。 </li>
+
+<li>供應程式的名稱 (也就是供應程式的類別名稱)，包括套件名稱。範例：<code>com.example.android.storageprovider.MyCloudProvider</code>。
+</li>
+
+<li>授權的名稱 (也就是套件的名稱；在此範例中為
+<code>com.example.android.storageprovider</code>) 以及內容供應程式的類型
+(<code>documents</code>)。範例：<code>com.example.android.storageprovider.documents</code>。</li>
+
+<li>設為 <code>&quot;true&quot;</code> 的 <code>android:exported</code> 屬性。您必須將供應程式匯出，方便其他應用程式加以偵測。
+</li>
+
+<li>設為 <code>&quot;true&quot;</code> 的
+<code>android:grantUriPermissions</code> 屬性。這項設定可讓系統將供應程式內容的存取權授予其他應用程式。
+如果想瞭解如何保留特定文件的權限，請參閱<a href="#permissions">保留權限</a>。
+</li>
+
+<li><code>MANAGE_DOCUMENTS</code> 權限。在預設情況下，所有人都可使用供應程式。
+加入這項權限可針對系統設定供應程式限制，藉此提高其安全性。
+</li>
+
+<li>設定資源檔案所定義布林值的 <code>android:enabled</code> 屬性。
+這項屬性可用於針對搭載 Android 4.3 以下版本的裝置停用供應程式。範例：<code>android:enabled="@bool/atLeastKitKat"</code>。
+除了在宣示說明中加入這項屬性以外，您還必須執行下列操作：
+
+<ul>
+<li>在位於 <code>res/values/</code> 的 <code>bool.xml</code> 資源檔案中，新增以下程式碼：
+ <pre>&lt;bool name=&quot;atLeastKitKat&quot;&gt;false&lt;/bool&gt;</pre></li>
+
+<li>在位於 <code>res/values-v19/</code> 的 <code>bool.xml</code> 資源檔案中，新增以下程式碼：
+ <pre>&lt;bool name=&quot;atLeastKitKat&quot;&gt;true&lt;/bool&gt;</pre></li>
+</ul></li>
+
+<li>內含
+<code>android.content.action.DOCUMENTS_PROVIDER</code> 動作的意圖篩選器，讓您的供應程式能夠在系統搜尋供應程式時顯示在挑選器中。
+</li>
+
+</ul>
+<p>以下是內含供應程式的範例宣示說明例外狀況：</p>
+
+<pre>&lt;manifest... &gt;
+    ...
+    &lt;uses-sdk
+        android:minSdkVersion=&quot;19&quot;
+        android:targetSdkVersion=&quot;19&quot; /&gt;
+        ....
+        &lt;provider
+            android:name=&quot;com.example.android.storageprovider.MyCloudProvider&quot;
+            android:authorities=&quot;com.example.android.storageprovider.documents&quot;
+            android:grantUriPermissions=&quot;true&quot;
+            android:exported=&quot;true&quot;
+            android:permission=&quot;android.permission.MANAGE_DOCUMENTS&quot;
+            android:enabled=&quot;&#64;bool/atLeastKitKat&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.content.action.DOCUMENTS_PROVIDER&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/provider&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;</pre>
+
+<h4 id="43">支援搭載 Android 4.3 以下版本的裝置</h4>
+
+<p>只有搭載 Android 4.4 以上版本的裝置可使用
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_OPEN_DOCUMENT">ACTION_OPEN_DOCUMENT</a></code> 意圖。如果您想讓應用程式支援 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_GET_CONTENT">ACTION_GET_CONTENT</a></code> 以便與搭載 Android 4.3 以下版本的裝置相容，請針對搭載 Android 4.4 以上版本的裝置停用宣示說明中的 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_GET_CONTENT">ACTION_GET_CONTENT</a></code> 意圖篩選器。
+
+
+
+
+文件供應器和 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_GET_CONTENT">ACTION_GET_CONTENT</a></code> 是完全不同的項目。
+
+如果您同時支援這兩個項目，您的應用程式就會重複出現在系統挑選器 UI 中，讓使用者可透過兩種不同方式存取您儲存的資料，
+
+而這樣會造成混淆。</p>
+
+<p>以下提供針對搭載 Android 4.4 以上版本的裝置停用
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_GET_CONTENT">ACTION_GET_CONTENT</a></code> 意圖篩選器的建議做法：
+</p>
+
+<ol>
+<li>在位於 <code>res/values/</code> 的 <code>bool.xml</code> 資源檔案中，新增以下程式碼：
+ <pre>&lt;bool name=&quot;atMostJellyBeanMR2&quot;&gt;true&lt;/bool&gt;</pre></li>
+
+<li>在位於 <code>res/values-v19/</code> 的 <code>bool.xml</code> 資源檔案中，新增以下程式碼：
+ <pre>&lt;bool name=&quot;atMostJellyBeanMR2&quot;&gt;false&lt;/bool&gt;</pre></li>
+
+<li>新增
+<a href="../manifest/activity-alias-elementf854.html?hl=zh-tw">Activity 別名</a>來針對搭載 Android 4.4 (API 級別 19) 以上版本的裝置停用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_GET_CONTENT">ACTION_GET_CONTENT</a></code> 意圖篩選器。
+
+例如：
+
+<pre>
+&lt;!-- This activity alias is added so that GET_CONTENT intent-filter
+     can be disabled for builds on API level 19 and higher. --&gt;
+&lt;activity-alias android:name=&quot;com.android.example.app.MyPicker&quot;
+        android:targetActivity=&quot;com.android.example.app.MyActivity&quot;
+        ...
+        android:enabled=&quot;@bool/atMostJellyBeanMR2&quot;&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.intent.action.GET_CONTENT&quot; /&gt;
+        &lt;category android:name=&quot;android.intent.category.OPENABLE&quot; /&gt;
+        &lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;
+        &lt;data android:mimeType=&quot;image/*&quot; /&gt;
+        &lt;data android:mimeType=&quot;video/*&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity-alias&gt;
+</pre>
+</li>
+</ol>
+<h3 id="contract">合約</h3>
+
+<p>一般來說，當您編寫自訂內容供應程式時，需要完成的其中一項工作為實作合約類別 (詳情請參閱<a href="content-provider-creatingf854.html?hl=zh-tw#ContractClass">內容供應程式</a>開發人員指南)。
+
+
+合約類別是 <code>public final</code> 類別，內含以下項目的固定不變定義：URI、欄名稱、MIME 類型以及供應程式擁有的其他中繼資料。
+
+SAF 可為您提供以下合約類別，因此您不必自行編 寫合約：
+
+</p>
+
+<ul>
+   <li><code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw">DocumentsContract.Document</a></code></li>
+   <li><code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Root.html?hl=zh-tw">DocumentsContract.Root</a></code></li>
+</ul>
+
+<p>例如，以下是在文件供應程式查詢文件或根目錄時可能會傳回的資料欄：
+</p>
+
+<pre>private static final String[] DEFAULT_ROOT_PROJECTION =
+        new String[]{Root.COLUMN_ROOT_ID, Root.COLUMN_MIME_TYPES,
+        Root.COLUMN_FLAGS, Root.COLUMN_ICON, Root.COLUMN_TITLE,
+        Root.COLUMN_SUMMARY, Root.COLUMN_DOCUMENT_ID,
+        Root.COLUMN_AVAILABLE_BYTES,};
+private static final String[] DEFAULT_DOCUMENT_PROJECTION = new
+        String[]{Document.COLUMN_DOCUMENT_ID, Document.COLUMN_MIME_TYPE,
+        Document.COLUMN_DISPLAY_NAME, Document.COLUMN_LAST_MODIFIED,
+        Document.COLUMN_FLAGS, Document.COLUMN_SIZE,};
+</pre>
+
+<h3 id="subclass">將 DocumentsProvider 設為子類別</h3>
+
+<p>編寫自動文件供應程式的下一個步驟是，將抽象類別 <code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw">DocumentsProvider</a></code> 設為子類別。
+您至少必須實作下列方法：
+</p>
+
+<ul>
+<li><code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#queryRoots(java.lang.String[])">queryRoots()</a></code></li>
+
+<li><code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#queryChildDocuments(java.lang.String, java.lang.String[], android.os.Bundle)">queryChildDocuments()</a></code></li>
+
+<li><code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#queryDocument(java.lang.String, java.lang.String[])">queryDocument()</a></code></li>
+
+<li><code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#openDocument(java.lang.String, java.lang.String, android.os.CancellationSignal)">openDocument()</a></code></li>
+</ul>
+
+<p>以上是您必須實作的方法，不過您可能會視需要實作其他方法。
+詳情請參閱 <code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw">DocumentsProvider</a></code>。
+</p>
+
+<h4 id="queryRoots">實作 queryRoots</h4>
+
+<p>實作 <code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#queryRoots(java.lang.String[])">queryRoots()</a></code> 後系統會使用 <code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Root.html?hl=zh-tw">DocumentsContract.Root</a></code> 中定義的資料欄，傳回指向文件供應程式所有根目錄的 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-tw">Cursor</a></code>。
+
+</p>
+
+<p>在以下程式碼片段中，<code>projection</code> 參數代表呼叫者想返回的特定欄位。
+這個程式碼片隊會建立新游標並在其中加入一列 &mdash; 也就是根目錄或頂層目錄 (例如「下載」或「圖片」)。
+
+大多數供應程式只有一個根目錄。而您可以有多個根目錄，例如擁有多個使用者帳戶的情況下。
+在這種情況下，只要在游標中加入第二列即可。
+</p>
+
+<pre>
+&#64;Override
+public Cursor queryRoots(String[] projection) throws FileNotFoundException {
+
+    // Create a cursor with either the requested fields, or the default
+    // projection if "projection" is null.
+    final MatrixCursor result =
+            new MatrixCursor(resolveRootProjection(projection));
+
+    // If user is not logged in, return an empty root cursor.  This removes our
+    // provider from the list entirely.
+    if (!isUserLoggedIn()) {
+        return result;
+    }
+
+    // It's possible to have multiple roots (e.g. for multiple accounts in the
+    // same app) -- just add multiple cursor rows.
+    // Construct one row for a root called &quot;MyCloud&quot;.
+    final MatrixCursor.RowBuilder row = result.newRow();
+    row.add(Root.COLUMN_ROOT_ID, ROOT);
+    row.add(Root.COLUMN_SUMMARY, getContext().getString(R.string.root_summary));
+
+    // FLAG_SUPPORTS_CREATE means at least one directory under the root supports
+    // creating documents. FLAG_SUPPORTS_RECENTS means your application's most
+    // recently used documents will show up in the &quot;Recents&quot; category.
+    // FLAG_SUPPORTS_SEARCH allows users to search all documents the application
+    // shares.
+    row.add(Root.COLUMN_FLAGS, Root.FLAG_SUPPORTS_CREATE |
+            Root.FLAG_SUPPORTS_RECENTS |
+            Root.FLAG_SUPPORTS_SEARCH);
+
+    // COLUMN_TITLE is the root title (e.g. Gallery, Drive).
+    row.add(Root.COLUMN_TITLE, getContext().getString(R.string.title));
+
+    // This document id cannot change once it's shared.
+    row.add(Root.COLUMN_DOCUMENT_ID, getDocIdForFile(mBaseDir));
+
+    // The child MIME types are used to filter the roots and only present to the
+    //  user roots that contain the desired type somewhere in their file hierarchy.
+    row.add(Root.COLUMN_MIME_TYPES, getChildMimeTypes(mBaseDir));
+    row.add(Root.COLUMN_AVAILABLE_BYTES, mBaseDir.getFreeSpace());
+    row.add(Root.COLUMN_ICON, R.drawable.ic_launcher);
+
+    return result;
+}</pre>
+
+<h4 id="queryChildDocuments">實作 queryChildDocuments</h4>
+
+<p>實作
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#queryChildDocuments(java.lang.String, java.lang.String[], android.os.Bundle)">queryChildDocuments()</a></code> 後系統會使用
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw">DocumentsContract.Document</a></code> 中定義的資料欄，傳回指向特定目錄中所有檔案的 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-tw">Cursor</a></code>。
+
+</p>
+
+<p>當您在挑選器 UI 中選擇應用程式的根目錄後，就會呼叫這個方法，藉此取得根目錄內某個目錄中的下層文件。
+您可以在檔案階層的任何層級中呼叫這個方法，而不單單只能在根目錄中呼叫。
+以下程式碼片段會使用要求的資料欄建立新游標，然後加入該游標中上層目錄的任何下層物件相關資訊。下層物件可以是圖片、其他目錄等任何檔案：
+
+
+</p>
+
+<pre>&#64;Override
+public Cursor queryChildDocuments(String parentDocumentId, String[] projection,
+                              String sortOrder) throws FileNotFoundException {
+
+    final MatrixCursor result = new
+            MatrixCursor(resolveDocumentProjection(projection));
+    final File parent = getFileForDocId(parentDocumentId);
+    for (File file : parent.listFiles()) {
+        // Adds the file's display name, MIME type, size, and so on.
+        includeFile(result, null, file);
+    }
+    return result;
+}
+</pre>
+
+<h4 id="queryDocument">實作 queryDocument</h4>
+
+<p>實作
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#queryDocument(java.lang.String, java.lang.String[])">queryDocument()</a></code> 後系統會使用 <code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.Document.html?hl=zh-tw">DocumentsContract.Document</a></code> 中定義的資料欄，傳回指向特定檔案的 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-tw">Cursor</a></code>。
+
+
+</p>
+
+<p><code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#queryDocument(java.lang.String, java.lang.String[])">queryDocument()</a></code>方法會針對特定檔案傳回
+<code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#queryChildDocuments(java.lang.String, java.lang.String[], android.os.Bundle)">queryChildDocuments()</a></code> 所傳送的相同資訊：
+
+</p>
+
+
+<pre>&#64;Override
+public Cursor queryDocument(String documentId, String[] projection) throws
+        FileNotFoundException {
+
+    // Create a cursor with the requested projection, or the default projection.
+    final MatrixCursor result = new
+            MatrixCursor(resolveDocumentProjection(projection));
+    includeFile(result, documentId, null);
+    return result;
+}
+</pre>
+
+<h4 id="openDocument">實作 openDocument</h4>
+
+<p>您必須實作 <code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#openDocument(java.lang.String, java.lang.String, android.os.CancellationSignal)">openDocument()</a></code> 來傳回代表特定檔案的
+<code><a href="https://developer.android.com/reference/android/os/ParcelFileDescriptor.html?hl=zh-tw">ParcelFileDescriptor</a></code>。其他應用程式可利用傳回的 <code><a href="https://developer.android.com/reference/android/os/ParcelFileDescriptor.html?hl=zh-tw">ParcelFileDescriptor</a></code> 傳輸資料。
+使用者選取檔案而且用戶端應用程式呼叫
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=zh-tw#openFileDescriptor(android.net.Uri, java.lang.String)">openFileDescriptor()</a></code> 要求存取該檔案後，系統就會呼叫這個方法。範例：
+
+</p>
+
+<pre>&#64;Override
+public ParcelFileDescriptor openDocument(final String documentId,
+                                         final String mode,
+                                         CancellationSignal signal) throws
+        FileNotFoundException {
+    Log.v(TAG, &quot;openDocument, mode: &quot; + mode);
+    // It's OK to do network operations in this method to download the document,
+    // as long as you periodically check the CancellationSignal. If you have an
+    // extremely large file to transfer from the network, a better solution may
+    // be pipes or sockets (see ParcelFileDescriptor for helper methods).
+
+    final File file = getFileForDocId(documentId);
+
+    final boolean isWrite = (mode.indexOf('w') != -1);
+    if(isWrite) {
+        // Attach a close listener if the document is opened in write mode.
+        try {
+            Handler handler = new Handler(getContext().getMainLooper());
+            return ParcelFileDescriptor.open(file, accessMode, handler,
+                        new ParcelFileDescriptor.OnCloseListener() {
+                &#64;Override
+                public void onClose(IOException e) {
+
+                    // Update the file with the cloud server. The client is done
+                    // writing.
+                    Log.i(TAG, &quot;A file with id &quot; +
+                    documentId + &quot; has been closed!
+                    Time to &quot; +
+                    &quot;update the server.&quot;);
+                }
+
+            });
+        } catch (IOException e) {
+            throw new FileNotFoundException(&quot;Failed to open document with id &quot;
+            + documentId + &quot; and mode &quot; + mode);
+        }
+    } else {
+        return ParcelFileDescriptor.open(file, accessMode);
+    }
+}
+</pre>
+
+<h3 id="security">安全性</h3>
+
+<p>假如您的文件供應程式為受密碼保護的雲端儲存服務，而您先想確認使用者都已登入，然後再開始分享其檔案。那麼在使用者未登入的情況下，您的應用程式應採取什麼行動？
+
+解決方案是不要讓文件供應程式在您實作 <code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#queryRoots(java.lang.String[])">queryRoots()</a></code> 後傳回任何根目錄。
+換句話說，就是讓供應程式傳回空的根目錄游標：</p>
+
+<pre>
+public Cursor queryRoots(String[] projection) throws FileNotFoundException {
+...
+    // If user is not logged in, return an empty root cursor.  This removes our
+    // provider from the list entirely.
+    if (!isUserLoggedIn()) {
+        return result;
+}
+</pre>
+
+<p>另一個需採取的步驟是呼叫 <code>getContentResolver().notifyChange()</code>。還記得 <code><a href="https://developer.android.com/reference/android/provider/DocumentsContract.html?hl=zh-tw">DocumentsContract</a></code> 嗎？
+我們會使用該類別建立 URI。以下程式碼片段會指示系統在使用者的登入狀態變更時，查詢文件供應程式的根目錄。
+
+如果使用者未登入，呼叫 <code><a href="https://developer.android.com/reference/android/provider/DocumentsProvider.html?hl=zh-tw#queryRoots(java.lang.String[])">queryRoots()</a></code> 就會如上所述傳回空的游標。
+
+這樣可確保只有登入供應程式的使用者可存取其中的文件。
+</p>
+
+<pre>private void onLoginButtonClick() {
+    loginOrLogout();
+    getContentResolver().notifyChange(DocumentsContract
+            .buildRootsUri(AUTHORITY), null);
+}
+</pre>
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=zh-tw" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="網誌" target="_blank">網誌</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=zh-tw" title="完備支援">完備支援</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=zh-tw" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=zh-tw" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=zh-tw" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=zh-tw" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="N7VcvJvnSVEJMGVgV5cj373AscKrua6qG2nJIX0eL8M6MTQ5NzUxNjczNDcyNzAzMA" />
+      <input type="hidden" name="next" value="document-provider.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+             selected="selected" >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">電子郵件地址</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en962f.js?hl=zh-tw?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=zh-tw"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_zh-tw.js?hl=zh-tw?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/document-provider.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:11:26 GMT -->
+</html>

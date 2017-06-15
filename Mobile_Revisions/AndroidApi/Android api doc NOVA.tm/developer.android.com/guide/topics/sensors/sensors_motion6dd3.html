@@ -1,0 +1,1534 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<!-- Mirrored from developer.android.com/guide/topics/sensors/sensors_motion.html?hl=pt-br by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:04:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="7tnTLxqkeMqM973qjbqto4NYTrgfauKs9-W_U8wCOeU6MTQ5NzUxNjE2NTMzMTYwMA" />
+
+  
+    <link rel="canonical" href="sensors_motion.html">
+  
+
+  
+    <link rel="alternate" href="sensors_motion.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/sensors/sensors_motion.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="sensors_motion.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon6dd3.png?hl=pt-br">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1806dd3.png?hl=pt-br">
+
+
+<title>
+
+  Motion Sensors | Android Developers
+
+</title>
+
+  <meta name="description" content="The Android platform provides several sensors that let you monitor the motion of a device. Two of these sensors are always hardware-based (the accelerometer and gyroscope), and three of these sensors can be either hardware-based or software-based (the…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default9fbc.css?hl=pt-br?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle6dd3.js?hl=pt-br" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__pt_br6dd3.js?hl=pt-br"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android6dd3.js?hl=pt-br"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs9fbc.js?hl=pt-br?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;pt-br&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;pt-br&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "pt-br", "served": "en"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=pt-br">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo6dd3.png?hl=pt-br"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=pt-br"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=pt-br"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=pt-br"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=pt-br"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=pt-br" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Pesquisa">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Voltar</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index6dd3.html?hl=pt-br" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals6dd3.html?hl=pt-br" >App Fundamentals</a></li><li><a href="../../practices/compatibility6dd3.html?hl=pt-br" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/index6dd3.html?hl=pt-br" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requesting6dd3.html?hl=pt-br" >Requesting Permissions</a></li><li><a href="../permissions/defining6dd3.html?hl=pt-br" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index6dd3.html?hl=pt-br" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack6dd3.html?hl=pt-br"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-art6dd3.html?hl=pt-br" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index6dd3.html?hl=pt-br" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters6dd3.html?hl=pt-br" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common6dd3.html?hl=pt-br" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/index6dd3.html?hl=pt-br" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activities6dd3.html?hl=pt-br" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecycle6dd3.html?hl=pt-br" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changes6dd3.html?hl=pt-br" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stack6dd3.html?hl=pt-br" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecycle6dd3.html?hl=pt-br" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundles6dd3.html?hl=pt-br" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recents6dd3.html?hl=pt-br" >Recents Screen</a></li></ul></li><li><a href="../../components/fragments6dd3.html?hl=pt-br" >Fragments</a></li><li><a href="../../components/loaders6dd3.html?hl=pt-br" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services6dd3.html?hl=pt-br" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services6dd3.html?hl=pt-br" >Bound Services</a></li><li><a href="../../components/aidl6dd3.html?hl=pt-br" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providers6dd3.html?hl=pt-br" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basics6dd3.html?hl=pt-br" >Content Provider Basics</a></li><li><a href="../providers/content-provider-creating6dd3.html?hl=pt-br" >Creating a Content Provider</a></li><li><a href="../providers/calendar-provider6dd3.html?hl=pt-br" >Calendar Provider</a></li><li><a href="../providers/contacts-provider6dd3.html?hl=pt-br" >Contacts Provider</a></li><li><a href="../providers/document-provider6dd3.html?hl=pt-br" >Open files using Storage Access Framework</a></li><li><a href="../providers/create-document-provider6dd3.html?hl=pt-br" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcasts6dd3.html?hl=pt-br" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index6dd3.html?hl=pt-br" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host6dd3.html?hl=pt-br" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threads6dd3.html?hl=pt-br" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index6dd3.html?hl=pt-br" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview6dd3.html?hl=pt-br" >Overview</a></li><li><a href="../resources/providing-resources6dd3.html?hl=pt-br" >Providing Resources</a></li><li><a href="../resources/accessing-resources6dd3.html?hl=pt-br" >Accessing Resources</a></li><li><a href="../resources/runtime-changes6dd3.html?hl=pt-br" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization6dd3.html?hl=pt-br" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework6dd3.html?hl=pt-br" >ICU4J Android Framework APIs</a></li><li><a href="../resources/multilingual-support6dd3.html?hl=pt-br" >Language and Locale</a></li></ul></li><li><a href="../resources/complex-xml-resources6dd3.html?hl=pt-br" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources6dd3.html?hl=pt-br" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource6dd3.html?hl=pt-br" >Animation</a></li><li><a href="../resources/color-list-resource6dd3.html?hl=pt-br" >Color State List</a></li><li><a href="../resources/drawable-resource6dd3.html?hl=pt-br" >Drawable</a></li><li><a href="../resources/layout-resource6dd3.html?hl=pt-br" >Layout</a></li><li><a href="../resources/menu-resource6dd3.html?hl=pt-br" >Menu</a></li><li><a href="../resources/string-resource6dd3.html?hl=pt-br" >String</a></li><li><a href="../resources/style-resource6dd3.html?hl=pt-br" >Style</a></li><li><a href="../resources/more-resources6dd3.html?hl=pt-br" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro6dd3.html?hl=pt-br" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element6dd3.html?hl=pt-br" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element6dd3.html?hl=pt-br" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element6dd3.html?hl=pt-br" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element6dd3.html?hl=pt-br" >&lt;application&gt;</a></li><li><a href="../manifest/category-element6dd3.html?hl=pt-br" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element6dd3.html?hl=pt-br" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element6dd3.html?hl=pt-br" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element6dd3.html?hl=pt-br" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element6dd3.html?hl=pt-br" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element6dd3.html?hl=pt-br" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element6dd3.html?hl=pt-br" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element6dd3.html?hl=pt-br" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element6dd3.html?hl=pt-br" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element6dd3.html?hl=pt-br" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element6dd3.html?hl=pt-br" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element6dd3.html?hl=pt-br" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element6dd3.html?hl=pt-br" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element6dd3.html?hl=pt-br" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element6dd3.html?hl=pt-br" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element6dd3.html?hl=pt-br" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element6dd3.html?hl=pt-br" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element6dd3.html?hl=pt-br" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element6dd3.html?hl=pt-br" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element6dd3.html?hl=pt-br" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element6dd3.html?hl=pt-br" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element6dd3.html?hl=pt-br" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element6dd3.html?hl=pt-br" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index6dd3.html?hl=pt-br" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview6dd3.html?hl=pt-br" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout6dd3.html?hl=pt-br" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear6dd3.html?hl=pt-br" >Linear Layout</a></li><li><a href="../ui/layout/relative6dd3.html?hl=pt-br" >Relative Layout</a></li><li><a href="../ui/layout/recyclerview6dd3.html?hl=pt-br" >Recycler View</a></li><li><a href="../ui/layout/listview6dd3.html?hl=pt-br" >List View</a></li><li><a href="../ui/layout/gridview6dd3.html?hl=pt-br" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls6dd3.html?hl=pt-br" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button6dd3.html?hl=pt-br" >Buttons</a></li><li><a href="../ui/controls/checkbox6dd3.html?hl=pt-br" >Checkboxes</a></li><li><a href="../ui/controls/radiobutton6dd3.html?hl=pt-br" >Radio Buttons</a></li><li><a href="../ui/controls/togglebutton6dd3.html?hl=pt-br" >Toggle Buttons</a></li><li><a href="../ui/controls/spinner6dd3.html?hl=pt-br" >Spinners</a></li><li><a href="../ui/controls/pickers6dd3.html?hl=pt-br" >Pickers</a></li></ul></li><li><a href="../ui/ui-events6dd3.html?hl=pt-br" >Input Events</a></li><li><a href="../ui/menus6dd3.html?hl=pt-br" >Menus</a></li><li><a href="../ui/settings6dd3.html?hl=pt-br" >Settings</a></li><li><a href="../ui/dialogs6dd3.html?hl=pt-br" >Dialogs</a></li><li><a href="../ui/notifiers/notifications6dd3.html?hl=pt-br" >Notifications</a></li><li><a href="../ui/notifiers/toasts6dd3.html?hl=pt-br" >Toasts</a></li><li><a href="../ui/shortcuts6dd3.html?hl=pt-br" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index6dd3.html?hl=pt-br" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog6dd3.html?hl=pt-br" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestions6dd3.html?hl=pt-br" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestions6dd3.html?hl=pt-br" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-config6dd3.html?hl=pt-br" >Searchable Configuration</a></li></ul></li><li><a href="../ui/multi-window6dd3.html?hl=pt-br" >Multi-Window Support</a></li><li><a href="../ui/drag-drop6dd3.html?hl=pt-br" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index6dd3.html?hl=pt-br" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps6dd3.html?hl=pt-br" >Making Apps More Accessible</a></li><li><a href="../ui/accessibility/checklist6dd3.html?hl=pt-br" >Accessibility Developer Checklist</a></li><li><a href="../ui/accessibility/node-tree-debugging6dd3.html?hl=pt-br" >Using Node Tree Debugging</a></li><li><a href="../ui/accessibility/services6dd3.html?hl=pt-br" >Building Accessibility Services</a></li><li><a href="../ui/accessibility/custom-views6dd3.html?hl=pt-br" >Building Accessible Custom Views</a></li></ul></li><li><a href="../ui/themes6dd3.html?hl=pt-br" >Styles and Themes</a></li><li><a href="../ui/custom-components6dd3.html?hl=pt-br" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index6dd3.html?hl=pt-br" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview6dd3.html?hl=pt-br" >Overview</a></li><li><a href="../graphics/prop-animation6dd3.html?hl=pt-br" >Property Animation</a></li><li><a href="../graphics/view-animation6dd3.html?hl=pt-br" >View Animation</a></li><li><a href="../graphics/drawable-animation6dd3.html?hl=pt-br" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphics6dd3.html?hl=pt-br" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resources6dd3.html?hl=pt-br" >Vector Drawable</a></li></ul></li><li><a href="../graphics/opengl6dd3.html?hl=pt-br" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel6dd3.html?hl=pt-br" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index6dd3.html?hl=pt-br" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute6dd3.html?hl=pt-br" >RenderScript</a></li><li><a href="../renderscript/advanced6dd3.html?hl=pt-br" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview6dd3.html?hl=pt-br" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types6dd3.html?hl=pt-br" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_types6dd3.html?hl=pt-br" >Object Types</a></li><li><a href="../renderscript/reference/rs_convert6dd3.html?hl=pt-br" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_math6dd3.html?hl=pt-br" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_math6dd3.html?hl=pt-br" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrix6dd3.html?hl=pt-br" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternion6dd3.html?hl=pt-br" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomic6dd3.html?hl=pt-br" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_time6dd3.html?hl=pt-br" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_data6dd3.html?hl=pt-br" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_info6dd3.html?hl=pt-br" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_each6dd3.html?hl=pt-br" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_io6dd3.html?hl=pt-br" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debug6dd3.html?hl=pt-br" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphics6dd3.html?hl=pt-br" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/index6dd3.html?hl=pt-br" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/index6dd3.html?hl=pt-br" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overview6dd3.html?hl=pt-br" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-session6dd3.html?hl=pt-br" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-app6dd3.html?hl=pt-br" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservice6dd3.html?hl=pt-br" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-client6dd3.html?hl=pt-br" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacks6dd3.html?hl=pt-br" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-app6dd3.html?hl=pt-br" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activity6dd3.html?hl=pt-br" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacks6dd3.html?hl=pt-br" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttons6dd3.html?hl=pt-br" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphones6dd3.html?hl=pt-br" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index6dd3.html?hl=pt-br" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formats6dd3.html?hl=pt-br" >Supported Media Formats</a></li><li><a href="../media/mediaplayer6dd3.html?hl=pt-br" >MediaPlayer</a></li><li><a href="../media/mediarecorder6dd3.html?hl=pt-br" >MediaRecorder</a></li><li><a href="../media/exoplayer6dd3.html?hl=pt-br" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routing6dd3.html?hl=pt-br" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouter6dd3.html?hl=pt-br" >MediaRouter API</a></li><li><a href="../media/mediarouteprovider6dd3.html?hl=pt-br" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/camera6dd3.html?hl=pt-br" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index6dd3.html?hl=pt-br" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index6dd3.html?hl=pt-br" >Location and Maps</a></li><li><a href="../location/strategies6dd3.html?hl=pt-br" >Location Strategies</a></li><li><a href="sensors_overview6dd3.html?hl=pt-br" >Sensors Overview</a></li><li><a href="sensors_motion6dd3.html?hl=pt-br" >Motion Sensors</a></li><li><a href="sensors_position6dd3.html?hl=pt-br" >Position Sensors</a></li><li><a href="sensors_environment6dd3.html?hl=pt-br" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index6dd3.html?hl=pt-br" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth6dd3.html?hl=pt-br" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le6dd3.html?hl=pt-br" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index6dd3.html?hl=pt-br" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc6dd3.html?hl=pt-br" >NFC Basics</a></li><li><a href="../connectivity/nfc/advanced-nfc6dd3.html?hl=pt-br" >Advanced NFC</a></li><li><a href="../connectivity/nfc/hce6dd3.html?hl=pt-br" >Host-based Card Emulation</a></li></ul></li><li><a href="../connectivity/wifip2p6dd3.html?hl=pt-br" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index6dd3.html?hl=pt-br" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory6dd3.html?hl=pt-br" >Accessory</a></li><li><a href="../connectivity/usb/host6dd3.html?hl=pt-br" >Host</a></li></ul></li><li><a href="../connectivity/sip6dd3.html?hl=pt-br" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index6dd3.html?hl=pt-br" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste6dd3.html?hl=pt-br" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-method6dd3.html?hl=pt-br" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboard6dd3.html?hl=pt-br" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-framework6dd3.html?hl=pt-br" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index6dd3.html?hl=pt-br" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage6dd3.html?hl=pt-br" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../data/backup6dd3.html?hl=pt-br" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/autobackup6dd3.html?hl=pt-br" >Auto Backup</a></li><li><a href="../data/keyvaluebackup6dd3.html?hl=pt-br" >Key/Value Backup</a></li><li><a href="../data/testingbackup6dd3.html?hl=pt-br" >Testing Backup and Restore</a></li></ul></li><li><a href="../data/install-location6dd3.html?hl=pt-br" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index6dd3.html?hl=pt-br" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin6dd3.html?hl=pt-br" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index6dd3.html?hl=pt-br" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting6dd3.html?hl=pt-br" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webview6dd3.html?hl=pt-br" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migrating6dd3.html?hl=pt-br" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debugging6dd3.html?hl=pt-br" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practices6dd3.html?hl=pt-br" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index6dd3.html?hl=pt-br"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support6dd3.html?hl=pt-br" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution6dd3.html?hl=pt-br" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-mode6dd3.html?hl=pt-br" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessness6dd3.html?hl=pt-br" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsets6dd3.html?hl=pt-br" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=pt-br">Início</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=pt-br">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=pt-br">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=pt-br">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=pt-br">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=pt-br">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=pt-br"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=pt-br"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=pt-br"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Treinamento</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index6dd3.html?hl=pt-br"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=pt-br"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Referência</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=pt-br">Amostras</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=pt-br"
+           >Bibliotecas</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=pt-br"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=pt-br"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=pt-br">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=pt-br">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=pt-br">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=pt-br"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=pt-br">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=pt-br">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=pt-br"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=pt-br"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=pt-br">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=pt-br">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Motion Sensors</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+  <div id="qv">
+    <h2>In this document</h2>
+    <ol>
+      <li><a href="#sensors-motion-grav">Using the Gravity Sensor</a></li>
+      <li><a href="#sensors-motion-linear">Using the Linear Accelerometer</a></li>
+      <li><a href="#sensors-motion-rotate">Using the Rotation Vector Sensor</a></li>
+      <li><a href="#sensors-motion-significant">Using the Significant Motion Sensor</a></li>
+      <li><a href="#sensors-motion-stepcounter">Using the Step Counter Sensor</a></li>
+      <li><a href="#sensors-motion-stepdetector">Using the Step Detector Sensor</a></li>
+      <li><a href="#sensors-raw-data">Working with Raw Data</a>
+        <ol>
+          <li><a href="#sensors-motion-accel">Using the Accelerometer</a></li>
+          <li><a href="#sensors-motion-gyro">Using the Gyroscope</a></li>
+        </ol>
+      </li>
+    </ol>
+    <h2>Key classes and interfaces</h2>
+    <ol>
+      <li><code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br">Sensor</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/hardware/SensorEvent.html?hl=pt-br">SensorEvent</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/hardware/SensorManager.html?hl=pt-br">SensorManager</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/hardware/SensorEventListener.html?hl=pt-br">SensorEventListener</a></code></li>
+    </ol>
+    <h2>Related samples</h2>
+    <ol>
+      <li><a href="https://developer.android.com/samples/AccelerometerPlay/index.html?hl=pt-br">Accelerometer
+      Play</a></li>
+      <li><a
+href="https://developer.android.com/samples/ApiDemos/src/com/example/android/apis/os/RotationVectorDemo.html?hl=pt-br">
+API Demos (OS - RotationVectorDemo)</a></li>
+      <li><a
+href="https://developer.android.com/samples/ApiDemos/src/com/example/android/apis/os/RotationVectorDemo.html?hl=pt-br"
+>API Demos (OS - Sensors)</a></li>
+    </ol>
+    <h2>See also</h2>
+    <ol>
+      <li><a href="index6dd3.html?hl=pt-br">Sensors</a></li>
+      <li><a href="sensors_overview6dd3.html?hl=pt-br">Sensors Overview</a></li>
+      <li><a href="sensors_position6dd3.html?hl=pt-br">Position Sensors</a></li>
+      <li><a href="sensors_environment6dd3.html?hl=pt-br">Environment
+Sensors</a></li>
+    </ol>
+  </div>
+</div>
+
+<p>The Android platform provides several sensors that let you monitor the motion
+of a device.</p>
+
+<p>The sensors' possible architectures vary by sensor type:</p>
+<ul>
+  <li>
+    The gravity, linear acceleration, rotation vector, significant motion, step
+    counter, and step detector sensors are either hardware-based or
+    software-based.
+  </li>
+  <li>
+    The accelerometer and gyroscope sensors are always hardware-based.
+  </li>
+</ul>
+
+<p>Most Android-powered devices have an accelerometer, and many now include a
+gyroscope. The availability of the software-based sensors is more
+variable because they often rely on one or more hardware sensors to derive their
+data. Depending on the device, these software-based sensors can derive their
+data either from the accelerometer and magnetometer or from the gyroscope.</p>
+
+<p>Motion sensors are useful for monitoring device movement, such as tilt, shake, rotation, or
+swing. The movement is usually a reflection of direct user input (for example, a user steering a
+car in a game or a user controlling a ball in a game), but it can also be a reflection of the
+physical environment in which the device is sitting (for example, moving with you while you drive
+your car). In the first case, you are monitoring motion relative to the device's frame of reference
+or your application's frame of reference; in the second case you are monitoring motion relative to
+the world's frame of reference. Motion sensors by themselves are not typically used to monitor
+device position, but they can be used with other sensors, such as the geomagnetic field sensor, to
+determine a device's position relative to the world's frame of reference (see <a
+href="sensors_position6dd3.html?hl=pt-br">Position Sensors</a> for more
+information).</p>
+
+<p>All of the motion sensors return multi-dimensional arrays of sensor values for each <code><a href="https://developer.android.com/reference/android/hardware/SensorEvent.html?hl=pt-br">SensorEvent</a></code>. For example, during a single sensor event the accelerometer returns
+acceleration force data for the three coordinate axes, and the gyroscope returns rate of rotation
+data for the three coordinate axes. These data values are returned in a <code>float</code> array
+(<code><a href="https://developer.android.com/reference/android/hardware/SensorEvent.html?hl=pt-br#values">values</a></code>) along with other <code><a href="https://developer.android.com/reference/android/hardware/SensorEvent.html?hl=pt-br">SensorEvent</a></code>
+parameters. Table 1 summarizes the motion sensors that are available on the Android platform.</p>
+
+<p class="table-caption" id="table1">
+  <strong>Table 1.</strong> Motion sensors that are supported on the Android platform.</p>
+<table>
+  <tr>
+    <th scope="col" style="white-space:nowrap">Sensor</th>
+    <th scope="col" style="white-space:nowrap">Sensor event data</th>
+    <th scope="col" style="white-space:nowrap">Description</th>
+    <th scope="col" style="white-space:nowrap">Units of measure</th>
+  </tr>
+  <tr>
+    <td rowspan="3"><code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#TYPE_ACCELEROMETER">TYPE_ACCELEROMETER</a></code></td>
+    <td><code>SensorEvent.values[0]</code></td>
+    <td>Acceleration force along the x axis (including gravity).</td>
+    <td rowspan="3">m/s<sup>2</sup></td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[1]</code></td>
+    <td>Acceleration force along the y axis (including gravity).</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[2]</code></td>
+    <td>Acceleration force along the z axis (including gravity).</td>
+  </tr>
+  <tr>
+    <td rowspan="3"><code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#TYPE_GRAVITY">TYPE_GRAVITY</a></code></td>
+    <td><code>SensorEvent.values[0]</code></td>
+    <td>Force of gravity along the x axis.</td>
+    <td rowspan="3">m/s<sup>2</sup></td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[1]</code></td>
+    <td>Force of gravity along the y axis.</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[2]</code></td>
+    <td>Force of gravity along the z axis.</td>
+  </tr>
+  <tr>
+    <td rowspan="3"><code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#TYPE_GYROSCOPE">TYPE_GYROSCOPE</a></code></td>
+    <td><code>SensorEvent.values[0]</code></td>
+    <td>Rate of rotation around the x axis.</td>
+    <td rowspan="3">rad/s</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[1]</code></td>
+    <td>Rate of rotation around the y axis.</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[2]</code></td>
+    <td>Rate of rotation around the z axis.</td>
+  </tr>
+  <tr>
+    <td rowspan="6"><code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#TYPE_GYROSCOPE_UNCALIBRATED">TYPE_GYROSCOPE_UNCALIBRATED</a></code></td>
+    <td><code>SensorEvent.values[0]</code></td>
+    <td>Rate of rotation (without drift compensation) around the x axis.</td>
+    <td rowspan="6">rad/s</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[1]</code></td>
+    <td>Rate of rotation (without drift compensation) around the y axis.</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[2]</code></td>
+    <td>Rate of rotation (without drift compensation) around the z axis.</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[3]</code></td>
+    <td>Estimated drift around the x axis.</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[4]</code></td>
+    <td>Estimated drift around the y axis.</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[5]</code></td>
+    <td>Estimated drift around the z axis.</td>
+  </tr>
+  <tr>
+    <td rowspan="3"><code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#TYPE_LINEAR_ACCELERATION">TYPE_LINEAR_ACCELERATION</a></code></td>
+    <td><code>SensorEvent.values[0]</code></td>
+    <td>Acceleration force along the x axis (excluding gravity).</td>
+    <td rowspan="3">m/s<sup>2</sup></td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[1]</code></td>
+    <td>Acceleration force along the y axis (excluding gravity).</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[2]</code></td>
+    <td>Acceleration force along the z axis (excluding gravity).</td>
+  </tr>
+  <tr>
+    <td rowspan="4"><code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#TYPE_ROTATION_VECTOR">TYPE_ROTATION_VECTOR</a></code></td>
+    <td><code>SensorEvent.values[0]</code></td>
+    <td>Rotation vector component along the x axis (x * sin(θ/2)).</td>
+    <td rowspan="4">Unitless</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[1]</code></td>
+    <td>Rotation vector component along the y axis (y * sin(θ/2)).</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[2]</code></td>
+    <td>Rotation vector component along the z axis (z * sin(θ/2)).</td>
+  </tr>
+  <tr>
+    <td><code>SensorEvent.values[3]</code></td>
+    <td>Scalar component of the rotation vector ((cos(θ/2)).<sup>1</sup></td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#TYPE_SIGNIFICANT_MOTION">TYPE_SIGNIFICANT_MOTION</a></code></td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#TYPE_STEP_COUNTER">TYPE_STEP_COUNTER</a></code></td>
+    <td><code>SensorEvent.values[0]</code></td>
+    <td>Number of steps taken by the user since the last reboot while the sensor
+        was activated.</td>
+    <td>Steps</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#TYPE_STEP_DETECTOR">TYPE_STEP_DETECTOR</a></code></td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+</table>
+
+<p class="note"><strong><sup>1</sup></strong> The scalar component is an optional value.</p>
+
+<p>The rotation vector sensor and the gravity sensor are the most frequently used sensors for motion
+detection and monitoring. The rotational vector sensor is particularly versatile and can be used for
+a wide range of motion-related tasks, such as detecting gestures, monitoring angular change, and
+monitoring relative orientation changes. For example, the rotational vector sensor is ideal if you
+are developing a game, an augmented reality application, a 2-dimensional or 3-dimensional compass,
+or a camera stabilization app. In most cases, using these sensors is a better choice than using
+the accelerometer and geomagnetic field sensor or the orientation sensor.</p>
+
+<h3>Android Open Source Project Sensors</h3>
+
+<p>The Android Open Source Project (AOSP) provides three software-based motion sensors: a gravity
+sensor, a linear acceleration sensor, and a rotation vector sensor. These sensors were updated in
+Android 4.0 and now use a device's gyroscope (in addition to other sensors) to improve stability and
+performance. If you want to try these sensors, you can identify them by using the <code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#getVendor()">getVendor()</a></code> method and the <code><a href="https://developer.android.com/reference/android/hardware/Sensor.html?hl=pt-br#getVersion()">getVersion()</a></code> method
+(the vendor is Google Inc.; the version number is 3). Identifying these sensors by vendor and
+version number is necessary because the Android system considers these three sensors to be secondary
+sensors. For example, if a device manufacturer provides their own gravity sensor, then the AOSP
+gravity sensor shows up as a secondary gravity sensor. All three of these sensors rely on a
+gyroscope: if a device does not have a gyroscope, these sensors do not show up and are not
+available for use.</p>
+
+<h2 id="sensors-motion-grav">Using the Gravity Sensor</h2>
+
+<p>The gravity sensor provides a three dimensional vector indicating the
+direction and magnitude of gravity. Typically, this sensor is used to determine
+the device's relative orientation in space. The following code shows you how to
+get an instance of the default gravity sensor:</p>
+
+<pre>
+private SensorManager mSensorManager;
+private Sensor mSensor;
+...
+mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+</pre>
+
+<p>The units are the same as those used by the acceleration
+sensor (m/s<sup>2</sup>), and the coordinate system is the same as the one used by the
+acceleration sensor.</p>
+
+<p class="note"><strong>Note:</strong> When a device is at rest, the output of the gravity sensor
+should be identical to that of the accelerometer.</p>
+
+<h2 id="sensors-motion-linear">Using the Linear Accelerometer</h2>
+
+<p>The linear acceleration sensor provides you with a three-dimensional vector
+representing acceleration along each device axis, excluding gravity. You can use
+this value to perform gesture detection. The value can also serve as input to an
+inertial navigation system, which uses dead reckoning. The following code shows
+you how to get an instance of the default linear acceleration sensor:</p>
+
+<pre>
+private SensorManager mSensorManager;
+private Sensor mSensor;
+...
+mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+</pre>
+
+<p>Conceptually, this sensor provides you with acceleration data according to the following
+relationship:</p>
+
+<pre class="no-pretty-print classic">
+linear acceleration = acceleration - acceleration due to gravity
+</pre>
+
+<p>You typically use this sensor when you want to obtain acceleration data without the influence of
+gravity. For example, you could use this sensor to see how fast your car is going. The linear
+acceleration sensor always has an offset, which you need to remove. The simplest way to do this is
+to build a calibration step into your application. During calibration you can ask the user to set
+the device on a table, and then read the offsets for all three axes. You can then subtract that
+offset from the acceleration sensor's direct readings to get the actual linear
+acceleration.</p>
+
+<p>The sensor <a
+  href="sensors_overview6dd3.html?hl=pt-br#sensors-coords">coordinate
+system</a> is the same as the one used by the acceleration sensor, as are the units of measure
+(m/s<sup>2</sup>).
+
+<h2 id="sensors-motion-rotate">Using the Rotation Vector Sensor</h2>
+
+<p>The rotation vector represents the orientation of the device as a combination of an angle and an
+axis, in which the device has rotated through an angle θ around an axis (x, y, or z). The following
+code shows you how to get an instance of the default rotation vector sensor:</p>
+
+<pre>
+private SensorManager mSensorManager;
+private Sensor mSensor;
+...
+mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+</pre>
+
+<p>The three elements of the rotation vector are expressed as follows:</p>
+
+<pre class="no-pretty-print classic">
+x*sin(θ/2)
+y*sin(θ/2)
+z*sin(θ/2)
+</pre>
+
+<p>Where the magnitude of the rotation vector is equal to sin(θ/2), and the direction of the
+rotation vector is equal to the direction of the axis of rotation.</p>
+
+<div class="figure" style="width:246px">
+  <img src="../../../images/axis_globe6dd3.png?hl=pt-br" alt="" height="235" />
+  <p class="img-caption">
+    <strong>Figure 1.</strong> Coordinate system used by the rotation vector sensor.
+  </p>
+</div>
+
+<p>The three elements of the rotation vector are equal to the last three components of a unit
+quaternion (cos(θ/2), x*sin(θ/2), y*sin(θ/2), z*sin(θ/2)). Elements of the rotation vector are
+unitless. The x, y, and z axes are defined in the same way as the acceleration sensor. The reference
+coordinate system is defined as a direct orthonormal basis (see figure 1). This coordinate system
+has the following characteristics:</p>
+
+<ul>
+  <li>X is defined as the vector product Y x Z. It is tangential to the
+ground at the device's current location and points approximately East.</li>
+  <li>Y is tangential to the ground at the device's current location and points toward the
+geomagnetic
+North Pole.</li>
+  <li>Z points toward the sky and is perpendicular to the ground plane.</li>
+</ul>
+
+<p>The Android SDK provides a sample application that shows how to use the rotation vector sensor.
+The sample application is located in the API Demos code (<a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/os/RotationVectorDemo.html?hl=pt-br">
+OS - RotationVectorDemo</a>).</p>
+
+<h2 id="sensors-motion-significant">Using the Significant Motion Sensor</h2>
+
+<p>The significant motion sensor triggers an event each time significant motion is detected and
+then it disables itself. A significant motion is a motion that might lead to a change in the
+user's location; for example walking, biking, or sitting in a moving car. The following code shows you
+how to get an instance of the default significant motion sensor and how to register an event
+listener:</p>
+
+<pre>
+private SensorManager mSensorManager;
+private Sensor mSensor;
+private TriggerEventListener mTriggerEventListener;
+...
+mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);
+
+mTriggerEventListener = new TriggerEventListener() {
+    &#64;Override
+    public void onTrigger(TriggerEvent event) {
+        // Do work
+    }
+};
+
+mSensorManager.requestTriggerSensor(mTriggerEventListener, mSensor);
+</pre>
+
+<p>For more information, see <code><a href="https://developer.android.com/reference/android/hardware/TriggerEventListener.html?hl=pt-br">TriggerEventListener</a></code>.</p>
+
+<h2 id="sensors-motion-stepcounter">Using the Step Counter Sensor</h2>
+
+<p>The step counter sensor provides the number of steps taken by the user since the last reboot
+while the sensor was activated. The step counter has more latency (up to 10 seconds) but more
+accuracy than the step detector sensor. The following code shows you how to get an instance of
+the default step counter sensor:</p>
+
+<pre>
+private SensorManager mSensorManager;
+private Sensor mSensor;
+...
+mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+</pre>
+
+<p>To preserve the battery on devices running your app, you should use the
+<code><a href="https://developer.android.com/reference/android/app/job/JobScheduler.html?hl=pt-br">JobScheduler</a></code> class to retrieve the current value from
+the step counter sensor at a specific interval. Although different types of apps
+require different sensor-reading intervals, you should make this interval as
+long as possible unless your app requires real-time data from the sensor.</p>
+
+<h2 id="sensors-motion-stepdetector">Using the Step Detector Sensor</h2>
+
+<p>The step detector sensor triggers an event each time the user takes a step. The latency is
+expected to be below 2 seconds. The following code shows you how to get an instance of the
+default step detector sensor:</p>
+
+<pre>
+private SensorManager mSensorManager;
+private Sensor mSensor;
+...
+mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+</pre>
+
+<h2 id="sensors-raw-data">Working with Raw Data</h2>
+
+<p>The following sensors provide your app with raw data about the linear and
+rotational forces being applied to the device. In order to use the values from
+these sensors effectively, you need to filter out factors from the environment,
+such as gravity. You might also need to apply a smoothing algorithm to the trend
+of values to reduce noise.</p>
+
+<h3 id="sensors-motion-accel">Using the Accelerometer</h3>
+
+<p>An acceleration sensor measures the acceleration applied to the device, including the force of
+gravity. The following code shows you how to get an instance of the default acceleration sensor:</p>
+
+<pre>
+private SensorManager mSensorManager;
+private Sensor mSensor;
+  ...
+mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+</pre>
+
+<p>Conceptually, an acceleration sensor determines the acceleration that is applied
+to a device (A<sub>d</sub>) by measuring the forces that are applied to the sensor
+itself (F<sub>s</sub>) using the following relationship:</p>
+
+<pre class="no-pretty-print classic">
+A<sub>d</sub> = - ∑F<sub>s</sub> / mass
+</pre>
+
+<p>However, the force of gravity is always influencing the measured acceleration according to
+the following relationship:</p>
+
+<pre class="no-pretty-print classic">
+A<sub>d</sub> = -g - ∑F / mass
+</pre>
+
+<p>For this reason, when the device is sitting on a table (and not accelerating), the
+accelerometer reads a magnitude of g = 9.81 m/s<sup>2</sup>. Similarly, when the device is in
+free fall and therefore rapidly accelerating toward the ground at 9.81 m/s<sup>2</sup>, its
+accelerometer reads a magnitude of g = 0 m/s<sup>2</sup>. Therefore, to measure
+the real acceleration of the device, the contribution of the force of gravity must be removed from
+the accelerometer data. This can be achieved by applying a high-pass filter. Conversely, a low-pass
+filter can be used to isolate the force of gravity. The following example shows how you can do
+this:</p>
+
+<pre>
+public void onSensorChanged(SensorEvent event){
+  // In this example, alpha is calculated as t / (t + dT),
+  // where t is the low-pass filter's time-constant and
+  // dT is the event delivery rate.
+
+  final float alpha = 0.8;
+
+  // Isolate the force of gravity with the low-pass filter.
+  gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
+  gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
+  gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+
+  // Remove the gravity contribution with the high-pass filter.
+  linear_acceleration[0] = event.values[0] - gravity[0];
+  linear_acceleration[1] = event.values[1] - gravity[1];
+  linear_acceleration[2] = event.values[2] - gravity[2];
+}
+</pre>
+
+<p class="note"><strong>Note:</strong> You can use many different techniques to filter sensor data.
+The code sample above uses a simple filter constant (alpha) to create a low-pass filter. This filter
+constant is derived from a time constant (t), which is a rough representation of the latency that
+the filter adds to the sensor events, and the sensor's event delivery rate (dt). The code sample
+uses an alpha value of 0.8 for demonstration purposes. If you use this filtering method you may need
+to choose a different alpha value.</p>
+
+<p>Accelerometers use the standard sensor <a
+href="sensors_overview6dd3.html?hl=pt-br#sensors-coords">coordinate
+system</a>. In practice, this means that the following conditions apply when a device is laying
+flat on a table in its natural orientation:</p>
+
+<ul>
+  <li>If you push the device on the left side (so it moves to the right), the x acceleration value
+is positive.</li>
+  <li>If you push the device on the bottom (so it moves away from you), the y acceleration value is
+positive.</li>
+  <li>If you push the device toward the sky with an acceleration of A m/s<sup>2</sup>, the
+z acceleration value is equal to A + 9.81, which corresponds to the acceleration of the device (+A
+m/s<sup>2</sup>) minus the force of gravity (-9.81 m/s<sup>2</sup>).</li>
+  <li>The stationary device will have an acceleration value of +9.81, which corresponds to the
+acceleration of the device (0 m/s<sup>2</sup> minus the force of gravity, which is -9.81
+m/s<sup>2</sup>).</li>
+</ul>
+
+<p>In general, the accelerometer is a good sensor to use if you are monitoring device motion.
+Almost every Android-powered handset and tablet has an accelerometer, and it uses about 10 times
+less power than the other motion sensors. One drawback is that you might have to implement
+low-pass and high-pass filters to eliminate gravitational forces and reduce noise.</p>
+
+<p>The Android SDK provides a sample application that shows how to use the acceleration sensor (<a
+href="https://developer.android.com/resources/samples/AccelerometerPlay/index.html?hl=pt-br">Accelerometer Play</a>).</p>
+
+<h3 id="sensors-motion-gyro">Using the Gyroscope</h3>
+<p>The gyroscope measures the rate of rotation in rad/s around a device's x, y,
+and z axis. The following code shows you how to get an instance of the default gyroscope:</p>
+
+<pre>
+private SensorManager mSensorManager;
+private Sensor mSensor;
+...
+mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+</pre>
+
+<p>The sensor's <a
+href="sensors_overview6dd3.html?hl=pt-br#sensors-coords">coordinate system</a>
+is the same as the one used for the acceleration sensor. Rotation is positive in the
+counter-clockwise direction; that is, an observer looking
+from some positive location on the x, y or z axis at a device positioned on the origin would report
+positive rotation if the device appeared to be rotating counter clockwise. This is the
+standard mathematical definition of positive rotation and is not the same as the definition for
+roll that is used by the orientation sensor.</p>
+
+<p>Usually, the output of the gyroscope is integrated over time to calculate a rotation describing
+the change of angles over the timestep. For example:</p>
+
+<pre>
+// Create a constant to convert nanoseconds to seconds.
+private static final float NS2S = 1.0f / 1000000000.0f;
+private final float[] deltaRotationVector = new float[4]();
+private float timestamp;
+
+public void onSensorChanged(SensorEvent event) {
+  // This timestep's delta rotation to be multiplied by the current rotation
+  // after computing it from the gyro sample data.
+  if (timestamp != 0) {
+    final float dT = (event.timestamp - timestamp) * NS2S;
+    // Axis of the rotation sample, not normalized yet.
+    float axisX = event.values[0];
+    float axisY = event.values[1];
+    float axisZ = event.values[2];
+
+    // Calculate the angular speed of the sample
+    float omegaMagnitude = sqrt(axisX*axisX + axisY*axisY + axisZ*axisZ);
+
+    // Normalize the rotation vector if it's big enough to get the axis
+    // (that is, EPSILON should represent your maximum allowable margin of error)
+    if (omegaMagnitude > EPSILON) {
+      axisX /= omegaMagnitude;
+      axisY /= omegaMagnitude;
+      axisZ /= omegaMagnitude;
+    }
+
+    // Integrate around this axis with the angular speed by the timestep
+    // in order to get a delta rotation from this sample over the timestep
+    // We will convert this axis-angle representation of the delta rotation
+    // into a quaternion before turning it into the rotation matrix.
+    float thetaOverTwo = omegaMagnitude * dT / 2.0f;
+    float sinThetaOverTwo = sin(thetaOverTwo);
+    float cosThetaOverTwo = cos(thetaOverTwo);
+    deltaRotationVector[0] = sinThetaOverTwo * axisX;
+    deltaRotationVector[1] = sinThetaOverTwo * axisY;
+    deltaRotationVector[2] = sinThetaOverTwo * axisZ;
+    deltaRotationVector[3] = cosThetaOverTwo;
+  }
+  timestamp = event.timestamp;
+  float[] deltaRotationMatrix = new float[9];
+  SensorManager.getRotationMatrixFromVector(deltaRotationMatrix, deltaRotationVector);
+    // User code should concatenate the delta rotation we computed with the current rotation
+    // in order to get the updated rotation.
+    // rotationCurrent = rotationCurrent * deltaRotationMatrix;
+   }
+}
+ </pre>
+
+<p>Standard gyroscopes provide raw rotational data without any filtering or correction for noise and
+drift (bias). In practice, gyroscope noise and drift will introduce errors that need to be
+compensated for. You usually determine the drift (bias) and noise by monitoring other sensors, such
+as the gravity sensor or accelerometer.</p>
+
+<h4 id="sensors-motion-gyrounc">Using the Uncalibrated Gyroscope</h4>
+
+<p>The uncalibrated gyroscope is similar to the <a href="#sensors-motion-gyro">gyroscope</a>,
+except that no gyro-drift compensation is applied to the rate of rotation. Factory calibration
+and temperature compensation are still applied to the rate of rotation. The uncalibrated
+gyroscope is useful for post-processing and melding orientation data. In general,
+<code>gyroscope_event.values[0]</code> will be close to
+<code>uncalibrated_gyroscope_event.values[0] - uncalibrated_gyroscope_event.values[3]</code>.
+That is,</p>
+
+<p><code>calibrated_x ~= uncalibrated_x - bias_estimate_x</code></p>
+
+<p class="note"><strong>Note:</strong> Uncalibrated sensors provide more raw results and may
+include some bias, but their measurements contain fewer jumps from corrections applied through
+calibration. Some applications may prefer these uncalibrated results as smoother and more
+reliable. For instance, if an application is attempting to conduct its own sensor fusion,
+introducing calibrations can actually distort results.</p>
+
+<p>In addition to the rates of rotation, the uncalibrated gyroscope also provides the estimated
+drift around each axis. The following code shows you how to get an instance of the default
+uncalibrated gyroscope:</p>
+
+<pre>
+private SensorManager mSensorManager;
+private Sensor mSensor;
+...
+mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE_UNCALIBRATED);
+</pre>
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=pt-br" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=pt-br" title="Suporte">Suporte</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=pt-br" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=pt-br" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=pt-br" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=pt-br" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="7tnTLxqkeMqM973qjbqto4NYTrgfauKs9-W_U8wCOeU6MTQ5NzUxNjE2NTMzMTYwMA" />
+      <input type="hidden" name="next" value="sensors_motion.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+             selected="selected" >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Endereço de e-mail</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=pt-br"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_pt-br.js?hl=pt-br?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/sensors/sensors_motion.html?hl=pt-br by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:04:56 GMT -->
+</html>

@@ -1,0 +1,1615 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from developer.android.com/guide/components/bound-services.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:00:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="6kKVvfTyTuy7zYg9Zp_tt3i3n5jJ2lbyiBtIR-OdFSA6MTQ5NzUxNTgxNzY2MjE1MA" />
+
+  
+    <link rel="canonical" href="bound-services.html">
+  
+
+  
+    <link rel="alternate" href="bound-services327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="bound-servicesf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="bound-services9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="bound-services7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="bound-services0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="bound-services0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="bound-services9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="bound-servicesde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="bound-services232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="bound-services6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="bound-services.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/bound-services.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="bound-services.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../_static/f304fc21fa/images/android/favicon.png">
+
+<link rel="apple-touch-icon" href="../../_static/f304fc21fa/images/android/touchicon-180.png">
+
+
+<title>
+
+  Bound Services | Android Developers
+
+</title>
+
+  <meta name="description" content="A bound service is the server in a client-server interface. It allows components (such as activities) to bind to the service, send requests, receive responses, and perform interprocess communication (IPC). A bound service typically lives only while it…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../static/css/default803f.css?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../_static/f304fc21fa/js/android_3p-bundle.js" type="text/javascript"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_closure_android.js"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_android.js"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../static/js/docs803f.js?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;en&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;en&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "en", "served": "en"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html">
+          <img class="dac-header-logo-image" src="../../static/images/android_logo.png"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Search">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Back</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../index.html" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="fundamentals.html" >App Fundamentals</a></li><li><a href="../practices/compatibility.html" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/permissions/index.html" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/permissions/requesting.html" >Requesting Permissions</a></li><li><a href="../topics/permissions/defining.html" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../platform/index.html" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../platform/j8-jack.html"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../practices/verifying-apps-art.html" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index.html" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="intents-filters.html" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="intents-common.html" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="activities/index.html" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="activities/intro-activities.html" >Introduction to Activities</a></li><li><a href="activities/activity-lifecycle.html" >The Activity Lifecycle</a></li><li><a href="activities/state-changes.html" >Activity State Changes</a></li><li><a href="activities/tasks-and-back-stack.html" >Tasks and Back Stack</a></li><li><a href="activities/process-lifecycle.html" >Processes and Application Lifecycle</a></li><li><a href="activities/parcelables-and-bundles.html" >Parcelables and Bundles</a></li><li><a href="activities/recents.html" >Recents Screen</a></li></ul></li><li><a href="fragments.html" >Fragments</a></li><li><a href="loaders.html" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="services.html" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="bound-services.html" >Bound Services</a></li><li><a href="aidl.html" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/providers/content-providers.html" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/providers/content-provider-basics.html" >Content Provider Basics</a></li><li><a href="../topics/providers/content-provider-creating.html" >Creating a Content Provider</a></li><li><a href="../topics/providers/calendar-provider.html" >Calendar Provider</a></li><li><a href="../topics/providers/contacts-provider.html" >Contacts Provider</a></li><li><a href="../topics/providers/document-provider.html" >Open files using Storage Access Framework</a></li><li><a href="../topics/providers/create-document-provider.html" >Create a Custom Document Provider</a></li></ul></li><li><a href="broadcasts.html" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/appwidgets/index.html" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/appwidgets/host.html" >App Widget Host</a></li></ul></li><li><a href="processes-and-threads.html" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/index.html" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/overview.html" >Overview</a></li><li><a href="../topics/resources/providing-resources.html" >Providing Resources</a></li><li><a href="../topics/resources/accessing-resources.html" >Accessing Resources</a></li><li><a href="../topics/resources/runtime-changes.html" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/localization.html" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/icu4j-framework.html" >ICU4J Android Framework APIs</a></li><li><a href="../topics/resources/multilingual-support.html" >Language and Locale</a></li></ul></li><li><a href="../topics/resources/complex-xml-resources.html" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/available-resources.html" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/animation-resource.html" >Animation</a></li><li><a href="../topics/resources/color-list-resource.html" >Color State List</a></li><li><a href="../topics/resources/drawable-resource.html" >Drawable</a></li><li><a href="../topics/resources/layout-resource.html" >Layout</a></li><li><a href="../topics/resources/menu-resource.html" >Menu</a></li><li><a href="../topics/resources/string-resource.html" >String</a></li><li><a href="../topics/resources/style-resource.html" >Style</a></li><li><a href="../topics/resources/more-resources.html" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/manifest/manifest-intro.html" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/manifest/action-element.html" >&lt;action&gt;</a></li><li><a href="../topics/manifest/activity-element.html" >&lt;activity&gt;</a></li><li><a href="../topics/manifest/activity-alias-element.html" >&lt;activity-alias&gt;</a></li><li><a href="../topics/manifest/application-element.html" >&lt;application&gt;</a></li><li><a href="../topics/manifest/category-element.html" >&lt;category&gt;</a></li><li><a href="../topics/manifest/compatible-screens-element.html" >&lt;compatible-screens&gt;</a></li><li><a href="../topics/manifest/data-element.html" >&lt;data&gt;</a></li><li><a href="../topics/manifest/grant-uri-permission-element.html" >&lt;grant-uri-permission&gt;</a></li><li><a href="../topics/manifest/instrumentation-element.html" >&lt;instrumentation&gt;</a></li><li><a href="../topics/manifest/intent-filter-element.html" >&lt;intent-filter&gt;</a></li><li><a href="../topics/manifest/manifest-element.html" >&lt;manifest&gt;</a></li><li><a href="../topics/manifest/meta-data-element.html" >&lt;meta-data&gt;</a></li><li><a href="../topics/manifest/path-permission-element.html" >&lt;path-permission&gt;</a></li><li><a href="../topics/manifest/permission-element.html" >&lt;permission&gt;</a></li><li><a href="../topics/manifest/permission-group-element.html" >&lt;permission-group&gt;</a></li><li><a href="../topics/manifest/permission-tree-element.html" >&lt;permission-tree&gt;</a></li><li><a href="../topics/manifest/provider-element.html" >&lt;provider&gt;</a></li><li><a href="../topics/manifest/receiver-element.html" >&lt;receiver&gt;</a></li><li><a href="../topics/manifest/service-element.html" >&lt;service&gt;</a></li><li><a href="../topics/manifest/supports-gl-texture-element.html" >&lt;supports-gl-texture&gt;</a></li><li><a href="../topics/manifest/supports-screens-element.html" >&lt;supports-screens&gt;</a></li><li><a href="../topics/manifest/uses-configuration-element.html" >&lt;uses-configuration&gt;</a></li><li><a href="../topics/manifest/uses-feature-element.html" >&lt;uses-feature&gt;</a></li><li><a href="../topics/manifest/uses-library-element.html" >&lt;uses-library&gt;</a></li><li><a href="../topics/manifest/uses-permission-element.html" >&lt;uses-permission&gt;</a></li><li><a href="../topics/manifest/uses-permission-sdk-23-element.html" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../topics/manifest/uses-sdk-element.html" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/index.html" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/overview.html" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/declaring-layout.html" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/layout/linear.html" >Linear Layout</a></li><li><a href="../topics/ui/layout/relative.html" >Relative Layout</a></li><li><a href="../topics/ui/layout/recyclerview.html" >Recycler View</a></li><li><a href="../topics/ui/layout/listview.html" >List View</a></li><li><a href="../topics/ui/layout/gridview.html" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/controls.html" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/controls/button.html" >Buttons</a></li><li><a href="../topics/ui/controls/checkbox.html" >Checkboxes</a></li><li><a href="../topics/ui/controls/radiobutton.html" >Radio Buttons</a></li><li><a href="../topics/ui/controls/togglebutton.html" >Toggle Buttons</a></li><li><a href="../topics/ui/controls/spinner.html" >Spinners</a></li><li><a href="../topics/ui/controls/pickers.html" >Pickers</a></li></ul></li><li><a href="../topics/ui/ui-events.html" >Input Events</a></li><li><a href="../topics/ui/menus.html" >Menus</a></li><li><a href="../topics/ui/settings.html" >Settings</a></li><li><a href="../topics/ui/dialogs.html" >Dialogs</a></li><li><a href="../topics/ui/notifiers/notifications.html" >Notifications</a></li><li><a href="../topics/ui/notifiers/toasts.html" >Toasts</a></li><li><a href="../topics/ui/shortcuts.html" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/search/index.html" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/search/search-dialog.html" >Creating a Search Interface</a></li><li><a href="../topics/search/adding-recent-query-suggestions.html" >Adding Recent Query Suggestions</a></li><li><a href="../topics/search/adding-custom-suggestions.html" >Adding Custom Suggestions</a></li><li><a href="../topics/search/searchable-config.html" >Searchable Configuration</a></li></ul></li><li><a href="../topics/ui/multi-window.html" >Multi-Window Support</a></li><li><a href="../topics/ui/drag-drop.html" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/accessibility/index.html" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/accessibility/apps.html" >Making Apps More Accessible</a></li><li><a href="../topics/ui/accessibility/checklist.html" >Accessibility Developer Checklist</a></li><li><a href="../topics/ui/accessibility/node-tree-debugging.html" >Using Node Tree Debugging</a></li><li><a href="../topics/ui/accessibility/services.html" >Building Accessibility Services</a></li><li><a href="../topics/ui/accessibility/custom-views.html" >Building Accessible Custom Views</a></li></ul></li><li><a href="../topics/ui/themes.html" >Styles and Themes</a></li><li><a href="../topics/ui/custom-components.html" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/index.html" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/overview.html" >Overview</a></li><li><a href="../topics/graphics/prop-animation.html" >Property Animation</a></li><li><a href="../topics/graphics/view-animation.html" >View Animation</a></li><li><a href="../topics/graphics/drawable-animation.html" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/2d-graphics.html" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/vector-drawable-resources.html" >Vector Drawable</a></li></ul></li><li><a href="../topics/graphics/opengl.html" >OpenGL ES</a></li><li><a href="../topics/graphics/hardware-accel.html" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/index.html" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/compute.html" >RenderScript</a></li><li><a href="../topics/renderscript/advanced.html" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/reference/overview.html" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/reference/rs_value_types.html" >Numerical Types</a></li><li><a href="../topics/renderscript/reference/rs_object_types.html" >Object Types</a></li><li><a href="../topics/renderscript/reference/rs_convert.html" >Conversion Functions</a></li><li><a href="../topics/renderscript/reference/rs_math.html" >Mathematical Constants and Functions</a></li><li><a href="../topics/renderscript/reference/rs_vector_math.html" >Vector Math Functions</a></li><li><a href="../topics/renderscript/reference/rs_matrix.html" >Matrix Functions</a></li><li><a href="../topics/renderscript/reference/rs_quaternion.html" >Quaternion Functions</a></li><li><a href="../topics/renderscript/reference/rs_atomic.html" >Atomic Update Functions</a></li><li><a href="../topics/renderscript/reference/rs_time.html" >Time Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_allocation_data.html" >Allocation Data Access Functions</a></li><li><a href="../topics/renderscript/reference/rs_object_info.html" >Object Characteristics Functions</a></li><li><a href="../topics/renderscript/reference/rs_for_each.html" >Kernel Invocation Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_io.html" >Input/Output Functions</a></li><li><a href="../topics/renderscript/reference/rs_debug.html" >Debugging Functions</a></li><li><a href="../topics/renderscript/reference/rs_graphics.html" >Graphics Functions and Types</a></li><li><a href="../topics/renderscript/reference/index.html" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/index.html" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/media-apps-overview.html" >Media Apps Overview</a></li><li><a href="../topics/media-apps/working-with-a-media-session.html" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/audio-app/building-an-audio-app.html" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/audio-app/building-a-mediabrowserservice.html" >Building a Media Browser Service</a></li><li><a href="../topics/media-apps/audio-app/building-a-mediabrowser-client.html" >Building a Media Browser Client</a></li><li><a href="../topics/media-apps/audio-app/mediasession-callbacks.html" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/video-app/building-a-video-app.html" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/video-app/building-a-video-player-activity.html" >Building a Video Player Activity</a></li><li><a href="../topics/media-apps/video-app/mediasession-callbacks.html" >Media Session Callbacks</a></li></ul></li><li><a href="../topics/media-apps/mediabuttons.html" >Responding to Media Buttons</a></li><li><a href="../topics/media-apps/volume-and-earphones.html" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/index.html" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/media-formats.html" >Supported Media Formats</a></li><li><a href="../topics/media/mediaplayer.html" >MediaPlayer</a></li><li><a href="../topics/media/mediarecorder.html" >MediaRecorder</a></li><li><a href="../topics/media/exoplayer.html" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/media-routing.html" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/mediarouter.html" >MediaRouter API</a></li><li><a href="../topics/media/mediarouteprovider.html" >MediaRouteProvider API</a></li></ul></li><li><a href="../topics/media/camera.html" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/sensors/index.html" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/location/index.html" >Location and Maps</a></li><li><a href="../topics/location/strategies.html" >Location Strategies</a></li><li><a href="../topics/sensors/sensors_overview.html" >Sensors Overview</a></li><li><a href="../topics/sensors/sensors_motion.html" >Motion Sensors</a></li><li><a href="../topics/sensors/sensors_position.html" >Position Sensors</a></li><li><a href="../topics/sensors/sensors_environment.html" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/index.html" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/bluetooth.html" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/bluetooth-le.html" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/nfc/index.html" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/nfc/nfc.html" >NFC Basics</a></li><li><a href="../topics/connectivity/nfc/advanced-nfc.html" >Advanced NFC</a></li><li><a href="../topics/connectivity/nfc/hce.html" >Host-based Card Emulation</a></li></ul></li><li><a href="../topics/connectivity/wifip2p.html" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/usb/index.html" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/usb/accessory.html" >Accessory</a></li><li><a href="../topics/connectivity/usb/host.html" >Host</a></li></ul></li><li><a href="../topics/connectivity/sip.html" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/index.html" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/copy-paste.html" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/creating-input-method.html" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/image-keyboard.html" >Image Keyboard</a></li></ul></li><li><a href="../topics/text/spell-checker-framework.html" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/index.html" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/data-storage.html" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/backup.html" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/autobackup.html" >Auto Backup</a></li><li><a href="../topics/data/keyvaluebackup.html" >Key/Value Backup</a></li><li><a href="../topics/data/testingbackup.html" >Testing Backup and Restore</a></li></ul></li><li><a href="../topics/data/install-location.html" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/admin/index.html" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/admin/device-admin.html" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../webapps/index.html" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../webapps/targeting.html" >Supporting Different Screens in Web Apps</a></li><li><a href="../webapps/webview.html" >Building Web Apps in WebView</a></li><li><a href="../webapps/migrating.html" >Migrating to WebView in Android 4.4</a></li><li><a href="../webapps/debugging.html" >Debugging Web Apps</a></li><li><a href="../webapps/best-practices.html" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../practices/index.html"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../practices/screens_support.html" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../practices/screens-distribution.html" >Distributing to Specific Screens</a></li><li><a href="../practices/screen-compat-mode.html" >Screen Compatibility Mode</a></li></ul></li><li><a href="../practices/app-design/seamlessness.html" >Designing for Seamlessness</a></li><li><a href="../practices/tablets-and-handsets.html" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html">Home</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Training</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../index.html"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Reference</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html">Samples</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html"
+           >Libraries</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Bound Services</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<ol id="qv">
+<h2>In this document</h2>
+<ol>
+  <li><a href="#Basics">The basics</a></li>
+  <li><a href="#Creating">Creating a bound service</a>
+    <ol>
+      <li><a href="#Binder">Extending the Binder class</a></li>
+      <li><a href="#Messenger">Using a Messenger</a></li>
+    </ol>
+  </li>
+  <li><a href="#Binding">Binding to a service</a>
+    <ol>
+      <li><a href="#Additional_Notes">Additional notes</a></li>
+    </ol>
+  </li>
+  <li><a href="#Lifecycle">Managing the lifecycle of a bound service</a></li>
+</ol>
+
+<h2>Key classes</h2>
+<ol>
+  <li><code><a href="https://developer.android.com/reference/android/app/Service.html">Service</a></code></li>
+  <li><code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html">ServiceConnection</a></code></li>
+  <li><code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code></li>
+</ol>
+
+<h2>Samples</h2>
+<ol>
+  <li><a
+ href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/RemoteService.html">
+  <code>RemoteService</code></a></li>
+  <li><a
+ href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/LocalService.html">
+ <code>LocalService</code></a></li>
+</ol>
+
+<h2>See also</h2>
+<ol>
+  <li><a href="services.html">Services</a></li>
+</ol>
+</div>
+
+
+<p>A bound service is the server in a client-server interface. It allows components
+(such as activities) to bind to the service, send requests, receive responses, and perform
+interprocess communication (IPC). A bound service typically lives only while it serves another
+application component and does not run in the background indefinitely.</p>
+
+<p class="note"><strong>Note:</strong> If your app targets Android 5.0 (API level 21) or later,
+it's recommended that you use the <code><a href="https://developer.android.com/reference/android/app/job/JobScheduler.html">JobScheduler</a></code> to execute background
+ services. For more information about <code><a href="https://developer.android.com/reference/android/app/job/JobScheduler.html">JobScheduler</a></code>, see its
+ <code><a href="https://developer.android.com/reference/android/app/job/JobScheduler.html">API-reference documentation</a></code>.</p>
+
+<p>This document describes how to create a bound service, including how to bind
+to the service from other application components. For additional information about services in
+ general, such as how to deliver notifications from a service and set the service to run
+ in the foreground, refer to the <a href="services.html">
+ Services</a> document.</p>
+
+<h2 id="Basics">The basics</h2>
+
+<p>A bound service is an implementation of the <code><a href="https://developer.android.com/reference/android/app/Service.html">Service</a></code> class that allows
+other applications to bind to it and interact with it. To provide binding for a
+service, you must implement the <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind()</a></code> callback method. This
+method returns an <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> object that defines the programming interface that
+clients can use to interact with the service.</p>
+
+<div class="sidebox-wrapper">
+<div class="sidebox">
+  <h3>Binding to a started service</h3>
+
+<p>As discussed in the <a href="services.html">Services</a>
+document, you can create a service that is both started and bound. That is, you can start a
+ service by calling <code><a href="https://developer.android.com/reference/android/content/Context.html#startService(android.content.Intent)">startService()</a></code>, which allows the
+service to run indefinitely, and you can also allow a client to bind to the service by
+ calling <code><a href="https://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>.
+  <p>If you do allow your service to be started and bound, then when the service has been
+started, the system does <em>not</em> destroy the service when all clients unbind.
+ Instead, you must
+explicitly stop the service by calling <code><a href="https://developer.android.com/reference/android/app/Service.html#stopSelf()">stopSelf()</a></code> or <code><a href="https://developer.android.com/reference/android/content/Context.html#stopService(android.content.Intent)">stopService()</a></code>.</p>
+
+<p>Although you usually implement either <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind()</a></code>
+<em>or</em> <code><a href="https://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code>, it's sometimes
+ necessary to
+implement both. For example, a music player might find it useful to allow its service to run
+indefinitely and also provide binding. This way, an activity can start the service to play some
+music and the music continues to play even if the user leaves the application. Then, when the user
+returns to the application, the activity can bind to the service to regain control of
+ playback.</p>
+
+<p>For more information about the service lifecycle when adding binding to a started service,
+ see <a href="#Lifecycle">Managing the lifecycle of a bound Service</a>.</p>
+</div>
+</div>
+
+<p>A client can bind to a service by calling <code><a href="https://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>. When it does, it must provide an implementation of <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html">ServiceConnection</a></code>, which monitors the connection with the service. The <code><a href="https://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> method returns immediately without a
+ value, but
+when the Android system creates the connection between the
+client and service, it calls <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code> on the <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html">ServiceConnection</a></code>, to deliver the <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> that
+the client can use to communicate with the service.</p>
+
+<p>Multiple clients can connect to a service simultaneously. However, the system calls your service's
+<code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind()</a></code> method to retrieve the
+ <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> only
+when the first client binds. The system then delivers the same <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> to any
+additional clients that bind, without calling <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind()</a></code>
+ again.</p>
+
+<p>When the last client unbinds from the service, the system destroys the service, unless the
+service was also started by <code><a href="https://developer.android.com/reference/android/content/Context.html#startService(android.content.Intent)">startService()</a></code>.</p>
+
+<p>The most important part of your bound service implementation is defining the interface
+that your <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind()</a></code> callback method returns. The following
+section discusses several different ways that you can define your service's
+ <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> interface.</p>
+
+<h2 id="Creating">Creating a bound service</h2>
+
+<p>When creating a service that provides binding, you must provide an <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code>
+that provides the programming interface that clients can use to interact with the service. There
+are three ways you can define the interface:</p>
+
+<dl>
+  <dt><a href="#Binder">Extending the Binder class</a></dt>
+  <dd>If your service is private to your own application and runs in the same process
+  as the client
+(which is common), you should create your interface by extending the <code><a href="https://developer.android.com/reference/android/os/Binder.html">Binder</a></code>
+ class
+and returning an instance of it from
+<code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind()</a></code>. The client receives the <code><a href="https://developer.android.com/reference/android/os/Binder.html">Binder</a></code> and
+can use it to directly access public methods available in either the <code><a href="https://developer.android.com/reference/android/os/Binder.html">Binder</a></code>
+implementation or the <code><a href="https://developer.android.com/reference/android/app/Service.html">Service</a></code>.
+  <p>This is the preferred technique when your service is merely a background worker for your own
+application. The only reason you would not create your interface this way is because
+your service is used by other applications or across separate processes.</dd>
+
+  <dt><a href="#Messenger">Using a Messenger</a></dt>
+  <dd>If you need your interface to work across different processes, you can create
+an interface for the service with a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code>. In this manner, the service
+defines a <code><a href="https://developer.android.com/reference/android/os/Handler.html">Handler</a></code> that responds to different types of <code><a href="https://developer.android.com/reference/android/os/Message.html">Message</a></code> objects. This <code><a href="https://developer.android.com/reference/android/os/Handler.html">Handler</a></code>
+is the basis for a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> that can then share an <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code>
+with the client, allowing the client to send commands to the service using <code><a href="https://developer.android.com/reference/android/os/Message.html">Message</a></code> objects. Additionally, the client can define a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> of
+its own, so the service can send messages back.
+  <p>This is the simplest way to perform interprocess communication (IPC), because the <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> queues all requests into a single thread so that you don't have to design
+your service to be thread-safe.</p>
+  </dd>
+
+  <dt><a href="aidl.html">Using AIDL</a></dt>
+  <dd>Android Interface Definition Language (AIDL) decomposes objects into
+primitives that the operating system can understand and marshals them across processes to perform
+IPC. The previous technique, using a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code>, is actually based on AIDL as
+its underlying structure. As mentioned above, the <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> creates a queue of
+all the client requests in a single thread, so the service receives requests one at a time. If,
+however, you want your service to handle multiple requests simultaneously, then you can use AIDL
+directly. In this case, your service must be thread-safe and capable of multi-threading.
+  <p>To use AIDL directly, you must
+create an <code>.aidl</code> file that defines the programming interface. The Android SDK tools use
+this file to generate an abstract class that implements the interface and handles IPC, which you
+can then extend within your service.</p>
+  </dd>
+</dl>
+
+  <p class="note"><strong>Note:</strong> Most applications <em>shouldn't</em> use AIDL to
+create a bound service, because it may require multithreading capabilities and
+can result in a more complicated implementation. As such, AIDL is not suitable for
+ most applications
+and this document does not discuss how to use it for your service. If you're certain that you need
+to use AIDL directly, see the <a href="aidl.html">AIDL</a>
+document.</p>
+
+<h3 id="Binder">Extending the Binder class</h3>
+
+<p>If your service is used only by the local application and does not need to
+ work across processes,
+then you can implement your own <code><a href="https://developer.android.com/reference/android/os/Binder.html">Binder</a></code> class that provides your client direct
+access to public methods in the service.</p>
+
+<p class="note"><strong>Note:</strong> This works only if the client and service are in the same
+application and process, which is most common. For example, this would work well for a music
+application that needs to bind an activity to its own service that's playing music in the
+background.</p>
+
+<p>Here's how to set it up:</p>
+<ol>
+  <li>In your service, create an instance of <code><a href="https://developer.android.com/reference/android/os/Binder.html">Binder</a></code> that does
+  one of the following:
+    <ul>
+      <li>Contains public methods that the client can call.</li>
+      <li>Returns the current <code><a href="https://developer.android.com/reference/android/app/Service.html">Service</a></code> instance, which has public methods the
+client can call.</li>
+      <li>Returns an instance of another class hosted by the service with public methods the
+client can call.</li>
+    </ul>
+  <li>Return this instance of <code><a href="https://developer.android.com/reference/android/os/Binder.html">Binder</a></code> from the <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind()</a></code> callback method.</li>
+  <li>In the client, receive the <code><a href="https://developer.android.com/reference/android/os/Binder.html">Binder</a></code> from the <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code> callback method and
+make calls to the bound service using the methods provided.</li>
+</ol>
+
+<p class="note"><strong>Note:</strong> The service and client must be in the same
+application so that the client can cast the returned object and properly call its APIs.
+ The service
+and client must also be in the same process, because this technique does not perform any
+marshaling across processes.</p>
+
+<p>For example, here's a service that provides clients with access to methods in the service through
+a <code><a href="https://developer.android.com/reference/android/os/Binder.html">Binder</a></code> implementation:</p>
+
+<pre>
+public class LocalService extends Service {
+    // Binder given to clients
+    private final IBinder mBinder = new LocalBinder();
+    // Random number generator
+    private final Random mGenerator = new Random();
+
+    /**
+     * Class used for the client Binder.  Because we know this service always
+     * runs in the same process as its clients, we don't need to deal with IPC.
+     */
+    public class LocalBinder extends Binder {
+        LocalService getService() {
+            // Return this instance of LocalService so clients can call public methods
+            return LocalService.this;
+        }
+    }
+
+    &#64;Override
+    public IBinder onBind(Intent intent) {
+        return mBinder;
+    }
+
+    /** method for clients */
+    public int getRandomNumber() {
+      return mGenerator.nextInt(100);
+    }
+}
+</pre>
+
+<p>The <code>LocalBinder</code> provides the <code>getService()</code> method for clients to retrieve the
+current instance of <code>LocalService</code>. This allows clients to call public methods in the
+service. For example, clients can call <code>getRandomNumber()</code> from the service.</p>
+
+<p>Here's an activity that binds to <code>LocalService</code> and calls <code>getRandomNumber()</code>
+when a button is clicked:</p>
+
+<pre>
+public class BindingActivity extends Activity {
+    LocalService mService;
+    boolean mBound = false;
+
+    &#64;Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+    }
+
+    &#64;Override
+    protected void onStart() {
+        super.onStart();
+        // Bind to LocalService
+        Intent intent = new Intent(this, LocalService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    &#64;Override
+    protected void onStop() {
+        super.onStop();
+        // Unbind from the service
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+        }
+    }
+
+    /** Called when a button is clicked (the button in the layout file attaches to
+      * this method with the android:onClick attribute) */
+    public void onButtonClick(View v) {
+        if (mBound) {
+            // Call a method from the LocalService.
+            // However, if this call were something that might hang, then this request should
+            // occur in a separate thread to avoid slowing down the activity performance.
+            int num = mService.getRandomNumber();
+            Toast.makeText(this, "number: " + num, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /** Defines callbacks for service binding, passed to bindService() */
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        &#64;Override
+        public void onServiceConnected(ComponentName className,
+                IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            LocalBinder binder = (LocalBinder) service;
+            mService = binder.getService();
+            mBound = true;
+        }
+
+        &#64;Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
+}
+</pre>
+
+<p>The above sample shows how the client binds to the service using an implementation of
+<code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html">ServiceConnection</a></code> and the <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code> callback. The next
+section provides more information about this process of binding to the service.</p>
+
+<p class="note"><strong>Note:</strong> In the example above, the
+<code><a href="https://developer.android.com/reference/android/app/Activity.html#onStop()">onStop()</a></code> method unbinds the client from the service. Clients
+should unbind from services at appropriate times, as discussed in
+<a href="#Additional_Notes">Additional notes</a>.
+</p>
+
+<p>For more sample code, see the <a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/LocalService.html">
+<code>LocalService.java</code></a> class and the <a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/LocalServiceActivities.html">
+<code>LocalServiceActivities.java</code></a> class in <a
+href="https://developer.android.com/resources/samples/ApiDemos/index.html">ApiDemos</a>.</p>
+
+<h3 id="Messenger">Using a Messenger</h3>
+
+<div class="sidebox-wrapper">
+<div class="sidebox">
+  <h4>Compared to AIDL</h4>
+  <p>When you need to perform IPC, using a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> for your interface is
+simpler than using AIDL, because <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> queues
+all calls to the service. A pure AIDL interface sends simultaneous requests to the
+service, which must then handle multi-threading.</p>
+  <p>For most applications, the service doesn't need to perform multi-threading, so using a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> allows the service to handle one call at a time. If it's important
+that your service be multi-threaded, use <a
+href="aidl.html">AIDL</a> to define your interface.</p>
+</div>
+</div>
+
+<p>If you need your service to communicate with remote processes, then you can use a
+<code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> to provide the interface for your service. This technique allows
+you to perform interprocess communication (IPC) without the need to use AIDL.</p>
+
+<p>Here's a summary of how to use a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code>:</p>
+
+<ol>
+  <li>The service implements a <code><a href="https://developer.android.com/reference/android/os/Handler.html">Handler</a></code> that receives a callback for each
+call from a client.</li>
+  <li>The service uses the <code><a href="https://developer.android.com/reference/android/os/Handler.html">Handler</a></code> to create a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code>
+  object
+(which is a reference to the <code><a href="https://developer.android.com/reference/android/os/Handler.html">Handler</a></code>).</li>
+  <li>The <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> creates an <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> that the service
+returns to clients from <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind()</a></code>.</li>
+  <li>Clients use the <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> to instantiate the <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code>
+(that references the service's <code><a href="https://developer.android.com/reference/android/os/Handler.html">Handler</a></code>), which the client uses to send
+<code><a href="https://developer.android.com/reference/android/os/Message.html">Message</a></code> objects to the service.</li>
+  <li>The service receives each <code><a href="https://developer.android.com/reference/android/os/Message.html">Message</a></code> in its <code><a href="https://developer.android.com/reference/android/os/Handler.html">Handler</a></code>&mdash;specifically, in the <code><a href="https://developer.android.com/reference/android/os/Handler.html#handleMessage(android.os.Message)">handleMessage()</a></code> method.</li>
+</ol>
+
+
+<p>In this way, there are no <em>methods</em> for the client to call on the service. Instead, the
+client delivers <em>messages</em> (<code><a href="https://developer.android.com/reference/android/os/Message.html">Message</a></code> objects) that the service
+ receives in
+its <code><a href="https://developer.android.com/reference/android/os/Handler.html">Handler</a></code>.</p>
+
+<p>Here's a simple example service that uses a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> interface:</p>
+
+<pre>
+public class MessengerService extends Service {
+    /** Command to the service to display a message */
+    static final int MSG_SAY_HELLO = 1;
+
+    /**
+     * Handler of incoming messages from clients.
+     */
+    class IncomingHandler extends Handler {
+        &#64;Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_SAY_HELLO:
+                    Toast.makeText(getApplicationContext(), "hello!", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    }
+
+    /**
+     * Target we publish for clients to send messages to IncomingHandler.
+     */
+    final Messenger mMessenger = new Messenger(new IncomingHandler());
+
+    /**
+     * When binding to the service, we return an interface to our messenger
+     * for sending messages to the service.
+     */
+    &#64;Override
+    public IBinder onBind(Intent intent) {
+        Toast.makeText(getApplicationContext(), "binding", Toast.LENGTH_SHORT).show();
+        return mMessenger.getBinder();
+    }
+}
+</pre>
+
+<p>Notice that the <code><a href="https://developer.android.com/reference/android/os/Handler.html#handleMessage(android.os.Message)">handleMessage()</a></code> method in the
+<code><a href="https://developer.android.com/reference/android/os/Handler.html">Handler</a></code> is where the service receives the incoming <code><a href="https://developer.android.com/reference/android/os/Message.html">Message</a></code>
+and decides what to do, based on the <code><a href="https://developer.android.com/reference/android/os/Message.html#what">what</a></code> member.</p>
+
+<p>All that a client needs to do is create a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> based on the <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> returned by the service and send a message using <code><a href="https://developer.android.com/reference/android/os/Messenger.html#send(android.os.Message)">send()</a></code>. For example, here's a simple activity that binds to the
+service and delivers the <code>MSG_SAY_HELLO</code> message to the service:</p>
+
+<pre>
+public class ActivityMessenger extends Activity {
+    /** Messenger for communicating with the service. */
+    Messenger mService = null;
+
+    /** Flag indicating whether we have called bind on the service. */
+    boolean mBound;
+
+    /**
+     * Class for interacting with the main interface of the service.
+     */
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // This is called when the connection with the service has been
+            // established, giving us the object we can use to
+            // interact with the service.  We are communicating with the
+            // service using a Messenger, so here we get a client-side
+            // representation of that from the raw IBinder object.
+            mService = new Messenger(service);
+            mBound = true;
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            // This is called when the connection with the service has been
+            // unexpectedly disconnected -- that is, its process crashed.
+            mService = null;
+            mBound = false;
+        }
+    };
+
+    public void sayHello(View v) {
+        if (!mBound) return;
+        // Create and send a message to the service, using a supported 'what' value
+        Message msg = Message.obtain(null, MessengerService.MSG_SAY_HELLO, 0, 0);
+        try {
+            mService.send(msg);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    &#64;Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+    }
+
+    &#64;Override
+    protected void onStart() {
+        super.onStart();
+        // Bind to the service
+        bindService(new Intent(this, MessengerService.class), mConnection,
+            Context.BIND_AUTO_CREATE);
+    }
+
+    &#64;Override
+    protected void onStop() {
+        super.onStop();
+        // Unbind from the service
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+        }
+    }
+}
+</pre>
+
+<p>Notice that this example does not show how the service can respond to the client.
+ If you want the
+service to respond, you need to also create a <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> in the client.
+When the client receives the <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code> callback, it sends a <code><a href="https://developer.android.com/reference/android/os/Message.html">Message</a></code> to the service that includes
+the client's <code><a href="https://developer.android.com/reference/android/os/Messenger.html">Messenger</a></code> in the <code><a href="https://developer.android.com/reference/android/os/Message.html#replyTo">replyTo</a></code> parameter
+of the <code><a href="https://developer.android.com/reference/android/os/Messenger.html#send(android.os.Message)">send()</a></code> method.</p>
+
+<p>You can see an example of how to provide two-way messaging in the <a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/MessengerService.html">
+<code>MessengerService.java</code></a> (service) and <a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/MessengerServiceActivities.html">
+<code>MessengerServiceActivities.java</code></a> (client) samples.</p>
+
+<h2 id="Binding">Binding to a service</h2>
+
+<p>Application components (clients) can bind to a service by calling
+<code><a href="https://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>. The Android
+system then calls the service's <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind()</a></code> method, which returns an <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> for interacting with
+ the service.</p>
+
+<p>The binding is asynchronous, and <code><a href="https://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> returns immediately without <em>not</em> returning the <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> to
+the client. To receive the <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code>, the client must create an
+ instance of <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html">ServiceConnection</a></code> and pass it to <code><a href="https://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>. The <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html">ServiceConnection</a></code> includes a callback method that the
+system calls to deliver the <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code>.</p>
+
+<p class="note"><strong>Note:</strong> Only activities, services, and content providers can bind
+to a service&mdash;you <strong>can't</strong> bind to a service from a broadcast receiver.</p>
+
+<p>To bind to a service from your client, follow these steps: </p>
+<ol>
+  <li>Implement <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html">ServiceConnection</a></code>.
+    <p>Your implementation must override two callback methods:</p>
+    <dl>
+      <dt><code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code></dt>
+        <dd>The system calls this to deliver the <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> returned by
+the service's <code><a href="https://developer.android.com/reference/android/app/Service.html#onBind(android.content.Intent)">onBind()</a></code> method.</dd>
+      <dt><code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html#onServiceDisconnected(android.content.ComponentName)">onServiceDisconnected()</a></code></dt>
+        <dd>The Android system calls this when the connection to the service is unexpectedly
+lost, such as when the service has crashed or has been killed. This is <em>not</em>
+ called when the
+client unbinds.</dd>
+    </dl>
+  </li>
+  <li>Call <code><a href="https://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>, passing the <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html">ServiceConnection</a></code> implementation.
+    <p class="note"><strong>Note:</strong> If the method returns false, your
+      client does not have a valid connection to the service. However, your
+      client should still call <code><a href="https://developer.android.com/reference/android/content/Context.html#unbindService(android.content.ServiceConnection)">unbindService()</a></code>; otherwise, your client will keep the service from
+      shutting down when it is idle.</p>
+  </li>
+  <li>When the system calls your <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code> callback method, you can begin making calls to the service, using
+the methods defined by the interface.</li>
+  <li>To disconnect from the service, call <code><a href="https://developer.android.com/reference/android/content/Context.html#unbindService(android.content.ServiceConnection)">unbindService()</a></code>.
+  <p>If your client is still bound to a service when your app destroys the client, destruction
+causes the client to unbind. It is better practice to unbind the client as soon as it is done
+interacting with the service. Doing so allows the idle service to shut down. For more information
+about appropriate times to bind and unbind, see <a href="#Additional_Notes">Additional notes</a>.
+</p>
+  </li>
+</ol>
+
+<p>The following example connects the client to the service created above by
+<a href="#Binder">extending the Binder class</a>, so all it must do is cast the returned
+<code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> to the <code>LocalService</code> class and request the <code>LocalService</code> instance:</p>
+
+<pre>
+LocalService mService;
+private ServiceConnection mConnection = new ServiceConnection() {
+    // Called when the connection with the service is established
+    public void onServiceConnected(ComponentName className, IBinder service) {
+        // Because we have bound to an explicit
+        // service that is running in our own process, we can
+        // cast its IBinder to a concrete class and directly access it.
+        LocalBinder binder = (LocalBinder) service;
+        mService = binder.getService();
+        mBound = true;
+    }
+
+    // Called when the connection with the service disconnects unexpectedly
+    public void onServiceDisconnected(ComponentName className) {
+        Log.e(TAG, "onServiceDisconnected");
+        mBound = false;
+    }
+};
+</pre>
+
+<p>With this <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html">ServiceConnection</a></code>, the client can bind to a service
+ by passing
+it to <code><a href="https://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>, as shown in the following example:</p>
+
+<pre>
+Intent intent = new Intent(this, LocalService.class);
+bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+</pre>
+
+<ul>
+  <li>The first parameter of <code><a href="https://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> is an
+<code><a href="https://developer.android.com/reference/android/content/Intent.html">Intent</a></code> that explicitly names the service to bind.
+<p class="caution"><strong>Caution:</strong> If you use an intent to bind to a
+ <code><a href="https://developer.android.com/reference/android/app/Service.html">Service</a></code>, ensure that your app is secure by using an <a href="intents-filters.html#Types">explicit</a>
+intent. Using an implicit intent to start a service is a
+security hazard because you can't be certain what service will respond to the intent,
+and the user can't see which service starts. Beginning with Android 5.0 (API level 21),
+ the system
+throws an exception if you call <code><a href="https://developer.android.com/reference/android/content/Context.html#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>
+with an implicit intent.</p>
+</li>
+
+<li>The second parameter is the <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html">ServiceConnection</a></code> object.</li>
+<li>The third parameter is a flag indicating options for the binding. It should usually be <code><a href="https://developer.android.com/reference/android/content/Context.html#BIND_AUTO_CREATE">BIND_AUTO_CREATE</a></code> in order to create the service if it's not already
+ alive.
+Other possible values are <code><a href="https://developer.android.com/reference/android/content/Context.html#BIND_DEBUG_UNBIND">BIND_DEBUG_UNBIND</a></code>
+and <code><a href="https://developer.android.com/reference/android/content/Context.html#BIND_NOT_FOREGROUND">BIND_NOT_FOREGROUND</a></code>, or <code>0</code> for none.</li>
+</ul>
+
+
+<h3 id="Additional_Notes">Additional notes</h3>
+
+<p>Here are some important notes about binding to a service:</p>
+<ul>
+  <li>You should always trap <code><a href="https://developer.android.com/reference/android/os/DeadObjectException.html">DeadObjectException</a></code> exceptions, which are thrown
+when the connection has broken. This is the only exception thrown by remote methods.</li>
+  <li>Objects are reference counted across processes. </li>
+  <li>You usually pair the binding and unbinding during
+matching bring-up and tear-down moments of the client's lifecycle, as described in the
+ following examples:
+    <ul>
+      <li>If you need to interact with the service only while your activity is visible, you
+should bind during <code><a href="https://developer.android.com/reference/android/app/Activity.html#onStart()">onStart()</a></code> and unbind during <code><a href="https://developer.android.com/reference/android/app/Activity.html#onStop()">onStop()</a></code>.</li>
+      <li>If you want your activity to receive responses even while it is stopped in the
+background, then you can bind during <code><a href="https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)">onCreate()</a></code> and unbind
+during <code><a href="https://developer.android.com/reference/android/app/Activity.html#onDestroy()">onDestroy()</a></code>. Beware that this implies that your
+activity needs to use the service the entire time it's running (even in the background), so if
+the service is in another process, then you increase the weight of the process and it becomes
+more likely that the system will kill it.</li>
+    </ul>
+    <p class="note"><strong>Note:</strong> You <em>don't</em> usually bind and unbind
+during your activity's <code><a href="https://developer.android.com/reference/android/app/Activity.html#onResume()">onResume()</a></code> and <code><a href="https://developer.android.com/reference/android/app/Activity.html#onPause()">onPause()</a></code>, because these callbacks occur at every
+ lifecycle transition
+and you should keep the processing that occurs at these transitions to a minimum. Also, if
+multiple activities in your application bind to the same service and there is a
+ transition between
+two of those activities, the service may be destroyed and recreated as the current
+ activity unbinds
+(during pause) before the next one binds (during resume). This activity transition for how
+activities coordinate their lifecycles is described in the <a
+href="activities/index.html#CoordinatingActivities">Activities</a>
+document.</p>
+</ul>
+
+<p>For more sample code, showing how to bind to a service, see the <a
+href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/RemoteService.html">
+<code>RemoteService.java</code></a> class in <a
+href="https://developer.android.com/resources/samples/ApiDemos/index.html">ApiDemos</a>.</p>
+
+<h2 id="Lifecycle">Managing the lifecycle of a bound service</h2>
+
+<p>When a service is unbound from all clients, the Android system destroys it (unless it was also
+started with <code><a href="https://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code>). As such, you don't have
+to manage the lifecycle of your service if it's purely a bound
+service&mdash;the Android system manages it for you based on whether it is bound to
+ any clients.</p>
+
+<p>However, if you choose to implement the <code><a href="https://developer.android.com/reference/android/app/Service.html#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> callback method, then you must explicitly stop the service, because the
+service is now considered to be <em>started</em>. In this case, the service runs until the service
+stops itself with <code><a href="https://developer.android.com/reference/android/app/Service.html#stopSelf()">stopSelf()</a></code> or another component calls <code><a href="https://developer.android.com/reference/android/content/Context.html#stopService(android.content.Intent)">stopService()</a></code>, regardless of whether it is bound to any
+clients.</p>
+
+<p>Additionally, if your service is started and accepts binding, then when the system calls
+your <code><a href="https://developer.android.com/reference/android/app/Service.html#onUnbind(android.content.Intent)">onUnbind()</a></code> method, you can optionally return
+<code>true</code> if you would like to receive a call to <code><a href="https://developer.android.com/reference/android/app/Service.html#onRebind(android.content.Intent)">onRebind()</a></code> the next time a client binds to the service. <code><a href="https://developer.android.com/reference/android/app/Service.html#onRebind(android.content.Intent)">onRebind()</a></code> returns void, but the client still receives the <code><a href="https://developer.android.com/reference/android/os/IBinder.html">IBinder</a></code> in its
+<code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code> callback.
+The following figure illustrates the logic for this kind of lifecycle.</p>
+
+<img src="../../images/fundamentals/service_binding_tree_lifecycle.png" alt="" />
+<p class="img-caption"><strong>Figure 1.</strong> The lifecycle for a service that is started
+and also allows binding.</p>
+
+<p>For more information about the lifecycle of a started service, see the <a
+href="services.html#Lifecycle">Services</a> document.</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html" title="Support">Support</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="6kKVvfTyTuy7zYg9Zp_tt3i3n5jJ2lbyiBtIR-OdFSA6MTQ5NzUxNTgxNzY2MjE1MA" />
+      <input type="hidden" name="next" value="/guide/components/bound-services.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+             selected="selected" >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Email address</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../ytblogger_lists_unified803f.js?v=2017061508" defer></script>
+  <script src="../../android_metadata_en803f.js?v=2017061508" defer></script>
+  
+  <script src="../../reference/lists803f.js?v=2017061508" defer></script>
+  <script src="../../reference/gms_lists803f.js?v=2017061508" defer></script>
+  <script src="../../reference/android/support/wearable/lists803f.js?v=2017061508" defer></script>
+  <script src="../../reference/android/support/test/lists803f.js?v=2017061508" defer></script>
+  <script src="../../reference/android/support/constraint/lists803f.js?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_en.js?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/components/bound-services.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:00:53 GMT -->
+</html>

@@ -1,0 +1,1502 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<!-- Mirrored from developer.android.com/guide/topics/connectivity/wifip2p.html?hl=pt-br by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:05:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="9k8eTmCMI9j_qJN8MNhFFV9-6J0hpeT9b7qxKAoQykM6MTQ5NzUxNjE3MDk3MDg0MA" />
+
+  
+    <link rel="canonical" href="wifip2p.html">
+  
+
+  
+    <link rel="alternate" href="wifip2p.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/connectivity/wifip2p.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="wifip2p.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon6dd3.png?hl=pt-br">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1806dd3.png?hl=pt-br">
+
+
+<title>
+
+  Wi-Fi Peer-to-Peer | Android Developers
+
+</title>
+
+  <meta name="description" content="Wi-Fi peer-to-peer (P2P) allows Android 4.0 (API level 14) or later devices with the appropriate hardware to connect directly to each other via Wi-Fi without an intermediate access point (Android&amp;#39;s Wi-Fi P2P framework complies with the Wi-Fi Alliance…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default9fbc.css?hl=pt-br?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle6dd3.js?hl=pt-br" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__pt_br6dd3.js?hl=pt-br"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android6dd3.js?hl=pt-br"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs9fbc.js?hl=pt-br?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;pt-br&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;pt-br&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "pt-br", "served": "en"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=pt-br">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo6dd3.png?hl=pt-br"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=pt-br"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=pt-br"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=pt-br"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=pt-br"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=pt-br" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Pesquisa">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Voltar</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index6dd3.html?hl=pt-br" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals6dd3.html?hl=pt-br" >App Fundamentals</a></li><li><a href="../../practices/compatibility6dd3.html?hl=pt-br" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/index6dd3.html?hl=pt-br" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requesting6dd3.html?hl=pt-br" >Requesting Permissions</a></li><li><a href="../permissions/defining6dd3.html?hl=pt-br" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index6dd3.html?hl=pt-br" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack6dd3.html?hl=pt-br"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-art6dd3.html?hl=pt-br" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index6dd3.html?hl=pt-br" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters6dd3.html?hl=pt-br" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common6dd3.html?hl=pt-br" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/index6dd3.html?hl=pt-br" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activities6dd3.html?hl=pt-br" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecycle6dd3.html?hl=pt-br" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changes6dd3.html?hl=pt-br" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stack6dd3.html?hl=pt-br" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecycle6dd3.html?hl=pt-br" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundles6dd3.html?hl=pt-br" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recents6dd3.html?hl=pt-br" >Recents Screen</a></li></ul></li><li><a href="../../components/fragments6dd3.html?hl=pt-br" >Fragments</a></li><li><a href="../../components/loaders6dd3.html?hl=pt-br" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services6dd3.html?hl=pt-br" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services6dd3.html?hl=pt-br" >Bound Services</a></li><li><a href="../../components/aidl6dd3.html?hl=pt-br" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providers6dd3.html?hl=pt-br" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basics6dd3.html?hl=pt-br" >Content Provider Basics</a></li><li><a href="../providers/content-provider-creating6dd3.html?hl=pt-br" >Creating a Content Provider</a></li><li><a href="../providers/calendar-provider6dd3.html?hl=pt-br" >Calendar Provider</a></li><li><a href="../providers/contacts-provider6dd3.html?hl=pt-br" >Contacts Provider</a></li><li><a href="../providers/document-provider6dd3.html?hl=pt-br" >Open files using Storage Access Framework</a></li><li><a href="../providers/create-document-provider6dd3.html?hl=pt-br" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcasts6dd3.html?hl=pt-br" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index6dd3.html?hl=pt-br" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host6dd3.html?hl=pt-br" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threads6dd3.html?hl=pt-br" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index6dd3.html?hl=pt-br" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview6dd3.html?hl=pt-br" >Overview</a></li><li><a href="../resources/providing-resources6dd3.html?hl=pt-br" >Providing Resources</a></li><li><a href="../resources/accessing-resources6dd3.html?hl=pt-br" >Accessing Resources</a></li><li><a href="../resources/runtime-changes6dd3.html?hl=pt-br" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization6dd3.html?hl=pt-br" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework6dd3.html?hl=pt-br" >ICU4J Android Framework APIs</a></li><li><a href="../resources/multilingual-support6dd3.html?hl=pt-br" >Language and Locale</a></li></ul></li><li><a href="../resources/complex-xml-resources6dd3.html?hl=pt-br" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources6dd3.html?hl=pt-br" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource6dd3.html?hl=pt-br" >Animation</a></li><li><a href="../resources/color-list-resource6dd3.html?hl=pt-br" >Color State List</a></li><li><a href="../resources/drawable-resource6dd3.html?hl=pt-br" >Drawable</a></li><li><a href="../resources/layout-resource6dd3.html?hl=pt-br" >Layout</a></li><li><a href="../resources/menu-resource6dd3.html?hl=pt-br" >Menu</a></li><li><a href="../resources/string-resource6dd3.html?hl=pt-br" >String</a></li><li><a href="../resources/style-resource6dd3.html?hl=pt-br" >Style</a></li><li><a href="../resources/more-resources6dd3.html?hl=pt-br" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro6dd3.html?hl=pt-br" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element6dd3.html?hl=pt-br" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element6dd3.html?hl=pt-br" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element6dd3.html?hl=pt-br" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element6dd3.html?hl=pt-br" >&lt;application&gt;</a></li><li><a href="../manifest/category-element6dd3.html?hl=pt-br" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element6dd3.html?hl=pt-br" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element6dd3.html?hl=pt-br" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element6dd3.html?hl=pt-br" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element6dd3.html?hl=pt-br" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element6dd3.html?hl=pt-br" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element6dd3.html?hl=pt-br" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element6dd3.html?hl=pt-br" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element6dd3.html?hl=pt-br" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element6dd3.html?hl=pt-br" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element6dd3.html?hl=pt-br" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element6dd3.html?hl=pt-br" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element6dd3.html?hl=pt-br" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element6dd3.html?hl=pt-br" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element6dd3.html?hl=pt-br" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element6dd3.html?hl=pt-br" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element6dd3.html?hl=pt-br" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element6dd3.html?hl=pt-br" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element6dd3.html?hl=pt-br" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element6dd3.html?hl=pt-br" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element6dd3.html?hl=pt-br" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element6dd3.html?hl=pt-br" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element6dd3.html?hl=pt-br" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index6dd3.html?hl=pt-br" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview6dd3.html?hl=pt-br" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout6dd3.html?hl=pt-br" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear6dd3.html?hl=pt-br" >Linear Layout</a></li><li><a href="../ui/layout/relative6dd3.html?hl=pt-br" >Relative Layout</a></li><li><a href="../ui/layout/recyclerview6dd3.html?hl=pt-br" >Recycler View</a></li><li><a href="../ui/layout/listview6dd3.html?hl=pt-br" >List View</a></li><li><a href="../ui/layout/gridview6dd3.html?hl=pt-br" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls6dd3.html?hl=pt-br" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button6dd3.html?hl=pt-br" >Buttons</a></li><li><a href="../ui/controls/checkbox6dd3.html?hl=pt-br" >Checkboxes</a></li><li><a href="../ui/controls/radiobutton6dd3.html?hl=pt-br" >Radio Buttons</a></li><li><a href="../ui/controls/togglebutton6dd3.html?hl=pt-br" >Toggle Buttons</a></li><li><a href="../ui/controls/spinner6dd3.html?hl=pt-br" >Spinners</a></li><li><a href="../ui/controls/pickers6dd3.html?hl=pt-br" >Pickers</a></li></ul></li><li><a href="../ui/ui-events6dd3.html?hl=pt-br" >Input Events</a></li><li><a href="../ui/menus6dd3.html?hl=pt-br" >Menus</a></li><li><a href="../ui/settings6dd3.html?hl=pt-br" >Settings</a></li><li><a href="../ui/dialogs6dd3.html?hl=pt-br" >Dialogs</a></li><li><a href="../ui/notifiers/notifications6dd3.html?hl=pt-br" >Notifications</a></li><li><a href="../ui/notifiers/toasts6dd3.html?hl=pt-br" >Toasts</a></li><li><a href="../ui/shortcuts6dd3.html?hl=pt-br" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index6dd3.html?hl=pt-br" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog6dd3.html?hl=pt-br" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestions6dd3.html?hl=pt-br" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestions6dd3.html?hl=pt-br" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-config6dd3.html?hl=pt-br" >Searchable Configuration</a></li></ul></li><li><a href="../ui/multi-window6dd3.html?hl=pt-br" >Multi-Window Support</a></li><li><a href="../ui/drag-drop6dd3.html?hl=pt-br" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index6dd3.html?hl=pt-br" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps6dd3.html?hl=pt-br" >Making Apps More Accessible</a></li><li><a href="../ui/accessibility/checklist6dd3.html?hl=pt-br" >Accessibility Developer Checklist</a></li><li><a href="../ui/accessibility/node-tree-debugging6dd3.html?hl=pt-br" >Using Node Tree Debugging</a></li><li><a href="../ui/accessibility/services6dd3.html?hl=pt-br" >Building Accessibility Services</a></li><li><a href="../ui/accessibility/custom-views6dd3.html?hl=pt-br" >Building Accessible Custom Views</a></li></ul></li><li><a href="../ui/themes6dd3.html?hl=pt-br" >Styles and Themes</a></li><li><a href="../ui/custom-components6dd3.html?hl=pt-br" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index6dd3.html?hl=pt-br" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview6dd3.html?hl=pt-br" >Overview</a></li><li><a href="../graphics/prop-animation6dd3.html?hl=pt-br" >Property Animation</a></li><li><a href="../graphics/view-animation6dd3.html?hl=pt-br" >View Animation</a></li><li><a href="../graphics/drawable-animation6dd3.html?hl=pt-br" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphics6dd3.html?hl=pt-br" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resources6dd3.html?hl=pt-br" >Vector Drawable</a></li></ul></li><li><a href="../graphics/opengl6dd3.html?hl=pt-br" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel6dd3.html?hl=pt-br" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index6dd3.html?hl=pt-br" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute6dd3.html?hl=pt-br" >RenderScript</a></li><li><a href="../renderscript/advanced6dd3.html?hl=pt-br" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview6dd3.html?hl=pt-br" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types6dd3.html?hl=pt-br" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_types6dd3.html?hl=pt-br" >Object Types</a></li><li><a href="../renderscript/reference/rs_convert6dd3.html?hl=pt-br" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_math6dd3.html?hl=pt-br" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_math6dd3.html?hl=pt-br" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrix6dd3.html?hl=pt-br" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternion6dd3.html?hl=pt-br" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomic6dd3.html?hl=pt-br" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_time6dd3.html?hl=pt-br" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_data6dd3.html?hl=pt-br" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_info6dd3.html?hl=pt-br" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_each6dd3.html?hl=pt-br" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_io6dd3.html?hl=pt-br" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debug6dd3.html?hl=pt-br" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphics6dd3.html?hl=pt-br" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/index6dd3.html?hl=pt-br" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/index6dd3.html?hl=pt-br" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overview6dd3.html?hl=pt-br" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-session6dd3.html?hl=pt-br" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-app6dd3.html?hl=pt-br" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservice6dd3.html?hl=pt-br" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-client6dd3.html?hl=pt-br" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacks6dd3.html?hl=pt-br" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-app6dd3.html?hl=pt-br" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activity6dd3.html?hl=pt-br" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacks6dd3.html?hl=pt-br" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttons6dd3.html?hl=pt-br" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphones6dd3.html?hl=pt-br" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index6dd3.html?hl=pt-br" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formats6dd3.html?hl=pt-br" >Supported Media Formats</a></li><li><a href="../media/mediaplayer6dd3.html?hl=pt-br" >MediaPlayer</a></li><li><a href="../media/mediarecorder6dd3.html?hl=pt-br" >MediaRecorder</a></li><li><a href="../media/exoplayer6dd3.html?hl=pt-br" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routing6dd3.html?hl=pt-br" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouter6dd3.html?hl=pt-br" >MediaRouter API</a></li><li><a href="../media/mediarouteprovider6dd3.html?hl=pt-br" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/camera6dd3.html?hl=pt-br" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index6dd3.html?hl=pt-br" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index6dd3.html?hl=pt-br" >Location and Maps</a></li><li><a href="../location/strategies6dd3.html?hl=pt-br" >Location Strategies</a></li><li><a href="../sensors/sensors_overview6dd3.html?hl=pt-br" >Sensors Overview</a></li><li><a href="../sensors/sensors_motion6dd3.html?hl=pt-br" >Motion Sensors</a></li><li><a href="../sensors/sensors_position6dd3.html?hl=pt-br" >Position Sensors</a></li><li><a href="../sensors/sensors_environment6dd3.html?hl=pt-br" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index6dd3.html?hl=pt-br" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="bluetooth6dd3.html?hl=pt-br" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="bluetooth-le6dd3.html?hl=pt-br" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="nfc/index6dd3.html?hl=pt-br" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="nfc/nfc6dd3.html?hl=pt-br" >NFC Basics</a></li><li><a href="nfc/advanced-nfc6dd3.html?hl=pt-br" >Advanced NFC</a></li><li><a href="nfc/hce6dd3.html?hl=pt-br" >Host-based Card Emulation</a></li></ul></li><li><a href="wifip2p6dd3.html?hl=pt-br" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="usb/index6dd3.html?hl=pt-br" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="usb/accessory6dd3.html?hl=pt-br" >Accessory</a></li><li><a href="usb/host6dd3.html?hl=pt-br" >Host</a></li></ul></li><li><a href="sip6dd3.html?hl=pt-br" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index6dd3.html?hl=pt-br" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste6dd3.html?hl=pt-br" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-method6dd3.html?hl=pt-br" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboard6dd3.html?hl=pt-br" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-framework6dd3.html?hl=pt-br" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index6dd3.html?hl=pt-br" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage6dd3.html?hl=pt-br" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../data/backup6dd3.html?hl=pt-br" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/autobackup6dd3.html?hl=pt-br" >Auto Backup</a></li><li><a href="../data/keyvaluebackup6dd3.html?hl=pt-br" >Key/Value Backup</a></li><li><a href="../data/testingbackup6dd3.html?hl=pt-br" >Testing Backup and Restore</a></li></ul></li><li><a href="../data/install-location6dd3.html?hl=pt-br" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index6dd3.html?hl=pt-br" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin6dd3.html?hl=pt-br" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index6dd3.html?hl=pt-br" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting6dd3.html?hl=pt-br" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webview6dd3.html?hl=pt-br" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migrating6dd3.html?hl=pt-br" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debugging6dd3.html?hl=pt-br" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practices6dd3.html?hl=pt-br" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index6dd3.html?hl=pt-br"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support6dd3.html?hl=pt-br" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution6dd3.html?hl=pt-br" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-mode6dd3.html?hl=pt-br" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessness6dd3.html?hl=pt-br" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsets6dd3.html?hl=pt-br" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=pt-br">Início</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=pt-br">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=pt-br">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=pt-br">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=pt-br">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=pt-br">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=pt-br"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=pt-br"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=pt-br"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Treinamento</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index6dd3.html?hl=pt-br"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=pt-br"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Referência</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=pt-br">Amostras</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=pt-br"
+           >Bibliotecas</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=pt-br"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=pt-br"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=pt-br">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=pt-br">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=pt-br">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=pt-br"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=pt-br">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=pt-br">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=pt-br"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=pt-br"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=pt-br">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=pt-br">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Wi-Fi Peer-to-Peer</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+    <div id="qv">
+      <h2>In this document</h2>
+
+      <ol>
+        <li><a href="#api">API Overview</a></li>
+        <li><a href="#creating-br">Creating a Broadcast Receiver for Wi-Fi P2P Intents</a></li>
+
+        <li>
+          <a href="#creating-app">Creating a Wi-Fi P2P Application</a>
+
+          <ol>
+            <li><a href="#setup">Initial setup</a></li>
+
+            <li><a href="#discovering">Discovering peers</a></li>
+
+            <li><a href="#connecting">Connecting to peers</a></li>
+
+            <li><a href="#transferring">Transferring data</a></li>
+          </ol>
+        </li>
+      </ol>
+    <h2>See also</h2>
+    <ul>
+      <li><a href="https://developer.android.com/training/connect-devices-wirelessly/wifi-direct.html?hl=pt-br">Creating
+        P2P Connections with Wi-Fi</a></li>
+    </ul>
+    </div>
+  </div>
+
+
+<p>Wi-Fi peer-to-peer (P2P) allows Android 4.0 (API level 14) or later devices with the appropriate
+hardware to connect directly to each other via Wi-Fi without an intermediate access point (Android's
+Wi-Fi P2P framework complies with the Wi-Fi Alliance's Wi-Fi Direct&trade; certification program).
+Using these APIs, you can discover and connect to other devices when each device supports Wi-Fi P2P,
+then communicate over a speedy connection across distances much longer than a Bluetooth connection.
+This is useful for applications that share data among users, such as a multiplayer game or
+a photo sharing application.</p>
+
+  <p>The Wi-Fi P2P APIs consist of the following main parts:</p>
+
+  <ul>
+    <li>Methods that allow you to discover, request, and connect to peers are defined
+    in the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code> class.</li>
+
+    <li>Listeners that allow you to be notified of the success or failure of <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code> method calls. When calling <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code> methods, each method can receive a specific listener
+    passed in as a parameter.</li>
+
+    <li>Intents that notify you of specific events detected by the Wi-Fi P2P framework,
+    such as a dropped connection or a newly discovered peer.</li>
+  </ul>
+
+  <p>You often use these three main components of the APIs together. For example, you can
+  provide a <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html?hl=pt-br">WifiP2pManager.ActionListener</a></code> to a call to <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#discoverPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">discoverPeers()</a></code>, so that you can be
+  notified with the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html?hl=pt-br#onSuccess()">ActionListener.onSuccess()</a></code> and <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html?hl=pt-br#onFailure(int)">ActionListener.onFailure()</a></code>
+  methods. A <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#WIFI_P2P_PEERS_CHANGED_ACTION">WIFI_P2P_PEERS_CHANGED_ACTION</a></code> intent is
+  also broadcast if the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#discoverPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">discoverPeers()</a></code>
+  method discovers that the peers list has changed.</p>
+
+  <h2 id="api">API Overview</h2>
+
+<p>The <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code> class provides methods to allow you to interact with
+  the Wi-Fi hardware on your device to do things like discover and connect to peers. The following actions
+  are available:</p>
+
+<p class="table-caption"><strong>Table 1.</strong>Wi-Fi P2P Methods</p>
+
+   <table>
+        <tr>
+          <th>Method</th>
+          <th>Description</th>
+        </tr>
+
+	<tr>
+	  <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#initialize(android.content.Context, android.os.Looper, android.net.wifi.p2p.WifiP2pManager.ChannelListener)">initialize()</a></code></td>
+	  <td>Registers the application with the Wi-Fi framework. This must be called before calling any other Wi-Fi P2P method.</td>
+	</tr>
+
+	<tr>
+	  <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#connect(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pConfig, android.net.wifi.p2p.WifiP2pManager.ActionListener)">connect()</a></code></td>
+	  <td>Starts a peer-to-peer connection with a device with the specified configuration.</td>
+	</tr>
+
+	<tr>
+	  <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#cancelConnect(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">cancelConnect()</a></code></td>
+	  <td>Cancels any ongoing peer-to-peer group negotiation.</td>
+	</tr>
+
+	<tr>
+	  <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#requestConnectionInfo(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ConnectionInfoListener)">requestConnectInfo()</a></code></td>
+	  <td>Requests a device's connection information.</td>
+	</tr>
+
+	<tr>
+	  <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#createGroup(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">createGroup()</a></code></td>
+	  <td>Creates a peer-to-peer group with the current device as the group owner.</td>
+	</tr>
+
+	<tr>
+	  <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#removeGroup(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">removeGroup()</a></code></td>
+	  <td>Removes the current peer-to-peer group.</td>
+	</tr>
+
+	<tr>
+	  <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#requestGroupInfo(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.GroupInfoListener)">requestGroupInfo()</a></code></td>
+	  <td>Requests peer-to-peer group information.</td>
+	</tr>
+
+	<tr>
+	  <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#discoverPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">discoverPeers()</a></code></td>
+	  <td>Initiates peer discovery </td>
+	</tr>
+
+	<tr>
+	  <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#requestPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.PeerListListener)">requestPeers()</a></code></td>
+	  <td>Requests the current list of discovered peers.</td>
+	</tr>
+  </table>
+
+
+ <p><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code> methods let you pass in a listener,
+  so that the Wi-Fi P2P framework can notify your
+  activity of the status of a call. The available listener interfaces and the
+  corresponding <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code> method calls that use the listeners
+  are described in the following table:</p>
+
+ <p class="table-caption"><strong>Table 2.</strong> Wi-Fi P2P Listeners</p>
+
+ <table>
+    <tr>
+      <th>Listener interface</th>
+      <th>Associated actions</th>
+    </tr>
+    <tr>
+    <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html?hl=pt-br">WifiP2pManager.ActionListener</a></code></td>
+    <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#connect(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pConfig, android.net.wifi.p2p.WifiP2pManager.ActionListener)">connect()</a></code>, <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#cancelConnect(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">cancelConnect()</a></code>, <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#createGroup(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">createGroup()</a></code>, <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#removeGroup(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">removeGroup()</a></code>, and <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#discoverPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">discoverPeers()</a></code></td>
+    </tr>
+
+    <tr>
+      <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ChannelListener.html?hl=pt-br">WifiP2pManager.ChannelListener</a></code></td>
+      <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#initialize(android.content.Context, android.os.Looper, android.net.wifi.p2p.WifiP2pManager.ChannelListener)">initialize()</a></code></td>
+    </tr>
+
+    <tr>
+      <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ConnectionInfoListener.html?hl=pt-br">WifiP2pManager.ConnectionInfoListener</a></code></td>
+      <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#requestConnectionInfo(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ConnectionInfoListener)">requestConnectInfo()</a></code></td>
+    </tr>
+
+    <tr>
+      <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.GroupInfoListener.html?hl=pt-br">WifiP2pManager.GroupInfoListener</a></code></td>
+      <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#requestGroupInfo(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.GroupInfoListener)">requestGroupInfo()</a></code></td>
+    </tr>
+
+    <tr>
+      <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.PeerListListener.html?hl=pt-br">WifiP2pManager.PeerListListener</a></code></td>
+      <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#requestPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.PeerListListener)">requestPeers()</a></code></td>
+    </tr>
+  </table>
+
+<p>The Wi-Fi P2P APIs define intents that are broadcast when certain Wi-Fi P2P events happen,
+  such as when a new peer is discovered or when a device's Wi-Fi state changes. You can register
+  to receive these intents in your application by <a href="#creating-br">creating a broadcast
+  receiver</a> that handles these intents:</p>
+
+<p class="table-caption"><strong>Table 3.</strong> Wi-Fi P2P Intents</p>
+
+    <table>
+    <tr>
+      <th>Intent</th>
+      <th>Description</th>
+    </tr>
+      <tr>
+        <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#WIFI_P2P_CONNECTION_CHANGED_ACTION">WIFI_P2P_CONNECTION_CHANGED_ACTION</a></code></td>
+        <td>Broadcast when the state of the device's Wi-Fi connection changes.</td>
+      </tr>
+      <tr>
+        <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#WIFI_P2P_PEERS_CHANGED_ACTION">WIFI_P2P_PEERS_CHANGED_ACTION</a></code></td>
+        <td>Broadcast when you call <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#discoverPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">discoverPeers()</a></code>. You
+    usually want to call <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#requestPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.PeerListListener)">requestPeers()</a></code> to get an updated list of peers if you handle this intent in your
+    application.</td>
+      </tr>
+      <tr>
+        <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#WIFI_P2P_STATE_CHANGED_ACTION">WIFI_P2P_STATE_CHANGED_ACTION</a></code></td>
+        <td>Broadcast when Wi-Fi P2P is enabled or disabled on the device.</td>
+      </tr>
+      <tr>
+        <td><code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#WIFI_P2P_THIS_DEVICE_CHANGED_ACTION">WIFI_P2P_THIS_DEVICE_CHANGED_ACTION</a></code></td>
+        <td>Broadcast when a device's details have changed, such as the device's name.</td>
+      </tr>
+    </table>
+
+
+
+  <h2 id="creating-br">Creating a Broadcast Receiver for Wi-Fi P2P Intents</h2>
+
+  <p>A broadcast receiver allows you to receive intents broadcast by the Android system,
+  so that your application can respond to events that you are interested in. The basic steps
+  for creating a broadcast receiver to handle Wi-Fi P2P intents are as follows:</p>
+
+  <ol>
+    <li>Create a class that extends the <code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=pt-br">BroadcastReceiver</a></code> class. For the
+    class' constructor, you most likely want to have parameters for the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code>, <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.Channel.html?hl=pt-br">WifiP2pManager.Channel</a></code>, and
+    the activity that this broadcast receiver will be registered in. This allows the broadcast
+    receiver to send updates to the activity as well as have access to the Wi-Fi hardware and a
+    communication channel if needed.</li>
+
+    <li>In the broadcast receiver, check for the intents that you are interested in
+    <code><code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=pt-br#onReceive(android.content.Context, android.content.Intent)">onReceive()</a></code></code>.
+    Carry out any necessary actions depending on the intent that is
+    received. For example, if the broadcast receiver receives a <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#WIFI_P2P_PEERS_CHANGED_ACTION">WIFI_P2P_PEERS_CHANGED_ACTION</a></code> intent, you can call the
+    <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#requestPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.PeerListListener)">requestPeers()</a></code> method to get a list of
+    the currently discovered peers.</li>
+  </ol>
+
+  <p>The following code shows you how to create a typical broadcast receiver. The broadcast
+  receiver takes a <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code> object and an activity as
+  arguments and uses these two classes to appropriately carry out the needed actions when the
+  broadcast receiver receives an intent:</p>
+
+<pre>
+/**
+ * A BroadcastReceiver that notifies of important Wi-Fi p2p events.
+ */
+public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
+
+    private WifiP2pManager mManager;
+    private Channel mChannel;
+    private MyWiFiActivity mActivity;
+
+    public WiFiDirectBroadcastReceiver(WifiP2pManager manager, Channel channel,
+            MyWifiActivity activity) {
+        super();
+        this.mManager = manager;
+        this.mChannel = channel;
+        this.mActivity = activity;
+    }
+
+    &#064;Override
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+
+        if (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)) {
+            // Check to see if Wi-Fi is enabled and notify appropriate activity
+        } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
+            // Call WifiP2pManager.requestPeers() to get a list of current peers
+        } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
+            // Respond to new connection or disconnections
+        } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
+            // Respond to this device's wifi state changing
+        }
+    }
+}
+</pre>
+
+  <h2 id="creating-app">Creating a Wi-Fi P2P Application</h2>
+
+  <p>Creating a Wi-Fi P2P application involves creating and registering a
+  broadcast receiver for your application, discovering peers, connecting to a peer, and
+  transferring data to a peer. The following sections describe how to do this.</p>
+
+  <h3 id="setup">Initial setup</h3>
+  <p>Before using the Wi-Fi P2P APIs, you must ensure that your application can access
+  the hardware and that the device supports the Wi-Fi P2P protocol. If Wi-Fi P2P is supported,
+  you can obtain an instance of <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code>, create and register
+  your broadcast receiver, and begin using the Wi-Fi P2P APIs.</p>
+  <ol>
+    <li>
+      <p>Request permission to use the Wi-Fi hardware on the device and also declare
+      your application to have the correct minimum SDK version in the Android manifest:</p>
+      <pre>
+&lt;uses-sdk android:minSdkVersion="14" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /&gt;
+&lt;uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /&gt;
+&lt;uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /&gt;
+&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+</pre>
+    </li>
+
+    <li>Check to see if Wi-Fi P2P is on and supported. A good place to check this is in your
+    broadcast receiver when it receives the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#WIFI_P2P_STATE_CHANGED_ACTION">WIFI_P2P_STATE_CHANGED_ACTION</a></code> intent. Notify your
+    activity of the Wi-Fi P2P state and react accordingly:
+<pre>
+&#064;Override
+public void onReceive(Context context, Intent intent) {
+    ...
+    String action = intent.getAction();
+    if (WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)) {
+        int state = intent.getIntExtra(WifiP2pManager.EXTRA_WIFI_STATE, -1);
+        if (state == WifiP2pManager.WIFI_P2P_STATE_ENABLED) {
+            // Wifi P2P is enabled
+        } else {
+            // Wi-Fi P2P is not enabled
+        }
+    }
+    ...
+}
+</pre>
+    </li>
+
+    <li>In your activity's <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=pt-br#onCreate(android.os.Bundle)">onCreate()</a></code> method, obtain an instance of <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code> and register your application with the Wi-Fi P2P
+    framework by calling <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#initialize(android.content.Context, android.os.Looper, android.net.wifi.p2p.WifiP2pManager.ChannelListener)">initialize()</a></code>. This
+    method returns a <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.Channel.html?hl=pt-br">WifiP2pManager.Channel</a></code>, which is used to connect
+    your application to the Wi-Fi P2P framework. You should also create an instance of your
+    broadcast receiver with the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code> and <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.Channel.html?hl=pt-br">WifiP2pManager.Channel</a></code>
+    objects along with a reference to your activity. This allows your broadcast receiver to notify
+    your activity of interesting events and update it accordingly. It also lets you manipulate the device's
+    Wi-Fi state if necessary:
+<pre>
+WifiP2pManager mManager;
+Channel mChannel;
+BroadcastReceiver mReceiver;
+...
+&#064;Override
+protected void onCreate(Bundle savedInstanceState){
+    ...
+    mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+    mChannel = mManager.initialize(this, getMainLooper(), null);
+    mReceiver = new WiFiDirectBroadcastReceiver(mManager, mChannel, this);
+    ...
+}
+</pre>
+    </li>
+
+    <li>Create an intent filter and add the same intents that your
+    broadcast receiver checks for:
+      <pre>
+IntentFilter mIntentFilter;
+...
+&#064;Override
+protected void onCreate(Bundle savedInstanceState){
+    ...
+    mIntentFilter = new IntentFilter();
+    mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+    mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+    mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+    mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+    ...
+}
+</pre>
+    </li>
+
+    <li>Register the broadcast receiver in the <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=pt-br#onResume()">onResume()</a></code> method
+    of your activity and unregister it in the <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=pt-br#onPause()">onPause()</a></code> method of your activity:
+      <pre>
+/* register the broadcast receiver with the intent values to be matched */
+&#064;Override
+protected void onResume() {
+    super.onResume();
+    registerReceiver(mReceiver, mIntentFilter);
+}
+/* unregister the broadcast receiver */
+&#064;Override
+protected void onPause() {
+    super.onPause();
+    unregisterReceiver(mReceiver);
+}
+</pre>
+
+      <p>When you have obtained a <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.Channel.html?hl=pt-br">WifiP2pManager.Channel</a></code> and
+      set up a broadcast receiver, your application can make Wi-Fi P2P method calls and receive
+      Wi-Fi P2P intents.</p>
+    </li>
+
+    <p>You can now implement your application and use the Wi-Fi P2P features by calling the
+    methods in <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br">WifiP2pManager</a></code>. The next sections describe how to do common actions
+    such as discovering and connecting to peers.</p>
+  </ol>
+
+  <h3 id="discovering">Discovering peers</h3>
+
+  <p>To discover peers that are available to connect to, call <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#discoverPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">discoverPeers()</a></code> to detect
+  available peers that are in range. The call to this function is asynchronous and a success or
+  failure is communicated to your application with <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html?hl=pt-br#onSuccess()">onSuccess()</a></code> and <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html?hl=pt-br#onFailure(int)">onFailure()</a></code> if you created a
+  <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html?hl=pt-br">WifiP2pManager.ActionListener</a></code>. The
+  <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html?hl=pt-br#onSuccess()">onSuccess()</a></code> method only notifies you
+  that the discovery process succeeded and does not provide any information about the actual peers
+  that it discovered, if any:</p>
+  <pre>
+mManager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
+    &#064;Override
+    public void onSuccess() {
+        ...
+    }
+
+    &#064;Override
+    public void onFailure(int reasonCode) {
+        ...
+    }
+});
+
+</pre>
+
+<p>If the discovery process succeeds and detects peers, the system broadcasts the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#WIFI_P2P_PEERS_CHANGED_ACTION">WIFI_P2P_PEERS_CHANGED_ACTION</a></code> intent, which you can listen
+  for in a broadcast receiver to obtain a list of peers. When your application receives the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#WIFI_P2P_PEERS_CHANGED_ACTION">WIFI_P2P_PEERS_CHANGED_ACTION</a></code> intent, you can request a
+  list of the discovered peers with <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#requestPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.PeerListListener)">requestPeers()</a></code>. The following code shows how to set this up:</p>
+  <pre>
+PeerListListener myPeerListListener;
+...
+if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
+
+    // request available peers from the wifi p2p manager. This is an
+    // asynchronous call and the calling activity is notified with a
+    // callback on PeerListListener.onPeersAvailable()
+    if (mManager != null) {
+        mManager.requestPeers(mChannel, myPeerListListener);
+    }
+}
+</pre>
+
+  <p>The <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#requestPeers(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.PeerListListener)">requestPeers()</a></code> method is also
+  asynchronous and can notify your activity when a list of peers is available with <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.PeerListListener.html?hl=pt-br#onPeersAvailable(android.net.wifi.p2p.WifiP2pDeviceList)">onPeersAvailable()</a></code>, which is defined in
+  the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.PeerListListener.html?hl=pt-br">WifiP2pManager.PeerListListener</a></code> interface. The <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.PeerListListener.html?hl=pt-br#onPeersAvailable(android.net.wifi.p2p.WifiP2pDeviceList)">onPeersAvailable()</a></code> method
+  provides you with an <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pDeviceList.html?hl=pt-br">WifiP2pDeviceList</a></code>, which you can iterate
+  through to find the peer that you want to connect to.</p>
+
+  <h3 id="connecting">Connecting to peers</h3>
+
+  <p>When you have figured out the device that you want to connect to after obtaining a list of
+  possible peers, call the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html?hl=pt-br#connect(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pConfig, android.net.wifi.p2p.WifiP2pManager.ActionListener)">connect()</a></code> method to
+  connect to the device. This method call requires a <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pConfig.html?hl=pt-br">WifiP2pConfig</a></code>
+  object that contains the information of the device to connect to.
+  You can be notified of a connection success or failure through the <code><a href="https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html?hl=pt-br">WifiP2pManager.ActionListener</a></code>. The following code
+  shows you how to create a connection to a desired device:</p>
+  <pre>
+//obtain a peer from the WifiP2pDeviceList
+WifiP2pDevice device;
+WifiP2pConfig config = new WifiP2pConfig();
+config.deviceAddress = device.deviceAddress;
+mManager.connect(mChannel, config, new ActionListener() {
+
+    &#064;Override
+    public void onSuccess() {
+        //success logic
+    }
+
+    &#064;Override
+    public void onFailure(int reason) {
+        //failure logic
+    }
+});
+
+</pre>
+
+
+  <h3 id="transferring">Transferring data</h3>
+  <p>Once a connection is established, you can transfer data between the devices with
+  sockets. The basic steps of transferring data are as follows:</p>
+
+  <ol>
+    <li>Create a <code><a href="https://developer.android.com/reference/java/net/ServerSocket.html?hl=pt-br">ServerSocket</a></code>. This socket waits for a connection from a client on a specified
+    port and blocks until it happens, so do this in a background thread.</li>
+
+    <li>Create a client <code><a href="https://developer.android.com/reference/java/net/Socket.html?hl=pt-br">Socket</a></code>. The client uses the IP address and port of
+    the server socket to connect to the server device.</li>
+
+    <li>Send data from the client to the server. When the client
+    socket successfully connects to the server socket, you can send data from the client to the server
+    with byte streams. </li>
+
+    <li>The server socket waits for a client connection (with the <code><a href="https://developer.android.com/reference/java/net/ServerSocket.html?hl=pt-br#accept()">accept()</a></code> method). This
+    call blocks until a client connects, so call this is another thread. When a connection happens, the server device can receive
+    the data from the client. Carry out any actions with this data, such as saving it to a file
+    or presenting it to the user.</li>
+  </ol>
+
+  <p>The following example, modified from the <a href="https://developer.android.com/resources/samples/WiFiDirectDemo/index.html?hl=pt-br">Wi-Fi P2P Demo</a> sample, shows you how
+  to create this client-server socket communication and transfer JPEG images from a client
+  to a server with a service. For a complete working example, compile and run the <a href="https://developer.android.com/resources/samples/WiFiDirectDemo/index.html?hl=pt-br">Wi-Fi P2P Demo</a> sample.</p>
+<pre>
+public static class FileServerAsyncTask extends AsyncTask<Void, Void, String> {
+
+    private Context context;
+    private TextView statusText;
+
+    public FileServerAsyncTask(Context context, View statusText) {
+        this.context = context;
+        this.statusText = (TextView) statusText;
+    }
+
+    &#064;Override
+    protected String doInBackground(Void... params) {
+        try {
+
+            /**
+             * Create a server socket and wait for client connections. This
+             * call blocks until a connection is accepted from a client
+             */
+            ServerSocket serverSocket = new ServerSocket(8888);
+            Socket client = serverSocket.accept();
+
+            /**
+             * If this code is reached, a client has connected and transferred data
+             * Save the input stream from the client as a JPEG file
+             */
+            final File f = new File(Environment.getExternalStorageDirectory() + "/"
+                    + context.getPackageName() + "/wifip2pshared-" + System.currentTimeMillis()
+                    + ".jpg");
+
+            File dirs = new File(f.getParent());
+            if (!dirs.exists())
+                dirs.mkdirs();
+            f.createNewFile();
+            InputStream inputstream = client.getInputStream();
+            copyFile(inputstream, new FileOutputStream(f));
+            serverSocket.close();
+            return f.getAbsolutePath();
+        } catch (IOException e) {
+            Log.e(WiFiDirectActivity.TAG, e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Start activity that can handle the JPEG image
+     */
+    &#064;Override
+    protected void onPostExecute(String result) {
+        if (result != null) {
+            statusText.setText("File copied - " + result);
+            Intent intent = new Intent();
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse("file://" + result), "image/*");
+            context.startActivity(intent);
+        }
+    }
+}
+</pre>
+
+  <p>On the client, connect to the server socket with a client socket and transfer data. This example
+  transfers a JPEG file on the client device's file system.</p>
+
+<pre>
+Context context = this.getApplicationContext();
+String host;
+int port;
+int len;
+Socket socket = new Socket();
+byte buf[]  = new byte[1024];
+...
+try {
+    /**
+     * Create a client socket with the host,
+     * port, and timeout information.
+     */
+    socket.bind(null);
+    socket.connect((new InetSocketAddress(host, port)), 500);
+
+    /**
+     * Create a byte stream from a JPEG file and pipe it to the output stream
+     * of the socket. This data will be retrieved by the server device.
+     */
+    OutputStream outputStream = socket.getOutputStream();
+    ContentResolver cr = context.getContentResolver();
+    InputStream inputStream = null;
+    inputStream = cr.openInputStream(Uri.parse("path/to/picture.jpg"));
+    while ((len = inputStream.read(buf)) != -1) {
+        outputStream.write(buf, 0, len);
+    }
+    outputStream.close();
+    inputStream.close();
+} catch (FileNotFoundException e) {
+    //catch logic
+} catch (IOException e) {
+    //catch logic
+}
+
+/**
+ * Clean up any open sockets when done
+ * transferring or if an exception occurred.
+ */
+finally {
+    if (socket != null) {
+        if (socket.isConnected()) {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                //catch logic
+            }
+        }
+    }
+}
+</pre>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=pt-br" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=pt-br" title="Suporte">Suporte</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=pt-br" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=pt-br" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=pt-br" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=pt-br" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="9k8eTmCMI9j_qJN8MNhFFV9-6J0hpeT9b7qxKAoQykM6MTQ5NzUxNjE3MDk3MDg0MA" />
+      <input type="hidden" name="next" value="/guide/topics/connectivity/wifip2p.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+             selected="selected" >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Endereço de e-mail</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=pt-br"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_pt-br.js?hl=pt-br?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/connectivity/wifip2p.html?hl=pt-br by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:05:00 GMT -->
+</html>

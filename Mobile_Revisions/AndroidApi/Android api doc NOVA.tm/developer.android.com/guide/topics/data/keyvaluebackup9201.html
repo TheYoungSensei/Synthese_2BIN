@@ -1,0 +1,1670 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<!-- Mirrored from developer.android.com/guide/topics/data/keyvaluebackup.html?hl=ru by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:07:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="tKmIP3IPJxFC8tkeTSJ4tG3LqHGxeS63dkRjJUPBHg06MTQ5NzUxNjQ1NDkwNzczMA" />
+
+  
+    <link rel="canonical" href="keyvaluebackup.html">
+  
+
+  
+    <link rel="alternate" href="keyvaluebackup.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/data/keyvaluebackup.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="keyvaluebackup.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon9201.png?hl=ru">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1809201.png?hl=ru">
+
+
+<title>
+
+  Key/Value Backup | Android Developers
+
+</title>
+
+  <meta name="description" content="Since Android 2.2 (API 8), Android has offered the Key&amp;#47;Value Backup feature as a way for developers to backup app data to the cloud. The Key&amp;#47;Value Backup feature (formerly known as the Backup API and the Android Backup Service) preserves app data…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default05ec.css?hl=ru?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle9201.js?hl=ru" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__ru9201.js?hl=ru"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android9201.js?hl=ru"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs05ec.js?hl=ru?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ru&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ru&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "ru", "served": "en"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=ru">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo9201.png?hl=ru"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=ru"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=ru"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=ru"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=ru"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=ru" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Поиск">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Назад</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index9201.html?hl=ru" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals9201.html?hl=ru" >App Fundamentals</a></li><li><a href="../../practices/compatibility9201.html?hl=ru" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/index9201.html?hl=ru" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requesting9201.html?hl=ru" >Requesting Permissions</a></li><li><a href="../permissions/defining9201.html?hl=ru" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index9201.html?hl=ru" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack9201.html?hl=ru"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-art9201.html?hl=ru" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index9201.html?hl=ru" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters9201.html?hl=ru" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common9201.html?hl=ru" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/index9201.html?hl=ru" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activities9201.html?hl=ru" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecycle9201.html?hl=ru" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changes9201.html?hl=ru" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stack9201.html?hl=ru" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecycle9201.html?hl=ru" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundles9201.html?hl=ru" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recents9201.html?hl=ru" >Recents Screen</a></li></ul></li><li><a href="../../components/fragments9201.html?hl=ru" >Fragments</a></li><li><a href="../../components/loaders9201.html?hl=ru" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services9201.html?hl=ru" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services9201.html?hl=ru" >Bound Services</a></li><li><a href="../../components/aidl9201.html?hl=ru" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providers9201.html?hl=ru" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basics9201.html?hl=ru" >Content Provider Basics</a></li><li><a href="../providers/content-provider-creating9201.html?hl=ru" >Creating a Content Provider</a></li><li><a href="../providers/calendar-provider9201.html?hl=ru" >Calendar Provider</a></li><li><a href="../providers/contacts-provider9201.html?hl=ru" >Contacts Provider</a></li><li><a href="../providers/document-provider9201.html?hl=ru" >Open files using Storage Access Framework</a></li><li><a href="../providers/create-document-provider9201.html?hl=ru" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcasts9201.html?hl=ru" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index9201.html?hl=ru" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host9201.html?hl=ru" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threads9201.html?hl=ru" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index9201.html?hl=ru" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview9201.html?hl=ru" >Overview</a></li><li><a href="../resources/providing-resources9201.html?hl=ru" >Providing Resources</a></li><li><a href="../resources/accessing-resources9201.html?hl=ru" >Accessing Resources</a></li><li><a href="../resources/runtime-changes9201.html?hl=ru" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization9201.html?hl=ru" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework9201.html?hl=ru" >ICU4J Android Framework APIs</a></li><li><a href="../resources/multilingual-support9201.html?hl=ru" >Language and Locale</a></li></ul></li><li><a href="../resources/complex-xml-resources9201.html?hl=ru" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources9201.html?hl=ru" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource9201.html?hl=ru" >Animation</a></li><li><a href="../resources/color-list-resource9201.html?hl=ru" >Color State List</a></li><li><a href="../resources/drawable-resource9201.html?hl=ru" >Drawable</a></li><li><a href="../resources/layout-resource9201.html?hl=ru" >Layout</a></li><li><a href="../resources/menu-resource9201.html?hl=ru" >Menu</a></li><li><a href="../resources/string-resource9201.html?hl=ru" >String</a></li><li><a href="../resources/style-resource9201.html?hl=ru" >Style</a></li><li><a href="../resources/more-resources9201.html?hl=ru" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro9201.html?hl=ru" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element9201.html?hl=ru" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element9201.html?hl=ru" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element9201.html?hl=ru" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element9201.html?hl=ru" >&lt;application&gt;</a></li><li><a href="../manifest/category-element9201.html?hl=ru" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element9201.html?hl=ru" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element9201.html?hl=ru" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element9201.html?hl=ru" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element9201.html?hl=ru" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element9201.html?hl=ru" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element9201.html?hl=ru" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element9201.html?hl=ru" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element9201.html?hl=ru" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element9201.html?hl=ru" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element9201.html?hl=ru" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element9201.html?hl=ru" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element9201.html?hl=ru" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element9201.html?hl=ru" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element9201.html?hl=ru" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element9201.html?hl=ru" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element9201.html?hl=ru" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element9201.html?hl=ru" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element9201.html?hl=ru" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element9201.html?hl=ru" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element9201.html?hl=ru" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element9201.html?hl=ru" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element9201.html?hl=ru" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index9201.html?hl=ru" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview9201.html?hl=ru" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout9201.html?hl=ru" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear9201.html?hl=ru" >Linear Layout</a></li><li><a href="../ui/layout/relative9201.html?hl=ru" >Relative Layout</a></li><li><a href="../ui/layout/recyclerview9201.html?hl=ru" >Recycler View</a></li><li><a href="../ui/layout/listview9201.html?hl=ru" >List View</a></li><li><a href="../ui/layout/gridview9201.html?hl=ru" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls9201.html?hl=ru" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button9201.html?hl=ru" >Buttons</a></li><li><a href="../ui/controls/checkbox9201.html?hl=ru" >Checkboxes</a></li><li><a href="../ui/controls/radiobutton9201.html?hl=ru" >Radio Buttons</a></li><li><a href="../ui/controls/togglebutton9201.html?hl=ru" >Toggle Buttons</a></li><li><a href="../ui/controls/spinner9201.html?hl=ru" >Spinners</a></li><li><a href="../ui/controls/pickers9201.html?hl=ru" >Pickers</a></li></ul></li><li><a href="../ui/ui-events9201.html?hl=ru" >Input Events</a></li><li><a href="../ui/menus9201.html?hl=ru" >Menus</a></li><li><a href="../ui/settings9201.html?hl=ru" >Settings</a></li><li><a href="../ui/dialogs9201.html?hl=ru" >Dialogs</a></li><li><a href="../ui/notifiers/notifications9201.html?hl=ru" >Notifications</a></li><li><a href="../ui/notifiers/toasts9201.html?hl=ru" >Toasts</a></li><li><a href="../ui/shortcuts9201.html?hl=ru" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index9201.html?hl=ru" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog9201.html?hl=ru" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestions9201.html?hl=ru" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestions9201.html?hl=ru" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-config9201.html?hl=ru" >Searchable Configuration</a></li></ul></li><li><a href="../ui/multi-window9201.html?hl=ru" >Multi-Window Support</a></li><li><a href="../ui/drag-drop9201.html?hl=ru" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index9201.html?hl=ru" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps9201.html?hl=ru" >Making Apps More Accessible</a></li><li><a href="../ui/accessibility/checklist9201.html?hl=ru" >Accessibility Developer Checklist</a></li><li><a href="../ui/accessibility/node-tree-debugging9201.html?hl=ru" >Using Node Tree Debugging</a></li><li><a href="../ui/accessibility/services9201.html?hl=ru" >Building Accessibility Services</a></li><li><a href="../ui/accessibility/custom-views9201.html?hl=ru" >Building Accessible Custom Views</a></li></ul></li><li><a href="../ui/themes9201.html?hl=ru" >Styles and Themes</a></li><li><a href="../ui/custom-components9201.html?hl=ru" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index9201.html?hl=ru" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview9201.html?hl=ru" >Overview</a></li><li><a href="../graphics/prop-animation9201.html?hl=ru" >Property Animation</a></li><li><a href="../graphics/view-animation9201.html?hl=ru" >View Animation</a></li><li><a href="../graphics/drawable-animation9201.html?hl=ru" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphics9201.html?hl=ru" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resources9201.html?hl=ru" >Vector Drawable</a></li></ul></li><li><a href="../graphics/opengl9201.html?hl=ru" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel9201.html?hl=ru" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index9201.html?hl=ru" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute9201.html?hl=ru" >RenderScript</a></li><li><a href="../renderscript/advanced9201.html?hl=ru" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview9201.html?hl=ru" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types9201.html?hl=ru" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_types9201.html?hl=ru" >Object Types</a></li><li><a href="../renderscript/reference/rs_convert9201.html?hl=ru" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_math9201.html?hl=ru" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_math9201.html?hl=ru" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrix9201.html?hl=ru" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternion9201.html?hl=ru" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomic9201.html?hl=ru" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_time9201.html?hl=ru" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_data9201.html?hl=ru" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_info9201.html?hl=ru" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_each9201.html?hl=ru" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_io9201.html?hl=ru" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debug9201.html?hl=ru" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphics9201.html?hl=ru" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/index9201.html?hl=ru" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/index9201.html?hl=ru" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overview9201.html?hl=ru" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-session9201.html?hl=ru" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-app9201.html?hl=ru" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservice9201.html?hl=ru" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-client9201.html?hl=ru" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacks9201.html?hl=ru" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-app9201.html?hl=ru" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activity9201.html?hl=ru" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacks9201.html?hl=ru" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttons9201.html?hl=ru" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphones9201.html?hl=ru" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index9201.html?hl=ru" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formats9201.html?hl=ru" >Supported Media Formats</a></li><li><a href="../media/mediaplayer9201.html?hl=ru" >MediaPlayer</a></li><li><a href="../media/mediarecorder9201.html?hl=ru" >MediaRecorder</a></li><li><a href="../media/exoplayer9201.html?hl=ru" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routing9201.html?hl=ru" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouter9201.html?hl=ru" >MediaRouter API</a></li><li><a href="../media/mediarouteprovider9201.html?hl=ru" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/camera9201.html?hl=ru" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index9201.html?hl=ru" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index9201.html?hl=ru" >Location and Maps</a></li><li><a href="../location/strategies9201.html?hl=ru" >Location Strategies</a></li><li><a href="../sensors/sensors_overview9201.html?hl=ru" >Sensors Overview</a></li><li><a href="../sensors/sensors_motion9201.html?hl=ru" >Motion Sensors</a></li><li><a href="../sensors/sensors_position9201.html?hl=ru" >Position Sensors</a></li><li><a href="../sensors/sensors_environment9201.html?hl=ru" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index9201.html?hl=ru" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth9201.html?hl=ru" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le9201.html?hl=ru" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index9201.html?hl=ru" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc9201.html?hl=ru" >NFC Basics</a></li><li><a href="../connectivity/nfc/advanced-nfc9201.html?hl=ru" >Advanced NFC</a></li><li><a href="../connectivity/nfc/hce9201.html?hl=ru" >Host-based Card Emulation</a></li></ul></li><li><a href="../connectivity/wifip2p9201.html?hl=ru" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index9201.html?hl=ru" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory9201.html?hl=ru" >Accessory</a></li><li><a href="../connectivity/usb/host9201.html?hl=ru" >Host</a></li></ul></li><li><a href="../connectivity/sip9201.html?hl=ru" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index9201.html?hl=ru" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste9201.html?hl=ru" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-method9201.html?hl=ru" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboard9201.html?hl=ru" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-framework9201.html?hl=ru" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index9201.html?hl=ru" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="data-storage9201.html?hl=ru" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="backup9201.html?hl=ru" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="autobackup9201.html?hl=ru" >Auto Backup</a></li><li><a href="keyvaluebackup9201.html?hl=ru" >Key/Value Backup</a></li><li><a href="testingbackup9201.html?hl=ru" >Testing Backup and Restore</a></li></ul></li><li><a href="install-location9201.html?hl=ru" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index9201.html?hl=ru" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin9201.html?hl=ru" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index9201.html?hl=ru" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting9201.html?hl=ru" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webview9201.html?hl=ru" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migrating9201.html?hl=ru" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debugging9201.html?hl=ru" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practices9201.html?hl=ru" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index9201.html?hl=ru"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support9201.html?hl=ru" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution9201.html?hl=ru" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-mode9201.html?hl=ru" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessness9201.html?hl=ru" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsets9201.html?hl=ru" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=ru">Начало</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=ru">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=ru">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=ru">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=ru">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=ru">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=ru"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=ru"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=ru"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Обучение</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index9201.html?hl=ru"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=ru"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Справочники</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=ru">Примеры</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=ru"
+           >Библиотеки</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=ru"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=ru"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=ru">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=ru">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=ru">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=ru"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=ru">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=ru">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=ru"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=ru"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=ru">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=ru">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Key/Value Backup</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+  <h2>In this document</h2>
+  <ol>
+    <li><a href="#Comparison">Comparison to Auto Backup</a></li>
+    <li><a href="#ImplementingBackup">Implementing Key/Value Backup</a></li>
+    <li><a href="#BackupManifest">Declaring the backup agent in your manifest</a></li>
+    <li><a href="#BackupKey">Registering for Android Backup Service</a></li>
+    <li><a href="#BackupAgent">Extending BackupAgent</a></li>
+    <li><a href="#BackupAgentHelper">Extending BackupAgentHelper</a></li>
+    <li><a href="#RestoreVersion">Checking the restore data version</a></li>
+    <li><a href="#RequestingBackup">Requesting backup</a></li>
+    <li><a href="#RequestingRestore">Requesting restore</a></li>
+    <li><a href="#Migrating">Migrating to Auto Backup</a></li>
+  </ol>
+
+  <h2>Key classes</h2>
+  <ol>
+    <li><code><a href="https://developer.android.com/reference/android/app/backup/BackupManager.html?hl=ru">BackupManager</a></code></li>
+    <li><code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code></li>
+    <li><code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code></li>
+  </ol>
+
+</div>
+</div>
+
+
+<p>Since Android 2.2 (API 8), Android has offered the <em>Key/Value Backup</em>
+feature as a way for developers to backup app data to the cloud. The Key/Value
+Backup feature (formerly known as the Backup API and the Android Backup Service)
+preserves app data by uploading it to
+<a href="https://developer.android.com/google/backup/index.html?hl=ru">Android Backup Service</a>.
+The amount of data is limited to 5MB per user of your app and there is
+no charge for storing backup data.
+
+<h2 id="Comparison">Comparison to Auto Backup</h2>
+<p>Like Auto Backup, Key/Value Backups are restored automatically whenever the app
+is installed. The following table describes some of the key differences between Key/Value Backup and Auto Backup:
+
+<table>
+  <tr>
+   <th>Key/Value Backup</th>
+   <th>Auto Backup</th>
+  </tr>
+  <tr>
+   <td>Available in API 8, Android 2.2</td>
+   <td>Available in API 23, Android 6.0</td>
+  </tr>
+  <tr>
+   <td>Apps must implement a <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code>. The backup agent defines what data to backup and how to
+restore data.</td>
+   <td>By default, Auto Backup includes almost all of the app's files. You can
+use XML to include and exclude files. Under the hood, Auto Backup relies on a
+backup agent that is bundled into the SDK.</td>
+  </tr>
+  <tr>
+   <td>Apps must issue a request when there is data
+that is ready to be backed up. Requests
+from multiple apps are batched and executed every few hours.</td>
+   <td>Backups happen automatically roughly once a day.</td>
+  </tr>
+  <tr>
+   <td>Backup data can be transmitted via wifi or cellular data.</td>
+   <td>Backup data is tranmitted only via wifi. If the device is never connected to a
+wifi network, then Auto Backup never occurs.</td>
+  </tr>
+  <tr>
+   <td>Apps are not shut down during backup.</td>
+   <td>The system shuts down the app during backup.</td>
+  </tr>
+  <tr>
+   <td>Backup data is stored in <a href="https://developer.android.com/google/backup/index.html?hl=ru">Android Backup Service</a> limited to 5MB per app.</td>
+   <td>Backup data is stored in the user's Google Drive limited to 25MB per app.</td>
+  </tr>
+  <tr>
+   <td>Related API methods are not filed based:<ul>
+      <li><code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code>
+      <li><code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code></ul></td>
+   <td>Related API methods are filed based:<ul>
+<li><code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onFullBackup(android.app.backup.FullBackupDataOutput)">onFullBackup()</a></code>
+<li><code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestoreFile(android.os.ParcelFileDescriptor, long, java.io.File, int, long, long)">onRestoreFile()</a></code></ul></td>
+  </tr>
+</table>
+
+<h2 id="ImplementingBackup">Implementing Key/Value Backup</h2>
+<p>To backup your application data, you need to implement a backup agent. Your backup
+agent is called by the Backup Manager both during backup and restore.</p>
+
+<p>To implement a backup agent, you must:</p>
+
+<ol>
+  <li>Declare your backup agent in your manifest file with the <a
+href="../manifest/application-element9201.html?hl=ru#agent"><code>android:backupAgent</code></a> attribute.</li>
+  <li>Register your application with <a href="https://developer.android.com/google/backup/index.html?hl=ru">Android
+   Backup Service</a></li>
+  <li>Define a backup agent by either:
+    <ol type="a">
+      <li><a href="#BackupAgent">Extending BackupAgent</a>
+        <p>The <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code> class provides the central interface with
+which your application communicates with the Backup Manager. If you extend this class
+directly, you must override <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> and <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code> to handle the backup and restore operations for your data.</p>
+        <p><em>Or</em></p>
+      <li><a href="#BackupAgentHelper">Extending BackupAgentHelper</a>
+        <p>The <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code> class provides a convenient
+wrapper around the <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code> class, which minimizes the amount of code
+you need to write. In your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code>, you must use one or more
+"helper" objects, which automatically backup and restore certain types of data, so that you do not
+need to implement <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> and <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>.</p>
+        <p>Android currently provides backup helpers that will backup and restore complete files
+from <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=ru">SharedPreferences</a></code> and <a
+href="data-storage9201.html?hl=ru#filesInternal">internal storage</a>.</p>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="BackupManifest">Declaring the backup agent in your manifest</h2>
+
+<p>This is the easiest step, so once you've decided on the class name for your backup agent, declare
+it in your manifest with the <a
+href="../manifest/application-element9201.html?hl=ru#agent"><code>android:backupAgent</code></a> attribute in the <a
+href="../manifest/application-element9201.html?hl=ru"><code>&lt;application&gt;</code></a> tag.</p>
+
+<p>For example:</p>
+
+<pre>
+&lt;manifest ... &gt;
+    ...
+    &lt;application android:label="MyApplication"
+                 <b>android:backupAgent="MyBackupAgent"</b>&gt;
+        &lt;activity ... &gt;
+            ...
+        &lt;/activity&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;
+</pre>
+
+<p>Another attribute you might want to use is <a
+href="../manifest/application-element9201.html?hl=ru#restoreany"><code>android:restoreAnyVersion</code></a>. This attribute takes a boolean value to indicate whether you
+want to restore the application data regardless of the current application version compared to the
+version that produced the backup data. (The default value is "<code>false</code>".) See <a
+href="#RestoreVersion">Checking the Restore Data Version</a> for more information.</p>
+
+<p class="note"><strong>Note:</strong> The backup service and the APIs you must use are
+available only on devices running API Level 8 (Android 2.2) or greater, so you should also
+set your <a
+href="../manifest/uses-sdk-element9201.html?hl=ru#min"><code>android:minSdkVersion</code></a>
+attribute to "8".</p>
+
+
+
+
+<h2 id="BackupKey">Registering for Android Backup Service</h2>
+
+<p>Google provides a backup transport with <a
+href="https://developer.android.com/google/backup/index.html?hl=ru">Android Backup Service</a> for most
+Android-powered devices running Android 2.2 or greater.</p>
+
+<p>In order for your application to perform backup using Android Backup Service, you must
+register your application with the service to receive a Backup Service Key, then
+declare the Backup Service Key in your Android manifest.</p>
+
+<p>To get your Backup Service Key, <a
+href="https://developer.android.com/google/backup/signup.html?hl=ru">register for Android Backup Service</a>.
+When you register, you will be provided a Backup Service Key and the appropriate <code>&lt;meta-data&gt;</code> XML code for your Android manifest file, which you must include as a child of the
+<code>&lt;application&gt;</code> element. For example:</p>
+
+<pre>
+&lt;application android:label="MyApplication"
+             android:backupAgent="MyBackupAgent"&gt;
+    ...
+    &lt;meta-data android:name="com.google.android.backup.api_key"
+        android:value="AEdPqrEAAAAIDaYEVgU6DJnyJdBmU7KLH3kszDXLv_4DIsEIyQ" /&gt;
+&lt;/application&gt;
+</pre>
+
+<p>The <code>android:name</code> must be <code>"com.google.android.backup.api_key"</code> and
+the <code>android:value</code> must be the Backup Service Key received from the Android Backup
+Service registration.</p>
+
+<p>If you have multiple applications, you must register each one, using the respective package
+name.</p>
+
+<p class="note"><strong>Note:</strong> The backup transport provided by Android Backup Service is
+not guaranteed to be available
+on all Android-powered devices that support backup. Some devices might support backup
+using a different transport, some devices might not support backup at all, and there is no way for
+your application to know what transport is used on the device. However, if you implement backup for
+your application, you should always include a Backup Service Key for Android Backup Service so
+your application can perform backup when the device uses the Android Backup Service transport. If
+the device does not use Android Backup Service, then the <code>&lt;meta-data&gt;</code> element with the
+Backup Service Key is ignored.</p>
+
+
+
+
+<h2 id="BackupAgent">Extending BackupAgent</h2>
+
+<p>Most applications shouldn't need to extend the <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code> class
+directly, but should instead <a href="#BackupAgentHelper">extend BackupAgentHelper</a> to take
+advantage of the built-in helper classes that automatically backup and restore your files. However,
+you might want to extend <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code> directly if you need to:</p>
+<ul>
+  <li>Version your data format. For instance, if you anticipate the need to revise the
+format in which you write your application data, you can build a backup agent to cross-check your
+application version during a restore operation and perform any necessary compatibility work if the
+version on the device is different than that of the backup data. For more information, see <a
+href="#RestoreVersion">Checking the Restore Data Version</a>.</li>
+  <li>Instead of backing up an entire file, you can specify the portions of data the should be
+backed up and how each portion is then restored to the device. (This can also help you manage
+different versions, because you read and write your data as unique entities, rather than
+complete files.)</li>
+  <li>Back up data in a database. If you have an SQLite database that you want to restore when
+the user re-installs your application, you need to build a custom <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code> that reads the appropriate data during a backup operation, then
+create your table and insert the data during a restore operation.</li>
+</ul>
+
+<p>If you don't need to perform any of the tasks above and want to back up complete files from
+<code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=ru">SharedPreferences</a></code> or <a
+href="data-storage9201.html?hl=ru#filesInternal">internal storage</a>, you
+should skip to <a href="#BackupAgentHelper">Extending BackupAgentHelper</a>.</p>
+
+
+
+<h3 id="RequiredMethods">Required methods</h3>
+
+<p>When you create a backup agent by extending <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code>, you
+must implement the following callback methods:</p>
+
+<dl>
+  <dt><code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code></dt>
+    <dd>The Backup Manager calls this method after you <a href="#RequestingBackup">request a
+backup</a>. In this method, you read your application data from the device and pass the data you
+want to back up to the Backup Manager, as described below in <a href="#PerformingBackup">Performing
+backup</a>.</dd>
+
+  <dt><code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code></dt>
+    <dd>The Backup Manager calls this method during a restore operation (you can <a
+href="#RequestingRestore">request a restore</a>, but the system automatically performs restore when
+the user re-installs your application). When it calls this method, the Backup Manager delivers your
+backup data, which you then restore to the device, as described below in <a
+href="#PerformingRestore">Performing restore</a>.</dd>
+</dl>
+
+
+
+<h3 id="PerformingBackup">Performing backup</h3>
+
+
+<p>When it's time to back up your application data, the Backup Manager calls your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> method. This is where you must provide your application data to the Backup Manager so
+it can be saved to cloud storage.</p>
+
+<p>Only the Backup Manager can call your backup agent's <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> method. Each time that your application data changes and you want to perform a backup,
+you must request a backup operation by calling <code><a href="https://developer.android.com/reference/android/app/backup/BackupManager.html?hl=ru#dataChanged()">dataChanged()</a></code> (see <a href="#RequestingBackup">Requesting
+Backup</a> for more information). A backup request does not result in an immediate call to your
+<code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> method. Instead, the Backup Manager waits for an appropriate time, then performs
+backup for all applications that have requested a backup since the last backup was performed.</p>
+
+<p class="note"><strong>Tip:</strong> While developing your application, you can initiate an
+immediate backup operation from the Backup Manager with the <a
+href="https://developer.android.com/tools/help/bmgr.html?hl=ru"><code>bmgr</code> tool</a>.</p>
+
+<p>When the Backup Manager calls your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> method, it passes three parameters:</p>
+
+<dl>
+  <dt><code>oldState</code></dt>
+    <dd>An open, read-only <code><a href="https://developer.android.com/reference/android/os/ParcelFileDescriptor.html?hl=ru">ParcelFileDescriptor</a></code> pointing to the last backup
+state provided by your application. This is not the backup data from cloud storage, but a
+local representation of the data that was backed up the last time <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> was called (as defined by <code>newState</code>, below, or from <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>&mdash;more about this in the next section). Because <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> does not allow you to read existing backup data in
+the cloud storage, you can use this local representation to determine whether your data has changed
+since the last backup.</dd>
+  <dt><code>data</code></dt>
+    <dd>A <code><a href="https://developer.android.com/reference/android/app/backup/BackupDataOutput.html?hl=ru">BackupDataOutput</a></code> object, which you use to deliver your backup
+data to the Backup Manager.</dd>
+  <dt><code>newState</code></dt>
+    <dd>An open, read/write <code><a href="https://developer.android.com/reference/android/os/ParcelFileDescriptor.html?hl=ru">ParcelFileDescriptor</a></code> pointing to a file in which
+you must write a representation of the data that you delivered to <code>data</code> (a representation
+can be as simple as the last-modified timestamp for your file). This object is
+returned as <code>oldState</code> the next time the Backup Manager calls your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> method. If you do not write your backup data to <code>newState</code>, then <code>oldState</code>
+will point to an empty file next time Backup Manager calls <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code>.</dd>
+</dl>
+
+<p>Using these parameters, you should implement your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> method to do the following:</p>
+
+<ol>
+  <li>Check whether your data has changed since the last backup by comparing <code>oldState</code> to
+your current data. How you read data in <code>oldState</code> depends on how you originally wrote it to
+<code>newState</code> (see step 3). The easiest way to record the state of a file is with its
+last-modified timestamp. For example, here's how you can read and compare a timestamp from <code>oldState</code>:
+    <pre>
+// Get the oldState input stream
+FileInputStream instream = new FileInputStream(oldState.getFileDescriptor());
+DataInputStream in = new DataInputStream(instream);
+
+try {
+    // Get the last modified timestamp from the state file and data file
+    long stateModified = in.readLong();
+    long fileModified = mDataFile.lastModified();
+
+    if (stateModified != fileModified) {
+        // The file has been modified, so do a backup
+        // Or the time on the device changed, so be safe and do a backup
+    } else {
+        // Don't back up because the file hasn't changed
+        return;
+    }
+} catch (IOException e) {
+    // Unable to read state file... be safe and do a backup
+}
+</pre>
+    <p>If nothing has changed and you don't need to back up, skip to step 3.</p>
+  </li>
+  <li>If your data has changed, compared to <code>oldState</code>, write the current data to
+<code>data</code> to back it up to the cloud storage.
+    <p>You must write each chunk of data as an "entity" in the <code><a href="https://developer.android.com/reference/android/app/backup/BackupDataOutput.html?hl=ru">BackupDataOutput</a></code>. An entity is a flattened binary data
+record that is identified by a unique key string. Thus, the data set that you back up is
+conceptually a set of key-value pairs.</p>
+    <p>To add an entity to your backup data set, you must:</p>
+    <ol>
+      <li>Call <code><a href="https://developer.android.com/reference/android/app/backup/BackupDataOutput.html?hl=ru#writeEntityHeader(java.lang.String, int)">writeEntityHeader()</a></code>, passing a unique string key for the data you're about to write and the data
+size.</li>
+      <li>Call <code><a href="https://developer.android.com/reference/android/app/backup/BackupDataOutput.html?hl=ru#writeEntityData(byte[], int)">writeEntityData()</a></code>, passing a byte buffer that contains your data and the number of bytes to write
+from the buffer (which should match the size passed to <code><a href="https://developer.android.com/reference/android/app/backup/BackupDataOutput.html?hl=ru#writeEntityHeader(java.lang.String, int)">writeEntityHeader()</a></code>).</li>
+    </ol>
+    <p>For example, the following code flattens some data into a byte stream and writes it into a
+single entity:</p>
+    <pre>
+// Create buffer stream and data output stream for our data
+ByteArrayOutputStream bufStream = new ByteArrayOutputStream();
+DataOutputStream outWriter = new DataOutputStream(bufStream);
+// Write structured data
+outWriter.writeUTF(mPlayerName);
+outWriter.writeInt(mPlayerScore);
+// Send the data to the Backup Manager via the BackupDataOutput
+byte[] buffer = bufStream.toByteArray();
+int len = buffer.length;
+data.writeEntityHeader(TOPSCORE_BACKUP_KEY, len);
+data.writeEntityData(buffer, len);
+</pre>
+    <p>Perform this for each piece of data that you want to back up. How you divide your data into
+entities is up to you (and you might use just one entity).</p>
+  </li>
+  <li>Whether or not you perform a backup (in step 2), write a representation of the current data to
+the <code>newState</code> <code><a href="https://developer.android.com/reference/android/os/ParcelFileDescriptor.html?hl=ru">ParcelFileDescriptor</a></code>. The Backup Manager retains this object
+locally as a representation of the data that is currently backed up. It passes this back to you as
+<code>oldState</code> the next time it calls <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> so you can determine whether another backup is necessary (as handled in step 1). If you
+do not write the current data state to this file, then
+<code>oldState</code> will be empty during the next callback.
+    <p>The following example saves a representation of the current data into <code>newState</code> using
+the file's last-modified timestamp:</p>
+    <pre>
+FileOutputStream outstream = new FileOutputStream(newState.getFileDescriptor());
+DataOutputStream out = new DataOutputStream(outstream);
+
+long modified = mDataFile.lastModified();
+out.writeLong(modified);
+</pre>
+  </li>
+</ol>
+
+<p class="caution"><strong>Caution:</strong> If your application data is saved to a file, make sure
+that you use synchronized statements while accessing the file so that your backup agent does not
+read the file while an Activity in your application is also writing the file.</p>
+
+
+
+
+<h3 id="PerformingRestore">Performing restore</h3>
+
+<p>When it's time to restore your application data, the Backup Manager calls your backup
+agent's <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code> method. When it calls this method, the Backup Manager delivers your backup data so
+you can restore it onto the device.</p>
+
+<p>Only the Backup Manager can call <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>, which happens automatically when the system installs your application and
+finds existing backup data. However, you can request a restore operation for
+your application by calling <code><a href="https://developer.android.com/reference/android/app/backup/BackupManager.html?hl=ru#requestRestore(android.app.backup.RestoreObserver)">requestRestore()</a></code> (see <a
+href="#RequestingRestore">Requesting restore</a> for more information).</p>
+
+<p class="note"><strong>Note:</strong> While developing your application, you can also request a
+restore operation with the <a href="https://developer.android.com/tools/help/bmgr.html?hl=ru"><code>bmgr</code>
+tool</a>.</p>
+
+<p>When the Backup Manager calls your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code> method, it passes three parameters:</p>
+
+<dl>
+  <dt><code>data</code></dt>
+    <dd>A <code><a href="https://developer.android.com/reference/android/app/backup/BackupDataInput.html?hl=ru">BackupDataInput</a></code>, which allows you to read your backup
+data.</dd>
+  <dt><code>appVersionCode</code></dt>
+    <dd>An integer representing the value of your application's <a
+href="../manifest/manifest-element9201.html?hl=ru#vcode"><code>android:versionCode</code></a>
+manifest attribute, as it was when this data was backed up. You can use this to cross-check the
+current application version and determine if the data format is compatible. For more
+information about using this to handle different versions of restore data, see the section
+below about <a href="#RestoreVersion">Checking the Restore Data Version</a>.</dd>
+  <dt><code>newState</code></dt>
+    <dd>An open, read/write <code><a href="https://developer.android.com/reference/android/os/ParcelFileDescriptor.html?hl=ru">ParcelFileDescriptor</a></code> pointing to a file in which
+you must write the final backup state that was provided with <code>data</code>. This object is
+returned as <code>oldState</code> the next time <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> is called. Recall that you must also write the same <code>newState</code> object in the
+<code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> callback&mdash;also doing it here ensures that the <code>oldState</code> object given to
+<code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> is valid even the first time <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> is called after the device is restored.</dd>
+</dl>
+
+<p>In your implementation of <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>, you should call <code><a href="https://developer.android.com/reference/android/app/backup/BackupDataInput.html?hl=ru#readNextHeader()">readNextHeader()</a></code> on the
+<code>data</code> to iterate
+through all entities in the data set. For each entity found, do the following:</p>
+
+<ol>
+  <li>Get the entity key with <code><a href="https://developer.android.com/reference/android/app/backup/BackupDataInput.html?hl=ru#getKey()">getKey()</a></code>.</li>
+  <li>Compare the entity key to a list of known key values that you should have declared as static
+final strings inside your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code> class. When the key matches one of
+your known key strings, enter into a statement to extract the entity data and save it to the device:
+    <ol>
+      <li>Get the entity data size with <code><a href="https://developer.android.com/reference/android/app/backup/BackupDataInput.html?hl=ru#getDataSize()">getDataSize()</a></code> and create a byte array of that size.</li>
+      <li>Call <code><a href="https://developer.android.com/reference/android/app/backup/BackupDataInput.html?hl=ru#readEntityData(byte[], int, int)">readEntityData()</a></code> and pass it the byte array, which is where the data will go, and specify the
+start offset and the size to read.</li>
+      <li>Your byte array is now full and you can read the data and write it to the device
+however you like.</li>
+    </ol>
+  </li>
+  <li>After you read and write your data back to the device, write the state of your data to the
+<code>newState</code> parameter the same as you do during <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code>.
+</ol>
+
+<p>For example, here's how you can restore the data backed up by the example in the previous
+section:</p>
+
+<pre>
+&#64;Override
+public void onRestore(BackupDataInput data, int appVersionCode,
+                      ParcelFileDescriptor newState) throws IOException {
+    // There should be only one entity, but the safest
+    // way to consume it is using a while loop
+    while (data.readNextHeader()) {
+        String key = data.getKey();
+        int dataSize = data.getDataSize();
+
+        // If the key is ours (for saving top score). Note this key was used when
+        // we wrote the backup entity header
+        if (TOPSCORE_BACKUP_KEY.equals(key)) {
+            // Create an input stream for the BackupDataInput
+            byte[] dataBuf = new byte[dataSize];
+            data.readEntityData(dataBuf, 0, dataSize);
+            ByteArrayInputStream baStream = new ByteArrayInputStream(dataBuf);
+            DataInputStream in = new DataInputStream(baStream);
+
+            // Read the player name and score from the backup data
+            mPlayerName = in.readUTF();
+            mPlayerScore = in.readInt();
+
+            // Record the score on the device (to a file or something)
+            recordScore(mPlayerName, mPlayerScore);
+        } else {
+            // We don't know this entity key. Skip it. (Shouldn't happen.)
+            data.skipEntityData();
+        }
+    }
+
+    // Finally, write to the state blob (newState) that describes the restored data
+    FileOutputStream outstream = new FileOutputStream(newState.getFileDescriptor());
+    DataOutputStream out = new DataOutputStream(outstream);
+    out.writeUTF(mPlayerName);
+    out.writeInt(mPlayerScore);
+}
+</pre>
+
+<p>In this example, the <code>appVersionCode</code> parameter passed to <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code> is not used. However, you might want to use
+it if you've chosen to perform backup when the user's version of the application has actually moved
+backward (for example, the user went from version 1.5 of your app to 1.0). For more information, see
+the section about <a href="#RestoreVersion">Checking the Restore Data Version</a>.</p>
+
+<div class="special">
+<p>For an example implementation of <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code>, see the <a
+href="https://developer.android.com/resources/samples/BackupRestore/src/com/example/android/backuprestore/ExampleAgent.html?hl=ru"><code>ExampleAgent</code></a> class in the <a
+href="https://developer.android.com/resources/samples/BackupRestore/index.html?hl=ru">Backup and Restore</a> sample
+application.</p>
+</div>
+
+
+
+
+
+
+<h2 id="BackupAgentHelper">Extending BackupAgentHelper</h2>
+
+<p>You should build your backup agent using <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code> if you want
+to back up complete files (from either <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=ru">SharedPreferences</a></code> or <a
+href="data-storage9201.html?hl=ru#filesInternal">internal storage</a>).
+Building your backup agent with <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code> requires far less
+code than extending <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru">BackupAgent</a></code>, because you don't have to implement
+<code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> and <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>.</p>
+
+<p>Your implementation of <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code> must
+use one or more backup helpers. A backup helper is a specialized
+component that <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code> summons to perform backup and
+restore operations for a particular type of data. The Android framework currently provides two
+different helpers:</p>
+<ul>
+  <li><code><a href="https://developer.android.com/reference/android/app/backup/SharedPreferencesBackupHelper.html?hl=ru">SharedPreferencesBackupHelper</a></code> to backup <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=ru">SharedPreferences</a></code> files.</li>
+  <li><code><a href="https://developer.android.com/reference/android/app/backup/FileBackupHelper.html?hl=ru">FileBackupHelper</a></code> to backup files from <a
+href="data-storage9201.html?hl=ru#filesInternal">internal storage</a>.</li>
+</ul>
+
+<p>You can include multiple helpers in your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code>, but only
+one helper is needed for each data type. That is, if you have multiple <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=ru">SharedPreferences</a></code> files, then you need only one <code><a href="https://developer.android.com/reference/android/app/backup/SharedPreferencesBackupHelper.html?hl=ru">SharedPreferencesBackupHelper</a></code>.</p>
+
+<p>For each helper you want to add to your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code>, you must do
+the following during your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onCreate()">onCreate()</a></code> method:</p>
+<ol>
+  <li>Instantiate in instance of the desired helper class. In the class constructor, you must
+specify the appropriate file(s) you want to backup.</li>
+  <li>Call <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru#addHelper(java.lang.String, android.app.backup.BackupHelper)">addHelper()</a></code>
+to add the helper to your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code>.</li>
+</ol>
+
+<p>The following sections describe how to create a backup agent using each of the available
+helpers.</p>
+
+
+
+<h3 id="SharedPreferences">Backing up SharedPreferences</h3>
+
+<p>When you instantiate a <code><a href="https://developer.android.com/reference/android/app/backup/SharedPreferencesBackupHelper.html?hl=ru">SharedPreferencesBackupHelper</a></code>, you must
+include the name of one or more <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=ru">SharedPreferences</a></code> files.</p>
+
+<p>For example, to back up a <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=ru">SharedPreferences</a></code> file named
+"user_preferences", a complete backup agent using <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code> looks
+like this:</p>
+
+<pre>
+public class MyPrefsBackupAgent extends BackupAgentHelper {
+    // The name of the SharedPreferences file
+    static final String PREFS = "user_preferences";
+
+    // A key to uniquely identify the set of backup data
+    static final String PREFS_BACKUP_KEY = "prefs";
+
+    // Allocate a helper and add it to the backup agent
+    &#64;Override
+    public void onCreate() {
+        SharedPreferencesBackupHelper helper =
+                new SharedPreferencesBackupHelper(this, PREFS);
+        addHelper(PREFS_BACKUP_KEY, helper);
+    }
+}
+</pre>
+
+<p>That's it! That's your entire backup agent. The <code><a href="https://developer.android.com/reference/android/app/backup/SharedPreferencesBackupHelper.html?hl=ru">SharedPreferencesBackupHelper</a></code> includes all the code
+needed to backup and restore a <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=ru">SharedPreferences</a></code> file.</p>
+
+<p>When the Backup Manager calls <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> and <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>, <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code> calls your backup helpers to perform
+backup and restore for your specified files.</p>
+
+<p class="note"><strong>Note:</strong> The methods of <code><a href="https://developer.android.com/reference/android/content/SharedPreferences.html?hl=ru">SharedPreferences</a></code>
+are threadsafe, so
+you can safely read and write the shared preferences file from your backup agent and
+other activities.</p>
+
+
+
+<h3 id="Files">Backing up other files</h3>
+
+<p>When you instantiate a <code><a href="https://developer.android.com/reference/android/app/backup/FileBackupHelper.html?hl=ru">FileBackupHelper</a></code>, you must include the name of
+one or more files that are saved to your application's <a
+href="data-storage9201.html?hl=ru#filesInternal">internal storage</a>
+(as specified by <code><a href="https://developer.android.com/reference/android/content/ContextWrapper.html?hl=ru#getFilesDir()">getFilesDir()</a></code>, which is the same
+location where <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#openFileOutput(java.lang.String, int)">openFileOutput()</a></code> writes
+files).</p>
+
+<p>For example, to backup two files named "scores" and "stats," a backup agent using <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code> looks like this:</p>
+
+<pre>
+public class MyFileBackupAgent extends BackupAgentHelper {
+    // The name of the file
+    static final String TOP_SCORES = "scores";
+    static final String PLAYER_STATS = "stats";
+
+    // A key to uniquely identify the set of backup data
+    static final String FILES_BACKUP_KEY = "myfiles";
+
+    // Allocate a helper and add it to the backup agent
+    &#64;Override
+    public void onCreate() {
+        FileBackupHelper helper = new FileBackupHelper(this,
+                TOP_SCORES, PLAYER_STATS);
+        addHelper(FILES_BACKUP_KEY, helper);
+    }
+}
+</pre>
+
+<p>The <code><a href="https://developer.android.com/reference/android/app/backup/FileBackupHelper.html?hl=ru">FileBackupHelper</a></code> includes all the code necessary to backup and
+restore files that are saved to your application's <a
+href="data-storage9201.html?hl=ru#filesInternal">internal storage</a>..</p>
+
+<p>However, reading and writing to files on internal storage is <strong>not threadsafe</strong>. To
+ensure that your backup agent does not read or write your files at the same time as your activities,
+you must use synchronized statements each time you perform a read or write. For example,
+in any Activity where you read and write the file, you need an object to use as the intrinsic
+lock for the synchronized statements:</p>
+
+<pre>
+// Object for intrinsic lock
+static final Object sDataLock = new Object();
+</pre>
+
+<p>Then create a synchronized statement with this lock each time you read or write the files. For
+example, here's a synchronized statement for writing the latest score in a game to a file:</p>
+
+<pre>
+try {
+    synchronized (MyActivity.sDataLock) {
+        File dataFile = new File(<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ru#getFilesDir()">getFilesDir()</a></code>, TOP_SCORES);
+        RandomAccessFile raFile = new RandomAccessFile(dataFile, "rw");
+        raFile.writeInt(score);
+    }
+} catch (IOException e) {
+    Log.e(TAG, "Unable to write to file");
+}
+</pre>
+
+<p>You should synchronize your read statements with the same lock.</p>
+
+<p>Then, in your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code>, you must override <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> and <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code> to synchronize the backup and restore operations with the same
+intrinsic lock. For example, the <code>MyFileBackupAgent</code> example from above needs the following
+methods:</p>
+
+<pre>
+&#64;Override
+public void onBackup(ParcelFileDescriptor oldState, BackupDataOutput data,
+          ParcelFileDescriptor newState) throws IOException {
+    // Hold the lock while the FileBackupHelper performs backup
+    synchronized (MyActivity.sDataLock) {
+        super.onBackup(oldState, data, newState);
+    }
+}
+
+&#64;Override
+public void onRestore(BackupDataInput data, int appVersionCode,
+        ParcelFileDescriptor newState) throws IOException {
+    // Hold the lock while the FileBackupHelper restores the file
+    synchronized (MyActivity.sDataLock) {
+        super.onRestore(data, appVersionCode, newState);
+    }
+}
+</pre>
+
+<p>That's it. All you need to do is add your <code><a href="https://developer.android.com/reference/android/app/backup/FileBackupHelper.html?hl=ru">FileBackupHelper</a></code> in the
+<code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onCreate()">onCreate()</a></code> method and override <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> and <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code> to synchronize read and write operations.</p>
+
+<div class="special">
+<p>For an example implementation of <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html?hl=ru">BackupAgentHelper</a></code> with <code><a href="https://developer.android.com/reference/android/app/backup/FileBackupHelper.html?hl=ru">FileBackupHelper</a></code>, see the
+<code>FileHelperExampleAgent</code> class in the <a
+href="https://developer.android.com/resources/samples/BackupRestore/index.html?hl=ru">Backup and Restore</a> sample
+application.</p>
+</div>
+
+
+
+
+
+
+<h2 id="RestoreVersion">Checking the restore data version</h2>
+
+<p>When the Backup Manager saves your data to cloud storage, it automatically includes the version
+of your application, as defined by your manifest file's <a
+href="../manifest/manifest-element9201.html?hl=ru#vcode"><code>android:versionCode</code></a>
+attribute. Before the Backup Manager calls your backup agent to restore your data, it
+looks at the <a
+href="../manifest/manifest-element9201.html?hl=ru#vcode"><code>android:versionCode</code></a> of the installed application and compares it to the value
+recorded in the restore data set. If the version recorded in the restore data set is
+<em>newer</em> than the application version on the device, then the user has downgraded their
+application. In this case, the Backup Manager will abort the restore operation for your application
+and not call your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>
+method, because the restore set is considered meaningless to an older version.</p>
+
+<p>You can override this behavior with the <a
+href="../manifest/application-element9201.html?hl=ru#restoreany"><code>android:restoreAnyVersion</code></a> attribute. This attribute is either "<code>true</code>" or "<code>false</code>" to indicate whether you want to restore the application regardless of the restore set
+version. The default value is "<code>false</code>". If you define this to be "<code>true</code>" then the
+Backup Manager will ignore the <a
+href="../manifest/manifest-element9201.html?hl=ru#vcode"><code>android:versionCode</code></a>
+and call your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>
+method in all cases. In doing so, you can manually check for the version difference in your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>
+method and take any steps necessary to make the data compatible if the versions conflict.</p>
+
+<p>To help you handle different versions during a restore operation, the <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>
+method passes you the version code included with the restore data set as the <code>appVersionCode</code>
+parameter. You can then query the current application's version code with the <code><a href="https://developer.android.com/reference/android/content/pm/PackageInfo.html?hl=ru#versionCode">PackageInfo.versionCode</a></code> field. For example:</p>
+
+<pre>
+PackageInfo info;
+try {
+    String name = <code><a href="https://developer.android.com/reference/android/content/ContextWrapper.html?hl=ru#getPackageName()">getPackageName</a></code>();
+    info = <code><a href="https://developer.android.com/reference/android/content/ContextWrapper.html?hl=ru#getPackageManager()">getPackageManager</a></code>().<code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=ru#getPackageInfo(java.lang.String, int)">getPackageInfo</a></code>(name,0);
+} catch (NameNotFoundException nnfe) {
+    info = null;
+}
+
+int version;
+if (info != null) {
+    version = info.versionCode;
+}
+</pre>
+
+<p>Then simply compare the <code>version</code> acquired from <code><a href="https://developer.android.com/reference/android/content/pm/PackageInfo.html?hl=ru">PackageInfo</a></code>
+to the <code>appVersionCode</code> passed into <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>.
+</p>
+
+<p class="caution"><strong>Caution:</strong> Be certain you understand the consequences of setting
+<a href="../manifest/application-element9201.html?hl=ru#restoreany"><code>android:restoreAnyVersion</code></a> to "<code>true</code>" for your application. If each version of your
+application that supports backup does not properly account for variations in your data format during
+<code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>,
+then the data on the device could be saved in a format incompatible with the version currently
+installed on the device.</p>
+
+
+
+<h2 id="RequestingBackup">Requesting backup</h2>
+
+<p>You can request a backup operation at any time by calling <code><a href="https://developer.android.com/reference/android/app/backup/BackupManager.html?hl=ru#dataChanged()">dataChanged()</a></code>. This method notifies the Backup Manager that you'd
+like to backup your data using your backup agent. The Backup Manager then calls your backup
+agent's <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code> method at an opportune time in the future. Typically, you should
+request a backup each time your data changes (such as when the user changes an application
+preference that you'd like to back up). If you call <code><a href="https://developer.android.com/reference/android/app/backup/BackupManager.html?hl=ru#dataChanged()">dataChanged()</a></code> several times consecutively, before the Backup
+Manager requests a backup from your agent, your agent still receives just one call to <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor)">onBackup()</a></code>.</p>
+
+<p class="note"><strong>Note:</strong> While developing your application, you can request a
+backup and initiate an immediate backup operation with the <a
+href="https://developer.android.com/tools/help/bmgr.html?hl=ru"><code>bmgr</code>
+tool</a>.</p>
+
+
+<h2 id="RequestingRestore">Requesting restore</h2>
+
+<p>During the normal life of your application, you shouldn't need to request a restore operation.
+They system automatically checks for backup data and performs a restore when your application is
+installed. However, you can manually request a restore operation by calling <code><a href="https://developer.android.com/reference/android/app/backup/BackupManager.html?hl=ru#requestRestore(android.app.backup.RestoreObserver)">requestRestore()</a></code>, if necessary. In
+which case, the Backup Manager calls your <code><a href="https://developer.android.com/reference/android/app/backup/BackupAgent.html?hl=ru#onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor)">onRestore()</a></code>
+implementation, passing the data from the current set of backup data.</p>
+
+<p class="note"><strong>Note:</strong> While developing your application, you can request a
+restore operation with the <a href="https://developer.android.com/tools/help/bmgr.html?hl=ru"><code>bmgr</code>
+tool</a>.</p>
+
+
+<h2 id="Migrating">Migrating to Auto Backup</h2>
+<p>You can transition your app to full-data backups by setting
+<a href="../manifest/application-element9201.html?hl=ru#fullBackupOnly"><code>android:fullBackupOnly</code></a>
+to <code>true</code> in the <code>&lt;application></code> element in the manifest file. When
+running on a device with Android 5.1 (API level 22) or lower, your app ignores
+this value in the manifest, and continues performing Key/Value Backups. When
+running on a device with Android 6.0 (API level 23) or higher, your app performs
+Auto Backup instead of Key/Value Backup.
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=ru" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Блог" target="_blank">Блог</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=ru" title="Поддержка">Поддержка</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=ru" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=ru" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=ru" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=ru" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="tKmIP3IPJxFC8tkeTSJ4tG3LqHGxeS63dkRjJUPBHg06MTQ5NzUxNjQ1NDkwNzczMA" />
+      <input type="hidden" name="next" value="/guide/topics/data/keyvaluebackup.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+             selected="selected" >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Адрес электронной почты</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en05ec.js?hl=ru?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists05ec.js?hl=ru?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=ru"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_ru.js?hl=ru?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/data/keyvaluebackup.html?hl=ru by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:07:52 GMT -->
+</html>

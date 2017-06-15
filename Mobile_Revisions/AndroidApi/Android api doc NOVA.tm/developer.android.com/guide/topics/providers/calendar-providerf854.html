@@ -1,0 +1,2097 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/calendar-provider.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:11:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="sgvhWt4s7-LKuTketFnp3o_C__6fIskDgVSUwNXZjrQ6MTQ5NzUxNjczMzM1Nzk4MA" />
+
+  
+    <link rel="canonical" href="calendar-providerf854.html?hl=zh-tw">
+  
+
+  
+    <link rel="alternate" href="calendar-providerf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="calendar-provider9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="calendar-provider327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="calendar-provider0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="calendar-provider7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="calendar-provider0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="calendar-provider.html" hreflang="en">
+  
+    <link rel="alternate" href="calendar-provider232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="calendar-provider9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="calendar-providerde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="calendar-provider6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=pt-br" hreflang="pt-br-cn">
+  
+
+  <link rel="alternate" href="calendar-provider.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/faviconf854.png?hl=zh-tw">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-180f854.png?hl=zh-tw">
+
+
+<title>
+
+  日曆供應程式 | Android Developers
+
+</title>
+
+  <meta name="description" content="「日曆供應程式」是使用者日曆活動的存放庫。「日曆供應程式」API 允許您在日曆、活動、參與者、提醒等等項目中執行查詢、插入、更新以及刪除操作。 「日曆供應程式」API 可以由應用程式和同步配接器使用。規則取決於發出呼叫的程式類型。 本文件主要著重於將「日曆供應程式」API 作為應用程式使用。 如要瞭解同步配接器不一樣的資訊，請參閱 同步配接器 。 一般而言，如要讀取或寫入日曆資料，應用程式的宣示說明必須含有適當的權限 (於 使用者權限 中描述)。 如要更輕鬆執行常見操作，「日曆供應程式」提供一組意圖…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default962f.css?hl=zh-tw?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundlef854.js?hl=zh-tw" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__zh_twf854.js?hl=zh-tw"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_androidf854.js?hl=zh-tw"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs962f.js?hl=zh-tw?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "zh-tw", "served": "zh-tw"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=zh-tw">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logof854.png?hl=zh-tw"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=zh-tw"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=zh-tw"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=zh-tw" width="18" height="19" alt="Play 管理中心">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="搜尋">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">返回</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../indexf854.html?hl=zh-tw" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentalsf854.html?hl=zh-tw" >App Fundamentals</a></li><li><a href="../../practices/compatibilityf854.html?hl=zh-tw" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/indexf854.html?hl=zh-tw" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requestingf854.html?hl=zh-tw" >Requesting Permissions</a></li><li><a href="../permissions/definingf854.html?hl=zh-tw" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/indexf854.html?hl=zh-tw" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jackf854.html?hl=zh-tw"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-artf854.html?hl=zh-tw" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/indexf854.html?hl=zh-tw" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filtersf854.html?hl=zh-tw" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-commonf854.html?hl=zh-tw" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/indexf854.html?hl=zh-tw" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activitiesf854.html?hl=zh-tw" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecyclef854.html?hl=zh-tw" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changesf854.html?hl=zh-tw" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stackf854.html?hl=zh-tw" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecyclef854.html?hl=zh-tw" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundlesf854.html?hl=zh-tw" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recentsf854.html?hl=zh-tw" >Recents Screen</a></li></ul></li><li><a href="../../components/fragmentsf854.html?hl=zh-tw" >Fragments</a></li><li><a href="../../components/loadersf854.html?hl=zh-tw" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/servicesf854.html?hl=zh-tw" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-servicesf854.html?hl=zh-tw" >Bound Services</a></li><li><a href="../../components/aidlf854.html?hl=zh-tw" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="content-providersf854.html?hl=zh-tw" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="content-provider-basicsf854.html?hl=zh-tw" >Content Provider Basics</a></li><li><a href="content-provider-creatingf854.html?hl=zh-tw" >Creating a Content Provider</a></li><li><a href="calendar-providerf854.html?hl=zh-tw" >Calendar Provider</a></li><li><a href="contacts-providerf854.html?hl=zh-tw" >Contacts Provider</a></li><li><a href="document-providerf854.html?hl=zh-tw" >Open files using Storage Access Framework</a></li><li><a href="create-document-providerf854.html?hl=zh-tw" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcastsf854.html?hl=zh-tw" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/indexf854.html?hl=zh-tw" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/hostf854.html?hl=zh-tw" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threadsf854.html?hl=zh-tw" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/indexf854.html?hl=zh-tw" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../resources/providing-resourcesf854.html?hl=zh-tw" >Providing Resources</a></li><li><a href="../resources/accessing-resourcesf854.html?hl=zh-tw" >Accessing Resources</a></li><li><a href="../resources/runtime-changesf854.html?hl=zh-tw" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localizationf854.html?hl=zh-tw" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-frameworkf854.html?hl=zh-tw" >ICU4J Android Framework APIs</a></li><li><a href="../resources/multilingual-supportf854.html?hl=zh-tw" >Language and Locale</a></li></ul></li><li><a href="../resources/complex-xml-resourcesf854.html?hl=zh-tw" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resourcesf854.html?hl=zh-tw" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resourcef854.html?hl=zh-tw" >Animation</a></li><li><a href="../resources/color-list-resourcef854.html?hl=zh-tw" >Color State List</a></li><li><a href="../resources/drawable-resourcef854.html?hl=zh-tw" >Drawable</a></li><li><a href="../resources/layout-resourcef854.html?hl=zh-tw" >Layout</a></li><li><a href="../resources/menu-resourcef854.html?hl=zh-tw" >Menu</a></li><li><a href="../resources/string-resourcef854.html?hl=zh-tw" >String</a></li><li><a href="../resources/style-resourcef854.html?hl=zh-tw" >Style</a></li><li><a href="../resources/more-resourcesf854.html?hl=zh-tw" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-introf854.html?hl=zh-tw" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-elementf854.html?hl=zh-tw" >&lt;action&gt;</a></li><li><a href="../manifest/activity-elementf854.html?hl=zh-tw" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-elementf854.html?hl=zh-tw" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-elementf854.html?hl=zh-tw" >&lt;application&gt;</a></li><li><a href="../manifest/category-elementf854.html?hl=zh-tw" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-elementf854.html?hl=zh-tw" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-elementf854.html?hl=zh-tw" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-elementf854.html?hl=zh-tw" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-elementf854.html?hl=zh-tw" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-elementf854.html?hl=zh-tw" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-elementf854.html?hl=zh-tw" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-elementf854.html?hl=zh-tw" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-elementf854.html?hl=zh-tw" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-elementf854.html?hl=zh-tw" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-elementf854.html?hl=zh-tw" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-elementf854.html?hl=zh-tw" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-elementf854.html?hl=zh-tw" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-elementf854.html?hl=zh-tw" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-elementf854.html?hl=zh-tw" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-elementf854.html?hl=zh-tw" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-elementf854.html?hl=zh-tw" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-elementf854.html?hl=zh-tw" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-elementf854.html?hl=zh-tw" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-elementf854.html?hl=zh-tw" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-elementf854.html?hl=zh-tw" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-elementf854.html?hl=zh-tw" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-elementf854.html?hl=zh-tw" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/indexf854.html?hl=zh-tw" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overviewf854.html?hl=zh-tw" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layoutf854.html?hl=zh-tw" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linearf854.html?hl=zh-tw" >Linear Layout</a></li><li><a href="../ui/layout/relativef854.html?hl=zh-tw" >Relative Layout</a></li><li><a href="../ui/layout/recyclerviewf854.html?hl=zh-tw" >Recycler View</a></li><li><a href="../ui/layout/listviewf854.html?hl=zh-tw" >List View</a></li><li><a href="../ui/layout/gridviewf854.html?hl=zh-tw" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controlsf854.html?hl=zh-tw" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/buttonf854.html?hl=zh-tw" >Buttons</a></li><li><a href="../ui/controls/checkboxf854.html?hl=zh-tw" >Checkboxes</a></li><li><a href="../ui/controls/radiobuttonf854.html?hl=zh-tw" >Radio Buttons</a></li><li><a href="../ui/controls/togglebuttonf854.html?hl=zh-tw" >Toggle Buttons</a></li><li><a href="../ui/controls/spinnerf854.html?hl=zh-tw" >Spinners</a></li><li><a href="../ui/controls/pickersf854.html?hl=zh-tw" >Pickers</a></li></ul></li><li><a href="../ui/ui-eventsf854.html?hl=zh-tw" >Input Events</a></li><li><a href="../ui/menusf854.html?hl=zh-tw" >Menus</a></li><li><a href="../ui/settingsf854.html?hl=zh-tw" >Settings</a></li><li><a href="../ui/dialogsf854.html?hl=zh-tw" >Dialogs</a></li><li><a href="../ui/notifiers/notificationsf854.html?hl=zh-tw" >Notifications</a></li><li><a href="../ui/notifiers/toastsf854.html?hl=zh-tw" >Toasts</a></li><li><a href="../ui/shortcutsf854.html?hl=zh-tw" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/indexf854.html?hl=zh-tw" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialogf854.html?hl=zh-tw" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestionsf854.html?hl=zh-tw" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestionsf854.html?hl=zh-tw" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-configf854.html?hl=zh-tw" >Searchable Configuration</a></li></ul></li><li><a href="../ui/multi-windowf854.html?hl=zh-tw" >Multi-Window Support</a></li><li><a href="../ui/drag-dropf854.html?hl=zh-tw" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/indexf854.html?hl=zh-tw" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/appsf854.html?hl=zh-tw" >Making Apps More Accessible</a></li><li><a href="../ui/accessibility/checklistf854.html?hl=zh-tw" >Accessibility Developer Checklist</a></li><li><a href="../ui/accessibility/node-tree-debuggingf854.html?hl=zh-tw" >Using Node Tree Debugging</a></li><li><a href="../ui/accessibility/servicesf854.html?hl=zh-tw" >Building Accessibility Services</a></li><li><a href="../ui/accessibility/custom-viewsf854.html?hl=zh-tw" >Building Accessible Custom Views</a></li></ul></li><li><a href="../ui/themesf854.html?hl=zh-tw" >Styles and Themes</a></li><li><a href="../ui/custom-componentsf854.html?hl=zh-tw" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/indexf854.html?hl=zh-tw" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../graphics/prop-animationf854.html?hl=zh-tw" >Property Animation</a></li><li><a href="../graphics/view-animationf854.html?hl=zh-tw" >View Animation</a></li><li><a href="../graphics/drawable-animationf854.html?hl=zh-tw" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphicsf854.html?hl=zh-tw" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resourcesf854.html?hl=zh-tw" >Vector Drawable</a></li></ul></li><li><a href="../graphics/openglf854.html?hl=zh-tw" >OpenGL ES</a></li><li><a href="../graphics/hardware-accelf854.html?hl=zh-tw" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/indexf854.html?hl=zh-tw" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/computef854.html?hl=zh-tw" >RenderScript</a></li><li><a href="../renderscript/advancedf854.html?hl=zh-tw" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overviewf854.html?hl=zh-tw" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_typesf854.html?hl=zh-tw" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_typesf854.html?hl=zh-tw" >Object Types</a></li><li><a href="../renderscript/reference/rs_convertf854.html?hl=zh-tw" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_mathf854.html?hl=zh-tw" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_mathf854.html?hl=zh-tw" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrixf854.html?hl=zh-tw" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternionf854.html?hl=zh-tw" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomicf854.html?hl=zh-tw" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_timef854.html?hl=zh-tw" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_dataf854.html?hl=zh-tw" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_infof854.html?hl=zh-tw" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_eachf854.html?hl=zh-tw" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_iof854.html?hl=zh-tw" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debugf854.html?hl=zh-tw" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphicsf854.html?hl=zh-tw" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/indexf854.html?hl=zh-tw" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/indexf854.html?hl=zh-tw" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overviewf854.html?hl=zh-tw" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-sessionf854.html?hl=zh-tw" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-appf854.html?hl=zh-tw" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservicef854.html?hl=zh-tw" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-clientf854.html?hl=zh-tw" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-appf854.html?hl=zh-tw" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activityf854.html?hl=zh-tw" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttonsf854.html?hl=zh-tw" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphonesf854.html?hl=zh-tw" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/indexf854.html?hl=zh-tw" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formatsf854.html?hl=zh-tw" >Supported Media Formats</a></li><li><a href="../media/mediaplayerf854.html?hl=zh-tw" >MediaPlayer</a></li><li><a href="../media/mediarecorderf854.html?hl=zh-tw" >MediaRecorder</a></li><li><a href="../media/exoplayerf854.html?hl=zh-tw" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routingf854.html?hl=zh-tw" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouterf854.html?hl=zh-tw" >MediaRouter API</a></li><li><a href="../media/mediarouteproviderf854.html?hl=zh-tw" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/cameraf854.html?hl=zh-tw" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/indexf854.html?hl=zh-tw" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/indexf854.html?hl=zh-tw" >Location and Maps</a></li><li><a href="../location/strategiesf854.html?hl=zh-tw" >Location Strategies</a></li><li><a href="../sensors/sensors_overviewf854.html?hl=zh-tw" >Sensors Overview</a></li><li><a href="../sensors/sensors_motionf854.html?hl=zh-tw" >Motion Sensors</a></li><li><a href="../sensors/sensors_positionf854.html?hl=zh-tw" >Position Sensors</a></li><li><a href="../sensors/sensors_environmentf854.html?hl=zh-tw" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/indexf854.html?hl=zh-tw" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetoothf854.html?hl=zh-tw" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-lef854.html?hl=zh-tw" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/indexf854.html?hl=zh-tw" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfcf854.html?hl=zh-tw" >NFC Basics</a></li><li><a href="../connectivity/nfc/advanced-nfcf854.html?hl=zh-tw" >Advanced NFC</a></li><li><a href="../connectivity/nfc/hcef854.html?hl=zh-tw" >Host-based Card Emulation</a></li></ul></li><li><a href="../connectivity/wifip2pf854.html?hl=zh-tw" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/indexf854.html?hl=zh-tw" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessoryf854.html?hl=zh-tw" >Accessory</a></li><li><a href="../connectivity/usb/hostf854.html?hl=zh-tw" >Host</a></li></ul></li><li><a href="../connectivity/sipf854.html?hl=zh-tw" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/indexf854.html?hl=zh-tw" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-pastef854.html?hl=zh-tw" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-methodf854.html?hl=zh-tw" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboardf854.html?hl=zh-tw" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-frameworkf854.html?hl=zh-tw" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/indexf854.html?hl=zh-tw" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storagef854.html?hl=zh-tw" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../data/backupf854.html?hl=zh-tw" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/autobackupf854.html?hl=zh-tw" >Auto Backup</a></li><li><a href="../data/keyvaluebackupf854.html?hl=zh-tw" >Key/Value Backup</a></li><li><a href="../data/testingbackupf854.html?hl=zh-tw" >Testing Backup and Restore</a></li></ul></li><li><a href="../data/install-locationf854.html?hl=zh-tw" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/indexf854.html?hl=zh-tw" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-adminf854.html?hl=zh-tw" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/indexf854.html?hl=zh-tw" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targetingf854.html?hl=zh-tw" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webviewf854.html?hl=zh-tw" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migratingf854.html?hl=zh-tw" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debuggingf854.html?hl=zh-tw" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practicesf854.html?hl=zh-tw" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/indexf854.html?hl=zh-tw"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_supportf854.html?hl=zh-tw" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distributionf854.html?hl=zh-tw" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-modef854.html?hl=zh-tw" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessnessf854.html?hl=zh-tw" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsetsf854.html?hl=zh-tw" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=zh-tw">首頁</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=zh-tw">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=zh-tw">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=zh-tw">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=zh-tw">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=zh-tw">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=zh-tw"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=zh-tw"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">訓練</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../indexf854.html?hl=zh-tw"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=zh-tw"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">參考資料</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=zh-tw">範例</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=zh-tw"
+           >程式庫</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=zh-tw"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=zh-tw"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=zh-tw">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=zh-tw">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=zh-tw">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=zh-tw">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=zh-tw">Play 管理中心</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=zh-tw"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=zh-tw"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=zh-tw">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=zh-tw">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">日曆供應程式</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+    <h2>本文件內容</h2>
+    <ol>
+  <li><a href="#overview">基本概念</a></li>
+  <li><a href="#manifest">使用者權限</a></li>
+  <li><a href="#calendar">日曆表格</a>
+<ol>
+      <li><a href="#query">查詢日曆</a></li>
+      <li><a href="#modify-calendar">修改日曆</a></li>
+      <li><a href="#insert-calendar">插入日曆</a></li>
+    </ol>
+  </li>
+  <li><a href="#events">活動表格</a>
+<ol>
+      <li><a href="#add-event">新增活動</a></li>
+      <li><a href="#update-event">更新活動</a></li>
+      <li><a href="#delete-event">刪除活動</a></li>
+    </ol>
+  </li>
+  <li><a href="#attendees">參與者表格</a>
+<ol>
+      <li><a href="#add-attendees">新增參與者</a></li>
+    </ol>
+  </li>
+  <li><a href="#reminders">提醒表格</a>
+<ol>
+      <li><a href="#add-reminders">新增提醒</a></li>
+    </ol>
+  </li>
+  <li><a href="#instances">執行個體表格</a>
+  <ol>
+      <li><a href="#query-instances">查詢執行個體表格</a></li>
+  </ol></li>
+  <li><a href="#intents">日曆意圖</a>
+  <ol>
+      <li><a href="#intent-insert">使用意圖插入活動</a></li>
+      <li><a href="#intent-edit">使用意圖編輯活動</a></li>
+      <li><a href="#intent-view">使用意圖檢視日曆資料</a></li>
+    </ol>
+  </li>
+
+  <li><a href="#sync-adapter">同步配接器</a></li>
+</ol>
+
+    <h2>重要類別</h2>
+    <ol>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=zh-tw">CalendarContract.Calendars</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=zh-tw">CalendarContract.Events</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Attendees.html?hl=zh-tw">CalendarContract.Attendees</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=zh-tw">CalendarContract.Reminders</a></code></li>
+    </ol>
+</div>
+</div>
+
+<p>「日曆供應程式」是使用者日曆活動的存放庫。「日曆供應程式」API 允許您在日曆、活動、參與者、提醒等等項目中執行查詢、插入、更新以及刪除操作。
+
+</p>
+
+
+<p>「日曆供應程式」API 可以由應用程式和同步配接器使用。規則取決於發出呼叫的程式類型。
+本文件主要著重於將「日曆供應程式」API 作為應用程式使用。
+如要瞭解同步配接器不一樣的資訊，請參閱<a href="#sync-adapter">同步配接器</a>。
+
+</p>
+
+
+<p>一般而言，如要讀取或寫入日曆資料，應用程式的宣示說明必須含有適當的權限 (於<a href="#manifest">使用者權限</a>中描述)。
+
+如要更輕鬆執行常見操作，「日曆供應程式」提供一組意圖 (於<a href="#intents">日曆意圖</a>中描述)。
+
+這些意圖會將使用者帶往「日曆」應用程式，以插入、檢視以及編輯活動。
+使用者與「日曆」應用程式互動後，回到原來的應用程式。
+因此，您的應用程式不需要要求權限，也不需要提供檢視或建立活動的使用者介面。
+</p>
+
+<h2 id="overview">基本概念</h2>
+
+<p><a href="content-providersf854.html?hl=zh-tw">內容供應程式</a>會儲存資料，讓應用程式可以存取這些資料。
+內容供應程式是由 Android 平台所提供 (包括「日曆供應程式」)，通常會根據關聯式資料庫模型，以一組表格的形式公開資料。表格中的每一列都是一筆記錄，而每一欄則是特定類型和意義的資料。
+
+透過「日曆供應程式」API，應用程式和同步配接器可以取得資料庫表格 (此資料庫表格含有使用者日曆資料) 的讀取/寫入存取權。
+
+</p>
+
+<p>每個內容供應程式都會公開一個公用 URI (包裝為
+<code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=zh-tw">Uri</a></code> 物件)，可唯一識別其資料集。
+控制多個資料集 (多個表格) 的內容供應程式會為每個資料集公開個別的 URI。
+供應程式所有 URI 的開頭字串為「content://」。
+這表示資料是受到內容供應程式的控制。
+「日曆供應程式」會為每個類別 (表格) 的 URI 定義常數。
+這些 URI 的格式為 <code><em>&lt;class&gt;</em>.CONTENT_URI</code>。
+例如，<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=zh-tw#CONTENT_URI">Events.CONTENT_URI</a></code>。
+</p>
+
+<p>「圖 1」顯示「日曆供應程式」資料模型的圖形表示。它顯示主要表格以及將每個表格連接在一起的欄位。
+</p>
+
+<img src="../../../images/providers/datamodelf854.png?hl=zh-tw" alt="Calendar Provider Data Model" />
+<p class="img-caption"><strong>圖 1.</strong>「日曆供應程式」資料模型。</p>
+
+<p>使用者可以有多個日曆，而且不同的日曆可以與不同類型的帳戶 (Google 日曆、Exchange 等等) 關聯。</p>
+
+<p><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw">CalendarContract</a></code> 會定義日曆的資料模型和活動相關資訊。此資料儲存於一些表格，列示如下。</p>
+
+<table>
+  <tr>
+    <th>表格 (類別)</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><p><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=zh-tw">CalendarContract.Calendars</a></code></p></td>
+
+    <td>此表格內含日曆特定的資訊。
+此表格中的每一列包含單一日曆的詳細資訊，例如名稱、色彩、同步資訊等等。
+</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=zh-tw">CalendarContract.Events</a></code></td>
+
+    <td>此表格內含活動特定的資訊。
+此表格中的每一列包含單一活動的資訊 &mdash; 例如，活動標題、位置、開始時間、結束時間等等。
+
+活動可以只發生一次或發生多次。參與者、提醒以及延伸屬性儲存於個別的表格。
+它們每一個都有 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#EVENT_ID">EVENT_ID</a></code>，會參照「活動」表格中的 <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=zh-tw#_ID">_ID</a></code>。
+
+</td>
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw">CalendarContract.Instances</a></code></td>
+
+    <td>此表格內含活動每次發生的開始和結束時間。
+此表格的每一列代表單一活動發生。
+單次活動執行個體和活動的對應為 1:1。
+對於週期性活動，則會自動產生多個列，對應到該活動的多次發生。
+</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Attendees.html?hl=zh-tw">CalendarContract.Attendees</a></code></td>
+
+    <td>此表格內含活動參與者 (邀請對象) 的資訊。
+每一列代表一個活動的單一邀請對象。
+其中會指出邀請對象類型，以及邀請對象是否出席該活動的回應。
+</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=zh-tw">CalendarContract.Reminders</a></code></td>
+
+    <td>此表格內含警示/通知資訊。
+每一列代表一個活動的單一警示。一個活動可以設定多個提醒。
+每個活動的最大數量提醒指定於
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=zh-tw#MAX_REMINDERS">MAX_REMINDERS</a></code>，此項是由擁有指定日曆的同步配接器所設定。
+
+
+提醒是以分鐘數指定活動發生前的時間，而且有一個方法用於決定通知使用者的方式。
+</td>
+  </tr>
+
+</table>
+
+<p>「日曆供應程式」API 的設計具備彈性且功能強大。提供良好的使用者體驗，以及保護日曆及其資料的完整性，兩者一樣重要。
+
+關於這一點，使用此 API 時，請記得以下事項：
+</p>
+
+<ul>
+
+<li><strong>插入、更新以及檢視日曆活動。</strong>如要從「日曆供應程式」直接插入、修改以及讀取活動，您需要具備適當的<a href="#manifest">權限</a>。然而，如果您不是要建置功能豐富的日曆應用程式，則不需要要求這些權限。您可以改用 Android「日曆」應用程式支援的意圖，將讀取和寫入操作交給您的應用程式。使用意圖時，您的應用程式可以將使用者傳送到「日曆」應用程式，在預先填好的表單中執行想要的操作。
+完成之後，使用者會回到您的應用程式。將應用程式設計成透過「日曆」來執行常見的操作，即可為使用者提供一致且完整的使用者介面。
+
+我們建議您採用此方式。
+如需詳細資訊，請參閱<a href="#intents">日曆意圖</a>。
+</p>
+
+
+<li><strong>同步配接器。</strong>同步配接器會將使用者裝置的日曆資料與另一台伺服器或資料來源進行同步。
+在
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=zh-tw">CalendarContract.Calendars</a></code> 和
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=zh-tw">CalendarContract.Events</a></code> 表格中，會保留某些欄讓同步配接器使用。供應程式和應用程式不應加以修改。
+
+事實上，除非以同步配接器進行存取，否則看不到這些保留的欄。
+如需關於同步配接器的詳細資訊，請參閱<a href="#sync-adapter">同步配接器</a>。
+</li>
+
+</ul>
+
+
+<h2 id="manifest">使用者權限</h2>
+
+<p>如要讀取日曆資料，應用程式必須在其宣示說明檔案中包含 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=zh-tw#READ_CALENDAR">READ_CALENDAR</a></code> 權限。宣示說明檔案必須包含 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=zh-tw#WRITE_CALENDAR">WRITE_CALENDAR</a></code> 權限，才能刪除、插入或更新日曆資料：
+
+</p>
+
+<pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;...&gt;
+    &lt;uses-sdk android:minSdkVersion=&quot;14&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_CALENDAR&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_CALENDAR&quot; /&gt;
+    ...
+&lt;/manifest&gt;
+</pre>
+
+
+<h2 id="calendar">日曆表格</h2>
+
+<p><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=zh-tw">CalendarContract.Calendars</a></code> 表格包含個別日曆的詳細資訊。
+下列「日曆」欄可以讓應用程式和<a href="#sync-adapter">同步配接器</a>寫入。
+如需關於支援欄位的完整清單，請參閱
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=zh-tw">CalendarContract.Calendars</a></code> 參照。
+</p>
+<table>
+  <tr>
+    <th>常數</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=zh-tw#NAME">NAME</a></code></td>
+    <td>日曆的名稱。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=zh-tw#CALENDAR_DISPLAY_NAME">CALENDAR_DISPLAY_NAME</a></code></td>
+    <td>使用者看到此日曆的名稱。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=zh-tw#VISIBLE">VISIBLE</a></code></td>
+
+    <td>指出是否選擇要顯示日曆的布林值。值 0 表示與此日曆關聯的活動不應顯示。
+
+值 1 表示與此日曆關聯的活動應顯示。
+此值會影響 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw">CalendarContract.Instances</a></code> 表格中列的產生。</td>
+
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=zh-tw#SYNC_EVENTS">SYNC_EVENTS</a></code></td>
+
+    <td>指出日曆是否應同步，並且讓日曆的活動儲存在裝置上的布林值。
+值 0 表示不同步此日曆，並且不要在裝置上儲存其活動。
+值 1 表示同步此日曆的活動，並且在裝置上儲存其活動。
+</td>
+  </tr>
+</table>
+
+<h3 id="query">查詢日曆</h3>
+
+<p>以下的範例顯示如何取得特定使用者擁有的日曆。
+為了簡化起見，本範例中的查詢操作顯示於使用者介面執行緒 (即「主要執行緒」) 中。
+實務上，應該以非同步執行緒來完成，而不是使用主要執行緒。
+如需更多討論，請參閱<a href="../../components/loadersf854.html?hl=zh-tw">載入器</a>。
+如果您不只要讀取資料，還要加以修改，請參閱 <code><a href="https://developer.android.com/reference/android/content/AsyncQueryHandler.html?hl=zh-tw">AsyncQueryHandler</a></code>。
+
+</p>
+
+
+<pre>
+// Projection array. Creating indices for this array instead of doing
+// dynamic lookups improves performance.
+public static final String[] EVENT_PROJECTION = new String[] {
+    Calendars._ID,                           // 0
+    Calendars.ACCOUNT_NAME,                  // 1
+    Calendars.CALENDAR_DISPLAY_NAME,         // 2
+    Calendars.OWNER_ACCOUNT                  // 3
+};
+
+// The indices for the projection array above.
+private static final int PROJECTION_ID_INDEX = 0;
+private static final int PROJECTION_ACCOUNT_NAME_INDEX = 1;
+private static final int PROJECTION_DISPLAY_NAME_INDEX = 2;
+private static final int PROJECTION_OWNER_ACCOUNT_INDEX = 3;</pre>
+
+
+<div class="sidebox-wrapper"> <div class="sidebox"> <h3>為什麼一定要包含 ACCOUNT_TYPE？
+</h3> <p>如果您要針對 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=zh-tw#ACCOUNT_NAME">Calendars.ACCOUNT_NAME</a></code> 進行查詢，也必須在選項中包含
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=zh-tw#ACCOUNT_TYPE">Calendars.ACCOUNT_TYPE</a></code>。
+這是因為只有同時提供指定帳戶的 <code>ACCOUNT_NAME</code> 和
+<code>ACCOUNT_TYPE</code> 情況下，此帳戶才會視為唯一的。
+<code>ACCOUNT_TYPE</code> 是對應至帳戶驗證器的字串。帳戶使用
+<code><a href="https://developer.android.com/reference/android/accounts/AccountManager.html?hl=zh-tw">AccountManager</a></code> 註冊時，會使用此帳戶驗證器。
+沒有與裝置帳戶關聯的日曆也有一種特殊類型的帳戶，稱為 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code>。<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code> 帳戶不會進行同步。
+
+</p> </div> </div>
+
+
+<p> 在範例的下一個部分，您將建構查詢。選項會指定查詢的條件。
+在此範例中，查詢會尋找日曆中有 <code>ACCOUNT_NAME</code> "sampleuser@google.com"、<code>ACCOUNT_TYPE</code> "com.google" 以及 <code>OWNER_ACCOUNT</code> "sampleuser@google.com" 的內容。
+
+
+
+如果您要查看使用者可以檢視的所有日曆，不是只查看使用者擁有的日曆，請略過 <code>OWNER_ACCOUNT</code>。此查詢會傳回 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-tw">Cursor</a></code> 物件。您可以使用此物件周遊資料庫查詢傳回的結果集。
+
+
+
+如需關於在內容供應程式中使用查詢的詳細討論，請參閱<a href="content-providersf854.html?hl=zh-tw">內容供應程式</a>。
+</p>
+
+
+<pre>// Run query
+Cursor cur = null;
+ContentResolver cr = getContentResolver();
+Uri uri = Calendars.CONTENT_URI;
+String selection = "((" + Calendars.ACCOUNT_NAME + " = ?) AND ("
+                        + Calendars.ACCOUNT_TYPE + " = ?) AND ("
+                        + Calendars.OWNER_ACCOUNT + " = ?))";
+String[] selectionArgs = new String[] {"sampleuser@gmail.com", "com.google",
+        "sampleuser@gmail.com"};
+// Submit the query and get a Cursor object back.
+cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);</pre>
+
+<p>下一節會使用游標逐步檢視結果集。它會使用範例一開始設定好的常數，傳回每個欄位的值。
+
+</p>
+
+<pre>// Use the cursor to step through the returned records
+while (cur.moveToNext()) {
+    long calID = 0;
+    String displayName = null;
+    String accountName = null;
+    String ownerName = null;
+
+    // Get the field values
+    calID = cur.getLong(PROJECTION_ID_INDEX);
+    displayName = cur.getString(PROJECTION_DISPLAY_NAME_INDEX);
+    accountName = cur.getString(PROJECTION_ACCOUNT_NAME_INDEX);
+    ownerName = cur.getString(PROJECTION_OWNER_ACCOUNT_INDEX);
+
+    // Do something with the values...
+
+   ...
+}
+</pre>
+
+<h3 id="modify-calendar">修改日曆</h3>
+
+<p>如要執行日曆的更新，您可以提供日曆的 <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=zh-tw#_ID">_ID</a></code>，可以是 URI 的附加 ID
+(<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=zh-tw#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>) 或以第一個選擇項目方式提供。
+
+
+選項的開頭應該是 <code>&quot;_id=?&quot;</code>，而且第一個
+<code>selectionArg</code> 應該是日曆的 <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=zh-tw#_ID">_ID</a></code>。
+您也可以透過將 ID 編碼在 URI 中，以執行更新。此範例會使用
+(<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=zh-tw#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>) 方式變更日曆的顯示名稱：
+
+
+</p>
+
+<pre>private static final String DEBUG_TAG = "MyActivity";
+...
+long calID = 2;
+ContentValues values = new ContentValues();
+// The new display name for the calendar
+values.put(Calendars.CALENDAR_DISPLAY_NAME, &quot;Trevor's Calendar&quot;);
+Uri updateUri = ContentUris.withAppendedId(Calendars.CONTENT_URI, calID);
+int rows = getContentResolver().update(updateUri, values, null, null);
+Log.i(DEBUG_TAG, &quot;Rows updated: &quot; + rows);</pre>
+
+<h3 id="insert-calendar">插入日曆</h2>
+
+<p>日曆的設計主要是由同步配接器進行管理，因此您只能以同步配接器的方式插入新日曆。
+在大多數情況下，應用程式只能對日曆進行與外觀相關的變更，例如變更顯示名稱
+。如果應用程式需要建立本機日曆，請以同步配接器的方式插入日曆，方法是使用 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code> 的 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=zh-tw#ACCOUNT_TYPE">ACCOUNT_TYPE</a></code>。
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code> 是特殊的日曆帳戶類型，它沒有與裝置帳戶關聯。
+
+
+
+
+
+此類型的日曆不會同步至伺服器。如需關於同步配接器的相關討論，請參閱<a href="#sync-adapter">同步配接器</a>。
+</p>
+
+<h2 id="events">活動表格</h2>
+
+<p><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=zh-tw">CalendarContract.Events</a></code> 表格包含個人活動的詳細資訊。
+如要新增、更新或刪除活動，應用程式必須在<a href="#manifest">宣示說明檔案</a>中包括 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=zh-tw#WRITE_CALENDAR">WRITE_CALENDAR</a></code>權限。
+
+</p>
+
+<p>下列「活動」欄可以讓應用程式和同步配接器寫入。
+如需關於支援欄位的完整清單，請參閱 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=zh-tw">CalendarContract.Events</a></code> 參照。</p>
+
+<table>
+  <tr>
+    <th>常數</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#CALENDAR_ID">CALENDAR_ID</a></code></td>
+    <td>活動所屬日曆的 <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=zh-tw#_ID">_ID</a></code>。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#ORGANIZER">ORGANIZER</a></code></td>
+    <td>活動主辦人 (擁有者) 的電子郵件。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#TITLE">TITLE</a></code></td>
+    <td>活動的標題。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#EVENT_LOCATION">EVENT_LOCATION</a></code></td>
+    <td>舉辦活動的地點。 </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#DESCRIPTION">DESCRIPTION</a></code></td>
+    <td>活動的描述。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#DTSTART">DTSTART</a></code></td>
+    <td>活動開始的時間，以紀元元年 1 月 1 日零時起算經過的 UTC 毫秒數為單位。 </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#DTEND">DTEND</a></code></td>
+    <td>活動結束的時間，以紀元元年 1 月 1 日零時起算經過的 UTC 毫秒數為單位。 </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#EVENT_TIMEZONE">EVENT_TIMEZONE</a></code></td>
+    <td>活動的時區。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#EVENT_END_TIMEZONE">EVENT_END_TIMEZONE</a></code></td>
+    <td>活動結束時間的時區。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#DURATION">DURATION</a></code></td>
+
+    <td>活動的持續期間，以 <a href="http://tools.ietf.org/html/rfc5545#section-3.8.2.5">RFC5545</a> 格式表示。例如，值 <code>&quot;PT1H&quot;</code> 表示活動持續一小時，而值 <code>&quot;P2W&quot;</code> 指出持續 2 週。
+
+
+ </td>
+
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#ALL_DAY">ALL_DAY</a></code></td>
+
+    <td>值 1 表示此活動需要整天，如同當地時區所定義。
+值 0 表示定期活動，會在一天中的任何時間開始和結束。
+</td>
+
+
+  </tr>
+
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#RRULE">RRULE</a></code></td>
+
+    <td>活動的週期規則。例如，<code>&quot;FREQ=WEEKLY;COUNT=10;WKST=SU&quot;</code>。
+您可以在<a href="http://tools.ietf.org/html/rfc5545#section-3.8.5.3">這裡</a>查看更多範例。
+</td>
+
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#RDATE">RDATE</a></code></td>
+    <td>活動重複發生的日期。您通常會將 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#RDATE">RDATE</a></code> 和 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#RRULE">RRULE</a></code> 一起使用，以定義週期性活動的彙總集合。
+
+
+
+如需更多討論，請參閱 <a href="http://tools.ietf.org/html/rfc5545#section-3.8.5.2">RFC5545 規格</a>。</td>
+</tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#AVAILABILITY">AVAILABILITY</a></code></td>
+
+    <td>活動要視為忙碌或有空 (可以安排其他活動) 的時間。
+ </td>
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#GUESTS_CAN_MODIFY">GUESTS_CAN_MODIFY</a></code></td>
+    <td>邀請對象是否可以修改活動。 </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#GUESTS_CAN_INVITE_OTHERS">GUESTS_CAN_INVITE_OTHERS</a></code></td>
+    <td>邀請對象是否可以邀請其他人。 </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#GUESTS_CAN_SEE_GUESTS">GUESTS_CAN_SEE_GUESTS</a></code></td>
+    <td>邀請對象是否可以看到參與者清單。</td>
+  </tr>
+</table>
+
+<h3 id="add-event">新增活動</h3>
+
+<p>您的應用程式插入新活動時，我們建議您使用
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_INSERT">INSERT</a></code> 意圖 (如同<a href="#intent-insert">使用意圖插入活動</a>所述)。不過，如果需要，您也可以直接插入活動。
+本節將描述如何執行此動作。
+</p>
+
+
+<p>以下是插入新活動的規則： </p>
+<ul>
+
+  <li>您必須包括 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#CALENDAR_ID">CALENDAR_ID</a></code> 和 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#DTSTART">DTSTART</a></code>。</li>
+
+<li>您必須包括 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#EVENT_TIMEZONE">EVENT_TIMEZONE</a></code>。如要取得系統已安裝時區 ID 的清單，請使用 <code><a href="https://developer.android.com/reference/java/util/TimeZone.html?hl=zh-tw#getAvailableIDs()">getAvailableIDs()</a></code>。
+請注意，如果您是透過 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_INSERT">INSERT</a></code> 意圖 (如同<a href="#intent-insert">使用意圖插入活動</a> &mdash; 所描述的案例) 插入活動，則不適用此規則，將會提供預設時區。
+
+</li>
+
+  <li>對於非週期性活動，您必須包括 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#DTEND">DTEND</a></code>。 </li>
+
+
+  <li>對於週期性活動，您必須包括 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#DURATION">DURATION</a></code>，以及 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#RRULE">RRULE</a></code> 或 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#RDATE">RDATE</a></code>。請注意，如果您是透過 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_INSERT">INSERT</a></code> 意圖 (如同<a href="#intent-insert">使用意圖插入活動</a> &mdash; 所描述的案例) 插入活動，則不適用此規則。您可以使用 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#RRULE">RRULE</a></code> 搭配 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#DTSTART">DTSTART</a></code> 和 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#DTEND">DTEND</a></code>，然後「日曆」應用程式就會自動將它轉換為一段持續時間。
+
+
+</li>
+
+</ul>
+
+<p>以下是插入活動的範例。為了簡化，會在 UI 執行緒中執行此示範。
+實際運作時，插入和更新應該在非同步執行緒中完成，以便將動作移至背景執行緒。
+如需詳細資訊，請參閱 <code><a href="https://developer.android.com/reference/android/content/AsyncQueryHandler.html?hl=zh-tw">AsyncQueryHandler</a></code>。
+</p>
+
+
+<pre>
+long calID = 3;
+long startMillis = 0;
+long endMillis = 0;
+Calendar beginTime = Calendar.getInstance();
+beginTime.set(2012, 9, 14, 7, 30);
+startMillis = beginTime.getTimeInMillis();
+Calendar endTime = Calendar.getInstance();
+endTime.set(2012, 9, 14, 8, 45);
+endMillis = endTime.getTimeInMillis();
+...
+
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+values.put(Events.DTSTART, startMillis);
+values.put(Events.DTEND, endMillis);
+values.put(Events.TITLE, &quot;Jazzercise&quot;);
+values.put(Events.DESCRIPTION, &quot;Group workout&quot;);
+values.put(Events.CALENDAR_ID, calID);
+values.put(Events.EVENT_TIMEZONE, "America/Los_Angeles");
+Uri uri = cr.insert(Events.CONTENT_URI, values);
+
+// get the event ID that is the last element in the Uri
+long eventID = Long.parseLong(uri.getLastPathSegment());
+//
+// ... do something with event ID
+//
+//</pre>
+
+<p class="note"><strong>注意：</strong>查看本範例如何在建立活動後擷取活動 ID。
+這是取得活動 ID 的最簡單方式。您經常需要活動 ID 來執行其他日曆操作 &mdash; 例如，在活動中新增參與者或提醒。
+
+</p>
+
+
+<h3 id="update-event">更新活動</h3>
+
+<p>您的應用程式允許使用者編輯活動時，我們建議您使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_EDIT">EDIT</a></code> 意圖編輯活動 (如同<a href="#intent-edit">使用意圖插入活動</a>所述)。不過，如果需要，您也可以直接編輯活動。
+
+
+如要執行活動的更新，您要提供活動的 <code>_ID</code>，可以是 URI 的附加 ID (<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=zh-tw#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>) 或以第一個選擇項目方式提供。
+
+
+選項的開頭應該是 <code>&quot;_id=?&quot;</code>，而且第一個
+<code>selectionArg</code> 應該是活動的 <code>_ID</code>。
+您也可以使用不含 ID 的選項進行更新。以下是更新活動的範例。
+
+它使用
+<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=zh-tw#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code> 方式變更活動的標題：
+</p>
+
+
+<pre>private static final String DEBUG_TAG = "MyActivity";
+...
+long eventID = 188;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+Uri updateUri = null;
+// The new title for the event
+values.put(Events.TITLE, &quot;Kickboxing&quot;);
+updateUri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+int rows = getContentResolver().update(updateUri, values, null, null);
+Log.i(DEBUG_TAG, &quot;Rows updated: &quot; + rows);  </pre>
+
+<h3 id="delete-event">刪除活動</h3>
+
+<p>您可以透過活動 URI 的附加 ID <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=zh-tw#_ID">_ID</a></code> 或使用標準選擇方式來刪除活動。
+如果您使用附加 ID，就不能進行選擇。刪除有兩種方式：以應用程式和以同步配接器。
+應用程式刪除會將 <em>deleted</em> 欄設定為 1。
+此旗標會告訴同步配接器該列已刪除，而且此刪除應傳播到伺服器。
+
+同步配接器會從資料庫刪除活動及其相關的所有資料。
+以下是應用程式透過活動的 <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=zh-tw#_ID">_ID</a></code>刪除活動的範例：
+</p>
+
+
+<pre>private static final String DEBUG_TAG = "MyActivity";
+...
+long eventID = 201;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+Uri deleteUri = null;
+deleteUri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+int rows = getContentResolver().delete(deleteUri, null, null);
+Log.i(DEBUG_TAG, &quot;Rows deleted: &quot; + rows);
+</pre>
+
+<h2 id="attendees">參與者表格</h2>
+
+<p><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Attendees.html?hl=zh-tw">CalendarContract.Attendees</a></code> 表格的每一列都代表活動的單一參與者或邀請對象。
+呼叫
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=zh-tw#query(android.content.ContentResolver, long, java.lang.String[])">query()</a></code> 會傳回指定 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#EVENT_ID">EVENT_ID</a></code> 活動的參與者清單。
+
+此 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#EVENT_ID">EVENT_ID</a></code> 必須符合特定活動的 <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=zh-tw#_ID">_ID</a></code>。
+
+</p>
+
+<p>下表列出可寫入的欄位。
+插入新的參與者時，您必須包括 <code>ATTENDEE_NAME</code> 以外的所有項目。
+
+</p>
+
+
+<table>
+  <tr>
+    <th>常數</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#EVENT_ID">EVENT_ID</a></code></td>
+    <td>活動的 ID。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#ATTENDEE_NAME">ATTENDEE_NAME</a></code></td>
+    <td>參與者的名稱。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#ATTENDEE_EMAIL">ATTENDEE_EMAIL</a></code></td>
+    <td>參與者的電子郵件地址。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#ATTENDEE_RELATIONSHIP">ATTENDEE_RELATIONSHIP</a></code></td>
+    <td><p>參與者與活動的關係。可以是以下其中一種：</p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#RELATIONSHIP_ATTENDEE">RELATIONSHIP_ATTENDEE</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#RELATIONSHIP_NONE">RELATIONSHIP_NONE</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#RELATIONSHIP_ORGANIZER">RELATIONSHIP_ORGANIZER</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#RELATIONSHIP_PERFORMER">RELATIONSHIP_PERFORMER</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#RELATIONSHIP_SPEAKER">RELATIONSHIP_SPEAKER</a></code></li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#ATTENDEE_TYPE">ATTENDEE_TYPE</a></code></td>
+    <td><p>參與者的類型。可以是以下其中一種： </p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#TYPE_REQUIRED">TYPE_REQUIRED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#TYPE_OPTIONAL">TYPE_OPTIONAL</a></code></li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#ATTENDEE_STATUS">ATTENDEE_STATUS</a></code></td>
+    <td><p>參與者的出席狀態。可以是以下其中一種：</p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#ATTENDEE_STATUS_ACCEPTED">ATTENDEE_STATUS_ACCEPTED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#ATTENDEE_STATUS_DECLINED">ATTENDEE_STATUS_DECLINED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#ATTENDEE_STATUS_INVITED">ATTENDEE_STATUS_INVITED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#ATTENDEE_STATUS_NONE">ATTENDEE_STATUS_NONE</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#ATTENDEE_STATUS_TENTATIVE">ATTENDEE_STATUS_TENTATIVE</a></code></li>
+    </ul></td>
+  </tr>
+</table>
+
+<h3 id="add-attendees">新增參與者</h3>
+
+<p>以下是將單一參與者新增至活動的範例。請注意，
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#EVENT_ID">EVENT_ID</a></code> 為必要的：
+</p>
+
+<pre>
+long eventID = 202;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+values.put(Attendees.ATTENDEE_NAME, &quot;Trevor&quot;);
+values.put(Attendees.ATTENDEE_EMAIL, &quot;trevor@example.com&quot;);
+values.put(Attendees.ATTENDEE_RELATIONSHIP, Attendees.RELATIONSHIP_ATTENDEE);
+values.put(Attendees.ATTENDEE_TYPE, Attendees.TYPE_OPTIONAL);
+values.put(Attendees.ATTENDEE_STATUS, Attendees.ATTENDEE_STATUS_INVITED);
+values.put(Attendees.EVENT_ID, eventID);
+Uri uri = cr.insert(Attendees.CONTENT_URI, values);
+</pre>
+
+<h2 id="reminders">提醒表格</h2>
+
+<p><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=zh-tw">CalendarContract.Reminders</a></code> 表格的每一列都代表活動的單一提醒。
+呼叫
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=zh-tw#query(android.content.ContentResolver, long, java.lang.String[])">query()</a></code> 會傳回指定
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=zh-tw#EVENT_ID">EVENT_ID</a></code> 活動的提醒清單。
+</p>
+
+
+<p>下表列出提醒可寫入的欄位。插入新的提醒時，必須包括所有項目。
+請注意，同步配接器會在 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=zh-tw">CalendarContract.Calendars</a></code> 表格中指出同步配接器支援的提醒類型。
+如需詳細資料，請參閱
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=zh-tw#ALLOWED_REMINDERS">ALLOWED_REMINDERS</a></code>。
+</p>
+
+
+<table>
+  <tr>
+    <th>常數</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=zh-tw#EVENT_ID">EVENT_ID</a></code></td>
+    <td>活動的 ID。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=zh-tw#MINUTES">MINUTES</a></code></td>
+    <td>活動之前的幾分鐘要觸發提醒。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=zh-tw#METHOD">METHOD</a></code></td>
+    <td><p>鬧鐘方法 (如伺服器上所設定)。可以是以下其中一種：</p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=zh-tw#METHOD_ALERT">METHOD_ALERT</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=zh-tw#METHOD_DEFAULT">METHOD_DEFAULT</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=zh-tw#METHOD_EMAIL">METHOD_EMAIL</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=zh-tw#METHOD_SMS">METHOD_SMS</a></code></li>
+    </ul></td>
+  </tr>
+</table>
+
+<h3 id="add-reminders">新增提醒</h3>
+
+<p>此範例會在活動新增提醒。此提醒會在活動 15 分鐘之前觸發。
+</p>
+<pre>
+long eventID = 221;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+values.put(Reminders.MINUTES, 15);
+values.put(Reminders.EVENT_ID, eventID);
+values.put(Reminders.METHOD, Reminders.METHOD_ALERT);
+Uri uri = cr.insert(Reminders.CONTENT_URI, values);</pre>
+
+<h2 id="instances">執行個體表格</h2>
+
+<p>
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw">CalendarContract.Instances</a></code> 表格內含活動每次發生的開始和結束時間。
+此表格的每一列代表單一活動發生。
+執行個體表格無法寫入，僅供查詢活動的發生。
+ </p>
+
+<p>下表列出您可以針對執行個體查詢的欄位。請注意，時區是由
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarCache.html?hl=zh-tw#KEY_TIMEZONE_TYPE">KEY_TIMEZONE_TYPE</a></code> 和
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarCache.html?hl=zh-tw#KEY_TIMEZONE_INSTANCES">KEY_TIMEZONE_INSTANCES</a></code> 所定義。
+
+</p>
+
+
+<table>
+  <tr>
+    <th>常數</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw#BEGIN">BEGIN</a></code></td>
+    <td>執行個體的開始時間，以 UTC 毫秒數為單位。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw#END">END</a></code></td>
+    <td>執行個體的結束時間，以 UTC 毫秒數為單位。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw#END_DAY">END_DAY</a></code></td>
+
+    <td>執行個體的凱撒曆結束日，與「日曆」的時區相關。
+
+
+</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw#END_MINUTE">END_MINUTE</a></code></td>
+
+    <td>執行個體的結束分鐘，從「日曆」時區的午夜開始計算。
+</td>
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw#EVENT_ID">EVENT_ID</a></code></td>
+    <td>此執行個體活動的 <code>_ID</code>。</td>
+  </tr>
+    <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw#START_DAY">START_DAY</a></code></td>
+    <td>執行個體的凱撒曆開始日，與「日曆」的時區相關。
+ </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw#START_MINUTE">START_MINUTE</a></code></td>
+
+    <td>執行個體的開始分鐘，從午夜開始計算，與「日曆」的時區相關。
+
+</td>
+
+  </tr>
+
+</table>
+
+<h3 id="query-instances">查詢執行個體表格</h3>
+
+<p>如要查詢「執行個體」表格，您需要在 URI 中指定查詢的範圍時間。在本範例中，<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw">CalendarContract.Instances</a></code> 是透過 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw">CalendarContract.EventsColumns</a></code> 介面的實作，得以存取 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#TITLE">TITLE</a></code> 欄位。
+
+
+換句話說，<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#TITLE">TITLE</a></code> 是透過資料庫視觀表所傳回，而不是透過查詢原始 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=zh-tw">CalendarContract.Instances</a></code> 表格。
+
+</p>
+
+<pre>
+private static final String DEBUG_TAG = "MyActivity";
+public static final String[] INSTANCE_PROJECTION = new String[] {
+    Instances.EVENT_ID,      // 0
+    Instances.BEGIN,         // 1
+    Instances.TITLE          // 2
+  };
+
+// The indices for the projection array above.
+private static final int PROJECTION_ID_INDEX = 0;
+private static final int PROJECTION_BEGIN_INDEX = 1;
+private static final int PROJECTION_TITLE_INDEX = 2;
+...
+
+// Specify the date range you want to search for recurring
+// event instances
+Calendar beginTime = Calendar.getInstance();
+beginTime.set(2011, 9, 23, 8, 0);
+long startMillis = beginTime.getTimeInMillis();
+Calendar endTime = Calendar.getInstance();
+endTime.set(2011, 10, 24, 8, 0);
+long endMillis = endTime.getTimeInMillis();
+
+Cursor cur = null;
+ContentResolver cr = getContentResolver();
+
+// The ID of the recurring event whose instances you are searching
+// for in the Instances table
+String selection = Instances.EVENT_ID + " = ?";
+String[] selectionArgs = new String[] {"207"};
+
+// Construct the query with the desired date range.
+Uri.Builder builder = Instances.CONTENT_URI.buildUpon();
+ContentUris.appendId(builder, startMillis);
+ContentUris.appendId(builder, endMillis);
+
+// Submit the query
+cur =  cr.query(builder.build(),
+    INSTANCE_PROJECTION,
+    selection,
+    selectionArgs,
+    null);
+
+while (cur.moveToNext()) {
+    String title = null;
+    long eventID = 0;
+    long beginVal = 0;
+
+    // Get the field values
+    eventID = cur.getLong(PROJECTION_ID_INDEX);
+    beginVal = cur.getLong(PROJECTION_BEGIN_INDEX);
+    title = cur.getString(PROJECTION_TITLE_INDEX);
+
+    // Do something with the values.
+    Log.i(DEBUG_TAG, "Event:  " + title);
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeInMillis(beginVal);
+    DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    Log.i(DEBUG_TAG, "Date: " + formatter.format(calendar.getTime()));
+    }
+ }</pre>
+
+<h2 id="intents">日曆意圖</h2>
+<p>您的應用程式不需要<a href="#manifest">權限</a>，即可讀取和寫入日曆資料。您可以改用 Android「日曆」應用程式支援的意圖，將讀取和寫入操作交給您的應用程式。下表列出「日曆供應程式」支援的意圖：</p>
+<table>
+  <tr>
+    <th>動作</th>
+    <th>URI</th>
+
+    <th>描述</th>
+    <th>Extra</th>
+  </tr>
+  <tr>
+    <td><br>
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_VIEW">VIEW</a></code> <br></td>
+    <td><p><code>content://com.android.calendar/time/&lt;ms_since_epoch&gt;</code></p>
+    您也可以使用
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#CONTENT_URI">CalendarContract.CONTENT_URI</a></code> 參照 URI。如需使用此意圖的範例，請參閱<a href="calendar-providerf854.html?hl=zh-tw#intent-view">使用意圖檢視日曆資料</a>。
+
+
+    </td>
+    <td>開啟日曆到 <code>&lt;ms_since_epoch&gt;</code> 指定的時間。</td>
+    <td>無。</td>
+  </tr>
+  <tr>
+    <td><p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_VIEW">VIEW</a></code> </p>
+
+     </td>
+    <td><p><code>content://com.android.calendar/events/&lt;event_id&gt;</code></p>
+
+    您也可以使用
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=zh-tw#CONTENT_URI">Events.CONTENT_URI</a></code> 參照 URI。如需使用此意圖的範例，請參閱<a href="calendar-providerf854.html?hl=zh-tw#intent-view">使用意圖檢視日曆資料</a>。
+
+
+    </td>
+    <td>檢視 <code>&lt;event_id&gt;</code> 指定的活動。</td>
+
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code><br>
+      <br>
+      <br>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code></td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_EDIT">EDIT</a></code> </td>
+    <td><p><code>content://com.android.calendar/events/&lt;event_id&gt;</code></p>
+
+  您也可以使用
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=zh-tw#CONTENT_URI">Events.CONTENT_URI</a></code> 參照 URI。如需使用此意圖的範例，請參閱<a href="calendar-providerf854.html?hl=zh-tw#intent-edit">使用意圖編輯活動</a>。
+
+
+
+    </td>
+    <td>編輯 <code>&lt;event_id&gt;</code> 指定的活動。</td>
+
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code><br>
+      <br>
+      <br>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code></td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_EDIT">EDIT</a></code> <br>
+    <br>
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_INSERT">INSERT</a></code> </td>
+    <td><p><code>content://com.android.calendar/events</code></p>
+
+   您也可以使用
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=zh-tw#CONTENT_URI">Events.CONTENT_URI</a></code> 參照 URI。如需使用此意圖的範例，請參閱<a href="calendar-providerf854.html?hl=zh-tw#intent-insert">使用意圖插入活動</a>。
+
+
+    </td>
+
+    <td>建立活動。</td>
+    <td>Extra 列於下表。</td>
+  </tr>
+</table>
+
+<p>下表列出「日曆供應程式」支援的意圖 Extra：
+</p>
+<table>
+  <tr>
+    <th>意圖 Extra</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#TITLE">Events.TITLE</a></code></td>
+    <td>活動的名稱。</td>
+  </tr>
+  <tr>
+
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code></td>
+    <td>活動開始時間，以紀元元年 1 月 1 日零時起算經過的毫秒數為單位。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code></td>
+
+    <td>活動結束時間，以紀元元年 1 月 1 日零時起算經過的毫秒數為單位。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#EXTRA_EVENT_ALL_DAY">CalendarContract.EXTRA_EVENT_ALL_DAY</a></code></td>
+
+    <td>指出活動為整天的布林值。值可以是
+<code>true</code> 或 <code>false</code>。</td> </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#EVENT_LOCATION">Events.EVENT_LOCATION</a></code></td>
+
+    <td>活動的地點。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#DESCRIPTION">Events.DESCRIPTION</a></code></td>
+
+    <td>活動描述。</td>
+  </tr>
+  <tr>
+    <td>
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#EXTRA_EMAIL">Intent.EXTRA_EMAIL</a></code></td>
+    <td>邀請對象的電子郵件地址 (以逗號分隔的清單)。</td>
+  </tr>
+  <tr>
+    <td>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#RRULE">Events.RRULE</a></code></td>
+    <td>活動的週期規則。</td>
+  </tr>
+  <tr>
+    <td>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#ACCESS_LEVEL">Events.ACCESS_LEVEL</a></code></td>
+
+    <td>活動為私人或公開性質。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=zh-tw#AVAILABILITY">Events.AVAILABILITY</a></code></td>
+
+    <td>活動要視為忙碌或有空 (可以安排其他活動) 的時間。</td>
+
+</table>
+<p>以下各節說明如何使用這些意圖。</p>
+
+
+<h3 id="intent-insert">使用意圖插入活動</h3>
+
+<p>使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_INSERT">INSERT</a></code> 意圖讓您的應用程式將活動插入工作交給「日曆」本身。使用此方式，您的應用程式就不需要將 <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=zh-tw#WRITE_CALENDAR">WRITE_CALENDAR</a></code> 權限包括在其<a href="#manifest">宣示說明檔案</a>中。
+
+</p>
+
+
+<p>使用者執行採用此方式的應用程式時，此應用程式會將使用者
+傳送到「日曆」以完成新增活動的操作。<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_INSERT">INSERT</a></code> 意圖會使用額外的欄位將「日曆」中活動的詳細資訊，預先填入表單。
+然後，使用者可以取消活動、視需要編輯表單或將活動儲存到其日曆。
+
+</p>
+
+
+
+<p>以下的程式碼片段會在 2012 年 1 月 19 日安排活動，此活動的期間是從上午 7:30 到上午 8:30。
+請注意下列關於此程式碼片段的事項：</p>
+
+<ul>
+  <li>它指定 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=zh-tw#CONTENT_URI">Events.CONTENT_URI</a></code>  作為 URI。
+</li>
+
+  <li>它使用 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code> 和 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code> 額外欄位，將活動的時間預先填入表單。
+這些時間值必須以自紀元元年 1 月 1 日零時起算經過的 UTC 毫秒數為單位。
+</li>
+
+  <li>它使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#EXTRA_EMAIL">Intent.EXTRA_EMAIL</a></code> 額外欄位提供逗號分隔的受邀者清單 (以電子郵件地址指定)。
+</li>
+
+</ul>
+<pre>
+Calendar beginTime = Calendar.getInstance();
+beginTime.set(2012, 0, 19, 7, 30);
+Calendar endTime = Calendar.getInstance();
+endTime.set(2012, 0, 19, 8, 30);
+Intent intent = new Intent(Intent.ACTION_INSERT)
+        .setData(Events.CONTENT_URI)
+        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+        .putExtra(Events.TITLE, &quot;Yoga&quot;)
+        .putExtra(Events.DESCRIPTION, &quot;Group class&quot;)
+        .putExtra(Events.EVENT_LOCATION, &quot;The gym&quot;)
+        .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
+        .putExtra(Intent.EXTRA_EMAIL, &quot;rowan@example.com,trevor@example.com&quot;);
+startActivity(intent);
+</pre>
+
+<h3 id="intent-edit">使用意圖編輯活動</h3>
+
+<p>您可以直接更新活動，如同<a href="#update-event">更新活動</a>所述。不過，使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_EDIT">EDIT</a></code> 意圖可以讓不具備權限的應用程式將活動編輯操作交給「日曆」應用程式。使用者在「日曆」中完成活動的編輯操作時，使用者就會回到原來的應用程式。
+
+
+</p> <p>以下的意圖範例會為指定的活動設定名稱，然後讓使用者在「日曆」中編輯此活動。
+</p>
+
+
+<pre>long eventID = 208;
+Uri uri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+Intent intent = new Intent(Intent.ACTION_EDIT)
+    .setData(uri)
+    .putExtra(Events.TITLE, &quot;My New Title&quot;);
+startActivity(intent);</pre>
+
+<h3 id="intent-view">使用意圖檢視日曆資料</h3>
+<p>「日曆供應程式」提供兩種不同的方式來使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#ACTION_VIEW">VIEW</a></code> 意圖：</p>
+<ul>
+  <li>開啟「日曆」到特定的日期。</li>
+  <li>檢視某個活動。</li>
+
+</ul>
+<p>以下的範例顯示如何開啟「日曆」到特定的日期：</p>
+<pre>// A date-time specified in milliseconds since the epoch.
+long startMillis;
+...
+Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+builder.appendPath(&quot;time&quot;);
+ContentUris.appendId(builder, startMillis);
+Intent intent = new Intent(Intent.ACTION_VIEW)
+    .setData(builder.build());
+startActivity(intent);</pre>
+
+<p>以下的範例顯示如何開啟某個活動以便檢視。</p>
+<pre>long eventID = 208;
+...
+Uri uri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+Intent intent = new Intent(Intent.ACTION_VIEW)
+   .setData(uri);
+startActivity(intent);
+</pre>
+
+
+<h2 id="sync-adapter">同步配接器</h2>
+
+
+<p>應用程式和同步配接器存取「日曆供應程式」的方式只有些微差異：
+</p>
+
+<ul>
+  <li>同步配接器需要透過將 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=zh-tw#CALLER_IS_SYNCADAPTER">CALLER_IS_SYNCADAPTER</a></code> 設定為 <code>true</code>，以指出這是同步配接器。</li>
+
+
+  <li>同步配接器需要在 URI 中提供 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=zh-tw#ACCOUNT_NAME">ACCOUNT_NAME</a></code> 和 <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=zh-tw#ACCOUNT_TYPE">ACCOUNT_TYPE</a></code> 作為查詢參數。 </li>
+
+  <li>同步配接器與應用程式或小工具相比，有更多欄的寫入權限。
+  例如，應用程式只能修改日曆的一些特性，例如名稱、顯示名稱、能見度設定，以及日曆是否同步。
+
+相較之下，同步配接器不只能存取這些欄，還可以存取很多其他欄，例如日曆色彩、時區、存取級別、位置等等。然而，同步配接器受限於所指定的 <code>ACCOUNT_NAME</code> 和
+<code>ACCOUNT_TYPE</code>。
+
+</li> </ul>
+
+<p>以下是您可用於傳回 URI 的協助程式方法，以便與同步配接器搭配使用：</p>
+<pre> static Uri asSyncAdapter(Uri uri, String account, String accountType) {
+    return uri.buildUpon()
+        .appendQueryParameter(android.provider.CalendarContract.CALLER_IS_SYNCADAPTER,&quot;true&quot;)
+        .appendQueryParameter(Calendars.ACCOUNT_NAME, account)
+        .appendQueryParameter(Calendars.ACCOUNT_TYPE, accountType).build();
+ }
+</pre>
+<p>如需實作同步配接器的範例 (並非與「日曆」特別相關)，請參閱
+<a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=zh-tw">SampleSyncAdapter</a>。
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=zh-tw" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="網誌" target="_blank">網誌</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=zh-tw" title="完備支援">完備支援</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=zh-tw" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=zh-tw" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=zh-tw" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=zh-tw" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="sgvhWt4s7-LKuTketFnp3o_C__6fIskDgVSUwNXZjrQ6MTQ5NzUxNjczMzM1Nzk4MA" />
+      <input type="hidden" name="next" value="/guide/topics/providers/calendar-provider.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+             selected="selected" >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">電子郵件地址</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en962f.js?hl=zh-tw?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=zh-tw"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_zh-tw.js?hl=zh-tw?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/calendar-provider.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:11:23 GMT -->
+</html>

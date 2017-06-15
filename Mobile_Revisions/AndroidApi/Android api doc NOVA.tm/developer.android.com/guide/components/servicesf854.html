@@ -1,0 +1,1674 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<!-- Mirrored from developer.android.com/guide/components/services.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:11:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="Irj-dNmlWemomagrQP4qbz50zJzoE_sHhmAlFcAWPdY6MTQ5NzUxNjcyOTgzNDE1MA" />
+
+  
+    <link rel="canonical" href="servicesf854.html?hl=zh-tw">
+  
+
+  
+    <link rel="alternate" href="services9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="services327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="servicesf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="services0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="services7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="services0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="services9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="services232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="services6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="services.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/services.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/services.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/services.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/services.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/services.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/services.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/services.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/services.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/services.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/services.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="services.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../_static/f304fc21fa/images/android/faviconf854.png?hl=zh-tw">
+
+<link rel="apple-touch-icon" href="../../_static/f304fc21fa/images/android/touchicon-180f854.png?hl=zh-tw">
+
+
+<title>
+
+  服務 | Android Developers
+
+</title>
+
+  <meta name="description" content="Service 是可以在背景中長時間執行操作的應用程式元件，且不提供使用者介面。 也是另一個可以啟動服務的應用程式元件，就算使用者切換至其他應用程式，也會繼續在背景中執行。 此外，元件也可以繫結至服務，以便與其互動，甚至執行處理程序間通訊 (IPC)。 例如，服務可能處理網路交易、播放音樂、執行檔案輸入&amp;#47;輸出或與內容供應程式互動，這些都可以從背景執行。 服務基本上可以採取兩種形式： 雖然此文件通常分別討論服務的這兩種類別，但您的服務兩種方式都可以執行 — 可以啟動服務 (無限次數地執行) …">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../static/css/default962f.css?hl=zh-tw?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../_static/f304fc21fa/js/android_3p-bundlef854.js?hl=zh-tw" type="text/javascript"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_closure_android__zh_twf854.js?hl=zh-tw"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_androidf854.js?hl=zh-tw"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../static/js/docs962f.js?hl=zh-tw?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-tw&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-tw&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "zh-tw", "served": "zh-tw"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=zh-tw">
+          <img class="dac-header-logo-image" src="../../static/images/android_logof854.png?hl=zh-tw"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=zh-tw"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=zh-tw"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=zh-tw" width="18" height="19" alt="Play 管理中心">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="搜尋">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">返回</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../indexf854.html?hl=zh-tw" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="fundamentalsf854.html?hl=zh-tw" >App Fundamentals</a></li><li><a href="../practices/compatibilityf854.html?hl=zh-tw" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/permissions/indexf854.html?hl=zh-tw" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/permissions/requestingf854.html?hl=zh-tw" >Requesting Permissions</a></li><li><a href="../topics/permissions/definingf854.html?hl=zh-tw" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../platform/indexf854.html?hl=zh-tw" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../platform/j8-jackf854.html?hl=zh-tw"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../practices/verifying-apps-artf854.html?hl=zh-tw" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="indexf854.html?hl=zh-tw" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="intents-filtersf854.html?hl=zh-tw" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="intents-commonf854.html?hl=zh-tw" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="activities/indexf854.html?hl=zh-tw" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="activities/intro-activitiesf854.html?hl=zh-tw" >Introduction to Activities</a></li><li><a href="activities/activity-lifecyclef854.html?hl=zh-tw" >The Activity Lifecycle</a></li><li><a href="activities/state-changesf854.html?hl=zh-tw" >Activity State Changes</a></li><li><a href="activities/tasks-and-back-stackf854.html?hl=zh-tw" >Tasks and Back Stack</a></li><li><a href="activities/process-lifecyclef854.html?hl=zh-tw" >Processes and Application Lifecycle</a></li><li><a href="activities/parcelables-and-bundlesf854.html?hl=zh-tw" >Parcelables and Bundles</a></li><li><a href="activities/recentsf854.html?hl=zh-tw" >Recents Screen</a></li></ul></li><li><a href="fragmentsf854.html?hl=zh-tw" >Fragments</a></li><li><a href="loadersf854.html?hl=zh-tw" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="servicesf854.html?hl=zh-tw" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="bound-servicesf854.html?hl=zh-tw" >Bound Services</a></li><li><a href="aidlf854.html?hl=zh-tw" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/providers/content-providersf854.html?hl=zh-tw" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/providers/content-provider-basicsf854.html?hl=zh-tw" >Content Provider Basics</a></li><li><a href="../topics/providers/content-provider-creatingf854.html?hl=zh-tw" >Creating a Content Provider</a></li><li><a href="../topics/providers/calendar-providerf854.html?hl=zh-tw" >Calendar Provider</a></li><li><a href="../topics/providers/contacts-providerf854.html?hl=zh-tw" >Contacts Provider</a></li><li><a href="../topics/providers/document-providerf854.html?hl=zh-tw" >Open files using Storage Access Framework</a></li><li><a href="../topics/providers/create-document-providerf854.html?hl=zh-tw" >Create a Custom Document Provider</a></li></ul></li><li><a href="broadcastsf854.html?hl=zh-tw" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/appwidgets/indexf854.html?hl=zh-tw" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/appwidgets/hostf854.html?hl=zh-tw" >App Widget Host</a></li></ul></li><li><a href="processes-and-threadsf854.html?hl=zh-tw" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/indexf854.html?hl=zh-tw" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../topics/resources/providing-resourcesf854.html?hl=zh-tw" >Providing Resources</a></li><li><a href="../topics/resources/accessing-resourcesf854.html?hl=zh-tw" >Accessing Resources</a></li><li><a href="../topics/resources/runtime-changesf854.html?hl=zh-tw" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/localizationf854.html?hl=zh-tw" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/icu4j-frameworkf854.html?hl=zh-tw" >ICU4J Android Framework APIs</a></li><li><a href="../topics/resources/multilingual-supportf854.html?hl=zh-tw" >Language and Locale</a></li></ul></li><li><a href="../topics/resources/complex-xml-resourcesf854.html?hl=zh-tw" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/available-resourcesf854.html?hl=zh-tw" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/animation-resourcef854.html?hl=zh-tw" >Animation</a></li><li><a href="../topics/resources/color-list-resourcef854.html?hl=zh-tw" >Color State List</a></li><li><a href="../topics/resources/drawable-resourcef854.html?hl=zh-tw" >Drawable</a></li><li><a href="../topics/resources/layout-resourcef854.html?hl=zh-tw" >Layout</a></li><li><a href="../topics/resources/menu-resourcef854.html?hl=zh-tw" >Menu</a></li><li><a href="../topics/resources/string-resourcef854.html?hl=zh-tw" >String</a></li><li><a href="../topics/resources/style-resourcef854.html?hl=zh-tw" >Style</a></li><li><a href="../topics/resources/more-resourcesf854.html?hl=zh-tw" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/manifest/manifest-introf854.html?hl=zh-tw" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/manifest/action-elementf854.html?hl=zh-tw" >&lt;action&gt;</a></li><li><a href="../topics/manifest/activity-elementf854.html?hl=zh-tw" >&lt;activity&gt;</a></li><li><a href="../topics/manifest/activity-alias-elementf854.html?hl=zh-tw" >&lt;activity-alias&gt;</a></li><li><a href="../topics/manifest/application-elementf854.html?hl=zh-tw" >&lt;application&gt;</a></li><li><a href="../topics/manifest/category-elementf854.html?hl=zh-tw" >&lt;category&gt;</a></li><li><a href="../topics/manifest/compatible-screens-elementf854.html?hl=zh-tw" >&lt;compatible-screens&gt;</a></li><li><a href="../topics/manifest/data-elementf854.html?hl=zh-tw" >&lt;data&gt;</a></li><li><a href="../topics/manifest/grant-uri-permission-elementf854.html?hl=zh-tw" >&lt;grant-uri-permission&gt;</a></li><li><a href="../topics/manifest/instrumentation-elementf854.html?hl=zh-tw" >&lt;instrumentation&gt;</a></li><li><a href="../topics/manifest/intent-filter-elementf854.html?hl=zh-tw" >&lt;intent-filter&gt;</a></li><li><a href="../topics/manifest/manifest-elementf854.html?hl=zh-tw" >&lt;manifest&gt;</a></li><li><a href="../topics/manifest/meta-data-elementf854.html?hl=zh-tw" >&lt;meta-data&gt;</a></li><li><a href="../topics/manifest/path-permission-elementf854.html?hl=zh-tw" >&lt;path-permission&gt;</a></li><li><a href="../topics/manifest/permission-elementf854.html?hl=zh-tw" >&lt;permission&gt;</a></li><li><a href="../topics/manifest/permission-group-elementf854.html?hl=zh-tw" >&lt;permission-group&gt;</a></li><li><a href="../topics/manifest/permission-tree-elementf854.html?hl=zh-tw" >&lt;permission-tree&gt;</a></li><li><a href="../topics/manifest/provider-elementf854.html?hl=zh-tw" >&lt;provider&gt;</a></li><li><a href="../topics/manifest/receiver-elementf854.html?hl=zh-tw" >&lt;receiver&gt;</a></li><li><a href="../topics/manifest/service-elementf854.html?hl=zh-tw" >&lt;service&gt;</a></li><li><a href="../topics/manifest/supports-gl-texture-elementf854.html?hl=zh-tw" >&lt;supports-gl-texture&gt;</a></li><li><a href="../topics/manifest/supports-screens-elementf854.html?hl=zh-tw" >&lt;supports-screens&gt;</a></li><li><a href="../topics/manifest/uses-configuration-elementf854.html?hl=zh-tw" >&lt;uses-configuration&gt;</a></li><li><a href="../topics/manifest/uses-feature-elementf854.html?hl=zh-tw" >&lt;uses-feature&gt;</a></li><li><a href="../topics/manifest/uses-library-elementf854.html?hl=zh-tw" >&lt;uses-library&gt;</a></li><li><a href="../topics/manifest/uses-permission-elementf854.html?hl=zh-tw" >&lt;uses-permission&gt;</a></li><li><a href="../topics/manifest/uses-permission-sdk-23-elementf854.html?hl=zh-tw" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../topics/manifest/uses-sdk-elementf854.html?hl=zh-tw" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/indexf854.html?hl=zh-tw" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/overviewf854.html?hl=zh-tw" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/declaring-layoutf854.html?hl=zh-tw" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/layout/linearf854.html?hl=zh-tw" >Linear Layout</a></li><li><a href="../topics/ui/layout/relativef854.html?hl=zh-tw" >Relative Layout</a></li><li><a href="../topics/ui/layout/recyclerviewf854.html?hl=zh-tw" >Recycler View</a></li><li><a href="../topics/ui/layout/listviewf854.html?hl=zh-tw" >List View</a></li><li><a href="../topics/ui/layout/gridviewf854.html?hl=zh-tw" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/controlsf854.html?hl=zh-tw" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/controls/buttonf854.html?hl=zh-tw" >Buttons</a></li><li><a href="../topics/ui/controls/checkboxf854.html?hl=zh-tw" >Checkboxes</a></li><li><a href="../topics/ui/controls/radiobuttonf854.html?hl=zh-tw" >Radio Buttons</a></li><li><a href="../topics/ui/controls/togglebuttonf854.html?hl=zh-tw" >Toggle Buttons</a></li><li><a href="../topics/ui/controls/spinnerf854.html?hl=zh-tw" >Spinners</a></li><li><a href="../topics/ui/controls/pickersf854.html?hl=zh-tw" >Pickers</a></li></ul></li><li><a href="../topics/ui/ui-eventsf854.html?hl=zh-tw" >Input Events</a></li><li><a href="../topics/ui/menusf854.html?hl=zh-tw" >Menus</a></li><li><a href="../topics/ui/settingsf854.html?hl=zh-tw" >Settings</a></li><li><a href="../topics/ui/dialogsf854.html?hl=zh-tw" >Dialogs</a></li><li><a href="../topics/ui/notifiers/notificationsf854.html?hl=zh-tw" >Notifications</a></li><li><a href="../topics/ui/notifiers/toastsf854.html?hl=zh-tw" >Toasts</a></li><li><a href="../topics/ui/shortcutsf854.html?hl=zh-tw" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/search/indexf854.html?hl=zh-tw" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/search/search-dialogf854.html?hl=zh-tw" >Creating a Search Interface</a></li><li><a href="../topics/search/adding-recent-query-suggestionsf854.html?hl=zh-tw" >Adding Recent Query Suggestions</a></li><li><a href="../topics/search/adding-custom-suggestionsf854.html?hl=zh-tw" >Adding Custom Suggestions</a></li><li><a href="../topics/search/searchable-configf854.html?hl=zh-tw" >Searchable Configuration</a></li></ul></li><li><a href="../topics/ui/multi-windowf854.html?hl=zh-tw" >Multi-Window Support</a></li><li><a href="../topics/ui/drag-dropf854.html?hl=zh-tw" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/accessibility/indexf854.html?hl=zh-tw" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/accessibility/appsf854.html?hl=zh-tw" >Making Apps More Accessible</a></li><li><a href="../topics/ui/accessibility/checklistf854.html?hl=zh-tw" >Accessibility Developer Checklist</a></li><li><a href="../topics/ui/accessibility/node-tree-debuggingf854.html?hl=zh-tw" >Using Node Tree Debugging</a></li><li><a href="../topics/ui/accessibility/servicesf854.html?hl=zh-tw" >Building Accessibility Services</a></li><li><a href="../topics/ui/accessibility/custom-viewsf854.html?hl=zh-tw" >Building Accessible Custom Views</a></li></ul></li><li><a href="../topics/ui/themesf854.html?hl=zh-tw" >Styles and Themes</a></li><li><a href="../topics/ui/custom-componentsf854.html?hl=zh-tw" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/indexf854.html?hl=zh-tw" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/overviewf854.html?hl=zh-tw" >Overview</a></li><li><a href="../topics/graphics/prop-animationf854.html?hl=zh-tw" >Property Animation</a></li><li><a href="../topics/graphics/view-animationf854.html?hl=zh-tw" >View Animation</a></li><li><a href="../topics/graphics/drawable-animationf854.html?hl=zh-tw" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/2d-graphicsf854.html?hl=zh-tw" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/vector-drawable-resourcesf854.html?hl=zh-tw" >Vector Drawable</a></li></ul></li><li><a href="../topics/graphics/openglf854.html?hl=zh-tw" >OpenGL ES</a></li><li><a href="../topics/graphics/hardware-accelf854.html?hl=zh-tw" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/indexf854.html?hl=zh-tw" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/computef854.html?hl=zh-tw" >RenderScript</a></li><li><a href="../topics/renderscript/advancedf854.html?hl=zh-tw" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/reference/overviewf854.html?hl=zh-tw" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/reference/rs_value_typesf854.html?hl=zh-tw" >Numerical Types</a></li><li><a href="../topics/renderscript/reference/rs_object_typesf854.html?hl=zh-tw" >Object Types</a></li><li><a href="../topics/renderscript/reference/rs_convertf854.html?hl=zh-tw" >Conversion Functions</a></li><li><a href="../topics/renderscript/reference/rs_mathf854.html?hl=zh-tw" >Mathematical Constants and Functions</a></li><li><a href="../topics/renderscript/reference/rs_vector_mathf854.html?hl=zh-tw" >Vector Math Functions</a></li><li><a href="../topics/renderscript/reference/rs_matrixf854.html?hl=zh-tw" >Matrix Functions</a></li><li><a href="../topics/renderscript/reference/rs_quaternionf854.html?hl=zh-tw" >Quaternion Functions</a></li><li><a href="../topics/renderscript/reference/rs_atomicf854.html?hl=zh-tw" >Atomic Update Functions</a></li><li><a href="../topics/renderscript/reference/rs_timef854.html?hl=zh-tw" >Time Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_allocation_dataf854.html?hl=zh-tw" >Allocation Data Access Functions</a></li><li><a href="../topics/renderscript/reference/rs_object_infof854.html?hl=zh-tw" >Object Characteristics Functions</a></li><li><a href="../topics/renderscript/reference/rs_for_eachf854.html?hl=zh-tw" >Kernel Invocation Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_iof854.html?hl=zh-tw" >Input/Output Functions</a></li><li><a href="../topics/renderscript/reference/rs_debugf854.html?hl=zh-tw" >Debugging Functions</a></li><li><a href="../topics/renderscript/reference/rs_graphicsf854.html?hl=zh-tw" >Graphics Functions and Types</a></li><li><a href="../topics/renderscript/reference/indexf854.html?hl=zh-tw" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/indexf854.html?hl=zh-tw" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/media-apps-overviewf854.html?hl=zh-tw" >Media Apps Overview</a></li><li><a href="../topics/media-apps/working-with-a-media-sessionf854.html?hl=zh-tw" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/audio-app/building-an-audio-appf854.html?hl=zh-tw" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/audio-app/building-a-mediabrowserservicef854.html?hl=zh-tw" >Building a Media Browser Service</a></li><li><a href="../topics/media-apps/audio-app/building-a-mediabrowser-clientf854.html?hl=zh-tw" >Building a Media Browser Client</a></li><li><a href="../topics/media-apps/audio-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/video-app/building-a-video-appf854.html?hl=zh-tw" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/video-app/building-a-video-player-activityf854.html?hl=zh-tw" >Building a Video Player Activity</a></li><li><a href="../topics/media-apps/video-app/mediasession-callbacksf854.html?hl=zh-tw" >Media Session Callbacks</a></li></ul></li><li><a href="../topics/media-apps/mediabuttonsf854.html?hl=zh-tw" >Responding to Media Buttons</a></li><li><a href="../topics/media-apps/volume-and-earphonesf854.html?hl=zh-tw" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/indexf854.html?hl=zh-tw" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/media-formatsf854.html?hl=zh-tw" >Supported Media Formats</a></li><li><a href="../topics/media/mediaplayerf854.html?hl=zh-tw" >MediaPlayer</a></li><li><a href="../topics/media/mediarecorderf854.html?hl=zh-tw" >MediaRecorder</a></li><li><a href="../topics/media/exoplayerf854.html?hl=zh-tw" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/media-routingf854.html?hl=zh-tw" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/mediarouterf854.html?hl=zh-tw" >MediaRouter API</a></li><li><a href="../topics/media/mediarouteproviderf854.html?hl=zh-tw" >MediaRouteProvider API</a></li></ul></li><li><a href="../topics/media/cameraf854.html?hl=zh-tw" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/sensors/indexf854.html?hl=zh-tw" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/location/indexf854.html?hl=zh-tw" >Location and Maps</a></li><li><a href="../topics/location/strategiesf854.html?hl=zh-tw" >Location Strategies</a></li><li><a href="../topics/sensors/sensors_overviewf854.html?hl=zh-tw" >Sensors Overview</a></li><li><a href="../topics/sensors/sensors_motionf854.html?hl=zh-tw" >Motion Sensors</a></li><li><a href="../topics/sensors/sensors_positionf854.html?hl=zh-tw" >Position Sensors</a></li><li><a href="../topics/sensors/sensors_environmentf854.html?hl=zh-tw" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/indexf854.html?hl=zh-tw" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/bluetoothf854.html?hl=zh-tw" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/bluetooth-lef854.html?hl=zh-tw" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/nfc/indexf854.html?hl=zh-tw" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/nfc/nfcf854.html?hl=zh-tw" >NFC Basics</a></li><li><a href="../topics/connectivity/nfc/advanced-nfcf854.html?hl=zh-tw" >Advanced NFC</a></li><li><a href="../topics/connectivity/nfc/hcef854.html?hl=zh-tw" >Host-based Card Emulation</a></li></ul></li><li><a href="../topics/connectivity/wifip2pf854.html?hl=zh-tw" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/usb/indexf854.html?hl=zh-tw" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/usb/accessoryf854.html?hl=zh-tw" >Accessory</a></li><li><a href="../topics/connectivity/usb/hostf854.html?hl=zh-tw" >Host</a></li></ul></li><li><a href="../topics/connectivity/sipf854.html?hl=zh-tw" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/indexf854.html?hl=zh-tw" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/copy-pastef854.html?hl=zh-tw" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/creating-input-methodf854.html?hl=zh-tw" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/image-keyboardf854.html?hl=zh-tw" >Image Keyboard</a></li></ul></li><li><a href="../topics/text/spell-checker-frameworkf854.html?hl=zh-tw" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/indexf854.html?hl=zh-tw" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/data-storagef854.html?hl=zh-tw" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/backupf854.html?hl=zh-tw" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/autobackupf854.html?hl=zh-tw" >Auto Backup</a></li><li><a href="../topics/data/keyvaluebackupf854.html?hl=zh-tw" >Key/Value Backup</a></li><li><a href="../topics/data/testingbackupf854.html?hl=zh-tw" >Testing Backup and Restore</a></li></ul></li><li><a href="../topics/data/install-locationf854.html?hl=zh-tw" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/admin/indexf854.html?hl=zh-tw" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/admin/device-adminf854.html?hl=zh-tw" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../webapps/indexf854.html?hl=zh-tw" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../webapps/targetingf854.html?hl=zh-tw" >Supporting Different Screens in Web Apps</a></li><li><a href="../webapps/webviewf854.html?hl=zh-tw" >Building Web Apps in WebView</a></li><li><a href="../webapps/migratingf854.html?hl=zh-tw" >Migrating to WebView in Android 4.4</a></li><li><a href="../webapps/debuggingf854.html?hl=zh-tw" >Debugging Web Apps</a></li><li><a href="../webapps/best-practicesf854.html?hl=zh-tw" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../practices/indexf854.html?hl=zh-tw"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../practices/screens_supportf854.html?hl=zh-tw" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../practices/screens-distributionf854.html?hl=zh-tw" >Distributing to Specific Screens</a></li><li><a href="../practices/screen-compat-modef854.html?hl=zh-tw" >Screen Compatibility Mode</a></li></ul></li><li><a href="../practices/app-design/seamlessnessf854.html?hl=zh-tw" >Designing for Seamlessness</a></li><li><a href="../practices/tablets-and-handsetsf854.html?hl=zh-tw" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=zh-tw">首頁</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=zh-tw">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=zh-tw">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=zh-tw">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=zh-tw">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=zh-tw">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=zh-tw"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=zh-tw"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=zh-tw"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">訓練</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../indexf854.html?hl=zh-tw"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=zh-tw"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">參考資料</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=zh-tw">範例</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=zh-tw"
+           >程式庫</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=zh-tw"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=zh-tw"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=zh-tw">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=zh-tw">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=zh-tw">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=zh-tw"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=zh-tw">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=zh-tw">Play 管理中心</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=zh-tw"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=zh-tw"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=zh-tw">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=zh-tw">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">服務</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<ol id="qv">
+<h2>本文件內容</h2>
+<ol>
+<li><a href="#Basics">基本概念</a></li>
+<ol>
+  <li><a href="#Declaring">在宣示說明中宣告服務</a></li>
+</ol>
+<li><a href="#CreatingAService">建立已啟動的服務</a>
+  <ol>
+    <li><a href="#ExtendingIntentService">延伸 IntentService 類別</a></li>
+    <li><a href="#ExtendingService">延伸服務類別</a></li>
+    <li><a href="#StartingAService">啟動服務</a></li>
+    <li><a href="#Stopping">停止服務</a></li>
+  </ol>
+</li>
+<li><a href="#CreatingBoundService">建立已繫結的服務</a></li>
+<li><a href="#Notifications">傳送通知給使用者</a></li>
+<li><a href="#Foreground">在前景中執行服務</a></li>
+<li><a href="#Lifecycle">管理服務的生命週期</a>
+<ol>
+  <li><a href="#LifecycleCallbacks">實作生命週期回呼</a></li>
+</ol>
+</li>
+</ol>
+
+<h2>重要類別</h2>
+<ol>
+  <li><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw">Service</a></code></li>
+  <li><code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw">IntentService</a></code></li>
+</ol>
+
+<h2>範例</h2>
+<ol>
+  <li><a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/ServiceStartArguments.html?hl=zh-tw"><code>ServiceStartArguments</code></a></li>
+  <li><a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/LocalService.html?hl=zh-tw"><code>LocalService</code></a></li>
+</ol>
+
+<h2>另請參閱</h2>
+<ol>
+<li><a href="bound-servicesf854.html?hl=zh-tw">已繫結的服務</a></li>
+</ol>
+
+</div>
+
+
+<p><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw">Service</a></code> 是可以在背景中長時間執行操作的應用程式元件，且不提供使用者介面。
+也是另一個可以啟動服務的應用程式元件，就算使用者切換至其他應用程式，也會繼續在背景中執行。
+
+此外，元件也可以繫結至服務，以便與其互動，甚至執行處理程序間通訊 (IPC)。
+例如，服務可能處理網路交易、播放音樂、執行檔案輸入/輸出或與內容供應程式互動，這些都可以從背景執行。
+
+</p>
+
+<p>服務基本上可以採取兩種形式：</p>
+
+<dl>
+  <dt>啟動</dt>
+  <dd>服務「啟動」表示應用程式元件 (例如 Activity) 透過呼叫
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 來啟動服務。一旦啟動，服務可以無限次數地在背景中執行，就算啟動服務的元件已終結也不會影響。
+通常，已啟動的服務會執行單一操作且不會將結果傳回呼叫端。例如，服務可能會透過網路下載或上傳檔案。
+
+當操作完成時，服務應該會自行終結。
+</dd>
+  <dt>繫結</dt>
+  <dd>服務「繫結」表示應用程式元件透過呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> 來繫結至服務。已繫結的服務提供主從式介面，讓元件可以與服務互動、傳送要求、取得結果，甚至可以使用處理程序間通訊 (IPC) 來跨程序達到目的。
+
+已繫結的服務伴隨另一個繫結至服務的應用程式元件執行。
+多重元件可以一次繫結至服務，但是當所有元件都取消繫結時，服務就會被終結。
+</dd>
+</dl>
+
+<p>雖然此文件通常分別討論服務的這兩種類別，但您的服務兩種方式都可以執行 &mdash; 可以啟動服務 (無限次數地執行) 也允許繫結。
+這僅與您是否實作兩種回呼方法而定：<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 允許元件啟動服務，而 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onBind(android.content.Intent)">onBind()</a></code> 則允許繫結。
+</p>
+
+<p>不論您的應用程式是否啟動、繫結或兩者都有，任何應用程式元件可以使用服務 (就算來自不同的應用程式)，與任何元件可以使用 Activity 的方式相同 &mdash; 使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code> 啟動服務。
+
+然而，您可以宣告服務為私用、位於宣示說明檔案之中，與封鎖從其他應用程式存取。
+如需更多討論資訊，請詳見<a href="#Declaring">在宣示說明中宣告服務</a>。
+
+</p>
+
+<p class="caution"><strong>注意：</strong>服務會在其託管程序的主執行緒中執行 &mdash; 服務<strong>不會</strong>建立自己的執行緒且<strong>不會</strong>在另外的程序中執行 (除非您另行指定)。
+
+這代表如果您的服務即將從事任何 CPU 密集的作業或封鎖操作 (如播放 MP3 或連線網路)，您應該在服務中建立新的執行緒來執行這些工作。
+
+透過使用另外的執行緒，您會降低應用程式不回應 (ANR) 錯誤的風險，且應用程式的主執行緒仍可以專務於使用者與您的 Activity 互動。
+
+</p>
+
+
+<h2 id="Basics">基本概念</h2>
+
+<div class="sidebox-wrapper">
+<div class="sidebox">
+  <h3>應該使用服務或執行緒？</h3>
+  <p>服務簡單而言就是可以在背景中執行的元件，就算使用者不與您的應用程式互動也不會影響。
+所以，您應該只在需要時才建立服務。
+</p>
+  <p>如果您必須在主執行緒外執行作業，但只有在使用者與您應用程式互動時才需要，則您可能應該建立新的執行緒而非服務。
+例如，如果您想要播放一些音樂，但只在執行您的 Activity 時播放，您可能在
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onCreate(android.os.Bundle)">onCreate()</a></code> 中建立執行緒，在 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onStart()">onStart()</a></code> 中開始執行該執行緒，然後在 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-tw#onStop()">onStop()</a></code> 中停止。
+也可以考慮使用 <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=zh-tw">AsyncTask</a></code> 或 <code><a href="https://developer.android.com/reference/android/os/HandlerThread.html?hl=zh-tw">HandlerThread</a></code>，來代替傳統的 <code><a href="https://developer.android.com/reference/java/lang/Thread.html?hl=zh-tw">Thread</a></code> 類別。
+如需更多有關執行緒的資訊，請參閱<a href="processes-and-threadsf854.html?hl=zh-tw#Threads">程序與執行緒</a>文件。
+</p>
+  <p>請記得如果您確實使用服務，依照預設會在您應用程式的主執行緒中執行該服務，所以，如果服務執行密集的操作或封鎖操作，則您仍應在服務中建立新的執行緒。
+
+</p>
+</div>
+</div>
+
+<p>如要建立服務，您必須建立 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw">Service</a></code> 的子類別 (或是其現有的子類別之一)。
+在您的實作中，如果可以，您必須覆寫某些回呼方法，這些方法負責處理服務生命週期的關鍵層面，並提供元件繫結至服務的機制。
+
+您應該覆寫的最重要回呼方法為：</p>
+
+<dl>
+  <dt><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code></dt>
+    <dd>當另一個元件 (如 Activity) 透過呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 來要求啟動服務時，系統會呼叫此方法。
+一旦執行此方法，服務會被啟動且可以無限次數地在背景中執行。
+如果您實作此方法，當作業完成時，您必須負責停止服務，方式為呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf()">stopSelf()</a></code> 或 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#stopService(android.content.Intent)">stopService()</a></code>。
+(如果您只想要提供繫結功能，您不需要實作此方法)。
+</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onBind(android.content.Intent)">onBind()</a></code></dt>
+    <dd>當其他元件想要與服務 (如執行 RPC) 繫結時，系統會透過呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> 來呼叫此方法。
+在您實作此方法時，透過傳回 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=zh-tw">IBinder</a></code>，您必須提供用戶端可用來與服務通訊的介面。
+您必須永遠實作此方法，但如果您不想允許繫結，則您應該傳回 null。
+</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onCreate()">onCreate()</a></code></dt>
+    <dd>當第一次建立服務時，系統會呼叫此方法來執行一次性的設定程序 (在其呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 或
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onBind(android.content.Intent)">onBind()</a></code> 之前)。
+如果已經執行服務，則不會呼叫此方法。
+</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onDestroy()">onDestroy()</a></code></dt>
+    <dd>當不再使用服務且正在終結服務時，系統會呼叫此方法。您的服務應該實作此方法來清除任何如執行緒、註冊的接聽器，接收器等資源。
+
+這會是服務接收到的最後呼叫。</dd>
+</dl>
+
+<p>如果透過呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> (這是呼叫至 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 的結果) 讓元件啟動服務，則服務仍會保持執行狀態，直到使用 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf()">stopSelf()</a></code> 讓服務自行停止或透過呼叫
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#stopService(android.content.Intent)">stopService()</a></code> 由其他元件停止服務。
+</p>
+
+<p>如果元件呼叫
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> 來建立服務 (且「沒有」呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code><em></em>)，則服務會伴隨繫結至服務的元件執行。
+一旦服務與所有用戶端解除繫結時，系統會終結服務。
+</p>
+
+<p>只有在記憶體不足且必須復原擁有使用者焦點的 Activity 其系統資源時，Android 系統才會強制停止服務。
+如果服務已繫結至擁有使用者焦點的 Activity，則該服務不太容易被終止，且如果服務被宣告為<a href="#Foreground">在前景中執行</a> (稍後會討論)，則該服務幾乎不會被終止。
+否則，如果長時間執行於前景中啟動的服務，則系統會隨時間降低該服務在背景工作清單中的位置，且該服務會很容易被終止 &mdash; 如果已啟動您的服務，則您必須設計讓系統可以完美地處理重新啟動。
+
+
+
+如果系統終止服務，則系統會在可以再度取得資源時立即重新啟動服務 (雖然這也會依據您從 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 傳回的值而有所不同，稍後會討論)。
+如需更多有關系統何時可能終結服務的資訊，請參閱<a href="processes-and-threadsf854.html?hl=zh-tw">程序與執行緒</a>文件。
+
+</p>
+
+<p>在下列小節，您將看到您如何可以建立每種類型的服務與如何從不同應用程式元件使用。
+</p>
+
+
+
+<h3 id="Declaring">在宣示說明中宣告服務</h3>
+
+<p>就如同 Activity (與其他元件)，您必須在您應用程式的宣示說明檔案中宣告所有服務。
+</p>
+
+<p>如要宣告您的服務，可以新增 <a href="../topics/manifest/service-elementf854.html?hl=zh-tw"><code>&amp;lt;service&amp;gt;</code></a> 元素為 <a href="../topics/manifest/application-elementf854.html?hl=zh-tw"><code>&amp;lt;application&amp;gt;</code></a>元素的子項。
+
+例如：</p>
+
+<pre>
+&lt;manifest ... &gt;
+  ...
+  &lt;application ... &gt;
+      &lt;service android:name=".ExampleService" /&gt;
+      ...
+  &lt;/application&gt;
+&lt;/manifest&gt;
+</pre>
+
+<p>如需更多有關在宣示說明中宣告您服務的行系資訊，請參閱 <a href="../topics/manifest/service-elementf854.html?hl=zh-tw"><code>&amp;lt;service&amp;gt;</code></a> 元素。
+</p>
+
+<p>您還可以在 <a href="../topics/manifest/service-elementf854.html?hl=zh-tw"><code>&amp;lt;service&amp;gt;</code></a> 元素中包含其他屬性，用來定義如啟動服務所需權限的屬性，與服務應該執行的程序。
+
+<a href="../topics/manifest/service-elementf854.html?hl=zh-tw#nm"><code>android:name</code></a> 屬性是唯一必備的屬性 &mdash; 用來指定服務的類別名稱。
+一旦您發佈應用程式，您就不應該變更此名稱，因為如果這樣做，會由於依賴明確的意圖來啟動或繫結服務 (閱讀部落格貼文、<a href="http://android-developers.blogspot.com/2011/06/things-that-cannot-change.html">不能變更的事項</a>)，造成程式碼中斷的風險。
+
+
+
+
+<p>如要確認您的應用程式是安全的，<strong>當啟動或繫結您的 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw">Service</a></code> 時，永遠使用明確意圖</strong>，且不要宣告服務的意圖篩選器。
+如果允許一定程度的模糊來決定啟動的服務是重要的，您可以提供您的服務意圖篩選器，並從 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code> 排除元件名稱，但您仍需使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw#setPackage(java.lang.String)">setPackage()</a></code> 設定意圖的封裝，這會提供目標服務足夠明確、避免含糊的指示。
+
+
+</p>
+
+<p>此外，您可以確保只有您的應用程式可以使用您的服務，方法為包含 <a href="../topics/manifest/service-elementf854.html?hl=zh-tw#exported"><code>android:exported</code></a> 屬性並將其設定為 <code>"false"</code>。
+
+這可以有效地避免其他應用程式啟動您的服務，就算使用明確意圖時也是如此。
+</p>
+
+
+
+
+<h2 id="CreatingStartedService">建立已啟動的服務</h2>
+
+<p>已啟動的服務是由其他應用程式呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 所啟動的，由呼叫至服務的
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 方法所導致。</p>
+
+<p>當服務啟動，其生命週期與啟動服務的元件無關，且服務可以無限次數地在背景中執行，就算啟動服務的元件已終結也不會影響。
+
+因此，當服務的工作藉由呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf()">stopSelf()</a></code> 而完成時，服務應該會自行停止，或藉由呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#stopService(android.content.Intent)">stopService()</a></code>，其他元件也可以停止服務。
+
+</p>
+
+<p>如 Activity 等應用程式元件可以透過呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 與傳送用來指定服務及包含服務所要使用任何資料的
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code>，來啟動服務。服務會接收 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 方法中的此 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code>。
+</p>
+
+<p>例如，假設 Activity 需要一些資料到線上資料庫。藉由傳送意圖至 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code>，Activity 可以啟動伴隨服務並傳送要儲存的資料。
+服務會接收 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 中的意圖，連線到網際網路，並執行資料庫交易。
+當操作完成時，服務應該會自行終結。
+</p>
+
+<p class="caution"><strong>注意：</strong>服務會在與應用程式相同的程序中執行，服務會在該程序中被宣告，且依照預設，會位於該應用程式的主執行緒之中。
+所以，在使用者與來自相同應用程式的 Activity 互動時，如果您的服務執行密集的操作或封鎖操作，則該服務將會降低 Activity 的效能。
+
+要避免影響應用程式的效能，您應該在服務之中啟動新的執行緒。
+</p>
+
+<p>傳統上，有兩種類別可以延伸為建立已啟動的服務：</p>
+<dl>
+  <dt><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw">Service</a></code></dt>
+  <dd>這是所有服務的基本類別。當您延伸此類別時，建立用來執行所有服務工作的新執行緒是非常重要的，因為依照預設，服務會使用您應用程式的主執行緒，這會降低任何您應用程式所執行 Activity 的效能。
+
+
+</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw">IntentService</a></code></dt>
+  <dd>這是 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw">Service</a></code> 的子類別，會使用 worker 執行緒來處理所有的啟動要求，一次一個。
+如果您不需要您的服務同時處理多個要求，則這是最佳的選項。
+您唯一要做的就是實作 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onHandleIntent(android.content.Intent)">onHandleIntent()</a></code>，這會接收每個起始要求的意圖 ，所以您可以在背景執行。
+</dd>
+</dl>
+
+<p>下列小節說明如何可以使用這些類別之一來實作您的服務。
+</p>
+
+
+<h3 id="ExtendingIntentService">延伸 IntentService 類別</h3>
+
+<p>因為大多數的已啟動服務不需要同時處理多個要求(多重執行緒策略事實上是危險的)，如果您使用 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw">IntentService</a></code> 類別來實作您的服務可能是最佳的方法。
+
+</p>
+
+<p><code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw">IntentService</a></code> 會達到下列目的：</p>
+
+<ul>
+  <li>建立預設的 worker 執行緒，該執行緒會執行所有傳送至 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 的意圖，並與您應用程式的主執行緒有所分別。
+</li>
+  <li>建立工作佇列，該佇列會一次傳送一個意圖到您的 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onHandleIntent(android.content.Intent)">onHandleIntent()</a></code> 實作，所以您絕對不需要擔心多重執行緒的問題。
+</li>
+  <li>在所有啟動要求都已處理後，停止服務，這樣您永遠不需要呼叫
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf()">stopSelf()</a></code>。</li>
+  <li>提供傳回 null 的 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onBind(android.content.Intent)">onBind()</a></code> 其預設實作。
+</li>
+  <li>提供傳送意圖至工作佇列的 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 其預設實作，然後傳送至您的 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onHandleIntent(android.content.Intent)">onHandleIntent()</a></code> 實作。</li>
+</ul>
+
+<p>所有這一切都說明了您要做的就是實作 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onHandleIntent(android.content.Intent)">onHandleIntent()</a></code> 來完成用戶端提供的工作。
+(雖然，您也需要提供小型建構函式給服務)。</p>
+
+<p>下列是 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw">IntentService</a></code> 實作的範例：</p>
+
+<pre>
+public class HelloIntentService extends IntentService {
+
+  /**
+   * A constructor is required, and must call the super <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#IntentService(java.lang.String)">IntentService(String)</a></code>
+   * constructor with a name for the worker thread.
+   */
+  public HelloIntentService() {
+      super("HelloIntentService");
+  }
+
+  /**
+   * The IntentService calls this method from the default worker thread with
+   * the intent that started the service. When this method returns, IntentService
+   * stops the service, as appropriate.
+   */
+  &#64;Override
+  protected void onHandleIntent(Intent intent) {
+      // Normally we would do some work here, like download a file.
+      // For our sample, we just sleep for 5 seconds.
+      long endTime = System.currentTimeMillis() + 5*1000;
+      while (System.currentTimeMillis() &lt; endTime) {
+          synchronized (this) {
+              try {
+                  wait(endTime - System.currentTimeMillis());
+              } catch (Exception e) {
+              }
+          }
+      }
+  }
+}
+</pre>
+
+<p>您需要的是：<code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onHandleIntent(android.content.Intent)">onHandleIntent()</a></code> 的建構函式與實作。</p>
+
+<p>如果您決定也要覆寫其他回呼方法，如 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onCreate()">onCreate()</a></code>、<code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 或 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onDestroy()">onDestroy()</a></code>，請確認呼叫超級實作，這樣
+<code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw">IntentService</a></code> 才可以適當處理 worker 執行緒的生命。</p>
+
+<p>例如，<code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 必須傳回預設的實作 (這就是意圖如何被傳送至 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onHandleIntent(android.content.Intent)">onHandleIntent()</a></code>)：
+</p>
+
+<pre>
+&#64;Override
+public int onStartCommand(Intent intent, int flags, int startId) {
+    Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
+    return super.onStartCommand(intent,flags,startId);
+}
+</pre>
+
+<p>除了 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onHandleIntent(android.content.Intent)">onHandleIntent()</a></code>，您不需要呼叫超級類別的唯一方法就是 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw#onBind(android.content.Intent)">onBind()</a></code> (但只有在您的服務允許繫結時才需要實作)。
+</p>
+
+<p>在下一節，您會看到在延伸基本 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw">Service</a></code> 類別時，如何實作同類的服務，這需要寫更多程式碼，但是如果您需要同時處理多個啟動要求時，這可能是比較合適的處理方式。
+
+</p>
+
+
+<h3 id="ExtendingService">延伸服務類別</h3>
+
+<p>如同您在前一節看到的，使用 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw">IntentService</a></code> 可讓您已啟動服務的實作變得非常容易。
+然而，如果您要求您的服務執行多重執行緒 (取代透過工作佇列處理啟動要求)，則您可以延伸 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw">Service</a></code> 類別來處理每個意圖。
+
+</p>
+
+<p>為了對比之用，下列程式碼範例是 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw">Service</a></code> 類別的實作，該類別執行與上述使用 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw">IntentService</a></code> 範例相同的工作。也就是，對每個啟動要求，會使用 worker 執行緒來執行工作，且一次只處理一個要求。
+</p>
+
+<pre>
+public class HelloService extends Service {
+  private Looper mServiceLooper;
+  private ServiceHandler mServiceHandler;
+
+  // Handler that receives messages from the thread
+  private final class ServiceHandler extends Handler {
+      public ServiceHandler(Looper looper) {
+          super(looper);
+      }
+      &#64;Override
+      public void handleMessage(Message msg) {
+          // Normally we would do some work here, like download a file.
+          // For our sample, we just sleep for 5 seconds.
+          long endTime = System.currentTimeMillis() + 5*1000;
+          while (System.currentTimeMillis() &lt; endTime) {
+              synchronized (this) {
+                  try {
+                      wait(endTime - System.currentTimeMillis());
+                  } catch (Exception e) {
+                  }
+              }
+          }
+          // Stop the service using the startId, so that we don't stop
+          // the service in the middle of handling another job
+          stopSelf(msg.arg1);
+      }
+  }
+
+  &#64;Override
+  public void onCreate() {
+    // Start up the thread running the service.  Note that we create a
+    // separate thread because the service normally runs in the process's
+    // main thread, which we don't want to block.  We also make it
+    // background priority so CPU-intensive work will not disrupt our UI.
+    HandlerThread thread = new HandlerThread("ServiceStartArguments",
+            Process.THREAD_PRIORITY_BACKGROUND);
+    thread.start();
+
+    // Get the HandlerThread's Looper and use it for our Handler
+    mServiceLooper = thread.getLooper();
+    mServiceHandler = new ServiceHandler(mServiceLooper);
+  }
+
+  &#64;Override
+  public int onStartCommand(Intent intent, int flags, int startId) {
+      Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
+
+      // For each start request, send a message to start a job and deliver the
+      // start ID so we know which request we're stopping when we finish the job
+      Message msg = mServiceHandler.obtainMessage();
+      msg.arg1 = startId;
+      mServiceHandler.sendMessage(msg);
+
+      // If we get killed, after returning from here, restart
+      return START_STICKY;
+  }
+
+  &#64;Override
+  public IBinder onBind(Intent intent) {
+      // We don't provide binding, so return null
+      return null;
+  }
+
+  &#64;Override
+  public void onDestroy() {
+    Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
+  }
+}
+</pre>
+
+<p>如同您看到的，比起使用 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw">IntentService</a></code>，這需要花更多功夫。</p>
+
+<p>然而，因為您自行處理每個對 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 的呼叫，您可以同時執行多個要求。那不是這個範例要做的，但如果那是您想要的，那麼您可以針對每個要求建立新的執行緒，並立即執行 (代替等待之前的要求結束)。
+
+</p>
+
+<p>請注意：<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 方法必須傳回整數。
+整數是一個數值，說明在系統終止服務的事件中，系統該如何繼續服務 (如上述的討論，雖然您可以修改，但 <code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=zh-tw">IntentService</a></code> 的預設實作會替您處理)。
+從
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 傳回的值必須是下列常數之一：
+</p>
+
+<dl>
+  <dt><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#START_NOT_STICKY">START_NOT_STICKY</a></code></dt>
+    <dd>如果系統在 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 回傳後終止服務，除非有待決的意圖要傳送，否則請「不要」<em></em>建立服務。
+在非必要時與應用程式可以簡單地重新啟動任何未完成的工作時，這是避免執行服務的最安全方式。
+</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#START_STICKY">START_STICKY</a></code></dt>
+    <dd>如果系統在 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 回傳後終止服務，請重新建立服務並呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code>，但「不要」<em></em>重新傳送最後的意圖。
+相反地，除非有待決的意圖要啟動服務傳送，否則系統會使用 null 意圖呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code>，如果有待決的意圖要啟動服務，則會傳送那些意圖。
+
+這適用於媒體播放程式 (或類似服務) 這類不執行命令，但可以無次數限制執行與等待工作的服務。
+</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#START_REDELIVER_INTENT">START_REDELIVER_INTENT</a></code></dt>
+    <dd>如果系統在 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 回傳後終止服務，請重新建立服務並使用傳送至服務的最後意圖呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code>。
+任何待決的意圖會反過來由後往前傳送。這適用的服務為主動執行如下載檔案等應該立即繼續的工作。
+</dd>
+</dl>
+<p>如需有關這些傳回值的詳細資訊，請參閱每個常數的連結參考文件。
+</p>
+
+
+
+<h3 id="StartingAService">啟動服務</h3>
+
+<p>您可以透過傳送
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code> (指定要啟動的服務) 到 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code>，從 Activity 或其他應用程式元件來啟動服務。Android 系統會呼叫服務的 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 方法並傳送 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code> 給該方法。(絕對不要直接呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code>)。</p>
+
+<p>例如，使用明確意圖並搭配 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code>，Activity 可以啟動前小節範例中的服務 (<code>HelloSevice</code>)：</p>
+
+<pre>
+Intent intent = new Intent(this, HelloService.class);
+startService(intent);
+</pre>
+
+<p><code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 方法會立即回傳且Android 系統會呼叫服務的 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 方法。
+如果尚未開始執行服務，系統會先呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onCreate()">onCreate()</a></code>，然後呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code>。</p>
+
+<p>如果服務也不提供繫結，則與意圖一同傳送的 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 是在應用程式元件與服務間通訊的唯一模式。
+然而，如果您想要服務將結果送回，則啟動服務的用戶端會針對廣播建立 <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-tw">PendingIntent</a></code>(搭配 <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-tw#getBroadcast(android.content.Context, int, android.content.Intent, int)">getBroadcast()</a></code>) 並將其傳送至服務，該服務在啟動服務的 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code> 之中。
+
+
+然後服務就可使用廣播來傳送結果。
+</p>
+
+<p>多個啟動服務的要求會導致多個相關呼叫至服務的
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code>。然而，只允許一個要求可以停止服務 (使用 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf()">stopSelf()</a></code> 或 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#stopService(android.content.Intent)">stopService()</a></code>)。
+</p>
+
+
+<h3 id="Stopping">停止服務</h3>
+
+<p>已啟動的服務必須管理本身的生命週期。也就是，系統不會停止或終結服務，除非系統必須復原系統記憶體，而服務會在 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 回傳後繼續執行。
+
+所以，服務務必自我停止，可透過呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf()">stopSelf()</a></code> 達成，或透過呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#stopService(android.content.Intent)">stopService()</a></code> 讓其他元件可以停止服務。
+
+</p>
+
+<p>一旦要求使用 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf()">stopSelf()</a></code> 或 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#stopService(android.content.Intent)">stopService()</a></code> 停止，系統會盡快終結服務。
+</p>
+
+<p>然而，如果您的服務同時處理多個對 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 的要求，則在您開始處理啟動要求時，您不應該停止服務，因為您仍可能會收到新的啟動要求 (在第一個要求結束時停止可能會終止第二個要求)。
+
+如要避免發生此問題，您可以使用 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf(int)">stopSelf(int)</a></code> 來確保您停止服務的要求會總是基於最新的啟動要求。
+
+也就是，當您呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf(int)">stopSelf(int)</a></code> 時，會傳送啟動要求的 ID (<code>startId</code> 已傳送至 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code>) 至您相關的停止要求。
+
+然而，如果服務在您可以呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf(int)">stopSelf(int)</a></code> 之前，就收到新的啟動要求，則 ID 將不會相符，服務也不會停止。</p>
+
+<p class="caution"><strong>注意：</strong>在您的應用程式完成工作時，應用程式停止其服務是非常重要的，這可以避免浪費系統資源與消耗電池電力。
+如果必要，透過呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#stopService(android.content.Intent)">stopService()</a></code>，其他元件可以停止服務。
+就算您啟動服務的繫結，如果曾接收對 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 的呼叫，您永遠仍必須自行停止服務。
+</p>
+
+<p>如需有關服務生命週期的詳細資訊，請參閱下節<a href="#Lifecycle">管理服務的生命週期</a>。</p>
+
+
+
+<h2 id="CreatingBoundService">建立已繫結的服務</h2>
+
+<p>已繫結的服務是允許應用程式元件透過呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> 來建立繫結的服務，這是為了建立長期的連線 (一般而言，並不允許元件透過呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 來「啟動」<em></em> )。
+</p>
+
+<p>當您想要透過處理程序間通訊 (IPC)，與來自 Activity 的服務及您應用程式中的其他元件互動時，或是想要揭露您應用程式的特定功能給其他應用程式時，您應該建立已繫結的服務。
+
+</p>
+
+<p>如要建立已繫結的服務，您必須實作 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onBind(android.content.Intent)">onBind()</a></code> 回呼方法並傳回
+<code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=zh-tw">IBinder</a></code> (這用來定義與服務溝通的介面)。接著其他應用程式元件可以呼叫
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> 來擷取介面並開始服務上的呼叫方法。
+服務只會為了服務所繫結應用程式元件才存在，
+所以當沒有繫結服務的元件時，系統會終結服務 (當服務透過
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 啟動時，您「不」<em></em>需要停止已繫結的服務)。
+</p>
+
+<p>如要建立已繫結的服務，您必須做的第一件事就是定義用來指定用戶端如何與服務通訊的介面。
+介於服務與用戶端間的介面必須是 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=zh-tw">IBinder</a></code> 的實作，也是您服務必須從 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onBind(android.content.Intent)">onBind()</a></code> 回呼方法傳回的。
+
+一旦用戶端收到 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=zh-tw">IBinder</a></code>，可以透過介面開始與服務互動。
+</p>
+
+<p>服務一次可以繫結多個用戶端。當用戶端完成與服務互動時，會呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#unbindService(android.content.ServiceConnection)">unbindService()</a></code> 來取消繫結。
+一旦沒有用戶端與服務繫結，系統就會終結服務。
+</p>
+
+<p>有多個方法可以實作已繫結的服務，且實作比已啟動服務更加複雜，所以會在另一份有關<a href="bound-servicesf854.html?hl=zh-tw">已繫結的服務</a>文件中討論已繫結的服務。
+
+</p>
+
+
+
+<h2 id="Notifications">傳送通知給使用者</h2>
+
+<p>一旦執行，服務可以使用<a href="../topics/ui/notifiers/toastsf854.html?hl=zh-tw">快顯通知</a>或<a href="../topics/ui/notifiers/notificationsf854.html?hl=zh-tw">狀態列通知</a>來通知事件的使用者。</p>
+
+<p>快顯通知是一個會出現在目前視窗表面上短暫時間然後消失的訊息，此時狀態列通知會在狀態列提供一個圖示與訊息，使用者可以選擇然後採取行動 (例如啟動 Activity)。
+
+</p>
+
+<p>通常，當已完成某些背景作業(如完成檔案下載) 且使用者現在可以採取行動時，狀態列通知是最佳的方法。
+
+當使用者從擴展的檢視選取通知時，通知可以啟動 Activity (如檢視已下載檔案)。
+</p>
+
+<p>如需更多資訊，請參閱<a href="../topics/ui/notifiers/toastsf854.html?hl=zh-tw">快顯通知</a>或<a href="../topics/ui/notifiers/notificationsf854.html?hl=zh-tw">狀態列通知</a>開發人員指南。
+</p>
+
+
+
+<h2 id="Foreground">在前景中執行服務</h2>
+
+<p>前景服務是被認為使用者已主動意識到、就算在記憶體不足時系統也不會終結的服務。
+前景服務必須提供通知給狀態列，狀態列會放置在「進行中」標題之下，這表示除非服務已被停止或從前景移除，否則無法解除通知。
+
+
+</p>
+
+<p>例如，播放來自某服務音樂的音樂播放器應該被設為在前景中執行，因為使用者明確意識到這項操作。
+
+狀態列中的通知可能會指出目前播放的歌曲，並允許使用者啟動 Activity 來與音樂播放器互動。
+</p>
+
+<p>如要要求您的服務在前景中執行，可以呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#startForeground(int, android.app.Notification)">startForeground()</a></code>。此方法有兩個參數：一個整數用來唯一識別通知，以及 <code><a href="https://developer.android.com/reference/android/app/Notification.html?hl=zh-tw">Notification</a></code> 供狀態列使用。
+例如：</p>
+
+<pre>
+Notification notification = new Notification(R.drawable.icon, getText(R.string.ticker_text),
+        System.currentTimeMillis());
+Intent notificationIntent = new Intent(this, ExampleActivity.class);
+PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+notification.setLatestEventInfo(this, getText(R.string.notification_title),
+        getText(R.string.notification_message), pendingIntent);
+startForeground(ONGOING_NOTIFICATION_ID, notification);
+</pre>
+
+<p class="caution"><strong>注意：</strong>您給 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#startForeground(int, android.app.Notification)">startForeground()</a></code> 的整數 ID 不能為 0。</p>
+
+
+<p>如要從前景移除服務，可以呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopForeground(boolean)">stopForeground()</a></code>。此方法有一個布林數，表示是否同時移除狀態列通知。
+此方法「不會」<em></em>停止服務。
+然而，如果您在服務仍於前景執行時停止服務，則也會移除通知。
+</p>
+
+<p>如需更多有關通知的資訊，請參閱<a href="../topics/ui/notifiers/notificationsf854.html?hl=zh-tw">建立狀態列通知</a>。
+</p>
+
+
+
+<h2 id="Lifecycle">管理服務的生命週期</h2>
+
+<p>服務的生命週期比 Activity 的生命週期要簡單多了。然而，密切關注如何建立與終結服務就更重要了，因為在使用者沒有意識到的狀況下可在背景中執行服務。
+
+</p>
+
+<p>服務生命週期 &mdash; 從何時建立到何時終結 &mdash; 可以遵循兩種不同的路徑：
+</p>
+
+<ul>
+<li>已啟動的服務
+  <p>當其他元件呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 時，會建立服務。然後服務可無限次數執行，且必須自行停止，方法是呼叫 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf()">stopSelf()</a></code>。
+透過呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#stopService(android.content.Intent)">stopService()</a></code>，其他元件可以停止服務。
+當服務停止時，系統會終結服務。</p></li>
+
+<li>已繫結的服務
+  <p>當其他元件 (一個用戶端) 呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> 時，會建立服務。然後用戶端會透過
+<code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=zh-tw">IBinder</a></code> 介面與服務通訊。用戶端也可以呼叫
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#unbindService(android.content.ServiceConnection)">unbindService()</a></code> 來切斷連線。多重用戶端可以繫結至相同的服務，但是當所有用戶端都取消繫結時，系統就會終結服務。
+(服務「不」<em></em>需要自行停止)。
+</p></li>
+</ul>
+
+<p>這兩種路徑不是完全獨立的。也就是，您可以繫結至已經使用
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 啟動的服務。例如，可以啟動背景音樂服務，方法是呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 並搭配可識別要播放音樂的 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code>。
+之後，使用者可能會想要透過播放器試試某些控制或取得關於目前歌曲的資訊，可以將 Activity 繫結至服務，方法為呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>。
+
+就這個的案子而言，除非所有的用戶端都取消繫結，否則 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#stopService(android.content.Intent)">stopService()</a></code> 或 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf()">stopSelf()</a></code> 不會實際上停止服務。 </p>
+
+
+<h3 id="LifecycleCallbacks">實作生命週期回呼</h3>
+
+<p>就如同 Activity，服務有您可以實作來監控服務狀態變更與在適合時段執行作業的生命週期回呼方法。
+下列服務會示範每個生命週期方法：
+</p>
+
+<pre>
+public class ExampleService extends Service {
+    int mStartMode;       // indicates how to behave if the service is killed
+    IBinder mBinder;      // interface for clients that bind
+    boolean mAllowRebind; // indicates whether onRebind should be used
+
+    &#64;Override
+    public void <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onCreate()">onCreate</a></code>() {
+        // The service is being created
+    }
+    &#64;Override
+    public int <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand</a></code>(Intent intent, int flags, int startId) {
+        // The service is starting, due to a call to <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code>
+        return <em>mStartMode</em>;
+    }
+    &#64;Override
+    public IBinder <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onBind(android.content.Intent)">onBind</a></code>(Intent intent) {
+        // A client is binding to the service with <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>
+        return <em>mBinder</em>;
+    }
+    &#64;Override
+    public boolean <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onUnbind(android.content.Intent)">onUnbind</a></code>(Intent intent) {
+        // All clients have unbound with <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#unbindService(android.content.ServiceConnection)">unbindService()</a></code>
+        return <em>mAllowRebind</em>;
+    }
+    &#64;Override
+    public void <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onRebind(android.content.Intent)">onRebind</a></code>(Intent intent) {
+        // A client is binding to the service with <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>,
+        // after onUnbind() has already been called
+    }
+    &#64;Override
+    public void <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onDestroy()">onDestroy</a></code>() {
+        // The service is no longer used and is being destroyed
+    }
+}
+</pre>
+
+<p class="note"><strong>注意：</strong>不像 Activity 生命週期回呼方法，您「不」<em></em>需要呼叫這些回呼方法的超級類別實作。
+</p>
+
+<img src="../../images/service_lifecyclef854.png?hl=zh-tw" alt="" />
+<p class="img-caption"><strong>圖 2.</strong>服務生命週期。左圖顯示使用 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 建立服務的生命週期，右圖顯示使用
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> 建立服務的生命週期。
+</p>
+
+<p>透過實作這些方法，您可以監控服務生命週期中的兩個巢狀迴圈： </p>
+
+<ul>
+<li>服務的<strong>整個生命</strong>發生在 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onCreate()">onCreate()</a></code> 被呼叫的時間與 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onDestroy()">onDestroy()</a></code> 回傳的時間之間。就像 Activity，服務於
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onCreate()">onCreate()</a></code> 中開始其初始設定，並於 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onDestroy()">onDestroy()</a></code> 中釋出所有剩餘的資訊。例如，音樂播放服務可以建立執行緒，且音樂會於 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onCreate()">onCreate()</a></code> 中播放，然後在 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onDestroy()">onDestroy()</a></code> 中停止執行緒。
+
+
+<p><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onCreate()">onCreate()</a></code> 與 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onDestroy()">onDestroy()</a></code> 方法可供所有服務呼叫，不論服務是否由 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 或 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> 所建立。
+</p></li>
+
+<li>服務的<strong>使用生命</strong>從對 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 或 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onBind(android.content.Intent)">onBind()</a></code> 的呼叫開始。
+每個方法都被遞交 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-tw">Intent</a></code>，也會被分別傳送至 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 或 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>。
+<p>如果服務已啟動，使用生命的結束時間與整個生命結束的時間相同 (就算在 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 回傳後，服務仍在作用中)。
+如果服務已繫結，使用生命的會於 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onUnbind(android.content.Intent)">onUnbind()</a></code> 回傳時結束。</p>
+</li>
+</ul>
+
+<p class="note"><strong>注意：</strong>雖然已啟動的服務可藉由對
+ <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#stopSelf()">stopSelf()</a></code> 或 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#stopService(android.content.Intent)">stopService()</a></code> 的呼叫來停止，但沒有服務的相對應回呼 (沒有 <code>onStop()</code> 回呼)。
+所有，除非服務已繫結至用戶端，系統會在服務停止時終結服務 &mdash; <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onDestroy()">onDestroy()</a></code> 是唯一收到的回呼。
+</p>
+
+<p>圖 2 說明服務的回呼方法。雖然圖示區隔由
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code> 所建立的服務與由
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> 所建立的服務，但請記住，任何服務不論是如何建立的，都可能可以允許使用者繫結。
+
+所以，一開始使用 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onStartCommand(android.content.Intent, int, int)">onStartCommand()</a></code> 啟動的服務 (由用戶端呼叫 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#startService(android.content.Intent)">startService()</a></code>)仍可以接收對 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onBind(android.content.Intent)">onBind()</a></code> 的呼叫 (當用戶端呼叫
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-tw#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code> 時)。
+</p>
+
+<p>針對建立提供已繫結的服務，如需更多詳細資訊，請參閱<a href="bound-servicesf854.html?hl=zh-tw">已繫結的服務</a>文件，其中在<a href="bound-servicesf854.html?hl=zh-tw#Lifecycle">管理已繫結服務的生命週期</a>包含更多有關 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-tw#onRebind(android.content.Intent)">onRebind()</a></code>回呼方法的詳細資訊。
+
+
+</p>
+
+
+<!--
+<h2>Beginner's Path</h2>
+
+<p>To learn how to query data from the system or other applications (such as contacts or media
+stored on the device), continue with the <b><a
+href="https://developer.android.com/guide/topics/providers/content-providers.html?hl=zh-tw">Content Providers</a></b>
+document.</p>
+-->
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=zh-tw" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="網誌" target="_blank">網誌</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=zh-tw" title="完備支援">完備支援</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=zh-tw" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=zh-tw" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=zh-tw" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=zh-tw" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="Irj-dNmlWemomagrQP4qbz50zJzoE_sHhmAlFcAWPdY6MTQ5NzUxNjcyOTgzNDE1MA" />
+      <input type="hidden" name="next" value="/guide/components/services.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+             selected="selected" >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">電子郵件地址</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../ytblogger_lists_unified962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../android_metadata_en962f.js?hl=zh-tw?v=2017061508" defer></script>
+  
+  <script src="../../reference/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../reference/gms_lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../reference/android/support/wearable/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../reference/android/support/test/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="../../reference/android/support/constraint/lists962f.js?hl=zh-tw?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=zh-tw"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_zh-tw.js?hl=zh-tw?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/components/services.html?hl=zh-tw by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:11:22 GMT -->
+</html>

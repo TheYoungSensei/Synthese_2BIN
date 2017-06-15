@@ -1,0 +1,2155 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/content-provider-creating.html?hl=ja by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:16:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="cxELOcHeBgpZcOphWgjpY0NPmhRrH-lhLRAdyHsg7Fk6MTQ5NzUxNzExMjYwNDkyMA" />
+
+  
+    <link rel="canonical" href="content-provider-creating9e29.html?hl=ja">
+  
+
+  
+    <link rel="alternate" href="content-provider-creating327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="content-provider-creatingf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="content-provider-creating9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="content-provider-creating7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="content-provider-creating0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="content-provider-creating9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="content-provider-creatingde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="content-provider-creating0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="content-provider-creating232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="content-provider-creating6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="content-provider-creating.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="content-provider-creating.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon9e29.png?hl=ja">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1809e29.png?hl=ja">
+
+
+<title>
+
+  コンテンツ プロバイダの作成 | Android Developers
+
+</title>
+
+  <meta name="description" content="A content provider manages access to a central repository of data. You implement a provider as one or more classes in an Android application, along with elements in the manifest file. One of your classes implements a subclass ContentProvider, which is…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/defaultdd52.css?hl=ja?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle9e29.js?hl=ja" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__ja9e29.js?hl=ja"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android9e29.js?hl=ja"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docsdd52.js?hl=ja?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ja&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ja&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ja&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ja&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "ja", "served": "ja"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=ja">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo9e29.png?hl=ja"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=ja"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=ja"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=ja"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=ja"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=ja" width="18" height="19" alt="Play コンソール">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="検索">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">戻る</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index9e29.html?hl=ja" >はじめに</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals9e29.html?hl=ja" >アプリケーションの基礎</a></li><li><a href="../../practices/compatibility9e29.html?hl=ja" >端末の互換性</a></li><li><a href="../security/permissions9e29.html?hl=ja" >システム パーミッション</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index9e29.html?hl=ja" >プラットフォーム アーキテクチャ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack9e29.html?hl=ja"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Java 8 の言語機能を使う</a></li><li><a href="../../practices/verifying-apps-art9e29.html?hl=ja" >Android ランタイム（ART）でのアプリの動作確認</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index9e29.html?hl=ja" >アプリのコンポーネント</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters9e29.html?hl=ja" >インテントとインテント フィルタ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common9e29.html?hl=ja" >一般的なインテント</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities9e29.html?hl=ja" >アクティビティ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments9e29.html?hl=ja" >フラグメント</a></li><li><a href="../../components/loaders9e29.html?hl=ja" >ローダ</a></li><li><a href="../../components/tasks-and-back-stack9e29.html?hl=ja" >タスクとバックスタック</a></li><li><a href="../../components/recents9e29.html?hl=ja" >オーバービュー画面</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services9e29.html?hl=ja" >サービス</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services9e29.html?hl=ja" >バインドされたサービス</a></li><li><a href="../../components/aidl9e29.html?hl=ja" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="content-providers9e29.html?hl=ja" >コンテンツ プロバイダ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="content-provider-basics9e29.html?hl=ja" >コンテンツ プロバイダの基本</a></li><li><a href="content-provider-creating9e29.html?hl=ja" >コンテンツ プロバイダの作成</a></li><li><a href="calendar-provider9e29.html?hl=ja" >カレンダー プロバイダ</a></li><li><a href="contacts-provider9e29.html?hl=ja" >連絡先プロバイダ</a></li><li><a href="document-provider9e29.html?hl=ja" >ストレージ アクセス フレームワーク</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index9e29.html?hl=ja" >アプリ ウィジェット</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host9e29.html?hl=ja" >アプリ ウィジェットのホスト</a></li></ul></li><li><a href="../../components/processes-and-threads9e29.html?hl=ja" >プロセスとスレッド</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index9e29.html?hl=ja" >アプリのリソース</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview9e29.html?hl=ja" >リソースの概要</a></li><li><a href="../resources/providing-resources9e29.html?hl=ja" >リソースの提供</a></li><li><a href="../resources/accessing-resources9e29.html?hl=ja" >リソースへのアクセス</a></li><li><a href="../resources/runtime-changes9e29.html?hl=ja" >実行時の変更の処理</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization9e29.html?hl=ja" >ローカライズ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework9e29.html?hl=ja" >ICU4J Android Framework API</a></li><li><a href="../resources/multilingual-support9e29.html?hl=ja" >言語とロケール</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources9e29.html?hl=ja" >リソースのタイプ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource9e29.html?hl=ja" >アニメーション</a></li><li><a href="../resources/color-list-resource9e29.html?hl=ja" >色状態リスト</a></li><li><a href="../resources/drawable-resource9e29.html?hl=ja" >ドローアブル</a></li><li><a href="../resources/layout-resource9e29.html?hl=ja" >レイアウト</a></li><li><a href="../resources/menu-resource9e29.html?hl=ja" >メニュー</a></li><li><a href="../resources/string-resource9e29.html?hl=ja" >文字列</a></li><li><a href="../resources/style-resource9e29.html?hl=ja" >スタイル</a></li><li><a href="../resources/more-resources9e29.html?hl=ja" >その他のタイプ</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro9e29.html?hl=ja" >アプリ マニフェスト</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element9e29.html?hl=ja" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element9e29.html?hl=ja" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element9e29.html?hl=ja" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element9e29.html?hl=ja" >&lt;application&gt;</a></li><li><a href="../manifest/category-element9e29.html?hl=ja" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element9e29.html?hl=ja" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element9e29.html?hl=ja" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element9e29.html?hl=ja" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element9e29.html?hl=ja" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element9e29.html?hl=ja" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element9e29.html?hl=ja" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element9e29.html?hl=ja" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element9e29.html?hl=ja" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element9e29.html?hl=ja" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element9e29.html?hl=ja" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element9e29.html?hl=ja" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element9e29.html?hl=ja" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element9e29.html?hl=ja" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element9e29.html?hl=ja" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element9e29.html?hl=ja" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element9e29.html?hl=ja" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element9e29.html?hl=ja" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element9e29.html?hl=ja" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element9e29.html?hl=ja" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element9e29.html?hl=ja" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element9e29.html?hl=ja" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element9e29.html?hl=ja" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index9e29.html?hl=ja" >ユーザー インターフェース</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview9e29.html?hl=ja" >UI の概要</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout9e29.html?hl=ja" >レイアウト</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear9e29.html?hl=ja" >線形レイアウト</a></li><li><a href="../ui/layout/relative9e29.html?hl=ja" >相対レイアウト</a></li><li><a href="../ui/layout/listview9e29.html?hl=ja" >リストビュー</a></li><li><a href="../ui/layout/gridview9e29.html?hl=ja" >グリッドビュー</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls9e29.html?hl=ja" >入力コントロール</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button9e29.html?hl=ja" >ボタン</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=ja" >テキスト フィールド</a></li><li><a href="../ui/controls/checkbox9e29.html?hl=ja" >チェックボックス</a></li><li><a href="../ui/controls/radiobutton9e29.html?hl=ja" >ラジオボタン</a></li><li><a href="../ui/controls/togglebutton9e29.html?hl=ja" >切り替えボタン</a></li><li><a href="../ui/controls/spinner9e29.html?hl=ja" >スピナー</a></li><li><a href="../ui/controls/pickers9e29.html?hl=ja" >ピッカー</a></li></ul></li><li><a href="../ui/ui-events9e29.html?hl=ja" >入力イベント</a></li><li><a href="../ui/menus9e29.html?hl=ja" >メニュー</a></li><li><a href="../ui/settings9e29.html?hl=ja" >設定</a></li><li><a href="../ui/dialogs9e29.html?hl=ja" >ダイアログ</a></li><li><a href="../ui/notifiers/notifications9e29.html?hl=ja" >通知</a></li><li><a href="../ui/notifiers/toasts9e29.html?hl=ja" >トースト</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index9e29.html?hl=ja" >検索</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog9e29.html?hl=ja" >検索インターフェースの作成</a></li><li><a href="../search/adding-recent-query-suggestions9e29.html?hl=ja" >検索候補の表示の追加</a></li><li><a href="../search/adding-custom-suggestions9e29.html?hl=ja" >カスタム候補の追加</a></li><li><a href="../search/searchable-config9e29.html?hl=ja" >検索可能な設定</a></li></ul></li><li><a href="../ui/multi-window9e29.html?hl=ja" >マルチ ウィンドウのサポート</a></li><li><a href="../ui/drag-drop9e29.html?hl=ja" >ドラッグ＆ドロップ</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index9e29.html?hl=ja" >ユーザー補助機能</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps9e29.html?hl=ja" >ユーザー補助機能に対応</a></li><li><a href="../ui/accessibility/checklist9e29.html?hl=ja" >ユーザー補助機能のデベロッパー チェックリスト</a></li><li><a href="../ui/accessibility/services9e29.html?hl=ja" >ユーザー補助機能サービスの作成</a></li></ul></li><li><a href="../ui/themes9e29.html?hl=ja" >スタイルとテーマ</a></li><li><a href="../ui/custom-components9e29.html?hl=ja" >カスタム コンポーネント</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index9e29.html?hl=ja" >アニメーションとグラフィック</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview9e29.html?hl=ja" >アニメーションとグラフィックの概要</a></li><li><a href="../graphics/prop-animation9e29.html?hl=ja" >プロパティ アニメーション</a></li><li><a href="../graphics/view-animation9e29.html?hl=ja" >ビュー アニメーション</a></li><li><a href="../graphics/drawable-animation9e29.html?hl=ja" >ドローアブル アニメーション</a></li><li><a href="../graphics/2d-graphics9e29.html?hl=ja" >キャンバスとドローアブル</a></li><li><a href="../graphics/opengl9e29.html?hl=ja" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel9e29.html?hl=ja" >ハードウェア アクセラレーション</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index9e29.html?hl=ja" >演算処理</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute9e29.html?hl=ja" >RenderScript</a></li><li><a href="../renderscript/advanced9e29.html?hl=ja" >高度な RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview9e29.html?hl=ja" >ランタイム API リファレンス</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types9e29.html?hl=ja" >数値型</a></li><li><a href="../renderscript/reference/rs_object_types9e29.html?hl=ja" >オブジェクト型</a></li><li><a href="../renderscript/reference/rs_convert9e29.html?hl=ja" >変換関数</a></li><li><a href="../renderscript/reference/rs_math9e29.html?hl=ja" >数学定数と数学関数</a></li><li><a href="../renderscript/reference/rs_vector_math9e29.html?hl=ja" >ベクター数学関数</a></li><li><a href="../renderscript/reference/rs_matrix9e29.html?hl=ja" >行列関数</a></li><li><a href="../renderscript/reference/rs_quaternion9e29.html?hl=ja" >四元数関数</a></li><li><a href="../renderscript/reference/rs_atomic9e29.html?hl=ja" >アトミック更新関数</a></li><li><a href="../renderscript/reference/rs_time9e29.html?hl=ja" >時間関数と時間型</a></li><li><a href="../renderscript/reference/rs_allocation_data9e29.html?hl=ja" >アロケーション データ アクセス関数</a></li><li><a href="../renderscript/reference/rs_object_info9e29.html?hl=ja" >オブジェクト特性関数</a></li><li><a href="../renderscript/reference/rs_for_each9e29.html?hl=ja" >カーネル呼び出し関数とカーネル呼び出し型</a></li><li><a href="../renderscript/reference/rs_io9e29.html?hl=ja" >入出力関数</a></li><li><a href="../renderscript/reference/rs_debug9e29.html?hl=ja" >デバッグ関数</a></li><li><a href="../renderscript/reference/rs_graphics9e29.html?hl=ja" >グラフィック関数とグラフィック型</a></li><li><a href="../renderscript/reference/index9e29.html?hl=ja" >インデックス</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index9e29.html?hl=ja" >メディアとカメラ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer9e29.html?hl=ja" >メディア再生</a></li><li><a href="../media/mediarouter9e29.html?hl=ja" >メディア ルーター</a></li><li><a href="../media/mediarouteprovider9e29.html?hl=ja" >メディア ルーター プロバイダ</a></li><li><a href="../media/exoplayer9e29.html?hl=ja" >ExoPlayer</a></li><li><a href="../media/media-formats9e29.html?hl=ja" >サポートされているメディア形式</a></li><li><a href="../media/mediarecorder9e29.html?hl=ja" >オーディオの録音</a></li><li><a href="../media/jetplayer9e29.html?hl=ja" >JetPlayer</a></li><li><a href="../media/camera9e29.html?hl=ja" >カメラ</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index9e29.html?hl=ja" >位置情報とセンサー</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index9e29.html?hl=ja" >位置情報と地図</a></li><li><a href="../location/strategies9e29.html?hl=ja" >位置情報に関する戦略</a></li><li><a href="../sensors/sensors_overview9e29.html?hl=ja" >センサーの概要</a></li><li><a href="../sensors/sensors_motion9e29.html?hl=ja" >モーション センサー</a></li><li><a href="../sensors/sensors_position9e29.html?hl=ja" >位置センサー</a></li><li><a href="../sensors/sensors_environment9e29.html?hl=ja" >環境センサー</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index9e29.html?hl=ja" >ネットワーク接続</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth9e29.html?hl=ja" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le9e29.html?hl=ja" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index9e29.html?hl=ja" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc9e29.html?hl=ja" >NFC の基本</a></li><li><a href="../connectivity/nfc/advanced-nfc9e29.html?hl=ja" >NFC の高度な利用</a></li><li><a href="../connectivity/nfc/hce9e29.html?hl=ja" >ホストベースのカード エミュレーション</a></li></ul></li><li><a href="../connectivity/wifip2p9e29.html?hl=ja" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index9e29.html?hl=ja" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory9e29.html?hl=ja" >アクセサリ</a></li><li><a href="../connectivity/usb/host9e29.html?hl=ja" >ホスト</a></li></ul></li><li><a href="../connectivity/sip9e29.html?hl=ja" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index9e29.html?hl=ja" >テキストと入力</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste9e29.html?hl=ja" >コピーとペースト</a></li><li><a href="../text/creating-input-method9e29.html?hl=ja" >IME の作成</a></li><li><a href="../text/spell-checker-framework9e29.html?hl=ja" >スペル チェッカー</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index9e29.html?hl=ja" >データ ストレージ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage9e29.html?hl=ja" >ストレージ オプション</a></li><li><a href="../data/backup9e29.html?hl=ja" >データのバックアップ</a></li><li><a href="../data/install-location9e29.html?hl=ja" >アプリのインストール場所</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=ja" >ライブラリ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=ja" >Support Library</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=ja" >機能</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=ja" >セットアップ</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=ja" >変更履歴</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=ja" >データ バインディング ライブラリ</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=ja" >Testing Support Library</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=ja" >API リファレンス</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index9e29.html?hl=ja" >管理</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin9e29.html?hl=ja" >端末ポリシー</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index9e29.html?hl=ja" >ウェブアプリ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting9e29.html?hl=ja" >ウェブアプリでの異なる画面のサポート</a></li><li><a href="../../webapps/webview9e29.html?hl=ja" >WebView によるウェブアプリの作成</a></li><li><a href="../../webapps/migrating9e29.html?hl=ja" >Android 4.4 での WebView への移行</a></li><li><a href="../../webapps/debugging9e29.html?hl=ja" >ウェブアプリのデバッグ</a></li><li><a href="../../webapps/best-practices9e29.html?hl=ja" >ウェブアプリのベスト プラクティス</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index9e29.html?hl=ja"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">ベスト プラクティス</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support9e29.html?hl=ja" >複数の画面のサポート</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution9e29.html?hl=ja" >特定の画面の端末にのみ配布</a></li><li><a href="../../practices/screen-compat-mode9e29.html?hl=ja" >画面互換性モード</a></li></ul></li><li><a href="../../practices/tablets-and-handsets9e29.html?hl=ja" >タブレットとハンドセットのサポート</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=ja">ホーム</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=ja">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=ja">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=ja">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=ja">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=ja">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=ja"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=ja"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=ja"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">トレーニング</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index9e29.html?hl=ja"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=ja"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">リファレンス</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=ja">サンプル</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=ja"
+           >ライブラリ</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=ja"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=ja"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=ja">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=ja">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=ja">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=ja"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=ja">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=ja">Play コンソール</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=ja"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=ja"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=ja">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=ja">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">コンテンツ プロバイダの作成</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+
+<h2>このドキュメントの内容</h2>
+<ol>
+    <li>
+        <a href="#DataStorage">データ ストレージを設計する</a>
+    </li>
+    <li>
+        <a href="#ContentURI">コンテンツ URI を設計する</a>
+    </li>
+    <li>
+        <a href="#ContentProvider">ContentProvider クラスを実装する</a>
+        <ol>
+            <li>
+                <a href="#RequiredAccess">必須メソッド</a>
+            </li>
+            <li>
+                <a href="#Query">query() メソッドを実装する</a>
+            </li>
+            <li>
+                <a href="#Insert">insert() メソッドを実装する</a>
+            </li>
+            <li>
+                <a href="#Delete">delete() メソッドを実装する</a>
+            </li>
+            <li>
+                <a href="#Update">update() メソッドを実装する</a>
+            </li>
+            <li>
+                <a href="#OnCreate">onCreate() メソッドを実装する</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#MIMETypes">コンテンツ プロバイダ MIME を実装する</a>
+        <ol>
+            <li>
+                <a href="#TableMIMETypes">テーブルの MIME タイプ</a>
+            </li>
+            <li>
+                <a href="#FileMIMETypes">ファイルの MIME タイプ</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#ContractClass">コントラクト クラスを実装する</a>
+    </li>
+    <li>
+        <a href="#Permissions">コンテンツ プロバイダ パーミッションを実装する</a>
+    </li>
+    <li>
+        <a href="#ProviderElement">&lt;provider&gt; 要素</a>
+    </li>
+    <li>
+        <a href="#Intents">インテントとデータアクセス</a>
+    </li>
+</ol>
+<h2>キークラス</h2>
+    <ol>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=ja">Uri</a></code>
+        </li>
+    </ol>
+<h2>関連サンプル</h2>
+    <ol>
+        <li>
+            <a href="https://developer.android.com/resources/samples/NotePad/index.html?hl=ja">
+                Note Pad のサンプル アプリケーション            </a>
+
+        </li>
+    </ol>
+<h2>関連ドキュメント</h2>
+    <ol>
+        <li>
+            <a href="content-provider-basics9e29.html?hl=ja">
+            コンテンツ プロバイダの基本</a>
+        </li>
+        <li>
+            <a href="calendar-provider9e29.html?hl=ja">
+            カレンダー プロバイダ</a>
+        </li>
+    </ol>
+</div>
+</div>
+
+
+<p>
+    コンテンツ プロバイダは、データの中央リポジトリへのアクセスを管理します。Android アプリケーションでは 1 つ以上のクラスとしてプロバイダを実装し、要素をマニフェスト ファイルで実装します。
+
+いずれか 1 つのクラスがサブラス <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code> を実装します。これは、プロバイダと他のアプリケーションとの間のインターフェースになります。
+
+コンテンツ プロバイダは他のアプリケーションへのデータの提供を意図したものですが、ユーザーがプロバイダに管理されるデータを照会、修正するアクティビティをアプリケーション内に設定することもできます。
+
+
+</p>
+<p>
+    このトピックの残りの部分では、コンテンツ プロバイダと使用する API のリストをビルドするための基本的な手順を挙げていきます。
+
+</p>
+
+
+<!-- Before You Start Building -->
+<h2 id="BeforeYouStart">ビルドを開始する前に</h2>
+<p>
+    ビルドを開始する前に、次の操作を行います。
+</p>
+<ol>
+    <li>
+        <strong>コンテンツ プロバイダが必要かどうかを決定します</strong>。次のような機能を 1 つ以上提供する場合に、コンテンツ プロバイダをビルドする必要があります。
+
+        <ul>
+            <li>他のアプリケーションに複雑なデータやファイルを提供する。</li>
+            <li>アプリから他のアプリへの複雑なデータのコピーをユーザーに許可する。</li>
+            <li>検索フレームワークを使用してカスタムの検索候補を提供する。</li>
+        </ul>
+    <p>
+        完全に独自アプリケーション内だけで使用する場合は、SQLite データベースを使用するプロバイダは必要はありません。<em></em>
+
+    </p>
+    </li>
+    <li>
+        必要かどうかを決定していない場合は、プロバイダの詳細については<a href="content-provider-basics9e29.html?hl=ja">コンテンツ プロバイダの基本</a>のトピックをご覧ください。
+
+
+    </li>
+</ol>
+<p>
+    次に、以下の手順に従ってプロバイダをビルドします。
+</p>
+<ol>
+    <li>
+        データの未処理のストレージを設計します。コンテンツ プロバイダは次の 2 つの方法でデータを提供します。
+        <dl>
+            <dt>
+                ファイルデータ
+            </dt>
+            <dd>
+                通常、写真、オーディオ、ビデオなどのファイルの形式となるデータです。
+ファイルはアプリケーションのプライベート スペースに格納します。
+ファイルに対する別のアプリケーションからの要求に応じて、プロバイダからファイルへのハンドルが提供されます。
+
+            </dd>
+            <dt>
+                「構造化」データ
+            </dt>
+            <dd>
+                通常、データベース、配列、類似の構造の形式となるデータです。
+                テーブルの行と列に互換性を持つ形式でデータが格納されます。行は、担当者や在庫にあるアイテムなどのエンティティを表します。
+列は、担当者の名前やアイテムの価格などの、エンティティの一部のデータを表します。
+一般的にこのタイプのデータは SQLite データベースに格納しますが、任意のタイプの永続ストレージを使用できます。
+
+Android システムで使用できるストレージ タイプの詳細は、<a href="#DataStorage">データ ストレージを設計する</a>をご覧ください。
+
+
+            </dd>
+        </dl>
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code> クラスの具体的な実装とそれに必要なメソッドを定義します。
+このクラスは、データと Android システムのそれ以外の部分とのインターフェースとなります。
+このクラスの詳細は、<a href="#ContentProvider">ContentProvider クラスを実装する</a>セクションをご覧ください。
+
+    </li>
+    <li>
+        プロバイダの認証局の文字列、コンテンツ URI、列名を定義します。プロバイダのアプリケーションでインテントを処理する場合は、インテント アクション、エクストラ データ、フラグも定義します。
+
+さらに、データにアクセスするアプリケーションに必要なパーミッションも定義します。
+これらの値はすべて定数として個別のコントラクト クラスに定義するようにします。そうしておくと、後で他のデベロッパーに対してこのクラスを公開できます。
+コンテンツ URI の詳細は、<a href="#ContentURI">コンテンツ URI を設計する</a>セクションをご覧ください。
+
+
+        インテントの使用に関する詳細については、<a href="#Intents">インテントとデータアクセス</a>セクションをご覧ください。
+
+    </li>
+    <li>
+        サンプルデータや、プロバイダとクラウドベースのデータの間でデータを同期する <code><a href="https://developer.android.com/reference/android/content/AbstractThreadedSyncAdapter.html?hl=ja">AbstractThreadedSyncAdapter</a></code> の実装などの、その他のオプション部分を追加します。
+
+
+    </li>
+</ol>
+
+
+<!-- Designing Data Storage -->
+<h2 id="DataStorage">データ ストレージを設計する</h2>
+<p>
+    コンテンツ プロバイダは、構造化された形式で保存されているデータへのインターフェースです。インターフェースを作成する前に、データの格納方法を決定しておく必要があります。
+データは任意の形式で保存でき、必要に応じてデータの読み取りと書き込みを行うためのインターフェースを設計できます。
+
+</p>
+<p>
+    Android には、次のように、いくつかのデータ格納テクノロジーがあります。
+</p>
+<ul>
+    <li>
+        Android システムには、Android の独自のプロバイダがテーブル指向のデータを格納するために使用する、SQLite データベースの API があります。
+<code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=ja">SQLiteOpenHelper</a></code> クラスを使用すると、データベースを作成できます。また、<code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html?hl=ja">SQLiteDatabase</a></code> クラスは、データベースにアクセスするための基本クラスです。
+
+
+
+        <p>
+            リポジトリを実装するのに、データベースを使用する必要がありません。外部的には、プロバイダはリレーショナル データベースに似た一連のテーブルとして表示されますが、プロバイダの内部実装をそのような形式にする必要はありません。
+
+
+        </p>
+    </li>
+    <li>
+        ファイルデータを格納するために、Android にはファイル指向のさまざまな API があります。
+        ファイル ストレージの詳細は、<a href="../data/data-storage9e29.html?hl=ja">データ ストレージ</a>のトピックをご覧ください。
+音楽やビデオのようにメディア関連のデータを提供するプロバイダを設計する場合は、テーブルデータとファイルを組み合わせるプロバイダを作成できます。
+
+
+    </li>
+    <li>
+        ネットワーク ベースのデータで作業する場合は、<code><a href="https://developer.android.com/reference/java/net/package-summary.html?hl=ja">java.net</a></code> と <code><a href="https://developer.android.com/reference/android/net/package-summary.html?hl=ja">android.net</a></code> のクラスを使用します。
+また、ネットワーク ベースをデータベースなどのローカル データストアに同期させ、データをテーブルやファイルとして提供することもできます。
+
+        <a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=ja">サンプル同期アダプタ</a>のサンプル アプリケーションでは、このタイプの同期のデモを紹介しています。
+
+    </li>
+</ul>
+<h3 id="DataDesign">
+    データ設計上の考慮事項
+</h3>
+<p>
+    次に、プロバイダのデータ構造を設計する際のヒントを示します。
+</p>
+<ul>
+    <li>
+        テーブルデータには、プロバイダが各行の一意の数値として保持する「プライマリキー」列が常に必要です。
+この値を使用すると、行を他のテーブルの関連する行にリンクできます（「外部キー」として使用）。
+この列には任意の名前を設定できますが、プロバイダ クエリの結果を <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=ja">ListView</a></code> にリンクさせるには、取得する列のいずれかの名前が <code>_ID</code> になっている必要があるため、<code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">BaseColumns._ID</a></code> を使用することをお勧めします。
+
+
+
+
+    </li>
+    <li>
+        ビットマップ画像やサイズが非常に大きなその他のファイル指向のデータを提供する場合は、テーブルにデータを直接格納するのではなく、データをファイルに格納し、データを間接的に提供します。
+
+その場合、データにアクセスするには、<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja">ContentResolver</a></code> ファイル メソッドの使用が必要であることをプロバイダのユーザーに通知する必要があります。
+
+    </li>
+    <li>
+        サイズや構造が異なるデータを格納するには、バイナリ ラージ オブジェクト（BLOB）データタイプを使用します。
+たとえば、<a href="http://code.google.com/p/protobuf?hl=ja">Protocol Buffer</a> や <a href="http://www.json.org/">JSON 構造</a>を格納するには、BLOB 列を使用します。
+
+
+        <p>
+            さらに、BLOB を使用してスキーマに依存しないテーブルを実装できます。<em></em>このタイプのテーブルでは、プライマリキー列、MIME タイプ列、1 つ以上の汎用列を BLOB として定義します。
+
+BLOB 列内のデータの内容は、MIME タイプ列の値によって示されます。
+これにより、同じテーブルにさまざまな行タイプを格納できます。
+連絡先プロバイダの「データ」テーブル <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> は、スキーマに依存しないテーブルの例です。
+
+
+        </p>
+    </li>
+</ul>
+<!-- Designing Content URIs -->
+<h2 id="ContentURI">コンテンツ URI を設計する</h2>
+<p>
+    <strong>コンテンツ URI</strong> は、プロバイダのデータを特定する URI です。コンテンツ URI には、プロバイダ全体の識別名（<strong>認証局</strong>）とテーブルやファイルをポイントする名前（<strong>パス</strong>）が含まれます。
+
+オプションの ID 部分は、テーブル内の個々の行を指します。
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code> のそれぞれのデータアクセス メソッドは引数としてコンテンツ URI を使用します。これにより、アクセスするテーブル、行、ファイルを決定できます。
+
+
+</p>
+<p>
+    コンテンツ URI の基本については、<a href="content-provider-basics9e29.html?hl=ja">コンテンツ プロバイダの基本</a>トピックをご覧ください。
+
+
+</p>
+<h3>認証局を設計する</h3>
+<p>
+    通常、プロバイダは、Android 内部の名前として使用される認証局を 1 つ持ちます。他のプロバイダとの競合を避けるためには、（逆に）プロバイダの認証局の基礎としてインターネット ドメインの所有権を使用する必要があります。
+
+この推奨事項は Android パッケージ名にもあてはまるため、プロバイダを含むパッケージの名前の拡張子として、プロバイダの認証局を定義できます。
+
+たとえば、Android パッケージ名が <code>com.example.&lt;appname&gt;</code> の場合、プロバイダに認証局 <code>com.example.&lt;appname&gt;.provider</code> を付与する必要があります。
+
+
+</p>
+<h3>パス構造を設計する</h3>
+<p>
+    デベロッパーは通常、個々のテーブルを指すパスを末尾に追加して認証局からコンテンツ URI を作成します。
+たとえば、<em>table1</em> と <em>table2</em> の 2 つのテーブルがある場合、前の例の認証局を組み合わせてコンテンツ URI <code>com.example.&lt;appname&gt;.provider/table1</code> と <code>com.example.&lt;appname&gt;.provider/table2</code> を作成します。
+
+
+
+パスは 1 つのセグメントに限定されず、パスの各レベルにテーブルを作成する必要はありません。
+
+</p>
+<h3>コンテンツ URI ID を処理する</h3>
+<p>
+    慣例として、URI の末尾にある行の ID 値を持つコンテンツ URI を受け取ることで、プロバイダはテーブル内の 1 つの行へのアクセスを提供します。
+さらに、慣例として、プロバイダは ID 値をテーブルの <code>_ID</code> 列とマッチングし、一致する行に対して要求されたアクセスを実行します。
+
+
+</p>
+<p>
+    この慣例により、プロバイダにアクセスするアプリの一般的なパターンを簡単に設計できます。アプリはプロバイダにクエリを実行し、<code><a href="https://developer.android.com/reference/android/widget/CursorAdapter.html?hl=ja">CursorAdapter</a></code> を使用して、取得した <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> を <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=ja">ListView</a></code> に表示します。
+
+
+    <code><a href="https://developer.android.com/reference/android/widget/CursorAdapter.html?hl=ja">CursorAdapter</a></code> の定義には、<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> のいずれかの列を <code>_ID</code> に設定する必要があります
+
+</p>
+<p>
+    その後、ユーザーはデータの確認や修正のために、表示された行のいずれかを UI から選択します。
+アプリは <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=ja">ListView</a></code> を返す <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> から対応する行を取得し、この行の <code>_ID</code> 値を取得し、その値をコンテンツ URI の末尾に追加して、プロバイダにアクセス要求を送ります。
+
+その後、プロバイダは、ユーザーが選択した行にクエリや修正を実行します。
+
+</p>
+<h3>コンテンツ URI パターン</h3>
+<p>
+    受け取ったコンテンツ URI に対するアクションを簡単に選択できるように、プロバイダ API には <code><a href="https://developer.android.com/reference/android/content/UriMatcher.html?hl=ja">UriMatcher</a></code> という便利なクラスが用意されています。このクラスはコンテンツ URI 「パターン」を正数値にマッピングします。
+
+この正数値を <code>switch</code> 文で使用することで、特定のパターンに一致する 1 つ以上のコンテンツ URI に目的のアクションを選択できます。
+
+</p>
+<p>
+    コンテンツ URI パターンは、次のワイルドカード文字を使用するコンテンツ URI に一致します。
+</p>
+    <ul>
+        <li>
+            <strong><code>*</code>:</strong> 任意の長さの任意の有効な文字で構成される文字列に一致します。
+        </li>
+        <li>
+            <strong><code>#</code>:</strong> 任意の長さの任意の数字で構成される文字列に一致します。
+        </li>
+    </ul>
+<p>
+    コンテンツ URI 処理の設計とコーディングの例として、テーブルを指す次のコンテンツ URI を認識する認証局 <code>com.example.app.provider</code> を持つプロバイダを考えてみます。
+
+
+</p>
+<ul>
+    <li>
+        <code>content://com.example.app.provider/table1</code>: <code>table1</code> という名前のテーブル。
+    </li>
+    <li>
+        <code>content://com.example.app.provider/table2/dataset1</code>: <code>dataset1</code> という名前のテーブル。
+
+    </li>
+    <li>
+        <code>content://com.example.app.provider/table2/dataset2</code>: <code>dataset2</code> という名前のテーブル。
+
+    </li>
+    <li>
+        <code>content://com.example.app.provider/table3</code>: <code>table3</code> という名前のテーブル。
+    </li>
+</ul>
+<p>
+    さらに、行 ID が末尾に追加されていると、プロバイダではこれらのコンテンツ URI が認識されます。たとえば、<code>table3</code> の <code>1</code> で特定される行は <code>content://com.example.app.provider/table3/1</code> になります。
+
+
+</p>
+<p>
+    次のようなコンテンツ URI パターンを使用できます。
+</p>
+<dl>
+    <dt>
+        <code>content://com.example.app.provider/*</code>
+    </dt>
+    <dd>
+        プロバイダの任意のコンテンツ URI に一致します。
+    </dd>
+    <dt>
+        <code>content://com.example.app.provider/table2/*</code>: 
+    </dt>
+    <dd>
+        テーブル <code>dataset1</code> と <code>dataset2</code> のコンテンツ URI に一致しますが、<code>table1</code> や <code>table3</code> のコンテンツ URI には一致しません。
+
+
+    </dd>
+    <dt>
+        <code>content://com.example.app.provider/table3/#</code>: <code>table3</code> の 1 つの行のコンテンツ URI に一致します。<code>6</code> で特定される行は <code>content://com.example.app.provider/table3/6</code> になります。
+
+
+
+    </dt>
+</dl>
+<p>
+    次のコード スニペットでは、<code><a href="https://developer.android.com/reference/android/content/UriMatcher.html?hl=ja">UriMatcher</a></code> のメソッドが機能する仕組みを示します。
+    このコードでは、テーブルにコンテンツ URI パターン <code>content://&lt;authority&gt;/&lt;path&gt;</code> を使用し、1 つの行に <code>content://&lt;authority&gt;/&lt;path&gt;/&lt;id&gt;</code> を使用することで、表全体の URI と 1 つの行の URI を異なる方法で処理します。
+
+
+
+</p>
+<p>
+    メソッド <code><a href="https://developer.android.com/reference/android/content/UriMatcher.html?hl=ja#addURI(java.lang.String, java.lang.String, int)">addURI()</a></code> は認証局とパスを整数値にマッピングします。
+メソッド <code><a href="https://developer.android.com/reference/android/content/UriMatcher.html?hl=ja#match(android.net.Uri)">match()</a></code> は URI に整数値を返します。次のように、<code>switch</code> 文によって、クエリをテーブル全体に実行するか、1 つのレコードに実行するかが決まります。
+
+</p>
+<pre class="prettyprint">
+public class ExampleProvider extends ContentProvider {
+...
+    // Creates a UriMatcher object.
+    private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
+    static {
+        /*
+         * The calls to addURI() go here, for all of the content URI patterns that the provider
+         * should recognize. For this snippet, only the calls for table 3 are shown.
+         */
+
+        /*
+         * Sets the integer value for multiple rows in table 3 to 1. Notice that no wildcard is used
+         * in the path
+         */
+        sUriMatcher.addURI("com.example.app.provider", "table3", 1);
+
+        /*
+         * Sets the code for a single row to 2. In this case, the "#" wildcard is
+         * used. "content://com.example.app.provider/table3/3" matches, but
+         * "content://com.example.app.provider/table3 doesn't.
+         */
+        sUriMatcher.addURI("com.example.app.provider", "table3/#", 2);
+    }
+...
+    // Implements ContentProvider.query()
+    public Cursor query(
+        Uri uri,
+        String[] projection,
+        String selection,
+        String[] selectionArgs,
+        String sortOrder) {
+...
+        /*
+         * Choose the table to query and a sort order based on the code returned for the incoming
+         * URI. Here, too, only the statements for table 3 are shown.
+         */
+        switch (sUriMatcher.match(uri)) {
+
+
+            // If the incoming URI was for all of table3
+            case 1:
+
+                if (TextUtils.isEmpty(sortOrder)) sortOrder = "_ID ASC";
+                break;
+
+            // If the incoming URI was for a single row
+            case 2:
+
+                /*
+                 * Because this URI was for a single row, the _ID value part is
+                 * present. Get the last path segment from the URI; this is the _ID value.
+                 * Then, append the value to the WHERE clause for the query
+                 */
+                selection = selection + "_ID = " uri.getLastPathSegment();
+                break;
+
+            default:
+            ...
+                // If the URI is not recognized, you should do some error handling here.
+        }
+        // call the code to actually do the query
+    }
+</pre>
+<p>
+    別の <code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=ja">ContentUris</a></code> には、コンテンツ URI の一部である <code>id</code> で作業するための便利なメソッドが備わっています。
+クラス <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=ja">Uri</a></code> と <code><a href="https://developer.android.com/reference/android/net/Uri.Builder.html?hl=ja">Uri.Builder</a></code> には、既存の <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=ja">Uri</a></code> オブジェクトを解析して新しいオブジェクトをビルドするための便利なメソッドがあります。
+
+
+</p>
+
+<!-- Implementing the ContentProvider class -->
+<h2 id="ContentProvider">ContentProvider クラスを実装する</h2>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code> インスタンスは、他のアプリケーションからの要求を処理することで、一連の構造化されたデータへのアクセスを管理します。
+どのような形式でアクセスする場合も、最終的には <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja">ContentResolver</a></code> が呼び出されます。その後 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code> の具象メソッドが呼び出され、アクセスを取得します。
+
+
+</p>
+<h3 id="RequiredAccess">必須メソッド</h3>
+<p>
+    抽象クラス <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code> は 6 つの抽象メソッドを定義しますが、これらのメソッドは独自の具象サブクラスの一部として実装する必要があります。
+次のように、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#onCreate()">onCreate()</a></code> を除くこれらのメソッドは、コンテンツ プロバイダへのアクセスを試みるクライアント アプリケーションによって呼び出されます。
+
+
+</p>
+<dl>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)">query()</a></code>
+    </dt>
+    <dd>
+        プロバイダからデータを取得します。引数を使って、クエリを実行するテーブル、返す行と列、結果の並び順を選択します。
+
+        データは <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> オブジェクトとして返されます。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#insert(android.net.Uri, android.content.ContentValues)">insert()</a></code>
+    </dt>
+    <dd>
+        プロバイダに新しい行を挿入します。引数を使って、挿入先のテーブルを選択し、使用する列の値を取得します。
+新たに挿入した行のコンテンツ URI が返されます。
+
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">update()</a></code>
+    </dt>
+    <dd>
+        プロバイダ内の既存の行を更新します。引数を使って、更新するテーブルと行を選び、更新された列の値を取得します。
+更新された行の数が返されます。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#delete(android.net.Uri, java.lang.String, java.lang.String[])">delete()</a></code>
+    </dt>
+    <dd>
+        プロバイダから行を削除します。引数を使って、削除するテーブルと行を選びます。
+削除された行の数が返されます。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#getType(android.net.Uri)">getType()</a></code>
+    </dt>
+    <dd>
+        コンテンツ URI に対応する MIME タイプを返します。このメソッドの詳細は、<a href="#MIMETypes">コンテンツ プロバイダ MIME を実装する</a>セクションをご覧ください。
+
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#onCreate()">onCreate()</a></code>
+    </dt>
+    <dd>
+        プロバイダを初期化します。プロバイダが作成されると、Android システムがこのメソッドを即座に呼び出します。
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja">ContentResolver</a></code> オブジェクトがアクセスを試みるまでは、プロバイダは作成されません。
+
+    </dd>
+</dl>
+<p>
+    これらのメソッドが持つ署名は、同じ名前の <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja">ContentResolver</a></code> メソッドの署名と同じになります。
+
+</p>
+<p>
+    これらのメソッドを実装する場合は、次の点を考慮する必要があります。
+</p>
+<ul>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#onCreate()">onCreate()</a></code> を除くこれらのすべてのメソッドは、複数のスレッドを使用して同時に呼び出すことができるため、スレッドに対応した設定にする必要があります。
+複数のスレッドの詳細は、<a href="../../components/processes-and-threads9e29.html?hl=ja">プロセスとスレッド</a>をご覧ください。
+
+
+
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#onCreate()">onCreate()</a></code> では冗長な操作は行わないようにします。本当に必要になるまでは、タスクの初期化は行わないようにします。
+        詳細は、<a href="#OnCreate">onCreate() メソッドを実装する</a>をご覧ください。
+
+    </li>
+    <li>
+        これのメソッドの実装は必須ですが、コードでは予測されたデータタイプを返す以外の操作は必要ありません。
+たとえば、他のアプリケーションが一部のテーブルにデータを挿入できないように設定するとします。
+その場合、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#insert(android.net.Uri, android.content.ContentValues)">insert()</a></code> への呼び出しを無視して 0 を返します。
+
+
+    </li>
+</ul>
+<h3 id="Query">query() メソッドを実装する</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)">ContentProvider.query()</a></code> メソッドは <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> オブジェクトを返す必要があります。失敗した場合は、<code><a href="https://developer.android.com/reference/java/lang/Exception.html?hl=ja">Exception</a></code> をスローします。
+
+SQLite データベースをデータストレージとして使用する場合は、<code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html?hl=ja">SQLiteDatabase</a></code> クラスのいずれかの <code>query()</code> メソッドが返す <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> を返します。
+
+
+    クエリがどの行にも一致しない場合は、<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja#getCount()">getCount()</a></code> メソッドが 0 を返す <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> インスタンスを返す必要があります。クエリプロセス中に内部エラーが発生した場合にのみ <code>null</code> を返します。
+
+
+</p>
+<p>
+    SQLite データベースをデータストレージとして使用しない場合は、<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> クラスのいずれかの具象サブクラスを使用します。
+たとえば、<code><a href="https://developer.android.com/reference/android/database/MatrixCursor.html?hl=ja">MatrixCursor</a></code> クラスは、各行が <code><a href="https://developer.android.com/reference/java/lang/Object.html?hl=ja">Object</a></code> の配列となるカーソルを実装します。
+このクラスでは、<code><a href="https://developer.android.com/reference/android/database/MatrixCursor.html?hl=ja#addRow(java.lang.Object[])">addRow()</a></code> を使って新しい行を追加します。
+
+</p>
+<p>
+    Android システムは、プロセスの境界をまたいで <code><a href="https://developer.android.com/reference/java/lang/Exception.html?hl=ja">Exception</a></code> を送信できるように設定する必要があることにご注意ください。
+Android では、クエリエラーを処理するのに便利な、次の例外を送信できます。
+
+</p>
+<ul>
+    <li>
+        <code><a href="https://developer.android.com/reference/java/lang/IllegalArgumentException.html?hl=ja">IllegalArgumentException</a></code>（プロバイダが無効なコンテンツ URI を受け取った場合にこの例外をスローするように選択できます）
+
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/java/lang/NullPointerException.html?hl=ja">NullPointerException</a></code>
+    </li>
+</ul>
+<h3 id="Insert">insert() メソッドを実装する</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#insert(android.net.Uri, android.content.ContentValues)">insert()</a></code> メソッドは、<code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=ja">ContentValues</a></code> 引数の値を使用して、適切なテーブルに新しい行を追加します。
+
+列名が <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=ja">ContentValues</a></code> 引数にない場合は、プロバイダ コードがデータベース スキーマのいずれかで、デフォルト値を設定できます。
+
+
+</p>
+<p>
+    このメソッドは新しい行のコンテンツ URI を返します。作成するには、<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=ja#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code> を使用して、新しい行の <code>_ID</code>（または他のプライマリキー）の値をテーブルのコンテンツ URI の末尾に追加します。
+
+
+</p>
+<h3 id="Delete">delete() メソッドを実装する</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#delete(android.net.Uri, java.lang.String, java.lang.String[])">delete()</a></code> メソッドでは、データストレージから行を物理的に削除する必要はありません。
+プロバイダで同期アダプタを使用する場合は、行全体を削除するのではなく、削除された行に「削除」フラグを付けるようにします。
+
+同期アダプタは削除された行を探して、プロバイダから削除される前に、サーバーから行を削除できます。
+
+</p>
+<h3 id="Update">update() メソッドを実装する</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">update()</a></code> メソッドは <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#insert(android.net.Uri, android.content.ContentValues)">insert()</a></code> が使用するのと同じ <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=ja">ContentValues</a></code> 引数、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#delete(android.net.Uri, java.lang.String, java.lang.String[])">delete()</a></code> と <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)">ContentProvider.query()</a></code> が使用するのと同じ <code>selection</code> と <code>selectionArgs</code> 引数を使用します。
+
+
+
+これにより、これらのメソッド間でコードを再利用できます。
+</p>
+<h3 id="OnCreate">onCreate() メソッドを実装する</h3>
+<p>
+    Android システムはプロバイダを起動する際に <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#onCreate()">onCreate()</a></code> を呼び出します。このメソッドでは迅速に実行できる初期化タスクのみを実行するようにし、プロバイダが実際にデータの要求を受け取るまでは、データベースの作成とデータロードを保留します。
+
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#onCreate()">onCreate()</a></code> で冗長なタスクを行う場合は、プロバイダの起動が遅くなります。
+
+同様に、プロバイダから他のアプリケーションへの応答も遅くなります。
+
+</p>
+<p>
+    たとえば、SQLite データベースを使用すると、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#onCreate()">ContentProvider.onCreate()</a></code> に <code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=ja">SQLiteOpenHelper</a></code> オブジェクトを作成し、データベースを初めて開くときに SQL テーブルを作成できます。
+
+
+この操作を簡単にするために、<code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=ja#getWritableDatabase()">getWritableDatabase()</a></code> を初めて呼び出すときには、<code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=ja#onCreate(android.database.sqlite.SQLiteDatabase)">SQLiteOpenHelper.onCreate()</a></code> メソッドが自動的に呼び出されます。
+
+
+</p>
+<p>
+    次の 2 つのスニペットは、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#onCreate()">ContentProvider.onCreate()</a></code> と <code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=ja#onCreate(android.database.sqlite.SQLiteDatabase)">SQLiteOpenHelper.onCreate()</a></code> との間のやり取りを表しています。
+
+最初のスニペットは <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#onCreate()">ContentProvider.onCreate()</a></code> の実装です。
+
+</p>
+<pre class="prettyprint">
+public class ExampleProvider extends ContentProvider
+
+    /*
+     * Defines a handle to the database helper object. The MainDatabaseHelper class is defined
+     * in a following snippet.
+     */
+    private MainDatabaseHelper mOpenHelper;
+
+    // Defines the database name
+    private static final String DBNAME = "mydb";
+
+    // Holds the database object
+    private SQLiteDatabase db;
+
+    public boolean onCreate() {
+
+        /*
+         * Creates a new helper object. This method always returns quickly.
+         * Notice that the database itself isn't created or opened
+         * until SQLiteOpenHelper.getWritableDatabase is called
+         */
+        mOpenHelper = new MainDatabaseHelper(
+            getContext(),        // the application context
+            DBNAME,              // the name of the database)
+            null,                // uses the default SQLite cursor
+            1                    // the version number
+        );
+
+        return true;
+    }
+
+    ...
+
+    // Implements the provider's insert method
+    public Cursor insert(Uri uri, ContentValues values) {
+        // Insert code here to determine which table to open, handle error-checking, and so forth
+
+        ...
+
+        /*
+         * Gets a writeable database. This will trigger its creation if it doesn't already exist.
+         *
+         */
+        db = mOpenHelper.getWritableDatabase();
+    }
+}
+</pre>
+<p>
+    次のスニペットは <code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=ja#onCreate(android.database.sqlite.SQLiteDatabase)">SQLiteOpenHelper.onCreate()</a></code> の実装であり、ヘルパークラスを含みます。
+
+</p>
+<pre class="prettyprint">
+...
+// A string that defines the SQL statement for creating a table
+private static final String SQL_CREATE_MAIN = "CREATE TABLE " +
+    "main " +                       // Table's name
+    "(" +                           // The columns in the table
+    " _ID INTEGER PRIMARY KEY, " +
+    " WORD TEXT"
+    " FREQUENCY INTEGER " +
+    " LOCALE TEXT )";
+...
+/**
+ * Helper class that actually creates and manages the provider's underlying data repository.
+ */
+protected static final class MainDatabaseHelper extends SQLiteOpenHelper {
+
+    /*
+     * Instantiates an open helper for the provider's SQLite data repository
+     * Do not do database creation and upgrade here.
+     */
+    MainDatabaseHelper(Context context) {
+        super(context, DBNAME, null, 1);
+    }
+
+    /*
+     * Creates the data repository. This is called when the provider attempts to open the
+     * repository and SQLite reports that it doesn't exist.
+     */
+    public void onCreate(SQLiteDatabase db) {
+
+        // Creates the main table
+        db.execSQL(SQL_CREATE_MAIN);
+    }
+}
+</pre>
+
+
+<!-- Implementing ContentProvider MIME Types -->
+<h2 id="MIMETypes">ContentProvider MIME タイプを実装する</h2>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code> クラスには、MIME タイプを返すための次の 2 つのクラスがあります。
+</p>
+<dl>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#getType(android.net.Uri)">getType()</a></code>
+    </dt>
+    <dd>
+        任意のプロバイダに実装する必要がある必須メソッドの 1 つです。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#getStreamTypes(android.net.Uri, java.lang.String)">getStreamTypes()</a></code>
+    </dt>
+    <dd>
+        ファイルを提供するプロバイダの場合に、実装が考えられるメソッドです。
+    </dd>
+</dl>
+<h3 id="TableMIMETypes">テーブルの MIME タイプ</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#getType(android.net.Uri)">getType()</a></code> メソッドは、MIME 形式で <code><a href="https://developer.android.com/reference/java/lang/String.html?hl=ja">String</a></code> を返します。これは、コンテンツ URI 引数によって返されるデータのタイプを表します。
+
+<code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=ja">Uri</a></code> 引数には特定の URI ではなくパターンを指定することもできます。この場合、パターンに一致するコンテンツ URI
+に関連付けられているデータのタイプを返します。
+
+</p>
+<p>
+    テキスト、HTML、JPEG といった一般的なタイプのデータの場合、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#getType(android.net.Uri)">getType()</a></code> では該当するデータの標準的な MIME
+タイプを返す必要があります。
+利用できるこれらの標準的なタイプの詳細なリストは、<a href="http://www.iana.org/assignments/media-types/index.htm">IANA MIME Media Types</a>
+のウェブサイトをご覧ください。
+
+</p>
+<p>
+    テーブル データの 1 つ以上の行を指すコンテンツ URI の場合、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#getType(android.net.Uri)">getType()</a></code> は、Android のベンダー固有の MIME
+形式で MIME タイプを返す必要があります。
+
+</p>
+<ul>
+    <li>
+        タイプ部分: <code>vnd</code>
+    </li>
+    <li>
+        サブタイプ部分: 
+        <ul>
+            <li>
+    URI パターンが 1 つの行の場合: <code>android.cursor.<strong>item</strong>/</code>
+            </li>
+            <li>
+    URI パターンが複数の行の場合: <code>android.cursor.<strong>dir</strong>/</code>
+            </li>
+        </ul>
+    </li>
+    <li>
+        プロバイダ固有の部分: <code>vnd.&lt;name&gt;</code>.<code>&lt;type&gt;</code>
+        <p>
+            <code>&lt;name&gt;</code> と <code>&lt;type&gt;</code> を指定します。
+            <code>&lt;name&gt;</code> の値はグローバルに一意の値とし、<code>&lt;type&gt;</code> の値は対応する URI
+パターンに一意のものとする必要があります。
+<code>&lt;name&gt;</code> には、企業名や、アプリケーションの Android パッケージ名の一部を使うことをお勧めします。
+<code>&lt;type&gt;</code> には、URI に関連付けられているテーブルを特定する文字列を使うことをお勧めします。
+
+
+        </p>
+
+    </li>
+</ul>
+<p>
+    たとえば、プロバイダの認証局が <code>com.example.app.provider</code> の場合、テーブル名は <code>table1</code> となり、<code>table1</code> の複数行の MIME タイプは次のようになります。
+
+
+</p>
+<pre>
+vnd.android.cursor.<strong>dir</strong>/vnd.com.example.provider.table1
+</pre>
+<p>
+    <code>table1</code> の 1 つの行の場合は、MIME タイプは次のようになります。
+</p>
+<pre>
+vnd.android.cursor.<strong>item</strong>/vnd.com.example.provider.table1
+</pre>
+<h3 id="FileMIMETypes">ファイルの MIME タイプ</h3>
+<p>
+    ファイルを提供するプロバイダの場合は、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#getStreamTypes(android.net.Uri, java.lang.String)">getStreamTypes()</a></code> を実装します。
+
+    このメソッドは、プロバイダが特定のコンテンツ URI に対して返すことができるファイルの MIME タイプの <code><a href="https://developer.android.com/reference/java/lang/String.html?hl=ja">String</a></code> 配列を返します。
+クライアントで処理する MIME タイプのみを返すには、MIME タイプフィルタ引数によって、提供する MIME タイプをフィルタする必要があります。
+
+</p>
+<p>
+    たとえば、写真画像を <code>.jpg</code>、<code>.png</code>、<code>.gif</code> 形式で提供するプロバイダについて考えてみます。
+
+    アプリケーションが <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#getStreamTypes(android.net.Uri, java.lang.String)">ContentResolver.getStreamTypes()</a></code> をフィルタ文字列 <code>image/*</code>  （何らかの形式の「画像」）で呼び出す場合、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#getStreamTypes(android.net.Uri, java.lang.String)">ContentProvider.getStreamTypes()</a></code> メソッドは次のような配列を返します。
+
+
+</p>
+<pre>
+{ &quot;image/jpeg&quot;, &quot;image/png&quot;, &quot;image/gif&quot;}
+</pre>
+<p>
+    アプリの対象が <code>.jpg</code>
+ファイルのみであり、アプリが <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#getStreamTypes(android.net.Uri, java.lang.String)">ContentResolver.getStreamTypes()</a></code> をフィルタ文字列 <code>*\/jpeg</code> で呼び出す場合、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#getStreamTypes(android.net.Uri, java.lang.String)">ContentProvider.getStreamTypes()</a></code> は次の項目を返します。
+
+<pre>
+{&quot;image/jpeg&quot;}
+</pre>
+<p>
+    プロバイダが、フィルタ文字列で要求した MIME 
+タイプを提供していない場合、<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja#getStreamTypes(android.net.Uri, java.lang.String)">getStreamTypes()</a></code> は <code>null</code> を返します。
+
+</p>
+
+
+<!--  Implementing a Contract Class -->
+<h2 id="ContractClass">コントラクト クラスを実装する</h2>
+<p>
+    コントラクト クラスは <code>public final</code> クラスであり、URI、列名、MIME タイプ、プロバイダに関連するその他のメタデータを含みます。
+このクラスは、URI
+や列名などの実際の値が変更された場合にも、プロバイダに正しくアクセスできることを保証することで、プロバイダとその他のアプリケーションとの間にコントラクトを構築します。
+
+
+</p>
+<p>
+    さらに、通常、コントラクト クラスではその定数にニーモニック名が設定されているため、デベロッパーが列名や URI に誤った値を使用しにくいようになっています。
+クラスであるため、Javadoc ドキュメントを含めることができます。
+Android Studio などの統合型開発環境では、コントラクト クラスから定数名が自動的に設定され、定数の Javadoc が表示されます。
+
+
+</p>
+<p>
+    デベロッパーはアプリケーションからコントラクト クラスのクラスファイルにアクセスできませんが、提供する <code>.jar</code> ファイルからクラスファイルをアプリケーションに静的にコンパイルできます。
+
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.html?hl=ja">ContactsContract</a></code> クラスとそのネストされたクラスは、コントラクト クラスの例です。
+
+</p>
+<h2 id="Permissions">コンテンツ プロバイダ パーミッションを実装する</h2>
+<p>
+    Android システムのあらゆる領域に対するパーミッションとクラスについては、<a href="https://developer.android.com/training/articles/security-tips.html?hl=ja">セキュリティとパーミッション</a>のトピックをご覧ください。
+
+    また、<a href="../data/data-storage9e29.html?hl=ja">データ ストレージ</a>のトピックにも、ストレージのさまざまなタイプに有効なセキュリティとパーミッションについて記載されています。
+
+    重要な点をまとめると次のようになります。
+</p>
+<ul>
+    <li>
+        デフォルトでは、端末の内部ストレージに格納されるデータファイルは、アプリケーションとプロバイダでのみ使用できます。
+
+    </li>
+    <li>
+        作成する <code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html?hl=ja">SQLiteDatabase</a></code> データベースは、自分のアプリケーションとプロバイダにのみ公開されます。
+
+    </li>
+    <li>
+        デフォルトでは、外部ストレージに保存するデータファイルはパブリックとなり、誰もが読み取ることができます。<em></em><em></em>
+他のアプリケーションは別の API 呼び出しを使用してファイルの読み取りと書き込みを実行できるため、コンテンツ プロバイダで外部ストレージにあるファイルへのアクセスは制限できません。
+
+    </li>
+    <li>
+        端末の内部ストレージにあるファイルや SQLite データベースを開いたり作成したりするメソッド呼び出しは、他のすべてのアプリケーションに読み取りと書き込みの両方のアクセスを付与してしまう可能性があります。
+内部ファイルやデータベースをプロバイダのリポジトリとして使用する場合に、「誰でも読み取り可能」や「誰でも書き込み可能」なアクセスを付与してしまうと、マニフェストで設定したプロバイダのパーミッションでデータを保護できなくなってしまいます。
+
+
+内部ストレージのファイルとデータベースへのデフォルトのアクセスは「プライベート」になっているため、プロバイダのリポジトリの場合はこの設定を変更しないでください。
+
+    </li>
+</ul>
+<p>
+    コンテンツ プロバイダ パーミッションを使用してデータへのアクセスを制御する場合は、内部ファイル、SQLite データベース、「クラウド」（リモート サーバーなど）にデータを格納し、ファイルやデータベースを自分のアプリケーションにのみ公開するように設定します。
+
+
+</p>
+<h3>パーミッションを実装する</h3>
+<p>
+    デフォルトではプロバイダにはパーミッションが設定されていないため、基礎となるデータがプライベートに設定されている場合でも、すべてのアプリケーションは自分のプロバイダからの読み取りとプロバイダへの書き込みを実行できます。
+これを変更するには、<code><a href="../manifest/provider-element9e29.html?hl=ja">
+    &lt;provider&gt;</a></code> 要素の属性や子要素を使用して、マニフェスト ファイルでプロバイダのパーミッションを設定します。
+
+プロバイダ全体に適用するパーミッションを設定することもできますし、特定のテーブル、特定のレコード、これら 3 つすべてに適用するパーミッションを設定することもできます。
+
+</p>
+<p>
+    マニフェスト ファイルで 1 つ以上の <code><a href="../manifest/permission-element9e29.html?hl=ja">
+    &lt;permission&gt;</a></code> 要素を使用して、プロバイダのパーミッションを定義します。
+自分のプロバイダに独自のパーミッションを作成するには、<code><a href="../manifest/permission-element9e29.html?hl=ja#nm">
+    android:name</a></code> 属性に Java スタイルのスコーピングを使用します
+
+たとえば、読み取りパーミッションの名前を <code>com.example.app.provider.permission.READ_PROVIDER</code> とします。
+
+
+</p>
+<p>
+    次のリストは、プロバイダ パーミッションの範囲を示しています。プロバイダ全体に適用するパーミッションから始まり、より詳細な範囲のものになっています。
+
+    より広い範囲を持つパーミッションよりも、範囲が限定されるパーミッションの方が優先されます。
+</p>
+<dl>
+    <dt>
+        プロバイダ レベルで 1 つの読み取りと書き込みのパーミッション
+    </dt>
+    <dd>
+        1 つのパーミッションでプロバイダ全体の読み取りと書き込みのアクセスの両方を制御します。<code><a href="../manifest/provider-element9e29.html?hl=ja">
+        &lt;provider&gt;</a></code> 要素の <code><a href="../manifest/provider-element9e29.html?hl=ja#prmsn">
+        android:permission</a></code> 属性で指定します。
+
+
+    </dd>
+    <dt>
+        プロバイダ レベルで別々の読み取りと書き込みパーミッション
+    </dt>
+    <dd>
+        プロバイダ全体の読み取りパーミッションと書き込みパーミッションです。これらのパーミッションは <code><a href="../manifest/provider-element9e29.html?hl=ja">
+        &lt;provider&gt;</a></code> 要素の <code><a href="../manifest/provider-element9e29.html?hl=ja#rprmsn">
+        android:readPermission</a></code> 属性と <code><a href="../manifest/provider-element9e29.html?hl=ja#wprmsn">
+        android:writePermission</a></code> 属性で指定します。
+
+
+これらは、<code><a href="../manifest/provider-element9e29.html?hl=ja#prmsn">
+        android:permission</a></code> で要求するパーミッションよりも優先されます。
+
+    </dd>
+    <dt>
+        パスレベルのパーミッション
+    </dt>
+    <dd>
+        プロバイダのコンテンツ URI の読み取り、書き込み、読み取り / 書き込みパーミッションです。<code><a href="../manifest/provider-element9e29.html?hl=ja">
+        &lt;provider&gt;</a></code> 要素の <code><a href="../manifest/path-permission-element9e29.html?hl=ja">
+        &lt;path-permission&gt;</a></code> 子要素を使用して、制御対象の各 URI を指定します。
+
+
+指定する各コンテンツ URI に対して、読み取り / 書き込みパーミッション、読み取りパーミッション、書き込みパーミッション、3 つすべてを指定できます。
+読み取りパーミッションと書き込みパーミッションは、読み取り / 書き込みパーミッションに優先します。
+また、パスレベルのパーミッションはプロバイダ レベルのパーミッションに優先します。
+
+    </dd>
+    <dt>
+        一時的なパーミッション
+    </dt>
+    <dd>
+        アプリケーションへの一時的なアクセスを付与するパーミッション レベルです。アプリケーションに通常必要とするパーミッションが付与されていない場合でも付与できます。
+一時的なアクセス機能により、アプリケーションのマニフェストに必要なパーミッションの数を減らせます。
+
+一時的なパーミッションを有効にすると、プロバイダへの「永続的な」パーミッションを必要とするアプリケーションのみが、継続的にすべてのデータにアクセスできます。
+
+
+        <p>
+            プロバイダからの写真の添付ファイルを外部の画像ビューワ アプリケーションで表示する場合に、メール プロバイダとアプリに実装するパーミッションを考えてみます。
+
+パーミッションを要求しなくても、画像ビューワに必要なアクセスを付与するには、写真のコンテンツ URI に一時的なパーミッションを設定します。
+ユーザーが写真を表示しようとしたときに、アプリから写真のコンテンツ URI とパーミッション フラグを含むインテントを画像ビューワに送信するようにメール アプリを設計します。
+
+ビューワにプロバイダの通常の読み取りパーミッションが付与されていない場合でも、画像ビューワはメール プロバイダにクエリを実行して写真を取得します。
+
+
+        </p>
+        <p>
+            一時的なパーミッションを有効にするには、<code><a href="../manifest/provider-element9e29.html?hl=ja">
+            &lt;provider&gt;</a></code> 要素の <code><a href="../manifest/provider-element9e29.html?hl=ja#gprmsn">
+            android:grantUriPermissions</a></code> 属性を設定するか、1 つ以上の <code><a href="../manifest/grant-uri-permission-element9e29.html?hl=ja">
+            &lt;grant-uri-permission&gt;</a></code> 子要素を <code><a href="../manifest/provider-element9e29.html?hl=ja">
+            &lt;provider&gt;</a></code> 要素に追加します。
+
+
+
+一時的なパーミッションを使用する場合、プロバイダからのコンテンツ URI のサポートを削除したときは常に <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ja#revokeUriPermission(android.net.Uri, int)">Context.revokeUriPermission()</a></code> を呼び出す必要があります。そうすると、コンテンツ URI が一時的なパーミッションに関連付けられます。
+
+
+        </p>
+        <p>
+            属性の値によって、プロバイダへのアクセスレベルが決まります。
+            属性を <code>true</code> に設定すると、システムによってプロバイダ全体への一時的なパーミッションが付与されます。このパーミッションは、プロバイダ レベルやパスレベルのパーミッションで必要になるその他のパーミッションよりも優先されます。
+
+
+        </p>
+        <p>
+            このフラグを <code>false</code> に設定する場合は、<code><a href="../manifest/grant-uri-permission-element9e29.html?hl=ja">
+            &lt;grant-uri-permission&gt;</a></code> 子要素を <code><a href="../manifest/provider-element9e29.html?hl=ja">
+            &lt;provider&gt;</a></code> 要素に追加する必要があります。
+
+それぞれの子要素は、一時的なアクセスが付与される 1 つ以上のコンテンツ URI を指定します。
+
+        </p>
+        <p>
+            一時的なアクセスをアプリケーションに委任するには、インテントに <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ja#FLAG_GRANT_READ_URI_PERMISSION">FLAG_GRANT_READ_URI_PERMISSION</a></code> フラグか <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ja#FLAG_GRANT_WRITE_URI_PERMISSION">FLAG_GRANT_WRITE_URI_PERMISSION</a></code> フラグ、またはその両方を含める必要があります。
+
+これらは、<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ja#setFlags(int)">setFlags()</a></code> メソッドで設定します。
+
+        </p>
+        <p>
+            <code><a href="../manifest/provider-element9e29.html?hl=ja#gprmsn">
+            android:grantUriPermissions</a></code> 属性がない場合は、<code>false</code> であると仮定されます。
+
+        </p>
+    </dd>
+</dl>
+
+
+
+<!-- The Provider Element -->
+<h2 id="ProviderElement">&lt;provider&gt; 要素</h2>
+<p>
+    <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ja">Activity</a></code> コンポーネントや <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ja">Service</a></code> コンポーネントと同様に、<code><a href="../manifest/provider-element9e29.html?hl=ja">
+    &lt;provider&gt;</a></code> 要素を使用して <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code> のサブクラスをアプリケーションのマニフェスト ファイルに定義する必要があります。
+
+
+Android システムは要素から次の情報を取得します。
+
+<dl>
+    <dt>
+        認証局（<a href="../manifest/provider-element9e29.html?hl=ja#auth"><code>android:authorities</code></a>）
+
+    </dt>
+    <dd>
+        システム内のプロバイダ全体を特定する識別名です。この属性の詳細は、<a href="#ContentURI">コンテンツ URI を設計する</a>セクションをご覧ください。
+
+
+    </dd>
+    <dt>
+        プロバイダ クラス名（<code>
+<a href="../manifest/provider-element9e29.html?hl=ja#nm">android:name</a>
+        </code>）
+
+    </dt>
+    <dd>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code> を実装するクラスです。このクラスの詳細は、<a href="#ContentProvider">ContentProvider クラスを実装する</a>セクションをご覧ください。
+
+
+    </dd>
+    <dt>
+        パーミッション
+    </dt>
+    <dd>
+        他のアプリケーションがプロバイダのデータにアクセスするのに必要なパーミッションを指定する属性です。
+
+        <ul>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#gprmsn">
+                android:grantUriPermssions</a></code>: 一時的なパーミッションのフラグです。
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#prmsn">
+                android:permission</a></code>: 1 つのプロバイダ全体の読み取り / 書き込みパーミッションです。
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#rprmsn">
+                android:readPermission</a></code>: プロバイダ全体の読み取りパーミッションです。
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#wprmsn">
+                android:writePermission</a></code>: プロバイダ全体の書き込みパーミッションです。
+            </li>
+        </ul>
+        <p>
+            パーミッションとそれに対応する属性の詳細は、<a href="#Permissions">コンテンツ プロバイダ パーミッションを実装する</a>セクションをご覧ください。
+
+
+        </p>
+    </dd>
+    <dt>
+        起動と制御の属性
+    </dt>
+    <dd>
+        これらの属性は、Android システムの起動方法とそのタイミング、プロバイダのプロセスの特性、その他の実行時の設定を決定します。
+
+        <ul>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#enabled">
+                android:enabled</a></code>: システムにプロバイダの起動を許可するフラグです。
+            </li>
+              <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#exported">
+                android:exported</a></code>: 他のアプリケーションにこのプロバイダの使用を許可するフラグです。
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#init">
+                android:initOrder</a></code>: 同じプロセス内の他のプロバイダに対して、このプロバイダを起動する順番です。
+
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#multi">
+                android:multiProcess</a></code>: システムに呼び出しクライアントと同じプロセスでのプロバイダの開始を許可するフラグです。
+
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#proc">
+                android:process</a></code>: プロバイダを実行するプロセスの名前です。
+
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#sync">
+                android:syncable</a></code>: プロバイダのデータをサーバー上のデータと同期することを示すフラグです。
+
+            </li>
+        </ul>
+        <p>
+            属性に関する詳細は、開発ガイドの <code><a href="../manifest/provider-element9e29.html?hl=ja">
+            &lt;provider&gt;</a></code> 要素に関するトピックに記載されています。
+
+
+        </p>
+    </dd>
+    <dt>
+        情報に関する属性
+    </dt>
+    <dd>
+        プロバイダのオプションのアイコンとラベルです。
+        <ul>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#icon">
+                android:icon</a></code>: プロバイダのアイコンを含むドローアブル リソースです。
+                [Settings] &gt; [Apps] &gt; [All] にあるアプリのリストのプロバイダラベルの横に表示されるアイコンです。<em></em><em></em><em></em>
+
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element9e29.html?hl=ja#label">
+                android:label</a></code>: プロバイダ、データ、その両方を説明する、情報ラベルです。
+[Settings] &gt; [Apps] &gt; [All] にあるアプリのリストのプロバイダラベルの横に表示されるアイコンです。<em></em><em></em><em></em>
+
+            </li>
+        </ul>
+        <p>
+            属性に関する詳細は、開発ガイドの <code><a href="../manifest/provider-element9e29.html?hl=ja">
+            &lt;provider&gt;</a></code> 要素に関するトピックに記載されています。
+
+        </p>
+    </dd>
+</dl>
+
+<!-- Intent Access -->
+<h2 id="Intents">インテントとデータアクセス</h2>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ja">Intent</a></code> を使用すると、アプリケーションはコンテンツ プロバイダに間接的にアクセスできます。
+    アプリケーションは、<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja">ContentResolver</a></code> や <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ja">ContentProvider</a></code> のメソッドを呼び出しません。
+その代わりに、アクティビティを起動するインテントを送信します。これは通常、プロバイダ独自のアプリケーションの一部となっています。
+対象のアクティビティは UI のデータの取得と表示を担当します。
+インテントのアクションに応じて、対象のアクティビティにより、ユーザーにプロバイダのデータの修正を求めるメッセージが表示されることがあります。
+
+    さらに、インテントには、対象のアクティビティが UI に表示する「エクストラ」データが含まれることがあります。ユーザーは使用前に、このデータを変更してプロバイダのデータを修正することもできます。
+
+
+</p>
+<p>
+
+</p>
+<p>
+    インテント アクセスを使用して、データの整合性を保証できます。プロバイダのデータの挿入、更新、削除は、厳格に定義されたビジネス ロジックによって規定されることがあります。
+この場合、他のアプリケーションにデータを直接修正できるように許可すると、無効なデータが発生することがあります。
+
+デベロッパーがインテント アクセスを使用する場合は、すべての操作を完全に文書化します。
+    コードを使用してデータを修正するよりも、独自のアプリケーションの UI を使用したインテント アクセスの方が優れている理由を説明します。
+
+</p>
+<p>
+    プロバイダのデータを修正するための受信インテントの処理は、その他のインテントの処理と同じです。
+インテントの使用についての詳細は、<a href="../../components/intents-filters9e29.html?hl=ja">インテントとインテント フィルタ</a>をご覧ください。
+
+</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=ja" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="ブログ" target="_blank">ブログ</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=ja" title="サポート">サポート</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=ja" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=ja" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=ja" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=ja" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="cxELOcHeBgpZcOphWgjpY0NPmhRrH-lhLRAdyHsg7Fk6MTQ5NzUxNzExMjYwNDkyMA" />
+      <input type="hidden" name="next" value="/guide/topics/providers/content-provider-creating.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+             selected="selected" >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">メールアドレス</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unifieddd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="../../../android_metadata_endd52.js?hl=ja?v=2017061508" defer></script>
+  
+  <script src="../../../reference/listsdd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="../../../reference/gms_listsdd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/listsdd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/listsdd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/listsdd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=ja"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_ja.js?hl=ja?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/content-provider-creating.html?hl=ja by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:16:11 GMT -->
+</html>

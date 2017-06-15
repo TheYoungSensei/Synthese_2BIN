@@ -1,0 +1,1817 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from developer.android.com/guide/components/intents-filters.html?hl=zh-cn by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:14:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="p3Y6gwcIV6T3vqdrXijTUjoRY1lcVv47J6qT_1O6QPA6MTQ5NzUxNjk4NDkxOTAwMA" />
+
+  
+    <link rel="canonical" href="intents-filters0b8e.html?hl=zh-cn">
+  
+
+  
+    <link rel="alternate" href="intents-filters9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="intents-filters327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="intents-filtersf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="intents-filters0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="intents-filters7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="intents-filters9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="intents-filtersde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="intents-filters0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="intents-filters232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="intents-filters6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="intents-filters.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/intents-filters.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="intents-filters.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../_static/f304fc21fa/images/android/favicon0b8e.png?hl=zh-cn">
+
+<link rel="apple-touch-icon" href="../../_static/f304fc21fa/images/android/touchicon-1800b8e.png?hl=zh-cn">
+
+
+<title>
+
+  Intent 和 Intent 过滤器 | Android Developers
+
+</title>
+
+  <meta name="description" content="An Intent is a messaging object you can use to request an action from another app component . Although intents facilitate communication between components in several ways, there are three fundamental use-cases: An Activity represents a single screen in…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../static/css/default414d.css?hl=zh-cn?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../_static/f304fc21fa/js/android_3p-bundle0b8e.js?hl=zh-cn" type="text/javascript"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_closure_android__zh_cn0b8e.js?hl=zh-cn"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_android0b8e.js?hl=zh-cn"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../static/js/docs414d.js?hl=zh-cn?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-cn&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-cn&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "zh-cn", "served": "zh-cn"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=zh-cn">
+          <img class="dac-header-logo-image" src="../../static/images/android_logo0b8e.png?hl=zh-cn"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=zh-cn"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=zh-cn"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=zh-cn"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=zh-cn"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=zh-cn" width="18" height="19" alt="Play 控制台">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="搜索">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">返回</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../index0b8e.html?hl=zh-cn" >简介</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="fundamentals0b8e.html?hl=zh-cn" >应用基础知识</a></li><li><a href="../practices/compatibility0b8e.html?hl=zh-cn" >设备兼容性</a></li><li><a href="../topics/security/permissions0b8e.html?hl=zh-cn" >系统权限</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../platform/index0b8e.html?hl=zh-cn" >平台架构</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../platform/j8-jack0b8e.html?hl=zh-cn"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 の機能" zh-tw-lang="Java 8 の機能">使用 Java 8 语言功能</a></li><li><a href="../practices/verifying-apps-art0b8e.html?hl=zh-cn" >在 Android Runtime (ART) 上验证应用行为</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index0b8e.html?hl=zh-cn" >应用组件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="intents-filters0b8e.html?hl=zh-cn" >Intent 和 Intent 过滤器</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="intents-common0b8e.html?hl=zh-cn" >通用 Intent</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="activities0b8e.html?hl=zh-cn" >Activity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="fragments0b8e.html?hl=zh-cn" >片段</a></li><li><a href="loaders0b8e.html?hl=zh-cn" >加载器</a></li><li><a href="tasks-and-back-stack0b8e.html?hl=zh-cn" >任务和返回栈</a></li><li><a href="recents0b8e.html?hl=zh-cn" >概览屏幕</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="services0b8e.html?hl=zh-cn" >服务</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="bound-services0b8e.html?hl=zh-cn" >绑定服务</a></li><li><a href="aidl0b8e.html?hl=zh-cn" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/providers/content-providers0b8e.html?hl=zh-cn" >内容提供程序</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/providers/content-provider-basics0b8e.html?hl=zh-cn" >内容提供程序基础知识</a></li><li><a href="../topics/providers/content-provider-creating0b8e.html?hl=zh-cn" >创建内容提供程序</a></li><li><a href="../topics/providers/calendar-provider0b8e.html?hl=zh-cn" >日历提供程序</a></li><li><a href="../topics/providers/contacts-provider0b8e.html?hl=zh-cn" >联系人提供程序</a></li><li><a href="../topics/providers/document-provider0b8e.html?hl=zh-cn" >存储访问框架</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/appwidgets/index0b8e.html?hl=zh-cn" >应用小部件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/appwidgets/host0b8e.html?hl=zh-cn" >应用小部件主机</a></li></ul></li><li><a href="processes-and-threads0b8e.html?hl=zh-cn" >进程和线程</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/index0b8e.html?hl=zh-cn" >应用资源</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/overview0b8e.html?hl=zh-cn" >概览</a></li><li><a href="../topics/resources/providing-resources0b8e.html?hl=zh-cn" >提供资源</a></li><li><a href="../topics/resources/accessing-resources0b8e.html?hl=zh-cn" >访问资源</a></li><li><a href="../topics/resources/runtime-changes0b8e.html?hl=zh-cn" >处理运行时变更</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/localization0b8e.html?hl=zh-cn" >本地化</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/icu4j-framework0b8e.html?hl=zh-cn" >ICU4J Android 框架 API</a></li><li><a href="../topics/resources/multilingual-support0b8e.html?hl=zh-cn" >语言和语言区域</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/available-resources0b8e.html?hl=zh-cn" >资源类型</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/animation-resource0b8e.html?hl=zh-cn" >动画</a></li><li><a href="../topics/resources/color-list-resource0b8e.html?hl=zh-cn" >颜色状态列表</a></li><li><a href="../topics/resources/drawable-resource0b8e.html?hl=zh-cn" >可绘制对象</a></li><li><a href="../topics/resources/layout-resource0b8e.html?hl=zh-cn" >布局</a></li><li><a href="../topics/resources/menu-resource0b8e.html?hl=zh-cn" >菜单</a></li><li><a href="../topics/resources/string-resource0b8e.html?hl=zh-cn" >字符串</a></li><li><a href="../topics/resources/style-resource0b8e.html?hl=zh-cn" >样式</a></li><li><a href="../topics/resources/more-resources0b8e.html?hl=zh-cn" >其他类型</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/manifest/manifest-intro0b8e.html?hl=zh-cn" >应用清单</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/manifest/action-element0b8e.html?hl=zh-cn" >&lt;action&gt;</a></li><li><a href="../topics/manifest/activity-element0b8e.html?hl=zh-cn" >&lt;activity&gt;</a></li><li><a href="../topics/manifest/activity-alias-element0b8e.html?hl=zh-cn" >&lt;activity-alias&gt;</a></li><li><a href="../topics/manifest/application-element0b8e.html?hl=zh-cn" >&lt;application&gt;</a></li><li><a href="../topics/manifest/category-element0b8e.html?hl=zh-cn" >&lt;category&gt;</a></li><li><a href="../topics/manifest/compatible-screens-element0b8e.html?hl=zh-cn" >&lt;compatible-screens&gt;</a></li><li><a href="../topics/manifest/data-element0b8e.html?hl=zh-cn" >&lt;data&gt;</a></li><li><a href="../topics/manifest/grant-uri-permission-element0b8e.html?hl=zh-cn" >&lt;grant-uri-permission&gt;</a></li><li><a href="../topics/manifest/instrumentation-element0b8e.html?hl=zh-cn" >&lt;instrumentation&gt;</a></li><li><a href="../topics/manifest/intent-filter-element0b8e.html?hl=zh-cn" >&lt;intent-filter&gt;</a></li><li><a href="../topics/manifest/manifest-element0b8e.html?hl=zh-cn" >&lt;manifest&gt;</a></li><li><a href="../topics/manifest/meta-data-element0b8e.html?hl=zh-cn" >&lt;meta-data&gt;</a></li><li><a href="../topics/manifest/path-permission-element0b8e.html?hl=zh-cn" >&lt;path-permission&gt;</a></li><li><a href="../topics/manifest/permission-element0b8e.html?hl=zh-cn" >&lt;permission&gt;</a></li><li><a href="../topics/manifest/permission-group-element0b8e.html?hl=zh-cn" >&lt;permission-group&gt;</a></li><li><a href="../topics/manifest/permission-tree-element0b8e.html?hl=zh-cn" >&lt;permission-tree&gt;</a></li><li><a href="../topics/manifest/provider-element0b8e.html?hl=zh-cn" >&lt;provider&gt;</a></li><li><a href="../topics/manifest/receiver-element0b8e.html?hl=zh-cn" >&lt;receiver&gt;</a></li><li><a href="../topics/manifest/service-element0b8e.html?hl=zh-cn" >&lt;service&gt;</a></li><li><a href="../topics/manifest/supports-gl-texture-element0b8e.html?hl=zh-cn" >&lt;supports-gl-texture&gt;</a></li><li><a href="../topics/manifest/supports-screens-element0b8e.html?hl=zh-cn" >&lt;supports-screens&gt;</a></li><li><a href="../topics/manifest/uses-configuration-element0b8e.html?hl=zh-cn" >&lt;uses-configuration&gt;</a></li><li><a href="../topics/manifest/uses-feature-element0b8e.html?hl=zh-cn" >&lt;uses-feature&gt;</a></li><li><a href="../topics/manifest/uses-library-element0b8e.html?hl=zh-cn" >&lt;uses-library&gt;</a></li><li><a href="../topics/manifest/uses-permission-element0b8e.html?hl=zh-cn" >&lt;uses-permission&gt;</a></li><li><a href="../topics/manifest/uses-permission-sdk-23-element0b8e.html?hl=zh-cn" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../topics/manifest/uses-sdk-element0b8e.html?hl=zh-cn" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/index0b8e.html?hl=zh-cn" >用户界面</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/overview0b8e.html?hl=zh-cn" >概览</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/declaring-layout0b8e.html?hl=zh-cn" >布局</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/layout/linear0b8e.html?hl=zh-cn" >线性布局</a></li><li><a href="../topics/ui/layout/relative0b8e.html?hl=zh-cn" >相对布局</a></li><li><a href="../topics/ui/layout/listview0b8e.html?hl=zh-cn" >列表视图</a></li><li><a href="../topics/ui/layout/gridview0b8e.html?hl=zh-cn" >网格视图</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/controls0b8e.html?hl=zh-cn" >输入控件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/controls/button0b8e.html?hl=zh-cn" >按钮</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=zh-cn" >文本字段</a></li><li><a href="../topics/ui/controls/checkbox0b8e.html?hl=zh-cn" >复选框</a></li><li><a href="../topics/ui/controls/radiobutton0b8e.html?hl=zh-cn" >单选按钮</a></li><li><a href="../topics/ui/controls/togglebutton0b8e.html?hl=zh-cn" >切换按钮</a></li><li><a href="../topics/ui/controls/spinner0b8e.html?hl=zh-cn" >微调框</a></li><li><a href="../topics/ui/controls/pickers0b8e.html?hl=zh-cn" >选取器</a></li></ul></li><li><a href="../topics/ui/ui-events0b8e.html?hl=zh-cn" >输入事件</a></li><li><a href="../topics/ui/menus0b8e.html?hl=zh-cn" >菜单</a></li><li><a href="../topics/ui/settings0b8e.html?hl=zh-cn" >设置</a></li><li><a href="../topics/ui/dialogs0b8e.html?hl=zh-cn" >对话框</a></li><li><a href="../topics/ui/notifiers/notifications0b8e.html?hl=zh-cn" >通知</a></li><li><a href="../topics/ui/notifiers/toasts0b8e.html?hl=zh-cn" >Toast</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/search/index0b8e.html?hl=zh-cn" >搜索</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/search/search-dialog0b8e.html?hl=zh-cn" >创建搜索界面</a></li><li><a href="../topics/search/adding-recent-query-suggestions0b8e.html?hl=zh-cn" >添加近期查询建议</a></li><li><a href="../topics/search/adding-custom-suggestions0b8e.html?hl=zh-cn" >添加自定义建议</a></li><li><a href="../topics/search/searchable-config0b8e.html?hl=zh-cn" >可搜索配置</a></li></ul></li><li><a href="../topics/ui/multi-window0b8e.html?hl=zh-cn" >多窗口支持</a></li><li><a href="../topics/ui/drag-drop0b8e.html?hl=zh-cn" >拖放</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/accessibility/index0b8e.html?hl=zh-cn" >无障碍功能</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/accessibility/apps0b8e.html?hl=zh-cn" >为应用设置无障碍功能</a></li><li><a href="../topics/ui/accessibility/checklist0b8e.html?hl=zh-cn" >无障碍功能开发者检查单</a></li><li><a href="../topics/ui/accessibility/services0b8e.html?hl=zh-cn" >构建无障碍服务</a></li></ul></li><li><a href="../topics/ui/themes0b8e.html?hl=zh-cn" >样式和主题</a></li><li><a href="../topics/ui/custom-components0b8e.html?hl=zh-cn" >自定义组件</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/index0b8e.html?hl=zh-cn" >动画和图形</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/overview0b8e.html?hl=zh-cn" >概览</a></li><li><a href="../topics/graphics/prop-animation0b8e.html?hl=zh-cn" >属性动画</a></li><li><a href="../topics/graphics/view-animation0b8e.html?hl=zh-cn" >视图动画</a></li><li><a href="../topics/graphics/drawable-animation0b8e.html?hl=zh-cn" >可绘制动画</a></li><li><a href="../topics/graphics/2d-graphics0b8e.html?hl=zh-cn" >画布和可绘制对象</a></li><li><a href="../topics/graphics/opengl0b8e.html?hl=zh-cn" >OpenGL ES</a></li><li><a href="../topics/graphics/hardware-accel0b8e.html?hl=zh-cn" >硬件加速</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/index0b8e.html?hl=zh-cn" >计算</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/compute0b8e.html?hl=zh-cn" >RenderScript</a></li><li><a href="../topics/renderscript/advanced0b8e.html?hl=zh-cn" >高级 RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/reference/overview0b8e.html?hl=zh-cn" >Runtime API 参考</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/reference/rs_value_types0b8e.html?hl=zh-cn" >数字类型</a></li><li><a href="../topics/renderscript/reference/rs_object_types0b8e.html?hl=zh-cn" >对象类型</a></li><li><a href="../topics/renderscript/reference/rs_convert0b8e.html?hl=zh-cn" >转换函数</a></li><li><a href="../topics/renderscript/reference/rs_math0b8e.html?hl=zh-cn" >数学常量和函数</a></li><li><a href="../topics/renderscript/reference/rs_vector_math0b8e.html?hl=zh-cn" >矢量数学函数</a></li><li><a href="../topics/renderscript/reference/rs_matrix0b8e.html?hl=zh-cn" >矩阵函数</a></li><li><a href="../topics/renderscript/reference/rs_quaternion0b8e.html?hl=zh-cn" >四元数函数</a></li><li><a href="../topics/renderscript/reference/rs_atomic0b8e.html?hl=zh-cn" >原子更新函数</a></li><li><a href="../topics/renderscript/reference/rs_time0b8e.html?hl=zh-cn" >时间函数和类型</a></li><li><a href="../topics/renderscript/reference/rs_allocation_data0b8e.html?hl=zh-cn" >分配数据访问函数</a></li><li><a href="../topics/renderscript/reference/rs_object_info0b8e.html?hl=zh-cn" >对象特性函数</a></li><li><a href="../topics/renderscript/reference/rs_for_each0b8e.html?hl=zh-cn" >内核调用函数和类型</a></li><li><a href="../topics/renderscript/reference/rs_io0b8e.html?hl=zh-cn" >输入/输出函数</a></li><li><a href="../topics/renderscript/reference/rs_debug0b8e.html?hl=zh-cn" >调试函数</a></li><li><a href="../topics/renderscript/reference/rs_graphics0b8e.html?hl=zh-cn" >图形函数和类型</a></li><li><a href="../topics/renderscript/reference/index0b8e.html?hl=zh-cn" >索引</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/index0b8e.html?hl=zh-cn" >媒体和相机</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/mediaplayer0b8e.html?hl=zh-cn" >媒体回放</a></li><li><a href="../topics/media/mediarouter0b8e.html?hl=zh-cn" >媒体路由器</a></li><li><a href="../topics/media/mediarouteprovider0b8e.html?hl=zh-cn" >媒体路由提供程序</a></li><li><a href="../topics/media/exoplayer0b8e.html?hl=zh-cn" >ExoPlayer</a></li><li><a href="../topics/media/media-formats0b8e.html?hl=zh-cn" >支持的媒体格式</a></li><li><a href="../topics/media/mediarecorder0b8e.html?hl=zh-cn" >音频采集</a></li><li><a href="../topics/media/jetplayer0b8e.html?hl=zh-cn" >JetPlayer</a></li><li><a href="../topics/media/camera0b8e.html?hl=zh-cn" >相机</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/sensors/index0b8e.html?hl=zh-cn" >位置和传感器</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/location/index0b8e.html?hl=zh-cn" >位置和地图</a></li><li><a href="../topics/location/strategies0b8e.html?hl=zh-cn" >位置策略</a></li><li><a href="../topics/sensors/sensors_overview0b8e.html?hl=zh-cn" >传感器概览</a></li><li><a href="../topics/sensors/sensors_motion0b8e.html?hl=zh-cn" >运动传感器</a></li><li><a href="../topics/sensors/sensors_position0b8e.html?hl=zh-cn" >位置传感器</a></li><li><a href="../topics/sensors/sensors_environment0b8e.html?hl=zh-cn" >环境传感器</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/index0b8e.html?hl=zh-cn" >连接</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/bluetooth0b8e.html?hl=zh-cn" >蓝牙</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/bluetooth-le0b8e.html?hl=zh-cn" >蓝牙低功耗</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/nfc/index0b8e.html?hl=zh-cn" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/nfc/nfc0b8e.html?hl=zh-cn" >NFC 基础知识</a></li><li><a href="../topics/connectivity/nfc/advanced-nfc0b8e.html?hl=zh-cn" >高级 NFC</a></li><li><a href="../topics/connectivity/nfc/hce0b8e.html?hl=zh-cn" >基于主机的卡模拟</a></li></ul></li><li><a href="../topics/connectivity/wifip2p0b8e.html?hl=zh-cn" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/usb/index0b8e.html?hl=zh-cn" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/usb/accessory0b8e.html?hl=zh-cn" >配件</a></li><li><a href="../topics/connectivity/usb/host0b8e.html?hl=zh-cn" >主机</a></li></ul></li><li><a href="../topics/connectivity/sip0b8e.html?hl=zh-cn" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/index0b8e.html?hl=zh-cn" >文本和输入</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/copy-paste0b8e.html?hl=zh-cn" >复制和粘贴</a></li><li><a href="../topics/text/creating-input-method0b8e.html?hl=zh-cn" >创建 IME</a></li><li><a href="../topics/text/spell-checker-framework0b8e.html?hl=zh-cn" >拼写检查程序</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/index0b8e.html?hl=zh-cn" >数据存储</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/data-storage0b8e.html?hl=zh-cn" >存储选项</a></li><li><a href="../topics/data/backup0b8e.html?hl=zh-cn" >数据备份</a></li><li><a href="../topics/data/install-location0b8e.html?hl=zh-cn" >应用安装位置</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=zh-cn" >库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=zh-cn" >支持库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=zh-cn" >功能</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=zh-cn" >设置</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=zh-cn" >修订历史记录</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=zh-cn" >数据绑定库</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=zh-cn" >测试支持库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=zh-cn" >API 参考</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/admin/index0b8e.html?hl=zh-cn" >管理</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/admin/device-admin0b8e.html?hl=zh-cn" >设备政策</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../webapps/index0b8e.html?hl=zh-cn" >网络应用</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../webapps/targeting0b8e.html?hl=zh-cn" >在网络应用中支持不同屏幕</a></li><li><a href="../webapps/webview0b8e.html?hl=zh-cn" >在 WebView 中构建网络应用</a></li><li><a href="../webapps/migrating0b8e.html?hl=zh-cn" >迁移到 Android 4.4 中的 WebView</a></li><li><a href="../webapps/debugging0b8e.html?hl=zh-cn" >调试网络应用</a></li><li><a href="../webapps/best-practices0b8e.html?hl=zh-cn" >网络应用最佳做法</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../practices/index0b8e.html?hl=zh-cn"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="最佳做法" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">最佳做法</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../practices/screens_support0b8e.html?hl=zh-cn" >支持多种屏幕</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../practices/screens-distribution0b8e.html?hl=zh-cn" >分配到特定屏幕</a></li><li><a href="../practices/screen-compat-mode0b8e.html?hl=zh-cn" >屏幕兼容性模式</a></li></ul></li><li><a href="../practices/tablets-and-handsets0b8e.html?hl=zh-cn" >支持平板电脑和手机</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=zh-cn">首页</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=zh-cn">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=zh-cn">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=zh-cn">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=zh-cn">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=zh-cn">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=zh-cn"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=zh-cn"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=zh-cn"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">培训</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../index0b8e.html?hl=zh-cn"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=zh-cn"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">参考网页</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=zh-cn">示例</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=zh-cn"
+           >库</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=zh-cn"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=zh-cn"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=zh-cn">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=zh-cn">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=zh-cn">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=zh-cn"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=zh-cn">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=zh-cn">Play 控制台</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=zh-cn"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=zh-cn"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=zh-cn">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=zh-cn">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Intent 和 Intent 过滤器</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+<h2>本文内容</h2>
+<ol>
+  <li><a href="#Types">Intent 类型</a></li>
+  <li><a href="#Building">构建 Intent</a>
+    <ol>
+      <li><a href="#ExampleExplicit">显式 Intent 示例</a></li>
+      <li><a href="#ExampleSend">隐式 Intent 示例</a></li>
+      <li><a href="#ForceChooser">强制使用应用选择器</a></li>
+    </ol>
+  </li>
+  <li><a href="#Receiving">接收隐式 Intent</a>
+    <ol>
+      <li><a href="#ExampleFilters">过滤器示例</a></li>
+    </ol>
+  </li>
+  <li><a href="#PendingIntent">使用待定 Intent</a></li>
+  <li><a href="#Resolution">Intent 解析</a>
+    <ol>
+      <li><a href="#ActionTest">操作测试</a></li>
+      <li><a href="#CategoryTest">类别测试</a></li>
+      <li><a href="#DataTest">数据测试</a></li>
+      <li><a href="#imatch">Intent 匹配</a></li>
+    </ol>
+  </li>
+</ol>
+
+<h2>另请参阅</h2>
+<ol>
+<li><a href="https://developer.android.com/training/basics/intents/index.html?hl=zh-cn">与其他应用交互</a></li>
+<li><a href="https://developer.android.com/training/sharing/index.html?hl=zh-cn">共享内容</a></li>
+</ol>
+
+</div>
+</div>
+
+
+
+
+<p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>
+是一个消息传递对象，您可以使用它从其他<a href="fundamentals0b8e.html?hl=zh-cn#Components">应用组件</a>请求操作。尽管 Intent 可以通过多种方式促进组件之间的通信，但其基本用例主要包括以下三个：
+
+</p>
+
+<ul>
+<li><b>启动 Activity</b>：
+<p><code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn">Activity</a></code> 表示应用中的一个屏幕。通过将
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 传递给 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code>，您可以启动新的
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn">Activity</a></code> 实例。<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 描述了要启动的 Activity，并携带了任何必要的数据。
+</p>
+
+<p>如果您希望在 Activity 完成后收到结果，请调用
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code>。在 Activity 的
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code> 回调中，您的 Activity 将结果作为单独的 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>
+对象接收。如需了解详细信息，请参阅 <a href="activities0b8e.html?hl=zh-cn">Activity</a> 指南。</p></li>
+
+<li><b>启动服务</b>：
+<p><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-cn">Service</a></code>
+是一个不使用用户界面而在后台执行操作的组件。通过将
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>
+传递给 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startService(android.content.Intent)">startService()</a></code>，您可以启动服务执行一次性操作（例如，下载文件）。<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>
+描述了要启动的服务，并携带了任何必要的数据。</p>
+
+<p>如果服务旨在使用客户端-服务器接口，则通过将 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 传递给
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code></code>，您可以从其他组件绑定到此服务。如需了解详细信息，请参阅<a href="services0b8e.html?hl=zh-cn">服务</a>指南。</p></li>
+
+<li><b>传递广播</b>：
+<p>广播是任何应用均可接收的消息。系统将针对系统事件（例如：系统启动或设备开始充电时）传递各种广播。通过将
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>
+传递给
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#sendBroadcast(android.content.Intent)">sendBroadcast()</a></code>、<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#sendOrderedBroadcast(android.content.Intent, java.lang.String)">sendOrderedBroadcast()</a></code> 或 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#sendStickyBroadcast(android.content.Intent)">sendStickyBroadcast()</a></code>，您可以将广播传递给其他应用。</p>
+</li>
+</ul>
+
+
+
+
+<h2 id="Types">Intent 类型</h2>
+
+<p>Intent 分为两种类型：</p>
+
+<ul>
+<li><b>显式 Intent</b>：按名称（完全限定类名）指定要启动的组件。
+通常，您会在自己的应用中使用显式
+Intent 来启动组件，这是因为您知道要启动的 Activity 或服务的类名。例如，启动新 Activity 以响应用户操作，或者启动服务以在后台下载文件。
+
+</li>
+
+<li><b>隐式 Intent </b>：不会指定特定的组件，而是声明要执行的常规操作，从而允许其他应用中的组件来处理它。
+例如，如需在地图上向用户显示位置，则可以使用隐式
+ Intent，请求另一具有此功能的应用在地图上显示指定的位置。
+</li>
+</ul>
+
+<p>创建显式 Intent 启动 Activity 或服务时，系统将立即启动
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 对象中指定的应用组件。</p>
+
+<div class="figure" style="width:446px">
+<img src="../../images/components/intent-filters%402x0b8e.png?hl=zh-cn" width="446" alt=""/>
+<p class="img-caption"><strong>图 1.</strong> 隐式 Intent 如何通过系统传递以启动其他 Activity 的图解：<b>[1]</b> Activity A 创建包含操作描述的
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>，并将其传递给 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code>。<b>[2]</b>
+Android 系统搜索所有应用中与 Intent 匹配的 Intent 过滤器。<em></em>
+找到匹配项之后，<b>[3]</b> 该系统通过调用匹配 Activity（Activity B）的 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn#onCreate(android.os.Bundle)">onCreate()</a></code> 方法并将其传递给 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>，以此启动匹配 Activity。
+<em></em>
+</p>
+</div>
+
+<p>创建隐式 Intent 时，Android 系统通过将 Intent 的内容与在设备上其他应用的<a href="../topics/manifest/manifest-intro0b8e.html?hl=zh-cn">清单文件</a>中声明的 Intent 过滤器进行比较，从而找到要启动的相应组件。<em></em>
+
+如果 Intent 与 Intent 过滤器匹配，则系统将启动该组件，并向其传递 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 对象。
+如果多个 Intent 过滤器兼容，则系统会显示一个对话框，支持用户选取要使用的应用。
+</p>
+
+<p>Intent 过滤器是应用清单文件中的一个表达式，它指定该组件要接收的 Intent 类型。
+
+例如，通过为 Activity 声明 Intent 过滤器，您可以使其他应用能够直接使用某一特定类型的
+Intent 启动 Activity。同样，如果您没有为 Activity 声明任何
+Intent 过滤器，则 Activity 只能通过显式
+Intent 启动。<em></em></p>
+
+<p class="caution"><strong>注意：</strong>为了确保应用的安全性，启动
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-cn">Service</a></code> 时，请始终使用显式
+Intent，且不要为服务声明 Intent 过滤器。使用隐式
+Intent 启动服务存在安全隐患，因为您无法确定哪些服务将响应
+Intent，且用户无法看到哪些服务已启动。从 Android 5.0（API 级别 21）开始，如果使用隐式 Intent 调用 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>，系统会引发异常。
+
+</p>
+
+
+
+
+
+<h2 id="Building">构建 Intent</h2>
+
+<p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>
+对象携带了 Android
+系统用来确定要启动哪个组件的信息（例如，准确的组件名称或应当接收该
+ Intent 的组件类别），以及收件人组件为了正确执行操作而使用的信息（例如，要采取的操作以及要处理的数据）。</p>
+
+
+<p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 中包含的主要信息如下：</p>
+
+<dl>
+
+<dt><b>组件名称</b></dt>
+<dd>要启动的组件名称。
+
+<p>这是可选项，但也是构建<b>显式</b> Intent 的一项重要信息，这意味着 Intent 应当仅传递给由组件名称定义的应用组件。
+
+如果没有组件名称，则 Intent 是<b>隐式</b>的，且系统将根据其他 Intent 信息（例如，以下所述的操作、数据和类别）决定哪个组件应当接收 Intent。
+
+因此，如需在应用中启动特定的组件，则应指定该组件的名称。
+</p>
+
+<p class="note"><strong>注：</strong>启动 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-cn">Service</a></code> 时，您应<strong>始终指定组件名称</strong>。
+否则，您无法确定哪项服务会响应 Intent，且用户无法看到哪项服务已启动。
+</p>
+
+<p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 的这一字段是一个 <code><a href="https://developer.android.com/reference/android/content/ComponentName.html?hl=zh-cn">ComponentName</a></code> 对象，您可以使用目标组件的完全限定类名指定此对象，其中包括应用的软件包名称。
+
+例如，
+<code>com.example.ExampleActivity</code>。您可以使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setComponent(android.content.ComponentName)">setComponent()</a></code>、<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setClass(android.content.Context, java.lang.Class<?>)">setClass()</a></code>、<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setClassName(java.lang.String, java.lang.String)">setClassName()</a></code> 或
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 构造函数设置组件名称。</p>
+
+</dd>
+
+<p><dt><b>操作</b></dt>
+<dd>指定要执行的通用操作（例如，“查看”或“选取”）的字符串。<em></em><em></em>
+
+<p>对于广播
+Intent，这是指已发生且正在报告的操作。操作在很大程度上决定了其余 Intent 的构成，特别是数据和
+extra 中包含的内容。
+
+<p>您可以指定自己的操作，供 Intent 在您的应用内使用（或者供其他应用在您的应用中调用组件）。但是，您通常应该使用由
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>
+类或其他框架类定义的操作常量。以下是一些用于启动 Activity 的常见操作：
+</p>
+
+<dl>
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#ACTION_VIEW">ACTION_VIEW</a></code></dt>
+   <dd>如果您拥有一些某项 Activity 可向用户显示的信息（例如，要使用图库应用查看的照片；或者要使用地图应用查看的地址），请使用 Intent 将此操作与
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code>
+结合使用。</dd>
+
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#ACTION_SEND">ACTION_SEND</a></code></dt>
+   <dd>这也称为“共享”Intent。如果您拥有一些用户可通过其他应用（例如，电子邮件应用或社交共享应用）共享的数据，则应使用 Intent 将此操作与 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code> 结合使用。
+</dd>
+</dl>
+
+<p>有关更多定义通用操作的常量，请参阅 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 类参考文档。
+其他操作在
+Android 框架中的其他位置定义。例如，对于在系统的设置应用中打开特定屏幕的操作，将在 <code><a href="https://developer.android.com/reference/android/provider/Settings.html?hl=zh-cn">Settings</a></code>
+中定义。</p>
+
+<p>您可以使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setAction(java.lang.String)">setAction()</a></code> 或 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 构造函数为 Intent 指定操作。</p>
+
+<p>如果定义自己的操作，请确保将应用的软件包名称作为前缀。
+例如：</p>
+<pre>static final String ACTION_TIMETRAVEL = "com.example.action.TIMETRAVEL";</pre>
+</dd>
+
+<dt><b>数据</b></dt>
+<dd>引用待操作数据和/或该数据
+MIME 类型的 URI（<code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=zh-cn">Uri</a></code> 对象）。提供的数据类型通常由 Intent 的操作决定。例如，如果操作是
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#ACTION_EDIT">ACTION_EDIT</a></code>，则数据应包含待编辑文档的
+URI。
+
+<p>创建 Intent 时，除了指定 URI 以外，指定数据类型（其 MIME 类型）往往也很重要。例如，能够显示图像的 Activity 可能无法播放音频文件，即便 URI 格式十分类似时也是如此。因此，指定数据的 MIME 类型有助于 Android 系统找到接收 Intent 的最佳组件。但有时，MIME 类型可以从 URI 中推断得出，特别当数据是 <code>content:</code> URI 时尤其如此。这表明数据位于设备中，且由 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code> 控制，这使得数据 MIME 类型对系统可见。
+
+
+
+
+
+
+
+</p>
+
+<p>要仅设置数据 URI，请调用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setData(android.net.Uri)">setData()</a></code>。
+要仅设置 MIME 类型，请调用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setType(java.lang.String)">setType()</a></code>。如有必要，您可以使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setDataAndType(android.net.Uri, java.lang.String)">setDataAndType()</a></code> 同时显式设置二者。
+</p>
+
+<p class="caution"><strong>注意：</strong>若要同时设置 URI 和 MIME 类型，<strong>请勿</strong>调用
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setData(android.net.Uri)">setData()</a></code> 和
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setType(java.lang.String)">setType()</a></code>，因为它们会互相抵消彼此的值。请始终使用
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setDataAndType(android.net.Uri, java.lang.String)">setDataAndType()</a></code> 同时设置
+URI 和 MIME 类型。</p>
+</dd>
+
+<p><dt><b>类别</b></dt>
+<dd>一个包含应处理 Intent 组件类型的附加信息的字符串。
+您可以将任意数量的类别描述放入一个 Intent 中，但大多数 Intent 均不需要类别。
+以下是一些常见类别：
+
+
+<dl>
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#CATEGORY_BROWSABLE">CATEGORY_BROWSABLE</a></code></dt>
+  <dd>目标 Activity 允许本身通过网络浏览器启动，以显示链接引用的数据，如图像或电子邮件。
+
+  </dd>
+<dt><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code></dt>
+  <dd>该 Activity 是任务的初始 Activity，在系统的应用启动器中列出。
+
+  </dd>
+</dl>
+
+<p>有关类别的完整列表，请参阅 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 类描述。
+</p>
+
+<p>您可以使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#addCategory(java.lang.String)">addCategory()</a></code> 指定类别。</p>
+</dd>
+</dl>
+
+
+<p>以上列出的这些属性（组件名称、操作、数据和类别）表示 Intent 的既定特征。
+通过读取这些属性，Android 系统能够解析应当启动哪个应用组件。
+</p>
+
+<p>但是，Intent 也有可能会一些携带不影响其如何解析为应用组件的信息。
+Intent 还可以提供：</p>
+
+<dl>
+<dt><b>Extra</b></dt>
+<dd>携带完成请求操作所需的附加信息的键值对。正如某些操作使用特定类型的数据 URI 一样，有些操作也使用特定的 extra。
+
+
+<p>您可以使用各种 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#putExtra(java.lang.String, android.os.Bundle)">putExtra()</a></code> 方法添加 extra 数据，每种方法均接受两个参数：键名和值。您还可以创建一个包含所有 extra 数据的 <code><a href="https://developer.android.com/reference/android/os/Bundle.html?hl=zh-cn">Bundle</a></code> 对象，然后使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#putExtras(android.content.Intent)">putExtras()</a></code> 将<code><a href="https://developer.android.com/reference/android/os/Bundle.html?hl=zh-cn">Bundle</a></code> 插入 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 中。
+
+
+</p>
+
+<p>例如，使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#ACTION_SEND">ACTION_SEND</a></code> 创建用于发送电子邮件的 Intent 时，可以使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#EXTRA_EMAIL">EXTRA_EMAIL</a></code> 键指定“目标”收件人，并使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#EXTRA_SUBJECT">EXTRA_SUBJECT</a></code> 键指定“主题”。
+
+
+</p>
+
+<p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 类将为标准化的数据类型指定多个 <code>EXTRA_*</code>
+常量。如需声明自己的 extra 键（对于应用接收的 Intent），请确保将应用的软件包名称作为前缀。
+
+例如：</p>
+<pre>static final String EXTRA_GIGAWATTS = "com.example.EXTRA_GIGAWATTS";</pre>
+</dd>
+
+<dt><b>标志</b></dt>
+<dd>在 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 类中定义的、充当 Intent 元数据的标志。
+标志可以指示 Android 系统如何启动 Activity（例如，Activity 应属于哪个<a href="tasks-and-back-stack0b8e.html?hl=zh-cn">任务</a>），以及启动之后如何处理（例如，它是否属于最近的 Activity 列表）。
+
+
+
+
+<p>如需了解详细信息，请参阅 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setFlags(int)">setFlags()</a></code> 方法。</p>
+</dd>
+
+</dl>
+
+
+
+
+<h3 id="ExampleExplicit">显式 Intent 示例</h3>
+
+<p>显式 Intent 是指用于启动某个特定应用组件（例如，应用中的某个特定 Activity 或服务）的 Intent。
+要创建显式 Intent，请为 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 对象定义组件名称 &mdash; Intent 的所有其他属性均为可选属性。
+
+</p>
+
+<p>例如，如果在应用中构建了一个名为 <code>DownloadService</code>、旨在从网页下载文件的服务，则可使用以下代码启动该服务：
+</p>
+
+<pre>
+// Executed in an Activity, so 'this' is the <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn">Context</a></code>
+// The fileUrl is a string URL, such as "http://www.example.com/image.png"
+Intent downloadIntent = new Intent(this, DownloadService.class);
+downloadIntent.setData(<code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=zh-cn#parse(java.lang.String)">Uri.parse</a></code>(fileUrl));
+startService(downloadIntent);
+</pre>
+
+<p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#Intent(android.content.Context, java.lang.Class<?>)">Intent(Context, Class)</a></code>
+构造函数分别为应用和组件提供 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn">Context</a></code> 和
+<code><a href="https://developer.android.com/reference/java/lang/Class.html?hl=zh-cn">Class</a></code> 对象。因此，此 Intent 将显式启动该应用中的 <code>DownloadService</code> 类。
+</p>
+
+<p>如需了解有关构建和启动服务的详细信息，请参阅<a href="services0b8e.html?hl=zh-cn">服务</a>指南。
+</p>
+
+
+
+
+<h3 id="ExampleSend">隐式 Intent 示例</h3>
+
+<p>隐式 Intent 指定能够在可以执行相应操作的设备上调用任何应用的操作。
+如果您的应用无法执行该操作而其他应用可以，且您希望用户选取要使用的应用，则使用隐式 Intent 非常有用。
+</p>
+
+<p>例如，如果您希望用户与他人共享您的内容，请使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#ACTION_SEND">ACTION_SEND</a></code> 操作创建 Intent，并添加指定共享内容的 extra。
+
+使用该 Intent 调用 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code> 时，用户可以选取共享内容所使用的应用。
+
+</p>
+
+<p class="caution"><strong>注意：</strong>用户可能没有<em>任何</em>应用处理您发送到
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code> 的隐式 Intent。如果出现这种情况，则调用将会失败，且应用会崩溃。要验证 Activity 是否会接收 Intent，请对
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 对象调用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#resolveActivity(android.content.pm.PackageManager)">resolveActivity()</a></code>。如果结果为非空，则至少有一个应用能够处理该 Intent，且可以安全调用 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code>。
+
+如果结果为空，则不应使用该 Intent。如有可能，您应停用发出该 Intent 的功能。
+
+</p>
+
+
+<pre>
+// Create the text message with a string
+Intent sendIntent = new Intent();
+sendIntent.setAction(Intent.ACTION_SEND);
+sendIntent.putExtra(Intent.EXTRA_TEXT, textMessage);
+sendIntent.setType("text/plain");
+
+// Verify that the intent will resolve to an activity
+if (sendIntent.resolveActivity(getPackageManager()) != null) {
+    startActivity(sendIntent);
+}
+</pre>
+
+<p class="note"><strong>注：</strong>在这种情况下，系统并没有使用 URI，但已声明 Intent 的数据类型，用于指定 extra 携带的内容。
+</p>
+
+
+<p>调用 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code> 时，系统将检查已安装的所有应用，确定哪些应用能够处理这种 Intent（即：含 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#ACTION_SEND">ACTION_SEND</a></code> 操作并携带“text/plain”数据的 Intent ）。
+
+
+如果只有一个应用能够处理，则该应用将立即打开并为其提供 Intent。
+如果多个 Activity 接受 Intent，则系统将显示一个对话框，使用户能够选取要使用的应用。
+</p>
+
+
+<div class="figure" style="width:200px">
+  <img src="../../images/training/basics/intent-chooser0b8e.png?hl=zh-cn" alt="">
+  <p class="img-caption"><strong>图 2.</strong> 选择器对话框。</p>
+</div>
+
+<h3 id="ForceChooser">强制使用应用选择器</h3>
+
+<p>如果有多个应用响应隐式 Intent，则用户可以选择要使用的应用，并将其设置为该操作的默认选项。
+
+如果用户可能希望今后一直使用相同的应用执行某项操作（例如，打开网页时，用户往往倾向于仅使用一种网络浏览器），则这一点十分有用。
+
+</p>
+
+<p>但是，如果多个应用可以响应 Intent，且用户可能希望每次使用不同的应用，则应采用显式方式显示选择器对话框。
+选择器对话框每次都会要求用户选择用于操作的应用（用户无法为该操作选择默认应用）。
+
+例如，当应用使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#ACTION_SEND">ACTION_SEND</a></code> 操作执行“共享”时，用户根据目前的状况可能需要使用另一不同的应用，因此应当始终使用选择器对话框，如图 2 中所示。
+</p>
+
+
+
+
+<p>要显示选择器，请使用 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#createChooser(android.content.Intent, java.lang.CharSequence)">createChooser()</a></code> 创建 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>，并将其传递给 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code>。例如：</p>
+
+<pre>
+Intent sendIntent = new Intent(Intent.ACTION_SEND);
+...
+
+// Always use string resources for UI text.
+// This says something like "Share this photo with"
+String title = getResources().getString(R.string.chooser_title);
+// Create intent to show the chooser dialog
+Intent chooser = Intent.createChooser(sendIntent, title);
+
+// Verify the original intent will resolve to at least one activity
+if (sendIntent.resolveActivity(getPackageManager()) != null) {
+    startActivity(chooser);
+}
+</pre>
+
+<p>这将显示一个对话框，其中有响应传递给 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#createChooser(android.content.Intent, java.lang.CharSequence)">createChooser()</a></code> 方法的 Intent 的应用列表，并且将提供的文本用作对话框标题。
+</p>
+
+
+
+
+
+
+
+
+
+<h2 id="Receiving">接收隐式 Intent</h2>
+
+<p>要公布应用可以接收哪些隐式 Intent，请在<a href="../topics/manifest/manifest-intro0b8e.html?hl=zh-cn">清单文件</a>中使用
+<a href="../topics/manifest/intent-filter-element0b8e.html?hl=zh-cn"><code>&lt;intent-filter&gt;</code></a>
+元素为每个应用组件声明一个或多个 Intent 过滤器。每个 Intent 过滤器均根据 Intent 的操作、数据和类别指定自身接受的 Intent 类型。
+
+仅当隐式 Intent 可以通过 Intent 过滤器之一传递时，系统才会将该 Intent 传递给应用组件。
+</p>
+
+<p class="note"><strong>注：</strong>显式 Intent 始终会传递给其目标，无论组件声明的 Intent 过滤器如何均是如此。
+</p>
+
+<p>应用组件应当为自身可执行的每个独特作业声明单独的过滤器。例如，图像库应用中的一个 Activity 可能会有两个过滤器，分别用于查看图像和编辑图像。
+
+当 Activity 启动时，它将检查 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 并根据 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 中的信息决定具体的行为（例如，是否显示编辑器控件）。
+
+</p>
+
+<p>每个 Intent 过滤器均由应用清单文件中的 <a href="../topics/manifest/intent-filter-element0b8e.html?hl=zh-cn"><code>&lt;intent-filter&gt;</code></a>
+元素定义，并嵌套在相应的应用组件（例如，<a href="../topics/manifest/activity-element0b8e.html?hl=zh-cn"><code>&lt;activity&gt;</code></a>
+元素）中。
+在 <a href="../topics/manifest/intent-filter-element0b8e.html?hl=zh-cn"><code>&lt;intent-filter&gt;</code></a>
+内部，您可以使用以下三个元素中的一个或多个指定要接受的 Intent 类型：
+</p>
+
+<dl>
+<dt><a href="../topics/manifest/action-element0b8e.html?hl=zh-cn"><code>&lt;action&gt;</code></a></dt>
+  <dd>在 <code>name</code> 属性中，声明接受的 Intent 操作。该值必须是操作的文本字符串值，而不是类常量。
+</dd>
+<dt><a href="../topics/manifest/data-element0b8e.html?hl=zh-cn"><code>&lt;data&gt;</code></a></dt>
+  <dd>使用一个或多个指定数据 URI 各个方面（<code>scheme</code>、<code>host</code>、<code>port</code>、<code>path</code> 等）和 MIME 类型的属性，声明接受的数据类型。
+
+</dd>
+<dt><a href="../topics/manifest/category-element0b8e.html?hl=zh-cn"><code>&lt;category&gt;</code></a></dt>
+  <dd>在 <code>name</code> 属性中，声明接受的 Intent 类别。该值必须是操作的文本字符串值，而不是类常量。
+
+
+  <p class="note"><strong>注：</strong>为了接收隐式 Intent，<strong>必须</strong>将 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#CATEGORY_DEFAULT">CATEGORY_DEFAULT</a></code> 类别包括在 Intent 过滤器中。
+
+方法
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code> 和
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code> 将按照已申明 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#CATEGORY_DEFAULT">CATEGORY_DEFAULT</a></code> 类别的方式处理所有 Intent。
+
+  如果未在 Intent 过滤器中声明此类别，则隐式 Intent 不会解析为您的 Activity。
+</p>
+  </dd>
+</dl>
+
+<p>例如，以下是一个使用包含 Intent 过滤器的 Activity 声明，当数据类型为文本时，系统将接收
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#ACTION_SEND">ACTION_SEND</a></code> Intent ：</p>
+
+<pre>
+&lt;activity android:name="ShareActivity">
+    &lt;intent-filter>
+        &lt;action android:name="android.intent.action.SEND"/>
+        &lt;category android:name="android.intent.category.DEFAULT"/>
+        &lt;data android:mimeType="text/plain"/>
+    &lt;/intent-filter>
+&lt;/activity>
+</pre>
+
+<p>您可以创建一个包括多个 <a href="../topics/manifest/action-element0b8e.html?hl=zh-cn"><code>&lt;action&gt;</code></a>、<a href="../topics/manifest/data-element0b8e.html?hl=zh-cn"><code>&lt;data&gt;</code></a> 或 <a href="../topics/manifest/category-element0b8e.html?hl=zh-cn"><code>&lt;category&gt;</code></a> 实例的过滤器。创建时，仅需确定组件能够处理这些过滤器元素的任何及所有组合即可。
+
+
+
+
+</p>
+
+<p>如需仅以操作、数据和类别类型的特定组合来处理多种 Intent，则需创建多个 Intent 过滤器。
+</p>
+
+
+<div class="sidebox-wrapper">
+<div class="sidebox">
+<h2>限制对组件的访问</h2>
+<p>使用 Intent 过滤器时，无法安全地防止其他应用启动组件。
+尽管 Intent 过滤器将组件限制为仅响应特定类型的隐式 Intent，但如果开发者确定您的组件名称，则其他应用有可能通过使用显式 Intent 启动您的应用组件。如果必须确保<em>只有您自己的应用</em>才能启动您的某一组件，请针对该组件将
+<a href="../topics/manifest/activity-element0b8e.html?hl=zh-cn#exported"><code>exported</code></a>
+属性设置为
+<code>"false"</code>。
+
+</p>
+</div>
+</div>
+
+<p>系统通过将 Intent 与所有这三个元素进行比较，根据过滤器测试隐式 Intent。
+隐式 Intent 若要传递给组件，必须通过所有这三项测试。如果 Intent 甚至无法匹配其中任何一项测试，则 Android 系统不会将其传递给组件。
+
+但是，由于一个组件可能有多个 Intent 过滤器，因此未能通过某一组件过滤器的 Intent 可能会通过另一过滤器。如需了解有关系统如何解析 Intent 的详细信息，请参阅下文的 <a href="#Resolution">Intent 解析</a>部分。
+
+
+</p>
+
+<p class="caution"><strong>注意：</strong>为了避免无意中运行不同应用的
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-cn">Service</a></code>，请始终使用显式 Intent 启动您自己的服务，且不必为该服务声明
+Intent 过滤器。</p>
+
+<p class="note"><strong>注：</strong>对于所有 Activity，您必须在清单文件中声明 Intent 过滤器。但是，广播接收器的过滤器可以通过调用 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#registerReceiver(android.content.BroadcastReceiver, android.content.IntentFilter, java.lang.String, android.os.Handler)">registerReceiver()</a></code> 动态注册。
+
+
+稍后，您可以使用 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#unregisterReceiver(android.content.BroadcastReceiver)">unregisterReceiver()</a></code> 注销该接收器。这样一来，应用便可仅在应用运行时的某一指定时间段内侦听特定的广播。
+
+</p>
+
+
+
+
+
+
+
+<h3 id="ExampleFilters">过滤器示例</h3>
+
+<p>为了更好地了解一些 Intent 过滤器的行为，我们一起来看看从社交共享应用的清单文件中截取的以下片段。
+</p>
+
+<pre>
+&lt;activity android:name="MainActivity">
+    &lt;!-- This activity is the main entry, should appear in app launcher -->
+    &lt;intent-filter>
+        &lt;action android:name="android.intent.action.MAIN" />
+        &lt;category android:name="android.intent.category.LAUNCHER" />
+    &lt;/intent-filter>
+&lt;/activity>
+
+&lt;activity android:name="ShareActivity">
+    &lt;!-- This activity handles "SEND" actions with text data -->
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.SEND"/>
+        &lt;category android:name="android.intent.category.DEFAULT"/>
+        &lt;data android:mimeType="text/plain"/>
+    &lt;/intent-filter&gt;
+    &lt;!-- This activity also handles "SEND" and "SEND_MULTIPLE" with media data -->
+    &lt;intent-filter&gt;
+        &lt;action android:name="android.intent.action.SEND"/>
+        &lt;action android:name="android.intent.action.SEND_MULTIPLE"/>
+        &lt;category android:name="android.intent.category.DEFAULT"/>
+        &lt;data android:mimeType="application/vnd.google.panorama360+jpg"/>
+        &lt;data android:mimeType="image/*"/>
+        &lt;data android:mimeType="video/*"/>
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;
+</pre>
+
+<p>第一个 Activity <code>MainActivity</code> 是应用的主要入口点。当用户最初使用启动器图标启动应用时，该 Activity 将打开：
+</p>
+<ul>
+  <li><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#ACTION_MAIN">ACTION_MAIN</a></code> 操作指示这是主要入口点，且不要求输入任何 Intent 数据。
+</li>
+  <li><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code> 类别指示此 Activity 的图标应放入系统的应用启动器。
+如果 <a href="../topics/manifest/activity-element0b8e.html?hl=zh-cn"><code>&lt;activity&gt;</code></a> 元素未使用 <code>icon</code> 指定图标，则系统将使用 <a href="../topics/manifest/application-element0b8e.html?hl=zh-cn"><code>&lt;application&gt;</code></a> 元素中的图标。
+
+</li>
+</ul>
+<p>这两个元素必须配对使用，Activity 才会显示在应用启动器中。</p>
+
+<p>第二个 Activity <code>ShareActivity</code> 旨在便于共享文本和媒体内容。
+尽管用户可以通过从 <code>MainActivity</code> 导航进入此 Activity，但也可以从发出隐式 Intent（与两个 Intent 过滤器之一匹配）的另一应用中直接进入 <code>ShareActivity</code>。
+
+</p>
+
+<p class="note"><strong>注：</strong>MIME 类型 <a href="https://developers.google.com/panorama/android/?hl=zh-cn"><code>application/vnd.google.panorama360+jpg</code></a> 是一个指定全景照片的特殊数据类型，您可以使用 <a href="https://developer.android.com/reference/com/google/android/gms/panorama/package-summary.html?hl=zh-cn">Google panorama</a> API 对其进行处理。
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="PendingIntent">使用待定 Intent</h2>
+
+<p><code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-cn">PendingIntent</a></code> 对象是 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 对象的包装器。<code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-cn">PendingIntent</a></code> 的主要目的是授权外部应用使用包含的 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>，就像是它从您应用本身的进程中执行的一样。
+
+
+</p>
+
+<p>待定 Intent 的主要用例包括：</p>
+<ul>
+  <li>声明用户使用您的<a href="../topics/ui/notifiers/notifications0b8e.html?hl=zh-cn">通知</a>执行操作时所要执行的
+ Intent（Android 系统的 <code><a href="https://developer.android.com/reference/android/app/NotificationManager.html?hl=zh-cn">NotificationManager</a></code>
+执行 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>）。
+  <li>声明用户使用您的
+<a href="../topics/appwidgets/index0b8e.html?hl=zh-cn">应用小部件</a>执行操作时要执行的
+Intent（主屏幕应用执行 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>）。
+  <li>声明未来某一特定时间要执行的 Intent（Android
+系统的 <code><a href="https://developer.android.com/reference/android/app/AlarmManager.html?hl=zh-cn">AlarmManager</a></code> 执行 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>）。
+</ul>
+
+<p>由于每个 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>
+对象均设计为由特定类型的应用组件（<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn">Activity</a></code>、<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-cn">Service</a></code> 或
+<code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=zh-cn">BroadcastReceiver</a></code>）进行处理，因此还必须基于相同的考虑因素创建
+<code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-cn">PendingIntent</a></code>。使用待定
+Intent 时，应用不会使用调用（如 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code>）执行该 Intent。相反，通过调用相应的创建器方法创建
+<code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-cn">PendingIntent</a></code> 时，您必须声明所需的组件类型：</p>
+
+<ul>
+  <li><code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-cn#getActivity(android.content.Context, int, android.content.Intent, int)">PendingIntent.getActivity()</a></code>，适用于启动
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn">Activity</a></code> 的 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>。</li>
+  <li><code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-cn#getService(android.content.Context, int, android.content.Intent, int)">PendingIntent.getService()</a></code>，适用于启动
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-cn">Service</a></code> 的 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>。</li>
+  <li><code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-cn#getBroadcast(android.content.Context, int, android.content.Intent, int)">PendingIntent.getBroadcast()</a></code>，适用于启动
+<code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=zh-cn">BroadcastReceiver</a></code> 的 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>。</li>
+</ul>
+
+<p>除非您的应用正在从其他应用中接收待定 Intent，否则上述用于创建 <code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-cn">PendingIntent</a></code>
+的方法可能是您所需的唯一
+<code><a href="https://developer.android.com/reference/android/app/PendingIntent.html?hl=zh-cn">PendingIntent</a></code> 方法。<em></em></p>
+
+<p>每种方法均会提取当前的应用 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn">Context</a></code>、您要包装的
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>
+以及一个或多个指定应如何使用该 Intent 的标志（例如，是否可以多次使用该 Intent）。</p>
+
+<p>如需了解有关使用待定 Intent 的详细信息，请参阅<a href="../topics/ui/notifiers/notifications0b8e.html?hl=zh-cn">通知</a>和<a href="../topics/appwidgets/index0b8e.html?hl=zh-cn">应用小部件</a> API 指南等手册中每个相应用例的相关文档。
+
+</p>
+
+
+
+
+
+
+
+<h2 id="Resolution">Intent 解析</h2>
+
+
+<p>当系统收到隐式 Intent 以启动 Activity 时，它根据以下三个方面将该 Intent 与 Intent 过滤器进行比较，搜索该 Intent 的最佳 Activity：
+</p>
+
+<ul>
+  <li>Intent 操作
+  <li>Intent 数据（URI 和数据类型）
+  <li>Intent 类别
+</ul>
+
+<p>下文根据如何在应用的清单文件中声明 Intent 过滤器，描述 Intent 如何与相应的组件匹配。
+</p>
+
+
+<h3 id="ActionTest">操作测试</h3>
+
+<p>要指定接受的 Intent 操作，Intent 过滤器既可以不声明任何
+<a href="../topics/manifest/action-element0b8e.html?hl=zh-cn"><code>&lt;action&gt;</code></a> 元素，也可以声明多个此类元素。例如：</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;action android:name="android.intent.action.EDIT" /&gt;
+    &lt;action android:name="android.intent.action.VIEW" /&gt;
+    ...
+&lt;/intent-filter&gt;
+</pre>
+
+<p>要通过此过滤器，您在 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 中指定的操作必须与过滤器中列出的某一操作匹配。
+</p>
+
+<p>如果该过滤器未列出任何操作，则 Intent 没有任何匹配项，因此所有 Intent 均无法通过测试。
+但是，如果 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 未指定操作，则会通过测试（只要过滤器至少包含一个操作）。
+
+</p>
+
+
+
+<h3 id="CategoryTest">类别测试</h3>
+
+<p>要指定接受的 Intent 类别， Intent 过滤器既可以不声明任何 <a href="../topics/manifest/category-element0b8e.html?hl=zh-cn"><code>&lt;category&gt;</code></a> 元素，也可以声明多个此类元素。
+例如：</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;category android:name="android.intent.category.DEFAULT" /&gt;
+    &lt;category android:name="android.intent.category.BROWSABLE" /&gt;
+    ...
+&lt;/intent-filter&gt;
+</pre>
+
+<p>若要使 Intent 通过类别测试，则 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code>
+中的每个类别均必须与过滤器中的类别匹配。反之则未必然，Intent 过滤器声明的类别可以超出 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 中指定的数量，且 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 仍会通过测试。
+
+因此，不含类别的 Intent 应当始终会通过此测试，无论过滤器中声明何种类别均是如此。
+</p>
+
+<p class="note"><strong>注</strong>：Android 会自动将 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#CATEGORY_DEFAULT">CATEGORY_DEFAULT</a></code> 类别应用于传递给 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#startActivity(android.content.Intent)">startActivity()</a></code> 和 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code> 的所有隐式 Intent。因此，如需 Activity 接收隐式 Intent，则必须将 <code>"android.intent.category.DEFAULT"</code> 的类别包括在其 Intent 过滤器中（如上文的 <code>&lt;intent-filter&gt;</code> 示例所示）。
+
+
+
+
+</p>
+
+
+
+<h3 id="DataTest">数据测试</h3>
+
+<p>要指定接受的 Intent 数据， Intent 过滤器既可以不声明任何 <a href="../topics/manifest/data-element0b8e.html?hl=zh-cn"><code>&lt;data&gt;</code></a> 元素，也可以声明多个此类元素。
+例如：</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;data android:mimeType="video/mpeg" android:scheme="http" ... /&gt;
+    &lt;data android:mimeType="audio/mpeg" android:scheme="http" ... /&gt;
+    ...
+&lt;/intent-filter&gt;
+</pre>
+
+<p>每个 <code><a href="../topics/manifest/data-element0b8e.html?hl=zh-cn">&lt;data&gt;</a></code> 元素均可指定 URI 结构和数据类型（MIME 媒体类型）。
+URI 的每个部分均包含单独的 <code>scheme</code>、<code>host</code>、<code>port</code> 和 <code>path</code> 属性：
+
+
+</p>
+
+<p style="margin-left: 2em"><code>&lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;/&lt;path&gt;</code></p>
+
+<p>
+例如：
+</p>
+
+<p style="margin-left: 2em"><code>content://com.example.project:200/folder/subfolder/etc</code></p>
+
+<p>在此 URI 中，架构是 <code>content</code>，主机是　<code>com.example.project</code>，端口是 <code>200</code>，路径是 <code>folder/subfolder/etc</code>。
+
+</p>
+
+<p>在 <a href="../topics/manifest/data-element0b8e.html?hl=zh-cn"><code>&lt;data&gt;</code></a> 元素中，上述每个属性均为可选，但存在线性依赖关系：
+</p>
+<ul>
+  <li>如果未指定架构，则会忽略主机。</li>
+  <li>如果未指定主机，则会忽略端口。</li>
+  <li>如果未指定架构和主机，则会忽略路径。</li>
+</ul>
+
+<p>将 Intent 中的 URI 与过滤器中的 URI 规范进行比较时，它仅与过滤器中包含的部分 URI 进行比较。
+例如：</p>
+<ul>
+  <li>如果过滤器仅指定架构，则具有该架构的所有 URI 均与该过滤器匹配。
+</li>
+  <li>如果过滤器指定架构和权限，但未指定路径，则具有相同架构和权限的所有 URI 都会通过过滤器，无论其路径如何均是如此。
+</li>
+  <li>如果过滤器指定架构、权限和路径，则仅具有相同架构、权限和路径的 URI 才会通过过滤器。
+</li>
+</ul>
+
+<p class="note"><strong>注：</strong>路径规范可以包含星号通配符 (*)，因此仅需部分匹配路径名即可。
+</p>
+
+<p>数据测试会将 Intent 中的 URI 和 MIME 类型与过滤器中指定的 URI 和 MIME 类型进行比较。
+规则如下：
+</p>
+
+<ol type="a">
+<li>仅当过滤器未指定任何 URI 或 MIME 类型时，不含 URI 和 MIME 类型的 Intent 才会通过测试。
+</li>
+
+<li>对于包含 URI 但不含 MIME 类型（既未显式声明，也无法通过 URI 推断得出）的 Intent，仅当其 URI 与过滤器的 URI 格式匹配、且过滤器同样未指定 MIME 类型时，才会通过测试。
+
+</li>
+
+<li>仅当过滤器列出相同的 MIME 类型且未指定 URI 格式时，包含 MIME 类型、但不含 URI 的 Intent 才会通过测试。
+</li>
+
+<li>仅当 MIME 类型与过滤器中列出的类型匹配时，同时包含 URI 类型和 MIME 类型（通过显式声明，或可以通过 URI 推断得出）的 Intent 才会通过测试的 MIME 类型部分。
+
+如果 Intent 的 URI 与过滤器中的 URI 匹配，或者如果 Intent 具有 <code>content:</code> 或 <code>file:</code> URI 且过滤器未指定 URI，则 Intent 会通过测试的 URI 部分。
+
+换言之，如果过滤器只是<em></em>列出 MIME 类型，则假定组件支持 <code>content:</code> 和 <code>file:</code> 数据。
+
+</p></li>
+</ol>
+
+<p>
+最后一条规则，即规则 (d)，反映了期望组件能够从文件中或内容提供程序获得本地数据。因此，其过滤器可以仅列出数据类型，而不必显式命名 <code>content:</code> 和 <code>file:</code> 架构。这是一个典型的案例。
+
+
+
+例如，下文中的 <a href="../topics/manifest/data-element0b8e.html?hl=zh-cn"><code>&lt;data&gt;</code></a> 元素向 Android 指出，组件可从内容提供商处获得并显示图像数据：
+
+
+</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;data android:mimeType="image/*" /&gt;
+    ...
+&lt;/intent-filter&gt;</pre>
+
+<p>
+由于大部分可用数据均由内容提供商分发，因此指定数据类型（而非 URI）的过滤器也许最为常见。
+
+</p>
+
+<p>
+另一常见的配置是具有架构和数据类型的过滤器。例如，下文中的 <a href="../topics/manifest/data-element0b8e.html?hl=zh-cn"><code>&lt;data&gt;</code></a> 元素向 Android 指出，组件可从网络中检索视频数据以执行操作：
+
+
+
+</p>
+
+<pre>
+&lt;intent-filter&gt;
+    &lt;data android:scheme="http" android:type="video/*" /&gt;
+    ...
+&lt;/intent-filter&gt;</pre>
+
+
+
+<h3 id="imatch">Intent 匹配</h3>
+
+<p>通过 Intent 过滤器匹配 Intent，这不仅有助于发现要激活的目标组件，还有助于发现设备上组件集的相关信息。
+
+例如，主页应用通过使用指定 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#ACTION_MAIN">ACTION_MAIN</a></code> 操作和 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#CATEGORY_LAUNCHER">CATEGORY_LAUNCHER</a></code> 类别的 Intent 过滤器查找所有 Activity，以此填充应用启动器。
+
+
+</p>
+
+<p>您的应用可以采用类似的方式使用 Intent 匹配。<code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=zh-cn">PackageManager</a></code> 提供了一整套 <code>query...()</code> 方法来返回所有能够接受特定 Intent 的组件。此外，它还提供了一系列类似的 <code>resolve...()</code> 方法来确定响应 Intent 的最佳组件。
+
+
+
+例如，<code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=zh-cn#queryIntentActivities(android.content.Intent, int)">queryIntentActivities()</a></code> 将返回能够执行那些作为参数传递的 Intent 的所有 Activity 列表，而 <code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=zh-cn#queryIntentServices(android.content.Intent, int)">queryIntentServices()</a></code> 则可返回类似的服务列表。这两种方法均不会激活组件，而只是列出能够响应的组件。
+
+
+对于广播接收器，有一种类似的方法：
+<code><a href="https://developer.android.com/reference/android/content/pm/PackageManager.html?hl=zh-cn#queryBroadcastReceivers(android.content.Intent, int)">queryBroadcastReceivers()</a></code>。
+</p>
+
+
+
+
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=zh-cn" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="博客" target="_blank">博客</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=zh-cn" title="支持">支持</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=zh-cn" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=zh-cn" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=zh-cn" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=zh-cn" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="p3Y6gwcIV6T3vqdrXijTUjoRY1lcVv47J6qT_1O6QPA6MTQ5NzUxNjk4NDkxOTAwMA" />
+      <input type="hidden" name="next" value="intents-filters.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+             selected="selected" >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Email 地址</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../ytblogger_lists_unified414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../android_metadata_en414d.js?hl=zh-cn?v=2017061508" defer></script>
+  
+  <script src="../../reference/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../reference/gms_lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../reference/android/support/wearable/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../reference/android/support/test/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../reference/android/support/constraint/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=zh-cn"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_zh-cn.js?hl=zh-cn?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/components/intents-filters.html?hl=zh-cn by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:14:30 GMT -->
+</html>

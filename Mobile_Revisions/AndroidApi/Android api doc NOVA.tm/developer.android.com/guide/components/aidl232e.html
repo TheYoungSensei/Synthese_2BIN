@@ -1,0 +1,1578 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- Mirrored from developer.android.com/guide/components/aidl.html?hl=ko by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:08:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="jMogFngX65tSez-sR9gUZfFHGdIDCzCe3I2p7ec8QSk6MTQ5NzUxNjQ4MDIwNzQ3MA" />
+
+  
+    <link rel="canonical" href="aidl232e.html?hl=ko">
+  
+
+  
+    <link rel="alternate" href="aidl7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="aidl9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="aidl.html" hreflang="en">
+  
+    <link rel="alternate" href="aidl232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="aidlde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="aidl0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="aidl0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="aidl6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/aidl.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/aidl.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/aidl.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/aidl.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/aidl.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/aidl.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/aidl.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/aidl.html?hl=pt-br" hreflang="pt-br-cn">
+  
+
+  <link rel="alternate" href="aidl.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../_static/f304fc21fa/images/android/favicon232e.png?hl=ko">
+
+<link rel="apple-touch-icon" href="../../_static/f304fc21fa/images/android/touchicon-180232e.png?hl=ko">
+
+
+<title>
+
+  안드로이드 인터페이스 정의 언어 (AIDL) | Android Developers
+
+</title>
+
+  <meta name="description" content="AIDL (Android Interface Definition Language) is similar to other IDLs you might have worked with. It allows you to define the programming interface that both the client and service agree upon in order to communicate with each other using interprocess …">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../static/css/defaultee8c.css?hl=ko?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../_static/f304fc21fa/js/android_3p-bundle232e.js?hl=ko" type="text/javascript"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_closure_android__ko232e.js?hl=ko"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_android232e.js?hl=ko"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../static/js/docsee8c.js?hl=ko?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ko&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ko&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ko&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ko&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "ko", "served": "ko"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=ko">
+          <img class="dac-header-logo-image" src="../../static/images/android_logo232e.png?hl=ko"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=ko"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=ko"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=ko"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=ko"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=ko" width="18" height="19" alt="Play 콘솔">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="검색">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">뒤로</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../index232e.html?hl=ko" >소개</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="fundamentals232e.html?hl=ko" >앱 기본 항목</a></li><li><a href="../practices/compatibility232e.html?hl=ko" >기기 호환성</a></li><li><a href="../topics/security/permissions232e.html?hl=ko" >시스템 권한</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../platform/index232e.html?hl=ko" >플랫폼 아키텍처</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../platform/j8-jack232e.html?hl=ko"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Java 8 언어 기능 사용</a></li><li><a href="../practices/verifying-apps-art232e.html?hl=ko" >ART(Android 런타임)에서 앱 동작 확인</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index232e.html?hl=ko" >앱 구성 요소</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="intents-filters232e.html?hl=ko" >인텐트 및 인텐트 필터</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="intents-common232e.html?hl=ko" >공통 인텐트</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="activities232e.html?hl=ko" >액티비티</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="fragments232e.html?hl=ko" >프래그먼트</a></li><li><a href="loaders232e.html?hl=ko" >로더</a></li><li><a href="tasks-and-back-stack232e.html?hl=ko" >작업 및 백 스택</a></li><li><a href="recents232e.html?hl=ko" >개요 화면</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="services232e.html?hl=ko" >서비스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="bound-services232e.html?hl=ko" >바인드된 서비스</a></li><li><a href="aidl232e.html?hl=ko" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/providers/content-providers232e.html?hl=ko" >콘텐츠 제공자</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/providers/content-provider-basics232e.html?hl=ko" >콘텐츠 제공자 기본 정보</a></li><li><a href="../topics/providers/content-provider-creating232e.html?hl=ko" >콘텐츠 제공자 생성</a></li><li><a href="../topics/providers/calendar-provider232e.html?hl=ko" >캘린더 제공자</a></li><li><a href="../topics/providers/contacts-provider232e.html?hl=ko" >연락처 제공자</a></li><li><a href="../topics/providers/document-provider232e.html?hl=ko" >저장소 액세스 프레임워크</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/appwidgets/index232e.html?hl=ko" >앱 위젯</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/appwidgets/host232e.html?hl=ko" >앱 위젯 호스트</a></li></ul></li><li><a href="processes-and-threads232e.html?hl=ko" >프로세스 및 스레드</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/index232e.html?hl=ko" >앱 리소스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/overview232e.html?hl=ko" >개요</a></li><li><a href="../topics/resources/providing-resources232e.html?hl=ko" >리소스 제공</a></li><li><a href="../topics/resources/accessing-resources232e.html?hl=ko" >리소스 액세스</a></li><li><a href="../topics/resources/runtime-changes232e.html?hl=ko" >런타임 변경 처리</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/localization232e.html?hl=ko" >현지화</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/icu4j-framework232e.html?hl=ko" >ICU4J Android 프레임워크 API</a></li><li><a href="../topics/resources/multilingual-support232e.html?hl=ko" >언어 및 로케일</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/available-resources232e.html?hl=ko" >리소스 유형</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/animation-resource232e.html?hl=ko" >애니메이션</a></li><li><a href="../topics/resources/color-list-resource232e.html?hl=ko" >색상 상태 목록</a></li><li><a href="../topics/resources/drawable-resource232e.html?hl=ko" >드로어블</a></li><li><a href="../topics/resources/layout-resource232e.html?hl=ko" >레이아웃</a></li><li><a href="../topics/resources/menu-resource232e.html?hl=ko" >메뉴</a></li><li><a href="../topics/resources/string-resource232e.html?hl=ko" >문자열</a></li><li><a href="../topics/resources/style-resource232e.html?hl=ko" >스타일</a></li><li><a href="../topics/resources/more-resources232e.html?hl=ko" >기타 유형</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/manifest/manifest-intro232e.html?hl=ko" >앱 매니페스트</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/manifest/action-element232e.html?hl=ko" >&lt;action&gt;</a></li><li><a href="../topics/manifest/activity-element232e.html?hl=ko" >&lt;activity&gt;</a></li><li><a href="../topics/manifest/activity-alias-element232e.html?hl=ko" >&lt;activity-alias&gt;</a></li><li><a href="../topics/manifest/application-element232e.html?hl=ko" >&lt;application&gt;</a></li><li><a href="../topics/manifest/category-element232e.html?hl=ko" >&lt;category&gt;</a></li><li><a href="../topics/manifest/compatible-screens-element232e.html?hl=ko" >&lt;compatible-screens&gt;</a></li><li><a href="../topics/manifest/data-element232e.html?hl=ko" >&lt;data&gt;</a></li><li><a href="../topics/manifest/grant-uri-permission-element232e.html?hl=ko" >&lt;grant-uri-permission&gt;</a></li><li><a href="../topics/manifest/instrumentation-element232e.html?hl=ko" >&lt;instrumentation&gt;</a></li><li><a href="../topics/manifest/intent-filter-element232e.html?hl=ko" >&lt;intent-filter&gt;</a></li><li><a href="../topics/manifest/manifest-element232e.html?hl=ko" >&lt;manifest&gt;</a></li><li><a href="../topics/manifest/meta-data-element232e.html?hl=ko" >&lt;meta-data&gt;</a></li><li><a href="../topics/manifest/path-permission-element232e.html?hl=ko" >&lt;path-permission&gt;</a></li><li><a href="../topics/manifest/permission-element232e.html?hl=ko" >&lt;permission&gt;</a></li><li><a href="../topics/manifest/permission-group-element232e.html?hl=ko" >&lt;permission-group&gt;</a></li><li><a href="../topics/manifest/permission-tree-element232e.html?hl=ko" >&lt;permission-tree&gt;</a></li><li><a href="../topics/manifest/provider-element232e.html?hl=ko" >&lt;provider&gt;</a></li><li><a href="../topics/manifest/receiver-element232e.html?hl=ko" >&lt;receiver&gt;</a></li><li><a href="../topics/manifest/service-element232e.html?hl=ko" >&lt;service&gt;</a></li><li><a href="../topics/manifest/supports-gl-texture-element232e.html?hl=ko" >&lt;supports-gl-texture&gt;</a></li><li><a href="../topics/manifest/supports-screens-element232e.html?hl=ko" >&lt;supports-screens&gt;</a></li><li><a href="../topics/manifest/uses-configuration-element232e.html?hl=ko" >&lt;uses-configuration&gt;</a></li><li><a href="../topics/manifest/uses-feature-element232e.html?hl=ko" >&lt;uses-feature&gt;</a></li><li><a href="../topics/manifest/uses-library-element232e.html?hl=ko" >&lt;uses-library&gt;</a></li><li><a href="../topics/manifest/uses-permission-element232e.html?hl=ko" >&lt;uses-permission&gt;</a></li><li><a href="../topics/manifest/uses-permission-sdk-23-element232e.html?hl=ko" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../topics/manifest/uses-sdk-element232e.html?hl=ko" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/index232e.html?hl=ko" >사용자 인터페이스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/overview232e.html?hl=ko" >개요</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/declaring-layout232e.html?hl=ko" >레이아웃</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/layout/linear232e.html?hl=ko" >선형 레이아웃</a></li><li><a href="../topics/ui/layout/relative232e.html?hl=ko" >상대적 레이아웃</a></li><li><a href="../topics/ui/layout/listview232e.html?hl=ko" >목록 뷰</a></li><li><a href="../topics/ui/layout/gridview232e.html?hl=ko" >그리드 뷰</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/controls232e.html?hl=ko" >입력 컨트롤</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/controls/button232e.html?hl=ko" >버튼</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=ko" >텍스트 필드</a></li><li><a href="../topics/ui/controls/checkbox232e.html?hl=ko" >체크박스</a></li><li><a href="../topics/ui/controls/radiobutton232e.html?hl=ko" >라디오 버튼</a></li><li><a href="../topics/ui/controls/togglebutton232e.html?hl=ko" >전환 버튼</a></li><li><a href="../topics/ui/controls/spinner232e.html?hl=ko" >스피너</a></li><li><a href="../topics/ui/controls/pickers232e.html?hl=ko" >선택기</a></li></ul></li><li><a href="../topics/ui/ui-events232e.html?hl=ko" >입력 이벤트</a></li><li><a href="../topics/ui/menus232e.html?hl=ko" >메뉴</a></li><li><a href="../topics/ui/settings232e.html?hl=ko" >설정</a></li><li><a href="../topics/ui/dialogs232e.html?hl=ko" >대화상자</a></li><li><a href="../topics/ui/notifiers/notifications232e.html?hl=ko" >알림</a></li><li><a href="../topics/ui/notifiers/toasts232e.html?hl=ko" >알림 메시지</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/search/index232e.html?hl=ko" >검색</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/search/search-dialog232e.html?hl=ko" >검색 인터페이스 생성</a></li><li><a href="../topics/search/adding-recent-query-suggestions232e.html?hl=ko" >최근 쿼리 제안 추가</a></li><li><a href="../topics/search/adding-custom-suggestions232e.html?hl=ko" >사용자 지정 제안 추가</a></li><li><a href="../topics/search/searchable-config232e.html?hl=ko" >검색 가능한 구성</a></li></ul></li><li><a href="../topics/ui/multi-window232e.html?hl=ko" >다중 창 지원</a></li><li><a href="../topics/ui/drag-drop232e.html?hl=ko" >드래그 앤 드롭</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/accessibility/index232e.html?hl=ko" >접근성</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/accessibility/apps232e.html?hl=ko" >액세스 가능한 애플리케이션 만들기</a></li><li><a href="../topics/ui/accessibility/checklist232e.html?hl=ko" >접근성 개발자 검사 목록</a></li><li><a href="../topics/ui/accessibility/services232e.html?hl=ko" >접근성 서비스 구축</a></li></ul></li><li><a href="../topics/ui/themes232e.html?hl=ko" >스타일 및 테마</a></li><li><a href="../topics/ui/custom-components232e.html?hl=ko" >사용자 지정 구성 요소</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/index232e.html?hl=ko" >애니메이션 및 그래픽</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/overview232e.html?hl=ko" >개요</a></li><li><a href="../topics/graphics/prop-animation232e.html?hl=ko" >속성 애니메이션</a></li><li><a href="../topics/graphics/view-animation232e.html?hl=ko" >뷰 애니메이션</a></li><li><a href="../topics/graphics/drawable-animation232e.html?hl=ko" >드로어블 애니메이션</a></li><li><a href="../topics/graphics/2d-graphics232e.html?hl=ko" >캔버스 및 드로어블</a></li><li><a href="../topics/graphics/opengl232e.html?hl=ko" >OpenGL ES</a></li><li><a href="../topics/graphics/hardware-accel232e.html?hl=ko" >하드웨어 가속</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/index232e.html?hl=ko" >연산</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/compute232e.html?hl=ko" >RenderScript</a></li><li><a href="../topics/renderscript/advanced232e.html?hl=ko" >고급 RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/reference/overview232e.html?hl=ko" >런타임 API 참조</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/reference/rs_value_types232e.html?hl=ko" >숫자 유형</a></li><li><a href="../topics/renderscript/reference/rs_object_types232e.html?hl=ko" >객체 유형</a></li><li><a href="../topics/renderscript/reference/rs_convert232e.html?hl=ko" >변환 함수</a></li><li><a href="../topics/renderscript/reference/rs_math232e.html?hl=ko" >수학 상수 및 함수</a></li><li><a href="../topics/renderscript/reference/rs_vector_math232e.html?hl=ko" >벡터 수학 함수</a></li><li><a href="../topics/renderscript/reference/rs_matrix232e.html?hl=ko" >행렬 함수</a></li><li><a href="../topics/renderscript/reference/rs_quaternion232e.html?hl=ko" >사원수 함수</a></li><li><a href="../topics/renderscript/reference/rs_atomic232e.html?hl=ko" >원자 업데이트 함수</a></li><li><a href="../topics/renderscript/reference/rs_time232e.html?hl=ko" >시간 함수 및 유형</a></li><li><a href="../topics/renderscript/reference/rs_allocation_data232e.html?hl=ko" >할당 데이터 액세스 함수</a></li><li><a href="../topics/renderscript/reference/rs_object_info232e.html?hl=ko" >객체 특성 함수</a></li><li><a href="../topics/renderscript/reference/rs_for_each232e.html?hl=ko" >커널 호출 함수 및 유형</a></li><li><a href="../topics/renderscript/reference/rs_io232e.html?hl=ko" >입력/출력 함수</a></li><li><a href="../topics/renderscript/reference/rs_debug232e.html?hl=ko" >디버깅 함수</a></li><li><a href="../topics/renderscript/reference/rs_graphics232e.html?hl=ko" >그래픽 함수 및 유형</a></li><li><a href="../topics/renderscript/reference/index232e.html?hl=ko" >인덱스</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/index232e.html?hl=ko" >미디어 및 카메라</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/mediaplayer232e.html?hl=ko" >미디어 재생</a></li><li><a href="../topics/media/mediarouter232e.html?hl=ko" >미디어 라우터</a></li><li><a href="../topics/media/mediarouteprovider232e.html?hl=ko" >미디어 루트 제공자</a></li><li><a href="../topics/media/exoplayer232e.html?hl=ko" >ExoPlayer</a></li><li><a href="../topics/media/media-formats232e.html?hl=ko" >지원되는 미디어 형식</a></li><li><a href="../topics/media/mediarecorder232e.html?hl=ko" >오디오 캡처</a></li><li><a href="../topics/media/jetplayer232e.html?hl=ko" >JetPlayer</a></li><li><a href="../topics/media/camera232e.html?hl=ko" >카메라</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/sensors/index232e.html?hl=ko" >위치 및 센서</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/location/index232e.html?hl=ko" >위치 및 지도</a></li><li><a href="../topics/location/strategies232e.html?hl=ko" >위치 전략</a></li><li><a href="../topics/sensors/sensors_overview232e.html?hl=ko" >센서 개요</a></li><li><a href="../topics/sensors/sensors_motion232e.html?hl=ko" >동작 센서</a></li><li><a href="../topics/sensors/sensors_position232e.html?hl=ko" >위치 센서</a></li><li><a href="../topics/sensors/sensors_environment232e.html?hl=ko" >환경 센서</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/index232e.html?hl=ko" >연결</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/bluetooth232e.html?hl=ko" >블루투스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/bluetooth-le232e.html?hl=ko" >블루투스 저전력</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/nfc/index232e.html?hl=ko" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/nfc/nfc232e.html?hl=ko" >NFC 기초</a></li><li><a href="../topics/connectivity/nfc/advanced-nfc232e.html?hl=ko" >고급 NFC</a></li><li><a href="../topics/connectivity/nfc/hce232e.html?hl=ko" >호스트 기반 카드 에뮬레이션</a></li></ul></li><li><a href="../topics/connectivity/wifip2p232e.html?hl=ko" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/usb/index232e.html?hl=ko" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/usb/accessory232e.html?hl=ko" >액세서리</a></li><li><a href="../topics/connectivity/usb/host232e.html?hl=ko" >호스트</a></li></ul></li><li><a href="../topics/connectivity/sip232e.html?hl=ko" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/index232e.html?hl=ko" >텍스트 및 입력</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/copy-paste232e.html?hl=ko" >복사 및 붙여넣기</a></li><li><a href="../topics/text/creating-input-method232e.html?hl=ko" >IME 생성</a></li><li><a href="../topics/text/spell-checker-framework232e.html?hl=ko" >맞춤법 검사기</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/index232e.html?hl=ko" >데이터 저장소</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/data-storage232e.html?hl=ko" >저장소 옵션</a></li><li><a href="../topics/data/backup232e.html?hl=ko" >데이터 백업</a></li><li><a href="../topics/data/install-location232e.html?hl=ko" >앱 설치 위치</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=ko" >라이브러리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=ko" >지원 라이브러리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=ko" >기능</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=ko" >설정</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=ko" >수정 버전 기록</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=ko" >데이터 바인딩 라이브러리</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=ko" >테스트 지원 라이브러리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=ko" >API 참조</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/admin/index232e.html?hl=ko" >관리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/admin/device-admin232e.html?hl=ko" >기기 정책</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../webapps/index232e.html?hl=ko" >웹 앱</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../webapps/targeting232e.html?hl=ko" >웹 앱에서 서로 다른 화면 지원</a></li><li><a href="../webapps/webview232e.html?hl=ko" >WebView에서 웹 앱 작성</a></li><li><a href="../webapps/migrating232e.html?hl=ko" >Android 4.4에서 WebView로 마이그레이션</a></li><li><a href="../webapps/debugging232e.html?hl=ko" >웹 앱 디버깅</a></li><li><a href="../webapps/best-practices232e.html?hl=ko" >웹 앱 모범 사례</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../practices/index232e.html?hl=ko"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="모범 사례" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">모범 사례</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../practices/screens_support232e.html?hl=ko" >다중 화면 지원</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../practices/screens-distribution232e.html?hl=ko" >특정 화면에 배포</a></li><li><a href="../practices/screen-compat-mode232e.html?hl=ko" >화면 호환 모드</a></li></ul></li><li><a href="../practices/tablets-and-handsets232e.html?hl=ko" >태블릿 및 핸드셋 지원</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=ko">홈</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=ko">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=ko">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=ko">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=ko">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=ko">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=ko"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=ko"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=ko"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">교육</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../index232e.html?hl=ko"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=ko"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">참조</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=ko">샘플</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=ko"
+           >라이브러리</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=ko"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=ko"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=ko">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=ko">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=ko">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=ko"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=ko">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=ko">Play 콘솔</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=ko"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=ko"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=ko">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=ko">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">안드로이드 인터페이스 정의 언어 (AIDL)</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+<h2>이 문서의 내용</h2>
+<ol>
+  <li><a href="#Defining">AIDL 인터페이스 정의</a>
+    <ol>
+      <li><a href="#Create">.aidl 파일 생성</a></li>
+      <li><a href="#Implement">인터페이스 구현</a></li>
+      <li><a href="#Expose">클라이언트에게 인터페이스 노출</a></li>
+    </ol>
+  </li>
+  <li><a href="#PassingObjects"> IPC를 통해 객체 전달</a></li>
+  <li><a href="#Calling">IPC 메서드 호출</a></li>
+</ol>
+
+<h2>참고 항목</h2>
+<ol>
+  <li><a href="bound-services232e.html?hl=ko">바인드된 서비스</a></li>
+</ol>
+
+</div>
+</div>
+
+
+<p>AIDL(Android Interface Definition Language)은 전에 다뤄본 다른 IDL과 유사합니다.
+ 클라이언트와 서비스가 프로세스간 통신(IPC)을 사용하여 서로 소통하는 데 동의한 프로그래밍 인터페이스를 정의할 수 있습니다.
+
+ Android에서는 한 프로세스가 다른 프로세스의 메모리에 정상적으로 액세스할 수 없습니다.
+ 따라서 객체들을 운영 체제가 이해할 수 있는 원시 유형으로 해체하고 해당 경계에 걸쳐 마샬링해야 합니다.
+ 이 마샬링을 위해 코드를 작성하는 일은 상당히 지루한 작업인데, Android는 AIDL을 이용해 그 일을 대신 해줍니다.
+</p>
+
+<p class="note"><strong>참고:</strong> AIDL의 사용은 클라이언트가 다른 애플리케이션에서 IPC의 서비스에 액세스하는 것을 허용하는 경우와 서비스에서 멀티스레딩을 처리하는 경우에만 필요합니다.
+
+ 다른 여러 애플리케이션에서
+동시에 IPC를 수행할 필요가 없다면 <a href="bound-services232e.html?hl=ko#Binder">바인더를
+구현</a>하여 인터페이스를 생성해야 합니다. 또는, IPC를 수행하기를 원하지만 멀티스레딩을
+처리할 필요가 <em>없는</em> 경우에는 <a href="bound-services232e.html?hl=ko#Messenger">메신저를 사용</a>하여 인터페이스를 구현하세요.
+아무튼, AIDL을 구현하기 전에 <a href="bound-services232e.html?hl=ko">바인드된 서비스</a>를 먼저
+이해해야 합니다.</p>
+
+<p>AIDL 인터페이스 디자인을 시작하기 전에, AIDL 인터페이스에 대한 호출은 직접 함수 호출임을 명심하세요.
+  호출이 발생하는 스레드에 대해 어떠한 가정도 해서는 안됩니다.
+  결과는 해당 호출이 로컬 프로세스에서 온 것인지, 원격 프로세스에서 온 것인지에 따라 달라집니다.
+ 구체적인 사항은 다음과 같습니다.</p>
+
+<ul>
+<li>로컬 프로세스에서 온 호출은 호출한 스레드와 같은 스레드에서 실행됩니다. 이
+스레드가 기본 UI 스레드인 경우, AIDL 인터페이스에서 해당 스레드가 계속 실행됩니다.  다른 스레드인 경우, 서비스에서 코드를 실행하는 스레드입니다.
+  따라서 로컬 스레드만 서비스에 액세스하고 있다면, 서비스에서 실행되고 있는 스레드를 완벽히 제어할 수 있습니다. (하지만 이 경우에는 AIDL을 전혀 사용할 필요가 없습니다. 대신 <a href="bound-services232e.html?hl=ko#Binder">바인더 구현</a>)을 통해 인터페이스를 생성하세요.)
+
+
+
+</li>
+
+<li>원격 프로세스에서 오는 호출은 플랫폼이 본인의 프로세스 내에서 유지 관리하는 스레드 풀에서 발송됩니다.
+  여러 호출이 동시에 발생하므로 알 수 없는 스레드로부터 들어오는 호출에 대비해야 합니다.
+  다시 말해서, AIDL 인터페이스 구현은 스레드로부터 완벽하게 안전해야 합니다.
+</li>
+
+<li><code>oneway</code> 키워드는 원격 호출의 동작을 수정합니다.  이 키워드가 사용된 경우,
+원격 호출이 차단되지 않습니다. 단지 트랜젝션 데이터를 보내고 즉시 반환됩니다.
+결국 인터페이스 구현은 이 호출을 <code><a href="https://developer.android.com/reference/android/os/Binder.html?hl=ko">Binder</a></code> 스레드 풀에서 정상적인 원격 호출로 보내는 정식 호출로 수신합니다. 지역 호출에서 <code>oneway</code>을 사용하는 것은
+아무런 영향을 주지 않으며 호출은 여전히 동기적입니다.</li>
+</ul>
+
+
+<h2 id="Defining">AIDL 인터페이스 정의</h2>
+
+<p>AIDL 인터페이스는 <code>.aidl</code> 파일에서 Java 프로그래밍 언어 구문을
+사용해서 정의한 다음, 서비스를 호스팅하는 애플리케이션 및 서비스로 바인딩되는
+모든 다른 애플리케이션의 소스 코드(<code>src/</code> 디렉터리)에 저장해야 합니다.</p>
+
+<p>Android SDK 도구는 <code>.aidl</code> 파일이 포함된 각 애플리케이션을 빌드할 때마다
+<code>.aidl</code> 파일을 기반으로 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ko">IBinder</a></code> 인터페이스를 생성하고
+프로젝트의 <code>gen/</code> 디렉터리에 저장합니다. 서비스는 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ko">IBinder</a></code>
+인터페이스를 적절히 구현해야 합니다. 그러면 클라이언트 애플리케이션이 서비스에 바인딩하고 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ko">IBinder</a></code>에서 메서드를 호출하여 IPC를 수행할 수 있습니다.
+</p>
+
+<p>AIDL을 사용하여 바인드된 서비스를 생성하려면 다음 단계를 따르세요.</p>
+<ol>
+    <li><a href="#CreateAidl">.aidl 파일 생성</a>
+      <p>이 파일은 메서드 서명으로 프로그래밍 인터페이스를 정의합니다.</p>
+    </li>
+    <li><a href="#ImplementTheInterface">인터페이스 구현</a>
+      <p>Android SDK 도구는
+<code>.aidl</code> 파일을 기반으로 Java 프로그래밍 언어로 인터페이스를 생성합니다. 이 인터페이스는
+<code><a href="https://developer.android.com/reference/android/os/Binder.html?hl=ko">Binder</a></code>를 확장하고 AIDL 인터페이스로부터 메서드를 구현하는 <code>Stub</code>라는 내부 추상 클래스를 가지고 있습니다. <code>Stub</code> 클래스를 확장하고
+메서드를 구현해야 합니다.</p>
+    </li>
+    <li><a href="#ExposeTheInterface">클라이언트에게 인터페이스 노출</a>
+      <p><code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ko">Service</a></code>를 구현하고 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ko#onBind(android.content.Intent)">onBind()</a></code>를 재정의하여 <code>Stub</code>
+클래스의 구현을 반환합니다.</p>
+    </li>
+</ol>
+
+<p class="caution"><strong>주의:</strong> 최초 릴리스 후 AIDL 인터페이스를 변경하는 경우, 서비스를 사용하는 다른 애플리케이션이 차단되지 않도록 반드시 이전 버전과의 호환성을 유지해야 합니다.
+
+ 즉, 다른 애플리케이션이 서비스의 인터페이스에 액세스하려면
+<code>.aidl</code> 파일을 복사해야 하기 때문에,
+원래의 인터페이스에 대한 지원을 유지해야 합니다.</p>
+
+
+<h3 id="Create">1. .aidl 파일 생성</h3>
+
+<p>AIDL은 매개변수를 가져와서 값을 반환할 수 있는 하나 이상의 메서드를 사용하여 인터페이스를 선언할 수 있는 간단한 구문을 사용합니다.
+ 다른 AIDL로 생성된 인터페이스를 비롯하여 모든 유형의 매개변수와 반환 값을 사용할 수 있습니다.
+</p>
+
+<p><code>.aidl</code> 파일은 자바 프로그래밍 언어로 작성해야 합니다. 각 <code>.aidl</code>
+파일에서 한 개의 인터페이스만 정의해야 하며, 인터페이스 선언과 메서드 서명만 필요합니다.
+</p>
+
+<p>기본적으로 AIDL은 다음 데이터 유형을 지원합니다.</p>
+
+<ul>
+  <li>Java 프로그래밍 언어의 모든 원시 데이터 유형(예: <code>int</code>, <code>long</code>,
+<code>char</code>, <code>boolean</code> 등)</li>
+  <li><code><a href="https://developer.android.com/reference/java/lang/String.html?hl=ko">String</a></code></li>
+  <li><code><a href="https://developer.android.com/reference/java/lang/CharSequence.html?hl=ko">CharSequence</a></code></li>
+  <li><code><a href="https://developer.android.com/reference/java/util/List.html?hl=ko">List</a></code>
+    <p><code><a href="https://developer.android.com/reference/java/util/List.html?hl=ko">List</a></code>의 모든 요소는 이 목록에 있는 지원 데이터 유형들 중 하나이거나, 다른 AIDL로 생성한 인터페이스이거나, 개발자가 선언한 parcelable이어야 합니다.
+ 선택적으로 <code><a href="https://developer.android.com/reference/java/util/List.html?hl=ko">List</a></code>를 "제네릭" 클래스로 사용할 수 있습니다(예:
+<code>List&lt;String&gt;</code>). 
+메서드가 <code><a href="https://developer.android.com/reference/java/util/ArrayList.html?hl=ko">ArrayList</a></code> 인터페이스를 사용하기 위해 생성되었더라도 상대방이 실제로 받는 구체적인 클래스는 언제나 <code><a href="https://developer.android.com/reference/java/util/List.html?hl=ko">List</a></code>입니다.</p>
+  </li>
+  <li><code><a href="https://developer.android.com/reference/java/util/Map.html?hl=ko">Map</a></code>
+    <p><code><a href="https://developer.android.com/reference/java/util/Map.html?hl=ko">Map</a></code>의 모든 요소는 이 목록에 있는 지원 데이터 유형들 중 하나이거나, 다른 AIDL로 생성한 인터페이스이거나, 개발자가 선언한 parcelable이어야 합니다.
+  <code>Map&lt;String,Integer&gt;</code> 같은
+형태의 제네릭 맵은
+지원되지 않습니다. 메서드가 <code><a href="https://developer.android.com/reference/java/util/Map.html?hl=ko">Map</a></code> 인터페이스를 사용하도록 생성되었더라도 상대방이 실제로 받는 구체적인 클래스는 언제나 <code><a href="https://developer.android.com/reference/java/util/HashMap.html?hl=ko">HashMap</a></code>입니다.
+
+</p>
+  </li>
+</ul>
+
+<p>위에 열거되지 않은 추가 유형의 경우, 인터페이스와 동일한 패키지에 정의되어 있더라도
+<code>import</code> 문을 포함해야 합니다.</p>
+
+<p>서비스 인터페이스를 정의할 때는 다음 사항에 유의하세요.</p>
+<ul>
+  <li>메서드는 0개 이상의 매개변수를 취하고 값 또는 void를 반환할 수 있습니다.</li>
+  <li>모든 비원시 매개변수에는 데이터가 이동하는 방향을 나타내는 방향 태그가 필요합니다.
+방향 태그는 <code>in</code>, <code>out</code> 또는 <code>inout</code>입니다(아래 예 참조).
+    <p>원시 유형은 기본적으로 <code>in</code>이며 다른 유형은 사용할 수 없습니다.</p>
+    <p class="caution"><strong>주의:</strong> 매개변수 마샬링은 시스템 리소스를 상당히 소모하기 때문에 꼭 필요한 대상으로만 방향을 제한해야 합니다.
+</p></li>
+  <li><code>.aidl</code> 파일에 포함된 코드 주석은 import 및 package 문 앞의 주석을 제외하고 모두 생성된 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ko">IBinder</a></code> 인터페이스에 포함됩니다.
+</li>
+    <li>메서드만 지원됩니다. AIDL에서는 정적 필드를 노출할 수 없습니다.</li>
+</ul>
+
+<p>다음은 <code>.aidl</code> 파일의 예입니다.</p>
+
+<pre>
+// IRemoteService.aidl
+package com.example.android;
+
+// Declare any non-default types here with import statements
+
+/** Example service interface */
+interface IRemoteService {
+    /** Request the process ID of this service, to do evil things with it. */
+    int getPid();
+
+    /** Demonstrates some basic types that you can use as parameters
+     * and return values in AIDL.
+     */
+    void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat,
+            double aDouble, String aString);
+}
+</pre>
+
+<p><code>.aidl</code> 파일을 프로젝트의 <code>src/</code> 디렉터리에 저장하면 애플리케이션을 빌드할 때
+SDK 도구가 프로젝트의 <code>gen/</code> 디렉터리에 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ko">IBinder</a></code> 인터페이스를
+생성합니다. 생성되는 파일 이름은 <code>.aidl</code> 파일 이름과 일치하지만 
+<code>.java</code> 확장자를 가집니다(예를 들어, <code>IRemoteService.aidl</code>은 <code>IRemoteService.java</code>.</p>
+
+<p>Android Studio를 사용하는 경우, 증분 빌드는 거의 즉시로 바인더 클래스를 생성합니다.
+Android Studio를 사용하지 않는 경우, 다음에 애플리케이션을 빌드할 때
+Gradle 도구가 바인더 클래스를 생성합니다. <code>.aidl</code> 파일 작성을 끝내는 즉시
+<code>gradle assembleDebug</code>(또는 <code>gradle assembleRelease</code>)로 프로젝트를 빌드해야,
+생성된 클래스에 코드가 연결할 수 있습니다.</p>
+
+
+<h3 id="Implement">2. 인터페이스 구현</h3>
+
+<p>애플리케이션을 빌드할 때 Android SDK 도구는 <code>.aidl</code> 파일 이름을 딴
+<code>.java</code> 인터페이스 파일을 생성합니다. 생성되는 인터페이스는 상위 인터페이스의 추상 구현인 <code>Stub</code>
+라는 서브클래스를 포함하며(예:  <code>YourInterface.Stub</code>), <code>.aidl</code> 파일에 있는 모든 메서드를 선언합니다.</p>
+
+<p class="note"><strong>참고:</strong> <code>Stub</code>은
+몇 개의 도우미 메서드도 정의합니다. 그 중에서 가장 주목할 메서드는 <code>asInterface()</code>이며, 이것은 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ko">IBinder</a></code> 메서드(대개 클라이언트의 <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html?hl=ko#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code> 콜백 메서드에 전달되는 메서드)를 취하고 스텁 인터페이스의 인스턴스를
+ 반환합니다. 이 캐스트를 만드는 자세한 방법은 <a href="#Calling">IPC
+ 메서드 호출</a> 섹션을 참조하세요.</p>
+
+<p><code>.aidl</code>로부터 생성된 인터페이스를 구현하려면, 생성된 <code><a href="https://developer.android.com/reference/android/os/Binder.html?hl=ko">Binder</a></code> 인터페이스(예: <code>YourInterface.Stub</code>)를 확장하고 <code>.aidl</code> 파일에서
+상속한 메서드를 구현합니다.</p>
+
+<p>아래의 코드는 익명의 인스턴스를 사용하여 (위의
+<code>IRemoteService.aidl</code> 예시에서 정의된) <code>IRemoteService</code>라는 인터페이스를 구현하는 예시입니다.</p>
+
+<pre>
+private final IRemoteService.Stub mBinder = new IRemoteService.Stub() {
+    public int getPid(){
+        return Process.myPid();
+    }
+    public void basicTypes(int anInt, long aLong, boolean aBoolean,
+        float aFloat, double aDouble, String aString) {
+        // Does nothing
+    }
+};
+</pre>
+
+<p>이제 <code>mBinder</code>는 <code>Stub</code> 클래스의 인스턴스이며(<code><a href="https://developer.android.com/reference/android/os/Binder.html?hl=ko">Binder</a></code>),
+서비스의 RPC 인터페이스를 정의합니다. 다음 단계에서는 이 인스턴스를 클라이언트에 노출하여 서비스와 상호작용할 수 있도록 합니다.
+</p>
+
+<p>AIDL 인터페이스를 구현할 때 알아두어야 할 몇 가지 규칙이 있습니다. </p>
+<ul>
+    <li>들어오는 호출이 메인 스레드에서 실행된다는 보장이 없으므로, 처음부터 멀티스레딩을 염두에 두고 서비스가 스레드로부터 안전하도록 적절히 빌드해야 합니다.
+</li>
+    <li>기본적으로 RPC 호출은 동기적입니다. 서비스가 요청을 완료하는데 몇
+밀리초 이상 걸린다는 것을 알고 있다면 액티비티의 메인 스레드에서 호출해서는 안됩니다.
+애플리케이션 작동이 중단될 수도 있기 때문입니다(Android가 "애플리케이션이 응답하지 않습니다"라는
+메시지를 표시할 수도 있습니다). 클라이언트에서 별도의 스레드에서 호출해야 합니다. </li>
+    <li>어떤 예외가 발생해도 호출자에게 되돌려 보내지 않습니다.</li>
+</ul>
+
+
+<h3 id="Expose">3. 클라이언트에게 인터페이스 노출</h3>
+
+<p>서비스의 인터페이스를 구현한 후에는 클라이언트가 바인딩할 수 있도록 노출해야 합니다.
+ (이전 섹션에서 설명한 것처럼) 서비스의 인터페이스를
+노출하려면 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ko">Service</a></code>를 확장하고 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ko#onBind(android.content.Intent)">onBind()</a></code>를 구현하여
+ 생성된 <code>Stub</code>을 구현하는 클래스의 인스턴스를 반환합니다. 다음은
+<code>IRemoteService</code> 예제 인터페이스를 클라이언트에게 노출하는 서비스의 예입니다. </p>
+
+<pre>
+public class RemoteService extends Service {
+    &#64;Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
+    &#64;Override
+    public IBinder onBind(Intent intent) {
+        // Return the interface
+        return mBinder;
+    }
+
+    private final IRemoteService.Stub mBinder = new IRemoteService.Stub() {
+        public int getPid(){
+            return Process.myPid();
+        }
+        public void basicTypes(int anInt, long aLong, boolean aBoolean,
+            float aFloat, double aDouble, String aString) {
+            // Does nothing
+        }
+    };
+}
+</pre>
+
+<p>이제 클라이언트(액티비티 등)가 이 서비스에 연결하기 위해 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>를 호출하면, 해당 클라이언트의 <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html?hl=ko#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code> 콜백이 서비스의 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ko#onBind(android.content.Intent)">onBind()</a></code>
+메서드가 반환하는
+<code>mBinder</code> 인스턴스를 받습니다.</p>
+
+<p>클라이언트는 인터페이스 클래스에 대한 액세스 권한도 가져야 하므로, 클라이언트와 서비스가
+별도의 애플리케이션에 있는 경우, 클라이언트의 애플리케이션은 (AIDL 메서드에 대한 클라이언트 액세스 권한을 제공하는 <code>android.os.Binder</code>
+ 인터페이스를 생성하는) <code>.aidl</code> 파일의 사본을
+<code>src/</code> 디렉터리에 가져야 합니다.</p>
+
+<p>클라이언트가 <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html?hl=ko#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code> 콜백에서 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ko">IBinder</a></code>를 받으면,
+<code><em>YourServiceInterface</em>.Stub.asInterface(service)</code>를 호출하여 반환된
+매개변수를 <code><em>YourServiceInterface</em></code> 유형으로 형변환해야 합니다. 예:</p>
+
+<pre>
+IRemoteService mIRemoteService;
+private ServiceConnection mConnection = new ServiceConnection() {
+    // Called when the connection with the service is established
+    public void onServiceConnected(ComponentName className, IBinder service) {
+        // Following the example above for an AIDL interface,
+        // this gets an instance of the IRemoteInterface, which we can use to call on the service
+        mIRemoteService = IRemoteService.Stub.asInterface(service);
+    }
+
+    // Called when the connection with the service disconnects unexpectedly
+    public void onServiceDisconnected(ComponentName className) {
+        Log.e(TAG, "Service has unexpectedly disconnected");
+        mIRemoteService = null;
+    }
+};
+</pre>
+
+<p>추가 샘플 코드는 <a href="https://developer.android.com/resources/samples/ApiDemos/index.html?hl=ko">ApiDemos</a>의 <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/app/RemoteService.html?hl=ko"><code>RemoteService.java</code></a> 클래스를 참조하세요.</p>
+
+
+
+
+
+
+
+
+<h2 id="PassingObjects"> IPC를 통해 객체 전달</h2>
+
+<p>IPC 인터페이스를 통해 한 프로세스에서 다른 프로세스로 보내려는 클래스가 있다면, 그렇게 할 수 있습니다.
+ 그렇지만, IPC 채널의 상대방이 클래스의 코드를
+사용할 수 있도록 하고, 클래스가 <code><a href="https://developer.android.com/reference/android/os/Parcelable.html?hl=ko">Parcelable</a></code> 인터페이스를 지원해야 합니다. <code><a href="https://developer.android.com/reference/android/os/Parcelable.html?hl=ko">Parcelable</a></code> 인터페이스를 지원하는 것은 Android 시스템이 객체를 프로세스 전체에 걸쳐 마샬링할 수 있는 원시 유형으로 해체할 수 있도록 하기 때문에 중요합니다.
+
+</p>
+
+<p><code><a href="https://developer.android.com/reference/android/os/Parcelable.html?hl=ko">Parcelable</a></code> 프로토콜을 지원하는 클래스를 만들려면 다음과 같이
+해야 합니다.</b>
+<ol>
+<li>클래스에서 <code><a href="https://developer.android.com/reference/android/os/Parcelable.html?hl=ko">Parcelable</a></code> 인터페이스를 구현합니다.</li>
+<li>객체의 현재 상태를 취해 <code><a href="https://developer.android.com/reference/android/os/Parcel.html?hl=ko">Parcel</a></code>에 기록하는 <code><a href="https://developer.android.com/reference/android/os/Parcelable.html?hl=ko#writeToParcel(android.os.Parcel, int)">writeToParcel</a></code>을 구현합니다.
+</li>
+<li><code><a href="https://developer.android.com/reference/android/os/Parcelable.Creator.html?hl=ko">Parcelable.Creator</a></code> 인터페이스를 구현하는 객체인 클래스에 <code>CREATOR</code>라는 정적 필드를 추가합니다.
+</li>
+<li>마지막으로, parcelable 클래스를 선언하는 <code>.aidl</code> 파일을 생성합니다(아래의
+<code>Rect.aidl</code> 파일 참조).
+  <p>사용자 지정 빌드 프로세스를 사용하는 경우, 빌드에 <code>.aidl</code> 파일을 추가하지 <em>마세요</em>.
+ C 언어의 헤더 파일과 마찬가지로 이 <code>.aidl</code> 파일은 컴파일되지 않습니다.</p></li>
+</ol>
+
+<p>AIDL은 코드에서 이러한 메서드와 필드를 사용하여 객체를 마샬링하거나 마샬링을 취소합니다.
+</p>
+
+<p>예를 들면, 아래는 parcelable 클래스 <code>Rect</code>를 만들기 위한 <code>Rect.aidl</code> 파일입니다.
+</p>
+
+<pre>
+package android.graphics;
+
+// Declare Rect so AIDL can find it and knows that it implements
+// the parcelable protocol.
+parcelable Rect;
+</pre>
+
+<p>그리고 다음은 <code><a href="https://developer.android.com/reference/android/graphics/Rect.html?hl=ko">Rect</a></code> 클래스가 어떻게 <code><a href="https://developer.android.com/reference/android/os/Parcelable.html?hl=ko">Parcelable</a></code>프로토콜을 구현하는지 보여주는 예입니다.
+</p>
+
+<pre>
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public final class Rect implements Parcelable {
+    public int left;
+    public int top;
+    public int right;
+    public int bottom;
+
+    public static final Parcelable.Creator&lt;Rect&gt; CREATOR = new
+Parcelable.Creator&lt;Rect&gt;() {
+        public Rect createFromParcel(Parcel in) {
+            return new Rect(in);
+        }
+
+        public Rect[] newArray(int size) {
+            return new Rect[size];
+        }
+    };
+
+    public Rect() {
+    }
+
+    private Rect(Parcel in) {
+        readFromParcel(in);
+    }
+
+    public void writeToParcel(Parcel out) {
+        out.writeInt(left);
+        out.writeInt(top);
+        out.writeInt(right);
+        out.writeInt(bottom);
+    }
+
+    public void readFromParcel(Parcel in) {
+        left = in.readInt();
+        top = in.readInt();
+        right = in.readInt();
+        bottom = in.readInt();
+    }
+}
+</pre>
+
+<p><code>Rect</code> 클래스에서의 마샬링은 아주 간단합니다.  <code><a href="https://developer.android.com/reference/android/os/Parcel.html?hl=ko">Parcel</a></code>의 다른
+메서드들을 살펴보고 Parcel에 쓸 수 있는 다른 종류의 값이 있는지 확인해
+보세요.</p>
+
+<p class="warning"><strong>경고:</strong> 다른 프로세스로부터 데이터를 수신하면 보안에 영향을 줄 수 있다는 점에 유의하세요.
+  이 경우 <code>Rect</code>는 <code><a href="https://developer.android.com/reference/android/os/Parcel.html?hl=ko">Parcel</a></code>로부터 4개의 숫자를 읽어오는데, 이
+값이 호출자가 의도하는 값의 범위 내에 있는지 확인하는 것은 여러분의 몫입니다.  <a href="https://developer.android.com/training/articles/security-tips.html?hl=ko">보안 및 권한</a>에서 애플리케이션을 악성 코드로부터 안전하게 지키는 방법에 대해 알아보세요.
+</p>
+
+
+
+<h2 id="Calling">IPC 메서드 호출</h2>
+
+<p>AIDL로 정의한 원격 인터페이스를 호출할 때, 호출하는 클래스는 반드시 다음 단계를 따라야 합니다. </p>
+<ol>
+    <li>프로젝트 <code>src/</code> 디렉터리의 <code>.aidl</code> 파일을 포함합니다.</li>
+    <li>AIDL을 기반으로 생성된 <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ko">IBinder</a></code> 인터페이스의 인스턴스를 선언합니다.
+ </li>
+    <li><code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html?hl=ko">ServiceConnection</a></code>을 구현합니다. </li>
+    <li>{@linkandroid.content.Context#bindService(android.content.Intent,android.content.ServiceConnection,int)
+        Context.bindService()}를 호출하고, <code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html?hl=ko">ServiceConnection</a></code> 구현에서 전달합니다. </li>
+    <li><code><a href="https://developer.android.com/reference/android/content/ServiceConnection.html?hl=ko#onServiceConnected(android.content.ComponentName, android.os.IBinder)">onServiceConnected()</a></code> 구현에서 
+ <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ko">IBinder</a></code> 인스턴스(<code>service</code>)를 받으실 것입니다. 
+<code><em>YourInterfaceName</em>.Stub.asInterface((IBinder)<em>service</em>)</code>를
+호출하여 반환된 매개변수를 <em>YourInterface</em> 유형으로 캐스팅합니다.</li>
+    <li>인터페이스에서 정의한 메서드를 호출합니다. 항상
+<code><a href="https://developer.android.com/reference/android/os/DeadObjectException.html?hl=ko">DeadObjectException</a></code> 예외를 처리해야 합니다. 이 예외는 연결이 끊어지면 발생하며, 원격 메서드에 의해 발생하는 유일한 예외입니다.
+
+</li>
+    <li>연결을 끊으려면 인터페이스의 인스턴스를 사용하여 <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=ko#unbindService(android.content.ServiceConnection)">Context.unbindService()</a></code>를 호출합니다. </li>
+</ol>
+<p>IPC 서비스 호출에 대한 코멘트 몇 가지:</p>
+<ul>
+    <li>객체는 여러 프로세스에 걸쳐 카운트되는 참조입니다. </li>
+    <li>익명의 객체를 메서드 인수로 보낼 수 있습니다.
+ </li>
+</ul>
+
+<p>서비스에 바인딩하는 자세한 방법은 <a href="bound-services232e.html?hl=ko#Binding">바인드된 서비스</a> 문서를 참조하세요.
+</p>
+
+<p>다음은 AIDL로 생성된 서비스 호출을 보여주는 몇 가지 샘플 코드로, ApiDemos 프로젝트의 Remote Service 샘플에서 발췌했습니다.
+</p>
+<p><pre>public static class Binding extends Activity {
+    /** The primary interface we will be calling on the service. */
+    IRemoteService mService = null;
+    /** Another interface we use on the service. */
+    ISecondary mSecondaryService = null;
+
+    Button mKillButton;
+    TextView mCallbackText;
+
+    private boolean mIsBound;
+
+    /**
+     * Standard initialization of this activity.  Set up the UI, then wait
+     * for the user to poke it before doing anything.
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.remote_service_binding);
+
+        // Watch for button clicks.
+        Button button = (Button)findViewById(R.id.bind);
+        button.setOnClickListener(mBindListener);
+        button = (Button)findViewById(R.id.unbind);
+        button.setOnClickListener(mUnbindListener);
+        mKillButton = (Button)findViewById(R.id.kill);
+        mKillButton.setOnClickListener(mKillListener);
+        mKillButton.setEnabled(false);
+
+        mCallbackText = (TextView)findViewById(R.id.callback);
+        mCallbackText.setText("Not attached.");
+    }
+
+    /**
+     * Class for interacting with the main interface of the service.
+     */
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className,
+                IBinder service) {
+            // This is called when the connection with the service has been
+            // established, giving us the service object we can use to
+            // interact with the service.  We are communicating with our
+            // service through an IDL interface, so get a client-side
+            // representation of that from the raw service object.
+            mService = IRemoteService.Stub.asInterface(service);
+            mKillButton.setEnabled(true);
+            mCallbackText.setText("Attached.");
+
+            // We want to monitor the service for as long as we are
+            // connected to it.
+            try {
+                mService.registerCallback(mCallback);
+            } catch (RemoteException e) {
+                // In this case the service has crashed before we could even
+                // do anything with it; we can count on soon being
+                // disconnected (and then reconnected if it can be restarted)
+                // so there is no need to do anything here.
+            }
+
+            // As part of the sample, tell the user what happened.
+            Toast.makeText(Binding.this, R.string.remote_service_connected,
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            // This is called when the connection with the service has been
+            // unexpectedly disconnected -- that is, its process crashed.
+            mService = null;
+            mKillButton.setEnabled(false);
+            mCallbackText.setText("Disconnected.");
+
+            // As part of the sample, tell the user what happened.
+            Toast.makeText(Binding.this, R.string.remote_service_disconnected,
+                    Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    /**
+     * Class for interacting with the secondary interface of the service.
+     */
+    private ServiceConnection mSecondaryConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className,
+                IBinder service) {
+            // Connecting to a secondary interface is the same as any
+            // other interface.
+            mSecondaryService = ISecondary.Stub.asInterface(service);
+            mKillButton.setEnabled(true);
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            mSecondaryService = null;
+            mKillButton.setEnabled(false);
+        }
+    };
+
+    private OnClickListener mBindListener = new OnClickListener() {
+        public void onClick(View v) {
+            // Establish a couple connections with the service, binding
+            // by interface names.  This allows other applications to be
+            // installed that replace the remote service by implementing
+            // the same interface.
+            Intent intent = new Intent(Binding.this, RemoteService.class);
+            intent.setAction(IRemoteService.class.getName());
+            bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+            intent.setAction(ISecondary.class.getName());
+            bindService(intent, mSecondaryConnection, Context.BIND_AUTO_CREATE);
+            mIsBound = true;
+            mCallbackText.setText("Binding.");
+        }
+    };
+
+    private OnClickListener mUnbindListener = new OnClickListener() {
+        public void onClick(View v) {
+            if (mIsBound) {
+                // If we have received the service, and hence registered with
+                // it, then now is the time to unregister.
+                if (mService != null) {
+                    try {
+                        mService.unregisterCallback(mCallback);
+                    } catch (RemoteException e) {
+                        // There is nothing special we need to do if the service
+                        // has crashed.
+                    }
+                }
+
+                // Detach our existing connection.
+                unbindService(mConnection);
+                unbindService(mSecondaryConnection);
+                mKillButton.setEnabled(false);
+                mIsBound = false;
+                mCallbackText.setText("Unbinding.");
+            }
+        }
+    };
+
+    private OnClickListener mKillListener = new OnClickListener() {
+        public void onClick(View v) {
+            // To kill the process hosting our service, we need to know its
+            // PID.  Conveniently our service has a call that will return
+            // to us that information.
+            if (mSecondaryService != null) {
+                try {
+                    int pid = mSecondaryService.getPid();
+                    // Note that, though this API allows us to request to
+                    // kill any process based on its PID, the kernel will
+                    // still impose standard restrictions on which PIDs you
+                    // are actually able to kill.  Typically this means only
+                    // the process running your application and any additional
+                    // processes created by that app as shown here; packages
+                    // sharing a common UID will also be able to kill each
+                    // other's processes.
+                    Process.killProcess(pid);
+                    mCallbackText.setText("Killed service process.");
+                } catch (RemoteException ex) {
+                    // Recover gracefully from the process hosting the
+                    // server dying.
+                    // Just for purposes of the sample, put up a notification.
+                    Toast.makeText(Binding.this,
+                            R.string.remote_call_failed,
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    };
+
+    // ----------------------------------------------------------------------
+    // Code showing how to deal with callbacks.
+    // ----------------------------------------------------------------------
+
+    /**
+     * This implementation is used to receive callbacks from the remote
+     * service.
+     */
+    private IRemoteServiceCallback mCallback = new IRemoteServiceCallback.Stub() {
+        /**
+         * This is called by the remote service regularly to tell us about
+         * new values.  Note that IPC calls are dispatched through a thread
+         * pool running in each process, so the code executing here will
+         * NOT be running in our main thread like most other things -- so,
+         * to update the UI, we need to use a Handler to hop over there.
+         */
+        public void valueChanged(int value) {
+            mHandler.sendMessage(mHandler.obtainMessage(BUMP_MSG, value, 0));
+        }
+    };
+
+    private static final int BUMP_MSG = 1;
+
+    private Handler mHandler = new Handler() {
+        @Override public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case BUMP_MSG:
+                    mCallbackText.setText("Received from service: " + msg.arg1);
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+
+    };
+}</pre></p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=ko" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="블로그" target="_blank">블로그</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=ko" title="지원">지원</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=ko" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=ko" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=ko" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=ko" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="jMogFngX65tSez-sR9gUZfFHGdIDCzCe3I2p7ec8QSk6MTQ5NzUxNjQ4MDIwNzQ3MA" />
+      <input type="hidden" name="next" value="/guide/components/aidl.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+             selected="selected" >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">이메일 주소</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../ytblogger_lists_unifiedee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../android_metadata_enee8c.js?hl=ko?v=2017061508" defer></script>
+  
+  <script src="../../reference/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../reference/gms_listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../reference/android/support/wearable/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../reference/android/support/test/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../reference/android/support/constraint/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=ko"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_ko.js?hl=ko?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/components/aidl.html?hl=ko by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:08:36 GMT -->
+</html>

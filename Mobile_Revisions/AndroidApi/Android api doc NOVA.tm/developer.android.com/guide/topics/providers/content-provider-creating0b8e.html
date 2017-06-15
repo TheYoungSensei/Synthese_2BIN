@@ -1,0 +1,2155 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/content-provider-creating.html?hl=zh-cn by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:14:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="DEOFkF0rT2DJ9_JW_EG8FI1nzSI3pI6GYOGI57G9kG06MTQ5NzUxNjk5MjQ1NDU4MA" />
+
+  
+    <link rel="canonical" href="content-provider-creating0b8e.html?hl=zh-cn">
+  
+
+  
+    <link rel="alternate" href="content-provider-creating327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="content-provider-creatingf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="content-provider-creating9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="content-provider-creating7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="content-provider-creating0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="content-provider-creating9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="content-provider-creatingde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="content-provider-creating0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="content-provider-creating232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="content-provider-creating6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="content-provider-creating.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-creating.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="content-provider-creating.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon0b8e.png?hl=zh-cn">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1800b8e.png?hl=zh-cn">
+
+
+<title>
+
+  创建内容提供程序 | Android Developers
+
+</title>
+
+  <meta name="description" content="A content provider manages access to a central repository of data. You implement a provider as one or more classes in an Android application, along with elements in the manifest file. One of your classes implements a subclass ContentProvider, which is…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default414d.css?hl=zh-cn?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle0b8e.js?hl=zh-cn" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__zh_cn0b8e.js?hl=zh-cn"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android0b8e.js?hl=zh-cn"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs414d.js?hl=zh-cn?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-cn&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;zh-cn&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "zh-cn", "served": "zh-cn"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=zh-cn">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo0b8e.png?hl=zh-cn"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=zh-cn"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=zh-cn"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=zh-cn"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=zh-cn"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=zh-cn" width="18" height="19" alt="Play 控制台">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="搜索">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">返回</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index0b8e.html?hl=zh-cn" >简介</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals0b8e.html?hl=zh-cn" >应用基础知识</a></li><li><a href="../../practices/compatibility0b8e.html?hl=zh-cn" >设备兼容性</a></li><li><a href="../security/permissions0b8e.html?hl=zh-cn" >系统权限</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index0b8e.html?hl=zh-cn" >平台架构</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack0b8e.html?hl=zh-cn"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 の機能" zh-tw-lang="Java 8 の機能">使用 Java 8 语言功能</a></li><li><a href="../../practices/verifying-apps-art0b8e.html?hl=zh-cn" >在 Android Runtime (ART) 上验证应用行为</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index0b8e.html?hl=zh-cn" >应用组件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters0b8e.html?hl=zh-cn" >Intent 和 Intent 过滤器</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common0b8e.html?hl=zh-cn" >通用 Intent</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities0b8e.html?hl=zh-cn" >Activity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments0b8e.html?hl=zh-cn" >片段</a></li><li><a href="../../components/loaders0b8e.html?hl=zh-cn" >加载器</a></li><li><a href="../../components/tasks-and-back-stack0b8e.html?hl=zh-cn" >任务和返回栈</a></li><li><a href="../../components/recents0b8e.html?hl=zh-cn" >概览屏幕</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services0b8e.html?hl=zh-cn" >服务</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services0b8e.html?hl=zh-cn" >绑定服务</a></li><li><a href="../../components/aidl0b8e.html?hl=zh-cn" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="content-providers0b8e.html?hl=zh-cn" >内容提供程序</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="content-provider-basics0b8e.html?hl=zh-cn" >内容提供程序基础知识</a></li><li><a href="content-provider-creating0b8e.html?hl=zh-cn" >创建内容提供程序</a></li><li><a href="calendar-provider0b8e.html?hl=zh-cn" >日历提供程序</a></li><li><a href="contacts-provider0b8e.html?hl=zh-cn" >联系人提供程序</a></li><li><a href="document-provider0b8e.html?hl=zh-cn" >存储访问框架</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index0b8e.html?hl=zh-cn" >应用小部件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host0b8e.html?hl=zh-cn" >应用小部件主机</a></li></ul></li><li><a href="../../components/processes-and-threads0b8e.html?hl=zh-cn" >进程和线程</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index0b8e.html?hl=zh-cn" >应用资源</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview0b8e.html?hl=zh-cn" >概览</a></li><li><a href="../resources/providing-resources0b8e.html?hl=zh-cn" >提供资源</a></li><li><a href="../resources/accessing-resources0b8e.html?hl=zh-cn" >访问资源</a></li><li><a href="../resources/runtime-changes0b8e.html?hl=zh-cn" >处理运行时变更</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization0b8e.html?hl=zh-cn" >本地化</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework0b8e.html?hl=zh-cn" >ICU4J Android 框架 API</a></li><li><a href="../resources/multilingual-support0b8e.html?hl=zh-cn" >语言和语言区域</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources0b8e.html?hl=zh-cn" >资源类型</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource0b8e.html?hl=zh-cn" >动画</a></li><li><a href="../resources/color-list-resource0b8e.html?hl=zh-cn" >颜色状态列表</a></li><li><a href="../resources/drawable-resource0b8e.html?hl=zh-cn" >可绘制对象</a></li><li><a href="../resources/layout-resource0b8e.html?hl=zh-cn" >布局</a></li><li><a href="../resources/menu-resource0b8e.html?hl=zh-cn" >菜单</a></li><li><a href="../resources/string-resource0b8e.html?hl=zh-cn" >字符串</a></li><li><a href="../resources/style-resource0b8e.html?hl=zh-cn" >样式</a></li><li><a href="../resources/more-resources0b8e.html?hl=zh-cn" >其他类型</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro0b8e.html?hl=zh-cn" >应用清单</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element0b8e.html?hl=zh-cn" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element0b8e.html?hl=zh-cn" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element0b8e.html?hl=zh-cn" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element0b8e.html?hl=zh-cn" >&lt;application&gt;</a></li><li><a href="../manifest/category-element0b8e.html?hl=zh-cn" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element0b8e.html?hl=zh-cn" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element0b8e.html?hl=zh-cn" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element0b8e.html?hl=zh-cn" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element0b8e.html?hl=zh-cn" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element0b8e.html?hl=zh-cn" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element0b8e.html?hl=zh-cn" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element0b8e.html?hl=zh-cn" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element0b8e.html?hl=zh-cn" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element0b8e.html?hl=zh-cn" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element0b8e.html?hl=zh-cn" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element0b8e.html?hl=zh-cn" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element0b8e.html?hl=zh-cn" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element0b8e.html?hl=zh-cn" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element0b8e.html?hl=zh-cn" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element0b8e.html?hl=zh-cn" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element0b8e.html?hl=zh-cn" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element0b8e.html?hl=zh-cn" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element0b8e.html?hl=zh-cn" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element0b8e.html?hl=zh-cn" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element0b8e.html?hl=zh-cn" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element0b8e.html?hl=zh-cn" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element0b8e.html?hl=zh-cn" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index0b8e.html?hl=zh-cn" >用户界面</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview0b8e.html?hl=zh-cn" >概览</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout0b8e.html?hl=zh-cn" >布局</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear0b8e.html?hl=zh-cn" >线性布局</a></li><li><a href="../ui/layout/relative0b8e.html?hl=zh-cn" >相对布局</a></li><li><a href="../ui/layout/listview0b8e.html?hl=zh-cn" >列表视图</a></li><li><a href="../ui/layout/gridview0b8e.html?hl=zh-cn" >网格视图</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls0b8e.html?hl=zh-cn" >输入控件</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button0b8e.html?hl=zh-cn" >按钮</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=zh-cn" >文本字段</a></li><li><a href="../ui/controls/checkbox0b8e.html?hl=zh-cn" >复选框</a></li><li><a href="../ui/controls/radiobutton0b8e.html?hl=zh-cn" >单选按钮</a></li><li><a href="../ui/controls/togglebutton0b8e.html?hl=zh-cn" >切换按钮</a></li><li><a href="../ui/controls/spinner0b8e.html?hl=zh-cn" >微调框</a></li><li><a href="../ui/controls/pickers0b8e.html?hl=zh-cn" >选取器</a></li></ul></li><li><a href="../ui/ui-events0b8e.html?hl=zh-cn" >输入事件</a></li><li><a href="../ui/menus0b8e.html?hl=zh-cn" >菜单</a></li><li><a href="../ui/settings0b8e.html?hl=zh-cn" >设置</a></li><li><a href="../ui/dialogs0b8e.html?hl=zh-cn" >对话框</a></li><li><a href="../ui/notifiers/notifications0b8e.html?hl=zh-cn" >通知</a></li><li><a href="../ui/notifiers/toasts0b8e.html?hl=zh-cn" >Toast</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index0b8e.html?hl=zh-cn" >搜索</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog0b8e.html?hl=zh-cn" >创建搜索界面</a></li><li><a href="../search/adding-recent-query-suggestions0b8e.html?hl=zh-cn" >添加近期查询建议</a></li><li><a href="../search/adding-custom-suggestions0b8e.html?hl=zh-cn" >添加自定义建议</a></li><li><a href="../search/searchable-config0b8e.html?hl=zh-cn" >可搜索配置</a></li></ul></li><li><a href="../ui/multi-window0b8e.html?hl=zh-cn" >多窗口支持</a></li><li><a href="../ui/drag-drop0b8e.html?hl=zh-cn" >拖放</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index0b8e.html?hl=zh-cn" >无障碍功能</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps0b8e.html?hl=zh-cn" >为应用设置无障碍功能</a></li><li><a href="../ui/accessibility/checklist0b8e.html?hl=zh-cn" >无障碍功能开发者检查单</a></li><li><a href="../ui/accessibility/services0b8e.html?hl=zh-cn" >构建无障碍服务</a></li></ul></li><li><a href="../ui/themes0b8e.html?hl=zh-cn" >样式和主题</a></li><li><a href="../ui/custom-components0b8e.html?hl=zh-cn" >自定义组件</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index0b8e.html?hl=zh-cn" >动画和图形</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview0b8e.html?hl=zh-cn" >概览</a></li><li><a href="../graphics/prop-animation0b8e.html?hl=zh-cn" >属性动画</a></li><li><a href="../graphics/view-animation0b8e.html?hl=zh-cn" >视图动画</a></li><li><a href="../graphics/drawable-animation0b8e.html?hl=zh-cn" >可绘制动画</a></li><li><a href="../graphics/2d-graphics0b8e.html?hl=zh-cn" >画布和可绘制对象</a></li><li><a href="../graphics/opengl0b8e.html?hl=zh-cn" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel0b8e.html?hl=zh-cn" >硬件加速</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index0b8e.html?hl=zh-cn" >计算</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute0b8e.html?hl=zh-cn" >RenderScript</a></li><li><a href="../renderscript/advanced0b8e.html?hl=zh-cn" >高级 RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview0b8e.html?hl=zh-cn" >Runtime API 参考</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types0b8e.html?hl=zh-cn" >数字类型</a></li><li><a href="../renderscript/reference/rs_object_types0b8e.html?hl=zh-cn" >对象类型</a></li><li><a href="../renderscript/reference/rs_convert0b8e.html?hl=zh-cn" >转换函数</a></li><li><a href="../renderscript/reference/rs_math0b8e.html?hl=zh-cn" >数学常量和函数</a></li><li><a href="../renderscript/reference/rs_vector_math0b8e.html?hl=zh-cn" >矢量数学函数</a></li><li><a href="../renderscript/reference/rs_matrix0b8e.html?hl=zh-cn" >矩阵函数</a></li><li><a href="../renderscript/reference/rs_quaternion0b8e.html?hl=zh-cn" >四元数函数</a></li><li><a href="../renderscript/reference/rs_atomic0b8e.html?hl=zh-cn" >原子更新函数</a></li><li><a href="../renderscript/reference/rs_time0b8e.html?hl=zh-cn" >时间函数和类型</a></li><li><a href="../renderscript/reference/rs_allocation_data0b8e.html?hl=zh-cn" >分配数据访问函数</a></li><li><a href="../renderscript/reference/rs_object_info0b8e.html?hl=zh-cn" >对象特性函数</a></li><li><a href="../renderscript/reference/rs_for_each0b8e.html?hl=zh-cn" >内核调用函数和类型</a></li><li><a href="../renderscript/reference/rs_io0b8e.html?hl=zh-cn" >输入/输出函数</a></li><li><a href="../renderscript/reference/rs_debug0b8e.html?hl=zh-cn" >调试函数</a></li><li><a href="../renderscript/reference/rs_graphics0b8e.html?hl=zh-cn" >图形函数和类型</a></li><li><a href="../renderscript/reference/index0b8e.html?hl=zh-cn" >索引</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index0b8e.html?hl=zh-cn" >媒体和相机</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer0b8e.html?hl=zh-cn" >媒体回放</a></li><li><a href="../media/mediarouter0b8e.html?hl=zh-cn" >媒体路由器</a></li><li><a href="../media/mediarouteprovider0b8e.html?hl=zh-cn" >媒体路由提供程序</a></li><li><a href="../media/exoplayer0b8e.html?hl=zh-cn" >ExoPlayer</a></li><li><a href="../media/media-formats0b8e.html?hl=zh-cn" >支持的媒体格式</a></li><li><a href="../media/mediarecorder0b8e.html?hl=zh-cn" >音频采集</a></li><li><a href="../media/jetplayer0b8e.html?hl=zh-cn" >JetPlayer</a></li><li><a href="../media/camera0b8e.html?hl=zh-cn" >相机</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index0b8e.html?hl=zh-cn" >位置和传感器</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index0b8e.html?hl=zh-cn" >位置和地图</a></li><li><a href="../location/strategies0b8e.html?hl=zh-cn" >位置策略</a></li><li><a href="../sensors/sensors_overview0b8e.html?hl=zh-cn" >传感器概览</a></li><li><a href="../sensors/sensors_motion0b8e.html?hl=zh-cn" >运动传感器</a></li><li><a href="../sensors/sensors_position0b8e.html?hl=zh-cn" >位置传感器</a></li><li><a href="../sensors/sensors_environment0b8e.html?hl=zh-cn" >环境传感器</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index0b8e.html?hl=zh-cn" >连接</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth0b8e.html?hl=zh-cn" >蓝牙</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le0b8e.html?hl=zh-cn" >蓝牙低功耗</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index0b8e.html?hl=zh-cn" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc0b8e.html?hl=zh-cn" >NFC 基础知识</a></li><li><a href="../connectivity/nfc/advanced-nfc0b8e.html?hl=zh-cn" >高级 NFC</a></li><li><a href="../connectivity/nfc/hce0b8e.html?hl=zh-cn" >基于主机的卡模拟</a></li></ul></li><li><a href="../connectivity/wifip2p0b8e.html?hl=zh-cn" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index0b8e.html?hl=zh-cn" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory0b8e.html?hl=zh-cn" >配件</a></li><li><a href="../connectivity/usb/host0b8e.html?hl=zh-cn" >主机</a></li></ul></li><li><a href="../connectivity/sip0b8e.html?hl=zh-cn" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index0b8e.html?hl=zh-cn" >文本和输入</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste0b8e.html?hl=zh-cn" >复制和粘贴</a></li><li><a href="../text/creating-input-method0b8e.html?hl=zh-cn" >创建 IME</a></li><li><a href="../text/spell-checker-framework0b8e.html?hl=zh-cn" >拼写检查程序</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index0b8e.html?hl=zh-cn" >数据存储</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage0b8e.html?hl=zh-cn" >存储选项</a></li><li><a href="../data/backup0b8e.html?hl=zh-cn" >数据备份</a></li><li><a href="../data/install-location0b8e.html?hl=zh-cn" >应用安装位置</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=zh-cn" >库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=zh-cn" >支持库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=zh-cn" >功能</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=zh-cn" >设置</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=zh-cn" >修订历史记录</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=zh-cn" >数据绑定库</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=zh-cn" >测试支持库</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=zh-cn" >API 参考</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index0b8e.html?hl=zh-cn" >管理</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin0b8e.html?hl=zh-cn" >设备政策</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index0b8e.html?hl=zh-cn" >网络应用</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting0b8e.html?hl=zh-cn" >在网络应用中支持不同屏幕</a></li><li><a href="../../webapps/webview0b8e.html?hl=zh-cn" >在 WebView 中构建网络应用</a></li><li><a href="../../webapps/migrating0b8e.html?hl=zh-cn" >迁移到 Android 4.4 中的 WebView</a></li><li><a href="../../webapps/debugging0b8e.html?hl=zh-cn" >调试网络应用</a></li><li><a href="../../webapps/best-practices0b8e.html?hl=zh-cn" >网络应用最佳做法</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index0b8e.html?hl=zh-cn"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="最佳做法" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">最佳做法</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support0b8e.html?hl=zh-cn" >支持多种屏幕</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution0b8e.html?hl=zh-cn" >分配到特定屏幕</a></li><li><a href="../../practices/screen-compat-mode0b8e.html?hl=zh-cn" >屏幕兼容性模式</a></li></ul></li><li><a href="../../practices/tablets-and-handsets0b8e.html?hl=zh-cn" >支持平板电脑和手机</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=zh-cn">首页</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=zh-cn">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=zh-cn">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=zh-cn">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=zh-cn">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=zh-cn">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=zh-cn"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=zh-cn"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=zh-cn"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">培训</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index0b8e.html?hl=zh-cn"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=zh-cn"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">参考网页</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=zh-cn">示例</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=zh-cn"
+           >库</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=zh-cn"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=zh-cn"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=zh-cn">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=zh-cn">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=zh-cn">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=zh-cn"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=zh-cn">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=zh-cn">Play 控制台</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=zh-cn"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=zh-cn"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=zh-cn">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=zh-cn">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">创建内容提供程序</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+
+<h2>本文内容</h2>
+<ol>
+    <li>
+        <a href="#DataStorage">设计数据存储</a>
+    </li>
+    <li>
+        <a href="#ContentURI">设计内容 URI</a>
+    </li>
+    <li>
+        <a href="#ContentProvider">实现 ContentProvider 类</a>
+        <ol>
+            <li>
+                <a href="#RequiredAccess">必需方法</a>
+            </li>
+            <li>
+                <a href="#Query">实现 query() 方法</a>
+            </li>
+            <li>
+                <a href="#Insert">实现 insert() 方法</a>
+            </li>
+            <li>
+                <a href="#Delete">实现 delete() 方法</a>
+            </li>
+            <li>
+                <a href="#Update">实现 update() 方法</a>
+            </li>
+            <li>
+                <a href="#OnCreate">实现 onCreate() 方法</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#MIMETypes">实现内容提供程序 MIME 类型</a>
+        <ol>
+            <li>
+                <a href="#TableMIMETypes">表的 MIME 类型</a>
+            </li>
+            <li>
+                <a href="#FileMIMETypes">文件的 MIME 类型</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#ContractClass">实现协定类</a>
+    </li>
+    <li>
+        <a href="#Permissions">实现内容提供程序权限</a>
+    </li>
+    <li>
+        <a href="#ProviderElement">&lt;Provider&gt; 元素</a>
+    </li>
+    <li>
+        <a href="#Intents">Intent 和数据访问</a>
+    </li>
+</ol>
+<h2>关键类</h2>
+    <ol>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-cn">Cursor</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=zh-cn">Uri</a></code>
+        </li>
+    </ol>
+<h2>相关示例</h2>
+    <ol>
+        <li>
+            <a href="https://developer.android.com/resources/samples/NotePad/index.html?hl=zh-cn">
+                记事本示例应用
+            </a>
+        </li>
+    </ol>
+<h2>另请参阅</h2>
+    <ol>
+        <li>
+            <a href="content-provider-basics0b8e.html?hl=zh-cn">
+            内容提供程序基础知识</a>
+        </li>
+        <li>
+            <a href="calendar-provider0b8e.html?hl=zh-cn">
+日历提供程序</a>
+        </li>
+    </ol>
+</div>
+</div>
+
+
+<p>
+    内容提供程序管理对中央数据存储区的访问。您将提供程序作为 Android 应用中的一个或多个类（连同清单文件中的元素）实现。
+
+其中一个类会实现子类 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code>，即您的提供程序与其他应用之间的接口。
+
+尽管内容提供程序旨在向其他应用提供数据，但您的应用中必定有这样一些 Activity，它们允许用户查询和修改由提供程序管理的数据。
+
+
+</p>
+<p>
+    本主题的其余部分列出了开发内容提供程序的基本步骤和需要使用的 API。
+
+</p>
+
+
+<!-- Before You Start Building -->
+<h2 id="BeforeYouStart">着手开发前的准备工作</h2>
+<p>
+    请在着手开发提供程序之前执行以下操作：
+</p>
+<ol>
+    <li>
+        <strong>决定您是否需要内容提供程序</strong>。如果您想提供下列一项或多项功能，则需要开发内容提供程序：
+
+        <ul>
+            <li>您想为其他应用提供复杂的数据或文件</li>
+            <li>您想允许用户将复杂的数据从您的应用复制到其他应用中</li>
+            <li>您想使用搜索框架提供自定义搜索建议</li>
+        </ul>
+    <p>
+        如果完全是在您自己的应用中使用，则<em>不</em>需要提供程序即可使用 SQLite 数据库。
+
+    </p>
+    </li>
+    <li>
+        如果您尚未完成此项操作，请阅读<a href="content-provider-basics0b8e.html?hl=zh-cn">内容提供程序基础知识</a>主题，了解有关提供程序的详情。
+
+
+    </li>
+</ol>
+<p>
+    接下来，请按照以下步骤开发您的提供程序：
+</p>
+<ol>
+    <li>
+        为您的数据设计原始存储。内容提供程序以两种方式提供数据：
+        <dl>
+            <dt>
+                文件数据
+            </dt>
+            <dd>
+                通常存储在文件中的数据，如照片、音频或视频。
+将文件存储在您的应用的私有空间内。
+您的提供程序可以应其他应用发出的文件请求提供文件句柄。
+
+            </dd>
+            <dt>
+                “结构化”数据
+            </dt>
+            <dd>
+                通常存储在数据库、数组或类似结构中的数据。
+                以兼容行列表的形式存储数据。行表示实体，如人员或库存项目。
+列表示实体的某项数据，如人员的姓名或商品的价格。
+此类数据通常存储在 SQLite 数据库中，但您可以使用任何类型的持久存储。
+
+如需了解有关 Android 系统中提供的存储类型的更多信息，请参阅<a href="#DataStorage">设计数据存储</a>部分。
+
+
+            </dd>
+        </dl>
+    </li>
+    <li>
+        定义 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code> 类及其所需方法的具体实现。
+此类是您的数据与 Android 系统其余部分之间的接口。
+如需了解有关此类的详细信息，请参阅<a href="#ContentProvider">实现 ContentProvider 类</a>部分。
+
+    </li>
+    <li>
+        定义提供程序的授权字符串、其内容 URI 以及列名称。如果您想让提供程序的应用处理 Intent，则还要定义 Intent 操作、Extra 数据以及标志。
+
+此外，还要定义想要访问您的数据的应用必须具备的权限。
+您应该考虑在一个单独的协定类中将所有这些值定义为常量；以后您可以将此类公开给其他开发者。
+如需了解有关内容 URI 的详细信息，请参阅<a href="#ContentURI">设计内容 URI</a> 部分。
+
+
+        如需了解有关 Intent 的详细信息，请参阅 <a href="#Intents">Intent 和数据访问</a>部分。
+
+    </li>
+    <li>
+        添加其他可选部分，如示例数据或可以在提供程序与云数据之间同步数据的 <code><a href="https://developer.android.com/reference/android/content/AbstractThreadedSyncAdapter.html?hl=zh-cn">AbstractThreadedSyncAdapter</a></code> 实现。
+
+
+    </li>
+</ol>
+
+
+<!-- Designing Data Storage -->
+<h2 id="DataStorage">设计数据存储</h2>
+<p>
+    内容提供程序是用于访问以结构化格式保存的数据的接口。在您创建该接口之前，必须决定如何存储数据。
+您可以按自己的喜好以任何形式存储数据，然后根据需要设计读写数据的接口。
+
+</p>
+<p>
+    以下是 Android 中提供的一些数据存储技术：
+</p>
+<ul>
+    <li>
+        Android 系统包括一个 SQLite 数据库 API，Android 自己的提供程序使用它来存储面向表的数据。
+<code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=zh-cn">SQLiteOpenHelper</a></code> 类可帮助您创建数据库，<code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html?hl=zh-cn">SQLiteDatabase</a></code> 类是用于访问数据库的基类。
+
+
+
+        <p>
+            请记住，您不必使用数据库来实现存储区。提供程序在外部表现为一组表，与关系型数据库类似，但这并不是对提供程序内部实现的要求；
+
+
+        </p>
+    </li>
+    <li>
+        为了存储文件数据，Android 提供了各种面向文件的 API。
+        如需了解有关文件存储的更多信息，请阅读<a href="../data/data-storage0b8e.html?hl=zh-cn">数据存储</a>主题。
+如果您要设计提供媒体相关数据（如音乐或视频）的提供程序，则可开发一个合并了表数据和文件的提供程序。
+
+
+    </li>
+    <li>
+        要想使用基于网络的数据，请使用 <code><a href="https://developer.android.com/reference/java/net/package-summary.html?hl=zh-cn">java.net</a></code> 和 <code><a href="https://developer.android.com/reference/android/net/package-summary.html?hl=zh-cn">android.net</a></code> 中的类。
+您也可以将基于网络的数据与本地数据存储（如数据库）同步，然后以表或文件的形式提供数据。
+
+        <a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=zh-cn">示例同步适配器</a>示例应用展示了这类同步。
+
+    </li>
+</ul>
+<h3 id="DataDesign">
+    数据设计考虑事项
+</h3>
+<p>
+    以下是一些设计提供程序数据结构的技巧：
+</p>
+<ul>
+    <li>
+        表数据应始终具有一个“主键”列，提供程序将其作为与每行对应的唯一数字值加以维护。
+您可以使用此值将该行链接到其他表中的相关行（将其用作“外键”）。
+尽管您可以为此列使用任何名称  ，但使用 <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=zh-cn#_ID">BaseColumns._ID</a></code> 是最佳选择，因为将提供程序查询的结果链接到 <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=zh-cn">ListView</a></code> 的条件是，检索到的其中一个列的名称必须是 <code>_ID</code>；
+
+
+
+
+    </li>
+    <li>
+        如果您想提供位图图像或其他非常庞大的文件导向型数据，请将数据存储在一个文件中，然后间接提供这些数据，而不是直接将其存储在表中。
+
+如果您执行了此操作，则需要告知提供程序的用户，他们需要使用 <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=zh-cn">ContentResolver</a></code> 文件方法来访问数据；
+
+    </li>
+    <li>
+        使用二进制大型对象 (BLOB) 数据类型存储大小或结构会发生变化的数据。
+例如，您可以使用 BLOB 列来存储<a href="http://code.google.com/p/protobuf?hl=zh-cn">协议缓冲区</a>或 <a href="http://www.json.org/">JSON 结构</a>。
+
+
+        <p>
+            您也可以使用 BLOB 来实现<em>独立于架构</em>的表。在这类表中，您需要以 BLOB 形式定义一个主键列、一个 MIME 类型列以及一个或多个通用列。
+
+这些 BLOB 列中数据的含义通过 MIME 类型列中的值指示。
+这样一来，您就可以在同一个表中存储不同类型的行。
+举例来说，联系人提供程序的“数据”表 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=zh-cn">ContactsContract.Data</a></code> 便是一个独立于架构的表。
+
+
+        </p>
+    </li>
+</ul>
+<!-- Designing Content URIs -->
+<h2 id="ContentURI">设计内容 URI</h2>
+<p>
+    <strong>内容 URI</strong> 是用于在提供程序中标识数据的 URI。内容 URI 包括整个提供程序的符号名称（其<strong>授权</strong>）和一个指向表或文件的名称（<strong>路径</strong>）。
+
+可选 ID 部分指向表中的单个行。
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code> 的每一个数据访问方法都将内容 URI 作为参数；您可以利用这一点确定要访问的表、行或文件。
+
+
+</p>
+<p>
+    
+    <a href="content-provider-basics0b8e.html?hl=zh-cn">内容提供程序基础知识</a>主题中描述了内容 URI 的基础知识。
+
+</p>
+<h3>设计授权</h3>
+<p>
+    提供程序通常具有单一授权，该授权充当其 Android 内部名称。为避免与其他提供程序发生冲突，您应该使用互联网网域所有权（反向）作为提供程序授权的基础。
+
+由于此建议也适用于 Android 软件包名称，因此您可以将提供程序授权定义为包含该提供程序的软件包名称的扩展名。
+
+例如，如果您的 Android 软件包名称为
+<code>com.example.&lt;appname&gt;</code>，则应为提供程序提供 <code>com.example.&lt;appname&gt;.provider</code> 授权。
+
+</p>
+<h3>设计路径结构</h3>
+<p>
+    开发者通常通过追加指向单个表的路径来根据权限创建内容 URI。
+例如，如果您有两个表：<em>table1</em> 和
+ <em>table2</em>，则可以通过合并上一示例中的权限来生成
+内容 URI
+<code>com.example.&lt;appname&gt;.provider/table1</code> 和
+<code>com.example.&lt;appname&gt;.provider/table2</code>。路径并不限定于单个段，也无需为每一级路径都创建一个表。
+
+</p>
+<h3>处理内容 URI ID</h3>
+<p>
+    按照惯例，提供程序通过接受末尾具有行所对应 ID 值的内容 URI 来提供对表中单个行的访问。
+同样按照惯例，提供程序会将该 ID 值与表的
+ <code>_ID</code> 列进行匹配，并对匹配的行执行请求的访问。
+
+</p>
+<p>
+    这一惯例为访问提供程序的应用的常见设计模式提供了便利。应用会对提供程序执行查询，并使用 <code><a href="https://developer.android.com/reference/android/widget/CursorAdapter.html?hl=zh-cn">CursorAdapter</a></code> 以 <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=zh-cn">ListView</a></code> 显示生成的 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-cn">Cursor</a></code>。
+
+
+    定义 <code><a href="https://developer.android.com/reference/android/widget/CursorAdapter.html?hl=zh-cn">CursorAdapter</a></code> 的条件是，
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-cn">Cursor</a></code> 中的其中一个列必须是 <code>_ID</code>
+</p>
+<p>
+    用户随后从 UI 上显示的行中选取其中一行，以查看或修改数据。
+应用会从支持
+<code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=zh-cn">ListView</a></code> 的 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-cn">Cursor</a></code> 中获取对应行，获取该行的 <code>_ID</code> 值，将其追加到内容 URI，然后向提供程序发送访问请求。
+然后，提供程序便可对用户选取的特定行执行查询或修改。
+
+</p>
+<h3>内容 URI 模式</h3>
+<p>
+    为帮助您选择对传入的内容 URI 执行的操作，提供程序 API 加入了实用类 <code><a href="https://developer.android.com/reference/android/content/UriMatcher.html?hl=zh-cn">UriMatcher</a></code>，它会将内容 URI“模式”映射到整型值。
+
+您可以在一个 <code>switch</code> 语句中使用这些整型值，为匹配特定模式的一个或多个内容 URI 选择所需操作。
+
+</p>
+<p>
+    内容 URI 模式使用通配符匹配内容 URI：
+</p>
+    <ul>
+        <li>
+            <strong><code>*</code></strong>：匹配由任意长度的任何有效字符组成的字符串
+        </li>
+        <li>
+            <strong><code>#</code></strong>：匹配由任意长度的数字字符组成的字符串
+        </li>
+    </ul>
+<p>
+    以设计和编码内容 URI 处理为例，假设一个具有授权 <code>com.example.app.provider</code> 的提供程序能识别以下指向表的内容 URI：
+
+
+</p>
+<ul>
+    <li>
+        <code>content://com.example.app.provider/table1</code>：一个名为 <code>table1</code> 的表
+    </li>
+    <li>
+        <code>content://com.example.app.provider/table2/dataset1</code>：一个名为 <code>dataset1</code> 的表
+
+    </li>
+    <li>
+        <code>content://com.example.app.provider/table2/dataset2</code>：一个名为 <code>dataset2</code> 的表
+
+    </li>
+    <li>
+        <code>content://com.example.app.provider/table3</code>：一个名为 <code>table3</code> 的表
+    </li>
+</ul>
+<p>
+    提供程序也能识别追加了行 ID 的内容 URI，例如，<code>content://com.example.app.provider/table3/1</code> 对应由 <code>table3</code> 中 <code>1</code> 标识的行的内容 URI。
+
+
+</p>
+<p>
+    可以使用以下内容 URI 模式：
+</p>
+<dl>
+    <dt>
+        <code>content://com.example.app.provider/*</code>
+    </dt>
+    <dd>
+        匹配提供程序中的任何内容 URI。
+    </dd>
+    <dt>
+        <code>content://com.example.app.provider/table2/*</code>：
+    </dt>
+    <dd>
+        匹配表 <code>dataset1</code>
+和表 <code>dataset2</code> 的内容 URI，但不匹配 <code>table1</code> 或
+<code>table3</code> 的内容 URI。
+    </dd>
+    <dt>
+        <code>content://com.example.app.provider/table3/#</code>：匹配
+ <code>table3</code> 中单个行的内容 URI，如 <code>content://com.example.app.provider/table3/6</code> 对应由
+<code>6</code> 标识的行的内容 URI。
+
+    </dt>
+</dl>
+<p>
+    以下代码段演示了 <code><a href="https://developer.android.com/reference/android/content/UriMatcher.html?hl=zh-cn">UriMatcher</a></code> 中方法的工作方式。
+    此代码采用不同方式处理整个表的 URI 与单个行的 URI，它为表使用的内容 URI 模式是
+<code>content://&lt;authority&gt;/&lt;path&gt;</code>，为单个行使用的内容 URI 模式则是
+<code>content://&lt;authority&gt;/&lt;path&gt;/&lt;id&gt;</code>。
+
+</p>
+<p>
+    方法 <code><a href="https://developer.android.com/reference/android/content/UriMatcher.html?hl=zh-cn#addURI(java.lang.String, java.lang.String, int)">addURI()</a></code> 会将授权和路径映射到一个整型值。
+方法 <code><a href="https://developer.android.com/reference/android/content/UriMatcher.html?hl=zh-cn#match(android.net.Uri)">match()</a></code> 会返回 URI 的整型值。<code>switch</code> 语句会在查询整个表与查询单个记录之间进行选择：
+
+</p>
+<pre class="prettyprint">
+public class ExampleProvider extends ContentProvider {
+...
+    // Creates a UriMatcher object.
+    private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
+    static {
+        /*
+         * The calls to addURI() go here, for all of the content URI patterns that the provider
+         * should recognize. For this snippet, only the calls for table 3 are shown.
+         */
+
+        /*
+         * Sets the integer value for multiple rows in table 3 to 1. Notice that no wildcard is used
+         * in the path
+         */
+        sUriMatcher.addURI("com.example.app.provider", "table3", 1);
+
+        /*
+         * Sets the code for a single row to 2. In this case, the "#" wildcard is
+         * used. "content://com.example.app.provider/table3/3" matches, but
+         * "content://com.example.app.provider/table3 doesn't.
+         */
+        sUriMatcher.addURI("com.example.app.provider", "table3/#", 2);
+    }
+...
+    // Implements ContentProvider.query()
+    public Cursor query(
+        Uri uri,
+        String[] projection,
+        String selection,
+        String[] selectionArgs,
+        String sortOrder) {
+...
+        /*
+         * Choose the table to query and a sort order based on the code returned for the incoming
+         * URI. Here, too, only the statements for table 3 are shown.
+         */
+        switch (sUriMatcher.match(uri)) {
+
+
+            // If the incoming URI was for all of table3
+            case 1:
+
+                if (TextUtils.isEmpty(sortOrder)) sortOrder = "_ID ASC";
+                break;
+
+            // If the incoming URI was for a single row
+            case 2:
+
+                /*
+                 * Because this URI was for a single row, the _ID value part is
+                 * present. Get the last path segment from the URI; this is the _ID value.
+                 * Then, append the value to the WHERE clause for the query
+                 */
+                selection = selection + "_ID = " uri.getLastPathSegment();
+                break;
+
+            default:
+            ...
+                // If the URI is not recognized, you should do some error handling here.
+        }
+        // call the code to actually do the query
+    }
+</pre>
+<p>
+    另一个类 <code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=zh-cn">ContentUris</a></code> 会提供一些工具方法，用于处理内容 URI 的
+ <code>id</code> 部分。<code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=zh-cn">Uri</a></code> 类和
+<code><a href="https://developer.android.com/reference/android/net/Uri.Builder.html?hl=zh-cn">Uri.Builder</a></code> 类包括一些工具方法，用于解析现有
+<code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=zh-cn">Uri</a></code> 对象和构建新对象。
+</p>
+
+<!-- Implementing the ContentProvider class -->
+<h2 id="ContentProvider">实现 ContentProvider 类</h2>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code> 实例通过处理来自其他应用的请求来管理对结构化数据集的访问。
+所有形式的访问最终都会调用 <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=zh-cn">ContentResolver</a></code>，后者接着调用
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code> 的具体方法来获取访问权限。
+
+</p>
+<h3 id="RequiredAccess">必需方法</h3>
+<p>
+    抽象类 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code> 定义了六个抽象方法，您必须将这些方法作为自己具体子类的一部分加以实现。
+所有这些方法（<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#onCreate()">onCreate()</a></code> 除外）都由一个尝试访问您的内容提供程序的客户端应用调用：
+
+
+</p>
+<dl>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)">query()</a></code>
+    </dt>
+    <dd>
+        从您的提供程序检索数据。使用参数选择要查询的表、要返回的行和列以及结果的排序顺序。
+
+        将数据作为 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-cn">Cursor</a></code> 对象返回。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#insert(android.net.Uri, android.content.ContentValues)">insert()</a></code>
+    </dt>
+    <dd>
+        在您的提供程序中插入一个新行。使用参数选择目标表并获取要使用的列值。
+返回新插入行的内容 URI。
+
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">update()</a></code>
+    </dt>
+    <dd>
+        更新您提供程序中的现有行。使用参数选择要更新的表和行，并获取更新后的列值。
+返回已更新的行数。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#delete(android.net.Uri, java.lang.String, java.lang.String[])">delete()</a></code>
+    </dt>
+    <dd>
+        从您的提供程序中删除行。使用参数选择要删除的表和行。
+返回已删除的行数。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#getType(android.net.Uri)">getType()</a></code>
+    </dt>
+    <dd>
+        返回内容 URI 对应的 MIME 类型。<a href="#MIMETypes">实现内容提供程序 MIME 类型</a>部分对此方法做了更详尽的描述。
+
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#onCreate()">onCreate()</a></code>
+    </dt>
+    <dd>
+        初始化您的提供程序。Android 系统会在创建您的提供程序后立即调用此方法。
+请注意，<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=zh-cn">ContentResolver</a></code> 对象尝试访问您的提供程序时，系统才会创建它。
+
+    </dd>
+</dl>
+<p>
+    请注意，这些方法的签名与同名的
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=zh-cn">ContentResolver</a></code> 方法相同。
+</p>
+<p>
+    您在实现这些方法时应考虑以下事项：
+</p>
+<ul>
+    <li>
+        所有这些方法（<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#onCreate()">onCreate()</a></code>
+除外）都可由多个线程同时调用，因此它们必须是线程安全方法。如需了解有关多个线程的更多信息，请参阅<a href="../../components/processes-and-threads0b8e.html?hl=zh-cn">进程和线程</a>主题；
+
+
+
+    </li>
+    <li>
+        避免在 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#onCreate()">onCreate()</a></code> 中执行长时间操作。将初始化任务推迟到实际需要时进行。
+        <a href="#OnCreate">实现 onCreate() 方法</a>部分对此做了更详尽的描述；
+
+    </li>
+    <li>
+        尽管您必须实现这些方法，但您的代码只需返回要求的数据类型，无需执行任何其他操作。
+例如，您可能想防止其他应用向某些表插入数据。
+要实现此目的，您可以忽略
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#insert(android.net.Uri, android.content.ContentValues)">insert()</a></code> 调用并返回 0。
+
+    </li>
+</ul>
+<h3 id="Query">实现 query() 方法</h3>
+<p>
+    
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)">ContentProvider.query()</a></code> 方法必须返回 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-cn">Cursor</a></code> 对象。如果失败，则会引发 <code><a href="https://developer.android.com/reference/java/lang/Exception.html?hl=zh-cn">Exception</a></code>。
+如果您使用 SQLite 数据库作为数据存储，则只需返回由 <code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html?hl=zh-cn">SQLiteDatabase</a></code> 类的其中一个
+<code>query()</code> 方法返回的 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-cn">Cursor</a></code>。
+
+    如果查询不匹配任何行，您应该返回一个 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-cn">Cursor</a></code> 实例（其 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-cn#getCount()">getCount()</a></code> 方法返回 0）。只有当查询过程中出现内部错误时，您才应该返回 <code>null</code>。
+
+
+</p>
+<p>
+    如果您不使用 SQLite 数据库作为数据存储，请使用 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=zh-cn">Cursor</a></code> 的其中一个具体子类。
+例如，在 <code><a href="https://developer.android.com/reference/android/database/MatrixCursor.html?hl=zh-cn">MatrixCursor</a></code> 类实现的游标中，每一行都是一个 <code><a href="https://developer.android.com/reference/java/lang/Object.html?hl=zh-cn">Object</a></code> 数组。
+对于此类，请使用 <code><a href="https://developer.android.com/reference/android/database/MatrixCursor.html?hl=zh-cn#addRow(java.lang.Object[])">addRow()</a></code> 来添加新行。
+
+</p>
+<p>
+    请记住，Android 系统必须能够跨进程边界传播 <code><a href="https://developer.android.com/reference/java/lang/Exception.html?hl=zh-cn">Exception</a></code>。
+Android 可以为以下异常执行此操作，这些异常可能有助于处理查询错误：
+
+</p>
+<ul>
+    <li>
+        <code><a href="https://developer.android.com/reference/java/lang/IllegalArgumentException.html?hl=zh-cn">IllegalArgumentException</a></code>（您可以选择在提供程序收到无效的内容 URI 时引发此异常）
+
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/java/lang/NullPointerException.html?hl=zh-cn">NullPointerException</a></code>
+    </li>
+</ul>
+<h3 id="Insert">实现 insert() 方法</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#insert(android.net.Uri, android.content.ContentValues)">insert()</a></code> 方法会使用 <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=zh-cn">ContentValues</a></code>
+参数中的值向相应表中添加新行。
+如果 <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=zh-cn">ContentValues</a></code> 参数中未包含列名称，您可能想在您的提供程序代码或数据库架构中提供其默认值。
+
+
+</p>
+<p>
+    此方法应该返回新行的内容 URI。要想构建此方法，请使用
+<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=zh-cn#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code> 向表的内容 URI 追加新行的 <code>_ID</code>（或其他主键）值。
+
+</p>
+<h3 id="Delete">实现 delete() 方法</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#delete(android.net.Uri, java.lang.String, java.lang.String[])">delete()</a></code> 方法不需要从您的数据存储中实际删除行。
+如果您将同步适配器与提供程序一起使用，应该考虑为已删除的行添加“删除”标志，而不是将行整个移除。
+
+同步适配器可以检查是否存在已删除的行，并将它们从服务器中移除，然后再将它们从提供程序中删除。
+
+</p>
+<h3 id="Update">实现 update() 方法</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">update()</a></code> 方法采用
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#insert(android.net.Uri, android.content.ContentValues)">insert()</a></code> 所使用的相同 <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=zh-cn">ContentValues</a></code> 参数，以及
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#delete(android.net.Uri, java.lang.String, java.lang.String[])">delete()</a></code> 和
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)">ContentProvider.query()</a></code> 所使用的相同 <code>selection</code> 和 <code>selectionArgs</code> 参数。
+这样一来，您就可以在这些方法之间重复使用代码。
+</p>
+<h3 id="OnCreate">实现 onCreate() 方法</h3>
+<p>
+    Android 系统会在启动提供程序时调用 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#onCreate()">onCreate()</a></code>。您只应在此方法中执行运行快速的初始化任务，并将数据库创建和数据加载推迟到提供程序实际收到数据请求时进行。
+
+如果您在
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#onCreate()">onCreate()</a></code> 中执行长时间的任务，则会减慢提供程序的启动速度，
+进而减慢提供程序对其他应用的响应速度。
+
+</p>
+<p>
+    例如，如果您使用 SQLite 数据库，可以在
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#onCreate()">ContentProvider.onCreate()</a></code> 中创建一个新的 <code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=zh-cn">SQLiteOpenHelper</a></code> 对象，然后在首次打开数据库时创建 SQL 表。
+
+为简化这一过程，在您首次调用 <code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=zh-cn#getWritableDatabase()">getWritableDatabase()</a></code> 时，它会自动调用
+    <code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=zh-cn#onCreate(android.database.sqlite.SQLiteDatabase)">SQLiteOpenHelper.onCreate()</a></code> 方法。
+
+</p>
+<p>
+    以下两个代码段展示了
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#onCreate()">ContentProvider.onCreate()</a></code> 与
+<code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=zh-cn#onCreate(android.database.sqlite.SQLiteDatabase)">SQLiteOpenHelper.onCreate()</a></code> 之间的交互。第一个代码段是
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#onCreate()">ContentProvider.onCreate()</a></code> 的实现：
+</p>
+<pre class="prettyprint">
+public class ExampleProvider extends ContentProvider
+
+    /*
+     * Defines a handle to the database helper object. The MainDatabaseHelper class is defined
+     * in a following snippet.
+     */
+    private MainDatabaseHelper mOpenHelper;
+
+    // Defines the database name
+    private static final String DBNAME = "mydb";
+
+    // Holds the database object
+    private SQLiteDatabase db;
+
+    public boolean onCreate() {
+
+        /*
+         * Creates a new helper object. This method always returns quickly.
+         * Notice that the database itself isn't created or opened
+         * until SQLiteOpenHelper.getWritableDatabase is called
+         */
+        mOpenHelper = new MainDatabaseHelper(
+            getContext(),        // the application context
+            DBNAME,              // the name of the database)
+            null,                // uses the default SQLite cursor
+            1                    // the version number
+        );
+
+        return true;
+    }
+
+    ...
+
+    // Implements the provider's insert method
+    public Cursor insert(Uri uri, ContentValues values) {
+        // Insert code here to determine which table to open, handle error-checking, and so forth
+
+        ...
+
+        /*
+         * Gets a writeable database. This will trigger its creation if it doesn't already exist.
+         *
+         */
+        db = mOpenHelper.getWritableDatabase();
+    }
+}
+</pre>
+<p>
+    下一个代码段是
+<code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html?hl=zh-cn#onCreate(android.database.sqlite.SQLiteDatabase)">SQLiteOpenHelper.onCreate()</a></code> 的实现，其中包括一个帮助程序类：
+</p>
+<pre class="prettyprint">
+...
+// A string that defines the SQL statement for creating a table
+private static final String SQL_CREATE_MAIN = "CREATE TABLE " +
+    "main " +                       // Table's name
+    "(" +                           // The columns in the table
+    " _ID INTEGER PRIMARY KEY, " +
+    " WORD TEXT"
+    " FREQUENCY INTEGER " +
+    " LOCALE TEXT )";
+...
+/**
+ * Helper class that actually creates and manages the provider's underlying data repository.
+ */
+protected static final class MainDatabaseHelper extends SQLiteOpenHelper {
+
+    /*
+     * Instantiates an open helper for the provider's SQLite data repository
+     * Do not do database creation and upgrade here.
+     */
+    MainDatabaseHelper(Context context) {
+        super(context, DBNAME, null, 1);
+    }
+
+    /*
+     * Creates the data repository. This is called when the provider attempts to open the
+     * repository and SQLite reports that it doesn't exist.
+     */
+    public void onCreate(SQLiteDatabase db) {
+
+        // Creates the main table
+        db.execSQL(SQL_CREATE_MAIN);
+    }
+}
+</pre>
+
+
+<!-- Implementing ContentProvider MIME Types -->
+<h2 id="MIMETypes">实现内容提供程序 MIME 类型</h2>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code> 类具有两个返回 MIME 类型的方法：
+</p>
+<dl>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#getType(android.net.Uri)">getType()</a></code>
+    </dt>
+    <dd>
+        您必须为任何提供程序实现的必需方法之一。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#getStreamTypes(android.net.Uri, java.lang.String)">getStreamTypes()</a></code>
+    </dt>
+    <dd>
+        系统在您的提供程序提供文件时要求实现的方法。
+    </dd>
+</dl>
+<h3 id="TableMIMETypes">表的 MIME 类型</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#getType(android.net.Uri)">getType()</a></code> 方法会返回一个 MIME 格式的
+<code><a href="https://developer.android.com/reference/java/lang/String.html?hl=zh-cn">String</a></code>，后者描述内容
+URI 参数返回的数据类型。<code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=zh-cn">Uri</a></code> 参数可以是模式，而不是特定 URI；在这种情况下，您应该返回与匹配该模式的内容 URI 关联的数据类型。
+
+
+</p>
+<p>
+    对于文本、HTML 或 JPEG 等常见数据类型，<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#getType(android.net.Uri)">getType()</a></code> 应该为该数据返回标准 MIME 类型。
+
+<a href="http://www.iana.org/assignments/media-types/index.htm">IANA MIME Media Types</a>
+网站上提供了这些标准类型的完整列表。
+
+</p>
+<p>
+    对于指向一个或多个表数据行的内容 URI，<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#getType(android.net.Uri)">getType()</a></code> 应该以 Android 供应商特有 MIME 格式返回
+MIME 类型：
+
+</p>
+<ul>
+    <li>
+        类型部分：<code>vnd</code>
+    </li>
+    <li>
+        子类型部分：
+        <ul>
+            <li>
+    如果 URI 模式用于单个行：<code>android.cursor.<strong>item</strong>/</code>
+            </li>
+            <li>
+    如果 URI 模式用于多个行：<code>android.cursor.<strong>dir</strong>/</code>
+            </li>
+        </ul>
+    </li>
+    <li>
+        提供程序特有部分：<code>vnd.&lt;name&gt;</code>.<code>&lt;type&gt;</code>
+        <p>
+            您提供 <code>&lt;name&gt;</code> 和 <code>&lt;type&gt;</code>。
+            <code>&lt;name&gt;</code> 值应具有全局唯一性，<code>&lt;type&gt;</code> 值应在对应的 URI
+模式中具有唯一性。
+适合选择贵公司的名称或您的应用 Android 软件包名称的某个部分作为 <code>&lt;name&gt;</code>。
+适合选择 URI 关联表的标识字符串作为 <code>&lt;type&gt;</code>。
+
+
+        </p>
+
+    </li>
+</ul>
+<p>
+    例如，如果提供程序的授权是
+<code>com.example.app.provider</code>，并且它公开了一个名为
+<code>table1</code> 的表，则 <code>table1</code> 中多个行的 MIME 类型是：
+</p>
+<pre>
+vnd.android.cursor.<strong>dir</strong>/vnd.com.example.provider.table1
+</pre>
+<p>
+    对于 <code>table1</code> 的单个行，MIME 类型是：
+</p>
+<pre>
+vnd.android.cursor.<strong>item</strong>/vnd.com.example.provider.table1
+</pre>
+<h3 id="FileMIMETypes">文件的 MIME 类型</h3>
+<p>
+    如果您的提供程序提供文件，请实现
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#getStreamTypes(android.net.Uri, java.lang.String)">getStreamTypes()</a></code>。
+    该方法会为您的提供程序可以为给定内容 URI 返回的文件返回一个 MIME 类型 <code><a href="https://developer.android.com/reference/java/lang/String.html?hl=zh-cn">String</a></code> 数组。
+您应该通过 MIME 类型过滤器参数过滤您提供的 MIME 类型，以便只返回客户端想处理的那些 MIME 类型。
+
+</p>
+<p>
+    例如，假设提供程序以 <code>.jpg</code>、<code>.png</code> 和 <code>.gif</code> 格式文件形式提供照片图像。
+
+    如果应用调用 <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=zh-cn#getStreamTypes(android.net.Uri, java.lang.String)">ContentResolver.getStreamTypes()</a></code> 时使用了过滤器字符串 <code>image/*</code>（任何是“图像”的内容），则 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#getStreamTypes(android.net.Uri, java.lang.String)">ContentProvider.getStreamTypes()</a></code> 方法应返回数组：
+
+
+</p>
+<pre>
+{ &quot;image/jpeg&quot;, &quot;image/png&quot;, &quot;image/gif&quot;}
+</pre>
+<p>
+    如果应用只对 <code>.jpg</code> 文件感兴趣，则可以在调用
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=zh-cn#getStreamTypes(android.net.Uri, java.lang.String)">ContentResolver.getStreamTypes()</a></code> 时使用过滤器字符串 <code>*\/jpeg</code>，<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#getStreamTypes(android.net.Uri, java.lang.String)">ContentProvider.getStreamTypes()</a></code> 应返回：
+
+<pre>
+{&quot;image/jpeg&quot;}
+</pre>
+<p>
+    如果您的提供程序未提供过滤器字符串中请求的任何 MIME 类型，则
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn#getStreamTypes(android.net.Uri, java.lang.String)">getStreamTypes()</a></code>
+应返回 <code>null</code>。
+</p>
+
+
+<!--  Implementing a Contract Class -->
+<h2 id="ContractClass">实现协定类</h2>
+<p>
+    协定类是一种 <code>public final</code> 类，其中包含对 URI、列名称、MIME 类型以及其他与提供程序有关的元数据的常量定义。
+该类可确保即使 URI、列名称等数据的实际值发生变化，也可以正确访问提供程序，从而在提供程序与其他应用之间建立协定。
+
+
+
+</p>
+<p>
+    协定类对开发者也有帮助，因为其常量通常采用助记名称，因此可以降低开发者为列名称或 URI 使用错误值的可能性。
+由于它是一种类，因此可以包含 Javadoc 文档。
+集成开发环境（如
+Android Studio）可以根据协定类自动完成常量名称，并为常量显示 Javadoc。
+
+</p>
+<p>
+    开发者无法从您的应用访问协定类的类文件，但他们可以通过您提供的 <code>.jar</code> 文件将其静态编译到其应用内。
+
+</p>
+<p>
+    举例来说，<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.html?hl=zh-cn">ContactsContract</a></code> 类及其嵌套类便属于协定类。
+
+</p>
+<h2 id="Permissions">实现内容提供程序权限</h2>
+<p>
+    <a href="https://developer.android.com/training/articles/security-tips.html?hl=zh-cn">安全与权限</a>主题中详细描述了 Android 系统各个方面的权限和访问。
+
+    <a href="../data/data-storage0b8e.html?hl=zh-cn">数据存储</a>主题也描述了各类存储实行中的安全与权限。
+
+    其中的要点简述如下：
+</p>
+<ul>
+    <li>
+        默认情况下，存储在设备内部存储上的数据文件是您的应用和提供程序的私有数据文件；
+
+    </li>
+    <li>
+        您创建的 <code><a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html?hl=zh-cn">SQLiteDatabase</a></code> 数据库是您的应用和提供程序的私有数据库；
+
+    </li>
+    <li>
+        默认情况下，您保存到外部存储的数据文件是<em>公用</em>并<em>可全局读取</em>的数据文件。
+您无法使用内容提供程序来限制对外部存储内文件的访问，因为其他应用可以使用其他 API 调用来对它们执行读取和写入操作；
+
+    </li>
+    <li>
+        用于在您的设备的内部存储上打开或创建文件或 SQLite 数据库的方法调用可能会为所有其他应用同时授予读取和写入访问权限。
+如果您将内部文件或数据库用作提供程序的存储区，并向其授予“可全局读取”或“可全局写入”访问权限，则您在清单文件中为提供程序设置的权限不会保护您的数据。
+
+
+内部存储中文件和数据库的默认访问权限是“私有”，对于提供程序的存储区，您不应更改此权限。
+
+    </li>
+</ul>
+<p>
+    如果您想使用内容提供程序权限来控制对数据的访问，则应将数据存储在内部文件、SQLite 数据库或“云”中（例如，远程服务器上），而且您应该保持文件和数据库为您的应用所私有。
+
+
+</p>
+<h3>实现权限</h3>
+<p>
+    即使底层数据为私有数据，所有应用仍可从您的提供程序读取数据或向其写入数据，因为在默认情况下，您的提供程序未设置权限。
+要想改变这种情况，请使用属性或
+    <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn">
+    &lt;provider&gt;</a></code> 元素的子元素在您的清单文件中为您的提供程序设置权限。
+您可以设置适用于整个提供程序、特定表甚至特定记录的权限，或者设置同时适用于这三者的权限。
+
+</p>
+<p>
+    您可以通过清单文件中的一个或多个
+    <code><a href="../manifest/permission-element0b8e.html?hl=zh-cn">
+    &lt;permission&gt;</a></code> 元素为您的提供程序定义权限。要使权限对您的提供程序具有唯一性，请为
+    <code><a href="../manifest/permission-element0b8e.html?hl=zh-cn#nm">
+    android:name</a></code> 属性使用 Java 风格作用域。
+例如，将读取权限命名为
+    <code>com.example.app.provider.permission.READ_PROVIDER</code>。
+
+</p>
+<p>
+    以下列表描述了提供程序权限的作用域，从适用于整个提供程序的权限开始，然后逐渐细化。
+
+    更细化的权限优先于作用域较大的权限：
+</p>
+<dl>
+    <dt>
+        统一读写提供程序级别权限
+    </dt>
+    <dd>
+        一个同时控制对整个提供程序读取和写入访问的权限，通过
+        <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn">
+        &lt;provider&gt;</a></code> 元素的 <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#prmsn">
+        android:permission</a></code> 属性指定。
+
+    </dd>
+    <dt>
+        单独的读取和写入提供程序级别权限
+    </dt>
+    <dd>
+        针对整个提供程序的读取权限和写入权限。您可以通过
+<code><a href="../manifest/provider-element0b8e.html?hl=zh-cn">
+        &lt;provider&gt;</a></code> 元素的 <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#rprmsn">
+        android:readPermission</a></code> 属性和
+<code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#wprmsn">
+        android:writePermission</a></code> 属性
+指定它们。它们优先于
+<code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#prmsn">
+        android:permission</a></code> 所需的权限。
+    </dd>
+    <dt>
+        路径级别权限
+    </dt>
+    <dd>
+        针对提供程序中内容 URI 的读取、写入或读取/写入权限。您可以通过
+<code><a href="../manifest/provider-element0b8e.html?hl=zh-cn">
+        &lt;provider&gt;</a></code> 元素的 <code><a href="../manifest/path-permission-element0b8e.html?hl=zh-cn">
+        &lt;path-permission&gt;</a></code> 子元素指定您想控制的每个 URI。
+
+对于您指定的每个内容 URI，您都可以指定读取/写入权限、读取权限或写入权限，或同时指定所有三种权限。
+读取权限和写入权限优先于读取/写入权限。
+此外，路径级别权限优先于提供程序级别权限。
+
+    </dd>
+    <dt>
+        临时权限
+    </dt>
+    <dd>
+        一种权限级别，即使应用不具备通常需要的权限，该级别也能授予对应用的临时访问权限。
+临时访问功能可减少应用需要在其清单文件中请求的权限数量。
+
+当您启用临时权限时，只有持续访问您的所有数据的应用才需要“永久性”提供程序访问权限。
+
+
+        <p>
+            假设您需要实现电子邮件提供程序和应用的权限，如果您想允许外部图像查看器应用显示您的提供程序中的照片附件，
+
+为了在不请求权限的情况下为图像查看器提供必要的访问权限，可以为照片的内容 URI 设置临时权限。
+对您的电子邮件应用进行相应设计，使应用能够在用户想要显示照片时向图像查看器发送一个 Intent，其中包含照片的内容 URI 以及权限标志。
+
+图像查看器可随后查询您的电子邮件提供程序以检索照片，即使查看器不具备对您提供程序的正常读取权限，也不受影响。
+
+
+        </p>
+        <p>
+            要想启用临时权限，请设置
+<code><a href="../manifest/provider-element0b8e.html?hl=zh-cn">
+            &lt;provider&gt;</a></code> 元素的
+<code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#gprmsn">
+            android:grantUriPermissions</a></code> 属性，或者向您的
+<code><a href="../manifest/provider-element0b8e.html?hl=zh-cn">
+            &lt;provider&gt;</a></code> 元素添加一个或多个
+<code><a href="../manifest/grant-uri-permission-element0b8e.html?hl=zh-cn">
+            &lt;grant-uri-permission&gt;</a></code> 子元素。如果您使用了临时权限，则每当您从提供程序中移除对某个内容 URI 的支持，并且该内容 URI 关联了临时权限时，都需要调用
+<code><a href="https://developer.android.com/reference/android/content/Context.html?hl=zh-cn#revokeUriPermission(android.net.Uri, int)">Context.revokeUriPermission()</a></code>。
+
+        </p>
+        <p>
+            该属性的值决定可访问的提供程序范围。
+            如果该属性设置为 <code>true</code>，则系统会向整个提供程序授予临时权限，该权限将替代您的提供程序级别或路径级别权限所需的任何其他权限。
+
+
+        </p>
+        <p>
+            如果此标志设置为 <code>false</code>，则您必须向
+            <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn">
+            &lt;provider&gt;</a></code> 元素添加
+            <code><a href="../manifest/grant-uri-permission-element0b8e.html?hl=zh-cn">
+            &lt;grant-uri-permission&gt;</a></code> 子元素。每个子元素都指定授予的临时权限所对应的一个或多个内容 URI。
+
+        </p>
+        <p>
+            要向应用授予临时访问权限，Intent 必须包含 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#FLAG_GRANT_READ_URI_PERMISSION">FLAG_GRANT_READ_URI_PERMISSION</a></code> 和/或 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#FLAG_GRANT_WRITE_URI_PERMISSION">FLAG_GRANT_WRITE_URI_PERMISSION</a></code> 标志。
+
+它们通过 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn#setFlags(int)">setFlags()</a></code> 方法进行设置。
+
+        </p>
+        <p>
+            如果 <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#gprmsn">
+            android:grantUriPermissions</a></code> 属性不存在，则假设其为
+            <code>false</code>。
+        </p>
+    </dd>
+</dl>
+
+
+
+<!-- The Provider Element -->
+<h2 id="ProviderElement">&lt;Provider&gt; 元素</h2>
+<p>
+    与 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=zh-cn">Activity</a></code> 和 <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=zh-cn">Service</a></code> 组件类似，必须使用
+<code><a href="../manifest/provider-element0b8e.html?hl=zh-cn">
+    &lt;provider&gt;</a></code> 元素在清单文件中为其应用定义
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code> 的子类。
+Android 系统会从该元素获取以下信息：
+
+<dl>
+    <dt>
+        授权
+        (<a href="../manifest/provider-element0b8e.html?hl=zh-cn#auth"><code>android:authorities</code></a>)
+    </dt>
+    <dd>
+        用于在系统内标识整个提供程序的符号名称。<a href="#ContentURI">设计内容 URI</a> 部分对此属性做了更详尽的描述。
+
+
+    </dd>
+    <dt>
+        提供程序类名
+        (<code>
+<a href="../manifest/provider-element0b8e.html?hl=zh-cn#nm">android:name</a>
+        </code>)
+    </dt>
+    <dd>
+        实现 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code> 的类。<a href="#ContentProvider">实现 ContentProvider 类</a>中对此类做了更详尽的描述。
+
+
+    </dd>
+    <dt>
+        权限
+    </dt>
+    <dd>
+        指定其他应用访问提供程序的数据所必须具备权限的属性：
+
+        <ul>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#gprmsn">
+                android:grantUriPermssions</a></code>：临时权限标志
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#prmsn">
+                android:permission</a></code>：统一提供程序范围读取/写入权限
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#rprmsn">
+                android:readPermission</a></code>：提供程序范围读取权限
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#wprmsn">
+                android:writePermission</a></code>：提供程序范围写入权限
+            </li>
+        </ul>
+        <p>
+            <a href="#Permissions">实现内容提供程序权限</a>部分对权限及其对应属性做了更详尽的描述。
+
+
+        </p>
+    </dd>
+    <dt>
+        启动和控制属性
+    </dt>
+    <dd>
+        这些属性决定 Android 系统如何以及何时启动提供程序、提供程序的进程特性以及其他运行时设置：
+
+        <ul>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#enabled">
+                android:enabled</a></code>：允许系统启动提供程序的标志。
+            </li>
+              <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#exported">
+                android:exported</a></code>：允许其他应用使用此提供程序的标志。
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#init">
+                android:initOrder</a></code>：此提供程序相对于同一进程中其他提供程序的启动顺序。
+
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#multi">
+                android:multiProcess</a></code>：允许系统在与调用客户端相同的进程中启动提供程序的标志。
+
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#proc">
+                android:process</a></code>：应在其中运行提供程序的进程的名称。
+
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#sync">
+                android:syncable</a></code>：指示提供程序的数据将与服务器上的数据同步的标志。
+
+            </li>
+        </ul>
+        <p>
+            开发指南中针对 <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn">
+            &lt;provider&gt;</a></code> 元素的主题提供了这些属性的完整资料。
+
+
+        </p>
+    </dd>
+    <dt>
+        信息属性
+    </dt>
+    <dd>
+        提供程序的可选图标和标签：
+        <ul>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#icon">
+                android:icon</a></code>：包含提供程序图标的可绘制对象资源。
+                该图标出现在<em>Settings</em> &gt; <em>Apps</em> &gt; <em>All</em> 中应用列表内的提供程序标签旁；
+
+            </li>
+            <li>
+                <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn#label">
+                android:label</a></code>：描述提供程序和/或其数据的信息标签。
+该标签出现在<em>Settings</em> &gt; <em>Apps</em> &gt; <em>All</em>中的应用列表内。
+
+            </li>
+        </ul>
+        <p>
+            开发指南中针对 <code><a href="../manifest/provider-element0b8e.html?hl=zh-cn">
+            &lt;provider&gt;</a></code> 元素的主题提供了这些属性的完整资料。
+
+        </p>
+    </dd>
+</dl>
+
+<!-- Intent Access -->
+<h2 id="Intents">Intent 和数据访问</h2>
+<p>
+    应用可以通过 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=zh-cn">Intent</a></code> 间接访问内容提供程序。
+    应用不会调用 <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=zh-cn">ContentResolver</a></code> 或
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=zh-cn">ContentProvider</a></code> 的任何方法，它并不会直接提供，而是会发送一个启动某个 Activity 的 Intent，该 Activity 通常是提供程序自身应用的一部分。
+目标 Activity 负责检索和显示其 UI 中的数据。
+视 Intent 中的操作而定，目标 Activity 可能还会提示用户对提供程序的数据进行修改。
+
+    Intent 可能还包含目标 Activity 在 UI 中显示的“extra”数据；用户随后可以选择更改此数据，然后使用它来修改提供程序中的数据。
+
+
+</p>
+<p>
+
+</p>
+<p>
+    您可能想使用 Intent 访问权限来帮助确保数据完整性。您的提供程序可能依赖于根据严格定义的业务逻辑插入、更新和删除数据。
+如果是这种情况，则允许其他应用直接修改您的数据可能会导致无效的数据。
+
+如果您想让开发者使用 Intent 访问权限，请务必为其提供详尽的参考资料。
+    向他们解释为什么使用自身应用 UI 的 Intent 访问比尝试通过代码修改数据更好。
+
+</p>
+<p>
+    处理想要修改您的提供程序数据的传入 Intent 与处理其他 Intent 没有区别。
+您可以通过阅读 <a href="../../components/intents-filters0b8e.html?hl=zh-cn">Intent 和 Intent 过滤器</a>主题了解有关 Intent 用法的更多信息。
+
+</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=zh-cn" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="博客" target="_blank">博客</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=zh-cn" title="支持">支持</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=zh-cn" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=zh-cn" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=zh-cn" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=zh-cn" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="DEOFkF0rT2DJ9_JW_EG8FI1nzSI3pI6GYOGI57G9kG06MTQ5NzUxNjk5MjQ1NDU4MA" />
+      <input type="hidden" name="next" value="/guide/topics/providers/content-provider-creating.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+             selected="selected" >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Email 地址</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en414d.js?hl=zh-cn?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists414d.js?hl=zh-cn?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=zh-cn"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_zh-cn.js?hl=zh-cn?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/content-provider-creating.html?hl=zh-cn by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:14:35 GMT -->
+</html>

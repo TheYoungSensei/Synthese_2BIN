@@ -1,0 +1,2162 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/content-provider-basics.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:00:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="dN6BrU-Z0SQ5EL9eVHJK9Y7BFLiHRdjTg0klrVi5mX46MTQ5NzUxNTgxOTMwNjExMA" />
+
+  
+    <link rel="canonical" href="content-provider-basics.html">
+  
+
+  
+    <link rel="alternate" href="content-provider-basics7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="content-provider-basics.html" hreflang="en">
+  
+    <link rel="alternate" href="content-provider-basics327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="content-provider-basics9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="content-provider-basics232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="content-provider-basics0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="content-provider-basics6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="content-provider-basics0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="content-provider-basicsf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="content-provider-basics9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=ru" hreflang="ru-cn">
+  
+
+  <link rel="alternate" href="content-provider-basics.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon.png">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-180.png">
+
+
+<title>
+
+  Content Provider Basics | Android Developers
+
+</title>
+
+  <meta name="description" content="A content provider manages access to a central repository of data. A provider is part of an Android application, which often provides its own UI for working with the data. However, content providers are primarily intended to be used by other applications…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default803f.css?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle.js" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android.js"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android.js"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs803f.js?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;en&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;en&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "en", "served": "en"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo.png"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Search">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Back</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index.html" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals.html" >App Fundamentals</a></li><li><a href="../../practices/compatibility.html" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/index.html" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requesting.html" >Requesting Permissions</a></li><li><a href="../permissions/defining.html" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index.html" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack.html"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-art.html" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index.html" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters.html" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common.html" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/index.html" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activities.html" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecycle.html" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changes.html" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stack.html" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecycle.html" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundles.html" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recents.html" >Recents Screen</a></li></ul></li><li><a href="../../components/fragments.html" >Fragments</a></li><li><a href="../../components/loaders.html" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services.html" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services.html" >Bound Services</a></li><li><a href="../../components/aidl.html" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="content-providers.html" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="content-provider-basics.html" >Content Provider Basics</a></li><li><a href="content-provider-creating.html" >Creating a Content Provider</a></li><li><a href="calendar-provider.html" >Calendar Provider</a></li><li><a href="contacts-provider.html" >Contacts Provider</a></li><li><a href="document-provider.html" >Open files using Storage Access Framework</a></li><li><a href="create-document-provider.html" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcasts.html" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index.html" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host.html" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threads.html" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index.html" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview.html" >Overview</a></li><li><a href="../resources/providing-resources.html" >Providing Resources</a></li><li><a href="../resources/accessing-resources.html" >Accessing Resources</a></li><li><a href="../resources/runtime-changes.html" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization.html" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework.html" >ICU4J Android Framework APIs</a></li><li><a href="../resources/multilingual-support.html" >Language and Locale</a></li></ul></li><li><a href="../resources/complex-xml-resources.html" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources.html" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource.html" >Animation</a></li><li><a href="../resources/color-list-resource.html" >Color State List</a></li><li><a href="../resources/drawable-resource.html" >Drawable</a></li><li><a href="../resources/layout-resource.html" >Layout</a></li><li><a href="../resources/menu-resource.html" >Menu</a></li><li><a href="../resources/string-resource.html" >String</a></li><li><a href="../resources/style-resource.html" >Style</a></li><li><a href="../resources/more-resources.html" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro.html" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element.html" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element.html" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element.html" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element.html" >&lt;application&gt;</a></li><li><a href="../manifest/category-element.html" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element.html" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element.html" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element.html" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element.html" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element.html" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element.html" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element.html" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element.html" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element.html" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element.html" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element.html" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element.html" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element.html" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element.html" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element.html" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element.html" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element.html" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element.html" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element.html" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element.html" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element.html" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element.html" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index.html" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview.html" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout.html" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear.html" >Linear Layout</a></li><li><a href="../ui/layout/relative.html" >Relative Layout</a></li><li><a href="../ui/layout/recyclerview.html" >Recycler View</a></li><li><a href="../ui/layout/listview.html" >List View</a></li><li><a href="../ui/layout/gridview.html" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls.html" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button.html" >Buttons</a></li><li><a href="../ui/controls/checkbox.html" >Checkboxes</a></li><li><a href="../ui/controls/radiobutton.html" >Radio Buttons</a></li><li><a href="../ui/controls/togglebutton.html" >Toggle Buttons</a></li><li><a href="../ui/controls/spinner.html" >Spinners</a></li><li><a href="../ui/controls/pickers.html" >Pickers</a></li></ul></li><li><a href="../ui/ui-events.html" >Input Events</a></li><li><a href="../ui/menus.html" >Menus</a></li><li><a href="../ui/settings.html" >Settings</a></li><li><a href="../ui/dialogs.html" >Dialogs</a></li><li><a href="../ui/notifiers/notifications.html" >Notifications</a></li><li><a href="../ui/notifiers/toasts.html" >Toasts</a></li><li><a href="../ui/shortcuts.html" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index.html" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog.html" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestions.html" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestions.html" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-config.html" >Searchable Configuration</a></li></ul></li><li><a href="../ui/multi-window.html" >Multi-Window Support</a></li><li><a href="../ui/drag-drop.html" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index.html" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps.html" >Making Apps More Accessible</a></li><li><a href="../ui/accessibility/checklist.html" >Accessibility Developer Checklist</a></li><li><a href="../ui/accessibility/node-tree-debugging.html" >Using Node Tree Debugging</a></li><li><a href="../ui/accessibility/services.html" >Building Accessibility Services</a></li><li><a href="../ui/accessibility/custom-views.html" >Building Accessible Custom Views</a></li></ul></li><li><a href="../ui/themes.html" >Styles and Themes</a></li><li><a href="../ui/custom-components.html" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index.html" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview.html" >Overview</a></li><li><a href="../graphics/prop-animation.html" >Property Animation</a></li><li><a href="../graphics/view-animation.html" >View Animation</a></li><li><a href="../graphics/drawable-animation.html" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphics.html" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resources.html" >Vector Drawable</a></li></ul></li><li><a href="../graphics/opengl.html" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel.html" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index.html" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute.html" >RenderScript</a></li><li><a href="../renderscript/advanced.html" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview.html" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types.html" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_types.html" >Object Types</a></li><li><a href="../renderscript/reference/rs_convert.html" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_math.html" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_math.html" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrix.html" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternion.html" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomic.html" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_time.html" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_data.html" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_info.html" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_each.html" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_io.html" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debug.html" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphics.html" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/index.html" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/index.html" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overview.html" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-session.html" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-app.html" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservice.html" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-client.html" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacks.html" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-app.html" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activity.html" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacks.html" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttons.html" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphones.html" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index.html" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formats.html" >Supported Media Formats</a></li><li><a href="../media/mediaplayer.html" >MediaPlayer</a></li><li><a href="../media/mediarecorder.html" >MediaRecorder</a></li><li><a href="../media/exoplayer.html" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routing.html" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouter.html" >MediaRouter API</a></li><li><a href="../media/mediarouteprovider.html" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/camera.html" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index.html" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index.html" >Location and Maps</a></li><li><a href="../location/strategies.html" >Location Strategies</a></li><li><a href="../sensors/sensors_overview.html" >Sensors Overview</a></li><li><a href="../sensors/sensors_motion.html" >Motion Sensors</a></li><li><a href="../sensors/sensors_position.html" >Position Sensors</a></li><li><a href="../sensors/sensors_environment.html" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index.html" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth.html" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le.html" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index.html" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc.html" >NFC Basics</a></li><li><a href="../connectivity/nfc/advanced-nfc.html" >Advanced NFC</a></li><li><a href="../connectivity/nfc/hce.html" >Host-based Card Emulation</a></li></ul></li><li><a href="../connectivity/wifip2p.html" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index.html" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory.html" >Accessory</a></li><li><a href="../connectivity/usb/host.html" >Host</a></li></ul></li><li><a href="../connectivity/sip.html" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index.html" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste.html" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-method.html" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboard.html" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-framework.html" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index.html" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage.html" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../data/backup.html" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/autobackup.html" >Auto Backup</a></li><li><a href="../data/keyvaluebackup.html" >Key/Value Backup</a></li><li><a href="../data/testingbackup.html" >Testing Backup and Restore</a></li></ul></li><li><a href="../data/install-location.html" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index.html" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin.html" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index.html" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting.html" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webview.html" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migrating.html" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debugging.html" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practices.html" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index.html"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support.html" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution.html" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-mode.html" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessness.html" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsets.html" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html">Home</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Training</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index.html"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Reference</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html">Samples</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html"
+           >Libraries</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Content Provider Basics</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+<!-- In this document -->
+<h2>In this document</h2>
+<ol>
+    <li>
+        <a href="#Basics">Overview</a>
+        <ol>
+            <li>
+                <a href="#ClientProvider">Accessing a provider</a>
+            </li>
+            <li>
+                <a href="#ContentURIs">Content URIs</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#SimpleQuery">Retrieving Data from the Provider</a>
+        <ol>
+            <li>
+                <a href="#RequestPermissions">Requesting read access permission</a>
+            </li>
+            <li>
+                <a href="#Query">Constructing the query</a>
+            </li>
+            <li>
+                <a href="#DisplayResults">Displaying query results</a>
+            </li>
+            <li>
+                <a href="#GettingResults">Getting data from query results</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#Permissions">Content Provider Permissions</a>
+    </li>
+    <li>
+        <a href="#Modifications">Inserting, Updating, and Deleting Data</a>
+        <ol>
+            <li>
+                <a href="#Inserting">Inserting data</a>
+            </li>
+            <li>
+                <a href="#Updating">Updating data</a>
+            </li>
+            <li>
+                <a href="#Deleting">Deleting data</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#DataTypes">Provider Data Types</a>
+    </li>
+    <li>
+        <a href="#AltForms">Alternative Forms of Provider Access</a>
+        <ol>
+            <li>
+                <a href="#Batch">Batch access</a>
+            </li>
+            <li>
+                <a href="#Intents">Data access via intents</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#ContractClasses">Contract Classes</a>
+    </li>
+    <li>
+        <a href="#MIMETypeReference">MIME Type Reference</a>
+    </li>
+</ol>
+
+    <!-- Key Classes -->
+<h2>Key classes</h2>
+    <ol>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html">ContentProvider</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html">ContentResolver</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/net/Uri.html">Uri</a></code>
+        </li>
+    </ol>
+
+    <!-- See also -->
+<h2>See also</h2>
+    <ol>
+        <li>
+            <a href="content-provider-creating.html">
+            Creating a Content Provider</a>
+        </li>
+        <li>
+            <a href="calendar-provider.html">
+            Calendar Provider</a>
+        </li>
+    </ol>
+</div>
+</div>
+
+    <!-- Intro paragraphs -->
+<p>
+    A content provider manages access to a central repository of data. A provider
+    is part of an Android application, which often provides its own UI for working with
+    the data. However, content providers are primarily intended to be used by other
+    applications, which access the provider using a provider client object. Together, providers
+    and provider clients offer a consistent, standard interface to data that also handles
+    inter-process communication and secure data access.
+</p>
+<p>
+    Typically you work with content providers in one of two scenarios; you may want to implement
+    code to access an exiting content provider in another application, or you may want to create
+    a new content provider in your application to share data with other applications. This topic
+    covers the basics of working with existing content providers. To learn more about implementing
+    content providers in your own applications, see
+    <a href="content-provider-creating.html">
+    Creating a Content Provider</a>.
+<p>
+    This topic describes the following:
+</p>
+    <ul>
+        <li>How content providers work.</li>
+        <li>The API you use to retrieve data from a content provider.</li>
+        <li>The API you use to insert, update, or delete data in a content provider.</li>
+        <li>Other API features that facilitate working with providers.</li>
+    </ul>
+
+    <!-- Basics -->
+<h2 id="Basics">Overview</h2>
+<p>
+    A content provider presents data to external applications as one or more tables that are
+    similar to the tables found in a relational database. A row represents an instance of some type
+    of data the provider collects, and each column in the row represents an individual piece of
+    data collected for an instance.
+</p>
+<p>
+    A content provider coordinates access to the data storage layer in your application for a
+    number of different APIs and components as illustrated in figure 1, these include:
+</p>
+    <ul>
+        <li>Sharing access to your application data with other applications</li>
+        <li>Sending data to a widget</li>
+        <li>Returning custom search suggestions for your application through the search
+        framework using <code><a href="https://developer.android.com/reference/android/content/SearchRecentSuggestionsProvider.html">SearchRecentSuggestionsProvider</a></code></li>
+        <li>Synchronizing application data with your server using an implementation of
+        <code><a href="https://developer.android.com/reference/android/content/AbstractThreadedSyncAdapter.html">AbstractThreadedSyncAdapter</a></code></li>
+        <li>Loading data in your UI using a <code><a href="https://developer.android.com/reference/android/content/CursorLoader.html">CursorLoader</a></code></li>
+    </ul>
+<img src="images/content-provider-tech-stack.png"
+  alt="Relationship between content provider and other components." id="figure-cpts">
+<p class="img-caption">
+    <strong>Figure 1.</strong> Relationship between content provider and other components.
+</p>
+<h3 id="ClientProvider">Accessing a provider</h3>
+<p>
+    When you want to access data in a content provider, you use the
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html">ContentResolver</a></code> object in your application's
+    <code><a href="https://developer.android.com/reference/android/content/Context.html">Context</a></code> to communicate with the provider as a client. The
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html">ContentResolver</a></code> object communicates with the provider object, an
+    instance of a class that implements <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html">ContentProvider</a></code>. The provider
+    object receives data requests from clients, performs the requested action, and returns the 
+    results. This object has methods that call identically-named methods in the provider object,
+    an instance of one of the concrete subclasses of <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html">ContentProvider</a></code>. The
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html">ContentResolver</a></code> methods provide the basic
+    "CRUD" (create, retrieve, update, and delete) functions of persistent storage.
+</p>
+<p>
+    A common pattern for accessing a <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html">ContentProvider</a></code> from your UI uses a
+    <code><a href="https://developer.android.com/reference/android/content/CursorLoader.html">CursorLoader</a></code> to run an asynchronous query in the background. The
+    <code><a href="https://developer.android.com/reference/android/app/Activity.html">Activity</a></code> or <code><a href="https://developer.android.com/reference/android/app/Fragment.html">Fragment</a></code> in your UI call a
+    <code><a href="https://developer.android.com/reference/android/content/CursorLoader.html">CursorLoader</a></code> to the query, which in turn gets the 
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html">ContentProvider</a></code> using the <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html">ContentResolver</a></code>.
+    This allows the UI to continue to be available to the user while the query is running. This
+    pattern involves the interaction of a number of different objects, as well as the underlying
+    storage mechanism, as illustrated in figure 2.
+</p>
+<img src="images/content-provider-interaction.png"
+  alt="Interaction between ContentProvider, other classes, and storage." id="figure-cpi">
+<p class="img-caption">
+    <strong>Figure 2.</strong> Interaction between ContentProvider, other classes, and storage.
+</p>
+<p class="note">
+    <strong>Note:</strong> To access a provider, your application usually has to request specific
+    permissions in its manifest file. This development pattern is described in more detail in the
+    section <a href="#Permissions">Content Provider Permissions</a>.
+</p>
+<p>
+    One of the built-in providers in the Android platform is the user dictionary, which
+    stores the spellings of non-standard words that the user wants to keep. Table 1 illustrates what
+    the data might look like in this provider's table:
+</p>
+<p class="table-caption">
+    <strong>Table 1:</strong> Sample user dictionary table.
+</p>
+<table id="table1" style="width: 50%;">
+    <tr>
+        <th style="width:20%" align="center" scope="col">word</th>
+        <th style="width:20%" align="center" scope="col">app id</th>
+        <th style="width:20%" align="center" scope="col">frequency</th>
+        <th style="width:20%" align="center" scope="col">locale</th>
+        <th style="width:20%" align="center" scope="col">_ID</th>
+    </tr>
+    <tr>
+        <td align="center" scope="row">mapreduce</td>
+        <td align="center">user1</td>
+        <td align="center">100</td>
+        <td align="center">en_US</td>
+        <td align="center">1</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">precompiler</td>
+        <td align="center">user14</td>
+        <td align="center">200</td>
+        <td align="center">fr_FR</td>
+        <td align="center">2</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">applet</td>
+        <td align="center">user2</td>
+        <td align="center">225</td>
+        <td align="center">fr_CA</td>
+        <td align="center">3</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">const</td>
+        <td align="center">user1</td>
+        <td align="center">255</td>
+        <td align="center">pt_BR</td>
+        <td align="center">4</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">int</td>
+        <td align="center">user5</td>
+        <td align="center">100</td>
+        <td align="center">en_UK</td>
+        <td align="center">5</td>
+    </tr>
+</table>
+<p>
+    In table 1, each row represents an instance of a word that might not be
+    found in a standard dictionary. Each column represents some data for that word, such as the
+    locale in which it was first encountered. The column headers are column names that are stored in
+    the provider. To refer to a row's locale, you refer to its <code>locale</code> column. For
+    this provider, the <code>_ID</code> column serves as a "primary key" column that
+    the provider automatically maintains.
+</p>
+<p>
+    To get a list of the words and their locales from the User Dictionary Provider,
+    you call <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code>.
+    The <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">query()</a></code> method calls the
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentProvider.query()</a></code> method defined by the
+    User Dictionary Provider. The following lines of code show a
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code> call:
+<p>
+<pre>
+// Queries the user dictionary and returns results
+mCursor = getContentResolver().query(
+    UserDictionary.Words.CONTENT_URI,   // The content URI of the words table
+    mProjection,                        // The columns to return for each row
+    mSelectionClause                    // Selection criteria
+    mSelectionArgs,                     // Selection criteria
+    mSortOrder);                        // The sort order for the returned rows
+</pre>
+<p>
+    Table 2 shows how the arguments to
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">query(Uri,projection,selection,selectionArgs,sortOrder)</a></code> match an SQL SELECT statement:
+</p>
+<p class="table-caption">
+    <strong>Table 2:</strong> Query() compared to SQL query.
+</p>
+<table id="table2" style="width: 75%;">
+    <tr>
+        <th style="width:25%" align="center" scope="col">query() argument</th>
+        <th style="width:25%" align="center" scope="col">SELECT keyword/parameter</th>
+        <th style="width:50%" align="center" scope="col">Notes</th>
+    </tr>
+    <tr>
+        <td align="center"><code>Uri</code></td>
+        <td align="center"><code>FROM <em>table_name</em></code></td>
+        <td><code>Uri</code> maps to the table in the provider named <em>table_name</em>.</td>
+    </tr>
+    <tr>
+        <td align="center"><code>projection</code></td>
+        <td align="center"><code><em>col,col,col,...</em></code></td>
+        <td>
+            <code>projection</code> is an array of columns that should be included for each row
+            retrieved.
+        </td>
+    </tr>
+    <tr>
+        <td align="center"><code>selection</code></td>
+        <td align="center"><code>WHERE <em>col</em> = <em>value</em></code></td>
+        <td><code>selection</code> specifies the criteria for selecting rows.</td>
+    </tr>
+    <tr>
+        <td align="center"><code>selectionArgs</code></td>
+        <td align="center">
+            (No exact equivalent. Selection arguments replace <code>?</code> placeholders in the
+            selection clause.)
+        </td>
+    </tr>
+    <tr>
+        <td align="center"><code>sortOrder</code></td>
+        <td align="center"><code>ORDER BY <em>col,col,...</em></code></td>
+        <td>
+            <code>sortOrder</code> specifies the order in which rows appear in the returned
+            <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code>.
+        </td>
+    </tr>
+</table>
+<h3 id="ContentURIs">Content URIs</h3>
+<p>
+    A <strong>content URI</strong> is a URI that identifies data in a provider. Content URIs
+    include the symbolic name of the entire provider (its <strong>authority</strong>) and a
+    name that points to a table (a <strong>path</strong>). When you call
+    a client method to access a table in a provider, the content URI for the table is one of
+    the arguments.
+</p>
+<p>
+    In the preceding lines of code, the constant
+    <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html#CONTENT_URI">CONTENT_URI</a></code> contains the content URI of
+    the user dictionary's "words" table. The <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html">ContentResolver</a></code>
+    object parses out the URI's authority, and uses it to "resolve" the provider by
+    comparing the authority to a system table of known providers. The
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html">ContentResolver</a></code> can then dispatch the query arguments to the correct
+    provider.
+</p>
+<p>
+    The <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html">ContentProvider</a></code> uses the path part of the content URI to choose the
+    table to access. A provider usually has a <strong>path</strong> for each table it exposes.
+</p>
+<p>
+    In the previous lines of code, the full URI for the "words" table is:
+</p>
+<pre>
+content://user_dictionary/words
+</pre>
+<p>
+    where the <code>user_dictionary</code> string is the provider's authority, and
+    the <code>words</code> string is the table's path. The string
+    <code>content://</code> (the <strong>scheme</strong>) is always present,
+    and identifies this as a content URI.
+</p>
+<p>
+    Many providers allow you to access a single row in a table by appending an ID value
+    to the end of the URI. For example, to retrieve a row whose <code>_ID</code> is
+    <code>4</code> from user dictionary, you can use this content URI:
+</p>
+<pre>
+Uri singleUri = ContentUris.withAppendedId(UserDictionary.Words.CONTENT_URI,4);
+</pre>
+<p>
+    You often use id values when you've retrieved a set of rows and then want to update or delete
+    one of them.
+</p>
+<p class="note">
+    <strong>Note:</strong> The <code><a href="https://developer.android.com/reference/android/net/Uri.html">Uri</a></code> and <code><a href="https://developer.android.com/reference/android/net/Uri.Builder.html">Uri.Builder</a></code> classes
+    contain convenience methods for constructing well-formed URI objects from strings. The
+    <code><a href="https://developer.android.com/reference/android/content/ContentUris.html">ContentUris</a></code> class contains convenience methods for appending id values to
+    a URI. The previous snippet uses <code><a href="https://developer.android.com/reference/android/content/ContentUris.html#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code> to append an id to the UserDictionary content URI.
+</p>
+
+
+    <!-- Retrieving Data from the Provider -->
+<h2 id="SimpleQuery">Retrieving Data from the Provider</h2>
+<p>
+    This section describes how to retrieve data from a provider, using the User Dictionary Provider
+    as an example.
+</p>
+<p class="note">
+    For the sake of clarity, the code snippets in this section call
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code> on the "UI thread"". In
+    actual code, however, you should do queries asynchronously on a separate thread. One way to do
+    this is to use the <code><a href="https://developer.android.com/reference/android/content/CursorLoader.html">CursorLoader</a></code> class, which is described
+    in more detail in the <a href="../../components/loaders.html">
+    Loaders</a> guide. Also, the lines of code are snippets only; they don't show a complete
+    application.
+</p>
+<p>
+    To retrieve data from a provider, follow these basic steps:
+</p>
+<ol>
+   <li>
+        Request the read access permission for the provider.
+   </li>
+   <li>
+        Define the code that sends a query to the provider.
+   </li>
+</ol>
+<h3 id="RequestPermissions">Requesting read access permission</h3>
+<p>
+    To retrieve data from a provider, your application needs "read access permission" for the
+    provider. You can't request this permission at run-time; instead, you have to specify that
+    you need this permission in your manifest, using the
+<code><a href="../manifest/uses-permission-element.html">&lt;uses-permission&gt;</a></code>
+    element and the exact permission name defined by the
+    provider. When you specify this element in your manifest, you are in effect "requesting" this
+    permission for your application. When users install your application, they implicitly grant
+    this request.
+</p>
+<p>
+    To find the exact name of the read access permission for the provider you're using, as well
+    as the names for other access permissions used by the provider, look in the provider's
+    documentation.
+</p>
+<p>
+    The role of permissions in accessing providers is described in more detail in the section
+    <a href="#Permissions">Content Provider Permissions</a>.
+</p>
+<p>
+    The User Dictionary Provider defines the permission
+    <code>android.permission.READ_USER_DICTIONARY</code> in its manifest file, so an
+    application that wants to read from the provider must request this permission.
+</p>
+<!-- Constructing the query -->
+<h3 id="Query">Constructing the query</h3>
+<p>
+    The next step in retrieving data from a provider is to construct a query. This first snippet
+    defines some variables for accessing the User Dictionary Provider:
+</p>
+<pre class="prettyprint">
+
+// A "projection" defines the columns that will be returned for each row
+String[] mProjection =
+{
+    UserDictionary.Words._ID,    // Contract class constant for the _ID column name
+    UserDictionary.Words.WORD,   // Contract class constant for the word column name
+    UserDictionary.Words.LOCALE  // Contract class constant for the locale column name
+};
+
+// Defines a string to contain the selection clause
+String mSelectionClause = null;
+
+// Initializes an array to contain selection arguments
+String[] mSelectionArgs = {""};
+
+</pre>
+<p>
+    The next snippet shows how to use
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code>, using the User Dictionary
+    Provider as an example. A provider client query is similar to an SQL query, and it contains a
+    set of columns to return, a set of selection criteria, and a sort order.
+</p>
+<p>
+    The set of columns that the query should return is called a <strong>projection</strong>
+    (the variable <code>mProjection</code>).
+</p>
+<p>
+    The expression that specifies the rows to retrieve is split into a selection clause and
+    selection arguments. The selection clause is a combination of logical and Boolean expressions,
+    column names, and values (the variable <code>mSelectionClause</code>). If you specify the
+    replaceable parameter <code>?</code> instead of a value, the query method retrieves the value
+    from the selection arguments array (the variable <code>mSelectionArgs</code>).
+</p>
+<p>
+    In the next snippet, if the user doesn't enter a word, the selection clause is set to
+    <code>null</code>, and the query returns all the words in the provider. If the user enters
+    a word, the selection clause is set to <code>UserDictionary.Words.WORD + " = ?"</code> and
+    the first element of selection arguments array is set to the word the user enters.
+</p>
+<pre class="prettyprint">
+/*
+ * This defines a one-element String array to contain the selection argument.
+ */
+String[] mSelectionArgs = {""};
+
+// Gets a word from the UI
+mSearchString = mSearchWord.getText().toString();
+
+// Remember to insert code here to check for invalid or malicious input.
+
+// If the word is the empty string, gets everything
+if (TextUtils.isEmpty(mSearchString)) {
+    // Setting the selection clause to null will return all words
+    mSelectionClause = null;
+    mSelectionArgs[0] = "";
+
+} else {
+    // Constructs a selection clause that matches the word that the user entered.
+    mSelectionClause = UserDictionary.Words.WORD + " = ?";
+
+    // Moves the user's input string to the selection arguments.
+    mSelectionArgs[0] = mSearchString;
+
+}
+
+// Does a query against the table and returns a Cursor object
+mCursor = getContentResolver().query(
+    UserDictionary.Words.CONTENT_URI,  // The content URI of the words table
+    mProjection,                       // The columns to return for each row
+    mSelectionClause                   // Either null, or the word the user entered
+    mSelectionArgs,                    // Either empty, or the string the user entered
+    mSortOrder);                       // The sort order for the returned rows
+
+// Some providers return null if an error occurs, others throw an exception
+if (null == mCursor) {
+    /*
+     * Insert code here to handle the error. Be sure not to use the cursor! You may want to
+     * call android.util.Log.e() to log this error.
+     *
+     */
+// If the Cursor is empty, the provider found no matches
+} else if (mCursor.getCount() &lt; 1) {
+
+    /*
+     * Insert code here to notify the user that the search was unsuccessful. This isn't necessarily
+     * an error. You may want to offer the user the option to insert a new row, or re-type the
+     * search term.
+     */
+
+} else {
+    // Insert code here to do something with the results
+
+}
+</pre>
+<p>
+    This query is analogous to the SQL statement:
+</p>
+<pre>
+SELECT _ID, word, locale FROM words WHERE word = &lt;userinput&gt; ORDER BY word ASC;
+</pre>
+<p>
+    In this SQL statement, the actual column names are used instead of contract class constants.
+</p>
+<h4 id="Injection">Protecting against malicious input</h4>
+<p>
+    If the data managed by the content provider is in an SQL database, including external untrusted
+    data into raw SQL statements can lead to SQL injection.
+</p>
+<p>
+    Consider this selection clause:
+</p>
+<pre>
+// Constructs a selection clause by concatenating the user's input to the column name
+String mSelectionClause =  "var = " + mUserInput;
+</pre>
+<p>
+    If you do this, you're allowing the user to concatenate malicious SQL onto your SQL statement.
+    For example, the user could enter "nothing; DROP TABLE *;"  for <code>mUserInput</code>, which
+    would result in the selection clause <code>var = nothing; DROP TABLE *;</code>. Since the
+    selection clause is treated as an SQL statement, this might cause the provider to erase all of
+    the tables in the underlying SQLite database (unless the provider is set up to catch
+    <a href="http://en.wikipedia.org/wiki/SQL_injection">SQL injection</a> attempts).
+</p>
+<p>
+    To avoid this problem, use a selection clause that uses <code>?</code> as a replaceable
+    parameter and a separate array of selection arguments. When you do this, the user input
+    is bound directly to the query rather than being interpreted as part of an SQL statement.
+    Because it's not treated as SQL, the user input can't inject malicious SQL. Instead of using
+    concatenation to include the user input, use this selection clause:
+</p>
+<pre>
+// Constructs a selection clause with a replaceable parameter
+String mSelectionClause =  "var = ?";
+</pre>
+<p>
+    Set up the array of selection arguments like this:
+</p>
+<pre>
+// Defines an array to contain the selection arguments
+String[] selectionArgs = {""};
+</pre>
+<p>
+    Put a value in the selection arguments array like this:
+</p>
+<pre>
+// Sets the selection argument to the user's input
+selectionArgs[0] = mUserInput;
+</pre>
+<p>
+    A selection clause that uses <code>?</code> as a replaceable parameter and an array of
+    selection arguments array are preferred way to specify a selection, even if the provider isn't
+    based on an SQL database.
+</p>
+<!-- Displaying the results -->
+<h3 id="DisplayResults">Displaying query results</h3>
+<p>
+    The <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code> client method always
+    returns a <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code> containing the columns specified by the query's
+    projection for the rows that match the query's selection criteria. A
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code> object provides random read access to the rows and columns it
+    contains. Using <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code> methods, you can iterate over the rows in the
+    results, determine the data type of each column, get the data out of a column, and examine other
+    properties of the results. Some <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code> implementations automatically
+    update the object when the provider's data changes, or trigger methods in an observer object
+    when the <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code> changes, or both.
+</p>
+<p class="note">
+    <strong>Note:</strong> A provider may restrict access to columns based on the nature of the
+    object making the query. For example, the Contacts Provider restricts access for some columns to
+    sync adapters, so it won't return them to an activity or service.
+</p>
+<p>
+    If no rows match the selection criteria, the provider
+    returns a <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code> object for which
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html#getCount()">Cursor.getCount()</a></code> is 0 (an empty cursor).
+</p>
+<p>
+    If an internal error occurs, the results of the query depend on the particular provider. It may
+    choose to return <code>null</code>, or it may throw an <code><a href="https://developer.android.com/reference/java/lang/Exception.html">Exception</a></code>.
+</p>
+<p>
+    Since a <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code> is a "list" of rows, a good way to display the
+    contents of a <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code> is to link it to a <code><a href="https://developer.android.com/reference/android/widget/ListView.html">ListView</a></code>
+    via a <code><a href="https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html">SimpleCursorAdapter</a></code>.
+</p>
+<p>
+    The following snippet continues the code from the previous snippet. It creates a
+    <code><a href="https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html">SimpleCursorAdapter</a></code> object containing the <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code>
+    retrieved by the query, and sets this object to be the adapter for a
+    <code><a href="https://developer.android.com/reference/android/widget/ListView.html">ListView</a></code>:
+</p>
+<pre class="prettyprint">
+// Defines a list of columns to retrieve from the Cursor and load into an output row
+String[] mWordListColumns =
+{
+    UserDictionary.Words.WORD,   // Contract class constant containing the word column name
+    UserDictionary.Words.LOCALE  // Contract class constant containing the locale column name
+};
+
+// Defines a list of View IDs that will receive the Cursor columns for each row
+int[] mWordListItems = { R.id.dictWord, R.id.locale};
+
+// Creates a new SimpleCursorAdapter
+mCursorAdapter = new SimpleCursorAdapter(
+    getApplicationContext(),               // The application's Context object
+    R.layout.wordlistrow,                  // A layout in XML for one row in the ListView
+    mCursor,                               // The result from the query
+    mWordListColumns,                      // A string array of column names in the cursor
+    mWordListItems,                        // An integer array of view IDs in the row layout
+    0);                                    // Flags (usually none are needed)
+
+// Sets the adapter for the ListView
+mWordList.setAdapter(mCursorAdapter);
+</pre>
+<p class="note">
+    <strong>Note:</strong> To back a <code><a href="https://developer.android.com/reference/android/widget/ListView.html">ListView</a></code> with a
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code>, the cursor must contain a column named <code>_ID</code>.
+    Because of this, the query shown previously retrieves the <code>_ID</code> column for the
+    "words" table, even though the <code><a href="https://developer.android.com/reference/android/widget/ListView.html">ListView</a></code> doesn't display it.
+    This restriction also explains why most providers have a <code>_ID</code> column for each of
+    their tables.
+</p>
+
+        <!-- Getting data from query results -->
+<h3 id="GettingResults">Getting data from query results</h3>
+<p>
+    Rather than simply displaying query results, you can use them for other tasks. For
+    example, you can retrieve spellings from the user dictionary and then look them up in
+    other providers. To do this, you iterate over the rows in the <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code>:
+</p>
+<pre class="prettyprint">
+
+// Determine the column index of the column named "word"
+int index = mCursor.getColumnIndex(UserDictionary.Words.WORD);
+
+/*
+ * Only executes if the cursor is valid. The User Dictionary Provider returns null if
+ * an internal error occurs. Other providers may throw an Exception instead of returning null.
+ */
+
+if (mCursor != null) {
+    /*
+     * Moves to the next row in the cursor. Before the first movement in the cursor, the
+     * "row pointer" is -1, and if you try to retrieve data at that position you will get an
+     * exception.
+     */
+    while (mCursor.moveToNext()) {
+
+        // Gets the value from the column.
+        newWord = mCursor.getString(index);
+
+        // Insert code here to process the retrieved word.
+
+        ...
+
+        // end of while loop
+    }
+} else {
+
+    // Insert code here to report an error if the cursor is null or the provider threw an exception.
+}
+</pre>
+<p>
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code> implementations contain several "get" methods for
+    retrieving different types of data from the object. For example, the previous snippet
+    uses <code><a href="https://developer.android.com/reference/android/database/Cursor.html#getString(int)">getString()</a></code>. They also have a
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html#getType(int)">getType()</a></code> method that returns a value indicating
+    the data type of the column.
+</p>
+
+
+    <!-- Requesting permissions -->
+<h2 id="Permissions">Content Provider Permissions</h2>
+<p>
+    A provider's application can specify permissions that other applications must have in order to
+    access the provider's data. These permissions ensure that the user knows what data
+    an application will try to access. Based on the provider's requirements, other applications
+    request the permissions they need in order to access the provider. End users see the requested
+    permissions when they install the application.
+</p>
+<p>
+    If a provider's application doesn't specify any permissions, then other applications have no
+    access to the provider's data. However, components in the provider's application always have
+    full read and write access, regardless of the specified permissions.
+</p>
+<p>
+    As noted previously, the User Dictionary Provider requires the
+    <code>android.permission.READ_USER_DICTIONARY</code> permission to retrieve data from it.
+    The provider has the separate <code>android.permission.WRITE_USER_DICTIONARY</code>
+    permission for inserting, updating, or deleting data.
+</p>
+<p>
+    To get the permissions needed to access a provider, an application requests them with a
+<code><a href="../manifest/uses-permission-element.html">&lt;uses-permission&gt;</a></code>
+    element in its manifest file. When the Android Package Manager installs the application, a user
+    must approve all of the permissions the application requests. If the user approves all of them,
+    Package Manager continues the installation; if the user doesn't approve them, Package Manager
+    aborts the installation.
+</p>
+<p>
+    The following
+<code><a href="../manifest/uses-permission-element.html">&lt;uses-permission&gt;</a></code>
+    element requests read access to the User Dictionary Provider:
+</p>
+<pre>
+    &lt;uses-permission android:name="android.permission.READ_USER_DICTIONARY"&gt;
+</pre>
+<p>
+    The impact of permissions on provider access is explained in more detail in the
+    <a href="https://developer.android.com/training/articles/security-tips.html">Security and Permissions</a> guide.
+</p>
+
+
+<!-- Inserting, Updating, and Deleting Data -->
+<h2 id="Modifications">Inserting, Updating, and Deleting Data</h2>
+<p>
+    In the same way that you retrieve data from a provider, you also use the interaction between
+    a provider client and the provider's <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html">ContentProvider</a></code> to modify data.
+    You call a method of <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html">ContentResolver</a></code> with arguments that are passed to
+    the corresponding method of <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html">ContentProvider</a></code>. The provider and provider
+    client automatically handle security and inter-process communication.
+</p>
+<h3 id="Inserting">Inserting data</h3>
+<p>
+    To insert data into a provider, you call the
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#insert(android.net.Uri, android.content.ContentValues)">ContentResolver.insert()</a></code>
+    method. This method inserts a new row into the provider and returns a content URI for that row.
+    This snippet shows how to insert a new word into the User Dictionary Provider:
+</p>
+<pre class="prettyprint">
+// Defines a new Uri object that receives the result of the insertion
+Uri mNewUri;
+
+...
+
+// Defines an object to contain the new values to insert
+ContentValues mNewValues = new ContentValues();
+
+/*
+ * Sets the values of each column and inserts the word. The arguments to the "put"
+ * method are "column name" and "value"
+ */
+mNewValues.put(UserDictionary.Words.APP_ID, "example.user");
+mNewValues.put(UserDictionary.Words.LOCALE, "en_US");
+mNewValues.put(UserDictionary.Words.WORD, "insert");
+mNewValues.put(UserDictionary.Words.FREQUENCY, "100");
+
+mNewUri = getContentResolver().insert(
+    UserDictionary.Word.CONTENT_URI,   // the user dictionary content URI
+    mNewValues                          // the values to insert
+);
+</pre>
+<p>
+    The data for the new row goes into a single <code><a href="https://developer.android.com/reference/android/content/ContentValues.html">ContentValues</a></code> object, which
+    is similar in form to a one-row cursor. The columns in this object don't need to have the
+    same data type, and if you don't want to specify a value at all, you can set a column
+    to <code>null</code> using <code><a href="https://developer.android.com/reference/android/content/ContentValues.html#putNull(java.lang.String)">ContentValues.putNull()</a></code>.
+</p>
+<p>
+    The snippet doesn't add the <code>_ID</code> column, because this column is maintained
+    automatically. The provider assigns a unique value of <code>_ID</code> to every row that is
+    added. Providers usually use this value as the table's primary key.
+</p>
+<p>
+    The content URI returned in <code>newUri</code> identifies the newly-added row, with
+    the following format:
+</p>
+<pre>
+content://user_dictionary/words/&lt;id_value&gt;
+</pre>
+<p>
+    The <code>&lt;id_value&gt;</code> is the contents of <code>_ID</code> for the new row.
+    Most providers can detect this form of content URI automatically and then perform the requested
+    operation on that particular row.
+</p>
+<p>
+    To get the value of <code>_ID</code> from the returned <code><a href="https://developer.android.com/reference/android/net/Uri.html">Uri</a></code>, call
+    <code><a href="https://developer.android.com/reference/android/content/ContentUris.html#parseId(android.net.Uri)">ContentUris.parseId()</a></code>.
+</p>
+<h3 id="Updating">Updating data</h3>
+<p>
+    To update a row, you use a <code><a href="https://developer.android.com/reference/android/content/ContentValues.html">ContentValues</a></code> object with the updated
+    values just as you do with an insertion, and selection criteria just as you do with a query.
+    The client method you use is
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">ContentResolver.update()</a></code>. You only need to add
+    values to the <code><a href="https://developer.android.com/reference/android/content/ContentValues.html">ContentValues</a></code> object for columns you're updating. If you
+    want to clear the contents of a column, set the value to <code>null</code>.
+</p>
+<p>
+    The following snippet changes all the rows whose locale has the language "en" to a
+    have a locale of <code>null</code>. The return value is the number of rows that were updated:
+</p>
+<pre>
+// Defines an object to contain the updated values
+ContentValues mUpdateValues = new ContentValues();
+
+// Defines selection criteria for the rows you want to update
+String mSelectionClause = UserDictionary.Words.LOCALE +  "LIKE ?";
+String[] mSelectionArgs = {"en_%"};
+
+// Defines a variable to contain the number of updated rows
+int mRowsUpdated = 0;
+
+...
+
+/*
+ * Sets the updated value and updates the selected words.
+ */
+mUpdateValues.putNull(UserDictionary.Words.LOCALE);
+
+mRowsUpdated = getContentResolver().update(
+    UserDictionary.Words.CONTENT_URI,   // the user dictionary content URI
+    mUpdateValues                       // the columns to update
+    mSelectionClause                    // the column to select on
+    mSelectionArgs                      // the value to compare to
+);
+</pre>
+<p>
+    You should also sanitize user input when you call
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">ContentResolver.update()</a></code>. To learn more about
+    this, read the section <a href="#Injection">Protecting against malicious input</a>.
+</p>
+<h3 id="Deleting">Deleting data</h3>
+<p>
+    Deleting rows is similar to retrieving row data: you specify selection criteria for the rows
+    you want to delete and the client method returns the number of deleted rows.
+    The following snippet deletes rows whose appid matches "user". The method returns the
+    number of deleted rows.
+</p>
+<pre>
+
+// Defines selection criteria for the rows you want to delete
+String mSelectionClause = UserDictionary.Words.APP_ID + " LIKE ?";
+String[] mSelectionArgs = {"user"};
+
+// Defines a variable to contain the number of rows deleted
+int mRowsDeleted = 0;
+
+...
+
+// Deletes the words that match the selection criteria
+mRowsDeleted = getContentResolver().delete(
+    UserDictionary.Words.CONTENT_URI,   // the user dictionary content URI
+    mSelectionClause                    // the column to select on
+    mSelectionArgs                      // the value to compare to
+);
+</pre>
+<p>
+    You should also sanitize user input when you call
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#delete(android.net.Uri, java.lang.String, java.lang.String[])">ContentResolver.delete()</a></code>. To learn more about
+    this, read the section <a href="#Injection">Protecting against malicious input</a>.
+</p>
+<!-- Provider Data Types -->
+<h2 id="DataTypes">Provider Data Types</h2>
+<p>
+    Content providers can offer many different data types. The User Dictionary Provider offers only
+    text, but providers can also offer the following formats:
+</p>
+    <ul>
+        <li>
+            integer
+        </li>
+        <li>
+            long integer (long)
+        </li>
+        <li>
+            floating point
+        </li>
+        <li>
+            long floating point (double)
+        </li>
+    </ul>
+<p>
+    Another data type that providers often use is Binary Large OBject (BLOB) implemented as a
+    64KB byte array. You can see the available data types by looking at the
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a></code> class "get" methods.
+</p>
+<p>
+    The data type for each column in a provider is usually listed in its documentation.
+    The data types for the User Dictionary Provider are listed in the reference documentation
+    for its contract class <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html">UserDictionary.Words</a></code> (contract classes are
+    described in the section <a href="#ContractClasses">Contract Classes</a>).
+    You can also determine the data type by calling <code><a href="https://developer.android.com/reference/android/database/Cursor.html#getType(int)">Cursor.getType()</a></code>.
+</p>
+<p>
+    Providers also maintain MIME data type information for each content URI they define. You can
+    use the MIME type information to find out if your application can handle data that the
+    provider offers, or to choose a type of handling based on the MIME type. You usually need the
+    MIME type when you are working with a provider that contains complex
+    data structures or files. For example, the <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html">ContactsContract.Data</a></code>
+    table in the Contacts Provider uses MIME types to label the type of contact data stored in each
+    row. To get the MIME type corresponding to a content URI, call
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#getType(android.net.Uri)">ContentResolver.getType()</a></code>.
+</p>
+<p>
+    The section <a href="#MIMETypeReference">MIME Type Reference</a> describes the
+    syntax of both standard and custom MIME types.
+</p>
+
+
+<!-- Alternative Forms of Provider Access -->
+<h2 id="AltForms">Alternative Forms of Provider Access</h2>
+<p>
+    Three alternative forms of provider access are important in application development:
+</p>
+<ul>
+    <li>
+        <a href="#Batch">Batch access</a>: You can create a batch of access calls with methods in
+        the <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html">ContentProviderOperation</a></code> class, and then apply them with
+        <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">ContentResolver.applyBatch()</a></code>.
+    </li>
+    <li>
+        Asynchronous queries: You should do queries in a separate thread. One way to do this is to
+        use a <code><a href="https://developer.android.com/reference/android/content/CursorLoader.html">CursorLoader</a></code> object. The examples in the
+        <a href="../../components/loaders.html">Loaders</a> guide demonstrate
+        how to do this.
+    </li>
+    <li>
+        <a href="#Intents">Data access via intents</a>: Although you can't send an intent
+        directly to a provider, you can send an intent to the provider's application, which is
+        usually the best-equipped to modify the provider's data.
+    </li>
+</ul>
+<p>
+    Batch access and modification via intents are described in the following sections.
+</p>
+<h3 id="Batch">Batch access</h3>
+<p>
+    Batch access to a provider is useful for inserting a large number of rows, or for inserting
+    rows in multiple tables in the same method call, or in general for performing a set of
+    operations across process boundaries as a transaction (an atomic operation).
+</p>
+<p>
+    To access a provider in "batch mode",
+    you create an array of <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html">ContentProviderOperation</a></code> objects and then
+    dispatch them to a content provider with
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">ContentResolver.applyBatch()</a></code>. You pass the
+    content provider's <em>authority</em> to this  method, rather than a particular content URI.
+    This allows each <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html">ContentProviderOperation</a></code> object in the array to work
+    against a different table. A call to <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">ContentResolver.applyBatch()</a></code> returns an array of results.
+</p>
+<p>
+    The description of the <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html">ContactsContract.RawContacts</a></code> contract class
+    includes a code snippet that demonstrates batch insertion. The
+    <a href="https://developer.android.com/resources/samples/ContactManager/index.html">Contact Manager</a>
+    sample application contains an example of batch access in its <code>ContactAdder.java</code>
+    source file.
+</p>
+<div class="sidebox-wrapper">
+<div class="sidebox">
+<h2>Displaying data using a helper app</h2>
+<p>
+    If your application <em>does</em> have access permissions, you still may want to use an
+    intent to display data in another application. For example, the Calendar application accepts an
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html#ACTION_VIEW">ACTION_VIEW</a></code> intent, which displays a particular date or event.
+    This allows you to display calendar information without having to create your own UI.
+    To learn more about this feature, see the
+    <a href="calendar-provider.html">Calendar Provider</a> guide.
+</p>
+<p>
+    The application to which you send the intent doesn't have to be the application
+    associated with the provider. For example, you can retrieve a contact from the
+    Contact Provider, then send an <code><a href="https://developer.android.com/reference/android/content/Intent.html#ACTION_VIEW">ACTION_VIEW</a></code> intent
+    containing the content URI for the contact's image to an image viewer.
+</p>
+</div>
+</div>
+<h3 id="Intents">Data access via intents</h3>
+<p>
+    Intents can provide indirect access to a content provider. You allow the user to access
+    data in a provider even if your application doesn't have access permissions, either by
+    getting a result intent back from an application that has permissions, or by activating an
+    application that has permissions and letting the user do work in it.
+</p>
+<h4>Getting access with temporary permissions</h4>
+<p>
+    You can access data in a content provider, even if you don't have the proper access
+    permissions, by sending an intent to an application that does have the permissions and
+    receiving back a result intent containing "URI" permissions.
+    These are permissions for a specific content URI that last until the activity that receives
+    them is finished. The application that has permanent permissions grants temporary
+    permissions by setting a flag in the result intent:
+</p>
+<ul>
+    <li>
+        <strong>Read permission:</strong>
+        <code><a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_GRANT_READ_URI_PERMISSION">FLAG_GRANT_READ_URI_PERMISSION</a></code>
+    </li>
+    <li>
+        <strong>Write permission:</strong>
+        <code><a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_GRANT_WRITE_URI_PERMISSION">FLAG_GRANT_WRITE_URI_PERMISSION</a></code>
+    </li>
+</ul>
+<p class="note">
+    <strong>Note:</strong> These flags don't give general read or write access to the provider
+    whose authority is contained in the content URI. The access is only for the URI itself.
+</p>
+<p>
+    A provider defines URI permissions for content URIs in its manifest, using the
+<code><a href="../manifest/provider-element.html#gprmsn">android:grantUriPermission</a></code>
+    attribute of the
+<code><a href="../manifest/provider-element.html">&lt;provider&gt;</a></code>
+    element, as well as the
+<code><a href="../manifest/grant-uri-permission-element.html">&lt;grant-uri-permission&gt;</a></code>
+    child element of the
+<code><a href="../manifest/provider-element.html">&lt;provider&gt;</a></code>
+    element. The URI permissions mechanism is explained in more detail in the
+    <a href="https://developer.android.com/training/articles/security-tips.html">Security and Permissions</a> guide,
+    in the section "URI Permissions".
+</p>
+<p>
+    For example, you can retrieve data for a contact in the Contacts Provider, even if you don't
+    have the <code><a href="https://developer.android.com/reference/android/Manifest.permission.html#READ_CONTACTS">READ_CONTACTS</a></code> permission. You might want to do
+    this in an application that sends e-greetings to a contact on his or her birthday. Instead of
+    requesting <code><a href="https://developer.android.com/reference/android/Manifest.permission.html#READ_CONTACTS">READ_CONTACTS</a></code>, which gives you access to all of
+    the user's contacts and all of their information, you prefer to let the user control which
+    contacts are used by your application. To do this, you use the following process:
+</p>
+<ol>
+    <li>
+        Your application sends an intent containing the action
+        <code><a href="https://developer.android.com/reference/android/content/Intent.html#ACTION_PICK">ACTION_PICK</a></code> and the "contacts" MIME type
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html#CONTENT_ITEM_TYPE">CONTENT_ITEM_TYPE</a></code>, using the
+        method <code><a href="https://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code>.
+    </li>
+    <li>
+        Because this intent matches the intent filter for the
+        People app's "selection" activity, the activity will come to the foreground.
+    </li>
+    <li>
+        In the selection activity, the user selects a
+        contact to update. When this happens, the selection activity calls
+        <code><a href="https://developer.android.com/reference/android/app/Activity.html#setResult(int)">setResult(resultcode, intent)</a></code>
+        to set up a intent to give back to your application. The intent contains the content URI
+        of the contact the user selected, and the "extras" flags
+        <code><a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_GRANT_READ_URI_PERMISSION">FLAG_GRANT_READ_URI_PERMISSION</a></code>. These flags grant URI
+        permission to your app to read data for the contact pointed to by the
+        content URI. The selection activity then calls <code><a href="https://developer.android.com/reference/android/app/Activity.html#finish()">finish()</a></code> to
+        return control to your application.
+    </li>
+    <li>
+        Your activity returns to the foreground, and the system calls your activity's
+        <code><a href="https://developer.android.com/reference/android/app/Activity.html#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code>
+        method. This method receives the result intent created by the selection activity in
+        the People app.
+    </li>
+    <li>
+        With the content URI from the result intent, you can read the contact's data
+        from the Contacts Provider, even though you didn't request permanent read access permission
+        to the provider in your manifest. You can then get the contact's birthday information
+        or his or her email address and then send the e-greeting.
+    </li>
+</ol>
+<h4>Using another application</h4>
+<p>
+    A simple way to allow the user to modify data to which you don't have access permissions is to
+    activate an application that has permissions and let the user do the work there.
+</p>
+<p>
+    For example, the Calendar application accepts an
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html#ACTION_INSERT">ACTION_INSERT</a></code> intent, which allows you to activate the
+    application's insert UI. You can pass "extras" data in this intent, which the application
+    uses to pre-populate the UI. Because recurring events have a complex syntax, the preferred
+    way of inserting events into the Calendar Provider is to activate the Calendar app with an
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html#ACTION_INSERT">ACTION_INSERT</a></code> and then let the user insert the event there.
+</p>
+<!-- Contract Classes -->
+<h2 id="ContractClasses">Contract Classes</h2>
+<p>
+    A contract class defines constants that help applications work with the content URIs, column
+    names, intent actions, and other features of a content provider. Contract classes are not
+    included automatically with a provider; the provider's developer has to define them and then
+    make them available to other developers. Many of the providers included with the Android
+    platform have corresponding contract classes in the package <code><a href="https://developer.android.com/reference/android/provider/package-summary.html">android.provider</a></code>.
+</p>
+<p>
+    For example, the User Dictionary Provider has a contract class
+    <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.html">UserDictionary</a></code> containing content URI and column name constants. The
+    content URI for the "words" table is defined in the constant
+    <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html#CONTENT_URI">UserDictionary.Words.CONTENT_URI</a></code>.
+    The <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html">UserDictionary.Words</a></code> class also contains column name constants,
+    which are used in the example snippets in this guide. For example, a query projection can be
+    defined as:
+</p>
+<pre>
+String[] mProjection =
+{
+    UserDictionary.Words._ID,
+    UserDictionary.Words.WORD,
+    UserDictionary.Words.LOCALE
+};
+</pre>
+<p>
+    Another contract class is <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.html">ContactsContract</a></code> for the Contacts Provider.
+    The reference documentation for this class includes example code snippets. One of its
+    subclasses, <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Intents.Insert.html">ContactsContract.Intents.Insert</a></code>, is a contract
+    class that contains constants for intents and intent data.
+</p>
+
+
+<!-- MIME Type Reference -->
+<h2 id="MIMETypeReference">MIME Type Reference</h2>
+<p>
+    Content providers can return standard MIME media types, or custom MIME type strings, or both.
+</p>
+<p>
+    MIME types have the format
+</p>
+<pre>
+<em>type</em>/<em>subtype</em>
+</pre>
+<p>
+    For example, the well-known MIME type <code>text/html</code> has the <code>text</code> type and
+    the <code>html</code> subtype. If the provider returns this type for a URI, it means that a
+    query using that URI will return text containing HTML tags.
+</p>
+<p>
+    Custom MIME type strings, also called "vendor-specific" MIME types, have more
+    complex <em>type</em> and <em>subtype</em> values. The <em>type</em> value is always
+</p>
+<pre>
+vnd.android.cursor.<strong>dir</strong>
+</pre>
+<p>
+    for multiple rows, or
+</p>
+<pre>
+vnd.android.cursor.<strong>item</strong>
+</pre>
+<p>
+    for a single row.
+</p>
+<p>
+    The <em>subtype</em> is provider-specific. The Android built-in providers usually have a simple
+    subtype. For example, when the Contacts application creates a row for a telephone number,
+    it sets the following MIME type in the row:
+</p>
+<pre>
+vnd.android.cursor.item/phone_v2
+</pre>
+<p>
+    Notice that the subtype value is simply <code>phone_v2</code>.
+</p>
+<p>
+    Other provider developers may create their own pattern of subtypes based on the provider's
+    authority and table names. For example, consider a provider that contains train timetables.
+    The provider's authority is <code>com.example.trains</code>, and it contains the tables
+    Line1, Line2, and Line3. In response to the content URI
+</p>
+<p>
+<pre>
+content://com.example.trains/Line1
+</pre>
+<p>
+    for table Line1, the provider returns the MIME type
+</p>
+<pre>
+vnd.android.cursor.<strong>dir</strong>/vnd.example.line1
+</pre>
+<p>
+     In response to the content URI
+</p>
+<pre>
+content://com.example.trains/Line2/5
+</pre>
+<p>
+    for row 5 in table Line2, the provider returns the MIME type
+</p>
+<pre>
+vnd.android.cursor.<strong>item</strong>/vnd.example.line2
+</pre>
+<p>
+    Most content providers define contract class constants for the MIME types they use. The
+    Contacts Provider contract class <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html">ContactsContract.RawContacts</a></code>,
+    for example, defines the constant
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html#CONTENT_ITEM_TYPE">CONTENT_ITEM_TYPE</a></code> for the MIME type of
+    a single raw contact row.
+</p>
+<p>
+    Content URIs for single rows are described in the section
+    <a href="#ContentURIs">Content URIs</a>.
+</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html" title="Support">Support</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="dN6BrU-Z0SQ5EL9eVHJK9Y7BFLiHRdjTg0klrVi5mX46MTQ5NzUxNTgxOTMwNjExMA" />
+      <input type="hidden" name="next" value="content-provider-basics.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+             selected="selected" >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Email address</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified803f.js?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en803f.js?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists803f.js?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists803f.js?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists803f.js?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists803f.js?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists803f.js?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_en.js?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/content-provider-basics.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:00:55 GMT -->
+</html>

@@ -1,0 +1,1635 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<!-- Mirrored from developer.android.com/guide/topics/admin/device-admin.html?hl=ja by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:17:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="Cm2IrEeBMhugb479bVTyEc5bjB-6WsJlRIU6ctVtIas6MTQ5NzUxNzIwMjYxNzgyMA" />
+
+  
+    <link rel="canonical" href="device-admin.html">
+  
+
+  
+    <link rel="alternate" href="device-admin.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/admin/device-admin.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="device-admin.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon9e29.png?hl=ja">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1809e29.png?hl=ja">
+
+
+<title>
+
+  Device Administration | Android Developers
+
+</title>
+
+  <meta name="description" content="Android 2.2 introduces support for enterprise applications by offering the Android Device Administration API. The Device Administration API provides device administration features at the system level. These APIs allow you to create security-aware applications…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default7dd0.css?hl=ja?v=2017061509" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle9e29.js?hl=ja" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__ja9e29.js?hl=ja"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android9e29.js?hl=ja"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs7dd0.js?hl=ja?v=2017061509" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ja&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ja&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "ja", "served": "en"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=ja">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo9e29.png?hl=ja"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=ja"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=ja"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=ja"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=ja"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=ja" width="18" height="19" alt="Play コンソール">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="検索">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">戻る</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index9e29.html?hl=ja" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals9e29.html?hl=ja" >App Fundamentals</a></li><li><a href="../../practices/compatibility9e29.html?hl=ja" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../permissions/index9e29.html?hl=ja" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../permissions/requesting9e29.html?hl=ja" >Requesting Permissions</a></li><li><a href="../permissions/defining9e29.html?hl=ja" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index9e29.html?hl=ja" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack9e29.html?hl=ja"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../../practices/verifying-apps-art9e29.html?hl=ja" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index9e29.html?hl=ja" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters9e29.html?hl=ja" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common9e29.html?hl=ja" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities/index9e29.html?hl=ja" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/activities/intro-activities9e29.html?hl=ja" >Introduction to Activities</a></li><li><a href="../../components/activities/activity-lifecycle9e29.html?hl=ja" >The Activity Lifecycle</a></li><li><a href="../../components/activities/state-changes9e29.html?hl=ja" >Activity State Changes</a></li><li><a href="../../components/activities/tasks-and-back-stack9e29.html?hl=ja" >Tasks and Back Stack</a></li><li><a href="../../components/activities/process-lifecycle9e29.html?hl=ja" >Processes and Application Lifecycle</a></li><li><a href="../../components/activities/parcelables-and-bundles9e29.html?hl=ja" >Parcelables and Bundles</a></li><li><a href="../../components/activities/recents9e29.html?hl=ja" >Recents Screen</a></li></ul></li><li><a href="../../components/fragments9e29.html?hl=ja" >Fragments</a></li><li><a href="../../components/loaders9e29.html?hl=ja" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services9e29.html?hl=ja" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services9e29.html?hl=ja" >Bound Services</a></li><li><a href="../../components/aidl9e29.html?hl=ja" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providers9e29.html?hl=ja" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basics9e29.html?hl=ja" >Content Provider Basics</a></li><li><a href="../providers/content-provider-creating9e29.html?hl=ja" >Creating a Content Provider</a></li><li><a href="../providers/calendar-provider9e29.html?hl=ja" >Calendar Provider</a></li><li><a href="../providers/contacts-provider9e29.html?hl=ja" >Contacts Provider</a></li><li><a href="../providers/document-provider9e29.html?hl=ja" >Open files using Storage Access Framework</a></li><li><a href="../providers/create-document-provider9e29.html?hl=ja" >Create a Custom Document Provider</a></li></ul></li><li><a href="../../components/broadcasts9e29.html?hl=ja" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index9e29.html?hl=ja" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host9e29.html?hl=ja" >App Widget Host</a></li></ul></li><li><a href="../../components/processes-and-threads9e29.html?hl=ja" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index9e29.html?hl=ja" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview9e29.html?hl=ja" >Overview</a></li><li><a href="../resources/providing-resources9e29.html?hl=ja" >Providing Resources</a></li><li><a href="../resources/accessing-resources9e29.html?hl=ja" >Accessing Resources</a></li><li><a href="../resources/runtime-changes9e29.html?hl=ja" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization9e29.html?hl=ja" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework9e29.html?hl=ja" >ICU4J Android Framework APIs</a></li><li><a href="../resources/multilingual-support9e29.html?hl=ja" >Language and Locale</a></li></ul></li><li><a href="../resources/complex-xml-resources9e29.html?hl=ja" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources9e29.html?hl=ja" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource9e29.html?hl=ja" >Animation</a></li><li><a href="../resources/color-list-resource9e29.html?hl=ja" >Color State List</a></li><li><a href="../resources/drawable-resource9e29.html?hl=ja" >Drawable</a></li><li><a href="../resources/layout-resource9e29.html?hl=ja" >Layout</a></li><li><a href="../resources/menu-resource9e29.html?hl=ja" >Menu</a></li><li><a href="../resources/string-resource9e29.html?hl=ja" >String</a></li><li><a href="../resources/style-resource9e29.html?hl=ja" >Style</a></li><li><a href="../resources/more-resources9e29.html?hl=ja" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro9e29.html?hl=ja" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element9e29.html?hl=ja" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element9e29.html?hl=ja" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element9e29.html?hl=ja" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element9e29.html?hl=ja" >&lt;application&gt;</a></li><li><a href="../manifest/category-element9e29.html?hl=ja" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element9e29.html?hl=ja" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element9e29.html?hl=ja" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element9e29.html?hl=ja" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element9e29.html?hl=ja" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element9e29.html?hl=ja" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element9e29.html?hl=ja" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element9e29.html?hl=ja" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element9e29.html?hl=ja" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element9e29.html?hl=ja" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element9e29.html?hl=ja" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element9e29.html?hl=ja" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element9e29.html?hl=ja" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element9e29.html?hl=ja" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element9e29.html?hl=ja" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element9e29.html?hl=ja" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element9e29.html?hl=ja" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element9e29.html?hl=ja" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element9e29.html?hl=ja" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element9e29.html?hl=ja" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element9e29.html?hl=ja" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element9e29.html?hl=ja" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element9e29.html?hl=ja" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index9e29.html?hl=ja" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview9e29.html?hl=ja" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout9e29.html?hl=ja" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear9e29.html?hl=ja" >Linear Layout</a></li><li><a href="../ui/layout/relative9e29.html?hl=ja" >Relative Layout</a></li><li><a href="../ui/layout/recyclerview9e29.html?hl=ja" >Recycler View</a></li><li><a href="../ui/layout/listview9e29.html?hl=ja" >List View</a></li><li><a href="../ui/layout/gridview9e29.html?hl=ja" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls9e29.html?hl=ja" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button9e29.html?hl=ja" >Buttons</a></li><li><a href="../ui/controls/checkbox9e29.html?hl=ja" >Checkboxes</a></li><li><a href="../ui/controls/radiobutton9e29.html?hl=ja" >Radio Buttons</a></li><li><a href="../ui/controls/togglebutton9e29.html?hl=ja" >Toggle Buttons</a></li><li><a href="../ui/controls/spinner9e29.html?hl=ja" >Spinners</a></li><li><a href="../ui/controls/pickers9e29.html?hl=ja" >Pickers</a></li></ul></li><li><a href="../ui/ui-events9e29.html?hl=ja" >Input Events</a></li><li><a href="../ui/menus9e29.html?hl=ja" >Menus</a></li><li><a href="../ui/settings9e29.html?hl=ja" >Settings</a></li><li><a href="../ui/dialogs9e29.html?hl=ja" >Dialogs</a></li><li><a href="../ui/notifiers/notifications9e29.html?hl=ja" >Notifications</a></li><li><a href="../ui/notifiers/toasts9e29.html?hl=ja" >Toasts</a></li><li><a href="../ui/shortcuts9e29.html?hl=ja" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index9e29.html?hl=ja" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog9e29.html?hl=ja" >Creating a Search Interface</a></li><li><a href="../search/adding-recent-query-suggestions9e29.html?hl=ja" >Adding Recent Query Suggestions</a></li><li><a href="../search/adding-custom-suggestions9e29.html?hl=ja" >Adding Custom Suggestions</a></li><li><a href="../search/searchable-config9e29.html?hl=ja" >Searchable Configuration</a></li></ul></li><li><a href="../ui/multi-window9e29.html?hl=ja" >Multi-Window Support</a></li><li><a href="../ui/drag-drop9e29.html?hl=ja" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index9e29.html?hl=ja" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps9e29.html?hl=ja" >Making Apps More Accessible</a></li><li><a href="../ui/accessibility/checklist9e29.html?hl=ja" >Accessibility Developer Checklist</a></li><li><a href="../ui/accessibility/node-tree-debugging9e29.html?hl=ja" >Using Node Tree Debugging</a></li><li><a href="../ui/accessibility/services9e29.html?hl=ja" >Building Accessibility Services</a></li><li><a href="../ui/accessibility/custom-views9e29.html?hl=ja" >Building Accessible Custom Views</a></li></ul></li><li><a href="../ui/themes9e29.html?hl=ja" >Styles and Themes</a></li><li><a href="../ui/custom-components9e29.html?hl=ja" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index9e29.html?hl=ja" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview9e29.html?hl=ja" >Overview</a></li><li><a href="../graphics/prop-animation9e29.html?hl=ja" >Property Animation</a></li><li><a href="../graphics/view-animation9e29.html?hl=ja" >View Animation</a></li><li><a href="../graphics/drawable-animation9e29.html?hl=ja" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/2d-graphics9e29.html?hl=ja" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/vector-drawable-resources9e29.html?hl=ja" >Vector Drawable</a></li></ul></li><li><a href="../graphics/opengl9e29.html?hl=ja" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel9e29.html?hl=ja" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index9e29.html?hl=ja" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute9e29.html?hl=ja" >RenderScript</a></li><li><a href="../renderscript/advanced9e29.html?hl=ja" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview9e29.html?hl=ja" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types9e29.html?hl=ja" >Numerical Types</a></li><li><a href="../renderscript/reference/rs_object_types9e29.html?hl=ja" >Object Types</a></li><li><a href="../renderscript/reference/rs_convert9e29.html?hl=ja" >Conversion Functions</a></li><li><a href="../renderscript/reference/rs_math9e29.html?hl=ja" >Mathematical Constants and Functions</a></li><li><a href="../renderscript/reference/rs_vector_math9e29.html?hl=ja" >Vector Math Functions</a></li><li><a href="../renderscript/reference/rs_matrix9e29.html?hl=ja" >Matrix Functions</a></li><li><a href="../renderscript/reference/rs_quaternion9e29.html?hl=ja" >Quaternion Functions</a></li><li><a href="../renderscript/reference/rs_atomic9e29.html?hl=ja" >Atomic Update Functions</a></li><li><a href="../renderscript/reference/rs_time9e29.html?hl=ja" >Time Functions and Types</a></li><li><a href="../renderscript/reference/rs_allocation_data9e29.html?hl=ja" >Allocation Data Access Functions</a></li><li><a href="../renderscript/reference/rs_object_info9e29.html?hl=ja" >Object Characteristics Functions</a></li><li><a href="../renderscript/reference/rs_for_each9e29.html?hl=ja" >Kernel Invocation Functions and Types</a></li><li><a href="../renderscript/reference/rs_io9e29.html?hl=ja" >Input/Output Functions</a></li><li><a href="../renderscript/reference/rs_debug9e29.html?hl=ja" >Debugging Functions</a></li><li><a href="../renderscript/reference/rs_graphics9e29.html?hl=ja" >Graphics Functions and Types</a></li><li><a href="../renderscript/reference/index9e29.html?hl=ja" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/index9e29.html?hl=ja" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/media-apps-overview9e29.html?hl=ja" >Media Apps Overview</a></li><li><a href="../media-apps/working-with-a-media-session9e29.html?hl=ja" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/audio-app/building-an-audio-app9e29.html?hl=ja" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/audio-app/building-a-mediabrowserservice9e29.html?hl=ja" >Building a Media Browser Service</a></li><li><a href="../media-apps/audio-app/building-a-mediabrowser-client9e29.html?hl=ja" >Building a Media Browser Client</a></li><li><a href="../media-apps/audio-app/mediasession-callbacks9e29.html?hl=ja" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media-apps/video-app/building-a-video-app9e29.html?hl=ja" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media-apps/video-app/building-a-video-player-activity9e29.html?hl=ja" >Building a Video Player Activity</a></li><li><a href="../media-apps/video-app/mediasession-callbacks9e29.html?hl=ja" >Media Session Callbacks</a></li></ul></li><li><a href="../media-apps/mediabuttons9e29.html?hl=ja" >Responding to Media Buttons</a></li><li><a href="../media-apps/volume-and-earphones9e29.html?hl=ja" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index9e29.html?hl=ja" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/media-formats9e29.html?hl=ja" >Supported Media Formats</a></li><li><a href="../media/mediaplayer9e29.html?hl=ja" >MediaPlayer</a></li><li><a href="../media/mediarecorder9e29.html?hl=ja" >MediaRecorder</a></li><li><a href="../media/exoplayer9e29.html?hl=ja" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../media/media-routing9e29.html?hl=ja" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediarouter9e29.html?hl=ja" >MediaRouter API</a></li><li><a href="../media/mediarouteprovider9e29.html?hl=ja" >MediaRouteProvider API</a></li></ul></li><li><a href="../media/camera9e29.html?hl=ja" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index9e29.html?hl=ja" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index9e29.html?hl=ja" >Location and Maps</a></li><li><a href="../location/strategies9e29.html?hl=ja" >Location Strategies</a></li><li><a href="../sensors/sensors_overview9e29.html?hl=ja" >Sensors Overview</a></li><li><a href="../sensors/sensors_motion9e29.html?hl=ja" >Motion Sensors</a></li><li><a href="../sensors/sensors_position9e29.html?hl=ja" >Position Sensors</a></li><li><a href="../sensors/sensors_environment9e29.html?hl=ja" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index9e29.html?hl=ja" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth9e29.html?hl=ja" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le9e29.html?hl=ja" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index9e29.html?hl=ja" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc9e29.html?hl=ja" >NFC Basics</a></li><li><a href="../connectivity/nfc/advanced-nfc9e29.html?hl=ja" >Advanced NFC</a></li><li><a href="../connectivity/nfc/hce9e29.html?hl=ja" >Host-based Card Emulation</a></li></ul></li><li><a href="../connectivity/wifip2p9e29.html?hl=ja" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index9e29.html?hl=ja" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory9e29.html?hl=ja" >Accessory</a></li><li><a href="../connectivity/usb/host9e29.html?hl=ja" >Host</a></li></ul></li><li><a href="../connectivity/sip9e29.html?hl=ja" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index9e29.html?hl=ja" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste9e29.html?hl=ja" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../text/creating-input-method9e29.html?hl=ja" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/image-keyboard9e29.html?hl=ja" >Image Keyboard</a></li></ul></li><li><a href="../text/spell-checker-framework9e29.html?hl=ja" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index9e29.html?hl=ja" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage9e29.html?hl=ja" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../data/backup9e29.html?hl=ja" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/autobackup9e29.html?hl=ja" >Auto Backup</a></li><li><a href="../data/keyvaluebackup9e29.html?hl=ja" >Key/Value Backup</a></li><li><a href="../data/testingbackup9e29.html?hl=ja" >Testing Backup and Restore</a></li></ul></li><li><a href="../data/install-location9e29.html?hl=ja" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index9e29.html?hl=ja" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="device-admin9e29.html?hl=ja" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index9e29.html?hl=ja" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting9e29.html?hl=ja" >Supporting Different Screens in Web Apps</a></li><li><a href="../../webapps/webview9e29.html?hl=ja" >Building Web Apps in WebView</a></li><li><a href="../../webapps/migrating9e29.html?hl=ja" >Migrating to WebView in Android 4.4</a></li><li><a href="../../webapps/debugging9e29.html?hl=ja" >Debugging Web Apps</a></li><li><a href="../../webapps/best-practices9e29.html?hl=ja" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index9e29.html?hl=ja"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support9e29.html?hl=ja" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution9e29.html?hl=ja" >Distributing to Specific Screens</a></li><li><a href="../../practices/screen-compat-mode9e29.html?hl=ja" >Screen Compatibility Mode</a></li></ul></li><li><a href="../../practices/app-design/seamlessness9e29.html?hl=ja" >Designing for Seamlessness</a></li><li><a href="../../practices/tablets-and-handsets9e29.html?hl=ja" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=ja">ホーム</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=ja">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=ja">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=ja">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=ja">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=ja">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=ja"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=ja"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=ja"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">トレーニング</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index9e29.html?hl=ja"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=ja"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">リファレンス</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=ja">サンプル</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=ja"
+           >ライブラリ</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=ja"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=ja"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=ja">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=ja">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=ja">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=ja"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=ja">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=ja">Play コンソール</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=ja"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=ja"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=ja">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=ja">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Device Administration</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+    <h2>In this document</h2>
+    <ol>
+<li><a href="#overview">Device Administration API Overview</a>
+    <ol>
+      <li><a href="#how">How does it work?</a></li>
+      <li><a href="#policies">Policies</a></li>
+    </ol>
+  </li>
+  <li><a href="#sample">Sample Application</a></li>
+  <li><a href="#developing">Developing a Device Administration Application</a>
+    <ol>
+      <li><a href="#manifest">Creating the manifest</a></li>
+      <li><a href="#code">Implementing the code</a></li>
+    </ol>
+  </li>
+
+ </ol>
+
+    <h2>Key classes</h2>
+    <ol>
+      <li><code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminInfo.html?hl=ja">DeviceAdminInfo</a></code></li>
+    </ol>
+</div>
+</div>
+
+<p>Android 2.2 introduces support for enterprise applications by offering the
+Android Device Administration API. The Device Administration API provides device
+administration features at the system level.  These APIs allow you to create
+security-aware applications that are useful in enterprise settings, in which IT
+professionals require rich control over employee devices. For example, the
+built-in Android Email application has leveraged the new APIs to improve
+Exchange support. Through the Email application, Exchange administrators can
+enforce password policies &mdash;  including alphanumeric passwords or numeric
+PINs &mdash; across devices. Administrators can also remotely wipe (that is,
+restore factory defaults on) lost or stolen handsets. Exchange users can sync
+their email and calendar data.</p>
+
+<p>This document is intended for developers who want to develop enterprise
+solutions for Android-powered devices. It discusses the various features
+provided by the Device Administration API to provide stronger security for
+employee devices that are powered by Android.</p>
+
+<p class="note">
+  <strong>Note</strong> For information on building a Work Policy
+  Controller for Android for Work deployments, see
+  <a href="https://developers.google.com/android/work/build-dpc?hl=ja"
+  >Build a Device Policy Controller</a>.
+</p>
+
+<h2 id="overview">Device Administration API Overview</h2>
+
+<p>Here are examples of the types of applications that might use the Device Administration API:</p>
+<ul>
+  <li>Email clients.</li>
+  <li>Security applications that do remote wipe.</li>
+  <li>Device management services and applications.</li>
+</ul>
+
+<h3 id="how">How does it work?</h3>
+<p>You use the Device Administration API to write device admin applications that users
+install on their devices. The device admin application enforces the desired
+policies. Here's how it works:</p> <ul>
+  <li>A system administrator writes a device admin application that enforces
+remote/local device security policies. These policies could be hard-coded into
+the app, or the application could dynamically fetch policies from a third-party
+server. </li>
+<li>The  application is installed on users' devices. Android does
+not currently have an automated provisioning solution. Some of the ways a sysadmin might
+distribute the application to users are as follows:
+<ul>
+<li>Google Play.</li>
+<li>Enabling installation from another store.</li>
+<li>Distributing the application through other means, such as email or websites.</li>
+
+</ul>
+
+
+</li>
+  <li>The system prompts the user to enable the device admin application. How
+and when this happens depends on how the application is implemented.</li>
+<li>Once  users enable the device admin application, they are subject to
+its policies. Complying with those policies typically confers benefits, such as
+access to sensitive systems and data.</li>
+</ul>
+<p>If users do not enable the device admin app, it remains on the device, but in an inactive state. Users will not be subject to its policies, and they will conversely not get any of the application's benefits&mdash;for example, they may not be able to sync data.</p>
+<p>If a user fails to comply with the policies (for example, if a user sets a
+password that violates the guidelines), it is up to the application to decide
+how to handle this. However, typically this will result in the user not being
+able to sync data.</p>
+<p>If a device attempts to connect to a server that requires policies not
+supported in the Device Administration API, the connection will not
+be allowed. The Device Administration API does not currently allow partial
+provisioning. In other words, if a device (for example, a legacy device) does
+not support all of the stated policies, there is no way to allow the
+device to connect.</p>
+<p>If a device contains multiple enabled admin applications, the strictest policy is
+enforced. There is no way to target a particular admin
+application.</p>
+<p>To uninstall an existing device admin application, users need to
+first unregister the application as an administrator. </p>
+
+
+<h3 id="policies">Policies</h3>
+
+<p>In an enterprise setting, it's often the case that employee devices must
+adhere to a strict set of policies that govern the use of the device. The
+Device Administration API supports the  policies listed in Table 1.
+Note that the Device Administration API currently only supports passwords for screen
+lock:</p>
+<p class="table-caption"><strong>Table 1.</strong> Policies supported by the Device Administration API.</p>
+<table border="1">
+  <tr>
+    <th>Policy</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Password enabled</td>
+    <td>Requires that devices ask for PIN or passwords.</td>
+  </tr>
+  <tr>
+    <td>Minimum password length</td>
+    <td>Set the required number of characters for the password. For example, you
+can require PIN or passwords to have at least six characters. </td> </tr>
+  <tr>
+    <td>Alphanumeric password required</td>
+    <td>Requires that passwords have a
+combination of letters and numbers. They may include symbolic characters.
+    </td>
+  </tr>
+
+  <tr>
+    <td>Complex password required</td>
+    <td>Requires that passwords must contain at least a letter, a numerical digit, and a special symbol. Introduced in Android 3.0.
+    </td>
+  </tr>
+
+<tr>
+  <td>Minimum letters required in password</td> <td>The minimum number of
+letters required in the password for all admins or a particular one. Introduced in Android 3.0.</td>
+</tr>
+
+
+  <tr>
+  <td>Minimum lowercase letters required in password</td>
+  <td>The minimum number of lowercase
+letters required in the password for all admins or a particular one. Introduced in Android 3.0.</td>
+</tr>
+
+  <tr>
+  <td>Minimum non-letter characters required in password</td>
+  <td>The minimum number of
+non-letter characters required in the password for all admins or a particular one. Introduced in Android 3.0.</td>
+</tr>
+
+<tr>
+  <td>Minimum numerical digits required in password</td>
+  <td>The minimum number of numerical digits required in the password for all admins or a particular one. Introduced in Android 3.0.</td>
+</tr>
+
+<tr>
+  <td>Minimum symbols required in password</td>
+  <td>The minimum number of symbols required in the password for all admins or a particular one. Introduced in Android 3.0.</td>
+</tr>
+
+<tr>
+  <td>Minimum uppercase letters required in password</td>
+  <td>The minimum number of uppercase letters required in the password for all admins or a particular one. Introduced in Android 3.0.</td>
+</tr>
+
+<tr>
+  <td>Password expiration timeout</td>
+  <td>When the password will expire, expressed as a delta in milliseconds from when a device admin sets the expiration timeout. Introduced in Android 3.0.</td>
+</tr>
+
+<tr>
+  <td>Password history restriction</td>
+  <td>This policy prevents users from reusing the last <em>n</em> unique passwords.
+ This policy is typically used in conjunction with
+<code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setPasswordExpirationTimeout(android.content.ComponentName, long)">setPasswordExpirationTimeout()</a></code>, which forces
+users to update their passwords after a specified amount of time has elapsed.
+Introduced in Android 3.0.</td>
+</tr>
+
+  <tr>
+    <td>Maximum failed password attempts </td>
+    <td>Specifies how many times a user can enter the wrong password before the
+device wipes its data.  The Device Administration API also allows administrators to
+remotely reset the device to  factory defaults. This secures data in case the
+device is lost or stolen.</td>
+  </tr>
+  <tr>
+    <td>Maximum inactivity time lock</td>
+    <td>Sets the length of time since the user last touched the screen or
+pressed a button before the device locks the screen. When this happens, users
+need to enter their PIN or passwords again before they can use their devices and
+access data.  The value can be between 1 and 60 minutes.</td> </tr>
+
+<tr>
+<td>Require storage encryption</td>
+<td>Specifies that the storage area should be encrypted, if the device supports it.
+Introduced in Android 3.0.</td> </tr>
+
+<tr>
+  <td>Disable camera</td>
+
+  <td>Specifies that the camera should be disabled. Note that this doesn't have
+to be a permanent disabling. The camera can be enabled/disabled dynamically
+based on context, time, and so on. Introduced in Android 4.0.</td>
+
+</tr>
+
+
+</table>
+
+<h4>Other features</h4>
+
+<p>In addition to supporting the policies listed in the above table, the Device
+Administration API lets you do the following:</p> <ul>
+  <li>Prompt user to set a new password.</li>
+  <li>Lock device immediately.</li>
+  <li>Wipe the device's data (that is, restore the device to its factory defaults).</li>
+</ul>
+
+
+<h2 id="sample">Sample Application</h2>
+
+<p>The examples used in this document are based on the Device Administration API
+sample, which is included in the SDK samples (available through the
+Android SDK Manager) and located on your system as
+<code>&lt;sdk_root&gt;/ApiDemos/app/src/main/java/com/example/android/apis/app/DeviceAdminSample.java</code>.</p>
+
+<p>The sample application offers a demo of device admin features. It presents users
+with a user interface that lets them enable the device admin application. Once
+they've enabled the application, they can use the buttons in the user interface
+to do the following:</p>
+<ul>
+  <li>Set password quality.</li>
+  <li>Specify requirements for the user's password, such as minimum length, the minimum number of
+  numeric characters it must contain, and so on.</li>
+  <li>Set the password. If the password does not conform to the specified
+policies, the system  returns an error.</li>
+  <li>Set how many failed password attempts can occur before the device is wiped
+(that is, restored to factory settings).</li>
+<li>Set how long from now the password will expire.</li>
+<li>Set the password history length (<em>length</em> refers to number of old passwords stored in the history).
+This prevents users from reusing
+one of the last <em>n</em> passwords they previously used.</li>
+<li>Specify that the storage area should be encrypted, if the device supports it.</li>
+  <li>Set the maximum amount of inactive time that can elapse before the device
+locks.</li>
+  <li>Make the device lock immediately.</li>
+  <li>Wipe the device's data (that is, restore factory settings).</li>
+  <li>Disable the camera.</li>
+
+</ul>
+
+
+
+<img src="../../../images/admin/device-admin-app9e29.png?hl=ja"/>
+
+<p class="img-caption"><strong>Figure 1.</strong> Screenshot of the Sample Application</p>
+
+
+
+<h2 id="developing">Developing a Device Administration Application</h2>
+
+<p>System administrators can use the Device Administration API to write an application
+that enforces remote/local device security policy enforcement. This section
+summarizes the steps involved in creating a device administration
+application.</p>
+
+<h3 id="manifest">Creating the manifest</h3>
+
+<p>To use the Device Administration API, the application's
+manifest must include the following:</p>
+<ul>
+  <li>A subclass of <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> that includes the following:
+    <ul>
+      <li>The <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ja#BIND_DEVICE_ADMIN">BIND_DEVICE_ADMIN</a></code> permission.</li>
+      <li>The ability to  respond to the <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja#ACTION_DEVICE_ADMIN_ENABLED">ACTION_DEVICE_ADMIN_ENABLED</a></code>
+intent, expressed in the manifest as an intent filter.</li>
+    </ul>
+  </li>
+  <li>A declaration of security policies used in metadata.</li>
+</ul>
+<p>Here is an excerpt from the Device Administration sample manifest:</p>
+<pre>&lt;activity android:name=&quot;.app.DeviceAdminSample&quot;
+            android:label=&quot;&#64;string/activity_sample_device_admin&quot;&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+        &lt;category android:name=&quot;android.intent.category.SAMPLE_CODE&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;
+&lt;receiver android:name=&quot;.app.DeviceAdminSample$DeviceAdminSampleReceiver&quot;
+        android:label=&quot;&#64;string/sample_device_admin&quot;
+        android:description=&quot;&#64;string/sample_device_admin_description&quot;
+        android:permission=&quot;android.permission.BIND_DEVICE_ADMIN&quot;&gt;
+    &lt;meta-data android:name=&quot;android.app.device_admin&quot;
+            android:resource=&quot;&#64;xml/device_admin_sample&quot; /&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.app.action.DEVICE_ADMIN_ENABLED&quot; /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;</pre>
+
+ <p>Note that:</p>
+<ul>
+<li>The following attributes refer to string resources that for the sample application reside in
+<code>ApiDemos/res/values/strings.xml</code>. For more information about resources, see
+<a
+href="../resources/index9e29.html?hl=ja">Application Resources</a>.
+<ul>
+<li><code>android:label=&quot;&#64;string/activity_sample_device_admin&quot;</code> refers to the
+user-readable label for the activity.</li>
+
+<li><code>android:label=&quot;&#64;string/sample_device_admin&quot;</code> refers to the
+user-readable label for the permission.</li>
+
+<li><code>android:description=&quot;&#64;string/sample_device_admin_description&quot;</code> refers to
+the user-readable description of the permission. A descripton is typically longer and more
+informative than
+a label.</li>
+</ul>
+
+
+<li><code>android:permission=&quot;android.permission.BIND_DEVICE_ADMIN&quot;
+</code> is a permission that a <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> subclass must
+have, to ensure that only the system can interact with the receiver (no application can be granted this permission). This
+prevents other applications from abusing your device admin app.</li>
+<li><code>android.app.action.DEVICE_ADMIN_ENABLED</code> is the primary
+action that a <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> subclass must handle to be
+allowed to manage a device. This is set to the receiver when the user enables
+the device admin app. Your code typically handles this in
+<code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja#onEnabled(android.content.Context, android.content.Intent)">onEnabled()</a></code>. To be supported, the receiver must also
+require the <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ja#BIND_DEVICE_ADMIN">BIND_DEVICE_ADMIN</a></code> permission so that other applications
+cannot abuse it.  </li>
+<li>When a user enables the device admin application, that gives the receiver
+permission to perform actions in response to the broadcast of particular system
+events. When suitable event arises, the application can impose a policy. For
+example, if the user attempts to set a new password that doesn't meet the policy
+requirements, the application can prompt the user to pick a different password
+that does meet the requirements.</li>
+<li>Avoid changing the receiver name after publishing your app. If the name in the
+manifest changes, device admin is disabled when users update the app. To learn more, see
+<a href="../manifest/receiver-element9e29.html?hl=ja#nm"><code>&lt;receiver&gt;</code></a>.</li>
+
+  <li><code>android:resource=&quot;&#64;xml/device_admin_sample&quot;</code>
+declares the security policies used in metadata. The metadata provides additional
+information specific to the device administrator, as parsed by the <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminInfo.html?hl=ja">DeviceAdminInfo</a></code> class. Here are the contents of
+<code>device_admin_sample.xml</code>:</li>
+</ul>
+<pre>&lt;device-admin xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+  &lt;uses-policies&gt;
+    &lt;limit-password /&gt;
+    &lt;watch-login /&gt;
+    &lt;reset-password /&gt;
+    &lt;force-lock /&gt;
+    &lt;wipe-data /&gt;
+    &lt;expire-password /&gt;
+    &lt;encrypted-storage /&gt;
+    &lt;disable-camera /&gt;
+  &lt;/uses-policies&gt;
+&lt;/device-admin&gt;
+</pre>
+<p>When designing your device administration application, you don't need to
+include all of the policies, just the ones that are relevant for your app.
+</p>
+For more discussion of the manifest file, see the <a
+href="../manifest/manifest-intro9e29.html?hl=ja">Android Developers Guide</a>.
+
+
+
+<h3 id="code">Implementing the code</h3>
+
+<p>The Device Administration API includes the following classes:</p>
+<dl>
+  <dt><code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code></dt>
+     <dd>Base class for implementing a device administration component. This class provides
+a convenience for interpreting the raw intent actions   that are sent by the
+system. Your Device Administration application must include a
+<code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> subclass.</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code></dt>
+<dd>A class for managing policies enforced on a device. Most clients of
+this class must have published a <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> that the user
+has currently enabled. The <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> manages policies for
+one or more <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> instances</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminInfo.html?hl=ja">DeviceAdminInfo</a></code></dt>
+<dd>This class is used to specify metadata
+for a device administrator component.</dd>
+</dl>
+<p>These classes provide the foundation for a fully functional device administration application.
+The rest of this section describes how you use the <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> and
+<code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> APIs to write a device admin application.</p>
+
+<h4 id="receiver">Subclassing DeviceAdminReceiver</h4>
+<p>To create a device admin application, you must subclass
+<code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code>. The <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> class
+consists of a series of callbacks that are triggered when particular events
+occur.</p>
+<p>In its <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> subclass, the sample application
+simply displays a <code><a href="https://developer.android.com/reference/android/widget/Toast.html?hl=ja">Toast</a></code> notification in response to particular
+events. For example:</p>
+<pre>public class DeviceAdminSample extends DeviceAdminReceiver {
+
+    void showToast(Context context, String msg) {
+        String status = context.getString(R.string.admin_receiver_status, msg);
+        Toast.makeText(context, status, Toast.LENGTH_SHORT).show();
+    }
+
+    &#64;Override
+    public void onEnabled(Context context, Intent intent) {
+        showToast(context, context.getString(R.string.admin_receiver_status_enabled));
+    }
+
+    &#64;Override
+    public CharSequence onDisableRequested(Context context, Intent intent) {
+        return context.getString(R.string.admin_receiver_status_disable_warning);
+    }
+
+    &#64;Override
+    public void onDisabled(Context context, Intent intent) {
+        showToast(context, context.getString(R.string.admin_receiver_status_disabled));
+    }
+
+    &#64;Override
+    public void onPasswordChanged(Context context, Intent intent) {
+        showToast(context, context.getString(R.string.admin_receiver_status_pw_changed));
+    }
+...
+}</pre>
+
+
+<h4 id="enabling">Enabling the application</h4>
+<p>One of the major events a device admin application has to handle is the user
+enabling the application. The user must explicitly enable the application for
+the policies to be enforced. If the user chooses not to enable the application
+it will still be present on the device, but its policies will not be enforced, and the user will not
+get any of the application's benefits.</p>
+<p>The process of enabling the application begins when the user performs an
+action that triggers the <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#ACTION_ADD_DEVICE_ADMIN">ACTION_ADD_DEVICE_ADMIN</a></code>
+intent. In the
+sample application, this happens when the user clicks the <strong>Enable
+Admin</strong> checkbox. </p>
+<p>When the user clicks the <strong>Enable Admin</strong> checkbox, the display
+changes to prompt the user to activate the device admin application, as shown in figure
+2.</p>
+
+<img src="../../../images/admin/device-admin-activate-prompt9e29.png?hl=ja"/>
+<p class="img-caption"><strong>Figure 2.</strong> Sample Application: Activating the Application</p>
+
+<p>Below  is the code that gets executed when the user clicks the <strong>Enable Admin</strong> checkbox. This has the effect of triggering the
+<code><a href="https://developer.android.com/reference/android/preference/Preference.OnPreferenceChangeListener.html?hl=ja#onPreferenceChange(android.preference.Preference, java.lang.Object)">onPreferenceChange()</a></code>
+callback. This callback is invoked when the value of this  <code><a href="https://developer.android.com/reference/android/preference/Preference.html?hl=ja">Preference</a></code> has been changed by the user and is about to be set and/or persisted. If the user is enabling the application, the display
+changes to prompt the user to activate the device admin application, as shown in figure
+2. Otherwise, the device admin application is disabled. </p>
+
+<pre>&#64;Override
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            if (super.onPreferenceChange(preference, newValue)) {
+                return true;
+            }
+            boolean value = (Boolean) newValue;
+            if (preference == mEnableCheckbox) {
+                if (value != mAdminActive) {
+                    if (value) {
+                        // Launch the activity to have the user enable our admin.
+                        Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+                        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdminSample);
+                        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                                mActivity.getString(R.string.add_admin_extra_app_text));
+                        startActivityForResult(intent, REQUEST_CODE_ENABLE_ADMIN);
+                        // return false - don't update checkbox until we're really active
+                        return false;
+                    } else {
+                        mDPM.removeActiveAdmin(mDeviceAdminSample);
+                        enableDeviceCapabilitiesArea(false);
+                        mAdminActive = false;
+                    }
+                }
+            } else if (preference == mDisableCameraCheckbox) {
+                mDPM.setCameraDisabled(mDeviceAdminSample, value);
+                ...
+            }
+            return true;
+        }</pre>
+
+
+<p>The line
+<code>intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,
+mDeviceAdminSample)</code> states that <code>mDeviceAdminSample</code> (which is
+a <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> component) is the target policy.
+This line invokes the user interface shown in figure 2, which guides users through
+adding the device administrator to the system (or allows them to reject it).</p>
+
+<p>When the application needs to perform an operation that is contingent on the
+device admin application being enabled, it confirms that the application is
+active. To do this it uses the <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> method
+<code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#isAdminActive(android.content.ComponentName)">isAdminActive()</a></code>. Notice that the <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code>
+method <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#isAdminActive(android.content.ComponentName)">isAdminActive()</a></code> takes a <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code>
+component as its argument:</p>
+
+<pre>
+DevicePolicyManager mDPM;
+...
+private boolean isActiveAdmin() {
+    return mDPM.isAdminActive(mDeviceAdminSample);
+}
+</pre>
+
+
+
+<h3 id="admin_ops">Managing policies</h3>
+<p><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> is a public class for managing policies
+enforced on a device. <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> manages policies for one
+or more <code><a href="https://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html?hl=ja">DeviceAdminReceiver</a></code> instances. </p>
+<p>You get a handle to the <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> as follows: </p>
+<pre>
+DevicePolicyManager mDPM =
+    (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+</pre>
+<p>This section describes how to use <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> to perform
+ administrative tasks:</p>
+<ul>
+  <li><a href="#pwd">Set password policies</a></li>
+  <li><a href="#lock">Set  device lock</a></li>
+  <li><a href="#wipe">Perform data wipe</a></li>
+</ul>
+
+<h4 id="pwd">Set password policies</h4>
+<p><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> includes APIs for setting and enforcing the
+device password policy. In the Device Administration API, the password only applies to
+screen lock. This section describes common password-related tasks.</p>
+
+<h5>Set a password for the device</h5>
+<p>This code displays a user interface prompting the user to set a password:</p>
+<pre>Intent intent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
+startActivity(intent);
+</pre>
+
+<h5>Set the password quality</h5>
+<p>The password quality can be one of the following <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> constants: </p>
+<dl>
+  <dt><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#PASSWORD_QUALITY_ALPHABETIC">PASSWORD_QUALITY_ALPHABETIC</a></code></dt><dd>The user must enter a
+password containing at least alphabetic (or other symbol) characters.</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#PASSWORD_QUALITY_ALPHANUMERIC">PASSWORD_QUALITY_ALPHANUMERIC</a></code></dt><dd>The user must enter a
+password containing at least <em>both</em> numeric <em>and</em> alphabetic (or
+other symbol) characters.</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#PASSWORD_QUALITY_NUMERIC">PASSWORD_QUALITY_NUMERIC</a></code></dt><dd>The user must enter a   password
+containing at least numeric characters.</dd>
+<dt><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#PASSWORD_QUALITY_COMPLEX">PASSWORD_QUALITY_COMPLEX</a></code></dt><dd>The user
+must have entered a password containing at least a letter, a numerical digit and
+a special symbol.</dd>
+<dt><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#PASSWORD_QUALITY_SOMETHING">PASSWORD_QUALITY_SOMETHING</a></code></dt><dd>The
+policy requires some kind
+of password, but doesn't care what it is.</dd>
+  <dt><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#PASSWORD_QUALITY_UNSPECIFIED">PASSWORD_QUALITY_UNSPECIFIED</a></code></dt><dd>
+  The policy has no requirements   for the password. </dd>
+</dl>
+<p>For example, this is how you would set the password policy to require an alphanumeric password:</p>
+<pre>
+DevicePolicyManager mDPM;
+ComponentName mDeviceAdminSample;
+...
+mDPM.setPasswordQuality(mDeviceAdminSample, DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC);
+</pre>
+
+<h5>Set password content requirements</h5>
+
+<p>Beginning with Android 3.0, the <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> class
+includes methods that let you fine-tune the contents of the password. For
+example, you could set a policy that states that passwords must contain at least
+<em>n</em> uppercase letters. Here are the methods for fine-tuning a password's
+contents:</p>
+<ul>
+
+<li><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setPasswordMinimumLetters(android.content.ComponentName, int)">setPasswordMinimumLetters()</a></code></li>
+
+<li><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setPasswordMinimumLowerCase(android.content.ComponentName, int)">setPasswordMinimumLowerCase()</a></code></li>
+
+<li><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setPasswordMinimumUpperCase(android.content.ComponentName, int)">setPasswordMinimumUpperCase()</a></code></li>
+
+<li><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setPasswordMinimumNonLetter(android.content.ComponentName, int)">setPasswordMinimumNonLetter()</a></code></li>
+
+<li><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setPasswordMinimumNumeric(android.content.ComponentName, int)">setPasswordMinimumNumeric()</a></code></li>
+
+<li><code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setPasswordMinimumSymbols(android.content.ComponentName, int)">setPasswordMinimumSymbols()</a></code></li>
+</ul>
+<p>For example, this snippet states that the password must have at least 2 uppercase letters:</p>
+<pre>
+DevicePolicyManager mDPM;
+ComponentName mDeviceAdminSample;
+int pwMinUppercase = 2;
+...
+mDPM.setPasswordMinimumUpperCase(mDeviceAdminSample, pwMinUppercase);</pre>
+
+
+<h5>Set the minimum password length</h5>
+<p>You can specify that a password must be at least the specified minimum
+length. For example:</p>
+<pre>DevicePolicyManager mDPM;
+ComponentName mDeviceAdminSample;
+int pwLength;
+...
+mDPM.setPasswordMinimumLength(mDeviceAdminSample, pwLength);
+</pre>
+
+<h5>Set maximum failed password attempts</h5>
+<p>You can set the maximum number of allowed failed password attempts before the
+device is wiped (that is, reset to factory settings). For example:</p>
+<pre>DevicePolicyManager mDPM;
+ComponentName mDeviceAdminSample;
+int maxFailedPw;
+ ...
+mDPM.setMaximumFailedPasswordsForWipe(mDeviceAdminSample, maxFailedPw);</pre>
+
+<h5 id="expiration">Set password expiration timeout</h5>
+<p>Beginning with Android 3.0, you can use the
+<code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setPasswordExpirationTimeout(android.content.ComponentName, long)">setPasswordExpirationTimeout()</a></code>
+method to set when a password will expire, expressed as a delta in milliseconds from when a device admin sets the expiration timeout. For example:</p>
+
+<pre>DevicePolicyManager mDPM;
+ComponentName mDeviceAdminSample;
+long pwExpiration;
+...
+mDPM.setPasswordExpirationTimeout(mDeviceAdminSample, pwExpiration);
+</pre>
+
+<h5 id="history">Restrict password based on history</h5>
+
+<p>Beginning with Android 3.0, you can use the
+<code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setPasswordHistoryLength(android.content.ComponentName, int)">setPasswordHistoryLength()</a></code>
+method to limit users'
+ability to reuse old passwords. This method takes a <em>length</em>
+parameter, which specifies how many old
+passwords are stored. When this policy is active, users cannot enter a new
+password that matches the last <em>n</em> passwords. This prevents
+users from using the same password over and over. This policy is typically used
+in conjunction with
+<code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setPasswordExpirationTimeout(android.content.ComponentName, long)">setPasswordExpirationTimeout()</a></code>,
+which forces users
+to update their passwords after a specified amount of time has elapsed. </p>
+
+<p>For example, this snippet prohibits users from reusing any of their last 5 passwords:</p>
+
+<pre>DevicePolicyManager mDPM;
+ComponentName mDeviceAdminSample;
+int pwHistoryLength = 5;
+...
+mDPM.setPasswordHistoryLength(mDeviceAdminSample, pwHistoryLength);
+</pre>
+
+<h4 id="lock">Set device lock</h4>
+<p>You can set the maximum period of user inactivity that can occur before the
+device locks. For example:</p>
+<pre>
+DevicePolicyManager mDPM;
+ComponentName mDeviceAdminSample;
+...
+long timeMs = 1000L*Long.parseLong(mTimeout.getText().toString());
+mDPM.setMaximumTimeToLock(mDeviceAdminSample, timeMs);
+</pre>
+<p>You can also programmatically tell the device to lock immediately:</p>
+<pre>
+DevicePolicyManager mDPM;
+mDPM.lockNow();
+</pre>
+
+
+
+<h4 id="wipe">Perform data wipe</h4>
+
+<p>You can use the <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja">DevicePolicyManager</a></code> method
+<code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#wipeData(int)">wipeData()</a></code> to reset the device to factory settings. This is useful
+if the device is lost or stolen. Often the decision to wipe the device is the
+result of certain conditions being met. For example, you can use
+<code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setMaximumFailedPasswordsForWipe(android.content.ComponentName, int)">setMaximumFailedPasswordsForWipe()</a></code> to state that a device should be
+wiped after a specific number of failed password attempts.</p>
+<p>You wipe data as follows:</p>
+<pre>
+DevicePolicyManager mDPM;
+mDPM.wipeData(0);</pre>
+<p>The <code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#wipeData(int)">wipeData()</a></code> method takes as its
+  parameter a bit mask of additional options. Currently the value must be 0. </p>
+
+<h4>Disable camera</h4>
+<p>Beginning with Android 4.0, you can disable the camera. Note that this doesn't have to be a permanent disabling. The camera can be enabled/disabled dynamically based on context, time, and so on. </p>
+<p>You control whether the camera is disabled by using the
+<code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setCameraDisabled(android.content.ComponentName, boolean)">setCameraDisabled()</a></code> method. For example, this snippet sets the camera to be enabled or disabled based on a checkbox setting:</p>
+
+<pre>private CheckBoxPreference mDisableCameraCheckbox;
+DevicePolicyManager mDPM;
+ComponentName mDeviceAdminSample;
+...
+mDPM.setCameraDisabled(mDeviceAdminSample, mDisableCameraCheckbox.isChecked());<br />
+</pre>
+
+
+<h4 id="storage">Storage encryption</h4>
+<p>Beginning with Android 3.0, you can use the
+<code><a href="https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html?hl=ja#setStorageEncryption(android.content.ComponentName, boolean)">setStorageEncryption()</a></code>
+method to set a policy requiring encryption of the storage area, where supported.</p>
+
+<p>For example:</p>
+
+<pre>
+DevicePolicyManager mDPM;
+ComponentName mDeviceAdminSample;
+...
+mDPM.setStorageEncryption(mDeviceAdminSample, true);
+</pre>
+<p>
+See the Device Administration API sample for a complete example of how to enable storage encryption.
+</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=ja" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="ブログ" target="_blank">ブログ</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=ja" title="サポート">サポート</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=ja" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=ja" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=ja" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=ja" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="Cm2IrEeBMhugb479bVTyEc5bjB-6WsJlRIU6ctVtIas6MTQ5NzUxNzIwMjYxNzgyMA" />
+      <input type="hidden" name="next" value="/guide/topics/admin/device-admin.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+             selected="selected" >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">メールアドレス</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified7dd0.js?hl=ja?v=2017061509" defer></script>
+  <script src="../../../android_metadata_en7dd0.js?hl=ja?v=2017061509" defer></script>
+  
+  <script src="../../../reference/lists7dd0.js?hl=ja?v=2017061509" defer></script>
+  <script src="../../../reference/gms_lists7dd0.js?hl=ja?v=2017061509" defer></script>
+  <script src="../../../reference/android/support/wearable/lists7dd0.js?hl=ja?v=2017061509" defer></script>
+  <script src="../../../reference/android/support/test/lists7dd0.js?hl=ja?v=2017061509" defer></script>
+  <script src="../../../reference/android/support/constraint/lists7dd0.js?hl=ja?v=2017061509" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=ja"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_ja.js?hl=ja?v=2017061509" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/admin/device-admin.html?hl=ja by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:17:19 GMT -->
+</html>

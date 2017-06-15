@@ -1,0 +1,2098 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/calendar-provider.html?hl=pt-br by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:04:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="p8ZsFWO7VIowjnS-fStKPXdQyr248oW0lcEkarFZuvg6MTQ5NzUxNjA4MTk1NjU5MA" />
+
+  
+    <link rel="canonical" href="calendar-provider6dd3.html?hl=pt-br">
+  
+
+  
+    <link rel="alternate" href="calendar-providerf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="calendar-provider9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="calendar-provider327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="calendar-provider0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="calendar-provider7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="calendar-provider0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="calendar-provider.html" hreflang="en">
+  
+    <link rel="alternate" href="calendar-provider232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="calendar-provider9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="calendar-providerde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="calendar-provider6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/calendar-provider.html?hl=pt-br" hreflang="pt-br-cn">
+  
+
+  <link rel="alternate" href="calendar-provider.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon6dd3.png?hl=pt-br">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1806dd3.png?hl=pt-br">
+
+
+<title>
+
+  Provedor de agenda | Android Developers
+
+</title>
+
+  <meta name="description" content="The Calendar Provider is a repository for a user&amp;#39;s calendar events. The Calendar Provider API allows you to perform query, insert, update, and delete operations on calendars, events, attendees, reminders, and so on. The Calender Provider API can be…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default9fbc.css?hl=pt-br?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle6dd3.js?hl=pt-br" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__pt_br6dd3.js?hl=pt-br"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android6dd3.js?hl=pt-br"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs9fbc.js?hl=pt-br?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;pt-br&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;pt-br&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;pt-br&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;pt-br&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "pt-br", "served": "pt-br"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=pt-br">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo6dd3.png?hl=pt-br"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=pt-br"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=pt-br"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=pt-br"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=pt-br"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=pt-br" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Pesquisa">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Voltar</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index6dd3.html?hl=pt-br" >Introdução</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals6dd3.html?hl=pt-br" >Fundamentos de aplicativos</a></li><li><a href="../../practices/compatibility6dd3.html?hl=pt-br" >Compatibilidade do dispositivo</a></li><li><a href="../security/permissions6dd3.html?hl=pt-br" >Permissões do sistema</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index6dd3.html?hl=pt-br" >Arquitetura da plataforma</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack6dd3.html?hl=pt-br"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use recursos de linguagem do Java 8</a></li><li><a href="../../practices/verifying-apps-art6dd3.html?hl=pt-br" >Verificação do comportamento do aplicativo no Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index6dd3.html?hl=pt-br" >Componentes de aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters6dd3.html?hl=pt-br" >Intents e filtros de intent</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common6dd3.html?hl=pt-br" >Intents comuns</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities6dd3.html?hl=pt-br" >Atividades</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments6dd3.html?hl=pt-br" >Fragmentos</a></li><li><a href="../../components/loaders6dd3.html?hl=pt-br" >Carregadores</a></li><li><a href="../../components/tasks-and-back-stack6dd3.html?hl=pt-br" >Tarefas e pilha de retorno</a></li><li><a href="../../components/recents6dd3.html?hl=pt-br" >Tela de visão geral</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services6dd3.html?hl=pt-br" >Serviços</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services6dd3.html?hl=pt-br" >Serviços vinculados</a></li><li><a href="../../components/aidl6dd3.html?hl=pt-br" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="content-providers6dd3.html?hl=pt-br" >Provedores de conteúdo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="content-provider-basics6dd3.html?hl=pt-br" >Fundamentos do provedor de conteúdo</a></li><li><a href="content-provider-creating6dd3.html?hl=pt-br" >Criação de um provedor de conteúdo</a></li><li><a href="calendar-provider6dd3.html?hl=pt-br" >Provedor de agenda</a></li><li><a href="contacts-provider6dd3.html?hl=pt-br" >Provedor de contatos</a></li><li><a href="document-provider6dd3.html?hl=pt-br" >Estrutura de acesso ao armazenamento</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index6dd3.html?hl=pt-br" >Widgets do aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host6dd3.html?hl=pt-br" >Host de widgets do aplicativo</a></li></ul></li><li><a href="../../components/processes-and-threads6dd3.html?hl=pt-br" >Processos e encadeamentos</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index6dd3.html?hl=pt-br" >Recursos do aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview6dd3.html?hl=pt-br" >Visão geral</a></li><li><a href="../resources/providing-resources6dd3.html?hl=pt-br" >Fornecimento de recursos</a></li><li><a href="../resources/accessing-resources6dd3.html?hl=pt-br" >Acesso aos recursos</a></li><li><a href="../resources/runtime-changes6dd3.html?hl=pt-br" >Processamento de alterações em tempo de execução</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization6dd3.html?hl=pt-br" >Localização</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework6dd3.html?hl=pt-br" >APIs de estrutura do Android para ICU4J</a></li><li><a href="../resources/multilingual-support6dd3.html?hl=pt-br" >Idioma e localidade</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources6dd3.html?hl=pt-br" >Tipos de recursos</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource6dd3.html?hl=pt-br" >Animação</a></li><li><a href="../resources/color-list-resource6dd3.html?hl=pt-br" >Lista de estados de cores</a></li><li><a href="../resources/drawable-resource6dd3.html?hl=pt-br" >Desenhável</a></li><li><a href="../resources/layout-resource6dd3.html?hl=pt-br" >Layout</a></li><li><a href="../resources/menu-resource6dd3.html?hl=pt-br" >Menu</a></li><li><a href="../resources/string-resource6dd3.html?hl=pt-br" >Cadeia de caracteres</a></li><li><a href="../resources/style-resource6dd3.html?hl=pt-br" >Estilo</a></li><li><a href="../resources/more-resources6dd3.html?hl=pt-br" >Mais tipos</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro6dd3.html?hl=pt-br" >Manifesto do aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element6dd3.html?hl=pt-br" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element6dd3.html?hl=pt-br" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element6dd3.html?hl=pt-br" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element6dd3.html?hl=pt-br" >&lt;application&gt;</a></li><li><a href="../manifest/category-element6dd3.html?hl=pt-br" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element6dd3.html?hl=pt-br" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element6dd3.html?hl=pt-br" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element6dd3.html?hl=pt-br" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element6dd3.html?hl=pt-br" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element6dd3.html?hl=pt-br" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element6dd3.html?hl=pt-br" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element6dd3.html?hl=pt-br" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element6dd3.html?hl=pt-br" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element6dd3.html?hl=pt-br" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element6dd3.html?hl=pt-br" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element6dd3.html?hl=pt-br" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element6dd3.html?hl=pt-br" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element6dd3.html?hl=pt-br" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element6dd3.html?hl=pt-br" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element6dd3.html?hl=pt-br" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element6dd3.html?hl=pt-br" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element6dd3.html?hl=pt-br" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element6dd3.html?hl=pt-br" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element6dd3.html?hl=pt-br" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element6dd3.html?hl=pt-br" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element6dd3.html?hl=pt-br" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element6dd3.html?hl=pt-br" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index6dd3.html?hl=pt-br" >Interface do usuário</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview6dd3.html?hl=pt-br" >Visão geral</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout6dd3.html?hl=pt-br" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear6dd3.html?hl=pt-br" >Layout linear</a></li><li><a href="../ui/layout/relative6dd3.html?hl=pt-br" >Layout relativo</a></li><li><a href="../ui/layout/listview6dd3.html?hl=pt-br" >Exibição em lista</a></li><li><a href="../ui/layout/gridview6dd3.html?hl=pt-br" >Exibição em grade</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls6dd3.html?hl=pt-br" >Controles de entrada</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button6dd3.html?hl=pt-br" >Botões</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=pt-br" >Campos de texto</a></li><li><a href="../ui/controls/checkbox6dd3.html?hl=pt-br" >Caixas de seleção</a></li><li><a href="../ui/controls/radiobutton6dd3.html?hl=pt-br" >Botões de opção</a></li><li><a href="../ui/controls/togglebutton6dd3.html?hl=pt-br" >Botões de alternância</a></li><li><a href="../ui/controls/spinner6dd3.html?hl=pt-br" >Controles giratórios</a></li><li><a href="../ui/controls/pickers6dd3.html?hl=pt-br" >Seletores</a></li></ul></li><li><a href="../ui/ui-events6dd3.html?hl=pt-br" >Eventos de entrada</a></li><li><a href="../ui/menus6dd3.html?hl=pt-br" >Menus</a></li><li><a href="../ui/settings6dd3.html?hl=pt-br" >Configurações</a></li><li><a href="../ui/dialogs6dd3.html?hl=pt-br" >Caixas de diálogo</a></li><li><a href="../ui/notifiers/notifications6dd3.html?hl=pt-br" >Notificações</a></li><li><a href="../ui/notifiers/toasts6dd3.html?hl=pt-br" >Avisos</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index6dd3.html?hl=pt-br" >Busca</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog6dd3.html?hl=pt-br" >Criação de uma interface de pesquisa</a></li><li><a href="../search/adding-recent-query-suggestions6dd3.html?hl=pt-br" >Adição de sugestões recentes de consulta</a></li><li><a href="../search/adding-custom-suggestions6dd3.html?hl=pt-br" >Adição de sugestões personalizadas</a></li><li><a href="../search/searchable-config6dd3.html?hl=pt-br" >Configuração pesquisável</a></li></ul></li><li><a href="../ui/multi-window6dd3.html?hl=pt-br" >Compatibilidade com várias janelas</a></li><li><a href="../ui/drag-drop6dd3.html?hl=pt-br" >Arrastar e soltar</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index6dd3.html?hl=pt-br" >Acessibilidade</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps6dd3.html?hl=pt-br" >Para tornar os aplicativos acessíveis</a></li><li><a href="../ui/accessibility/checklist6dd3.html?hl=pt-br" >Lista de verificação de acessibilidade do desenvolvedor</a></li><li><a href="../ui/accessibility/services6dd3.html?hl=pt-br" >Criação de serviços de acessibilidade</a></li></ul></li><li><a href="../ui/themes6dd3.html?hl=pt-br" >Estilos e temas</a></li><li><a href="../ui/custom-components6dd3.html?hl=pt-br" >Componentes personalizados</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index6dd3.html?hl=pt-br" >Animação e gráficos</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview6dd3.html?hl=pt-br" >Visão geral</a></li><li><a href="../graphics/prop-animation6dd3.html?hl=pt-br" >Animação de propriedade</a></li><li><a href="../graphics/view-animation6dd3.html?hl=pt-br" >Exibição de animação</a></li><li><a href="../graphics/drawable-animation6dd3.html?hl=pt-br" >Animação de desenhável</a></li><li><a href="../graphics/2d-graphics6dd3.html?hl=pt-br" >Tela e desenháveis</a></li><li><a href="../graphics/opengl6dd3.html?hl=pt-br" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel6dd3.html?hl=pt-br" >Aceleração de hardware</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index6dd3.html?hl=pt-br" >Computação</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute6dd3.html?hl=pt-br" >RenderScript</a></li><li><a href="../renderscript/advanced6dd3.html?hl=pt-br" >RenderScript avançado</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview6dd3.html?hl=pt-br" >Referência da API de tempo de execução</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types6dd3.html?hl=pt-br" >Tipos numéricos</a></li><li><a href="../renderscript/reference/rs_object_types6dd3.html?hl=pt-br" >Tipos de objeto</a></li><li><a href="../renderscript/reference/rs_convert6dd3.html?hl=pt-br" >Funções de conversão</a></li><li><a href="../renderscript/reference/rs_math6dd3.html?hl=pt-br" >Constantes e funções matemáticas</a></li><li><a href="../renderscript/reference/rs_vector_math6dd3.html?hl=pt-br" >Funções matemáticas de vetores</a></li><li><a href="../renderscript/reference/rs_matrix6dd3.html?hl=pt-br" >Funções de matriz</a></li><li><a href="../renderscript/reference/rs_quaternion6dd3.html?hl=pt-br" >Funções de quaternion</a></li><li><a href="../renderscript/reference/rs_atomic6dd3.html?hl=pt-br" >Funções de atualização atômicas</a></li><li><a href="../renderscript/reference/rs_time6dd3.html?hl=pt-br" >Funções e tipos de tempo</a></li><li><a href="../renderscript/reference/rs_allocation_data6dd3.html?hl=pt-br" >Funções de acesso a dados de alocação</a></li><li><a href="../renderscript/reference/rs_object_info6dd3.html?hl=pt-br" >Funções de características de objetos</a></li><li><a href="../renderscript/reference/rs_for_each6dd3.html?hl=pt-br" >Funções e tipos de invocação de kernel</a></li><li><a href="../renderscript/reference/rs_io6dd3.html?hl=pt-br" >Funções de entrada/saída</a></li><li><a href="../renderscript/reference/rs_debug6dd3.html?hl=pt-br" >Funções de deputação</a></li><li><a href="../renderscript/reference/rs_graphics6dd3.html?hl=pt-br" >Funções e tipos de gráfico</a></li><li><a href="../renderscript/reference/index6dd3.html?hl=pt-br" >Índice</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index6dd3.html?hl=pt-br" >Mídia e câmera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer6dd3.html?hl=pt-br" >Reprodução de mídia</a></li><li><a href="../media/mediarouter6dd3.html?hl=pt-br" >Roteador de mídia</a></li><li><a href="../media/mediarouteprovider6dd3.html?hl=pt-br" >Provedor de roteamento de mídia</a></li><li><a href="../media/exoplayer6dd3.html?hl=pt-br" >ExoPlayer</a></li><li><a href="../media/media-formats6dd3.html?hl=pt-br" >Formatos de mídia suportados</a></li><li><a href="../media/mediarecorder6dd3.html?hl=pt-br" >Captura de áudio</a></li><li><a href="../media/jetplayer6dd3.html?hl=pt-br" >JetPlayer</a></li><li><a href="../media/camera6dd3.html?hl=pt-br" >Câmera</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index6dd3.html?hl=pt-br" >Localização e sensores</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index6dd3.html?hl=pt-br" >Localização e mapas</a></li><li><a href="../location/strategies6dd3.html?hl=pt-br" >Estratégias de localização</a></li><li><a href="../sensors/sensors_overview6dd3.html?hl=pt-br" >Visão geral de sensores</a></li><li><a href="../sensors/sensors_motion6dd3.html?hl=pt-br" >Sensores de movimento</a></li><li><a href="../sensors/sensors_position6dd3.html?hl=pt-br" >Sensores de posição</a></li><li><a href="../sensors/sensors_environment6dd3.html?hl=pt-br" >Sensores de ambiente</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index6dd3.html?hl=pt-br" >Conectividade</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth6dd3.html?hl=pt-br" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le6dd3.html?hl=pt-br" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index6dd3.html?hl=pt-br" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc6dd3.html?hl=pt-br" >Fundamentos de NFC</a></li><li><a href="../connectivity/nfc/advanced-nfc6dd3.html?hl=pt-br" >NFC avançado</a></li><li><a href="../connectivity/nfc/hce6dd3.html?hl=pt-br" >Emulação de cartão com base em host</a></li></ul></li><li><a href="../connectivity/wifip2p6dd3.html?hl=pt-br" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index6dd3.html?hl=pt-br" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory6dd3.html?hl=pt-br" >Acessório</a></li><li><a href="../connectivity/usb/host6dd3.html?hl=pt-br" >Host</a></li></ul></li><li><a href="../connectivity/sip6dd3.html?hl=pt-br" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index6dd3.html?hl=pt-br" >Texto e entrada</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste6dd3.html?hl=pt-br" >Copiar e colar</a></li><li><a href="../text/creating-input-method6dd3.html?hl=pt-br" >Criação de um IME</a></li><li><a href="../text/spell-checker-framework6dd3.html?hl=pt-br" >Verificador ortográfico</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index6dd3.html?hl=pt-br" >Armazenamento de dados</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage6dd3.html?hl=pt-br" >Opções de armazenamento</a></li><li><a href="../data/backup6dd3.html?hl=pt-br" >Backup de dados</a></li><li><a href="../data/install-location6dd3.html?hl=pt-br" >Local da instalação do aplicativo</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=pt-br" >Bibliotecas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=pt-br" >Biblioteca de suporte</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=pt-br" >Recursos</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=pt-br" >Configuração</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=pt-br" >Histórico de revisão</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=pt-br" >Data Binding Library</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=pt-br" >Testing Support Library</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=pt-br" >Referência da API</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index6dd3.html?hl=pt-br" >Administração</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin6dd3.html?hl=pt-br" >Políticas do dispositivo</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index6dd3.html?hl=pt-br" >Aplicativos Web</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting6dd3.html?hl=pt-br" >Suporte a diferentes telas em aplicativos Web</a></li><li><a href="../../webapps/webview6dd3.html?hl=pt-br" >Criação de aplicativos Web no WebView</a></li><li><a href="../../webapps/migrating6dd3.html?hl=pt-br" >Migração do WebView para o Android 4.4</a></li><li><a href="../../webapps/debugging6dd3.html?hl=pt-br" >Depuração de aplicativos Web</a></li><li><a href="../../webapps/best-practices6dd3.html?hl=pt-br" >Práticas recomendadas para aplicativos Web</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index6dd3.html?hl=pt-br"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Prática recomendada" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Práticas recomendadas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support6dd3.html?hl=pt-br" >Compatibilidade com várias telas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution6dd3.html?hl=pt-br" >Distribuição para telas específicas</a></li><li><a href="../../practices/screen-compat-mode6dd3.html?hl=pt-br" >Modo de compatibilidade da tela</a></li></ul></li><li><a href="../../practices/tablets-and-handsets6dd3.html?hl=pt-br" >Compatibilidade com tablets e celulares</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=pt-br">Início</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=pt-br">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=pt-br">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=pt-br">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=pt-br">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=pt-br">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=pt-br"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=pt-br"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=pt-br"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Treinamento</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index6dd3.html?hl=pt-br"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=pt-br"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Referência</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=pt-br">Amostras</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=pt-br"
+           >Bibliotecas</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=pt-br"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=pt-br"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=pt-br">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=pt-br">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=pt-br">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=pt-br"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=pt-br">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=pt-br">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=pt-br"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=pt-br"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=pt-br">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=pt-br">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Provedor de agenda</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+    <h2>Neste documento</h2>
+    <ol>
+  <li><a href="#overview">Conceitos básicos</a></li>
+  <li><a href="#manifest">Permissões do usuário</a></li>
+  <li><a href="#calendar">Tabela de agendas</a>
+<ol>
+      <li><a href="#query">Consulta em uma agenda</a></li>
+      <li><a href="#modify-calendar">Modificação de uma agenda</a></li>
+      <li><a href="#insert-calendar">Inserção de uma agenda</a></li>
+    </ol>
+  </li>
+  <li><a href="#events">Tabela de eventos</a>
+<ol>
+      <li><a href="#add-event">Adição de eventos</a></li>
+      <li><a href="#update-event">Atualização de eventos</a></li>
+      <li><a href="#delete-event">Exclusão de eventos</a></li>
+    </ol>
+  </li>
+  <li><a href="#attendees">Tabela de participantes</a>
+<ol>
+      <li><a href="#add-attendees">Adição de participantes</a></li>
+    </ol>
+  </li>
+  <li><a href="#reminders">Tabela de lembretes</a>
+<ol>
+      <li><a href="#add-reminders">Adição de lembretes</a></li>
+    </ol>
+  </li>
+  <li><a href="#instances">Tabela de instâncias</a>
+  <ol>
+      <li><a href="#query-instances">Consulta na tabela de instâncias</a></li>
+  </ol></li>
+  <li><a href="#intents">Intents do Agenda</a>
+  <ol>
+      <li><a href="#intent-insert">Uso de um intent para inserir um evento</a></li>
+      <li><a href="#intent-edit">Uso de um intent para editar um evento</a></li>
+      <li><a href="#intent-view">Uso de intents para exibir dados de agenda</a></li>
+    </ol>
+  </li>
+
+  <li><a href="#sync-adapter">Adaptadores de sincronização</a></li>
+</ol>
+
+    <h2>Classes principais</h2>
+    <ol>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=pt-br">CalendarContract.Calendars</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=pt-br">CalendarContract.Events</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Attendees.html?hl=pt-br">CalendarContract.Attendees</a></code></li>
+      <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=pt-br">CalendarContract.Reminders</a></code></li>
+    </ol>
+</div>
+</div>
+
+<p>O Provedor de agenda é um repositório para eventos da agenda do usuário. A
+Calendar Provider API permite consultar, inserir, atualizar e excluir
+operações em agendas, eventos, participantes, lembretes etc.</p>
+
+
+<p>A Calender Provider API pode ser usada por aplicativos e adaptadores de sincronização. As regras
+variam conforme o tipo de programa que realiza as chamadas. Este documento
+se concentra principalmente no uso da API do Provedor de Agenda como um aplicativo. Veja
+uma discussão sobre as diferenças entre os adaptadores de sincronização em
+<a href="#sync-adapter">Adaptadores de sincronização</a>.</p>
+
+
+<p>Normalmente, para ler ou programar dados da agenda, o manifesto de um aplicativo deve
+conter as permissões adequadas descritas em <a href="#manifest">Permissões
+do usuário</a>. Para facilitar a realização de operações comuns, o Provedor
+de Agenda fornece um conjunto de intents conforme descrito em <a href="#intents">Intents
+do Agenda</a>. Esses intents levam os usuários ao aplicativo Agenda para inserir, exibir
+e editar eventos. O usuário interage com o aplicativo Agenda e, em seguida,
+retorna ao aplicativo original. Assim, o aplicativo não precisa solicitar permissões
+nem fornecer uma interface do usuário para exibir ou criar eventos.</p>
+
+<h2 id="overview">Conceitos básicos</h2>
+
+<p>Os <a href="content-providers6dd3.html?hl=pt-br">provedores de conteúdo</a> armazenam dados e disponibilizam-nos
+para aplicativos. Os provedores de conteúdo oferecidos pela plataforma do Android (inclusive o Provedor de Agenda) normalmente expõem dados como um conjunto de tabelas baseadas em
+um modelo de banco de dados relacional, em que cada linha é um registro e cada coluna são dados
+de um tipo e significado específico. Por meio da Calender Provider API, aplicativos
+e adaptadores de sincronização podem obter acesso de leitura/gravação às tabelas do banco de dados que armazenam
+dados da agenda do usuário.</p>
+
+<p>Todo provedor de conteúdo expõe um URI público (agrupado como
+um objeto <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=pt-br">Uri</a></code>
+) que identifica exclusivamente seu conjunto de dados.  Um provedor de conteúdo que controla
+diversos conjuntos de dados (diversas tabelas) expõe uma URI separada para cada um.  Todos os
+URIs de provedores começam com a string “content://”.  Ela
+identifica os dados como controlados por um provedor de conteúdo. O Provedor
+de Agenda define constantes para as URIs de cada uma das classes (tabelas). Essas
+URIs têm o formato <code><em>&lt;class&gt;</em>.CONTENT_URI</code>. Por
+exemplo, <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=pt-br#CONTENT_URI">Events.CONTENT_URI</a></code>.</p>
+
+<p>A figura 1 exibe uma representação gráfica do modelo de dados do Provedor de Agenda. Ela ilustra
+as tabelas e os campos principais que as vinculam entre si.</p>
+
+<img src="../../../images/providers/datamodel6dd3.png?hl=pt-br" alt="Modelo de dados do Provedor de Agenda."/>
+<p class="img-caption"><strong>Imagem 1.</strong> Modelo de dados do Provedor de Agenda.</p>
+
+<p>Cada usuário pode ter diversas agendas e diferentes agendas podem ser associadas a diferentes tipos de conta (Google Agenda, Exchange etc.).</p>
+
+<p>O <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br">CalendarContract</a></code> define o modelo de dados de informações relacionadas a eventos e agendas. Esses dados são armazenados em diversas tabelas, que são listadas a seguir.</p>
+
+<table>
+  <tr>
+    <th>Tabela (classe)</th>
+    <th>Descrição</th>
+  </tr>
+  <tr>
+    <td><p><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=pt-br">CalendarContract.Calendars</a></code></p></td>
+
+    <td>Essa tabela contém
+as informações específicas da agenda. Cada linha nessa tabela contém os detalhes
+de uma única agenda, como nome, cor, informações de sincronização etc.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=pt-br">CalendarContract.Events</a></code></td>
+
+    <td>Essa tabela contém
+as informações específicas do evento. Cada linha nessa tabela tem as informações de um único
+evento &mdash; por exemplo, título do evento, local, horário de início, horário
+de término etc. O evento pode ocorrer uma vez ou diversas vezes. Participantes,
+lembretes e propriedades estendidas ficam armazenados em tabelas separadas.
+Cada um deles tem um <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#EVENT_ID">EVENT_ID</a></code>
+que referencia o <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=pt-br#_ID">_ID</a></code> na tabela Eventos.</td>
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br">CalendarContract.Instances</a></code></td>
+
+    <td>Essa tabela contém
+os horários de início e término de cada ocorrência de um evento. Cada linha nessa tabela
+representa uma única ocorrência do evento. Para eventos de ocorrência única, há um mapeamento 1:1
+de instâncias para eventos. Para eventos recorrentes, diversas linhas correspondentes
+a diversas ocorrências daquele evento são geradas automaticamente.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Attendees.html?hl=pt-br">CalendarContract.Attendees</a></code></td>
+
+    <td>Essa tabela contém
+as informações dos participantes (convidados) do evento. Cada linha representa um único convidado
+de um evento. Ela especifica o tipo de convidado e a resposta quanto à participação do convidado
+no evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=pt-br">CalendarContract.Reminders</a></code></td>
+
+    <td>Essa tabela contém
+os dados de alerta/notificação. Cada linha representa um único alerta de um evento. Um evento
+pode ter vários lembretes. O número máximo de lembretes por evento
+é especificado em
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=pt-br#MAX_REMINDERS">MAX_REMINDERS</a></code>,
+que é definido pelo adaptador de sincronização
+que detém a agenda em questão. Os lembretes são especificados em minutos antes do evento
+e têm um método que determina a forma de alertar o usuário.</td>
+  </tr>
+
+</table>
+
+<p>A Calender Provider API é projetada para ser flexível e poderosa. Ao mesmo tempo,
+é importante fornecer uma boa experiência ao usuário final
+e proteger a integridade da agenda e seus dados. Para isso, eis
+alguns pontos a considerar ao usar a API:</p>
+
+<ul>
+
+<li><strong>Inserção, atualização e exibição de eventos da agenda.</strong> Para inserir, modificar e ler eventos diretamente do provedor de agenda, é necessário ter as <a href="#manifest">permissões</a> apropriadas. Contudo, se o aplicativo em criação não for um aplicativo de agenda totalmente desenvolvido nem um adaptador de sincronização, não será necessário solicitar essas permissões. Em vez disso, podem-se usar intents compatíveis com o aplicativo Agenda do Android para entregar operações de leitura e gravação a esse aplicativo. Ao usar os intents, o aplicativo envia usuários ao aplicativo Agenda para realizar a operação desejada
+em um formulário pré-preenchido. Após finalizarem a operação, eles serão direcionados de volta ao aplicativo.
+Ao projetar seu aplicativo para realizar operações comuns através do Agenda,
+os usuários têm uma experiência em uma interface do usuário robusta e consistente. Essa é
+a abordagem recomendada. Para obter mais informações, consulte <a href="#intents">Intents
+do Agenda</a>.</p>
+
+
+<li><strong>Adaptadores de sincronização.</strong> Os adaptadores de sincronização sincronizam os dados da agenda
+em um dispositivo do usuário com outro servidor ou fonte de dados. Nas tabelas
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=pt-br">CalendarContract.Calendars</a></code>
+e <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=pt-br">CalendarContract.Events</a></code>,
+há colunas reservadas para os adaptadores de sincronização usarem.
+O provedor e os aplicativos não devem modificá-las. De fato, elas não são
+visíveis a menos que sejam acessadas como um adaptador de sincronização. Para obter mais informações sobre
+adaptadores de sincronização, consulte <a href="#sync-adapter">Adaptadores de sincronização</a>.</li>
+
+</ul>
+
+
+<h2 id="manifest">Permissões do usuário</h2>
+
+<p>Para ler dados da agenda, o aplicativo deve conter a permissão <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=pt-br#READ_CALENDAR">READ_CALENDAR</a></code> no arquivo de manifesto. Ele
+deve conter a permissão <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=pt-br#WRITE_CALENDAR">WRITE_CALENDAR</a></code>
+para excluir, inserir ou atualizar dados da agenda:</p>
+
+<pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;...&gt;
+    &lt;uses-sdk android:minSdkVersion=&quot;14&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_CALENDAR&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_CALENDAR&quot; /&gt;
+    ...
+&lt;/manifest&gt;
+</pre>
+
+
+<h2 id="calendar">Tabela de agendas</h2>
+
+<p>A tabela <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=pt-br">CalendarContract.Calendars</a></code> contém informações
+de agendas individuais. As colunas
+Agendas a seguir são graváveis tanto por aplicativos quanto por <a href="#sync-adapter">adaptadores de sincronização</a>.
+Para obter uma lista completa de campos compatíveis, consulte a referência de
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=pt-br">CalendarContract.Calendars</a></code>.</p>
+<table>
+  <tr>
+    <th>Constante</th>
+    <th>Descrição</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=pt-br#NAME">NAME</a></code></td>
+    <td>O nome da agenda.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=pt-br#CALENDAR_DISPLAY_NAME">CALENDAR_DISPLAY_NAME</a></code></td>
+    <td>O nome dessa agenda exibido ao usuário.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=pt-br#VISIBLE">VISIBLE</a></code></td>
+
+    <td>Um booleano que indica se a agenda foi selecionada para exibição. Um valor
+de 0 indica que eventos associados a essa agenda não devem ser
+exibidos.  Um valor de 1 indica que eventos associados a essa agenda devem
+ser exibidos. Esse valor afeta a geração de linhas na tabela <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br">CalendarContract.Instances</a></code>.</td>
+
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=pt-br#SYNC_EVENTS">SYNC_EVENTS</a></code></td>
+
+    <td>Booleano que indica se a agenda deve ser sincronizada e armazenar
+os eventos no dispositivo. Um valor de 0 indica a não sincronização dessa agenda
+e o não armazenamento dos eventos no dispositivo.  Um valor de 1 indica a sincronização dos eventos dessa agenda
+e o armazenamento deles no dispositivo.</td>
+  </tr>
+</table>
+
+<h3 id="query">Consulta em uma agenda</h3>
+
+<p>A seguir, há um exemplo que mostra como obter as agendas de propriedade de determinado
+usuário. Para simplificar o exemplo, a operação de consulta é exibida no
+encadeamento da interface do usuário ("encadeamento principal"). Na prática, isso deve ser feito em um encadeamento
+assíncrono em vez de no encadeamento principal. Para ver mais discussões, consulte 
+<a href="../../components/loaders6dd3.html?hl=pt-br">Carregadores</a>. Se você não estiver somente
+lendo dados, mas modificando-os, consulte <code><a href="https://developer.android.com/reference/android/content/AsyncQueryHandler.html?hl=pt-br">AsyncQueryHandler</a></code>.
+</p>
+
+
+<pre>
+// Projection array. Creating indices for this array instead of doing
+// dynamic lookups improves performance.
+public static final String[] EVENT_PROJECTION = new String[] {
+    Calendars._ID,                           // 0
+    Calendars.ACCOUNT_NAME,                  // 1
+    Calendars.CALENDAR_DISPLAY_NAME,         // 2
+    Calendars.OWNER_ACCOUNT                  // 3
+};
+
+// The indices for the projection array above.
+private static final int PROJECTION_ID_INDEX = 0;
+private static final int PROJECTION_ACCOUNT_NAME_INDEX = 1;
+private static final int PROJECTION_DISPLAY_NAME_INDEX = 2;
+private static final int PROJECTION_OWNER_ACCOUNT_INDEX = 3;</pre>
+
+
+<div class="sidebox-wrapper"> <div class="sidebox"> <h3>Por que incluir
+ACCOUNT_TYPE?</h3> <p>Ao consultar um {@linkandroid.provider.CalendarContract.Calendars#ACCOUNT_NAME
+Calendars.ACCOUNT_NAME}, é necessário incluir
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=pt-br#ACCOUNT_TYPE">Calendars.ACCOUNT_TYPE</a></code>
+na seleção. Isso porque determinada conta
+só é considerada exclusiva devido a seus <code>ACCOUNT_NAME</code>
+e <code>ACCOUNT_TYPE</code>. <code>ACCOUNT_TYPE</code> é a string correspondente
+ao autenticador da conta que foi usado quando ela foi registrada com
+o <code><a href="https://developer.android.com/reference/android/accounts/AccountManager.html?hl=pt-br">AccountManager</a></code>. Há também um tipo especial de conta, <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code>, para agendas
+não associadas a nenhuma conta do dispositivo. As contas <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code> não são
+sincronizadas.</p> </div> </div>
+
+
+<p> Na próxima parte do exemplo, você construirá a consulta. A seleção
+especifica os critérios da consulta. Neste exemplo, a consulta busca
+agendas que tenham o <code>ACCOUNT_NAME</code>
+"sampleuser@google.com", o <code>ACCOUNT_TYPE</code>
+"com.google" e o <code>OWNER_ACCOUNT</code>
+"sampleuser@google.com". Para ver todas as agendas que um usuário
+tenha exibido, não somente as que ele tem, omita o <code>OWNER_ACCOUNT</code>.
+A consulta retorna um objeto <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=pt-br">Cursor</a></code>
+que pode ser usado para cruzar o conjunto de resultados retornado pela consulta
+do banco de dados. Para ver mais informações sobre o uso de consultas em provedores de conteúdo,
+consulte <a href="content-providers6dd3.html?hl=pt-br">Provedores de conteúdo</a>.</p>
+
+
+<pre>// Run query
+Cursor cur = null;
+ContentResolver cr = getContentResolver();
+Uri uri = Calendars.CONTENT_URI;
+String selection = "((" + Calendars.ACCOUNT_NAME + " = ?) AND ("
+                        + Calendars.ACCOUNT_TYPE + " = ?) AND ("
+                        + Calendars.OWNER_ACCOUNT + " = ?))";
+String[] selectionArgs = new String[] {"sampleuser@gmail.com", "com.google",
+        "sampleuser@gmail.com"};
+// Submit the query and get a Cursor object back.
+cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);</pre>
+
+<p>Essa próxima seção usa o cursor para avançar pelo conjunto de resultados. Ele usa
+as constantes definidas no início do exemplo para retornar os valores
+de cada campo.</p>
+
+<pre>// Use the cursor to step through the returned records
+while (cur.moveToNext()) {
+    long calID = 0;
+    String displayName = null;
+    String accountName = null;
+    String ownerName = null;
+
+    // Get the field values
+    calID = cur.getLong(PROJECTION_ID_INDEX);
+    displayName = cur.getString(PROJECTION_DISPLAY_NAME_INDEX);
+    accountName = cur.getString(PROJECTION_ACCOUNT_NAME_INDEX);
+    ownerName = cur.getString(PROJECTION_OWNER_ACCOUNT_INDEX);
+
+    // Do something with the values...
+
+   ...
+}
+</pre>
+
+<h3 id="modify-calendar">Modificação de uma agenda</h3>
+
+<p>Para realizar uma atualização de uma agenda, é possível fornecer o <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=pt-br#_ID">_ID</a></code> da agenda como um ID anexado
+ao URI
+
+(<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=pt-br#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>)
+ou como o primeiro item da seleção. A seleção
+deve começar com <code>&quot;_id=?&quot;</code>, e o primeiro
+<code>selectionArg</code> deve ser o <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=pt-br#_ID">_ID</a></code> da agenda.
+Você ainda pode codificar o ID do URI para fazer atualizações. Esse exemplo altera
+o nome de exibição de uma agenda usando a abordagem
+(<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=pt-br#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>)
+:</p>
+
+<pre>private static final String DEBUG_TAG = "MyActivity";
+...
+long calID = 2;
+ContentValues values = new ContentValues();
+// The new display name for the calendar
+values.put(Calendars.CALENDAR_DISPLAY_NAME, &quot;Trevor's Calendar&quot;);
+Uri updateUri = ContentUris.withAppendedId(Calendars.CONTENT_URI, calID);
+int rows = getContentResolver().update(updateUri, values, null, null);
+Log.i(DEBUG_TAG, &quot;Rows updated: &quot; + rows);</pre>
+
+<h3 id="insert-calendar">Inserção de uma agenda</h2>
+
+<p>Agendas são projetadas para serem gerenciadas principalmente por um adaptador de sincronização, por isso,
+deve-se inserir novas agendas somente como um adaptador de sincronização. Para a maior parte,
+aplicativos só podem efetuar mudanças superficiais em agendas, como mudar o nome de exibição. Se
+um aplicativo precisa criar uma agenda local, pode fazê-lo realizando
+a inserção da agenda como um adaptador de sincronização usando um <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=pt-br#ACCOUNT_TYPE">ACCOUNT_TYPE</a></code> de <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code>.
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#ACCOUNT_TYPE_LOCAL">ACCOUNT_TYPE_LOCAL</a></code>
+é um tipo de conta especial para agendas
+não associado a nenhuma conta do dispositivo. Agendas desse tipo não são sincronizadas com um servidor. Para 
+ver discussões sobre adaptadores de sincronização, consulte <a href="#sync-adapter">Adaptadores de sincronização</a>.</p>
+
+<h2 id="events">Tabela de eventos</h2>
+
+<p>A tabela <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=pt-br">CalendarContract.Events</a></code> contém detalhes
+de eventos individuais. Para adicionar, atualizar ou excluir eventos, um aplicativo deve
+conter a permissão <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=pt-br#WRITE_CALENDAR">WRITE_CALENDAR</a></code> 
+no <a href="#manifest">arquivo de manifesto</a>.</p>
+
+<p>As colunas de Eventos a seguir são graváveis tanto por um aplicativo quanto por um adaptador
+de sincronização. Para obter uma lista completa de campos compatíveis, consulte a referência de <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=pt-br">CalendarContract.Events</a></code>.</p>
+
+<table>
+  <tr>
+    <th>Constante</th>
+    <th>Descrição</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#CALENDAR_ID">CALENDAR_ID</a></code></td>
+    <td>O <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=pt-br#_ID">_ID</a></code> da agenda à qual pertence o evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#ORGANIZER">ORGANIZER</a></code></td>
+    <td>E-mail do organizador (proprietário) do evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#TITLE">TITLE</a></code></td>
+    <td>Título do evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#EVENT_LOCATION">EVENT_LOCATION</a></code></td>
+    <td>Local do evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#DESCRIPTION">DESCRIPTION</a></code></td>
+    <td>Descrição do evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#DTSTART">DTSTART</a></code></td>
+    <td>Horário de início do evento em milissegundos em UTC desde a época.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#DTEND">DTEND</a></code></td>
+    <td>Horário de término do evento em milissegundos em UTC desde a época.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#EVENT_TIMEZONE">EVENT_TIMEZONE</a></code></td>
+    <td>Fuso horário do evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#EVENT_END_TIMEZONE">EVENT_END_TIMEZONE</a></code></td>
+    <td>Fuso horário do horário de término do evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#DURATION">DURATION</a></code></td>
+
+    <td>Duração do evento em formato <a href="http://tools.ietf.org/html/rfc5545#section-3.8.2.5">RCF5545</a>.
+Por exemplo: um valor de <code>&quot;PT1H&quot;</code> indica que o evento
+deve durar uma hora e um valor de <code>&quot;P2W&quot;</code> indica
+uma duração de 2 semanas.</td>
+
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#ALL_DAY">ALL_DAY</a></code></td>
+
+    <td>Um valor de 1 indica que esse evento dura o dia inteiro, como definido
+pelo fuso horário local. Um valor de 0 indica que é um evento comum que pode iniciar
+e terminar a qualquer momento durante um dia.</td>
+
+
+  </tr>
+
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#RRULE">RRULE</a></code></td>
+
+    <td>A regra de recorrência do formato do evento. Por
+exemplo, <code>&quot;FREQ=WEEKLY;COUNT=10;WKST=SU&quot;</code>. Veja
+mais exemplos <a href="http://tools.ietf.org/html/rfc5545#section-3.8.5.3">aqui</a>.</td>
+
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#RDATE">RDATE</a></code></td>
+    <td>As datas de recorrência do evento.
+    Normalmente, usa-se <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#RDATE">RDATE</a></code> 
+    em conjunto com <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#RRULE">RRULE</a></code> 
+    para definir um conjunto agregado
+de ocorrências repetidas. Para ver mais discussões, consulte a <a href="http://tools.ietf.org/html/rfc5545#section-3.8.5.2">Especificação RFC5545</a>.</td>
+</tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#AVAILABILITY">AVAILABILITY</a></code></td>
+
+    <td>Se esse evento for considerado como tempo ocupado ou como tempo livre que
+pode ser reagendado. </td>
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#GUESTS_CAN_MODIFY">GUESTS_CAN_MODIFY</a></code></td>
+    <td>Se convidados podem modificar o evento. </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#GUESTS_CAN_INVITE_OTHERS">GUESTS_CAN_INVITE_OTHERS</a></code></td>
+    <td>Se convidados podem convidar outras pessoas. </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#GUESTS_CAN_SEE_GUESTS">GUESTS_CAN_SEE_GUESTS</a></code></td>
+    <td>Se convidados podem ver a lista de participantes.</td>
+  </tr>
+</table>
+
+<h3 id="add-event">Adição de eventos</h3>
+
+<p>Quando o aplicativo insere um novo evento, recomenda-se usar
+um intent <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_INSERT">INSERT</a></code>, como descrito em <a href="#intent-insert">Uso de um intent para inserir um evento</a>. Contudo, caso
+necessário, é possível inserir eventos diretamente. Esta seção descreve como
+fazê-lo.</p>
+
+
+<p>Eis as regras para inserção de um novo evento: </p>
+<ul>
+
+  <li>Você deve incluir <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#CALENDAR_ID">CALENDAR_ID</a></code> e <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#DTSTART">DTSTART</a></code>.</li>
+
+<li>É necessário incluir um <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#EVENT_TIMEZONE">EVENT_TIMEZONE</a></code>. Para obter uma lista
+dos IDs de fuso horário instalados do sistema, use <code><a href="https://developer.android.com/reference/java/util/TimeZone.html?hl=pt-br#getAvailableIDs()">getAvailableIDs()</a></code>. Observe que essa regra não se aplica
+a inserções de evento pelo intent <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_INSERT">INSERT</a></code> descrita em <a href="#intent-insert">Uso de um intent para inserir um evento</a> &mdash; nessa
+situação, é fornecido um fuso horário padrão.</li>
+
+  <li>Para eventos não recorrentes, é preciso incluir <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#DTEND">DTEND</a></code>. </li>
+
+
+  <li>Para eventos recorrentes, deve-se incluir uma <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#DURATION">DURATION</a></code> além da <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#RRULE">RRULE</a></code> ou da <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#RDATE">RDATE</a></code>. Observe que essa regra não se aplica
+a inserções de evento pelo intent <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_INSERT">INSERT</a></code> descrita em <a href="#intent-insert">Uso de um intent para inserir um evento</a> &mdash; nessa situação,
+é possível usar uma <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#RRULE">RRULE</a></code> em conjunto com <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#DTSTART">DTSTART</a></code> e <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#DTEND">DTEND</a></code>. Dessa forma, o aplicativo Agenda
+a converte automaticamente em uma duração.</li>
+
+</ul>
+
+<p>Eis um exemplo de inserção de um evento: Para simplificar, isso está sendo realizado
+no encadeamento da IU. Na prática, inserções e atualizações devem ser feitas
+em um encadeamento assíncrono para mover a ação para um encadeamento de segundo plano. Para obter
+mais informações, consulte <code><a href="https://developer.android.com/reference/android/content/AsyncQueryHandler.html?hl=pt-br">AsyncQueryHandler</a></code>.</p>
+
+
+<pre>
+long calID = 3;
+long startMillis = 0;
+long endMillis = 0;
+Calendar beginTime = Calendar.getInstance();
+beginTime.set(2012, 9, 14, 7, 30);
+startMillis = beginTime.getTimeInMillis();
+Calendar endTime = Calendar.getInstance();
+endTime.set(2012, 9, 14, 8, 45);
+endMillis = endTime.getTimeInMillis();
+...
+
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+values.put(Events.DTSTART, startMillis);
+values.put(Events.DTEND, endMillis);
+values.put(Events.TITLE, &quot;Jazzercise&quot;);
+values.put(Events.DESCRIPTION, &quot;Group workout&quot;);
+values.put(Events.CALENDAR_ID, calID);
+values.put(Events.EVENT_TIMEZONE, "America/Los_Angeles");
+Uri uri = cr.insert(Events.CONTENT_URI, values);
+
+// get the event ID that is the last element in the Uri
+long eventID = Long.parseLong(uri.getLastPathSegment());
+//
+// ... do something with event ID
+//
+//</pre>
+
+<p class="note"><strong>Observação:</strong> Veja como esse exemplo captura o ID
+do evento depois que o evento é criado. Esse é o modo mais fácil de obter um ID de evento. Muitas vezes, o ID do evento
+é necessário para realizar outras operações de agenda &mdash; por exemplo, adicionar
+participantes ou lembretes a um evento.</p>
+
+
+<h3 id="update-event">Atualização de eventos</h3>
+
+<p>Quando o aplicativo deseja permitir que o usuário edite um evento, é recomendável
+usar um intent <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_EDIT">EDIT</a></code>, como
+descrito em <a href="#intent-edit">Uso de um intent para editar um evento</a>.
+Contudo, caso necessário, é possível editar eventos diretamente. Para atualizar
+um evento, é possível fornecer o <code>_ID</code>
+do evento como um ID anexado ao URI (<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=pt-br#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>)
+ou como o primeiro item da seleção.
+A seleção deve iniciar com <code>&quot;_id=?&quot;</code>, e o primeiro
+<code>selectionArg</code> deve ser o <code>_ID</code> do evento. Você também
+pode realizar atualizações usando uma seleção sem ID. Eis um exemplo de atualização de um
+evento. É possível mudar o título do evento usando a abordagem
+<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=pt-br#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>
+:</p>
+
+
+<pre>private static final String DEBUG_TAG = "MyActivity";
+...
+long eventID = 188;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+Uri updateUri = null;
+// The new title for the event
+values.put(Events.TITLE, &quot;Kickboxing&quot;);
+updateUri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+int rows = getContentResolver().update(updateUri, values, null, null);
+Log.i(DEBUG_TAG, &quot;Rows updated: &quot; + rows);  </pre>
+
+<h3 id="delete-event">Exclusão de eventos</h3>
+
+<p>Pode-se excluir um evento tanto pelo <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=pt-br#_ID">_ID</a></code> como um ID anexado ao URI quanto usando
+a seleção padrão. Ao usar um ID anexado, não é possível fazer seleções.
+Há duas versões de exclusão: como aplicativo e como adaptador de sincronização. A
+exclusão do aplicativo define a coluna <em>deleted</em> como 1. Esse sinalizador diz
+ao adaptador de sincronização que a linha foi excluída e que essa exclusão deve ser
+propagada para o servidor. A exclusão por um adaptador de sincronização remove o evento
+do banco de dados juntamente com todos os dados associados. Eis um exemplo de um aplicativo
+excluindo um evento pelo seu <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=pt-br#_ID">_ID</a></code>:</p>
+
+
+<pre>private static final String DEBUG_TAG = "MyActivity";
+...
+long eventID = 201;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+Uri deleteUri = null;
+deleteUri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+int rows = getContentResolver().delete(deleteUri, null, null);
+Log.i(DEBUG_TAG, &quot;Rows deleted: &quot; + rows);
+</pre>
+
+<h2 id="attendees">Tabela de participantes</h2>
+
+<p>Cada linha da tabela <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Attendees.html?hl=pt-br">CalendarContract.Attendees</a></code>
+representa um único participante ou convidado de um evento. Chamar
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=pt-br#query(android.content.ContentResolver, long, java.lang.String[])">query()</a></code>
+retorna uma lista de participantes
+para o evento com o <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#EVENT_ID">EVENT_ID</a></code> em questão.
+Esse <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#EVENT_ID">EVENT_ID</a></code>
+deve corresponder ao <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=pt-br#_ID">_ID</a></code> de um determinado evento.</p>
+
+<p>A tabela a seguir lista
+os campos graváveis. Ao inserir um novo participante, é necessário incluir todos eles
+exceto <code>ATTENDEE_NAME</code>.
+</p>
+
+
+<table>
+  <tr>
+    <th>Constante</th>
+    <th>Descrição</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#EVENT_ID">EVENT_ID</a></code></td>
+    <td>ID do evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#ATTENDEE_NAME">ATTENDEE_NAME</a></code></td>
+    <td>Nome do participante.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#ATTENDEE_EMAIL">ATTENDEE_EMAIL</a></code></td>
+    <td>Endereço de e-mail do participante.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#ATTENDEE_RELATIONSHIP">ATTENDEE_RELATIONSHIP</a></code></td>
+    <td><p>A relação do participante com o evento. Pode ser:</p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#RELATIONSHIP_ATTENDEE">RELATIONSHIP_ATTENDEE</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#RELATIONSHIP_NONE">RELATIONSHIP_NONE</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#RELATIONSHIP_ORGANIZER">RELATIONSHIP_ORGANIZER</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#RELATIONSHIP_PERFORMER">RELATIONSHIP_PERFORMER</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#RELATIONSHIP_SPEAKER">RELATIONSHIP_SPEAKER</a></code></li>
+    </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#ATTENDEE_TYPE">ATTENDEE_TYPE</a></code></td>
+    <td><p>O tipo de participante. Pode ser: </p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#TYPE_REQUIRED">TYPE_REQUIRED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#TYPE_OPTIONAL">TYPE_OPTIONAL</a></code></li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#ATTENDEE_STATUS">ATTENDEE_STATUS</a></code></td>
+    <td><p>O status de participação do participante. Pode ser:</p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#ATTENDEE_STATUS_ACCEPTED">ATTENDEE_STATUS_ACCEPTED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#ATTENDEE_STATUS_DECLINED">ATTENDEE_STATUS_DECLINED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#ATTENDEE_STATUS_INVITED">ATTENDEE_STATUS_INVITED</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#ATTENDEE_STATUS_NONE">ATTENDEE_STATUS_NONE</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#ATTENDEE_STATUS_TENTATIVE">ATTENDEE_STATUS_TENTATIVE</a></code></li>
+    </ul></td>
+  </tr>
+</table>
+
+<h3 id="add-attendees">Adição de participantes</h3>
+
+<p>A seguir, há um exemplo que adiciona um único participante a um evento. Observe que
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#EVENT_ID">EVENT_ID</a></code>
+é obrigatório:</p>
+
+<pre>
+long eventID = 202;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+values.put(Attendees.ATTENDEE_NAME, &quot;Trevor&quot;);
+values.put(Attendees.ATTENDEE_EMAIL, &quot;trevor@example.com&quot;);
+values.put(Attendees.ATTENDEE_RELATIONSHIP, Attendees.RELATIONSHIP_ATTENDEE);
+values.put(Attendees.ATTENDEE_TYPE, Attendees.TYPE_OPTIONAL);
+values.put(Attendees.ATTENDEE_STATUS, Attendees.ATTENDEE_STATUS_INVITED);
+values.put(Attendees.EVENT_ID, eventID);
+Uri uri = cr.insert(Attendees.CONTENT_URI, values);
+</pre>
+
+<h2 id="reminders">Tabela de lembretes</h2>
+
+<p>Cada linha da tabela <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=pt-br">CalendarContract.Reminders</a></code>
+representa um único lembrete de um evento. Chamar
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders.html?hl=pt-br#query(android.content.ContentResolver, long, java.lang.String[])">query()</a></code> retorna uma lista de lembretes para
+o evento com o
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns.html?hl=pt-br#EVENT_ID">EVENT_ID</a></code> em questão.</p>
+
+
+<p>A tabela a seguir relaciona os campos graváveis de lembretes. Todos eles devem
+ser incluídos ao inserir um novo lembrete. Observe que adaptadores de sincronização especificam
+os tipos de lembretes compatíveis na tabela <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Calendars.html?hl=pt-br">CalendarContract.Calendars</a></code>. Consulte
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarColumns.html?hl=pt-br#ALLOWED_REMINDERS">ALLOWED_REMINDERS</a></code>
+para obter detalhes.</p>
+
+
+<table>
+  <tr>
+    <th>Constante</th>
+    <th>Descrição</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=pt-br#EVENT_ID">EVENT_ID</a></code></td>
+    <td>ID do evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=pt-br#MINUTES">MINUTES</a></code></td>
+    <td>Quantidade de minutos antes do evento o lembrete deve disparar.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=pt-br#METHOD">METHOD</a></code></td>
+    <td><p>O método de alarme, como definido no servidor. Pode ser:</p>
+      <ul>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=pt-br#METHOD_ALERT">METHOD_ALERT</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=pt-br#METHOD_DEFAULT">METHOD_DEFAULT</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=pt-br#METHOD_EMAIL">METHOD_EMAIL</a></code></li>
+        <li><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns.html?hl=pt-br#METHOD_SMS">METHOD_SMS</a></code></li>
+    </ul></td>
+  </tr>
+</table>
+
+<h3 id="add-reminders">Adição de lembretes</h3>
+
+<p>Esse exemplo adiciona um lembrete para um evento. O lembrete dispara
+15 minutos antes do evento.</p>
+<pre>
+long eventID = 221;
+...
+ContentResolver cr = getContentResolver();
+ContentValues values = new ContentValues();
+values.put(Reminders.MINUTES, 15);
+values.put(Reminders.EVENT_ID, eventID);
+values.put(Reminders.METHOD, Reminders.METHOD_ALERT);
+Uri uri = cr.insert(Reminders.CONTENT_URI, values);</pre>
+
+<h2 id="instances">Tabela de instâncias</h2>
+
+<p>A tabela 
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br">CalendarContract.Instances</a></code> contém
+os horários de início e término das ocorrência de um evento. Cada linha nessa tabela
+representa uma única ocorrência do evento. A tabela de instâncias não é gravável e fornece
+somente um modo de consultar ocorrências de eventos. </p>
+
+<p>A tabela a seguir relaciona alguns dos campos passíveis de consulta de uma instância. Observe
+que o fuso horário é definido por
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarCache.html?hl=pt-br#KEY_TIMEZONE_TYPE">KEY_TIMEZONE_TYPE</a></code>
+e 
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.CalendarCache.html?hl=pt-br#KEY_TIMEZONE_INSTANCES">KEY_TIMEZONE_INSTANCES</a></code>.</p>
+
+
+<table>
+  <tr>
+    <th>Constante</th>
+    <th>Descrição</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br#BEGIN">BEGIN</a></code></td>
+    <td>O horário de início da instância, em milissegundos UTC.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br#END">END</a></code></td>
+    <td>O horário de término da instância, em milissegundos UTC.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br#END_DAY">END_DAY</a></code></td>
+
+    <td>O dia final do calendário juliano da instância relativo ao fuso horário
+do Agenda.
+
+</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br#END_MINUTE">END_MINUTE</a></code></td>
+
+    <td>O minuto final da instância calculado a partir de meia-noite
+no fuso horário do Agenda.</td>
+
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br#EVENT_ID">EVENT_ID</a></code></td>
+    <td>O <code>_ID</code> do evento para essa instância.</td>
+  </tr>
+    <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br#START_DAY">START_DAY</a></code></td>
+    <td>O dia inicial do calendário juliano da instância relativo ao fuso horário do Agenda.
+ </td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br#START_MINUTE">START_MINUTE</a></code></td>
+
+    <td>O minuto inicial da instância calculado a partir de meia-noite, relativo
+ao fuso horário do Agenda.
+</td>
+
+  </tr>
+
+</table>
+
+<h3 id="query-instances">Consulta na tabela de instâncias</h3>
+
+<p>Para consultar a tabela de instâncias, é necessário especificar um intervalo de tempo para a consulta
+na URI. Nesse exemplo, <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br">CalendarContract.Instances</a></code>
+obtém acesso ao campo <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#TITLE">TITLE</a></code> por meio da
+implementação da interface <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br">CalendarContract.EventsColumns</a></code>.
+Em outras palavras, <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#TITLE">TITLE</a></code> é retornado por uma
+vista do banco de dados, não por uma consulta à tabela de <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Instances.html?hl=pt-br">CalendarContract.Instances</a></code> brutas.</p>
+
+<pre>
+private static final String DEBUG_TAG = "MyActivity";
+public static final String[] INSTANCE_PROJECTION = new String[] {
+    Instances.EVENT_ID,      // 0
+    Instances.BEGIN,         // 1
+    Instances.TITLE          // 2
+  };
+
+// The indices for the projection array above.
+private static final int PROJECTION_ID_INDEX = 0;
+private static final int PROJECTION_BEGIN_INDEX = 1;
+private static final int PROJECTION_TITLE_INDEX = 2;
+...
+
+// Specify the date range you want to search for recurring
+// event instances
+Calendar beginTime = Calendar.getInstance();
+beginTime.set(2011, 9, 23, 8, 0);
+long startMillis = beginTime.getTimeInMillis();
+Calendar endTime = Calendar.getInstance();
+endTime.set(2011, 10, 24, 8, 0);
+long endMillis = endTime.getTimeInMillis();
+
+Cursor cur = null;
+ContentResolver cr = getContentResolver();
+
+// The ID of the recurring event whose instances you are searching
+// for in the Instances table
+String selection = Instances.EVENT_ID + " = ?";
+String[] selectionArgs = new String[] {"207"};
+
+// Construct the query with the desired date range.
+Uri.Builder builder = Instances.CONTENT_URI.buildUpon();
+ContentUris.appendId(builder, startMillis);
+ContentUris.appendId(builder, endMillis);
+
+// Submit the query
+cur =  cr.query(builder.build(),
+    INSTANCE_PROJECTION,
+    selection,
+    selectionArgs,
+    null);
+
+while (cur.moveToNext()) {
+    String title = null;
+    long eventID = 0;
+    long beginVal = 0;
+
+    // Get the field values
+    eventID = cur.getLong(PROJECTION_ID_INDEX);
+    beginVal = cur.getLong(PROJECTION_BEGIN_INDEX);
+    title = cur.getString(PROJECTION_TITLE_INDEX);
+
+    // Do something with the values.
+    Log.i(DEBUG_TAG, "Event:  " + title);
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeInMillis(beginVal);
+    DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    Log.i(DEBUG_TAG, "Date: " + formatter.format(calendar.getTime()));
+    }
+ }</pre>
+
+<h2 id="intents">Intents do Agenda</h2>
+<p>O aplicativo não precisa de <a href="#manifest">permissões</a> para ler e gravar dados de agenda. Em vez disso, ele pode usar intents compatíveis com o aplicativo Agenda do Android para entregar operações de leitura e gravação. A tabela a seguir lista os intents compatíveis com o Provedor de Agenda.</p>
+<table>
+  <tr>
+    <th>Ação</th>
+    <th>URI</th>
+
+    <th>Descrição</th>
+    <th>Extras</th>
+  </tr>
+  <tr>
+    <td><br>
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_VIEW">VIEW</a></code> <br></td>
+    <td><p><code>content://com.android.calendar/time/&lt;ms_since_epoch&gt;</code></p>
+    Você também pode consultar o URI com
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#CONTENT_URI">CalendarContract.CONTENT_URI</a></code>.
+Para ver um exemplo de uso desse intent, consulte <a href="calendar-provider6dd3.html?hl=pt-br#intent-view">Uso de intents para exibir dados de calendário</a>.
+
+    </td>
+    <td>Abra o calendário no horário especificado por <code>&lt;ms_since_epoch&gt;</code>.</td>
+    <td>Nenhum.</td>
+  </tr>
+  <tr>
+    <td><p><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_VIEW">VIEW</a></code> </p>
+
+     </td>
+    <td><p><code>content://com.android.calendar/events/&lt;event_id&gt;</code></p>
+
+    Você também pode consultar o URI com
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=pt-br#CONTENT_URI">Events.CONTENT_URI</a></code>.
+Para ver um exemplo de uso desse intent, consulte <a href="calendar-provider6dd3.html?hl=pt-br#intent-view">Uso de intents para exibir dados de calendário</a>.
+
+    </td>
+    <td>Exibe o evento especificado por <code>&lt;event_id&gt;</code>.</td>
+
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code><br>
+      <br>
+      <br>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code></td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_EDIT">EDIT</a></code> </td>
+    <td><p><code>content://com.android.calendar/events/&lt;event_id&gt;</code></p>
+
+  Você também pode consultar o URI com
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=pt-br#CONTENT_URI">Events.CONTENT_URI</a></code>.
+Para ver um exemplo de uso desse intent, consulte <a href="calendar-provider6dd3.html?hl=pt-br#intent-edit">Uso de um intent para editar um evento</a>.
+
+
+    </td>
+    <td>Edita o evento especificado por <code>&lt;event_id&gt;</code>.</td>
+
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code><br>
+      <br>
+      <br>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code></td>
+  </tr>
+
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_EDIT">EDIT</a></code> <br>
+    <br>
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_INSERT">INSERT</a></code> </td>
+    <td><p><code>content://com.android.calendar/events</code></p>
+
+   Você também pode consultar o URI com
+<code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=pt-br#CONTENT_URI">Events.CONTENT_URI</a></code>.
+Para ver um exemplo do uso desse intent, consulte <a href="calendar-provider6dd3.html?hl=pt-br#intent-insert">Uso de um intent para inserir um evento</a>.
+
+    </td>
+
+    <td>Crie um evento.</td>
+    <td>Qualquer um dos extras listados na tabela abaixo.</td>
+  </tr>
+</table>
+
+<p>A tabela a seguir lista os extras de intent compatíveis com o Provedor de Agenda:
+</p>
+<table>
+  <tr>
+    <th>Extra de intent</th>
+    <th>Descrição</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#TITLE">Events.TITLE</a></code></td>
+    <td>Nome do evento.</td>
+  </tr>
+  <tr>
+
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#EXTRA_EVENT_BEGIN_TIME">CalendarContract.EXTRA_EVENT_BEGIN_TIME</a></code></td>
+    <td>Horário de início do evento em milissegundos desde a época.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#EXTRA_EVENT_END_TIME">CalendarContract.EXTRA_EVENT_END_TIME</a></code></td>
+
+    <td>Horário de término do evento em milissegundos desde a época.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#EXTRA_EVENT_ALL_DAY">CalendarContract.EXTRA_EVENT_ALL_DAY</a></code></td>
+
+    <td>Booleano que indica que um evento dura o dia inteiro. O valor pode ser
+<code>true</code> ou <code>false</code>.</td> </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#EVENT_LOCATION">Events.EVENT_LOCATION</a></code></td>
+
+    <td>Local do evento.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#DESCRIPTION">Events.DESCRIPTION</a></code></td>
+
+    <td>Descrição do evento.</td>
+  </tr>
+  <tr>
+    <td>
+    <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#EXTRA_EMAIL">Intent.EXTRA_EMAIL</a></code></td>
+    <td>Lista com endereços de e-mail das pessoas a convidar, com termos separados por vírgula.</td>
+  </tr>
+  <tr>
+    <td>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#RRULE">Events.RRULE</a></code></td>
+    <td>A regra de recorrência do evento.</td>
+  </tr>
+  <tr>
+    <td>
+    <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#ACCESS_LEVEL">Events.ACCESS_LEVEL</a></code></td>
+
+    <td>Se o evento é privado ou público.</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns.html?hl=pt-br#AVAILABILITY">Events.AVAILABILITY</a></code></td>
+
+    <td>Se esse evento é considerado como tempo ocupado ou como tempo livre que pode ser reagendado.</td>
+
+</table>
+<p>As seções a seguir descrevem como usar estes intents.</p>
+
+
+<h3 id="intent-insert">Uso de um intent para inserir um evento</h3>
+
+<p>O intent <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_INSERT">INSERT</a></code>
+permite que o aplicativo entregue a tarefa de inserção de eventos ao próprio Agenda.
+Com essa abordagem, o aplicativo não precisará ter a permissão <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=pt-br#WRITE_CALENDAR">WRITE_CALENDAR</a></code> contida no <a href="#manifest">arquivo de manifesto</a>.</p>
+
+
+<p>Quando usuários executam um aplicativo que usa essa abordagem, ele os direciona
+ao Agenda para finalizar a adição do evento. O intent <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_INSERT">INSERT</a></code> usa campos extras para
+pré-preencher um formulário com os detalhes do evento no Agenda. Os usuários podem,
+então, cancelar o evento, editar o formulário conforme necessário ou salvar o evento na sua
+agenda.</p>
+
+
+
+<p>A seguir, há um snippet de código que agenda um evento em 19 de janeiro de 2012, que acontece
+das 7h30 às 8h30. Observe o seguinte sobre esse snippet de código:</p>
+
+<ul>
+  <li>Ele especifica <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.Events.html?hl=pt-br#CONTENT_URI">Events.CONTENT_URI</a></code>
+ como o URI.</li>
+
+  <li>Ele usa os campos extras {@linkandroid.provider.CalendarContract#EXTRA_EVENT_BEGIN_TIME
+CalendarContract.EXTRA_EVENT_BEGIN_TIME} e {@linkandroid.provider.CalendarContract#EXTRA_EVENT_END_TIME
+CalendarContract.EXTRA_EVENT_END_TIME} para pré-preencher o formulário
+com o horário do evento. Os valores desses horários devem estar em milissegundos UTC
+a partir da época.</li>
+
+  <li>Ele usa o campo extra <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#EXTRA_EMAIL">Intent.EXTRA_EMAIL</a></code>
+ para fornecer uma lista de termos separados por vírgula de convidados, especificados por endereço de e-mail.</li>
+
+</ul>
+<pre>
+Calendar beginTime = Calendar.getInstance();
+beginTime.set(2012, 0, 19, 7, 30);
+Calendar endTime = Calendar.getInstance();
+endTime.set(2012, 0, 19, 8, 30);
+Intent intent = new Intent(Intent.ACTION_INSERT)
+        .setData(Events.CONTENT_URI)
+        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+        .putExtra(Events.TITLE, &quot;Yoga&quot;)
+        .putExtra(Events.DESCRIPTION, &quot;Group class&quot;)
+        .putExtra(Events.EVENT_LOCATION, &quot;The gym&quot;)
+        .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
+        .putExtra(Intent.EXTRA_EMAIL, &quot;rowan@example.com,trevor@example.com&quot;);
+startActivity(intent);
+</pre>
+
+<h3 id="intent-edit">Uso de um intent para editar um evento</h3>
+
+<p>É possível atualizar um evento diretamente, como descrito em <a href="#update-event">Atualização de eventos</a>. Porém, o uso do intent <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_EDIT">EDIT</a></code> permite que um aplicativo
+sem permissão entregue a edição de eventos ao aplicativo Agenda.
+Quando os usuários finalizam a edição do evento no Agenda, são direcionados
+ao aplicativo original.</p> <p>A seguir há um exemplo de um intent que define um novo
+título para o evento especificado e permite aos usuários editar o evento no Agenda.</p>
+
+
+<pre>long eventID = 208;
+Uri uri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+Intent intent = new Intent(Intent.ACTION_EDIT)
+    .setData(uri)
+    .putExtra(Events.TITLE, &quot;My New Title&quot;);
+startActivity(intent);</pre>
+
+<h3 id="intent-view">Uso de intents para exibir dados de agenda</h3>
+<p>O Provedor de Agenda oferece dois modos diferentes de usar o intent <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=pt-br#ACTION_VIEW">VIEW</a></code>:</p>
+<ul>
+  <li>Para abrir o Agenda em uma data específica.</li>
+  <li>Para exibir um evento.</li>
+
+</ul>
+<p>Eis há um exemplo que mostra como abrir o Agenda em uma data específica:</p>
+<pre>// A date-time specified in milliseconds since the epoch.
+long startMillis;
+...
+Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+builder.appendPath(&quot;time&quot;);
+ContentUris.appendId(builder, startMillis);
+Intent intent = new Intent(Intent.ACTION_VIEW)
+    .setData(builder.build());
+startActivity(intent);</pre>
+
+<p>Eis há um exemplo que mostra como abrir um evento para exibição:</p>
+<pre>long eventID = 208;
+...
+Uri uri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+Intent intent = new Intent(Intent.ACTION_VIEW)
+   .setData(uri);
+startActivity(intent);
+</pre>
+
+
+<h2 id="sync-adapter">Adaptadores de sincronização</h2>
+
+
+<p>Há pequenas diferenças apenas nos modos de acesso ao Provedor de Agenda
+via aplicativo e via adaptador de sincronização:</p>
+
+<ul>
+  <li>Um adaptador de sincronização precisa especificar que é um adaptador de sincronização que define <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.html?hl=pt-br#CALLER_IS_SYNCADAPTER">CALLER_IS_SYNCADAPTER</a></code> como <code>true</code>.</li>
+
+
+  <li>Os adaptadores de sincronização precisam fornecer um <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=pt-br#ACCOUNT_NAME">ACCOUNT_NAME</a></code> e um <code><a href="https://developer.android.com/reference/android/provider/CalendarContract.SyncColumns.html?hl=pt-br#ACCOUNT_TYPE">ACCOUNT_TYPE</a></code> como parâmetros da consulta no URI. </li>
+
+  <li>Os adaptadores de sincronização têm acesso de gravação a mais colunas do que um aplicativo ou widget.
+  Por exemplo, um aplicativo só pode modificar algumas características de uma agenda,
+como nome, nome de exibição, configurações de visibilidade e se a agenda está
+sincronizada. Por comparação, um adaptador de sincronização pode acessar não somente essas colunas, mas muitas outras,
+como cores da agenda, fuso horário, nível de acesso, local etc.
+No entanto, um adaptador de sincronização é restrito ao <code>ACCOUNT_NAME</code>
+e ao <code>ACCOUNT_TYPE</code> que especificou.</li> </ul>
+
+<p>Eis um método auxiliar que pode ser usado para retornar uma URI para uso com um adaptador de sincronização:</p>
+<pre> static Uri asSyncAdapter(Uri uri, String account, String accountType) {
+    return uri.buildUpon()
+        .appendQueryParameter(android.provider.CalendarContract.CALLER_IS_SYNCADAPTER,&quot;true&quot;)
+        .appendQueryParameter(Calendars.ACCOUNT_NAME, account)
+        .appendQueryParameter(Calendars.ACCOUNT_TYPE, accountType).build();
+ }
+</pre>
+<p>Para obter um exemplo de implementação de um adaptador de sincronização (não especificamente relacionado ao Agenda), consulte 
+<a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=pt-br">SampleSyncAdapter</a>.
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=pt-br" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=pt-br" title="Suporte">Suporte</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=pt-br" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=pt-br" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=pt-br" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=pt-br" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="p8ZsFWO7VIowjnS-fStKPXdQyr248oW0lcEkarFZuvg6MTQ5NzUxNjA4MTk1NjU5MA" />
+      <input type="hidden" name="next" value="/guide/topics/providers/calendar-provider.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+             selected="selected" >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Endereço de e-mail</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=pt-br"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_pt-br.js?hl=pt-br?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/calendar-provider.html?hl=pt-br by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:04:15 GMT -->
+</html>

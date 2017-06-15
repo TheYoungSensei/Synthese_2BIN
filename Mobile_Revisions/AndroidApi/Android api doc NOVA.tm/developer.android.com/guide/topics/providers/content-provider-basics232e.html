@@ -1,0 +1,2145 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/content-provider-basics.html?hl=ko by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:08:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="lH5LppAUqR1UJlU6odRiXSnRldshoA-Kp3QMqsmyY406MTQ5NzUxNjQ4MTU5MDA4MA" />
+
+  
+    <link rel="canonical" href="content-provider-basics232e.html?hl=ko">
+  
+
+  
+    <link rel="alternate" href="content-provider-basics7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="content-provider-basics.html" hreflang="en">
+  
+    <link rel="alternate" href="content-provider-basics327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="content-provider-basics9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="content-provider-basics232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="content-provider-basics0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="content-provider-basics6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="content-provider-basics0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="content-provider-basicsf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="content-provider-basics9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/content-provider-basics.html?hl=ru" hreflang="ru-cn">
+  
+
+  <link rel="alternate" href="content-provider-basics.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon232e.png?hl=ko">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-180232e.png?hl=ko">
+
+
+<title>
+
+  콘텐츠 제공자 기본 사항 | Android Developers
+
+</title>
+
+  <meta name="description" content="A content provider manages access to a central repository of data. A provider is part of an Android application, which often provides its own UI for working with the data. However, content providers are primarily intended to be used by other applications…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/defaultee8c.css?hl=ko?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle232e.js?hl=ko" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__ko232e.js?hl=ko"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android232e.js?hl=ko"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docsee8c.js?hl=ko?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ko&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ko&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ko&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ko&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "ko", "served": "ko"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=ko">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo232e.png?hl=ko"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=ko"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=ko"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=ko"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=ko"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=ko" width="18" height="19" alt="Play 콘솔">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="검색">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">뒤로</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index232e.html?hl=ko" >소개</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals232e.html?hl=ko" >앱 기본 항목</a></li><li><a href="../../practices/compatibility232e.html?hl=ko" >기기 호환성</a></li><li><a href="../security/permissions232e.html?hl=ko" >시스템 권한</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index232e.html?hl=ko" >플랫폼 아키텍처</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack232e.html?hl=ko"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Java 8 언어 기능 사용</a></li><li><a href="../../practices/verifying-apps-art232e.html?hl=ko" >ART(Android 런타임)에서 앱 동작 확인</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index232e.html?hl=ko" >앱 구성 요소</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters232e.html?hl=ko" >인텐트 및 인텐트 필터</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common232e.html?hl=ko" >공통 인텐트</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities232e.html?hl=ko" >액티비티</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments232e.html?hl=ko" >프래그먼트</a></li><li><a href="../../components/loaders232e.html?hl=ko" >로더</a></li><li><a href="../../components/tasks-and-back-stack232e.html?hl=ko" >작업 및 백 스택</a></li><li><a href="../../components/recents232e.html?hl=ko" >개요 화면</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services232e.html?hl=ko" >서비스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services232e.html?hl=ko" >바인드된 서비스</a></li><li><a href="../../components/aidl232e.html?hl=ko" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="content-providers232e.html?hl=ko" >콘텐츠 제공자</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="content-provider-basics232e.html?hl=ko" >콘텐츠 제공자 기본 정보</a></li><li><a href="content-provider-creating232e.html?hl=ko" >콘텐츠 제공자 생성</a></li><li><a href="calendar-provider232e.html?hl=ko" >캘린더 제공자</a></li><li><a href="contacts-provider232e.html?hl=ko" >연락처 제공자</a></li><li><a href="document-provider232e.html?hl=ko" >저장소 액세스 프레임워크</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index232e.html?hl=ko" >앱 위젯</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host232e.html?hl=ko" >앱 위젯 호스트</a></li></ul></li><li><a href="../../components/processes-and-threads232e.html?hl=ko" >프로세스 및 스레드</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index232e.html?hl=ko" >앱 리소스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview232e.html?hl=ko" >개요</a></li><li><a href="../resources/providing-resources232e.html?hl=ko" >리소스 제공</a></li><li><a href="../resources/accessing-resources232e.html?hl=ko" >리소스 액세스</a></li><li><a href="../resources/runtime-changes232e.html?hl=ko" >런타임 변경 처리</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization232e.html?hl=ko" >현지화</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework232e.html?hl=ko" >ICU4J Android 프레임워크 API</a></li><li><a href="../resources/multilingual-support232e.html?hl=ko" >언어 및 로케일</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources232e.html?hl=ko" >리소스 유형</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource232e.html?hl=ko" >애니메이션</a></li><li><a href="../resources/color-list-resource232e.html?hl=ko" >색상 상태 목록</a></li><li><a href="../resources/drawable-resource232e.html?hl=ko" >드로어블</a></li><li><a href="../resources/layout-resource232e.html?hl=ko" >레이아웃</a></li><li><a href="../resources/menu-resource232e.html?hl=ko" >메뉴</a></li><li><a href="../resources/string-resource232e.html?hl=ko" >문자열</a></li><li><a href="../resources/style-resource232e.html?hl=ko" >스타일</a></li><li><a href="../resources/more-resources232e.html?hl=ko" >기타 유형</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro232e.html?hl=ko" >앱 매니페스트</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element232e.html?hl=ko" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element232e.html?hl=ko" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element232e.html?hl=ko" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element232e.html?hl=ko" >&lt;application&gt;</a></li><li><a href="../manifest/category-element232e.html?hl=ko" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element232e.html?hl=ko" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element232e.html?hl=ko" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element232e.html?hl=ko" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element232e.html?hl=ko" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element232e.html?hl=ko" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element232e.html?hl=ko" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element232e.html?hl=ko" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element232e.html?hl=ko" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element232e.html?hl=ko" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element232e.html?hl=ko" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element232e.html?hl=ko" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element232e.html?hl=ko" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element232e.html?hl=ko" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element232e.html?hl=ko" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element232e.html?hl=ko" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element232e.html?hl=ko" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element232e.html?hl=ko" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element232e.html?hl=ko" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element232e.html?hl=ko" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element232e.html?hl=ko" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element232e.html?hl=ko" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element232e.html?hl=ko" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index232e.html?hl=ko" >사용자 인터페이스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview232e.html?hl=ko" >개요</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout232e.html?hl=ko" >레이아웃</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear232e.html?hl=ko" >선형 레이아웃</a></li><li><a href="../ui/layout/relative232e.html?hl=ko" >상대적 레이아웃</a></li><li><a href="../ui/layout/listview232e.html?hl=ko" >목록 뷰</a></li><li><a href="../ui/layout/gridview232e.html?hl=ko" >그리드 뷰</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls232e.html?hl=ko" >입력 컨트롤</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button232e.html?hl=ko" >버튼</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=ko" >텍스트 필드</a></li><li><a href="../ui/controls/checkbox232e.html?hl=ko" >체크박스</a></li><li><a href="../ui/controls/radiobutton232e.html?hl=ko" >라디오 버튼</a></li><li><a href="../ui/controls/togglebutton232e.html?hl=ko" >전환 버튼</a></li><li><a href="../ui/controls/spinner232e.html?hl=ko" >스피너</a></li><li><a href="../ui/controls/pickers232e.html?hl=ko" >선택기</a></li></ul></li><li><a href="../ui/ui-events232e.html?hl=ko" >입력 이벤트</a></li><li><a href="../ui/menus232e.html?hl=ko" >메뉴</a></li><li><a href="../ui/settings232e.html?hl=ko" >설정</a></li><li><a href="../ui/dialogs232e.html?hl=ko" >대화상자</a></li><li><a href="../ui/notifiers/notifications232e.html?hl=ko" >알림</a></li><li><a href="../ui/notifiers/toasts232e.html?hl=ko" >알림 메시지</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index232e.html?hl=ko" >검색</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog232e.html?hl=ko" >검색 인터페이스 생성</a></li><li><a href="../search/adding-recent-query-suggestions232e.html?hl=ko" >최근 쿼리 제안 추가</a></li><li><a href="../search/adding-custom-suggestions232e.html?hl=ko" >사용자 지정 제안 추가</a></li><li><a href="../search/searchable-config232e.html?hl=ko" >검색 가능한 구성</a></li></ul></li><li><a href="../ui/multi-window232e.html?hl=ko" >다중 창 지원</a></li><li><a href="../ui/drag-drop232e.html?hl=ko" >드래그 앤 드롭</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index232e.html?hl=ko" >접근성</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps232e.html?hl=ko" >액세스 가능한 애플리케이션 만들기</a></li><li><a href="../ui/accessibility/checklist232e.html?hl=ko" >접근성 개발자 검사 목록</a></li><li><a href="../ui/accessibility/services232e.html?hl=ko" >접근성 서비스 구축</a></li></ul></li><li><a href="../ui/themes232e.html?hl=ko" >스타일 및 테마</a></li><li><a href="../ui/custom-components232e.html?hl=ko" >사용자 지정 구성 요소</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index232e.html?hl=ko" >애니메이션 및 그래픽</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview232e.html?hl=ko" >개요</a></li><li><a href="../graphics/prop-animation232e.html?hl=ko" >속성 애니메이션</a></li><li><a href="../graphics/view-animation232e.html?hl=ko" >뷰 애니메이션</a></li><li><a href="../graphics/drawable-animation232e.html?hl=ko" >드로어블 애니메이션</a></li><li><a href="../graphics/2d-graphics232e.html?hl=ko" >캔버스 및 드로어블</a></li><li><a href="../graphics/opengl232e.html?hl=ko" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel232e.html?hl=ko" >하드웨어 가속</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index232e.html?hl=ko" >연산</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute232e.html?hl=ko" >RenderScript</a></li><li><a href="../renderscript/advanced232e.html?hl=ko" >고급 RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview232e.html?hl=ko" >런타임 API 참조</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types232e.html?hl=ko" >숫자 유형</a></li><li><a href="../renderscript/reference/rs_object_types232e.html?hl=ko" >객체 유형</a></li><li><a href="../renderscript/reference/rs_convert232e.html?hl=ko" >변환 함수</a></li><li><a href="../renderscript/reference/rs_math232e.html?hl=ko" >수학 상수 및 함수</a></li><li><a href="../renderscript/reference/rs_vector_math232e.html?hl=ko" >벡터 수학 함수</a></li><li><a href="../renderscript/reference/rs_matrix232e.html?hl=ko" >행렬 함수</a></li><li><a href="../renderscript/reference/rs_quaternion232e.html?hl=ko" >사원수 함수</a></li><li><a href="../renderscript/reference/rs_atomic232e.html?hl=ko" >원자 업데이트 함수</a></li><li><a href="../renderscript/reference/rs_time232e.html?hl=ko" >시간 함수 및 유형</a></li><li><a href="../renderscript/reference/rs_allocation_data232e.html?hl=ko" >할당 데이터 액세스 함수</a></li><li><a href="../renderscript/reference/rs_object_info232e.html?hl=ko" >객체 특성 함수</a></li><li><a href="../renderscript/reference/rs_for_each232e.html?hl=ko" >커널 호출 함수 및 유형</a></li><li><a href="../renderscript/reference/rs_io232e.html?hl=ko" >입력/출력 함수</a></li><li><a href="../renderscript/reference/rs_debug232e.html?hl=ko" >디버깅 함수</a></li><li><a href="../renderscript/reference/rs_graphics232e.html?hl=ko" >그래픽 함수 및 유형</a></li><li><a href="../renderscript/reference/index232e.html?hl=ko" >인덱스</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index232e.html?hl=ko" >미디어 및 카메라</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer232e.html?hl=ko" >미디어 재생</a></li><li><a href="../media/mediarouter232e.html?hl=ko" >미디어 라우터</a></li><li><a href="../media/mediarouteprovider232e.html?hl=ko" >미디어 루트 제공자</a></li><li><a href="../media/exoplayer232e.html?hl=ko" >ExoPlayer</a></li><li><a href="../media/media-formats232e.html?hl=ko" >지원되는 미디어 형식</a></li><li><a href="../media/mediarecorder232e.html?hl=ko" >오디오 캡처</a></li><li><a href="../media/jetplayer232e.html?hl=ko" >JetPlayer</a></li><li><a href="../media/camera232e.html?hl=ko" >카메라</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index232e.html?hl=ko" >위치 및 센서</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index232e.html?hl=ko" >위치 및 지도</a></li><li><a href="../location/strategies232e.html?hl=ko" >위치 전략</a></li><li><a href="../sensors/sensors_overview232e.html?hl=ko" >센서 개요</a></li><li><a href="../sensors/sensors_motion232e.html?hl=ko" >동작 센서</a></li><li><a href="../sensors/sensors_position232e.html?hl=ko" >위치 센서</a></li><li><a href="../sensors/sensors_environment232e.html?hl=ko" >환경 센서</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index232e.html?hl=ko" >연결</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth232e.html?hl=ko" >블루투스</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le232e.html?hl=ko" >블루투스 저전력</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index232e.html?hl=ko" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc232e.html?hl=ko" >NFC 기초</a></li><li><a href="../connectivity/nfc/advanced-nfc232e.html?hl=ko" >고급 NFC</a></li><li><a href="../connectivity/nfc/hce232e.html?hl=ko" >호스트 기반 카드 에뮬레이션</a></li></ul></li><li><a href="../connectivity/wifip2p232e.html?hl=ko" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index232e.html?hl=ko" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory232e.html?hl=ko" >액세서리</a></li><li><a href="../connectivity/usb/host232e.html?hl=ko" >호스트</a></li></ul></li><li><a href="../connectivity/sip232e.html?hl=ko" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index232e.html?hl=ko" >텍스트 및 입력</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste232e.html?hl=ko" >복사 및 붙여넣기</a></li><li><a href="../text/creating-input-method232e.html?hl=ko" >IME 생성</a></li><li><a href="../text/spell-checker-framework232e.html?hl=ko" >맞춤법 검사기</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index232e.html?hl=ko" >데이터 저장소</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage232e.html?hl=ko" >저장소 옵션</a></li><li><a href="../data/backup232e.html?hl=ko" >데이터 백업</a></li><li><a href="../data/install-location232e.html?hl=ko" >앱 설치 위치</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=ko" >라이브러리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=ko" >지원 라이브러리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=ko" >기능</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=ko" >설정</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=ko" >수정 버전 기록</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=ko" >데이터 바인딩 라이브러리</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=ko" >테스트 지원 라이브러리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=ko" >API 참조</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index232e.html?hl=ko" >관리</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin232e.html?hl=ko" >기기 정책</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index232e.html?hl=ko" >웹 앱</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting232e.html?hl=ko" >웹 앱에서 서로 다른 화면 지원</a></li><li><a href="../../webapps/webview232e.html?hl=ko" >WebView에서 웹 앱 작성</a></li><li><a href="../../webapps/migrating232e.html?hl=ko" >Android 4.4에서 WebView로 마이그레이션</a></li><li><a href="../../webapps/debugging232e.html?hl=ko" >웹 앱 디버깅</a></li><li><a href="../../webapps/best-practices232e.html?hl=ko" >웹 앱 모범 사례</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index232e.html?hl=ko"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="모범 사례" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">모범 사례</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support232e.html?hl=ko" >다중 화면 지원</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution232e.html?hl=ko" >특정 화면에 배포</a></li><li><a href="../../practices/screen-compat-mode232e.html?hl=ko" >화면 호환 모드</a></li></ul></li><li><a href="../../practices/tablets-and-handsets232e.html?hl=ko" >태블릿 및 핸드셋 지원</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=ko">홈</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=ko">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=ko">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=ko">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=ko">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=ko">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=ko"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=ko"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=ko"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">교육</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index232e.html?hl=ko"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=ko"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">참조</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=ko">샘플</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=ko"
+           >라이브러리</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=ko"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=ko"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=ko">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=ko">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=ko">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=ko"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=ko">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=ko">Play 콘솔</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=ko"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=ko"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=ko">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=ko">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">콘텐츠 제공자 기본 사항</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+<!-- In this document -->
+<h2>이 문서의 내용</h2>
+<ol>
+    <li>
+        <a href="#Basics">개요</a>
+        <ol>
+            <li>
+                <a href="#ClientProvider">제공자 액세스</a>
+            </li>
+            <li>
+                <a href="#ContentURIs">콘텐츠 URI</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#SimpleQuery">제공자에서 데이터 검색</a>
+        <ol>
+            <li>
+                <a href="#RequestPermissions">읽기 액세스 권한 요청</a>
+            </li>
+            <li>
+                <a href="#Query">쿼리 구성</a>
+            </li>
+            <li>
+                <a href="#DisplayResults">쿼리 결과 표시</a>
+            </li>
+            <li>
+                <a href="#GettingResults">쿼리 결과에서 데이터 가져오기</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#Permissions">콘텐츠 제공자 권한</a>
+    </li>
+    <li>
+        <a href="#Modifications">데이터 삽입, 업데이트 및 삭제</a>
+        <ol>
+            <li>
+                <a href="#Inserting">데이터 삽입</a>
+            </li>
+            <li>
+                <a href="#Updating">데이터 업데이트</a>
+            </li>
+            <li>
+                <a href="#Deleting">데이터 삭제</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#DataTypes">제공자 데이터 유형</a>
+    </li>
+    <li>
+        <a href="#AltForms">제공자 액세스의 대체 형식</a>
+        <ol>
+            <li>
+                <a href="#Batch">일괄 액세스</a>
+            </li>
+            <li>
+                <a href="#Intents">인텐트를 통한 데이터 액세스</a>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <a href="#ContractClasses">계약 클래스</a>
+    </li>
+    <li>
+        <a href="#MIMETypeReference">MIME 유형 참조</a>
+    </li>
+</ol>
+
+    <!-- Key Classes -->
+<h2>주요 클래스</h2>
+    <ol>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ko">ContentProvider</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko">ContentResolver</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code>
+        </li>
+        <li>
+            <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=ko">Uri</a></code>
+        </li>
+    </ol>
+
+    <!-- Related Samples -->
+<h2>관련 샘플</h2>
+    <ol>
+        <li>
+        <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/List2.html?hl=ko">
+        커서(피플)</a>
+        </li>
+        <li>
+        <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/List7.html?hl=ko">
+        커서(전화)</a>
+        </li>
+    </ol>
+
+    <!-- See also -->
+<h2>참고 항목</h2>
+    <ol>
+        <li>
+            <a href="content-provider-creating232e.html?hl=ko">
+        콘텐츠 제공자 생성</a>
+        </li>
+        <li>
+            <a href="calendar-provider232e.html?hl=ko">
+        캘린더 제공자</a>
+        </li>
+    </ol>
+</div>
+</div>
+
+    <!-- Intro paragraphs -->
+<p>
+    콘텐츠 제공자는 중앙 리포지토리로의 데이터 액세스를 관리합니다. 
+제공자는 Android 애플리케이션의 일부이며, 이는 흔히 데이터 작업을 위한 고유의 UI를 제공합니다.
+ 그러나 콘텐츠 제공자는 기본적으로 다른 애플리케이션이 사용하도록 만들어진 것입니다. 
+이들은 제공자 클라이언트 객체를 사용하여 제공자에 액세스합니다. 
+제공자와 제공자 클라이언트가 결합되면 데이터에 하나의 일관적인 표준 인터페이스를 제공하여 
+이것이 프로세스간 통신과 보안 데이터 액세스도 처리합니다.
+</p>
+<p>
+    이 주제에서는 다음의 기본 사항을 설명합니다.
+</p>
+    <ul>
+        <li>콘텐츠 제공자의 작동 원리</li>
+        <li>콘텐츠 제공자에서 데이터를 검색할 때 사용하는 API</li>
+        <li>콘텐츠 제공자 내의 데이터를 삽입, 업데이트 및 삭제하는 데 사용하는 API</li>
+        <li>제공자를 다루는 데 도움이 되는 기타 API 기능</li>
+    </ul>
+
+    <!-- Basics -->
+<h2 id="Basics">개요</h2>
+<p>
+    콘텐츠 제공자는 외부 애플리케이션에 데이터를 표시하며, 이때 데이터는 
+관계형 데이터베이스에서 찾을 수 있는 테이블과 유사한 하나 이상의 테이블로서 표시됩니다. 
+한 행은 제공자가 수집하는 어떤 유형의 데이터 인스턴스를 나타내며, 
+행 안의 각 열은 인스턴스에 대해 수집된 개별적인 데이터를 나타냅니다.
+</p>
+<p>
+    예를 들어 Android 플랫폼 안에 내장된 여러 제공자 중에 사용자 사전이라는 것이 있습니다. 
+이것은 사용자가 보관하고 싶어하는 비표준 단어의 철자를 저장합니다. 표 1은 이 제공자의 테이블에서 
+데이터가 어떤 형태를 띨 수 있는지를 나타낸 것입니다.
+</p>
+<p class="table-caption">
+    <strong>표 1:</strong> 샘플 사용자 사전 테이블.
+</p>
+<table id="table1" style="width: 50%;">
+    <tr>
+        <th style="width:20%" align="center" scope="col">단어</th>
+        <th style="width:20%" align="center" scope="col">앱 ID</th>
+        <th style="width:20%" align="center" scope="col">빈도</th>
+        <th style="width:20%" align="center" scope="col">로케일</th>
+        <th style="width:20%" align="center" scope="col">_ID</th>
+    </tr>
+    <tr>
+        <td align="center" scope="row">mapreduce</td>
+        <td align="center">user1</td>
+        <td align="center">100</td>
+        <td align="center">en_US</td>
+        <td align="center">1</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">precompiler</td>
+        <td align="center">user14</td>
+        <td align="center">200</td>
+        <td align="center">fr_FR</td>
+        <td align="center">2</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">applet</td>
+        <td align="center">user2</td>
+        <td align="center">225</td>
+        <td align="center">fr_CA</td>
+        <td align="center">3</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">const</td>
+        <td align="center">user1</td>
+        <td align="center">255</td>
+        <td align="center">pt_BR</td>
+        <td align="center">4</td>
+    </tr>
+    <tr>
+        <td align="center" scope="row">int</td>
+        <td align="center">user5</td>
+        <td align="center">100</td>
+        <td align="center">en_UK</td>
+        <td align="center">5</td>
+    </tr>
+</table>
+<p>
+    표 1에서 각 행은 일반 사전에 나오지 않는 단어의 인스턴스를 
+나타냅니다. 각 열은 해당 단어에 대한 일부 데이터를 나타냅니다. 예를 들어 
+단어가 처음 나온 로케일 등을 들 수 있습니다. 열 헤더는 제공자에 저장된
+열 이름입니다. 행의 로케일을 참조하려면 그 행의 <code>locale</code> 열을 참조합니다. 
+이 제공자의 경우, <code>_ID</code> 열은 제공자가 자동으로 유지하는 "기본 키" 열
+역할을 합니다.
+</p>
+<p class="note">
+    <strong>참고:</strong> 제공자에 기본 키가 꼭 있어야 하는 것은 아니고, 
+기본 키가 있는 경우 <code>_ID</code>를 열 이름으로 사용하지 않아도 됩니다. 그러나 제공자의 데이터를 
+<code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=ko">ListView</a></code>에 바인드하려면 
+열 이름 중 하나는<code>_ID</code>여야 합니다. 이 요구사항은
+<a href="#DisplayResults">쿼리 결과 표시</a> 섹션에 자세히 설명되어 있습니다.
+</p>
+<h3 id="ClientProvider">제공자 액세스</h3>
+<p>
+    애플리케이션은 콘텐츠 제공자로부터의 데이터에 
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko">ContentResolver</a></code> 클라이언트 객체를 이용해 액세스합니다. 
+이 객체에는 제공자 객체 내의 같은 이름을 가진 메서드를 호출하는 메서드가 있습니다. 
+이는 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ko">ContentProvider</a></code>의 구체적인 서브클래스 중 하나의 인스턴스입니다. 
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko">ContentResolver</a></code> 메서드는 
+영구 저장소의 기본적인 "CRUD"(생성, 검색, 업데이트 및 삭제) 기능을 제공합니다.
+</p>
+<p>
+    클라이언트 애플리케이션의 프로세스 내에 있는 <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko">ContentResolver</a></code> 객체와
+ 제공자를 소유하는 애플리케이션 내의 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ko">ContentProvider</a></code> 객체가 
+자동으로 프로세스간 통신을 처리합니다.
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ko">ContentProvider</a></code> 또한 
+콘텐츠 제공자의 데이터 리포지토리와 외부에 테이블로 표시되는 데이터 모습 사이에서 추상화 계층 역할을 합니다.
+</p>
+<p class="note">
+    <strong>참고:</strong> 제공자에 액세스하려면 보통은 애플리케이션이 
+제공자의 매니페스트 파일에 있는 특정 권한을 요청해야 합니다. 이것은 
+<a href="#Permissions">콘텐츠 제공자 권한</a> 섹션에 더 자세히 설명되어 있습니다.
+</p>
+<p>
+    예를 들어 사용자 사전 제공자로부터 단어와 그에 해당하는 로케일 목록을 가져오려면,
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code>를 호출하면 됩니다.
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">query()</a></code> 메서드는 사용자 사전 제공자가 정의한
+<code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ko#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentProvider.query()</a></code> 메서드를
+호출합니다. 다음 몇 줄의 코드는 
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code> 호출을 보여줍니다.
+<p>
+<pre>
+// Queries the user dictionary and returns results
+mCursor = getContentResolver().query(
+    UserDictionary.Words.CONTENT_URI,   // The content URI of the words table
+    mProjection,                        // The columns to return for each row
+    mSelectionClause                    // Selection criteria
+    mSelectionArgs,                     // Selection criteria
+    mSortOrder);                        // The sort order for the returned rows
+</pre>
+<p>
+    표 2는
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">query(Uri,projection,selection,selectionArgs,sortOrder)</a></code>의 인수가 SQL SELECT 문과 일치하는 방식을 나타낸 것입니다.
+</p>
+<p class="table-caption">
+    <strong>표 2:</strong> Query()와 SQL 쿼리의 비교.
+</p>
+<table id="table2" style="width: 75%;">
+    <tr>
+        <th style="width:25%" align="center" scope="col">query() 인수</th>
+        <th style="width:25%" align="center" scope="col">SELECT 키워드/매개변수</th>
+        <th style="width:50%" align="center" scope="col">참고</th>
+    </tr>
+    <tr>
+        <td align="center"><code>Uri</code></td>
+        <td align="center"><code>FROM <em>table_name</em></code></td>
+        <td><code>Uri</code>가 <em>table_name</em>이라는 이름의 제공자 테이블에 매핑됩니다.</td>
+    </tr>
+    <tr>
+        <td align="center"><code>projection</code></td>
+        <td align="center"><code><em>col,col,col,...</em></code></td>
+        <td>
+            <code>projection</code>은 검색된 각 행에 포함되어야 하는 일련의
+            열입니다.
+        </td>
+    </tr>
+    <tr>
+        <td align="center"><code>selection</code></td>
+        <td align="center"><code>WHERE <em>col</em> = <em>value</em></code></td>
+        <td><code>selection</code>은 행을 선택하는 기준을 지정합니다.</td>
+    </tr>
+    <tr>
+        <td align="center"><code>selectionArgs</code></td>
+        <td align="center">
+            (정확한 등가는 없습니다. 선택 인수는 SELECT 절에 있는 <code>?</code>
+자리 표시자를 대체합니다.)
+        </td>
+    </tr>
+    <tr>
+        <td align="center"><code>sortOrder</code></td>
+        <td align="center"><code>ORDER BY <em>col,col,...</em></code></td>
+        <td>
+            <code>sortOrder</code>는 반환된
+            <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code> 내에 행이 나타나는 순서를 지정합니다.
+        </td>
+    </tr>
+</table>
+<h3 id="ContentURIs">콘텐츠 URI</h3>
+<p>
+    <strong>콘텐츠 URI</strong>는 제공자에서 데이터를 식별하는 URI입니다. 
+콘텐츠 URI에는 전체 제공자의 상징적인 이름(제공자의 <strong>권한</strong>)과
+테이블을 가리키는 이름(<strong>경로</strong>)이 포함됩니다. 
+제공자 내의 테이블에 액세스하기 위해 클라이언트 메서드를 호출하는 경우,
+그 테이블에 대한 콘텐츠 URI는 인수 중 하나입니다.
+</p>
+<p>
+    앞서 몇 줄의 코드에는 상수
+<code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html?hl=ko#CONTENT_URI">CONTENT_URI</a></code>에 
+사용자 사전 "단어" 테이블의 콘텐츠 URI가 들어있습니다. <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko">ContentResolver</a></code>
+ 객체가 이 URI의 권한을 파싱한 다음, 이를 이용해 제공자를 "확인"합니다. 즉 이 권한을 알려진 제공자로 이루어진 시스템 테이블과 비교하는 것입니다.
+ 
+그러면 <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko">ContentResolver</a></code>가 쿼리 인수를 
+올바른 제공자에게 발송할 수 있습니다.
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ko">ContentProvider</a></code>는 콘텐츠 URI의 경로 부분을 사용하여
+액세스할 테이블을 선택합니다. 제공자에는 보통 제공자가 노출하는 테이블마다 <strong>경로</strong>가 있습니다.
+</p>
+<p>
+    앞선 몇 줄의 코드에서 "단어" 테이블에 대해 완전한 URI는 다음과 같습니다.
+</p>
+<pre>
+content://user_dictionary/words
+</pre>
+<p>
+    여기에서 <code>user_dictionary</code> 문자열은 제공자의 권한이고
+<code>words</code> 문자열은 테이블의 경로입니다. 문자열
+<code>content://</code>(<strong>구성표</strong>)는 언제나 표시되며,
+콘텐츠 URI로 이를 식별합니다.
+</p>
+<p>
+    대다수의 제공자에서는 URI의 맨 끝에 ID 값을 추가하면 
+테이블 내 하나의 행에 액세스할 수 있습니다. 예를 들어 사용자 사전에서 <code>_ID</code>가
+ <code>4</code>인 행을 검색하려면, 이 콘텐츠 URI를 사용하면 됩니다.
+</p>
+<pre>
+Uri singleUri = ContentUris.withAppendedId(UserDictionary.Words.CONTENT_URI,4);
+</pre>
+<p>
+    일련의 행을 검색한 다음 그 중 하나를 업데이트하거나 삭제하고자 하는 경우 종종 ID 값을 사용합니다.
+
+</p>
+<p class="note">
+    <strong>참고:</strong> <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=ko">Uri</a></code> 및 <code><a href="https://developer.android.com/reference/android/net/Uri.Builder.html?hl=ko">Uri.Builder</a></code> 클래스에는
+문자열에서 잘 구성된(Well-Formed) URI 객체를 구성하기 위한 편의 메서드가 들어 있습니다. <code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=ko">ContentUris</a></code>
+클래스에는 URI에
+ID 값을 추가하는 편의 메서드가 들어 있습니다. 이전의 스니펫은 <code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=ko#withAppendedId(android.net.Uri, long)">withAppendedId()</a></code>를 사용하여 UserDictionary 콘텐츠 URI에 ID를 추가합니다.
+</p>
+
+
+    <!-- Retrieving Data from the Provider -->
+<h2 id="SimpleQuery">제공자에서 데이터 검색</h2>
+<p>
+    이 섹션은 사용자 사전 제공자를 예시로 사용하여 제공자에서 데이터를 검색하는
+방법을 설명합니다.
+</p>
+<p class="note">
+    명확한 이해를 돕기 위헤 이 섹션의 스니펫에서는 
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code>를 "UI 스레드"에서 호출합니다. 그러나
+실제 코드의 경우 쿼리는 별도의 스레드에서 비동기식으로 수행해야 합니다. 이를 위한 한 가지 방식으로
+<code><a href="https://developer.android.com/reference/android/content/CursorLoader.html?hl=ko">CursorLoader</a></code>
+클래스를 쓰는 것을 들 수 있습니다. 이 내용은
+<a href="../../components/loaders232e.html?hl=ko">로더</a> 가이드에 더 자세히 설명되어 있습니다. 또한, 이 코드 줄은 스니펫일 뿐이며 애플리케이션을 전체적으로 표시한 것이 아닙니다.
+
+</p>
+<p>
+    제공자에서 데이터를 검색하려면 다음과 같은 기본 단계를 따르세요.
+</p>
+<ol>
+   <li>
+        제공자에 대한 읽기 권한을 요청합니다.
+   </li>
+   <li>
+        제공자에게 쿼리를 보내는 코드를 정의합니다.
+   </li>
+</ol>
+<h3 id="RequestPermissions">읽기 액세스 권한 요청</h3>
+<p>
+    제공자에서 데이터를 검색하려면 애플리케이션에 해당 제공자에 대한 "읽기 권한 "이 필요합니다.
+ 런타임에는 이 권한을 요청할 수 없습니다. 대신 이 권한이 필요하다는 것을 매니페스트에 나타내야 합니다. 이때, 
+
+<code><a href="../manifest/uses-permission-element232e.html?hl=ko">&lt;uses-permission&gt;</a></code>
+ 요소와 제공자가 정의한 정확한 권한 이름을 사용하면 됩니다.
+ 매니페스트에서 이 요소를 지정하는 것은 사실상 애플리케이션을 위해 이 권한을 "요청"하는 것과 
+같습니다. 사용자가 애플리케이션을 설치할 때면, 이 요청을 암시적으로 허용하게 됩니다.
+
+</p>
+<p>
+    사용 중인 제공자에 대한 읽기 권한의 정확한 이름과 해당 제공자가 사용하는 
+다른 액세스 권한의 이름을 찾아보려면 제공자의 문서를 살펴보세요.
+
+</p>
+<p>
+    제공자에 액세스하는 데 있어 권한이 어떤 역할을 하는지는 
+<a href="#Permissions">콘텐츠 제공자 권한</a> 섹션에 더 자세하게 설명되어 있습니다.
+</p>
+<p>
+    사용자 사전 제공자는 
+<code>android.permission.READ_USER_DICTIONARY</code> 권한을 자신의 매니페스트 파일에 정의합니다. 따라서 해당 제공자에서 
+읽기 작업을 하고자 하는 애플리케이션은 반드시 이 권한을 요청해야 합니다.
+</p>
+<!-- Constructing the query -->
+<h3 id="Query">쿼리 구성</h3>
+<p>
+    제공자에서 데이터를 검색할 때 다음 단계는 쿼리를 구성하는 것입니다. 다음의 첫 번째 스니펫은 
+사용자 사전 제공자에 액세스하는 데 필요한 몇 가지 변수를 정의합니다.
+</p>
+<pre class="prettyprint">
+
+// A "projection" defines the columns that will be returned for each row
+String[] mProjection =
+{
+    UserDictionary.Words._ID,    // Contract class constant for the _ID column name
+    UserDictionary.Words.WORD,   // Contract class constant for the word column name
+    UserDictionary.Words.LOCALE  // Contract class constant for the locale column name
+};
+
+// Defines a string to contain the selection clause
+String mSelectionClause = null;
+
+// Initializes an array to contain selection arguments
+String[] mSelectionArgs = {""};
+
+</pre>
+<p>
+    다음 스니펫은 사용자 사전 제공자를 예시로 사용하여 
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code>를
+ 사용하는 방법을 보여줍니다. 제공자 클라이언트 쿼리는 SQL 쿼리와 비슷하며,
+반환할 열 집합과 선택 기준 집합, 그리고 정렬 순서가 이 안에 들어 있습니다.
+</p>
+<p>
+    쿼리가 반환해야 할 열의 세트를 <strong>프로젝션</strong>
+(변수<code>mProjection</code>)이라고 합니다.
+</p>
+<p>
+    검색할 행을 나타내는 식은 선택 절과 선택 인수로 분할되어 있습니다.
+ 선택 절은 논리와 부울 식, 열 이름과 값
+(변수 <code>mSelectionClause</code>)의 조합입니다. 값
+대신 대체 가능한 매개변수 <code>?</code>를 지정하면,
+쿼리 메서드가 그 값을 선택 인수 배열에서 검색합니다(변수 <code>mSelectionArgs</code>).
+</p>
+<p>
+    다음 스니펫의 경우, 사용자가 단어를 입력하지 않으면 선택 절이 
+<code>null</code>로 설정되고, 쿼리는 제공자 안의 모든 단어를 반환합니다. 
+사용자가 단어를 입력하면 선택 절은 <code>UserDictionary.Words.WORD + " = ?"</code>로 설정되며
+선택 인수의 첫 번째 요소가 사용자가 입력한 단어로 설정됩니다.
+</p>
+<pre class="prettyprint">
+/*
+ * This defines a one-element String array to contain the selection argument.
+ */
+String[] mSelectionArgs = {""};
+
+// Gets a word from the UI
+mSearchString = mSearchWord.getText().toString();
+
+// Remember to insert code here to check for invalid or malicious input.
+
+// If the word is the empty string, gets everything
+if (TextUtils.isEmpty(mSearchString)) {
+    // Setting the selection clause to null will return all words
+    mSelectionClause = null;
+    mSelectionArgs[0] = "";
+
+} else {
+    // Constructs a selection clause that matches the word that the user entered.
+    mSelectionClause = UserDictionary.Words.WORD + " = ?";
+
+    // Moves the user's input string to the selection arguments.
+    mSelectionArgs[0] = mSearchString;
+
+}
+
+// Does a query against the table and returns a Cursor object
+mCursor = getContentResolver().query(
+    UserDictionary.Words.CONTENT_URI,  // The content URI of the words table
+    mProjection,                       // The columns to return for each row
+    mSelectionClause                   // Either null, or the word the user entered
+    mSelectionArgs,                    // Either empty, or the string the user entered
+    mSortOrder);                       // The sort order for the returned rows
+
+// Some providers return null if an error occurs, others throw an exception
+if (null == mCursor) {
+    /*
+     * Insert code here to handle the error. Be sure not to use the cursor! You may want to
+     * call android.util.Log.e() to log this error.
+     *
+     */
+// If the Cursor is empty, the provider found no matches
+} else if (mCursor.getCount() &lt; 1) {
+
+    /*
+     * Insert code here to notify the user that the search was unsuccessful. This isn't necessarily
+     * an error. You may want to offer the user the option to insert a new row, or re-type the
+     * search term.
+     */
+
+} else {
+    // Insert code here to do something with the results
+
+}
+</pre>
+<p>
+    이 쿼리는 SQL 문과 유사합니다.
+</p>
+<pre>
+SELECT _ID, word, locale FROM words WHERE word = &lt;userinput&gt; ORDER BY word ASC;
+</pre>
+<p>
+    이 SQL 문에서는 계약 클래스 상수 대신 실제 열 이름을 사용했습니다.
+</p>
+<h4 id="Injection">악의적인 입력에 대한 보호</h4>
+<p>
+    SQL 데이터베이스에 콘텐츠 제공자가 관리하는 데이터가 있을 경우, 
+외부의 신뢰할 수 없는 데이터를 원시 SQL 문에 포함하면 SQL 주입 공격을 초래할 수 있습니다.
+</p>
+<p>
+    다음의 선택 절 예를 보세요.
+</p>
+<pre>
+// Constructs a selection clause by concatenating the user's input to the column name
+String mSelectionClause =  "var = " + mUserInput;
+</pre>
+<p>
+    이렇게 하면, 사용자가 여러분의 SQL 문에 악의적인 SQL을 연결할 수 있도록 허용하는 것입니다.
+    예를 들어 사용자가 <code>mUserInput</code>에 "nothing; DROP TABLE *;"을 입력할 수 있습니다. 
+그러면 선택 절의 결과로 <code>var = nothing; DROP TABLE *;</code>이 나옵니다. 
+선택 절이 일종의 SQL 문으로 취급되었기 때문에 제공자가 기본 SQLite 데이터베이스에서 테이블을 
+모두 삭제하는 결과를 낳을 수도 있습니다(제공자가 <a href="http://en.wikipedia.org/wiki/SQL_injection">SQL 주입 공격</a> 
+시도를 잡아내도록 설정된 경우는 예외입니다).
+</p>
+<p>
+    이 문제를 피하려면 <code>?</code>를 대체 가능한 매개변수로 사용하는 선택 절과, 
+별도의 선택 인수 배열을 사용하면 됩니다. 이렇게 하면, 사용자 입력이 SQL 문의 일부로 해석되는 대신 쿼리에 직접 바인드됩니다.
+
+    이것은 SQL로 취급되지 않기 때문에 사용자 입력이 악의적인 SQL을 주입할 수 없습니다. 
+사용자 입력을 포함하기 위해 문자열을 연결하는 대신 다음 선택 절을 사용하세요.
+</p>
+<pre>
+// Constructs a selection clause with a replaceable parameter
+String mSelectionClause =  "var = ?";
+</pre>
+<p>
+    그리고 다음과 같이 선택 인수를 배열하세요.
+</p>
+<pre>
+// Defines an array to contain the selection arguments
+String[] selectionArgs = {""};
+</pre>
+<p>
+    선택 인수 배열에 값을 입력할 때는 이렇게 합니다.
+</p>
+<pre>
+// Sets the selection argument to the user's input
+selectionArgs[0] = mUserInput;
+</pre>
+<p>
+    <code>?</code>를 대체 가능한 매개변수로 사용하는 선택 절과 
+선택 인수 배열을 사용하는 것이 선택을 지정하는 데 선호되는 방법입니다. 
+이는 제공자가 SQL 데이터베이스 기반이 아닐 때에도 마찬가지입니다.
+</p>
+<!-- Displaying the results -->
+<h3 id="DisplayResults">쿼리 결과 표시</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">ContentResolver.query()</a></code>
+클라이언트 메서드는 언제나 쿼리 선택 기준과 일치하는 행에 대해 쿼리 프로젝션이 지정한 열을 포함하는
+<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code>를 반환합니다. <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code>
+객체가 자신이 포함한
+행과 열에 무작위 읽기 액세스를 제공합니다. <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code> 메서드를 사용하면 행을 결과에서 반복할 수 있고,
+각 열의 데이터 유형을 결정하며 열에서 데이터를 꺼내거나 결과의 다른
+속성을 검토할 수도 있습니다. 일부 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code> 구현은 제공자의 데이터가 변경될 경우,
+<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code>가 변경될 때 관찰자 객체 내의 메서드를 트리거하는 경우
+또는 두 가지가 한 번에 발생할 경우 자동으로 객체를 업데이트합니다.
+</p>
+<p class="note">
+    <strong>참고:</strong> 제공자는 쿼리를 수행하는 객체의 성격을 근거로 
+열에 대한 액세스를 제한할 수 있습니다. 예를 들어 연락처 제공자는 동기화 어댑터로의 몇몇 열에 대한 액세스를 제한합니다. 
+이렇게 해야 액티비티 또는 서비스에 열을 반환하지 않기 때문입니다.
+</p>
+<p>
+    선택 기준에 일치하는 행이 없으면, 제공자는 
+<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code> 객체를 반환합니다. 이 객체의 
+<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko#getCount()">Cursor.getCount()</a></code>는 0(빈 커서)입니다.
+</p>
+<p>
+    내부 오류가 발생하는 경우, 쿼리 결과는 특정 제공자에 따라 달라집니다. 
+<code>null</code>을 반환하기로 선택할 수도 있고, <code><a href="https://developer.android.com/reference/java/lang/Exception.html?hl=ko">Exception</a></code>을 발생시킬 수도 있습니다.
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code>는 행의 "목록"이므로,
+<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code>의 콘텐츠를 표시하는 좋은 방법은 <code><a href="https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html?hl=ko">SimpleCursorAdapter</a></code>를 통해 <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=ko">ListView</a></code>에
+연결하는 것입니다.
+</p>
+<p>
+    다음 스니펫은 이전 스니펫의 코드에서 계속된 것입니다. 
+이는 해당 쿼리가 검색한 <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code>가 들어 있는
+<code><a href="https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html?hl=ko">SimpleCursorAdapter</a></code> 객체를 생성하며, 이 객체를 
+<code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=ko">ListView</a></code>에 대한 어댑터로 설정합니다.
+</p>
+<pre class="prettyprint">
+// Defines a list of columns to retrieve from the Cursor and load into an output row
+String[] mWordListColumns =
+{
+    UserDictionary.Words.WORD,   // Contract class constant containing the word column name
+    UserDictionary.Words.LOCALE  // Contract class constant containing the locale column name
+};
+
+// Defines a list of View IDs that will receive the Cursor columns for each row
+int[] mWordListItems = { R.id.dictWord, R.id.locale};
+
+// Creates a new SimpleCursorAdapter
+mCursorAdapter = new SimpleCursorAdapter(
+    getApplicationContext(),               // The application's Context object
+    R.layout.wordlistrow,                  // A layout in XML for one row in the ListView
+    mCursor,                               // The result from the query
+    mWordListColumns,                      // A string array of column names in the cursor
+    mWordListItems,                        // An integer array of view IDs in the row layout
+    0);                                    // Flags (usually none are needed)
+
+// Sets the adapter for the ListView
+mWordList.setAdapter(mCursorAdapter);
+</pre>
+<p class="note">
+    <strong>참고:</strong> <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code>로 <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=ko">ListView</a></code>를 뒷받침하려면,
+커서에 <code>_ID</code>라는 열이 포함되어야 합니다.
+    이것 때문에 이전에 표시된 쿼리가 "단어" 테이블에 대하여 <code>_ID</code> 열을 
+검색하며, <code><a href="https://developer.android.com/reference/android/widget/ListView.html?hl=ko">ListView</a></code>가 이를 표시하지 않더라도 무관합니다.
+    이 제한은 대부분의 제공자에 각 테이블에 대한 <code>_ID</code> 열이 있는 이유를 설명해주기도 합니다.
+
+</p>
+
+        <!-- Getting data from query results -->
+<h3 id="GettingResults">쿼리 결과에서 데이터 가져오기</h3>
+<p>
+    쿼리 결과를 단순히 표시만 하는 것보다 이를 다른 작업에 사용할 수 있습니다. 
+예를 들어, 사용자 사전에서 철자를 검색한 다음 이것을 다른 제공자 내에서 찾아볼 수 있습니다.
+ 이렇게 하려면, <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code>에서 행을 계속 반복하면 됩니다.
+</p>
+<pre class="prettyprint">
+
+// Determine the column index of the column named "word"
+int index = mCursor.getColumnIndex(UserDictionary.Words.WORD);
+
+/*
+ * Only executes if the cursor is valid. The User Dictionary Provider returns null if
+ * an internal error occurs. Other providers may throw an Exception instead of returning null.
+ */
+
+if (mCursor != null) {
+    /*
+     * Moves to the next row in the cursor. Before the first movement in the cursor, the
+     * "row pointer" is -1, and if you try to retrieve data at that position you will get an
+     * exception.
+     */
+    while (mCursor.moveToNext()) {
+
+        // Gets the value from the column.
+        newWord = mCursor.getString(index);
+
+        // Insert code here to process the retrieved word.
+
+        ...
+
+        // end of while loop
+    }
+} else {
+
+    // Insert code here to report an error if the cursor is null or the provider threw an exception.
+}
+</pre>
+<p>
+    <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code> 구현에는 
+여러 개의 "get" 메서드가 들어 있어 객체로부터 여러 가지 유형의 데이터를 검색합니다. 예를 들어 이전 스니펫에서는 
+<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko#getString(int)">getString()</a></code>을 사용합니다. 
+여기에는 해당 열의 데이터 유형을 나타내는 값을 반환하는 
+<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko#getType(int)">getType()</a></code> 메서드도 있습니다.
+</p>
+
+
+    <!-- Requesting permissions -->
+<h2 id="Permissions">콘텐츠 제공자 권한</h2>
+<p>
+    제공자의 애플리케이션은 해당 제공자의 데이터에 액세스하려면 다른 애플리케이션이 반드시 가지고 있어야 하는 
+권한을 지정할 수 있습니다. 이와 같은 권한을 통해 사용자는 한 애플리케이션이 어느 데이터에 액세스하려 시도할지 
+알 수 있습니다. 다른 애플리케이션은 제공자의 요구사항을 근거로 해당 제공자에 액세스하기 위해 필요한 
+권한을 요청합니다. 최종 사용자는 애플리케이션을 설치할 때 요청된 권한을 보게 됩니다.
+
+</p>
+<p>
+    제공자의 애플리케이션이 아무 권한도 지정하지 않은 경우, 다른 애플리케이션은 해당 제공자의 
+데이터에 액세스할 수 없습니다. 그러나 제공자의 애플리케이션 내에 있는 구성 요소는 
+지정된 권한과 무관하게 항상 읽기 및 쓰기 권한을 모두 가지고 있습니다.
+</p>
+<p>
+    이전에 언급한 것과 같이 사용자 사전 제공자에서 데이터를 검색하려면 
+<code>android.permission.READ_USER_DICTIONARY</code> 권한이 필요합니다.
+    이 제공자에게는 데이터 삽입, 업데이트 또는 삭제에 각각 별도의 <code>android.permission.WRITE_USER_DICTIONARY</code>
+권한이 있습니다.
+</p>
+<p>
+    제공자에 액세스하는 데 필요한 권한을 얻으려면 애플리케이션은 
+자신의 매니페스트 파일에 있는 <code><a href="../manifest/uses-permission-element232e.html?hl=ko">&lt;uses-permission&gt;</a></code>
+으로 그러한 권한을 요청합니다. Android 패키지 관리자가 애플리케이션을 설치하는 경우,
+사용자는 애플리케이션이 요청하는 권한을 모두 승인해야 합니다. 사용자가 이를 모두 승인하면
+패키지 관리자가 설치를 계속하지만, 사용자가 이를 승인하지 않으면 패키지 관리자는
+설치를 중단합니다.
+</p>
+<p>
+    다음
+<code><a href="../manifest/uses-permission-element232e.html?hl=ko">&lt;uses-permission&gt;</a></code>
+요소는 사용자 사전 제공자에 읽기 권한을 요청합니다.
+</p>
+<pre>
+    &lt;uses-permission android:name="android.permission.READ_USER_DICTIONARY"&gt;
+</pre>
+<p>
+    제공자 액세스 권한이 미치는 영향은 
+<a href="https://developer.android.com/training/articles/security-tips.html?hl=ko">보안 및 권한</a> 가이드에 좀 더 자세히 설명되어 있습니다.
+</p>
+
+
+<!-- Inserting, Updating, and Deleting Data -->
+<h2 id="Modifications">데이터 삽입, 업데이트 및 삭제</h2>
+<p>
+    제공자에서 데이터를 검색하는 방식과 마찬가지로
+제공자 클라이언트와 제공자 <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ko">ContentProvider</a></code> 사이의 상호작용을 이용하여 데이터를 수정합니다.
+    <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=ko">ContentProvider</a></code>의 해당하는 메서드에 전달된 인수로 <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko">ContentResolver</a></code> 메서드를
+호출합니다. 제공자와 제공자 클라이언트
+는 보안 및 프로세스 간 통신을 자동으로 처리합니다.
+</p>
+<h3 id="Inserting">데이터 삽입</h3>
+<p>
+    데이터를 제공자 안으로 삽입하려면, 
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#insert(android.net.Uri, android.content.ContentValues)">ContentResolver.insert()</a></code>
+ 메서드를 호출합니다. 이 메서드는 제공자에 새로운 행을 삽입하고 해당 열에 대한 콘텐츠 URI를 반환합니다.
+    이 스니펫은 사용자 사전 제공자에 새 단어를 삽입하는 방법을 보여줍니다.
+</p>
+<pre class="prettyprint">
+// Defines a new Uri object that receives the result of the insertion
+Uri mNewUri;
+
+...
+
+// Defines an object to contain the new values to insert
+ContentValues mNewValues = new ContentValues();
+
+/*
+ * Sets the values of each column and inserts the word. The arguments to the "put"
+ * method are "column name" and "value"
+ */
+mNewValues.put(UserDictionary.Words.APP_ID, "example.user");
+mNewValues.put(UserDictionary.Words.LOCALE, "en_US");
+mNewValues.put(UserDictionary.Words.WORD, "insert");
+mNewValues.put(UserDictionary.Words.FREQUENCY, "100");
+
+mNewUri = getContentResolver().insert(
+    UserDictionary.Word.CONTENT_URI,   // the user dictionary content URI
+    mNewValues                          // the values to insert
+);
+</pre>
+<p>
+    새로운 행에 대한 데이터는 단일 행 커서와 형태가 유사한 단일 <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=ko">ContentValues</a></code> 객체로
+이동합니다. 이 객체 내의 열은 모두 같은 데이터 유형을 가지지 않아도 됩니다. 
+또한 아예 값을 지정하고 싶지 않은 경우라면 열을 <code>null</code>로 설정할 수 있습니다. 
+이때 <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=ko#putNull(java.lang.String)">ContentValues.putNull()</a></code>을 사용하면 됩니다.
+</p>
+<p>
+    이 스니펫은 <code>_ID</code> 열을 추가하지 않습니다. 이 열은 자동으로 유지관리되기 때문입니다.
+ 제공자는 추가된 모든 열마다 고유한 <code>_ID</code> 값을 할당합니다.
+ 제공자는 보통 이 값을 테이블의 기본 키로 사용합니다.
+</p>
+<p>
+    <code>newUri</code>에 반환된 콘텐츠 URI는 다음과 같은 형식으로 새로 추가된 행을 식별합니다.
+
+</p>
+<pre>
+content://user_dictionary/words/&lt;id_value&gt;
+</pre>
+<p>
+    <code>&lt;id_value&gt;</code>는 새로운 행에 대한 <code>_ID</code>의 콘텐츠입니다.
+    대부분의 제공자는 이런 형태의 콘텐츠 URI를 자동으로 감지할 수 있으며, 그런 다음 해당 행에서 요청된 작업을 수행합니다.
+
+</p>
+<p>
+    반환된 <code><a href="https://developer.android.com/reference/android/net/Uri.html?hl=ko">Uri</a></code>에서 <code>_ID</code> 값을 가져오려면
+<code><a href="https://developer.android.com/reference/android/content/ContentUris.html?hl=ko#parseId(android.net.Uri)">ContentUris.parseId()</a></code>를 호출합니다.
+</p>
+<h3 id="Updating">데이터 업데이트</h3>
+<p>
+    행을 업데이트하려면 업데이트된 값과 함께 <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=ko">ContentValues</a></code> 객체를 사용합니다. 
+이때 값은 삽입할 때와 똑같고, 선택 기준은 쿼리할 때와 같습니다.
+    사용하는 클라이언트 메서드는
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">ContentResolver.update()</a></code>입니다. 값을
+추가하는 것은 업데이트 중인 열에 대한 <code><a href="https://developer.android.com/reference/android/content/ContentValues.html?hl=ko">ContentValues</a></code> 객체에만 하면 됩니다. 열의
+콘텐츠를 삭제하려면, 값을 <code>null</code>로 설정하세요.
+</p>
+<p>
+    다음 스니펫에서는 로케일이 언어 "en"인 행 모두를 로케일 <code>null</code>을 가지도록 변경합니다.
+ 반환 값은 업데이트된 행의 수입니다.
+</p>
+<pre>
+// Defines an object to contain the updated values
+ContentValues mUpdateValues = new ContentValues();
+
+// Defines selection criteria for the rows you want to update
+String mSelectionClause = UserDictionary.Words.LOCALE +  "LIKE ?";
+String[] mSelectionArgs = {"en_%"};
+
+// Defines a variable to contain the number of updated rows
+int mRowsUpdated = 0;
+
+...
+
+/*
+ * Sets the updated value and updates the selected words.
+ */
+mUpdateValues.putNull(UserDictionary.Words.LOCALE);
+
+mRowsUpdated = getContentResolver().update(
+    UserDictionary.Words.CONTENT_URI,   // the user dictionary content URI
+    mUpdateValues                       // the columns to update
+    mSelectionClause                    // the column to select on
+    mSelectionArgs                      // the value to compare to
+);
+</pre>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">ContentResolver.update()</a></code>를 
+호출하는 경우에는 사용자 입력도 삭제해야 합니다. 이에 관해 자세히 알아보려면
+<a href="#Injection">악의적인 입력에 대한 보호</a> 섹션을 읽어 보세요.
+</p>
+<h3 id="Deleting">데이터 삭제</h3>
+<p>
+    행을 삭제하는 것은 행 데이터를 검색하는 것과 비슷합니다. 즉, 삭제하고자 하는 행에 대한 선택 기준을 지정하면 
+클라이언트 메서드가 삭제된 행 수를 반환하는 식입니다.
+    다음 스니펫은 앱 ID가 "user"와 일치하는 행을 삭제합니다. 메서드가 삭제된 행 수를 반환합니다.
+
+</p>
+<pre>
+
+// Defines selection criteria for the rows you want to delete
+String mSelectionClause = UserDictionary.Words.APP_ID + " LIKE ?";
+String[] mSelectionArgs = {"user"};
+
+// Defines a variable to contain the number of rows deleted
+int mRowsDeleted = 0;
+
+...
+
+// Deletes the words that match the selection criteria
+mRowsDeleted = getContentResolver().delete(
+    UserDictionary.Words.CONTENT_URI,   // the user dictionary content URI
+    mSelectionClause                    // the column to select on
+    mSelectionArgs                      // the value to compare to
+);
+</pre>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#delete(android.net.Uri, java.lang.String, java.lang.String[])">ContentResolver.delete()</a></code>를 
+호출하는 경우에는 사용자 입력도 삭제해야 합니다. 이에 관해 자세히 알아보려면
+<a href="#Injection">악의적인 입력에 대한 보호</a> 섹션을 읽어 보세요.
+</p>
+<!-- Provider Data Types -->
+<h2 id="DataTypes">제공자 데이터 유형</h2>
+<p>
+    콘텐츠 제공자는 아주 다양한 데이터 유형을 제공할 수 있습니다. 
+사용자 사전 제공자는 텍스트만 제공하지만, 제공자는 다음과 같은 형식도 제공할 수 있습니다.
+</p>
+    <ul>
+        <li>
+            정수
+        </li>
+        <li>
+            긴 정수(Long)
+        </li>
+        <li>
+            부동 소수점 수
+        </li>
+        <li>
+            긴 부동 소수점 수(double)
+        </li>
+    </ul>
+<p>
+    제공자가 흔히 사용하는 또 다른 데이터 유형은 64KB 바이트 배열로 구현되는 BLOB(Binary Large OBject)입니다.
+ 이용 가능한 데이터 유형을 확인하려면 
+<code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ko">Cursor</a></code> 클래스 "get" 메서드를 살펴보면 됩니다.
+</p>
+<p>
+    제공자 내의 각 열에 대한 데이터 유형은 대개 제공자 문서에 나열되어 있습니다.
+    사용자 사전 제공자의 데이터 유형은 제공자의 계약 클래스 
+<code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html?hl=ko">UserDictionary.Words</a></code>의 참조 문서에 나열되어 있습니다(계약 클래스는
+<a href="#ContractClasses">계약 클래스</a> 섹션에 설명되어 있습니다).
+    @link android.database.Cursor#getType
+    Cursor.getType()}을 호출해서도 데이터 유형을 결정할 수 있습니다.
+</p>
+<p>
+    제공자는 스스로 정의하는 각 콘텐츠 URI의 MIME 데이터 유형 정보도 유지관리합니다. 
+MIME 유형 정보를 사용하면 애플리케이션이 제공자가 제공하는 데이터를 처리할 수 있을지 알아낼 수도 있고, 
+MIME 유형을 근거로 처리 유형을 선택할 수도 있습니다. 
+MIME 유형이 필요한 시점은 주로 복잡한 데이터 구조 또는 파일이 들어 있는 제공자를 다룰 때입니다.
+ 예를 들어 연락처 제공자 내의 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ko">ContactsContract.Data</a></code>
+ 테이블은 MIME 유형을 사용하여 각 행에 저장된 연락처 데이터의 유형에 레이블을 붙입니다.
+ 콘텐츠 URI에 상응하는 MIME 유형을 가져오려면 
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#getType(android.net.Uri)">ContentResolver.getType()</a></code>을 호출하세요.
+</p>
+<p>
+    <a href="#MIMETypeReference">MIME 유형 참조</a> 섹션에서 표준 및 사용자 지정 MIME 유형의 
+두 가지를 모두 설명하고 있습니다.
+</p>
+
+
+<!-- Alternative Forms of Provider Access -->
+<h2 id="AltForms">제공자 액세스의 대체 형식</h2>
+<p>
+    애플리케이션 개발에 있어 중요한 제공자 액세스의 대체 형식에는 다음과 같은 세 가지가 있습니다.
+</p>
+<ul>
+    <li>
+        <a href="#Batch">일괄 액세스</a>: <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ko">ContentProviderOperation</a></code>
+ 클래스에 있는 메서드로 일괄 액세스 호출을 생성하고
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">ContentResolver.applyBatch()</a></code>로 이를 적용할 수 있습니다.
+    </li>
+    <li>
+        비동기식 쿼리: 쿼리는 별도의 스레드에서 수행해야 합니다. 이 작업을 수행하는 한 가지 방법으로 
+<code><a href="https://developer.android.com/reference/android/content/CursorLoader.html?hl=ko">CursorLoader</a></code> 객체를 사용하는 것이 있습니다. 이 사용 방법은 
+<a href="../../components/loaders232e.html?hl=ko">로더</a> 가이드에 있는 예시에서 설명합니다.
+
+    </li>
+    <li>
+        <a href="#Intents">인텐트를 통한 데이터 액세스</a>: 
+인텐트를 제공자에 직접 보낼 수는 없지만, 인텐트를 제공자의 애플리케이션에 보낼 수는 있습니다.
+보통은 이것이 제공자의 데이터를 수정하기에 가장 좋습니다.
+    </li>
+</ul>
+<p>
+    일괄 액세스와 인텐트를 통한 수정은 다음 섹션에서 설명되어 있습니다.
+</p>
+<h3 id="Batch">일괄 액세스</h3>
+<p>
+    제공자에 일괄 액세스하면 많은 수의 행을 삽입할 때, 같은 메서드 호출 내에서 여러 개의 테이블에 여러 행을 삽입할 때 
+또는 전반적으로, 프로세스 경계를 가로질러 일련의 작업을 수행하는 경우(원자성 작업) 유용합니다.
+
+</p>
+<p>
+    "일괄 모드"로 제공자에 액세스하려면
+<code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ko">ContentProviderOperation</a></code> 객체의 배열을 생성한 다음 이를 콘텐츠 제공자에게 
+<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">ContentResolver.applyBatch()</a></code>로
+ 발송하면 됩니다. 이
+메서드에는 특정 콘텐츠 URI가 아니라 콘텐츠 제공자의 <em>권한</em>을 전달합니다.
+    이렇게 하면 배열 내의 각 <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ko">ContentProviderOperation</a></code> 객체가
+서로 다른 테이블에 대해 작용하도록 할 수 있습니다. <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">ContentResolver.applyBatch()</a></code>를 호출하면 일련의 결과를 반환합니다.
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ko">ContactsContract.RawContacts</a></code> 계약 클래스의 설명에
+ 일괄 삽입을 설명하는 스니펫이 포함되어 있습니다. 
+<a href="https://developer.android.com/resources/samples/ContactManager/index.html?hl=ko">Contact Manager</a>
+샘플 애플리케이션에는 <code>ContactAdder.java</code>
+소스 파일의 일괄 액세스 예시가 포함되어 있습니다.
+</p>
+<div class="sidebox-wrapper">
+<div class="sidebox">
+<h2>도우미 앱을 사용한 데이터 표시</h2>
+<p>
+    애플리케이션에 액세스 권한이 <em>있더라도</em> 
+다른 애플리케이션에 데이터를 표시할 인텐트를 사용하고자 할 수 있습니다. 예를 들어 캘린더 애플리케이션은 
+특정 날짜나 이벤트를 표시하는 <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ko#ACTION_VIEW">ACTION_VIEW</a></code> 인텐트를 허용합니다.
+    따라서 UI를 직접 생성하지 않고도 캘린더 정보를 표시할 수 있습니다.
+    이 기능에 대한 자세한 정보는 
+<a href="calendar-provider232e.html?hl=ko">캘린더 제공자</a> 가이드를 참고하세요.
+</p>
+<p>
+    인텐트를 보낼 목적지인 애플리케이션은 제공자와 연관된 애플리케이션이 아니어도 됩니다.
+ 예를 들어 연락처 제공자에서 연락처를 검색한 다음, 해당 연락처의 이미지에 대한 콘텐츠 URI가 들어 있는 
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ko#ACTION_VIEW">ACTION_VIEW</a></code> 인텐트를 
+이미지 뷰어로 보낼 수 있습니다.
+</p>
+</div>
+</div>
+<h3 id="Intents">인텐트를 통한 데이터 액세스</h3>
+<p>
+    인텐트는 콘텐츠 제공자에 간접 액세스를 제공할 수 있습니다. 애플리케이션에 액세스 권한이 없는데도 
+사용자에게 제공자 내의 데이터에 액세스 권한을 허가하려면, 권한을 가지고 있는 애플리케이션에서 결과 인텐트를 다시 가져오거나 
+권한이 있는 애플리케이션을 활성화한 다음 사용자에게 그 애플리케이션에서 작업하도록 하면 됩니다.
+
+</p>
+<h4>임시 권한으로 액세스하기</h4>
+<p>
+    적절한 액세스 권한이 없더라도 콘텐츠 제공자 내의 데이터에 액세스할 수는 있습니다. 
+권한을 가지고 있는 애플리케이션에 인텐트를 보내 "URI" 권한이 들어 있는 결과 인텐트를 돌려받으면 됩니다.
+
+    이들 권한은 특정 콘텐츠 URI에 대한 권한으로, 이를 수신하는 액티비티가 완료될 때까지 유지됩니다.
+ 영구 권한을 가지고 있는 애플리케이션은 결과 인텐트에 다음과 같이 플래그를 설정하여 임시 권한을 허가합니다.
+
+</p>
+<ul>
+    <li>
+        <strong>읽기 권한:</strong>
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ko#FLAG_GRANT_READ_URI_PERMISSION">FLAG_GRANT_READ_URI_PERMISSION</a></code>
+    </li>
+    <li>
+        <strong>쓰기 권한:</strong>
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ko#FLAG_GRANT_WRITE_URI_PERMISSION">FLAG_GRANT_WRITE_URI_PERMISSION</a></code>
+    </li>
+</ul>
+<p class="note">
+    <strong>참고:</strong> 이들 플래그는 콘텐츠 URI에 권한이 포함된 제공자에게 일반적인 읽기 또는 쓰기 
+권한을 부여하지 않습니다. 이 액세스는 URI 자체에만 해당됩니다.
+</p>
+<p>
+    제공자는 자신의 매니페스트 내의 콘텐츠 URI에 대한 URI 권한을 정의합니다. 이때
+<code><a href="../manifest/provider-element232e.html?hl=ko">&lt;provider&gt;</a></code>
+요소의
+<code><a href="../manifest/provider-element232e.html?hl=ko#gprmsn">android:grantUriPermission</a></code>
+속성을 사용하며,
+<code><a href="../manifest/provider-element232e.html?hl=ko">&lt;provider&gt;</a></code>
+요소의 
+<code><a href="../manifest/grant-uri-permission-element232e.html?hl=ko">&lt;grant-uri-permission&gt;</a></code>
+하위 요소도 사용합니다. 
+URI 권한 메커니즘은 "URI 권한" 섹션의 <a href="https://developer.android.com/training/articles/security-tips.html?hl=ko">보안 및 권한</a> 가이드에
+자세히 설명되어 있습니다.
+</p>
+<p>
+    예를 들어, <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#READ_CONTACTS">READ_CONTACTS</a></code> 권한이 없더라도
+연락처 제공자 내의 연락처에 대한 데이터를 검색할 수 있습니다. 
+이 작업을 하면 좋은 예로, 연락처에 기재된 사람의 생일에 전자 축하 카드를 보내주는 애플리케이션을 들 수 있습니다. 
+<code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ko#READ_CONTACTS">READ_CONTACTS</a></code>를 요청하면 
+사용자의 연락처 전체와 해당 정보 일체에 대한 액세스를 부여하므로, 그 대신 애플리케이션에서 어느 연락처를 사용할지 사용자가 직접 제어하도록 해주는 편이 낫습니다.
+ 이렇게 하려면 다음 절차를 사용합니다.
+</p>
+<ol>
+    <li>
+        애플리케이션이<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ko#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code> 메서드를 사용해서
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ko#ACTION_PICK">ACTION_PICK</a></code> 작업과 "contacts" MIME 유형
+<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ko#CONTENT_ITEM_TYPE">CONTENT_ITEM_TYPE</a></code>이 들어 있는 인텐트를 보냅니다.
+
+    </li>
+    <li>
+        이 인텐트는 피플 앱의 "선택" 액티비티에 대한 인텐트 필터와 일치하기 때문에, 이 액티비티가 포그라운드로 나옵니다.
+
+    </li>
+    <li>
+        선택 액티비티에서 사용자가 업데이트할 연락처를 선택합니다.
+ 이렇게 되면 선택 액티비티가 
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ko#setResult(int)">setResult(resultcode, intent)</a></code>를
+호출하여 애플리케이션에 돌려줄 인텐트를 설정합니다. 
+이 인텐트에 사용자가 선택한 연락처의 콘텐츠 URI와 "엑스트라" 플래그 
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ko#FLAG_GRANT_READ_URI_PERMISSION">FLAG_GRANT_READ_URI_PERMISSION</a></code>이 들어 있습니다. 이들 플래그는 앱에 URI
+ 권한을 부여하여
+ 콘텐츠 URI가 가리키는 연락처의 데이터를 읽을 수 있도록 합니다. 그런 다음 선택 액티비티는 <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ko#finish()">finish()</a></code>를 호출하여 
+애플리케이션에 제어를 반환합니다.
+    </li>
+    <li>
+        액티비티가 포그라운드로 돌아오고, 시스템이 액티비티의
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ko#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code>
+ 메서드를 호출합니다. 이 메서드가 피플 앱의 선택 액티비티가 생성한 결과 인텐트를 수신합니다.
+
+    </li>
+    <li>
+        결과 인텐트로부터 받은 콘텐츠 URI를 사용하면 연락처 제공자에서 연락처의 데이터를 읽을 수 있습니다.
+이것은 매니페스트에서 제공자로의 영구 읽기 권한 를 요청하지 않았어도 적용됩니다.
+ 그러면 연락처의 생일 정보나 당사자의 이메일 주소를 가져와 전자 축하 카드를 보낼 수 있게 됩니다.
+
+    </li>
+</ol>
+<h4>다른 애플리케이션 사용</h4>
+<p>
+    개발자에게 액세스 권한이 없는 데이터를 사용자가 수정할 수 있도록 허용하는 간단한 방법은 
+해당 권한을 가지고 있는 애플리케이션을 활성화한 다음 사용자에게 그곳에서 작업하도록 해주는 것입니다.
+</p>
+<p>
+    예를 들어 캘린더 애플리케이션은 애플리케이션의 삽입 UI를 활성화하는
+ <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ko#ACTION_INSERT">ACTION_INSERT</a></code> 인텐트를 허용합니다.
+ 이 인텐트에 "엑스트라" 데이터를 전달할 수 있습니다. 이 데이터는 애플리케이션이 UI를 미리 채우는 데 사용됩니다.
+ 반복적인 이벤트의 구문은 복잡하므로 캘린더 제공자에 이벤트를 삽입하는 좋은 방법은
+<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ko#ACTION_INSERT">ACTION_INSERT</a></code>로 캘린더 앱을 활성화하고 사용자에게 그곳에서 이벤트를
+삽입하게 하는 것입니다.
+</p>
+<!-- Contract Classes -->
+<h2 id="ContractClasses">계약 클래스</h2>
+<p>
+    계약 클래스는 애플리케이션이 콘텐츠 URI, 열 이름, 인텐트 작업 및 콘텐츠 제공자의 다른 기능과
+작업할 수 있게 도와주는 상수를 정의합니다. 계약 클래스는 제공자와 함께 자동으로 포함되지 않습니다. 
+해당 제공자의 개발자가 이를 정의한 다음 다른 개발자가 사용할 수 있도록 해야 합니다.
+ Android 플랫폼 내에 포함된 제공자는 대부분 패키지 
+<code><a href="https://developer.android.com/reference/android/provider/package-summary.html?hl=ko">android.provider</a></code> 안에 상응하는 계약 클래스를 가지고 있습니다.
+</p>
+<p>
+    예를 들어, 사용자 사전 제공자에는 콘텐츠 URI와 열 이름 상수가 들어 있는
+<code><a href="https://developer.android.com/reference/android/provider/UserDictionary.html?hl=ko">UserDictionary</a></code> 계약 클래스가 있습니다. 
+"단어" 테이블에 대한 콘텐츠 URI는 상수
+<code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html?hl=ko#CONTENT_URI">UserDictionary.Words.CONTENT_URI</a></code>에 정의됩니다.
+    <code><a href="https://developer.android.com/reference/android/provider/UserDictionary.Words.html?hl=ko">UserDictionary.Words</a></code> 클래스에도 
+열 이름 상수가 들어 있으며, 이는 이 가이드의 예시 스니펫에서 사용됩니다. 
+예를 들어 쿼리 프로젝션은 다음과 같이 정의될 수 있습니다.
+</p>
+<pre>
+String[] mProjection =
+{
+    UserDictionary.Words._ID,
+    UserDictionary.Words.WORD,
+    UserDictionary.Words.LOCALE
+};
+</pre>
+<p>
+    또 다른 계약 클래스는 연락처 제공자의 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.html?hl=ko">ContactsContract</a></code>입니다.
+    이 클래스에 대한 참조 문서에는 예시 스니펫이 포함되어 있습니다. 
+이것의 서브클래스 중 하나인 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Intents.Insert.html?hl=ko">ContactsContract.Intents.Insert</a></code>는
+ 인텐트와 인텐트 데이터의 상수가 들어 있는 계약 클래스입니다.
+</p>
+
+
+<!-- MIME Type Reference -->
+<h2 id="MIMETypeReference">MIME 유형 참조</h2>
+<p>
+    콘텐츠 제공자는 표준 MIME 미디어 유형이나 사용자 지정 MIME 유형 문자열, 또는 그 두 가지를 모두 반환할 수 있습니다.
+</p>
+<p>
+    MIME 유형의 형식은 다음과 같습니다.
+</p>
+<pre>
+<em>type</em>/<em>subtype</em>
+</pre>
+<p>
+    예를 들어, 잘 알려진 MIME 유형 <code>text/html</code>에는 <code>text</code> 유형과
+<code>html</code> 하위 유형이 있습니다. 제공자가 URI에 대해 이 유형을 반환하면,
+해당 URI를 사용하는 쿼리가 HTML 태그가 들어 있는 텍스트를 반환할 것이라는 뜻입니다.
+</p>
+<p>
+    사용자 지정 MIME 유형 문자열은 "공급업체별" MIME 유형이라고도 불리며 
+이쪽의 <em>유형</em>과 <em>하위 유형</em> 값이 더 복잡합니다. <em>유형</em> 값은 경우에 따라 항상 다음과 같습니다.
+</p>
+<pre>
+vnd.android.cursor.<strong>dir</strong>
+</pre>
+<p>
+    (여러 행의 경우)
+</p>
+<pre>
+vnd.android.cursor.<strong>item</strong>
+</pre>
+<p>
+    (하나의 행의 경우).
+</p>
+<p>
+    <em>하위 유형</em>은 제공자별로 다릅니다. Android 내장 제공자는 보통 단순한 하위 유형을 가지고 있습니다.
+ 예를 들어 주소록 애플리케이션이 전화 번호에 대한 행을 생성하는 경우,
+ 애플리케이션은 해당 행에 다음과 같은 MIME 유형을 설정합니다.
+</p>
+<pre>
+vnd.android.cursor.item/phone_v2
+</pre>
+<p>
+    하위 유형 값이 단순히 <code>phone_v2</code>인 것을 눈여겨 보세요.
+</p>
+<p>
+    다른 제공자 개발자도 해당 제공자의 권한과 테이블 이름을 근거로 나름의 하위 유형 패턴을 만들 수 있습니다.
+ 예를 들어 기차 시간표가 들어 있는 제공자가 있다고 생각해 보세요.
+    제공자의 권한은 <code>com.example.trains</code>이고 이 안에 테이블
+Line1, Line2, Line3이 들어 있습니다. 콘텐츠 URI에 대한 응답으로
+</p>
+<p>
+<pre>
+content://com.example.trains/Line1
+</pre>
+<p>
+    제공자는 테이블 Line1에 대해 다음과 같은 MIME 유형을 반환합니다.
+</p>
+<pre>
+vnd.android.cursor.<strong>dir</strong>/vnd.example.line1
+</pre>
+<p>
+     콘텐츠 URI에 대한 응답으로
+</p>
+<pre>
+content://com.example.trains/Line2/5
+</pre>
+<p>
+    테이블 Line2의 행 5에 대해 제공자가 반환하는 MIME 유형은 다음과 같습니다.
+</p>
+<pre>
+vnd.android.cursor.<strong>item</strong>/vnd.example.line2
+</pre>
+<p>
+    대부분의 콘텐츠 제공자는 자신이 사용하는 MIME 유형에 대한 계약 클래스 상수를 정의합니다. 
+예를 들어, 연락처 제공자 계약 클래스 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ko">ContactsContract.RawContacts</a></code>는
+단일 연락처 행의 MIME 유행에 대한
+ 상수 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ko#CONTENT_ITEM_TYPE">CONTENT_ITEM_TYPE</a></code>을
+정의합니다.
+</p>
+<p>
+    한 행에 대한 콘텐츠 URI는 
+<a href="#ContentURIs">콘텐츠 URI</a> 섹션에 설명되어 있습니다.
+</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=ko" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="블로그" target="_blank">블로그</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=ko" title="지원">지원</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=ko" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=ko" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=ko" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=ko" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="lH5LppAUqR1UJlU6odRiXSnRldshoA-Kp3QMqsmyY406MTQ5NzUxNjQ4MTU5MDA4MA" />
+      <input type="hidden" name="next" value="content-provider-basics.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+             selected="selected" >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">이메일 주소</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unifiedee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../../android_metadata_enee8c.js?hl=ko?v=2017061508" defer></script>
+  
+  <script src="../../../reference/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../../reference/gms_listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/listsee8c.js?hl=ko?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=ko"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_ko.js?hl=ko?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/content-provider-basics.html?hl=ko by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:08:36 GMT -->
+</html>

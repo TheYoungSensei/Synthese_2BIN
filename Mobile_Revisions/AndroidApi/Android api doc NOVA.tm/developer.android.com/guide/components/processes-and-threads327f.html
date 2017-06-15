@@ -1,0 +1,1336 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<!-- Mirrored from developer.android.com/guide/components/processes-and-threads.html?hl=vi by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:05:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="dDenyvZl42KPZFQBjpOj_MLa_CGuSlJz2GCRdTWiaNg6MTQ5NzUxNjIxMzEzODc0MA" />
+
+  
+    <link rel="canonical" href="processes-and-threads327f.html?hl=vi">
+  
+
+  
+    <link rel="alternate" href="processes-and-threads7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="processes-and-threads.html" hreflang="en">
+  
+    <link rel="alternate" href="processes-and-threadsf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="processes-and-threads9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="processes-and-threads327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="processes-and-threadsde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="processes-and-threads0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="processes-and-threads232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="processes-and-threads0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="processes-and-threads9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="processes-and-threads6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/components/processes-and-threads.html?hl=pt-br" hreflang="pt-br-cn">
+  
+
+  <link rel="alternate" href="processes-and-threads.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../_static/f304fc21fa/images/android/favicon327f.png?hl=vi">
+
+<link rel="apple-touch-icon" href="../../_static/f304fc21fa/images/android/touchicon-180327f.png?hl=vi">
+
+
+<title>
+
+  Tiến trình và Luồng | Android Developers
+
+</title>
+
+  <meta name="description" content="Khi một thành phần ứng dụng bắt đầu và ứng dụng không có bất kỳ thành phần nào khác đang chạy, hệ thống Android sẽ khởi động một tiến trình Linux mới cho ứng dụng bằng một luồng thực thi đơn lẻ. Theo mặc định, tất cả thành phần của cùng ứng dụng sẽ chạy…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../static/css/default0c0e.css?hl=vi?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../_static/f304fc21fa/js/android_3p-bundle327f.js?hl=vi" type="text/javascript"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_closure_android__vi327f.js?hl=vi"></script>
+<script src="../../_static/f304fc21fa/js/script_foot_android327f.js?hl=vi"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../static/js/docs0c0e.js?hl=vi?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;vi&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;vi&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;vi&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;vi&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "vi", "served": "vi"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=vi">
+          <img class="dac-header-logo-image" src="../../static/images/android_logo327f.png?hl=vi"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=vi"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=vi"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=vi"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=vi"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=vi" width="18" height="19" alt="Bảng điều khiển Play">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Tìm kiếm">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Quay lại</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../index327f.html?hl=vi" >Introduction</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="fundamentals327f.html?hl=vi" >App Fundamentals</a></li><li><a href="../practices/compatibility327f.html?hl=vi" >Device Compatibility</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/permissions/index327f.html?hl=vi" >System Permissions</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/permissions/requesting327f.html?hl=vi" >Requesting Permissions</a></li><li><a href="../topics/permissions/defining327f.html?hl=vi" >Defining Permissions</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../platform/index327f.html?hl=vi" >Platform Architecture</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../platform/j8-jack327f.html?hl=vi"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use Java 8 Language Features</a></li><li><a href="../practices/verifying-apps-art327f.html?hl=vi" >Verifying App Behavior on the Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index327f.html?hl=vi" >App Components</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="intents-filters327f.html?hl=vi" >Intents and Intent Filters</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="intents-common327f.html?hl=vi" >Common Intents</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="activities/index327f.html?hl=vi" >Activities</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="activities/intro-activities327f.html?hl=vi" >Introduction to Activities</a></li><li><a href="activities/activity-lifecycle327f.html?hl=vi" >The Activity Lifecycle</a></li><li><a href="activities/state-changes327f.html?hl=vi" >Activity State Changes</a></li><li><a href="activities/tasks-and-back-stack327f.html?hl=vi" >Tasks and Back Stack</a></li><li><a href="activities/process-lifecycle327f.html?hl=vi" >Processes and Application Lifecycle</a></li><li><a href="activities/parcelables-and-bundles327f.html?hl=vi" >Parcelables and Bundles</a></li><li><a href="activities/recents327f.html?hl=vi" >Recents Screen</a></li></ul></li><li><a href="fragments327f.html?hl=vi" >Fragments</a></li><li><a href="loaders327f.html?hl=vi" >Loaders</a></li><li class="nav-section"><div class="nav-section-header"><a href="services327f.html?hl=vi" >Services</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="bound-services327f.html?hl=vi" >Bound Services</a></li><li><a href="aidl327f.html?hl=vi" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/providers/content-providers327f.html?hl=vi" >Content Providers</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/providers/content-provider-basics327f.html?hl=vi" >Content Provider Basics</a></li><li><a href="../topics/providers/content-provider-creating327f.html?hl=vi" >Creating a Content Provider</a></li><li><a href="../topics/providers/calendar-provider327f.html?hl=vi" >Calendar Provider</a></li><li><a href="../topics/providers/contacts-provider327f.html?hl=vi" >Contacts Provider</a></li><li><a href="../topics/providers/document-provider327f.html?hl=vi" >Open files using Storage Access Framework</a></li><li><a href="../topics/providers/create-document-provider327f.html?hl=vi" >Create a Custom Document Provider</a></li></ul></li><li><a href="broadcasts327f.html?hl=vi" >Broadcasts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/appwidgets/index327f.html?hl=vi" >App Widgets</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/appwidgets/host327f.html?hl=vi" >App Widget Host</a></li></ul></li><li><a href="processes-and-threads327f.html?hl=vi" >Processes and Threads</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/index327f.html?hl=vi" >App Resources</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/overview327f.html?hl=vi" >Overview</a></li><li><a href="../topics/resources/providing-resources327f.html?hl=vi" >Providing Resources</a></li><li><a href="../topics/resources/accessing-resources327f.html?hl=vi" >Accessing Resources</a></li><li><a href="../topics/resources/runtime-changes327f.html?hl=vi" >Handling Runtime Changes</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/localization327f.html?hl=vi" >Localization</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/icu4j-framework327f.html?hl=vi" >ICU4J Android Framework APIs</a></li><li><a href="../topics/resources/multilingual-support327f.html?hl=vi" >Language and Locale</a></li></ul></li><li><a href="../topics/resources/complex-xml-resources327f.html?hl=vi" >Complex XML Resources</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/resources/available-resources327f.html?hl=vi" >Resource Types</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/resources/animation-resource327f.html?hl=vi" >Animation</a></li><li><a href="../topics/resources/color-list-resource327f.html?hl=vi" >Color State List</a></li><li><a href="../topics/resources/drawable-resource327f.html?hl=vi" >Drawable</a></li><li><a href="../topics/resources/layout-resource327f.html?hl=vi" >Layout</a></li><li><a href="../topics/resources/menu-resource327f.html?hl=vi" >Menu</a></li><li><a href="../topics/resources/string-resource327f.html?hl=vi" >String</a></li><li><a href="../topics/resources/style-resource327f.html?hl=vi" >Style</a></li><li><a href="../topics/resources/more-resources327f.html?hl=vi" >More Types</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/manifest/manifest-intro327f.html?hl=vi" >App Manifest</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/manifest/action-element327f.html?hl=vi" >&lt;action&gt;</a></li><li><a href="../topics/manifest/activity-element327f.html?hl=vi" >&lt;activity&gt;</a></li><li><a href="../topics/manifest/activity-alias-element327f.html?hl=vi" >&lt;activity-alias&gt;</a></li><li><a href="../topics/manifest/application-element327f.html?hl=vi" >&lt;application&gt;</a></li><li><a href="../topics/manifest/category-element327f.html?hl=vi" >&lt;category&gt;</a></li><li><a href="../topics/manifest/compatible-screens-element327f.html?hl=vi" >&lt;compatible-screens&gt;</a></li><li><a href="../topics/manifest/data-element327f.html?hl=vi" >&lt;data&gt;</a></li><li><a href="../topics/manifest/grant-uri-permission-element327f.html?hl=vi" >&lt;grant-uri-permission&gt;</a></li><li><a href="../topics/manifest/instrumentation-element327f.html?hl=vi" >&lt;instrumentation&gt;</a></li><li><a href="../topics/manifest/intent-filter-element327f.html?hl=vi" >&lt;intent-filter&gt;</a></li><li><a href="../topics/manifest/manifest-element327f.html?hl=vi" >&lt;manifest&gt;</a></li><li><a href="../topics/manifest/meta-data-element327f.html?hl=vi" >&lt;meta-data&gt;</a></li><li><a href="../topics/manifest/path-permission-element327f.html?hl=vi" >&lt;path-permission&gt;</a></li><li><a href="../topics/manifest/permission-element327f.html?hl=vi" >&lt;permission&gt;</a></li><li><a href="../topics/manifest/permission-group-element327f.html?hl=vi" >&lt;permission-group&gt;</a></li><li><a href="../topics/manifest/permission-tree-element327f.html?hl=vi" >&lt;permission-tree&gt;</a></li><li><a href="../topics/manifest/provider-element327f.html?hl=vi" >&lt;provider&gt;</a></li><li><a href="../topics/manifest/receiver-element327f.html?hl=vi" >&lt;receiver&gt;</a></li><li><a href="../topics/manifest/service-element327f.html?hl=vi" >&lt;service&gt;</a></li><li><a href="../topics/manifest/supports-gl-texture-element327f.html?hl=vi" >&lt;supports-gl-texture&gt;</a></li><li><a href="../topics/manifest/supports-screens-element327f.html?hl=vi" >&lt;supports-screens&gt;</a></li><li><a href="../topics/manifest/uses-configuration-element327f.html?hl=vi" >&lt;uses-configuration&gt;</a></li><li><a href="../topics/manifest/uses-feature-element327f.html?hl=vi" >&lt;uses-feature&gt;</a></li><li><a href="../topics/manifest/uses-library-element327f.html?hl=vi" >&lt;uses-library&gt;</a></li><li><a href="../topics/manifest/uses-permission-element327f.html?hl=vi" >&lt;uses-permission&gt;</a></li><li><a href="../topics/manifest/uses-permission-sdk-23-element327f.html?hl=vi" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../topics/manifest/uses-sdk-element327f.html?hl=vi" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/index327f.html?hl=vi" >User Interface</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/overview327f.html?hl=vi" >Overview</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/declaring-layout327f.html?hl=vi" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/layout/linear327f.html?hl=vi" >Linear Layout</a></li><li><a href="../topics/ui/layout/relative327f.html?hl=vi" >Relative Layout</a></li><li><a href="../topics/ui/layout/recyclerview327f.html?hl=vi" >Recycler View</a></li><li><a href="../topics/ui/layout/listview327f.html?hl=vi" >List View</a></li><li><a href="../topics/ui/layout/gridview327f.html?hl=vi" >Grid View</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/controls327f.html?hl=vi" >Input Controls</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/controls/button327f.html?hl=vi" >Buttons</a></li><li><a href="../topics/ui/controls/checkbox327f.html?hl=vi" >Checkboxes</a></li><li><a href="../topics/ui/controls/radiobutton327f.html?hl=vi" >Radio Buttons</a></li><li><a href="../topics/ui/controls/togglebutton327f.html?hl=vi" >Toggle Buttons</a></li><li><a href="../topics/ui/controls/spinner327f.html?hl=vi" >Spinners</a></li><li><a href="../topics/ui/controls/pickers327f.html?hl=vi" >Pickers</a></li></ul></li><li><a href="../topics/ui/ui-events327f.html?hl=vi" >Input Events</a></li><li><a href="../topics/ui/menus327f.html?hl=vi" >Menus</a></li><li><a href="../topics/ui/settings327f.html?hl=vi" >Settings</a></li><li><a href="../topics/ui/dialogs327f.html?hl=vi" >Dialogs</a></li><li><a href="../topics/ui/notifiers/notifications327f.html?hl=vi" >Notifications</a></li><li><a href="../topics/ui/notifiers/toasts327f.html?hl=vi" >Toasts</a></li><li><a href="../topics/ui/shortcuts327f.html?hl=vi" >App Shortcuts</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/search/index327f.html?hl=vi" >Search</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/search/search-dialog327f.html?hl=vi" >Creating a Search Interface</a></li><li><a href="../topics/search/adding-recent-query-suggestions327f.html?hl=vi" >Adding Recent Query Suggestions</a></li><li><a href="../topics/search/adding-custom-suggestions327f.html?hl=vi" >Adding Custom Suggestions</a></li><li><a href="../topics/search/searchable-config327f.html?hl=vi" >Searchable Configuration</a></li></ul></li><li><a href="../topics/ui/multi-window327f.html?hl=vi" >Multi-Window Support</a></li><li><a href="../topics/ui/drag-drop327f.html?hl=vi" >Drag and Drop</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/ui/accessibility/index327f.html?hl=vi" >Accessibility</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/ui/accessibility/apps327f.html?hl=vi" >Making Apps More Accessible</a></li><li><a href="../topics/ui/accessibility/checklist327f.html?hl=vi" >Accessibility Developer Checklist</a></li><li><a href="../topics/ui/accessibility/node-tree-debugging327f.html?hl=vi" >Using Node Tree Debugging</a></li><li><a href="../topics/ui/accessibility/services327f.html?hl=vi" >Building Accessibility Services</a></li><li><a href="../topics/ui/accessibility/custom-views327f.html?hl=vi" >Building Accessible Custom Views</a></li></ul></li><li><a href="../topics/ui/themes327f.html?hl=vi" >Styles and Themes</a></li><li><a href="../topics/ui/custom-components327f.html?hl=vi" >Custom Components</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/index327f.html?hl=vi" >Animation and Graphics</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/overview327f.html?hl=vi" >Overview</a></li><li><a href="../topics/graphics/prop-animation327f.html?hl=vi" >Property Animation</a></li><li><a href="../topics/graphics/view-animation327f.html?hl=vi" >View Animation</a></li><li><a href="../topics/graphics/drawable-animation327f.html?hl=vi" >Drawable Animation</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/graphics/2d-graphics327f.html?hl=vi" >Canvas and Drawables</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/graphics/vector-drawable-resources327f.html?hl=vi" >Vector Drawable</a></li></ul></li><li><a href="../topics/graphics/opengl327f.html?hl=vi" >OpenGL ES</a></li><li><a href="../topics/graphics/hardware-accel327f.html?hl=vi" >Hardware Acceleration</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/index327f.html?hl=vi" >Computation</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/compute327f.html?hl=vi" >RenderScript</a></li><li><a href="../topics/renderscript/advanced327f.html?hl=vi" >Advanced RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/renderscript/reference/overview327f.html?hl=vi" >Runtime API Reference</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/renderscript/reference/rs_value_types327f.html?hl=vi" >Numerical Types</a></li><li><a href="../topics/renderscript/reference/rs_object_types327f.html?hl=vi" >Object Types</a></li><li><a href="../topics/renderscript/reference/rs_convert327f.html?hl=vi" >Conversion Functions</a></li><li><a href="../topics/renderscript/reference/rs_math327f.html?hl=vi" >Mathematical Constants and Functions</a></li><li><a href="../topics/renderscript/reference/rs_vector_math327f.html?hl=vi" >Vector Math Functions</a></li><li><a href="../topics/renderscript/reference/rs_matrix327f.html?hl=vi" >Matrix Functions</a></li><li><a href="../topics/renderscript/reference/rs_quaternion327f.html?hl=vi" >Quaternion Functions</a></li><li><a href="../topics/renderscript/reference/rs_atomic327f.html?hl=vi" >Atomic Update Functions</a></li><li><a href="../topics/renderscript/reference/rs_time327f.html?hl=vi" >Time Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_allocation_data327f.html?hl=vi" >Allocation Data Access Functions</a></li><li><a href="../topics/renderscript/reference/rs_object_info327f.html?hl=vi" >Object Characteristics Functions</a></li><li><a href="../topics/renderscript/reference/rs_for_each327f.html?hl=vi" >Kernel Invocation Functions and Types</a></li><li><a href="../topics/renderscript/reference/rs_io327f.html?hl=vi" >Input/Output Functions</a></li><li><a href="../topics/renderscript/reference/rs_debug327f.html?hl=vi" >Debugging Functions</a></li><li><a href="../topics/renderscript/reference/rs_graphics327f.html?hl=vi" >Graphics Functions and Types</a></li><li><a href="../topics/renderscript/reference/index327f.html?hl=vi" >Index</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/index327f.html?hl=vi" >Media Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/media-apps-overview327f.html?hl=vi" >Media Apps Overview</a></li><li><a href="../topics/media-apps/working-with-a-media-session327f.html?hl=vi" >Working with a Media Session</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/audio-app/building-an-audio-app327f.html?hl=vi" >Building an Audio App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/audio-app/building-a-mediabrowserservice327f.html?hl=vi" >Building a Media Browser Service</a></li><li><a href="../topics/media-apps/audio-app/building-a-mediabrowser-client327f.html?hl=vi" >Building a Media Browser Client</a></li><li><a href="../topics/media-apps/audio-app/mediasession-callbacks327f.html?hl=vi" >Media Session Callbacks</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media-apps/video-app/building-a-video-app327f.html?hl=vi" >Building a Video App</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media-apps/video-app/building-a-video-player-activity327f.html?hl=vi" >Building a Video Player Activity</a></li><li><a href="../topics/media-apps/video-app/mediasession-callbacks327f.html?hl=vi" >Media Session Callbacks</a></li></ul></li><li><a href="../topics/media-apps/mediabuttons327f.html?hl=vi" >Responding to Media Buttons</a></li><li><a href="../topics/media-apps/volume-and-earphones327f.html?hl=vi" >Handling Changes in Audio Output</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/index327f.html?hl=vi" >Media and Camera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/media-formats327f.html?hl=vi" >Supported Media Formats</a></li><li><a href="../topics/media/mediaplayer327f.html?hl=vi" >MediaPlayer</a></li><li><a href="../topics/media/mediarecorder327f.html?hl=vi" >MediaRecorder</a></li><li><a href="../topics/media/exoplayer327f.html?hl=vi" >ExoPlayer</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/media/media-routing327f.html?hl=vi" >Media Routing</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/media/mediarouter327f.html?hl=vi" >MediaRouter API</a></li><li><a href="../topics/media/mediarouteprovider327f.html?hl=vi" >MediaRouteProvider API</a></li></ul></li><li><a href="../topics/media/camera327f.html?hl=vi" >Camera API</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/sensors/index327f.html?hl=vi" >Location and Sensors</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/location/index327f.html?hl=vi" >Location and Maps</a></li><li><a href="../topics/location/strategies327f.html?hl=vi" >Location Strategies</a></li><li><a href="../topics/sensors/sensors_overview327f.html?hl=vi" >Sensors Overview</a></li><li><a href="../topics/sensors/sensors_motion327f.html?hl=vi" >Motion Sensors</a></li><li><a href="../topics/sensors/sensors_position327f.html?hl=vi" >Position Sensors</a></li><li><a href="../topics/sensors/sensors_environment327f.html?hl=vi" >Environment Sensors</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/index327f.html?hl=vi" >Connectivity</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/bluetooth327f.html?hl=vi" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/bluetooth-le327f.html?hl=vi" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/nfc/index327f.html?hl=vi" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/nfc/nfc327f.html?hl=vi" >NFC Basics</a></li><li><a href="../topics/connectivity/nfc/advanced-nfc327f.html?hl=vi" >Advanced NFC</a></li><li><a href="../topics/connectivity/nfc/hce327f.html?hl=vi" >Host-based Card Emulation</a></li></ul></li><li><a href="../topics/connectivity/wifip2p327f.html?hl=vi" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/connectivity/usb/index327f.html?hl=vi" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/connectivity/usb/accessory327f.html?hl=vi" >Accessory</a></li><li><a href="../topics/connectivity/usb/host327f.html?hl=vi" >Host</a></li></ul></li><li><a href="../topics/connectivity/sip327f.html?hl=vi" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/index327f.html?hl=vi" >Text and Input</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/copy-paste327f.html?hl=vi" >Copy and Paste</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/text/creating-input-method327f.html?hl=vi" >Creating an IME</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/text/image-keyboard327f.html?hl=vi" >Image Keyboard</a></li></ul></li><li><a href="../topics/text/spell-checker-framework327f.html?hl=vi" >Spelling Checker</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/index327f.html?hl=vi" >Data Storage</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/data-storage327f.html?hl=vi" >Storage Options</a></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/data/backup327f.html?hl=vi" >Data Backup</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/data/autobackup327f.html?hl=vi" >Auto Backup</a></li><li><a href="../topics/data/keyvaluebackup327f.html?hl=vi" >Key/Value Backup</a></li><li><a href="../topics/data/testingbackup327f.html?hl=vi" >Testing Backup and Restore</a></li></ul></li><li><a href="../topics/data/install-location327f.html?hl=vi" >App Install Location</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../topics/admin/index327f.html?hl=vi" >Administration</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../topics/admin/device-admin327f.html?hl=vi" >Device Policies</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../webapps/index327f.html?hl=vi" >Web Apps</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../webapps/targeting327f.html?hl=vi" >Supporting Different Screens in Web Apps</a></li><li><a href="../webapps/webview327f.html?hl=vi" >Building Web Apps in WebView</a></li><li><a href="../webapps/migrating327f.html?hl=vi" >Migrating to WebView in Android 4.4</a></li><li><a href="../webapps/debugging327f.html?hl=vi" >Debugging Web Apps</a></li><li><a href="../webapps/best-practices327f.html?hl=vi" >Best Practices for Web Apps</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../practices/index327f.html?hl=vi"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Best Practices</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../practices/screens_support327f.html?hl=vi" >Supporting Multiple Screens</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../practices/screens-distribution327f.html?hl=vi" >Distributing to Specific Screens</a></li><li><a href="../practices/screen-compat-mode327f.html?hl=vi" >Screen Compatibility Mode</a></li></ul></li><li><a href="../practices/app-design/seamlessness327f.html?hl=vi" >Designing for Seamlessness</a></li><li><a href="../practices/tablets-and-handsets327f.html?hl=vi" >Supporting Tablets and Handsets</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=vi">Trang chủ</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=vi">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=vi">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=vi">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=vi">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=vi">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=vi"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=vi"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=vi"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Đào tạo</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../index327f.html?hl=vi"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=vi"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Tham chiếu</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=vi">Mẫu</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=vi"
+           >Thư viện</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=vi"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=vi"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=vi">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=vi">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=vi">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=vi"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=vi">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=vi">Bảng điều khiển Play</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=vi"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=vi"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=vi">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=vi">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Tiến trình và Luồng</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+
+<h2>Trong tài liệu này</h2>
+<ol>
+<li><a href="#Processes">Tiến trình</a>
+  <ol>
+    <li><a href="#Lifecycle">Vòng đời tiến trình</a></li>
+  </ol>
+</li>
+<li><a href="#Threads">Luồng</a>
+  <ol>
+    <li><a href="#WorkerThreads">Luồng trình thực hiện</a></li>
+    <li><a href="#ThreadSafe">Phương pháp an toàn với luồng</a></li>
+  </ol>
+</li>
+<li><a href="#IPC">Truyền thông Liên Tiến trình</a></li>
+</ol>
+
+</div>
+</div>
+
+<p>Khi một thành phần ứng dụng bắt đầu và ứng dụng không có bất kỳ thành phần nào khác
+đang chạy, hệ thống Android sẽ khởi động một tiến trình Linux mới cho ứng dụng bằng một luồng
+thực thi đơn lẻ. Theo mặc định, tất cả thành phần của cùng ứng dụng sẽ chạy trong cùng tiến trình và luồng
+(được gọi là luồng "chính"). Nếu một thành phần ứng dụng bắt đầu và đã tồn tại một tiến trình
+cho ứng dụng đó (bởi một thành phần khác từ ứng dụng đã tồn tại), khi đó thành phần được
+bắt đầu bên trong tiến trình đó và sử dụng cùng luồng thực thi. Tuy nhiên, bạn có thể sắp xếp cho
+các thành phần khác nhau trong ứng dụng của mình để chạy trong các tiến trình riêng biệt, và bạn có thể tạo thêm
+luồng cho bất kỳ tiến trình nào.</p>
+
+<p>Tài liệu này trình bày về cách các tiến trình và luồng vận hành trong một ứng dụng Android.</p>
+
+
+<h2 id="Processes">Tiến trình</h2>
+
+<p>Theo mặc định, tất cả thành phần của cùng ứng dụng sẽ chạy trong cùng tiến trình và hầu hết các ứng dụng
+sẽ không thay đổi điều này. Tuy nhiên, nếu bạn thấy rằng mình cần kiểm soát một thành phần
+cụ thể thuộc về một tiến trình nào đó, bạn có thể làm vậy trong tệp bản kê khai.</p>
+
+<p>Mục nhập bản kê khai đối với mỗi loại phần tử thành phần&mdash;<a href="../topics/manifest/activity-element327f.html?hl=vi"><code>&amp;lt;activity&amp;gt;</code></a>, <a href="../topics/manifest/service-element327f.html?hl=vi"><code>&amp;lt;service&amp;gt;</code></a>, <a href="../topics/manifest/receiver-element327f.html?hl=vi"><code>&amp;lt;receiver&amp;gt;</code></a>, và <a href="../topics/manifest/provider-element327f.html?hl=vi"><code>&amp;lt;provider&amp;gt;</code></a>&mdash;sẽ hỗ trợ một thuộc tính <code>android:process</code> mà có thể quy định một
+tiến trình mà thành phần đó sẽ chạy trong đó. Bạn có thể đặt thuộc tính này sao cho từng thành phần chạy
+trong chính tiến trình của nó hoặc sao cho một số thành phần chia sẻ một tiến trình trong khi các thành phần khác thì không.  Bạn cũng có thể đặt
+<code>android:process</code> sao cho các thành phần của những ứng dụng khác nhau chạy trong cùng
+tiến trình&mdash;với điều kiện rằng ứng dụng chia sẻ cùng ID người dùng Linux và được ký bằng cùng các
+chứng chỉ.</p>
+
+<p>Phần tử <a href="../topics/manifest/application-element327f.html?hl=vi"><code>&amp;lt;application&amp;gt;</code></a> cũng hỗ trợ một thuộc tính <code>android:process</code>, để đặt một
+giá trị mặc định áp dụng cho tất cả thành phần.</p>
+
+<p>Android có thể quyết định tắt một tiến trình tại một thời điểm nào đó, khi bộ nhớ thấp và theo yêu cầu của các
+tiến trình khác đang phục vụ người dùng tức thì hơn. Các thành phần
+ứng dụng đang chạy trong tiến trình bị tắt bỏ thì sau đó sẽ bị hủy.  Tiến trình được
+khởi động lại cho những thành phần đó khi lại có việc cho chúng thực hiện.</p>
+
+<p>Khi quyết định bỏ những tiến trình nào, hệ thống Android sẽ cân nhắc tầm quan trọng tương đối so với
+người dùng.  Ví dụ, hệ thống sẵn sàng hơn khi tắt một tiến trình lưu trữ các hoạt động không còn
+hiển thị trên màn hình, so với một tiến trình lưu trữ các hoạt động đang hiển thị. Vì thế, quyết định về việc có
+chấm dứt một tiến trình hay không phụ thuộc vào trạng thái của các thành phần đang chạy trong tiến trình đó. Các quy tắc
+được sử dụng để quyết định sẽ chấm dứt tiến trình nào được trình bày ở bên dưới. </p>
+
+
+<h3 id="Lifecycle">Vòng đời tiến trình</h3>
+
+<p>Hệ thống Android cố gắng duy trì một tiến trình ứng dụng lâu nhất có thể, nhưng
+cuối cùng thì nó cũng cần loại bỏ các tiến trình cũ để lấy lại bộ nhớ cho các tiến trình mới hoặc quan trọng hơn.  Để
+xác định giữ lại những tiến trình nào
+và loại bỏ những tiến trình nào, hệ thống sẽ đặt từng tiến trình vào một "phân cấp tầm quan trọng" dựa trên
+những thành phần đang chạy trong tiến trình và trạng thái của những thành phần đó.  Những tiến trình có tầm quan trọng
+thấp nhất bị loại bỏ trước, rồi đến những tiến trình có tầm quan trọng thấp thứ hai, và cứ thế tiếp tục, miễn là còn cần thiết
+để khôi phục tài nguyên của hệ thống.</p>
+
+<p>Có năm cấp trong phân cấp tầm quan trọng. Danh sách sau trình bày các loại
+tiến trình khác nhau theo thứ tự tầm quan trọng (tiến trình thứ nhất là <em>quan trọng nhất</em> và được
+<em>tắt bỏ sau cùng</em>):</p>
+
+<ol>
+  <li><b>Tiến trình tiền cảnh</b>
+    <p>Một tiến trình được yêu cầu cho việc mà người dùng đang thực hiện.  Một
+      tiến trình được coi là đang trong tiền cảnh nếu bất kỳ điều nào sau đây là đúng:</p>
+
+      <ul>
+        <li>Nó lưu trữ một <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi">Activity</a></code> mà người dùng đang tương tác với (phương pháp của <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi">Activity</a></code>, <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#onResume()">onResume()</a></code>, đã được
+gọi).</li>
+
+        <li>Nó lưu trữ một <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi">Service</a></code> gắn kết với hoạt động mà người dùng đang
+tương tác với.</li>
+
+        <li>Nó lưu trữ một <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi">Service</a></code> đang chạy "trong tiền cảnh"&mdash;mà
+dịch vụ đã gọi <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi#startForeground(int, android.app.Notification)">startForeground()</a></code>.
+
+        <li>Nó lưu trữ một <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi">Service</a></code> mà đang thực thi một trong các lệnh
+gọi lại của vòng đời của nó (<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi#onCreate()">onCreate()</a></code>, <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi#onStart(android.content.Intent, int)">onStart()</a></code>, hoặc <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi#onDestroy()">onDestroy()</a></code>).</li>
+
+        <li>Nó lưu trữ một <code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=vi">BroadcastReceiver</a></code> mà đang thực thi phương pháp <code><a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html?hl=vi#onReceive(android.content.Context, android.content.Intent)">onReceive()</a></code> của nó.</li>
+    </ul>
+
+    <p>Nhìn chung, tại bất kỳ thời điểm xác định nào cũng chỉ tồn tại một vài tiến trình tiền cảnh.  Chúng chỉ bị tắt bỏ
+như một giải pháp cuối cùng&mdash;nếu bộ nhớ quá thấp tới mức chúng đều không thể tiếp tục chạy được.  Nhìn chung, tại thời điểm
+đó, thiết bị đã đạt tới trạng thái phân trang bộ nhớ, vì thế việc tắt bỏ một số tiến trình tiền cảnh là
+bắt buộc để đảm bảo giao diện người dùng có phản hồi.</p></li>
+
+  <li><b>Tiến trình hiển thị</b>
+    <p>Một tiến trình mà không có bất kỳ thành phần tiền cảnh nào, nhưng vẫn có thể
+      ảnh hưởng tới nội dung mà người dùng nhìn thấy trên màn hình. Một tiến trình được coi là hiển thị nếu một trong hai
+      điều kiện sau là đúng:</p>
+
+      <ul>
+        <li>Nó lưu trữ một <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi">Activity</a></code> mà không nằm trong tiền cảnh, nhưng vẫn
+hiển thị với người dùng (phương pháp <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#onPause()">onPause()</a></code> của nó đã được gọi).
+Điều này có thể xảy ra, ví dụ, nếu hoạt động tiền cảnh đã bắt đầu một hộp thoại, nó cho phép
+hoạt động trước được nhìn thấy phía sau nó.</li>
+
+        <li>Nó lưu trữ một <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi">Service</a></code> được gắn kết với một hoạt động
+hiển thị (hoặc tiền cảnh).</li>
+      </ul>
+
+      <p>Một tiến trình tiền cảnh được coi là cực kỳ quan trọng và sẽ không bị tắt bỏ trừ khi làm vậy
+là bắt buộc để giữ cho tất cả tiến trình tiền cảnh chạy. </p>
+    </li>
+
+  <li><b>Tiến trình dịch vụ</b>
+    <p>Một tiến trình mà đang chạy một dịch vụ đã được bắt đầu bằng phương pháp <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#startService(android.content.Intent)">startService()</a></code> và không rơi vào một trong hai
+thể loại cao hơn. Mặc dù tiến trình dịch vụ không trực tiếp gắn với bất kỳ thứ gì mà người dùng thấy, chúng
+thường đang làm những việc mà người dùng quan tâm đến (chẳng hạn như phát nhạc chạy ngầm hoặc
+tải xuống dữ liệu trên mạng), vì thế hệ thống vẫn giữ chúng chạy trừ khi không có đủ bộ nhớ để
+duy trì chúng cùng với tất cả tiến trình tiền cảnh và hiển thị. </p>
+  </li>
+
+  <li><b>Tiến trình nền</b>
+    <p>Một tiến trình lưu trữ một hoạt động mà hiện tại không hiển thị với người dùng (phương pháp
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#onStop()">onStop()</a></code> của hoạt động đã được gọi). Những tiến trình này không có tác động
+trực tiếp tới trải nghiệm người dùng, và hệ thống có thể bỏ chúng đi vào bất cứ lúc nào để lấy lại bộ nhớ cho một
+tiến trình tiền cảnh,
+hiển thị hoặc dịch vụ. Thường thì có nhiều tiến trình ngầm đang chạy, vì thế chúng được giữ
+trong một danh sách LRU (ít sử dụng gần đây nhất) để đảm bảo rằng tiến trình với hoạt động
+mà người dùng nhìn thấy gần đây nhất là tiến trình cuối cùng sẽ bị tắt bỏ. Nếu một hoạt động triển khai các phương pháp vòng đời của nó
+đúng cách, và lưu trạng thái hiện tại của nó, việc tắt bỏ tiến trình của hoạt động đó sẽ không có ảnh hưởng có thể thấy được tới
+trải nghiệm người dùng, vì khi người dùng điều hướng lại hoạt động đó, hoạt động sẽ khôi phục
+tất cả trạng thái hiển thị của nó. Xem tài liệu <a href="activities327f.html?hl=vi#SavingActivityState">Hoạt động</a>
+để biết thông tin về việc lưu và khôi phục trạng thái.</p>
+  </li>
+
+  <li><b>Tiến trình trống</b>
+    <p>Một tiến trình mà không giữ bất kỳ thành phần ứng dụng hiện hoạt nào.  Lý do duy nhất để giữ cho
+kiểu tiến trình này hoạt động đó là nhằm mục đích lưu bộ nhớ ẩn, để cải thiện thời gian khởi động vào lần tới khi thành phần
+cần chạy trong nó.  Hệ thống thường tắt bỏ những tiến trình này để cân bằng tài nguyên tổng thể
+của hệ thống giữa các bộ đệm ẩn tiến trình và bộ đệm ẩn nhân liên quan.</p>
+  </li>
+</ol>
+
+
+  <p>Android xếp hạng một tiến trình ở mức cao nhất mà nó có thể, dựa vào tầm quan trọng của
+các thành phần đang hoạt động trong tiến trình đó.  Ví dụ, nếu một tiến trình lưu giữ một dịch vụ và hoạt động
+hiển thị, tiến trình đó sẽ được xếp hạng là tiến trình hiển thị chứ không phải tiến trình dịch vụ.</p>
+
+  <p>Ngoài ra, xếp hạng của một tiến trình có thể tăng bởi các tiến trình khác phụ thuộc vào
+nó&mdash;một tiến trình mà đang phục vụ một tiến trình khác không thể bị xếp thấp hơn tiến trình mà nó
+đang phục vụ. Ví dụ, nếu một trình cung cấp nội dung trong tiến trình A đang phục vụ một máy khách trong tiến trình B, hoặc nếu một
+dịch vụ trong tiến trình A được gắn kết với một thành phần trong tiến trình B, ít nhất tiến trình A sẽ luôn được coi
+là quan trọng như tiến trình B.</p>
+
+  <p>Do một tiến trình đang chạy một dịch vụ được xếp hạng cao hơn một tiến trình có các hoạt động nền,
+một hoạt động mà khởi động một thao tác nhấp giữ có thể làm tốt việc khởi động một <a href="services327f.html?hl=vi">dịch vụ</a> cho thao tác đó, thay vì
+chỉ tạo một luồng trình thực hiện&mdash;nhất là khi thao tác đó sẽ có thể diễn ra lâu hơn hoạt động.
+Ví dụ, một hoạt động mà đang tải một ảnh lên một trang web nên bắt đầu một dịch vụ để thực hiện
+việc tải lên sao cho việc tải lên có thể tiếp tục chạy ngầm ngay cả khi người dùng rời khỏi hoạt động.
+Việc sử dụng một dịch vụ sẽ bảo đảm rằng thao tác ít nhất sẽ có mức ưu tiên như "tiến trình dịch vụ",
+không phụ thuộc vào điều xảy ra với hoạt động. Đây cũng chính là lý do hàm nhận quảng bá nên
+sử dụng dịch vụ thay vì chỉ đưa các thao tác tốn thời gian vào một luồng.</p>
+
+
+
+
+<h2 id="Threads">Luồng</h2>
+
+<p>Khi một ứng dụng được khởi chạy, hệ thống sẽ tạo một luồng thực thi cho ứng dụng,
+gọi là luồng "chính." Luồng này rất quan trọng bởi nó phụ trách phân phối các sự kiện tới
+những widget giao diện người dùng phù hợp, bao gồm các sự kiện vẽ. Nó cũng là luồng mà
+trong đó ứng dụng của bạn tương tác với các thành phần từ bộ công cụ UI của Android (các thành phần từ các gói <code><a href="https://developer.android.com/reference/android/widget/package-summary.html?hl=vi">android.widget</a></code> và <code><a href="https://developer.android.com/reference/android/view/package-summary.html?hl=vi">android.view</a></code>). Như vậy, luồng chính đôi khi cũng được gọi là
+luồng UI.</p>
+
+<p>Hệ thống <em>không</em> tạo một luồng riêng cho từng thực thể của thành phần. Tất cả
+thành phần chạy trong cùng tiến trình đều được khởi tạo trong luồng UI, và các lệnh gọi của hệ thống tới
+từng thành phần được phân phối từ luồng đó. Hệ quả là các phương pháp hồi đáp lại lệnh
+gọi lại của hệ thống (chẳng hạn như <code><a href="https://developer.android.com/reference/android/view/View.html?hl=vi#onKeyDown(int, android.view.KeyEvent)">onKeyDown()</a></code> để báo cáo hành động của người dùng
+hoặc một phương pháp gọi lại vòng đời) sẽ luôn chạy trong luồng UI của tiến trình.</p>
+
+<p>Ví dụ, khi người dùng chạm vào một nút trên màn hình, luồng UI của ứng dụng của bạn sẽ phân phối
+sự kiện chạm tới widget, đến lượt mình, widget sẽ đặt trạng thái được nhấn và đăng một yêu cầu vô hiệu hóa tới
+hàng đợi sự kiện. Luồng UI loại yêu cầu khỏi hàng đợi và thông báo với widget rằng nó nên tự vẽ lại
+.</p>
+
+<p>Khi ứng dụng của bạn thực hiện công việc nặng để hồi đáp tương tác của người dùng, mô hình luồng đơn nhất
+này có thể dẫn đến hiệu năng kém trừ khi bạn triển khai ứng dụng của mình một cách phù hợp. Cụ thể, nếu
+mọi thứ đang xảy ra trong luồng UI, việc thực hiện những thao tác kéo dài như truy cập mạng hay
+truy vấn cơ sở dữ liệu sẽ chặn toàn bộ UI. Khi luồng bị chặn, không sự kiện nào có thể được phân phối,
+bao gồm cả sự kiện vẽ. Từ phương diện của người dùng, ứng dụng
+có vẻ như đang bị treo. Thậm chí tệ hơn, nếu luồng UI bị chặn trong lâu hơn vài giây
+(hiện tại là khoảng 5 giây), người dùng sẽ được hiển thị hộp thoại không phổ biến "<a href="https://developer.android.com/training/articles/perf-anr.html?hl=vi">ứng dụng
+không phản hồi</a>" (ANR). Khi đó, người dùng có thể quyết định thoát ứng dụng của mình và gỡ cài đặt nó
+nếu họ không thoải mái.</p>
+
+<p>Ngoài ra, bộ công cụ UI của Android <em>không</em> an toàn với luồng. Vì vậy, bạn không được thao tác
+UI của mình từ một luồng trình thực hiện&mdash;bạn phải thực hiện tất cả thao tác đối với giao diện người dùng của mình từ luồng
+UI. Vì vậy, có hai quy tắc đơn giản đối với mô hình luồng đơn lẻ của Android:</p>
+
+<ol>
+<li>Không được chặn luồng UI
+<li>Không được truy cập bộ công cụ UI của Android từ bên ngoài luồng UI
+</ol>
+
+<h3 id="WorkerThreads">Luồng trình thực hiện</h3>
+
+<p>Vì mô hình luồng đơn lẻ nêu trên, điều thiết yếu đối với tính phản hồi của UI
+ứng dụng của bạn đó là bạn không được chặn luồng UI. Nếu bạn có thao tác cần thực hiện
+không mang tính chất tức thời, bạn nên đảm bảo thực hiện chúng trong các luồng riêng (luồng “chạy ngầm" hoặc
+"trình thực hiện").</p>
+
+<p>Ví dụ, bên dưới là một số mã cho một đối tượng theo dõi nhấp có chức năng tải xuống một hình ảnh từ một luồng
+riêng và hiển thị nó trong một <code><a href="https://developer.android.com/reference/android/widget/ImageView.html?hl=vi">ImageView</a></code>:</p>
+
+<pre>
+public void onClick(View v) {
+    new Thread(new Runnable() {
+        public void run() {
+            Bitmap b = loadImageFromNetwork("http://example.com/image.png");
+            mImageView.setImageBitmap(b);
+        }
+    }).start();
+}
+</pre>
+
+<p>Thoạt đầu, điều này có vẻ như diễn ra ổn thỏa, vì nó tạo một luồng mới để xử lý thao tác
+mạng. Tuy nhiên, nó vi phạm quy tắc thứ hai của mô hình luồng đơn nhất: <em>không được truy cập
+bộ công cụ UI của Android từ bên ngoài luồng UI</em>&mdash;mẫu này sửa đổi <code><a href="https://developer.android.com/reference/android/widget/ImageView.html?hl=vi">ImageView</a></code> từ luồng trình thực hiện thay vì từ luồng UI. Điều này có thể dẫn đến
+hành vi bất ngờ, không được định nghĩa mà có thể gây khó khăn và tốn thời gian theo dõi.</p>
+
+<p>Để sửa vấn đề này, Android giới thiệu một vài cách để truy cập luồng UI từ các luồng
+khác. Sau đây là một danh sách các phương pháp có thể trợ giúp:</p>
+
+<ul>
+<li><code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=vi#runOnUiThread(java.lang.Runnable)">Activity.runOnUiThread(Runnable)</a></code></li>
+<li><code><a href="https://developer.android.com/reference/android/view/View.html?hl=vi#post(java.lang.Runnable)">View.post(Runnable)</a></code></li>
+<li><code><a href="https://developer.android.com/reference/android/view/View.html?hl=vi#postDelayed(java.lang.Runnable, long)">View.postDelayed(Runnable,
+long)</a></code></li>
+</ul>
+
+<p>Ví dụ, bạn có thể sửa mã trên bằng cách sử dụng phương pháp <code><a href="https://developer.android.com/reference/android/view/View.html?hl=vi#post(java.lang.Runnable)">View.post(Runnable)</a></code>:</p>
+
+<pre>
+public void onClick(View v) {
+    new Thread(new Runnable() {
+        public void run() {
+            final Bitmap bitmap = loadImageFromNetwork("http://example.com/image.png");
+            mImageView.post(new Runnable() {
+                public void run() {
+                    mImageView.setImageBitmap(bitmap);
+                }
+            });
+        }
+    }).start();
+}
+</pre>
+
+<p>Giờ thì triển khai này đã an toàn với luồng: thao tác mạng được thực hiện từ một luồng riêng
+trong khi <code><a href="https://developer.android.com/reference/android/widget/ImageView.html?hl=vi">ImageView</a></code> được thao tác từ luồng UI.</p>
+
+<p>Tuy nhiên, khi mà sự phức tạp của thao tác tăng lên, kiểu mã này có thể bị phức tạp hóa và
+khó duy trì. Để xử lý những tương tác phức tạp hơn bằng một luồng trình thực hiện, bạn có thể cân nhắc
+sử dụng một <code><a href="https://developer.android.com/reference/android/os/Handler.html?hl=vi">Handler</a></code> trong luồng trình thực hiện của mình, để xử lý các thư được chuyển từ luồng
+UI. Mặc dù vậy, giải pháp tốt nhất là mở rộng lớp <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi">AsyncTask</a></code>,
+điều này sẽ đơn giản hóa việc thực thi các tác vụ của luồng trình thực hiện cần tương tác với UI.</p>
+
+
+<h4 id="AsyncTask">Sử dụng AsyncTask</h4>
+
+<p><code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi">AsyncTask</a></code> cho phép bạn thực hiện công việc không đồng bộ trên giao diện
+người dùng của mình. Nó thực hiện các thao tác chặn trong một luồng trình thực hiện rồi phát hành kết quả trên
+luồng UI mà không yêu cầu bạn tự xử lý các luồng và/hoặc trình xử lý.</p>
+
+<p>Để sử dụng nó, bạn phải tạo lớp con <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi">AsyncTask</a></code> và triển khai phương pháp gọi lại <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#doInBackground(Params...)">doInBackground()</a></code>, phương pháp này chạy trong một tập hợp
+các luồng chạy ngầm. Để cập nhật UI của mình, bạn nên triển khai <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#onPostExecute(Result)">onPostExecute()</a></code>, nó sẽ mang lại kết quả từ <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#doInBackground(Params...)">doInBackground()</a></code> và chạy trong luồng UI, vì thế bạn có thể nâng cấp
+UI của mình một cách an toàn. Sau đó, bạn có thể chạy tác vụ bằng cách gọi <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#execute(Params...)">execute()</a></code>
+từ luồng UI.</p>
+
+<p>Ví dụ, bạn có thể triển khai ví dụ trước bằng cách sử dụng <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi">AsyncTask</a></code> theo
+cách này:</p>
+
+<pre>
+public void onClick(View v) {
+    new DownloadImageTask().execute("http://example.com/image.png");
+}
+
+private class DownloadImageTask extends AsyncTask&lt;String, Void, Bitmap&gt; {
+    /** The system calls this to perform work in a worker thread and
+      * delivers it the parameters given to AsyncTask.execute() */
+    protected Bitmap doInBackground(String... urls) {
+        return loadImageFromNetwork(urls[0]);
+    }
+
+    /** The system calls this to perform work in the UI thread and delivers
+      * the result from doInBackground() */
+    protected void onPostExecute(Bitmap result) {
+        mImageView.setImageBitmap(result);
+    }
+}
+</pre>
+
+<p>Lúc này, UI an toàn và mã đơn giản hơn, vì nó tách riêng công việc thành
+phần sẽ được thực hiện trên một luồng trình thực hiện và phần sẽ được thực hiện trên luồng UI.</p>
+
+<p>Bạn nên đọc tài liệu tham khảo <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi">AsyncTask</a></code>để hiểu đầy đủ về
+cách sử dụng lớp này, nhưng sau đây là phần trình bày tổng quan nhanh về hoạt động của nó:</p>
+
+<ul>
+<li>Bạn có thể quy định loại tham số, các giá trị tiến độ, và giá trị
+cuối cùng của tác vụ, bằng cách sử dụng các kiểu chung</li>
+<li>Phương pháp <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#doInBackground(Params...)">doInBackground()</a></code> sẽ tự động thực thi
+trên một luồng trình thực hiện</li>
+<li><code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#onPreExecute()">onPreExecute()</a></code>, <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#onPostExecute(Result)">onPostExecute()</a></code>, và <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#onProgressUpdate(Progress...)">onProgressUpdate()</a></code> đều được gọi ra trên luồng UI</li>
+<li>Giá trị được trả về bởi <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#doInBackground(Params...)">doInBackground()</a></code> được gửi tới
+<code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#onPostExecute(Result)">onPostExecute()</a></code></li>
+<li>Bạn có thể gọi <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#publishProgress(Progress...)">publishProgress()</a></code> vào bất cứ lúc nào trong <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#doInBackground(Params...)">doInBackground()</a></code> để thực thi <code><a href="https://developer.android.com/reference/android/os/AsyncTask.html?hl=vi#onProgressUpdate(Progress...)">onProgressUpdate()</a></code> trên luồng UI</li>
+<li>Bạn có thể hủy bỏ tác vụ vào bất cứ lúc nào từ bất kỳ luồng nào</li>
+</ul>
+
+<p class="caution"><strong>Chú ý:</strong> Một vấn đề khác mà bạn có thể gặp phải khi sử dụng một luồng
+trình thực hiện đó là những lần khởi động lại bất ngờ trong hoạt động của bạn do một <a href="../topics/resources/runtime-changes327f.html?hl=vi">thay đổi trong cấu hình thời gian chạy</a>
+(chẳng hạn như khi người dùng thay đổi hướng màn hình), điều này có thể làm hỏng luồng trình thực hiện của bạn. Để
+xem cách bạn có thể duy trì tác vụ của mình khi diễn ra một trong những lần khởi động lại này và cách hủy bỏ tác vụ cho phù hợp
+khi hoạt động bị hủy, hãy xem mã nguồn cho ứng dụng mẫu <a href="http://code.google.com/p/shelves/?hl=vi">Shelves</a>.</p>
+
+
+<h3 id="ThreadSafe">Phương pháp an toàn với luồng</h3>
+
+<p> Trong một số tình huống, các phương pháp bạn triển khai có thể được gọi ra từ nhiều hơn một luồng, và vì thế
+phải được ghi sao cho an toàn với luồng. </p>
+
+<p>Điều này chủ yếu đúng với các phương pháp mà có thể được gọi từ xa&mdash;chẳng hạn như các phương pháp trong một <a href="bound-services327f.html?hl=vi">dịch vụ gắn kết</a>. Khi một lệnh gọi trên một
+phương pháp được triển khai trong một <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=vi">IBinder</a></code> khởi đầu trong cùng tiến trình mà
+<code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=vi">IBinder</a></code> đang chạy, phương pháp đó sẽ được thực thi trong luồng của hàm gọi.
+Tuy nhiên, khi lệnh gọi khởi đầu trong một tiến trình khác, phương pháp sẽ được thực thi trong một luồng được chọn từ
+một tập hợp các luồng mà hệ thống duy trì trong cùng tiến trình như <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=vi">IBinder</a></code> (nó không được thực thi trong luồng UI của tiến trình).  Ví dụ, trong khi phương pháp
+<code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi#onBind(android.content.Intent)">onBind()</a></code> của dịch vụ sẽ được gọi từ luồng UI của tiến trình
+của dịch vụ, các phương pháp được triển khai trong đối tượng mà <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=vi#onBind(android.content.Intent)">onBind()</a></code> trả về (ví dụ, một lớp con triển khai các phương pháp RPC) sẽ được gọi từ các luồng
+trong tập hợp. Vì một dịch vụ có thể có nhiều hơn một máy khách, nhiều hơn một luồng tập hợp có thể sử dụng
+cùng một phương pháp <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=vi">IBinder</a></code> tại cùng một thời điểm.  Vì thế, các phương pháp <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=vi">IBinder</a></code> phải được triển khai sao cho an toàn với luồng.</p>
+
+<p> Tương tự, một trình cung cấp nội dung có thể nhận các yêu cầu dữ liệu khởi nguồn trong các tiến trình khác.
+Mặc dù các lớp <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=vi">ContentResolver</a></code> và <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=vi">ContentProvider</a></code>
+ẩn đi chi tiết về cách truyền thông liên tiến trình được quản lý, các phương pháp <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=vi">ContentProvider</a></code> hồi đáp những yêu cầu đó&mdash;các phương pháp <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=vi#query(android.net.Uri, java.lang.String[], android.os.Bundle, android.os.CancellationSignal)">query()</a></code>, <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=vi#insert(android.net.Uri, android.content.ContentValues)">insert()</a></code>, <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=vi#delete(android.net.Uri, java.lang.String, java.lang.String[])">delete()</a></code>, <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=vi#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])">update()</a></code>, và <code><a href="https://developer.android.com/reference/android/content/ContentProvider.html?hl=vi#getType(android.net.Uri)">getType()</a></code>&mdash;được gọi từ một tập hợp luồng trong tiến trình của trình cung cấp nội dung, chứ không phải luồng
+UI cho tiến trình đó.  Vì những phương pháp này có thể được gọi từ bất kỳ số lượng luồng nào tại
+cùng thời điểm, chúng cũng phải được triển khai sao cho an toàn với luồng. </p>
+
+
+<h2 id="IPC">Truyền thông Liên Tiến trình</h2>
+
+<p>Android cung cấp một cơ chế cho truyền thông liên tiến trình (IPC) bằng cách sử dụng các lệnh gọi thủ tục từ xa
+(RPC), trong đó một phương pháp được gọi bởi một hoạt động hoặc thành phần ứng dụng khác, nhưng được thực thi
+từ xa (trong một tiến trình khác), với bất kỳ kết quả nào được trả về
+hàm gọi. Điều này đòi hỏi việc phân tích một lệnh gọi phương pháp và dữ liệu của nó về cấp độ mà hệ điều hành
+có thể hiểu được, truyền phát nó từ tiến trình và khoảng trống địa chỉ cục bộ đến tiến trình và
+khoảng trống địa chỉ từ xa, sau đó tổ hợp lại và phát hành lại lệnh gọi ở đó.  Sau đó, các giá trị trả về được
+phát theo hướng ngược lại.  Android cung cấp tất cả mã để thực hiện những giao tác
+IPC này, vì thế bạn có thể tập trung vào việc định nghĩa và triển khai giao diện lập trình RPC. </p>
+
+<p>Để thực hiện IPC, ứng dụng của bạn phải liên kết với một dịch vụ, bằng cách sử dụng <code><a href="https://developer.android.com/reference/android/content/Context.html?hl=vi#bindService(android.content.Intent, android.content.ServiceConnection, int)">bindService()</a></code>. Để biết thêm thông tin, hãy xem hướng dẫn cho nhà phát triển <a href="services327f.html?hl=vi">Dịch vụ</a>.</p>
+
+
+<!--
+<h2>Beginner's Path</h2>
+
+<p>For information about how to perform work in the background for an indefinite period of time
+(without a user interface), continue with the <b><a
+href="https://developer.android.com/guide/components/services.html?hl=vi">Services</a></b> document.</p>
+-->
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=vi" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=vi" title="Hỗ trợ">Hỗ trợ</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=vi" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=vi" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=vi" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=vi" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="dDenyvZl42KPZFQBjpOj_MLa_CGuSlJz2GCRdTWiaNg6MTQ5NzUxNjIxMzEzODc0MA" />
+      <input type="hidden" name="next" value="/guide/components/processes-and-threads.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+             selected="selected" >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Địa chỉ email</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../ytblogger_lists_unified0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../android_metadata_en0c0e.js?hl=vi?v=2017061508" defer></script>
+  
+  <script src="../../reference/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../reference/gms_lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../reference/android/support/wearable/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../reference/android/support/test/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="../../reference/android/support/constraint/lists0c0e.js?hl=vi?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=vi"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_vi.js?hl=vi?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/components/processes-and-threads.html?hl=vi by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:05:32 GMT -->
+</html>

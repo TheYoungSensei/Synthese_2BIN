@@ -1,0 +1,3315 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/contacts-provider.html?hl=ja by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:16:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="5VJZm7PjtcwLaSxYqOUteotKA6BKqXNu6iQMh_KBkeY6MTQ5NzUxNzExMzgwMDc0MA" />
+
+  
+    <link rel="canonical" href="contacts-provider9e29.html?hl=ja">
+  
+
+  
+    <link rel="alternate" href="contacts-provider327f.html?hl=vi" hreflang="vi">
+  
+    <link rel="alternate" href="contacts-providerf854.html?hl=zh-tw" hreflang="zh-Hant">
+  
+    <link rel="alternate" href="contacts-provider9201.html?hl=ru" hreflang="ru">
+  
+    <link rel="alternate" href="contacts-provider.html" hreflang="en">
+  
+    <link rel="alternate" href="contacts-provider0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="contacts-provider7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="contacts-providerde3a.html?hl=es" hreflang="es">
+  
+    <link rel="alternate" href="contacts-provider9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="contacts-provider232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="contacts-provider0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="contacts-provider6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html?hl=vi" hreflang="vi-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html?hl=zh-tw" hreflang="zh-Hant-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html?hl=ru" hreflang="ru-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html" hreflang="en-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html?hl=es" hreflang="es-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/providers/contacts-provider.html?hl=pt-br" hreflang="pt-br-cn">
+  
+
+  <link rel="alternate" href="contacts-provider.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon9e29.png?hl=ja">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1809e29.png?hl=ja">
+
+
+<title>
+
+  連絡先プロバイダ | Android Developers
+
+</title>
+
+  <meta name="description" content="The Contacts Provider is a powerful and flexible Android component that manages the device&amp;#39;s central repository of data about people. The Contacts Provider is the source of data you see in the device&amp;#39;s contacts application, and you can also access…">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/defaultdd52.css?hl=ja?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle9e29.js?hl=ja" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__ja9e29.js?hl=ja"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android9e29.js?hl=ja"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docsdd52.js?hl=ja?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ja&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ja&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;ja&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;ja&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "ja", "served": "ja"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=ja">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo9e29.png?hl=ja"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=ja"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=ja"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=ja"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=ja"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=ja" width="18" height="19" alt="Play コンソール">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="検索">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">戻る</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index9e29.html?hl=ja" >はじめに</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals9e29.html?hl=ja" >アプリケーションの基礎</a></li><li><a href="../../practices/compatibility9e29.html?hl=ja" >端末の互換性</a></li><li><a href="../security/permissions9e29.html?hl=ja" >システム パーミッション</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index9e29.html?hl=ja" >プラットフォーム アーキテクチャ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack9e29.html?hl=ja"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Java 8 の言語機能を使う</a></li><li><a href="../../practices/verifying-apps-art9e29.html?hl=ja" >Android ランタイム（ART）でのアプリの動作確認</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index9e29.html?hl=ja" >アプリのコンポーネント</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters9e29.html?hl=ja" >インテントとインテント フィルタ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common9e29.html?hl=ja" >一般的なインテント</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities9e29.html?hl=ja" >アクティビティ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments9e29.html?hl=ja" >フラグメント</a></li><li><a href="../../components/loaders9e29.html?hl=ja" >ローダ</a></li><li><a href="../../components/tasks-and-back-stack9e29.html?hl=ja" >タスクとバックスタック</a></li><li><a href="../../components/recents9e29.html?hl=ja" >オーバービュー画面</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services9e29.html?hl=ja" >サービス</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services9e29.html?hl=ja" >バインドされたサービス</a></li><li><a href="../../components/aidl9e29.html?hl=ja" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="content-providers9e29.html?hl=ja" >コンテンツ プロバイダ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="content-provider-basics9e29.html?hl=ja" >コンテンツ プロバイダの基本</a></li><li><a href="content-provider-creating9e29.html?hl=ja" >コンテンツ プロバイダの作成</a></li><li><a href="calendar-provider9e29.html?hl=ja" >カレンダー プロバイダ</a></li><li><a href="contacts-provider9e29.html?hl=ja" >連絡先プロバイダ</a></li><li><a href="document-provider9e29.html?hl=ja" >ストレージ アクセス フレームワーク</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index9e29.html?hl=ja" >アプリ ウィジェット</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host9e29.html?hl=ja" >アプリ ウィジェットのホスト</a></li></ul></li><li><a href="../../components/processes-and-threads9e29.html?hl=ja" >プロセスとスレッド</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index9e29.html?hl=ja" >アプリのリソース</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview9e29.html?hl=ja" >リソースの概要</a></li><li><a href="../resources/providing-resources9e29.html?hl=ja" >リソースの提供</a></li><li><a href="../resources/accessing-resources9e29.html?hl=ja" >リソースへのアクセス</a></li><li><a href="../resources/runtime-changes9e29.html?hl=ja" >実行時の変更の処理</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization9e29.html?hl=ja" >ローカライズ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework9e29.html?hl=ja" >ICU4J Android Framework API</a></li><li><a href="../resources/multilingual-support9e29.html?hl=ja" >言語とロケール</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources9e29.html?hl=ja" >リソースのタイプ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource9e29.html?hl=ja" >アニメーション</a></li><li><a href="../resources/color-list-resource9e29.html?hl=ja" >色状態リスト</a></li><li><a href="../resources/drawable-resource9e29.html?hl=ja" >ドローアブル</a></li><li><a href="../resources/layout-resource9e29.html?hl=ja" >レイアウト</a></li><li><a href="../resources/menu-resource9e29.html?hl=ja" >メニュー</a></li><li><a href="../resources/string-resource9e29.html?hl=ja" >文字列</a></li><li><a href="../resources/style-resource9e29.html?hl=ja" >スタイル</a></li><li><a href="../resources/more-resources9e29.html?hl=ja" >その他のタイプ</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro9e29.html?hl=ja" >アプリ マニフェスト</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element9e29.html?hl=ja" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element9e29.html?hl=ja" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element9e29.html?hl=ja" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element9e29.html?hl=ja" >&lt;application&gt;</a></li><li><a href="../manifest/category-element9e29.html?hl=ja" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element9e29.html?hl=ja" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element9e29.html?hl=ja" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element9e29.html?hl=ja" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element9e29.html?hl=ja" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element9e29.html?hl=ja" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element9e29.html?hl=ja" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element9e29.html?hl=ja" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element9e29.html?hl=ja" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element9e29.html?hl=ja" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element9e29.html?hl=ja" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element9e29.html?hl=ja" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element9e29.html?hl=ja" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element9e29.html?hl=ja" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element9e29.html?hl=ja" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element9e29.html?hl=ja" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element9e29.html?hl=ja" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element9e29.html?hl=ja" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element9e29.html?hl=ja" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element9e29.html?hl=ja" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element9e29.html?hl=ja" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element9e29.html?hl=ja" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element9e29.html?hl=ja" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/index9e29.html?hl=ja" >ユーザー インターフェース</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/overview9e29.html?hl=ja" >UI の概要</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/declaring-layout9e29.html?hl=ja" >レイアウト</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/layout/linear9e29.html?hl=ja" >線形レイアウト</a></li><li><a href="../ui/layout/relative9e29.html?hl=ja" >相対レイアウト</a></li><li><a href="../ui/layout/listview9e29.html?hl=ja" >リストビュー</a></li><li><a href="../ui/layout/gridview9e29.html?hl=ja" >グリッドビュー</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/controls9e29.html?hl=ja" >入力コントロール</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/controls/button9e29.html?hl=ja" >ボタン</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=ja" >テキスト フィールド</a></li><li><a href="../ui/controls/checkbox9e29.html?hl=ja" >チェックボックス</a></li><li><a href="../ui/controls/radiobutton9e29.html?hl=ja" >ラジオボタン</a></li><li><a href="../ui/controls/togglebutton9e29.html?hl=ja" >切り替えボタン</a></li><li><a href="../ui/controls/spinner9e29.html?hl=ja" >スピナー</a></li><li><a href="../ui/controls/pickers9e29.html?hl=ja" >ピッカー</a></li></ul></li><li><a href="../ui/ui-events9e29.html?hl=ja" >入力イベント</a></li><li><a href="../ui/menus9e29.html?hl=ja" >メニュー</a></li><li><a href="../ui/settings9e29.html?hl=ja" >設定</a></li><li><a href="../ui/dialogs9e29.html?hl=ja" >ダイアログ</a></li><li><a href="../ui/notifiers/notifications9e29.html?hl=ja" >通知</a></li><li><a href="../ui/notifiers/toasts9e29.html?hl=ja" >トースト</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index9e29.html?hl=ja" >検索</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog9e29.html?hl=ja" >検索インターフェースの作成</a></li><li><a href="../search/adding-recent-query-suggestions9e29.html?hl=ja" >検索候補の表示の追加</a></li><li><a href="../search/adding-custom-suggestions9e29.html?hl=ja" >カスタム候補の追加</a></li><li><a href="../search/searchable-config9e29.html?hl=ja" >検索可能な設定</a></li></ul></li><li><a href="../ui/multi-window9e29.html?hl=ja" >マルチ ウィンドウのサポート</a></li><li><a href="../ui/drag-drop9e29.html?hl=ja" >ドラッグ＆ドロップ</a></li><li class="nav-section"><div class="nav-section-header"><a href="../ui/accessibility/index9e29.html?hl=ja" >ユーザー補助機能</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../ui/accessibility/apps9e29.html?hl=ja" >ユーザー補助機能に対応</a></li><li><a href="../ui/accessibility/checklist9e29.html?hl=ja" >ユーザー補助機能のデベロッパー チェックリスト</a></li><li><a href="../ui/accessibility/services9e29.html?hl=ja" >ユーザー補助機能サービスの作成</a></li></ul></li><li><a href="../ui/themes9e29.html?hl=ja" >スタイルとテーマ</a></li><li><a href="../ui/custom-components9e29.html?hl=ja" >カスタム コンポーネント</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index9e29.html?hl=ja" >アニメーションとグラフィック</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview9e29.html?hl=ja" >アニメーションとグラフィックの概要</a></li><li><a href="../graphics/prop-animation9e29.html?hl=ja" >プロパティ アニメーション</a></li><li><a href="../graphics/view-animation9e29.html?hl=ja" >ビュー アニメーション</a></li><li><a href="../graphics/drawable-animation9e29.html?hl=ja" >ドローアブル アニメーション</a></li><li><a href="../graphics/2d-graphics9e29.html?hl=ja" >キャンバスとドローアブル</a></li><li><a href="../graphics/opengl9e29.html?hl=ja" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel9e29.html?hl=ja" >ハードウェア アクセラレーション</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index9e29.html?hl=ja" >演算処理</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute9e29.html?hl=ja" >RenderScript</a></li><li><a href="../renderscript/advanced9e29.html?hl=ja" >高度な RenderScript</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview9e29.html?hl=ja" >ランタイム API リファレンス</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types9e29.html?hl=ja" >数値型</a></li><li><a href="../renderscript/reference/rs_object_types9e29.html?hl=ja" >オブジェクト型</a></li><li><a href="../renderscript/reference/rs_convert9e29.html?hl=ja" >変換関数</a></li><li><a href="../renderscript/reference/rs_math9e29.html?hl=ja" >数学定数と数学関数</a></li><li><a href="../renderscript/reference/rs_vector_math9e29.html?hl=ja" >ベクター数学関数</a></li><li><a href="../renderscript/reference/rs_matrix9e29.html?hl=ja" >行列関数</a></li><li><a href="../renderscript/reference/rs_quaternion9e29.html?hl=ja" >四元数関数</a></li><li><a href="../renderscript/reference/rs_atomic9e29.html?hl=ja" >アトミック更新関数</a></li><li><a href="../renderscript/reference/rs_time9e29.html?hl=ja" >時間関数と時間型</a></li><li><a href="../renderscript/reference/rs_allocation_data9e29.html?hl=ja" >アロケーション データ アクセス関数</a></li><li><a href="../renderscript/reference/rs_object_info9e29.html?hl=ja" >オブジェクト特性関数</a></li><li><a href="../renderscript/reference/rs_for_each9e29.html?hl=ja" >カーネル呼び出し関数とカーネル呼び出し型</a></li><li><a href="../renderscript/reference/rs_io9e29.html?hl=ja" >入出力関数</a></li><li><a href="../renderscript/reference/rs_debug9e29.html?hl=ja" >デバッグ関数</a></li><li><a href="../renderscript/reference/rs_graphics9e29.html?hl=ja" >グラフィック関数とグラフィック型</a></li><li><a href="../renderscript/reference/index9e29.html?hl=ja" >インデックス</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index9e29.html?hl=ja" >メディアとカメラ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer9e29.html?hl=ja" >メディア再生</a></li><li><a href="../media/mediarouter9e29.html?hl=ja" >メディア ルーター</a></li><li><a href="../media/mediarouteprovider9e29.html?hl=ja" >メディア ルーター プロバイダ</a></li><li><a href="../media/exoplayer9e29.html?hl=ja" >ExoPlayer</a></li><li><a href="../media/media-formats9e29.html?hl=ja" >サポートされているメディア形式</a></li><li><a href="../media/mediarecorder9e29.html?hl=ja" >オーディオの録音</a></li><li><a href="../media/jetplayer9e29.html?hl=ja" >JetPlayer</a></li><li><a href="../media/camera9e29.html?hl=ja" >カメラ</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index9e29.html?hl=ja" >位置情報とセンサー</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index9e29.html?hl=ja" >位置情報と地図</a></li><li><a href="../location/strategies9e29.html?hl=ja" >位置情報に関する戦略</a></li><li><a href="../sensors/sensors_overview9e29.html?hl=ja" >センサーの概要</a></li><li><a href="../sensors/sensors_motion9e29.html?hl=ja" >モーション センサー</a></li><li><a href="../sensors/sensors_position9e29.html?hl=ja" >位置センサー</a></li><li><a href="../sensors/sensors_environment9e29.html?hl=ja" >環境センサー</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index9e29.html?hl=ja" >ネットワーク接続</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth9e29.html?hl=ja" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le9e29.html?hl=ja" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index9e29.html?hl=ja" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc9e29.html?hl=ja" >NFC の基本</a></li><li><a href="../connectivity/nfc/advanced-nfc9e29.html?hl=ja" >NFC の高度な利用</a></li><li><a href="../connectivity/nfc/hce9e29.html?hl=ja" >ホストベースのカード エミュレーション</a></li></ul></li><li><a href="../connectivity/wifip2p9e29.html?hl=ja" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index9e29.html?hl=ja" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory9e29.html?hl=ja" >アクセサリ</a></li><li><a href="../connectivity/usb/host9e29.html?hl=ja" >ホスト</a></li></ul></li><li><a href="../connectivity/sip9e29.html?hl=ja" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index9e29.html?hl=ja" >テキストと入力</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste9e29.html?hl=ja" >コピーとペースト</a></li><li><a href="../text/creating-input-method9e29.html?hl=ja" >IME の作成</a></li><li><a href="../text/spell-checker-framework9e29.html?hl=ja" >スペル チェッカー</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index9e29.html?hl=ja" >データ ストレージ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage9e29.html?hl=ja" >ストレージ オプション</a></li><li><a href="../data/backup9e29.html?hl=ja" >データのバックアップ</a></li><li><a href="../data/install-location9e29.html?hl=ja" >アプリのインストール場所</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=ja" >ライブラリ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=ja" >Support Library</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=ja" >機能</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=ja" >セットアップ</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=ja" >変更履歴</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=ja" >データ バインディング ライブラリ</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=ja" >Testing Support Library</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=ja" >API リファレンス</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index9e29.html?hl=ja" >管理</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin9e29.html?hl=ja" >端末ポリシー</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index9e29.html?hl=ja" >ウェブアプリ</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting9e29.html?hl=ja" >ウェブアプリでの異なる画面のサポート</a></li><li><a href="../../webapps/webview9e29.html?hl=ja" >WebView によるウェブアプリの作成</a></li><li><a href="../../webapps/migrating9e29.html?hl=ja" >Android 4.4 での WebView への移行</a></li><li><a href="../../webapps/debugging9e29.html?hl=ja" >ウェブアプリのデバッグ</a></li><li><a href="../../webapps/best-practices9e29.html?hl=ja" >ウェブアプリのベスト プラクティス</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index9e29.html?hl=ja"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Best practice" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">ベスト プラクティス</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support9e29.html?hl=ja" >複数の画面のサポート</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution9e29.html?hl=ja" >特定の画面の端末にのみ配布</a></li><li><a href="../../practices/screen-compat-mode9e29.html?hl=ja" >画面互換性モード</a></li></ul></li><li><a href="../../practices/tablets-and-handsets9e29.html?hl=ja" >タブレットとハンドセットのサポート</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=ja">ホーム</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=ja">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=ja">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=ja">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=ja">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=ja">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=ja"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=ja"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=ja"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">トレーニング</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index9e29.html?hl=ja"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=ja"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">リファレンス</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=ja">サンプル</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=ja"
+           >ライブラリ</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=ja"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=ja"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=ja">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=ja">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=ja">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=ja"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=ja">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=ja">Play コンソール</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=ja"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=ja"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=ja">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=ja">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">連絡先プロバイダ</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+<div id="qv">
+<h2>クイックビュー</h2>
+<ul>
+    <li>人の情報に関する Android のリポジトリ。</li>
+    <li>
+        ウェブとの同期。
+    </li>
+    <li>
+        ソーシャル ストリーム データの統合。
+    </li>
+</ul>
+<h2>このドキュメントの内容</h2>
+<ol>
+    <li>
+        <a href="#InformationTypes">連絡先プロバイダの構成</a>
+    </li>
+    <li>
+        <a href="#RawContactBasics">未加工連絡先</a>
+    </li>
+    <li>
+        <a href="#DataBasics">データ</a>
+    </li>
+    <li>
+        <a href="#ContactBasics">連絡先</a>
+    </li>
+    <li>
+        <a href="#Sources">同期アダプタからのデータ</a>
+    </li>
+    <li>
+        <a href="#Permissions">必要なパーミッション</a>
+    </li>
+    <li>
+        <a href="#UserProfile">ユーザー プロファイル</a>
+    </li>
+    <li>
+        <a href="#ContactsProviderMetadata">連絡先プロバイダのメタデータ</a>
+    </li>
+    <li>
+        <a href="#Access">連絡先プロバイダへのアクセス</a>
+    <li>
+    </li>
+    <li>
+        <a href="#SyncAdapters">連絡先プロバイダの同期アダプタ</a>
+    </li>
+    <li>
+        <a href="#SocialStream">ソーシャル ストリーム データ</a>
+    </li>
+    <li>
+        <a href="#AdditionalFeatures">連絡先プロバイダの追加機能</a>
+    </li>
+</ol>
+<h2>キークラス</h2>
+<ol>
+    <li><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja">ContactsContract.Contacts</a></code></li>
+    <li><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code></li>
+    <li><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code></li>
+    <li>android.provider.ContactsContract.StreamItems</li>
+</ol>
+<h2>関連サンプル</h2>
+<ol>
+    <li>
+        <a href="https://developer.android.com/resources/samples/ContactManager/index.html?hl=ja">        Contact Manager        </a>
+
+
+    </li>
+    <li>
+        <a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=ja">        サンプル同期アダプタ</a>
+
+    </li>
+</ol>
+<h2>関連ドキュメント</h2>
+<ol>
+    <li>
+        <a href="content-provider-basics9e29.html?hl=ja">        コンテンツ プロバイダの基本        </a>
+
+
+    </li>
+</ol>
+</div>
+</div>
+<p>
+    連絡先プロバイダは、人のデータに関する端末の中央リポジトリを管理する、柔軟で効果的な Android コンポーネントです。
+連絡先プロバイダは、端末の連絡先アプリケーションに表示されるデータのソースであり、さらに独自アプリケーションで連絡先プロバイダのデータにアクセスし、端末とオンライン サービスとの間でデータを転送することもできます。
+
+このプロバイダは幅広いデータソースに対応しており、各人に関してできるだけ多くのデータを管理しようとするため、複雑な構造をしています。
+
+そのため、連絡先プロバイダの API には、データの取得と変更をどちらもやりやすくするクラスやインターフェースが多数用意されています。
+
+
+</p>
+<p>
+    このガイドでは、以下について説明します。
+</p>
+    <ul>
+        <li>
+            プロバイダの基本構造。
+        </li>
+        <li>
+            プロバイダからのデータの取得方法。
+        </li>
+        <li>
+            プロバイダでのデータの変更方法。
+        </li>
+        <li>
+            サーバーから連絡先プロバイダとデータを同期する同期アダプタの作成方法。
+
+        </li>
+    </ul>
+<p>
+    このガイドは、Android のコンテンツ プロバイダの基礎知識がある読者を対象としています。Android のコンテンツ プロバイダについて詳しくは、<a href="content-provider-basics9e29.html?hl=ja">コンテンツ プロバイダの基本</a>をご覧ください。
+
+
+<a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=ja">サンプル同期アダプタ</a> サンプルアプリは、同期アダプタを使用して連絡先プロバイダと Google ウェブ サービスでホストされているサンプル アプリケーションとの間でデータを転送する例です。
+
+
+
+</p>
+<h2 id="InformationTypes">連絡先プロバイダの構成</h2>
+<p>
+    連絡先プロバイダは、Android のコンテンツ プロバイダ コンポーネントです。人に関する 3 種類のデータを保持しており、それぞれがコンテンツ プロバイダによって提供される 1 つのテーブルに対応しています。この構成を図 1 に示します。
+
+
+</p>
+<img src="../../../images/providers/contacts_structure9e29.png?hl=ja" alt=""
+    height="364" id="figure1" />
+<p class="img-caption">
+  <strong>図 1.</strong>連絡先プロバイダのテーブル構造
+</p>
+<p>
+    この 3 つのテーブルは、一般にそれぞれのコントラクト クラス名で呼ばれます。各クラスは、テーブルによって使用されるコンテンツ URI、列名、列の値のための定数を定義しています。
+
+</p>
+<dl>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja">ContactsContract.Contacts</a></code> テーブル
+    </dt>
+    <dd>
+        各行は、未加工連絡先の行の集約に基づいて異なる人を表します。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> テーブル
+    </dt>
+    <dd>
+        各行には、ユーザーのアカウントとタイプに固有の、人に関するデータの概要が格納されています。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブル
+    </dt>
+    <dd>
+        各行には、メールアドレスや電話番号など、未加工連絡先の詳細情報が格納されています。
+    </dd>
+</dl>
+<p>
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.html?hl=ja">ContactsContract</a></code> に含まれるコントラクト クラスによって表現される他のテーブルは補助テーブルであり、連絡先プロバイダがその操作を管理したり、端末の連絡先アプリや電話アプリの特定機能をサポートしたりするために使用します。
+
+
+</p>
+<h2 id="RawContactBasics">未加工連絡先</h2>
+<p>
+    未加工連絡先は、アカウント タイプとアカウント名の 1 つのペアを使用して得られる人に関するデータです。
+連絡先プロバイダでは、1 人に関するデータのソースとして複数のオンライン サーバーを使用できるため、同じ個人に対して複数の未加工連絡先が許されます。
+
+    未加工連絡先が複数ある場合、ユーザーは同じアカウント タイプの複数のアカウントから取得したその人のデータを組み合わせることができます。
+
+</p>
+<p>
+    未加工連絡先データの大半は、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> テーブルには格納されません。
+その代わり、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルの 1 つまたは複数の行に格納されています。
+各データ行には列 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#RAW_CONTACT_ID">Data.RAW_CONTACT_ID</a></code> があり、親 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> 行の <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">RawContacts._ID</a></code> 値が格納されています。
+
+
+
+</p>
+<h3 id="RawContactsColumns">重要な未加工連絡先列</h3>
+<p>
+    表 1 に、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> の重要な列を示します。表の後の注もお読みください。
+
+</p>
+<p class="table-caption" id="table1">
+    <strong>表 1.</strong> 重要な未加工連絡先列
+</p>
+<table>
+    <tr>
+        <th scope="col">列名</th>
+        <th scope="col">用途</th>
+        <th scope="col">注</th>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncColumns.html?hl=ja#ACCOUNT_NAME">ACCOUNT_NAME</a></code></td><td>この未加工連絡先のソースであるアカウント タイプにおけるアカウント名。
+
+
+
+
+            たとえば、Google アカウントのアカウント名は、デバイス オーナーの Gmail アドレスのどれかです。
+詳しくは、次の <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncColumns.html?hl=ja#ACCOUNT_TYPE">ACCOUNT_TYPE</a></code> の項目をご覧ください。
+
+
+        </td><td>この名前の形式は、アカウント タイプによって異なります。
+
+必ずしもメールアドレスとは限りません。</td>
+
+
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncColumns.html?hl=ja#ACCOUNT_TYPE">ACCOUNT_TYPE</a></code></td><td>この未加工連絡先のソースであるアカウント タイプ。
+
+
+
+たとえば、Google アカウントのアカウント タイプは <code>com.google</code> です。
+アカウント タイプは必ず、所有または管理しているドメインのドメイン ID で修飾してください。
+そうすることで、アカウント タイプが確実に一意になります。
+
+        </td><td>連絡先データを提供するアカウント タイプには、通常、連絡先プロバイダと同期する関連同期アダプタが用意されています。
+
+
+
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContactsColumns.html?hl=ja#DELETED">DELETED</a></code></td><td>未加工連絡先の「削除済み」フラグ。
+
+
+
+
+        </td><td>連絡先プロバイダは、同期アダプタが該当行をサーバーから削除し、最終的にリポジトリから削除するまで、このフラグを基に行を内部的に管理します。</td>
+
+
+
+
+
+    </tr>
+</table>
+<h4>注</h4>
+<p>
+    次に、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> テーブルに関する重要な注を示します。
+
+</p>
+<ul>
+    <li>
+        未加工連絡先の名前は、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> の行には格納されません。
+その代わり、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルの <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.StructuredName.html?hl=ja">ContactsContract.CommonDataKinds.StructuredName</a></code> 行に格納されます。
+
+未加工連絡先は、このタイプの行を <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルに 1 行だけ持ちます。
+
+    </li>
+    <li>
+        <strong>警告: </strong>未加工連絡先の行で独自のアカウント データを使用する場合は、まずそれを <code><a href="https://developer.android.com/reference/android/accounts/AccountManager.html?hl=ja">AccountManager</a></code> に登録する必要があります。
+登録するには、ユーザーに対し、アカウントのリストにアカウント タイプとアカウント名を追加するよう求めます。
+そうしないと、連絡先プロバイダによって未加工連絡先の行が自動的に削除されてしまいます。
+
+        <p>
+            たとえば、ドメインが <code>com.example.dataservice</code> であるウェブベースのサービス用に連絡先データをアプリで管理する場合、そのサービス用のユーザー アカウントが <code>becky.sharp@dataservice.example.com</code> であれば、そのユーザーが先にそのアカウントの「タイプ」（<code>com.example.dataservice</code>）と「名前」（<code>becky.smart@dataservice.example.com</code>）を追加しておくことで、アプリが未加工連絡先の行を追加できるようになります。
+
+
+
+
+            この要件については、文書で説明するか、ユーザーにタイプと名前を追加するよう求めるか、あるいはその両方を実施してください。
+アカウントのタイプと名前については、次のセクションで詳しく説明します。
+
+    </li>
+</ul>
+<h3 id="RawContactsExample">未加工連絡先データのソース</h3>
+<p>
+    未加工連絡先の働きを理解するために、「Emily Dickinson」というユーザーについて考えてみましょう。彼女は自分の端末に次の 3 つのアカウントを定義しています。
+
+</p>
+<ul>
+    <li><code>emily.dickinson@gmail.com</code></li>
+    <li><code>emilyd@gmail.com</code></li>
+    <li>Twitter アカウント「belle_of_amherst」</li>
+</ul>
+<p>
+    このユーザーは、[Accounts] の設定でこの 3 つのアカウントすべてについて [Sync Contacts] を有効にしています。<em></em><em></em>
+
+</p>
+<p>
+    Emily Dickinson がブラウザのウィンドウを開き、Gmail に <code>emily.dickinson@gmail.com</code> としてログインし、[連絡先] を開いて「Thomas Higginson」を追加したとしましょう。
+
+後日、彼女が Gmail に <code>emilyd@gmail.com</code> としてログインし、メールを「Thomas Higginson」宛てに送信すると、彼は自動的に連絡先として追加されます。
+
+彼女はまた、Twitter で「colonel_tom」（Thomas Higginson の Twitter ID）をフォローしています。
+
+</p>
+<p>
+    連絡先プロバイダは、この操作の結果として次の 3 行の未加工連絡先を作成します。
+</p>
+<ol>
+    <li>
+        「Thomas Higginson」の、<code>emily.dickinson@gmail.com</code> に関連付けられた未加工連絡先。
+        ユーザー アカウントのタイプは Google です。
+    </li>
+    <li>
+        「Thomas Higginson」の、<code>emilyd@gmail.com</code> に関連付けられた新たな未加工連絡先。
+        ユーザー アカウントのタイプはやはり Google です。名前が前の行とまったく同じなのに新たな未加工連絡先が作成されたのは、この個人が異なるユーザー アカウントに追加されたからです。
+
+
+    </li>
+    <li>
+        「Thomas Higginson」の、「belle_of_amherst」に関連付けられた未加工連絡先。ユーザー アカウントのタイプは Twitter です。
+
+    </li>
+</ol>
+<h2 id="DataBasics">データ</h2>
+<p>
+    前にも説明したように、未加工連絡先のデータは未加工連絡先の <code>_ID</code> 値にリンクされている <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> 行に格納されます。
+
+これにより、1 つの未加工連絡先が同じタイプのデータ（メールアドレスや電話番号など）のインスタンスを複数持つことができます。
+たとえば、<code>emilyd@gmail.com</code> に対する「Thomas Higginson」（Google アカウント <code>emilyd@gmail.com</code> に関連付けられた、Thomas Higginson の未加工連絡先の行）には、<code>thigg@gmail.com</code> という個人用アドレスと <code>thomas.higginson@gmail.com</code> という仕事用アドレスがあり、連絡先プロバイダはこの 2 つのメールアドレスの行を格納し、両方とも同じ未加工連絡先にリンクします。
+
+
+
+
+
+</p>
+<p>
+    異なるタイプのデータが同じテーブルに格納されることに注目してください。表示名、電話番号、メール、住所、写真、ウェブサイトに関する詳細行はすべて、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルにあります。
+
+これを管理しやすくするため、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルの一部の行には説明的な名前が、それ以外には一般的な名前がそれぞれ付いています。
+
+説明的な名前が付いた列の内容は、行データのタイプによらず意味が同じなのに対し、一般的な名前が付いた列の内容は、データのタイプによって意味が異なります。
+
+
+</p>
+<h3 id="DescriptiveColumns">説明的な名前の列</h3>
+<p>
+    説明的な名前が付いた列の例をいくつか示します。
+</p>
+<dl>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#RAW_CONTACT_ID">RAW_CONTACT_ID</a></code>
+    </dt>
+    <dd>
+        このデータの、未加工連絡先の <code>_ID</code> 列の値。
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#MIMETYPE">MIMETYPE</a></code>
+    </dt>
+    <dd>
+        カスタム MIME タイプで表現した、この行に格納されているデータのタイプ。連絡先プロバイダは、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.html?hl=ja">ContactsContract.CommonDataKinds</a></code> のサブクラスに定義されている MIME タイプを使用します。
+
+これらの MIME タイプはオープンソースで、連絡先プロバイダと連携する任意のアプリケーションまたは同期アダプタで使用できます。
+
+    </dd>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#IS_PRIMARY">IS_PRIMARY</a></code>
+    </dt>
+    <dd>
+        このタイプのデータ行が 1 つの未加工連絡先に対して複数発生する場合、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#IS_PRIMARY">IS_PRIMARY</a></code> 列はそのタイプに対するプライマリ データを含むデータ行を示します。
+
+たとえば、ユーザーがある連絡先の電話番号を長押しし、[<strong>デフォルトに設定</strong>] を選択すると、その番号を含む <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> 行の <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#IS_PRIMARY">IS_PRIMARY</a></code> 列にゼロでない値が設定されます。
+
+
+
+
+    </dd>
+</dl>
+<h3 id="GenericColumns">汎用名の列</h3>
+<p>
+    自由に使用できる <code>DATA1</code> ～ <code>DATA15</code> という 15 個の汎用列の他に、同期アダプタしか使用してはいけない <code>SYNC1</code> ～ <code>SYNC4</code> という 4 個の列があります。
+
+
+汎用名列の定数は、行に指定されているデータのタイプによらず、常に機能します。
+
+</p>
+<p>
+    <code>DATA1</code> 列はインデックス付きです。連絡先プロバイダは常に、この列を、最も頻繁にクエリの対象となるとプロバイダが予想するデータ用の列として使用します。
+たとえば、メールの行では、この列には実際のメールアドレスが格納されます。
+
+</p>
+<p>
+    <code>DATA15</code> は慣例として、写真サムネイルのようなバイナリ ラージ オブジェクト（BLOB）データ用に予約されています。
+
+</p>
+<h3 id="TypeSpecificNames">タイプ固有の列名</h3>
+<p>
+    特定タイプの行に含まれる列に対する作業をやりやすくするため、連絡先プロバイダではタイプ固有の列名定数もあり、たとえば <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.html?hl=ja">ContactsContract.CommonDataKinds</a></code> のサブクラスに定義されています。
+
+こうした定数は、同じ列名に異なる定数名を充てて、特定タイプの行に含まれるデータにアクセスしやすくしているだけのものです。
+
+
+</p>
+<p>
+    たとえば、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email.html?hl=ja">ContactsContract.CommonDataKinds.Email</a></code> クラスには、MIME タイプが <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email.html?hl=ja#CONTENT_ITEM_TYPE">Email.CONTENT_ITEM_TYPE</a></code> である<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> 行向けにタイプ固有の列名定数が定義されています。
+
+
+
+このクラスには、メールアドレス 列用に <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email.html?hl=ja#ADDRESS">ADDRESS</a></code> という定数が含まれています。
+
+<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email.html?hl=ja#ADDRESS">ADDRESS</a></code> の実際の値は「data1」で、これはこの列の汎用名と同じです。
+
+
+</p>
+<p class="caution">
+    <strong>警告: </strong>連絡先プロバイダにあらかじめ定義されている MIME タイプのどれかである行を使用している <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルには、独自のカスタムデータを追加しないでください。
+
+追加すると、データが失われたり、連絡先プロバイダが誤動作したりすることがあります。
+たとえば、メールアドレスではなくユーザー名が格納されている MIME タイプ <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email.html?hl=ja#CONTENT_ITEM_TYPE">Email.CONTENT_ITEM_TYPE</a></code> の行は、列 <code>DATA1</code> には追加しないでください。
+
+
+一方、行に独自のカスタム MIME タイプを使用している場合は、独自のタイプ固有名を定義して列を自由に使用してかまいません。
+
+</p>
+<p>
+    図 2 に、説明的な名前の列とデータ列で <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> 行がどう見えるか、そしてタイプ固有の列名が汎用列名をどう「オーバーレイ」するかを示します。
+
+
+</p>
+<img src="../../../images/providers/data_columns9e29.png?hl=ja"
+    alt="タイプ固有の列名を汎用列名に対応させる方法"
+    height="311" id="figure2" />
+<p class="img-caption">
+  <strong>図 2.</strong> タイプ固有の列名と汎用列名
+</p>
+<h3 id="ColumnMaps">タイプ固有列名が使用されるクラス</h3>
+<p>
+    表 2 に、最もよく用いられるタイプ固有列名クラスを示します。
+</p>
+<p class="table-caption" id="table2">
+  <strong>表 2.</strong>タイプ固有列名が使用されるクラス</p>
+<table>
+  <tr>
+    <th scope="col">対応クラス</th>
+    <th scope="col">データのタイプ</th>
+    <th scope="col">注</th>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.StructuredName.html?hl=ja">ContactsContract.CommonDataKinds.StructuredName</a></code></td><td>このデータ行に関連付けられている未加工連絡先の名前データ。</td>
+
+    <td>1 つの未加工連絡先は、この行を 1 行だけ持ちます。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Photo.html?hl=ja">ContactsContract.CommonDataKinds.Photo</a></code></td><td>このデータ行に関連付けられている未加工連絡先のメインの写真。</td>
+
+    <td>1 つの未加工連絡先は、この行を 1 行だけ持ちます。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email.html?hl=ja">ContactsContract.CommonDataKinds.Email</a></code></td><td>このデータ行に関連付けられている未加工連絡先のメールレアドレス。</td>
+
+    <td>1 つの未加工連絡先は複数のメールアドレスを持つことができます。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.StructuredPostal.html?hl=ja">ContactsContract.CommonDataKinds.StructuredPostal</a></code></td><td>このデータ行に関連付けられている未加工連絡先の住所。</td>
+
+    <td>1 つの未加工連絡先は複数の住所を持つことができます。</td>
+  </tr>
+  <tr>
+    <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.GroupMembership.html?hl=ja">ContactsContract.CommonDataKinds.GroupMembership</a></code></td><td>その未加工連絡先を連絡先プロバイダのグループのどれかにリンクする識別子。</td>
+
+    <td>グループは、アカウント タイプとアカウント名のオプション機能です。
+詳しくは、<a href="#Groups">連絡先グループ</a>をご覧ください。</td>
+
+
+  </tr>
+</table>
+<h3 id="ContactBasics">連絡先</h3>
+<p>
+    連絡先プロバイダは、すべてのアカウント タイプとアカウント名にわたって未加工連絡先の行を結び付けて 1 つの<strong>連絡先</strong>を形成します。
+これにより、1 人の人についてユーザーが集めた全データを表示したり変更したりしやすくなります。
+連絡先プロバイダは、新しい連絡先の行の作成と、既存の連絡先の行を使用した未加工連絡先の集約とを管理します。
+アプリケーションと同期アダプタは連絡先の追加はできず、連絡先の行の一部の列は読み取り専用です。
+
+</p>
+<p class="note">
+    <strong>注: </strong>連絡先を連絡先プロバイダに <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#insert(android.net.Uri, android.content.ContentValues)">insert()</a></code> を使用して追加しようとすると、<code><a href="https://developer.android.com/reference/java/lang/UnsupportedOperationException.html?hl=ja">UnsupportedOperationException</a></code> 例外が発生します。
+
+「読み取り専用」になっている列をアップデートしようとしても、そのアップデートは無視されます。
+
+</p>
+<p>
+    連絡先プロバイダは、既存の連絡先と一致しない新しい未加工連絡先が追加されると、それに対して新しい連絡先を作成します。
+また、既存の未加工連絡先のデータが変更され、それまで関連付けられていた連絡先と一致しなくなった場合にも、同じ処理がなされます。
+
+アプリケーションまたは同期アダプタが、既存の連絡先と一致する新しい未加工連絡先を作成すると、その新しい未加工連絡先は既存の連絡先に集約されます。<em></em>
+
+
+</p>
+<p>
+    連絡先プロバイダは、連絡先の行を未加工連絡先とリンクするのに、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja">Contacts</a></code> テーブルの <code>_ID</code> 列を使用します。
+
+未加工連絡先テーブル <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> の <code>CONTACT_ID</code> 列には、未加工連絡先の各行に関連付けられている連絡先の行の <code>_ID</code> 値が格納されます。
+
+
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja">ContactsContract.Contacts</a></code> テーブルには列 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html?hl=ja#LOOKUP_KEY">LOOKUP_KEY</a></code> もあり、こちらは連絡先の行への「永久」リンクです。
+
+連絡先プロバイダは連絡先を自動的に管理するため、集約や同期が行われると、それに応じて連絡先の行の <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">_ID</a></code> 値が変更される場合があります。
+
+この処理が行われても、コンテンツ URI <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja#CONTENT_LOOKUP_URI">CONTENT_LOOKUP_URI</a></code> と連絡先の <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html?hl=ja#LOOKUP_KEY">LOOKUP_KEY</a></code> の組み合わせは、引き続きその連絡先の行を指すため、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html?hl=ja#LOOKUP_KEY">LOOKUP_KEY</a></code> を使用して「お気に入り」の連絡先へのリンクを管理するなどができます。
+
+
+
+
+この列には、<code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">_ID</a></code> 列の形式と関係のない独自の形式があります。
+
+</p>
+<p>
+    図 3 に、3 つのテーブルの相互関係を示します。
+</p>
+<img src="../../../images/providers/contacts_tables9e29.png?hl=ja" alt="連絡先プロバイダの主なテーブル"
+    height="514" id="figure4" />
+<p class="img-caption">
+  <strong>図 3.</strong> Contacts、RawContacts、Data の各テーブルの関係
+</p>
+<h2 id="Sources">同期アダプタからのデータ</h2>
+<p>
+    ユーザーは端末に連絡先データを直接入力しますが、データはウェブサービスから<strong>同期アダプタ</strong>を経由して連絡先プロバイダにも流れます。同期アダプタは、端末とサービスの間のデータ転送を自動化します。
+
+同期アダフタはシステムの管理下でバックグラウンドで実行され、<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja">ContentResolver</a></code> のメソッドを呼び出してデータを管理します。
+
+
+</p>
+<p>
+    Android では、同期アダプタと連携するウェブサービスをアカウント タイプで識別します。
+    各同期アダプタが扱うアカウント タイプは 1 つですが、そのタイプのアカウント名を複数サポートできます。
+アカウント名とアカウント タイプについては、<a href="#RawContactsExample">未加工連絡先データのソース</a>で簡単に説明しています。
+次に、アカウント タイプとアカウント名が同期アダプタやサービスとどのような関係にあるかを詳しく説明します。
+
+</p>
+<dl>
+    <dt>
+        アカウント タイプ
+    </dt>
+    <dd>
+        ユーザーがデータを格納しているサービスを示します。ほとんどの場合、ユーザーにはサービスに対する認証が求められます。
+たとえば、Google コンタクト はアカウント タイプの 1 つで、コード <code>google.com</code> で識別されます。
+この値は、<code><a href="https://developer.android.com/reference/android/accounts/AccountManager.html?hl=ja">AccountManager</a></code> によって使用されるアカウント タイプに対応します。
+
+    </dd>
+    <dt>
+        アカウント名
+    </dt>
+    <dd>
+        あるアカウント タイプで使用する特定のアカウントまたはログインを示します。Google コンタクト アカウントは Google アカウントと同じで、アカウント名としてメールアドレスを使用します。
+
+        他のサービスでは、1 語のユーザー名や数字の ID が使われていることもあります。
+    </dd>
+</dl>
+<p>
+    アカウント タイプは、一意である必要はありません。1 人のユーザーが複数の Google コンタクト アカウントを設定し、それぞれのデータを連絡先プロバイダにダウンロードする、ということが可能です。このような使い方は、そのユーザーが個人用のアカウント名で私用の連絡先を、仕事用のアカウント名で仕事用の連絡先を管理している場合にありえます。
+
+アカウント名は、普通は一意です。
+この 2 つを組み合わせて、連絡先プロバイダと外部サービスとの間のある決まったデータフローを識別します。
+
+</p>
+<p>
+    独自サービスのデータを連絡先プロバイダに転送する場合は、独自の同期アダプタを作成する必要があります。
+詳しくは、<a href="#SyncAdapters">連絡先プロバイダの同期アダプタ</a>をご覧ください。
+
+</p>
+<p>
+    図 4 に、人に関するデータの流れにおける連絡先プロバイダの位置付けを示します。
+右から 2 列目の各ボックス内のアダプタには、そのアダプタのアカウント タイプが示されています。
+</p>
+<img src="../../../images/providers/ContactsDataFlow9e29.png?hl=ja" alt="人に関するデータの流れ"
+    height="252" id="figure5" />
+<p class="img-caption">
+  <strong>図 4.</strong> 連絡先プロバイダに絡んだデータフロー
+</p>
+<h2 id="Permissions">必要なパーミッション</h2>
+<p>
+    連絡先プロバイダにアクセスするアプリケーションは、次のパーミッションを要求する必要があります。
+
+</p>
+<dl>
+    <dt>1 つ以上のテーブルに対する読み取りアクセス</dt>
+    <dd>
+        <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ja#READ_CONTACTS">READ_CONTACTS</a></code>。<code>AndroidManifest.xml</code> に <code><a href="../manifest/uses-permission-element9e29.html?hl=ja">
+        &lt;uses-permission&gt;</a></code> 要素を使用して <code>&lt;uses-permission android:name="android.permission.READ_CONTACTS"&gt;</code> のように指定します。
+
+
+
+    </dd>
+    <dt>1 つ以上のテーブルに対する書き込みアクセス</dt>
+    <dd>
+        <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ja#WRITE_CONTACTS">WRITE_CONTACTS</a></code>。<code>AndroidManifest.xml</code> に <code><a href="../manifest/uses-permission-element9e29.html?hl=ja">
+        &lt;uses-permission&gt;</a></code> 要素を使用して <code>&lt;uses-permission android:name="android.permission.WRITE_CONTACTS"&gt;</code> のように指定します。
+
+
+
+    </dd>
+</dl>
+<p>
+    これらのパーミッションは、ユーザー プロファイル データにまでは拡張されません。ユーザー プロファイルとそれに必要なパーミッションについては、次のセクションである<a href="#UserProfile">ユーザー プロファイル</a>で説明しています。
+
+
+</p>
+<p>
+    ユーザーの連絡先データは個人的で秘密性の高い情報であることを再度ご確認ください。ユーザーはプライバシーに敏感であり、アプリケーションが自分や自分の連絡先に関するデータを集めることを望みません。
+
+    連絡先データにアクセスするためのパーミッションが必要な理由が明らかでないと、ユーザーがアプリケーションを低く評価したりインストールを拒否したりすることがあります。
+
+</p>
+<h2 id="UserProfile">ユーザー プロファイル</h2>
+<p>
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja">ContactsContract.Contacts</a></code> テーブルには、その端末のユーザーのプロファイル データを格納している行が 1 行あります。
+このデータが記述しているのは端末の <code>user</code> であって、そのユーザーの連絡先ではありません。
+プロファイルの連絡先の行は、プロファイルを使用する各システムの未加工連絡先の行にリンクされています。
+
+    プロファイルの未加工連絡先の各行は、複数のデータ行を持つことができます。ユーザー プロファイルにアクセスするための定数は、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Profile.html?hl=ja">ContactsContract.Profile</a></code> クラスに用意されています。
+
+</p>
+<p>
+    ユーザー プロファイルにアクセスするには、特別なパーミッションが必要です。読み取りと書き込みに必要な <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ja#READ_CONTACTS">READ_CONTACTS</a></code> パーミッションと <code><a href="https://developer.android.com/reference/android/Manifest.permission.html?hl=ja#WRITE_CONTACTS">WRITE_CONTACTS</a></code> パーミッションの他に、ユーザー プロファイルに対する読み取りと書き込みのために android.Manifest.permission#READ_PROFILE パーミッションと android.Manifest.permission#WRITE_PROFILE パーミッションがそれぞれ必要です。
+
+
+
+
+
+</p>
+<p>
+    ユーザーのプロファイルは秘密性の高い情報であることを再度ご確認ください。パーミッション android.Manifest.permission#READ_PROFILE を使用すると、端末ユーザーの個人識別データにアクセスできます。
+
+アプリケーションの説明には、ユーザー プロファイルへのアクセス パーミッションが必要な理由を必ず記載してください。
+
+</p>
+<p>
+    ユーザーのプロファイルが格納された連絡先の行を取得するには、<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)">ContentResolver.query()</a></code> を呼び出します。
+
+コンテンツ URI を <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Profile.html?hl=ja#CONTENT_URI">CONTENT_URI</a></code> に設定し、選択条件は何も指定しません。
+
+このコンテンツ URI は、そのプロファイルの未加工連絡先やデータを取得するためのベース URI としても使用できます。
+たとえば、次のスニペットは指定されたプロファイルのデータを取得します。
+</p>
+<pre>
+// Sets the columns to retrieve for the user profile
+mProjection = new String[]
+    {
+        Profile._ID,
+        Profile.DISPLAY_NAME_PRIMARY,
+        Profile.LOOKUP_KEY,
+        Profile.PHOTO_THUMBNAIL_URI
+    };
+
+// Retrieves the profile from the Contacts Provider
+mProfileCursor =
+        getContentResolver().query(
+                Profile.CONTENT_URI,
+                mProjection ,
+                null,
+                null,
+                null);
+</pre>
+<p class="note">
+    <strong>注: </strong>連絡先の行を複数取得する場合、そのなかの 1 つがユーザー プロファイルかどうかを確認するには、行の <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html?hl=ja#IS_USER_PROFILE">IS_USER_PROFILE</a></code> 列をテストします。
+
+その連絡先がユーザー プロファイルであれば、この列は「1」に設定されています。
+
+</p>
+<h2 id="ContactsProviderMetadata">連絡先プロバイダのメタデータ</h2>
+<p>
+    連絡先プロバイダは、連絡先データの状態を継続的に追跡するためのデータをリポジトリで管理します。
+リポジトリに関するこのメタデータは、RawContacts、Data、Contacts の各テーブルの行、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Settings.html?hl=ja">ContactsContract.Settings</a></code> テーブル、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncState.html?hl=ja">ContactsContract.SyncState</a></code> テーブルなど、さまざまな場所に格納されています。
+
+
+次の表に、各メタデータの効果を示します。
+
+</p>
+<p class="table-caption" id="table3">
+  <strong>表 3.</strong>連絡先プロバイダに用意されているメタデータ</p>
+<table>
+    <tr>
+        <th scope="col">テーブル</th>
+        <th scope="col">列</th>
+        <th scope="col">値</th>
+        <th scope="col">意味</th>
+    </tr>
+    <tr>
+        <td rowspan="2"><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code></td><td rowspan="2"><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncColumns.html?hl=ja#DIRTY">DIRTY</a></code></td><td>「0」- 前回の同期以降、変更はありません。</td>
+
+
+        <td rowspan="2">端末上で変更があり、サーバーと同期する必要がある未加工連絡先をマークします。
+
+Android アプリケーションが行をアップデートすると、連絡先プロバイダによって値が自動的に設定されます。
+
+            <p>
+                未加工連絡先やデータのテーブルを変更する同期アダプタは、使用するコンテンツ URI の末尾に文字列 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.html?hl=ja#CALLER_IS_SYNCADAPTER">CALLER_IS_SYNCADAPTER</a></code> を必ず追加してください。
+
+これにより、プロバイダが行をダーティとマークするのを防ぐことができます。
+                こうしないと、同期アダプタによる変更がローカルな変更と認識され、変更のソースがサーバーであるにもかかわらず、その変更がサーバーに送信されます。
+
+            </p>
+        </td>
+    </tr>
+    <tr>
+            <td>「1」- 前回の同期以降に変更があり、サーバーへの同期が必要です。</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code></td><td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncColumns.html?hl=ja#VERSION">VERSION</a></code></td><td>この行のバージョン番号。</td>
+
+
+        <td>この行またはその関連データが変更されるたび、連絡先プロバイダがこの値を自動的にインクリメントします。</td>
+
+
+
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code></td><td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#DATA_VERSION">DATA_VERSION</a></code></td><td>この行のバージョン番号。</td>
+
+
+        <td>このデータ行が変更されるたび、連絡先プロバイダがこの値を自動的にインクリメントします。</td>
+
+
+
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code></td><td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncColumns.html?hl=ja#SOURCE_ID">SOURCE_ID</a></code></td><td>この未加工連絡先をそれが作成されたアカウントと一意に結び付ける文字列値。
+
+
+
+
+        </td><td>同期アダプタが新しい未加工連絡先を作成するたび、この列はその未加工連絡先に対するサーバーの一意の ID に設定される必要があります。
+
+
+Android アプリケーションが新しい未加工連絡先を作成した場合、そのアプリケーションはこの列を空欄のままにする必要があります。
+同期アダプタはこれを確認して、サーバー上に新しい未加工連絡先を作成し、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncColumns.html?hl=ja#SOURCE_ID">SOURCE_ID</a></code> の値を取得します。
+
+
+            <p>
+                特に、ソース ID はアカウント タイプごとに<strong>一意</strong>で、同期中に安定している必要があります。
+
+            </p>
+                <ul>
+                    <li>
+                        Unique: アカウントの各未加工連絡先には独自のソース ID が必要です。これを強制しないと、連絡先アプリケーションに問題を引き起こすことになります。
+
+                        同じアカウント タイプに対する 2 つの未加工連絡先が、同じソース ID を持つことがありえます。<em></em>
+たとえば、アカウント <code>emily.dickinson@gmail.com</code> の未加工連絡先「Thomas Higginson」は、アカウント <code>emilyd@gmail.com</code> の未加工連絡先「Thomas Higginson」と同じソース ID を持つことができます。
+
+
+
+                    </li>
+                    <li>
+                        Stable: ソース ID は、未加工連絡先のオンライン サービス データにおいて変わらない部分です。
+たとえば、ユーザーが [Apps] 設定から [連絡先ストレージ] を消去し、再同期したとしても、復元された未加工連絡先のソース ID は以前と同じになります。
+
+これを強制しないと、ショートカットが機能しなくなります。
+
+                    </li>
+                </ul>
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="2"><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Groups.html?hl=ja">ContactsContract.Groups</a></code></td><td rowspan="2"><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.GroupsColumns.html?hl=ja#GROUP_VISIBLE">GROUP_VISIBLE</a></code></td><td>「0」- このグループに属する連絡先が Android アプリケーションの UI に表示されなくなります。</td>
+
+
+        <td>この列は、ユーザーが特定のグループに属する連絡先を非表示にすることを許可するサーバーに対して互換性を確保するために用意されています。</td>
+
+
+
+    </tr>
+    <tr>
+        <td>「1」- このグループに属する連絡先を Android アプリケーションの UI に表示できます。</td>
+    </tr>
+    <tr>
+        <td rowspan="2"><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Settings.html?hl=ja">ContactsContract.Settings</a></code></td><td rowspan="2"><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SettingsColumns.html?hl=ja#UNGROUPED_VISIBLE">UNGROUPED_VISIBLE</a></code></td><td>「0」- このアカウントとアカウント タイプについて、グループに属さない連絡先は Android アプリケーションの UI に表示されなくなります。
+
+
+
+
+
+        </td><td rowspan="2">デフォルトでは、グループに属する未加工連絡先がなければ連絡先は表示されません（未加工連絡先のグループ メンバーシップは、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルの 1 つないし複数の <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.GroupMembership.html?hl=ja">ContactsContract.CommonDataKinds.GroupMembership</a></code> 行によって示されます）。
+
+
+
+
+
+            あるアカウントとアカウント タイプについて、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Settings.html?hl=ja">ContactsContract.Settings</a></code> テーブルの行でこのフラグを設定すると、グループのない連絡先を強制的に表示できます。
+
+            このフラグの用途の 1 つとして、グループを使用しないサーバーから連絡先を取得して表示することが考えられます。</td>
+
+    </tr>
+    <tr>
+        <td>「1」- このアカウントとアカウント タイプについて、グループに属さない連絡先が Android アプリケーションの UI に表示されます。</td>
+
+
+
+
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncState.html?hl=ja">ContactsContract.SyncState</a></code></td><td>（すべて）</td><td>このテーブルを使用して、同期アダプタのメタデータを格納します。
+
+
+
+        </td><td>このテーブルを使用すると、同期状態などの同期関連データを永続的に端末上に格納できます。</td>
+
+
+
+
+    </tr>
+</table>
+<h2 id="Access">連絡先プロバイダへのアクセス</h2>
+<p>
+    このセクションでは、連絡先プロバイダからのデータにアクセスするためのガイドラインについて、以下に注目して説明します。
+
+</p>
+<ul>
+    <li>
+        エンティティ クエリ。
+    </li>
+    <li>
+        バッチ変更。
+    </li>
+    <li>
+        インテントを使用した取得と変更。
+    </li>
+    <li>
+        データ整合性。
+    </li>
+</ul>
+<p>
+    同期アダプタからの変更については、<a href="#SyncAdapters">連絡先プロバイダの同期アダプタ</a>でも詳しく説明しています。
+
+</p>
+<h3 id="Entities">エンティティのクエリ</h3>
+<p>
+    連絡先プロバイダのテーブルは階層構造になっており、ある行とその「子」の行すべてを取得すると便利なことがよくあります。
+たとえば、ある人に関するすべての情報を表示するために、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja">ContactsContract.Contacts</a></code> 行 1 行に対するすべての <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> 行や、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> 行 1 行に対するすべての <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email.html?hl=ja">ContactsContract.CommonDataKinds.Email</a></code> 行を取得することが考えられます。
+
+
+
+
+こうした処理をやりやすくするため、連絡先プロバイダには<strong>エンティティ</strong>構造が用意されています。これは、テーブル間でのデータベースの和集合のように機能します。
+
+
+</p>
+<p>
+    1 つのエンティティは、ある親テーブルとその子テーブルから選ばれた列からなるテーブルのようなものです。
+    エンティティをクエリする場合は、そのエンティティで使用できる列に基づいてプロジェクションと検索の条件を指定します。
+その結果が <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> で、取得された各子テーブル行につき 1 行を含みます。
+たとえば、ある連絡先名と、その名前のすべての未加工連絡先の <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email.html?hl=ja">ContactsContract.CommonDataKinds.Email</a></code> 行について、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.Entity.html?hl=ja">ContactsContract.Contacts.Entity</a></code> をクエリすると、各 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email.html?hl=ja">ContactsContract.CommonDataKinds.Email</a></code> 行につき 1 行を含む <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> が得られます。
+
+
+
+
+</p>
+<p>
+    エンティティにより、クエリが簡素化されます。エンティティを使用することで、ある連絡先または未加工連絡先の連絡先データをすべて取得できるので、まず親テーブルにクエリして ID を取得し、次にその ID を使用して子テーブルにクエリする必要がありません。
+
+また、連絡先プロバイダは、エンティティに対するクエリを 1 回のトランザクションで処理することから、取得されたデータの内部的な整合性が保証されます。
+
+
+</p>
+<p class="note">
+    <strong>注: </strong>エンティティには通常、親テーブルと子テーブルのすべての列が含まれるわけではありません。
+そのエンティティの列名定数のリストにない列名に対して作業しようとすると、<code><a href="https://developer.android.com/reference/java/lang/Exception.html?hl=ja">Exception</a></code> が発生します。
+
+</p>
+<p>
+    次のスニペットは、ある連絡先のすべての未加工連絡先を取得する方法を示しています。このスニペットは、「メイン」と「詳細」という 2 つのアクティビティを持つ、もっと大きなアプリケーションの一部です。
+メイン アクティビティは、連絡先の行の一覧を示します。ユーザーが 1 つを選択すると、このアクティビティはその ID を詳細アクティビティに送ります。
+
+詳細アクティビティは <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.Entity.html?hl=ja">ContactsContract.Contacts.Entity</a></code> を使用して、選択した連絡先と関連付けられているすべての未加工連絡先から取得したすべてのデータ行を示します。
+
+
+</p>
+<p>
+    このスニペットは「詳細」アクティビティからの抜粋です。
+</p>
+<pre>
+...
+    /*
+     * Appends the entity path to the URI. In the case of the Contacts Provider, the
+     * expected URI is content://com.google.contacts/#/entity (# is the ID value).
+     */
+    mContactUri = Uri.withAppendedPath(
+            mContactUri,
+            ContactsContract.Contacts.Entity.CONTENT_DIRECTORY);
+
+    // Initializes the loader identified by LOADER_ID.
+    getLoaderManager().initLoader(
+            LOADER_ID,  // The identifier of the loader to initialize
+            null,       // Arguments for the loader (in this case, none)
+            this);      // The context of the activity
+
+    // Creates a new cursor adapter to attach to the list view
+    mCursorAdapter = new SimpleCursorAdapter(
+            this,                        // the context of the activity
+            R.layout.detail_list_item,   // the view item containing the detail widgets
+            mCursor,                     // the backing cursor
+            mFromColumns,                // the columns in the cursor that provide the data
+            mToViews,                    // the views in the view item that display the data
+            0);                          // flags
+
+    // Sets the ListView's backing adapter.
+    mRawContactList.setAdapter(mCursorAdapter);
+...
+&#64;Override
+public Loader&lt;Cursor&gt; onCreateLoader(int id, Bundle args) {
+
+    /*
+     * Sets the columns to retrieve.
+     * RAW_CONTACT_ID is included to identify the raw contact associated with the data row.
+     * DATA1 contains the first column in the data row (usually the most important one).
+     * MIMETYPE indicates the type of data in the data row.
+     */
+    String[] projection =
+        {
+            ContactsContract.Contacts.Entity.RAW_CONTACT_ID,
+            ContactsContract.Contacts.Entity.DATA1,
+            ContactsContract.Contacts.Entity.MIMETYPE
+        };
+
+    /*
+     * Sorts the retrieved cursor by raw contact id, to keep all data rows for a single raw
+     * contact collated together.
+     */
+    String sortOrder =
+            ContactsContract.Contacts.Entity.RAW_CONTACT_ID +
+            " ASC";
+
+    /*
+     * Returns a new CursorLoader. The arguments are similar to
+     * ContentResolver.query(), except for the Context argument, which supplies the location of
+     * the ContentResolver to use.
+     */
+    return new CursorLoader(
+            getApplicationContext(),  // The activity's context
+            mContactUri,              // The entity content URI for a single contact
+            projection,               // The columns to retrieve
+            null,                     // Retrieve all the raw contacts and their data rows.
+            null,                     //
+            sortOrder);               // Sort by the raw contact ID.
+}
+</pre>
+<p>
+    読み込みが完了すると、<code><a href="https://developer.android.com/reference/android/app/LoaderManager.html?hl=ja">LoaderManager</a></code> は <code><a href="https://developer.android.com/reference/android/app/LoaderManager.LoaderCallbacks.html?hl=ja#onLoadFinished(android.content.Loader<D>, D)">onLoadFinished()</a></code> に対するコールバックを起動します。
+
+このメソッドへの入力引数の 1 つは、クエリの結果を含む <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> です。
+独自アプリでは、データをこの <code><a href="https://developer.android.com/reference/android/database/Cursor.html?hl=ja">Cursor</a></code> から取得して表示したりさらに処理したりできます。
+
+</p>
+<h3 id="Transactions">バッチ変更</h3>
+<p>
+    可能であれば必ず、連絡先プロバイダのデータを「バッチモード」で挿入、アップデート、削除してください。そのためには、<code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja">ContentProviderOperation</a></code> オブジェクトの <code><a href="https://developer.android.com/reference/java/util/ArrayList.html?hl=ja">ArrayList</a></code> を作成し、<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">applyBatch()</a></code> を呼び出します。
+
+
+連絡先プロバイダはすべての操作を 1 つのトランザクションの 1 つの <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">applyBatch()</a></code> で行うため、変更内容が連絡先リポジトリで不整合のままになることは決してありません。
+
+
+
+また、バッチ変更では、未加工連絡先とその詳細データを同時に挿入しやすくなっています。
+
+</p>
+<p class="note">
+    <strong>注: </strong>1 つの未加工連絡先を変更する場合は、変更を独自アプリ内で処理するのではなく、インテントを端末の連絡先アプリケーションに送信することを検討してください。<em></em>
+
+    この方法については、<a href="#Intents">インテントを使用した取得と変更</a>で詳しく説明しています。
+
+</p>
+<h4>明け渡し点</h4>
+<p>
+    多数の操作を伴うバッチ変更は、他のプロセスをブロックしてユーザーにとっての全体的な使用感を悪化させかねません。
+意図したすべての変更をできるだけ少ない個別リストに整理するとともに、それらがシステムをブロックしないようにするために、1 つまたは複数の操作に<strong>明け渡し点</strong>を設定してください。
+
+
+    明け渡し点の実体は、<code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja#isYieldAllowed()">isYieldAllowed()</a></code> の値が <code>true</code> に設定された <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja">ContentProviderOperation</a></code> オブジェクトです。
+
+連絡先プロバイダが明け渡し点に遭遇すると、作業を一時中断して他のプロセスを実行させ、現在のトランザクションをクローズします。
+作業を再開した連絡先プロバイダは、<code><a href="https://developer.android.com/reference/java/util/ArrayList.html?hl=ja">ArrayList</a></code> に含まれている次の操作を行い、新しいトランザクションを始めます。
+
+
+</p>
+<p>
+    明け渡し点により、<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">applyBatch()</a></code> の呼び出し 1 回につき複数のトランザクションが発生します。
+そのため、明け渡し点は 1 組の関連する行への最後の操作に設定してください。
+
+    たとえば、未加工連絡先の行とその関連データ行を追加する一連の操作の最後に、あるいは 1 人の連絡先に関連する 1 組の行に対する最後の操作に、明け渡し点を設定します。
+
+
+</p>
+<p>
+    明け渡し点は、アトミック操作の単位でもあります。2 つの明け渡し点間のすべてのアクセスは、1 つのまとまりとして成功または失敗します。
+明け渡し点を設定しない場合、最小のアトミック操作は操作のバッチ全体になります。
+明け渡し点を使用すると、操作がシステムのパフォーマンスを低下させるのを防ぐと同時に、操作の一部分が確実にアトミックになります。
+
+
+</p>
+<h4>変更の後方参照</h4>
+<p>
+    新しい未加工連絡先の行とその関連データの行を 1 組の <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja">ContentProviderOperation</a></code> オブジェクトとして挿入している場合は、データの行を未加工連絡先の行にリンクする必要があります。そのためには、未加工連絡先の <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">_ID</a></code> 値を <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#RAW_CONTACT_ID">RAW_CONTACT_ID</a></code> 値として挿入します。
+
+
+
+ただし、この値は、データの行のために<code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja">ContentProviderOperation</a></code> を作成している間は使用できません。未加工連絡先に <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja">ContentProviderOperation</a></code> 操作がまだ適用されていないからです。
+
+
+これを回避するため、<code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja">ContentProviderOperation.Builder</a></code> クラスにはメソッド <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja#withValueBackReference(java.lang.String, int)">withValueBackReference()</a></code> が用意されています。
+
+
+    このメソッドを使用すると、前の操作の結果を使用して列を挿入または変更できます。
+
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja#withValueBackReference(java.lang.String, int)">withValueBackReference()</a></code> メソッドには引数が 2 つあります。
+
+</p>
+    <dl>
+        <dt>
+            <code>key</code>
+        </dt>
+        <dd>
+            キーと値のペアのキーです。この引数の値は、変更中のテーブルに含まれる列であることが必要です。
+
+        </dd>
+        <dt>
+            <code>previousResult</code>
+        </dt>
+        <dd>
+            <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">applyBatch()</a></code> から取得した <code><a href="https://developer.android.com/reference/android/content/ContentProviderResult.html?hl=ja">ContentProviderResult</a></code> オブジェクトの配列に含まれる値の、0 ベースのインデックスです。
+
+バッチ操作が適用されると、各操作の結果は結果用の中間配列に格納されます。
+
+<code>previousResult</code> 値はそうした結果の 1 つのインデックスで、<code>key</code> 値を使用して取得され、格納されます。
+
+これにより、新しい未加工連絡先レコードを挿入してその <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">_ID</a></code> 値に戻り、次に <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> 行を追加するときにその値を「後方参照」できます。
+
+
+            <p>
+                <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">applyBatch()</a></code> を初めて呼び出すと、指定した <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja">ContentProviderOperation</a></code> オブジェクトの <code><a href="https://developer.android.com/reference/java/util/ArrayList.html?hl=ja">ArrayList</a></code> と同じサイズを使用して、結果配列全体が作成されます。
+
+
+ただし、結果配列に含まれるすべての要素は <code>null</code> に設定され、そのためまだ適用されていない操作から結果を後方参照しようとすると <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja#withValueBackReference(java.lang.String, int)">withValueBackReference()</a></code> が <code><a href="https://developer.android.com/reference/java/lang/Exception.html?hl=ja">Exception</a></code> をスローします。
+
+
+
+
+
+            </p>
+        </dd>
+    </dl>
+<p>
+    次のスニペットは、新しい未加工連絡先とデータをバッチで挿入する方法を示しています。その中には、明け渡し点を指定し、後方参照を使用するコードが含まれています。
+これらのスニペットは、<code><a href="https://developer.android.com/resources/samples/ContactManager/index.html?hl=ja">
+    Contact Manager</a></code> サンプル アプリケーションの <code>ContactAdder</code> クラスの一部である <code>createContacEntry()</code> メソッドの拡張版です。
+
+
+
+</p>
+<p>
+    最初のスニペットは、連絡先データを UI から取得します。この時点で、ユーザーは新しい未加工連絡先の追加先となるアカウントを既に選択しています。
+
+</p>
+<pre>
+// Creates a contact entry from the current UI values, using the currently-selected account.
+protected void createContactEntry() {
+    /*
+     * Gets values from the UI
+     */
+    String name = mContactNameEditText.getText().toString();
+    String phone = mContactPhoneEditText.getText().toString();
+    String email = mContactEmailEditText.getText().toString();
+
+    int phoneType = mContactPhoneTypes.get(
+            mContactPhoneTypeSpinner.getSelectedItemPosition());
+
+    int emailType = mContactEmailTypes.get(
+            mContactEmailTypeSpinner.getSelectedItemPosition());
+</pre>
+<p>
+    次のスニペットは、未加工連絡先の行を <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> テーブルに挿入する操作を作成します。
+
+</p>
+<pre>
+    /*
+     * Prepares the batch operation for inserting a new raw contact and its data. Even if
+     * the Contacts Provider does not have any data for this person, you can't add a Contact,
+     * only a raw contact. The Contacts Provider will then add a Contact automatically.
+     */
+
+     // Creates a new array of ContentProviderOperation objects.
+    ArrayList&lt;ContentProviderOperation&gt; ops =
+            new ArrayList&lt;ContentProviderOperation&gt;();
+
+    /*
+     * Creates a new raw contact with its account type (server type) and account name
+     * (user's account). Remember that the display name is not stored in this row, but in a
+     * StructuredName data row. No other data is required.
+     */
+    ContentProviderOperation.Builder op =
+            ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+            .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, mSelectedAccount.getType())
+            .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, mSelectedAccount.getName());
+
+    // Builds the operation and adds it to the array of operations
+    ops.add(op.build());
+</pre>
+<p>
+    次に、表示名、電話、メールのデータ行を作成します。
+</p>
+<p>
+    操作の各ビルダー オブジェクトは、<code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja#withValueBackReference(java.lang.String, int)">withValueBackReference()</a></code> を使用して <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#RAW_CONTACT_ID">RAW_CONTACT_ID</a></code> を取得します。
+
+
+この参照が最初の操作からの <code><a href="https://developer.android.com/reference/android/content/ContentProviderResult.html?hl=ja">ContentProviderResult</a></code> オブジェクトを後方参照しており、それが未加工連絡先の行を追加し、新しい <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">_ID</a></code> 値を返します。
+
+
+その結果、各データ行はその <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#RAW_CONTACT_ID">RAW_CONTACT_ID</a></code> によって、属する新しい <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> 行に自動的にリンクされます。
+
+
+</p>
+<p>
+    メール行を追加する <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja">ContentProviderOperation.Builder</a></code> オブジェクトは、明け渡し点を設定する <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja#withYieldAllowed(boolean)">withYieldAllowed()</a></code> でフラグ付けされます。
+
+
+</p>
+<pre>
+    // Creates the display name for the new raw contact, as a StructuredName data row.
+    op =
+            ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+            /*
+             * withValueBackReference sets the value of the first argument to the value of
+             * the ContentProviderResult indexed by the second argument. In this particular
+             * call, the raw contact ID column of the StructuredName data row is set to the
+             * value of the result returned by the first operation, which is the one that
+             * actually adds the raw contact row.
+             */
+            .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+
+            // Sets the data row's MIME type to StructuredName
+            .withValue(ContactsContract.Data.MIMETYPE,
+                    ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+
+            // Sets the data row's display name to the name in the UI.
+            .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, name);
+
+    // Builds the operation and adds it to the array of operations
+    ops.add(op.build());
+
+    // Inserts the specified phone number and type as a Phone data row
+    op =
+            ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+            /*
+             * Sets the value of the raw contact id column to the new raw contact ID returned
+             * by the first operation in the batch.
+             */
+            .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+
+            // Sets the data row's MIME type to Phone
+            .withValue(ContactsContract.Data.MIMETYPE,
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+
+            // Sets the phone number and type
+            .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, phone)
+            .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, phoneType);
+
+    // Builds the operation and adds it to the array of operations
+    ops.add(op.build());
+
+    // Inserts the specified email and type as a Phone data row
+    op =
+            ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+            /*
+             * Sets the value of the raw contact id column to the new raw contact ID returned
+             * by the first operation in the batch.
+             */
+            .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+
+            // Sets the data row's MIME type to Email
+            .withValue(ContactsContract.Data.MIMETYPE,
+                    ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+
+            // Sets the email address and type
+            .withValue(ContactsContract.CommonDataKinds.Email.ADDRESS, email)
+            .withValue(ContactsContract.CommonDataKinds.Email.TYPE, emailType);
+
+    /*
+     * Demonstrates a yield point. At the end of this insert, the batch operation's thread
+     * will yield priority to other threads. Use after every set of operations that affect a
+     * single contact, to avoid degrading performance.
+     */
+    op.withYieldAllowed(true);
+
+    // Builds the operation and adds it to the array of operations
+    ops.add(op.build());
+</pre>
+<p>
+    最後のスニペットは、新しい未加工連絡先とデータ行を挿入する <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">applyBatch()</a></code> を呼び出しています。
+
+
+</p>
+<pre>
+    // Ask the Contacts Provider to create a new contact
+    Log.d(TAG,"Selected account: " + mSelectedAccount.getName() + " (" +
+            mSelectedAccount.getType() + ")");
+    Log.d(TAG,"Creating contact: " + name);
+
+    /*
+     * Applies the array of ContentProviderOperation objects in batch. The results are
+     * discarded.
+     */
+    try {
+
+            getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
+    } catch (Exception e) {
+
+            // Display a warning
+            Context ctx = getApplicationContext();
+
+            CharSequence txt = getString(R.string.contactCreationFailure);
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(ctx, txt, duration);
+            toast.show();
+
+            // Log exception
+            Log.e(TAG, "Exception encountered while inserting contact: " + e);
+    }
+}
+</pre>
+<p>
+    バッチ処理を使用すると、<strong>楽観的並行性制御</strong>を実装できます。これは、背後のリポジトリをロックする必要なく変更トランザクションを適用する手法です。
+
+    この手法を使用するには、トランザクションを適用してから、同時に行うことのできる可能性のある他の変更をチェックします。
+一貫性のない変更が発生していることがわかった場合は、トランザクションをロールバックしてやり直します。
+
+</p>
+<p>
+    楽観的並行性制御は、一度に使用するユーザーが 1 人でデータリポジトリへの同時アクセスがまれなモバイル端末に便利です。
+ロックが使用されないため、ロックの設定や他のトランザクションによるロックの解放待ちで時間を無駄にしません。
+
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> 行を 1 行更新している間に楽観的並行性制御を使用する方法は次のとおりです。
+
+</p>
+<ol>
+    <li>
+        取得する他のデータとともに、未加工連絡先の <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncColumns.html?hl=ja#VERSION">VERSION</a></code> 列を取得します。
+
+    </li>
+    <li>
+        制約を強制するのに適した <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja">ContentProviderOperation.Builder</a></code> オブジェクトを、メソッド <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja#newAssertQuery(android.net.Uri)">newAssertQuery(Uri)</a></code> を使用して作成します。
+
+コンテンツ URI に、未加工連絡先の <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">_ID</a></code> が末尾に追加された <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja#CONTENT_URI">RawContacts.CONTENT_URI</a></code> を使用します。
+
+
+
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja">ContentProviderOperation.Builder</a></code> オブジェクトに対し、<code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja#withValue(java.lang.String, java.lang.Object)">withValue()</a></code> を呼び出して、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SyncColumns.html?hl=ja#VERSION">VERSION</a></code> 列と取得したばかりのバージョン番号を比較します。
+
+
+
+    </li>
+    <li>
+        同じ <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja">ContentProviderOperation.Builder</a></code> に対し、<code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja#withExpectedCount(int)">withExpectedCount()</a></code> を呼び出して、このアサーションで 1 行だけがテストされるようにします。
+
+
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.Builder.html?hl=ja#build()">build()</a></code> を呼び出して <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja">ContentProviderOperation</a></code> オブジェクトを作成し、次のこのオブジェクトを <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#applyBatch(java.lang.String, java.util.ArrayList<android.content.ContentProviderOperation>)">applyBatch()</a></code> に渡す <code><a href="https://developer.android.com/reference/java/util/ArrayList.html?hl=ja">ArrayList</a></code> に先頭オブジェクトとして追加します。
+
+
+
+    </li>
+    <li>
+        バッチトランザクションを適用します。
+    </li>
+</ol>
+<p>
+    目的の未加工連絡先の行が、行の読み込みからその変更の試行までの間に別の操作によってアップデートされた場合、<code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja">ContentProviderOperation</a></code> の「アサート」が失敗し、操作のバッチ全体がバックアウトされます。
+
+バックアウトが終わったら、バッチをやり直すこと、または他のアクションを行うことができます。
+
+</p>
+<p>
+    次のスニペットは、<code><a href="https://developer.android.com/reference/android/content/CursorLoader.html?hl=ja">CursorLoader</a></code> を使用して未加工連絡先を 1 つクエリした後に、<code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja">ContentProviderOperation</a></code> を「アサート」します。
+
+
+</p>
+<pre>
+/*
+ * The application uses CursorLoader to query the raw contacts table. The system calls this method
+ * when the load is finished.
+ */
+public void onLoadFinished(Loader&lt;Cursor&gt; loader, Cursor cursor) {
+
+    // Gets the raw contact's _ID and VERSION values
+    mRawContactID = cursor.getLong(cursor.getColumnIndex(BaseColumns._ID));
+    mVersion = cursor.getInt(cursor.getColumnIndex(SyncColumns.VERSION));
+}
+
+...
+
+// Sets up a Uri for the assert operation
+Uri rawContactUri = ContentUris.withAppendedId(RawContacts.CONTENT_URI, mRawContactID);
+
+// Creates a builder for the assert operation
+ContentProviderOperation.Builder assertOp = ContentProviderOperation.netAssertQuery(rawContactUri);
+
+// Adds the assertions to the assert operation: checks the version and count of rows tested
+assertOp.withValue(SyncColumns.VERSION, mVersion);
+assertOp.withExpectedCount(1);
+
+// Creates an ArrayList to hold the ContentProviderOperation objects
+ArrayList ops = new ArrayList&lt;ContentProviderOperationg&gt;;
+
+ops.add(assertOp.build());
+
+// You would add the rest of your batch operations to "ops" here
+
+...
+
+// Applies the batch. If the assert fails, an Exception is thrown
+try
+    {
+        ContentProviderResult[] results =
+                getContentResolver().applyBatch(AUTHORITY, ops);
+
+    } catch (OperationApplicationException e) {
+
+        // Actions you want to take if the assert operation fails go here
+    }
+</pre>
+<h3 id="Intents">インテントを使用した取得と変更</h3>
+<p>
+    インテントを端末の連絡先アプリケーションに送信すると、連絡先プロバイダに間接的にアクセスできます。
+インテントが端末の連絡先アプリケーション UI を起動し、ユーザーはそこで連絡先関連の作業を行えます。
+このタイプのアクセスで、ユーザーは次の作業ができます。
+    <ul>
+        <li>連絡先をリストから選び、アプリケーションに返してさらに作業する。</li>
+        <li>既存の連絡先データを編集する。</li>
+        <li>任意のアカウントに新しい未加工連絡先を挿入する。</li>
+        <li>連絡先または連絡先データを削除する。</li>
+    </ul>
+<p>
+    ユーザーがデータを挿入またはアップデートしている場合は、まずデータを収集し、次にそれをインテントの一部として送信できます。
+
+</p>
+<p>
+    インテントを使用して端末の連絡先アプリケーション経由で連絡先プロバイダにアクセスする場合、連絡先プロバイダにアクセスするための独自の UI やコードを作成する必要はありません。
+また、連絡先プロバイダに対する読み取りや書き込みのパーミッションを要求する必要もありません。
+端末の連絡先アプリケーションは、連絡先に対する読み取りパーミッションをデリゲートできます。また、連絡先プロバイダへの変更を他のアプリケーション経由で行っていることから、書き込みパーミッションは不要です。
+
+
+</p>
+<p>
+    プロバイダにアクセスするためのインテントを送信する汎用プロセスについては、<a href="content-provider-basics9e29.html?hl=ja">コンテンツ プロバイダの基本</a>のセクション「インテント経由のデータアクセス」で詳しく説明しています。
+
+表 4 に、利用可能なタスクで使用できるアクション、MIME タイプ、データ値をまとめます。<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ja#putExtra(java.lang.String, java.lang.String)">putExtra()</a></code> で使用できるエクストラ値については、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Intents.Insert.html?hl=ja">ContactsContract.Intents.Insert</a></code> のリファレンス ドキュメントに一覧があります。
+
+
+
+
+</p>
+<p class="table-caption" id="table4">
+  <strong>表 4.</strong>連絡先プロバイダのインテント
+</p>
+<table style="width:75%">
+    <tr>
+        <th scope="col" style="width:10%">タスク</th>
+        <th scope="col" style="width:5%">アクション</th>
+        <th scope="col" style="width:10%">データ</th>
+        <th scope="col" style="width:10%">MIME タイプ</th>
+        <th scope="col" style="width:25%">注</th>
+    </tr>
+    <tr>
+        <td><strong>連絡先をリストから選択</strong></td><td><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ja#ACTION_PICK">ACTION_PICK</a></code></td><td>次のどれかです。
+
+
+
+            <ul>
+                <li>
+<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja#CONTENT_URI">Contacts.CONTENT_URI</a></code>。連絡先のリストを表示します。
+
+                </li>
+                <li>
+<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Phone.html?hl=ja#CONTENT_URI">Phone.CONTENT_URI</a></code>。未加工連絡先の電話番号のリストを表示します。
+
+                </li>
+                <li>
+<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.StructuredPostal.html?hl=ja#CONTENT_URI">StructuredPostal.CONTENT_URI</a></code>。未加工連絡先の住所のリストを表示します。
+
+
+                </li>
+                <li>
+<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email.html?hl=ja#CONTENT_URI">Email.CONTENT_URI</a></code>。未加工連絡先のメールアドレスのリストを表示します。
+
+                </li>
+            </ul>
+        </td><td>未使用</td><td>指定したコンテンツ URI のタイプに応じて、未加工連絡先のリストか、未加工連絡先から取得されたデータのリストを表示します。
+
+
+
+
+
+
+            <p>
+                <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ja#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code> を呼び出してください。それにより、選択した行のコンテンツ URI が返されます。
+
+URI の形式は、テーブルのコンテンツ URI の末尾にその行の <code>LOOKUP_ID</code> が追加されたものです。
+
+                端末の連絡先アプリは、このアクティビティの実行中を通して、読み取りと書き込みのパーミッションをこのコンテンツ URI にデリゲートします。
+詳しくは、<a href="content-provider-basics9e29.html?hl=ja">コンテンツ プロバイダの基本</a>をご覧ください。
+
+
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>新しい未加工連絡先を挿入</strong></td><td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Intents.Insert.html?hl=ja#ACTION">Insert.ACTION</a></code></td><td>該当せず</td><td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja#CONTENT_TYPE">RawContacts.CONTENT_TYPE</a></code>。未加工連絡先のセットに対する MIME タイプです。
+
+
+
+
+        </td><td>端末の連絡先アプリケーションの [<strong>Add Contact</strong>] 画面を表示します。
+
+インテントに追加したエクストラ値が表示されます。
+<code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ja#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a></code> を使用して送信すると、新たに追加された未加工連絡先の URI が、アクティビティの <code><a href="https://developer.android.com/reference/android/app/Activity.html?hl=ja#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a></code> コールバック メソッドの <code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ja">Intent</a></code> 引数の「data」フィールドに格納されて戻ってきます。
+
+
+
+
+この値を取得するには、<code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ja#getData()">getData()</a></code> を呼び出します。</td>
+
+    </tr>
+    <tr>
+        <td><strong>連絡先の編集</strong></td><td><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ja#ACTION_EDIT">ACTION_EDIT</a></code></td><td>連絡先の <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja#CONTENT_LOOKUP_URI">CONTENT_LOOKUP_URI</a></code>。
+
+
+
+エディタ アクティビティを使用すると、ユーザーがその連絡先に関連付けられている任意のデータを編集できます。</td><td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja#CONTENT_ITEM_TYPE">Contacts.CONTENT_ITEM_TYPE</a></code>。1 つの連絡先です。</td>
+
+
+
+
+        <td>連絡先アプリケーションに Edit Contact 画面を表示します。
+インテントに追加したエクストラ値が表示されます。
+ユーザーが [<strong>Done</strong>] をタップして編集内容を保存すると、アクティビティがフォアグラウンドに戻ります。</td>
+
+
+    </tr>
+    <tr>
+        <td><strong>ピッカー（データ追加も可能）を表示</strong></td>
+        <td><code><a href="https://developer.android.com/reference/android/content/Intent.html?hl=ja#ACTION_INSERT_OR_EDIT">ACTION_INSERT_OR_EDIT</a></code></td><td>該当せず</td><td><code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja#CONTENT_ITEM_TYPE">CONTENT_ITEM_TYPE</a></code></td><td>このインテントは、連絡先アプリのピッカー画面を常に表示します。
+
+
+
+
+
+
+
+ユーザーは、編集する連絡先を選ぶか、新しい連絡先を追加できます。
+ユーザーの選択に応じて編集画面か追加画面が開き、インテントに含めて渡したエクストラ データが表示されます。
+
+メールアドレスや電話番号などの連絡先データを独自アプリに表示する場合は、このインテントを使用すると、ユーザーが既存の連絡先にデータを追加できます。
+
+
+            <p class="note">
+                <strong>注: </strong>このインテントのエクストラで名前の値を送信する必要はありません。ユーザーは必ず既存の名前を選ぶか新しい名前を追加するからです。
+そのうえ、アプリが名前を送信し、ユーザーが編集することを選んだ場合、連絡先アプリは送信した名前を表示し、以前の値を上書きします。
+
+ユーザーがこのことに気付かず、編集内容を保存すると、以前の値が失われます。
+
+            </p>
+         </td>
+    </tr>
+</table>
+<p>
+    端末の連絡先アプリは、インテントを使用して未加工連絡先や任意のデータを削除することを許可しません。
+そのため、未加工連絡先を削除するには <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#delete(android.net.Uri, java.lang.String, java.lang.String[])">ContentResolver.delete()</a></code> または <code><a href="https://developer.android.com/reference/android/content/ContentProviderOperation.html?hl=ja#newDelete(android.net.Uri)">ContentProviderOperation.newDelete()</a></code> を使用してください。
+
+
+
+</p>
+<p>
+    次のスニペットは、新しい未加工連絡先とデータをバッチで挿入するインテントをコンストラクトして送信する方法を示しています。
+
+</p>
+<pre>
+// Gets values from the UI
+String name = mContactNameEditText.getText().toString();
+String phone = mContactPhoneEditText.getText().toString();
+String email = mContactEmailEditText.getText().toString();
+
+String company = mCompanyName.getText().toString();
+String jobtitle = mJobTitle.getText().toString();
+
+// Creates a new intent for sending to the device's contacts application
+Intent insertIntent = new Intent(ContactsContract.Intents.Insert.ACTION);
+
+// Sets the MIME type to the one expected by the insertion activity
+insertIntent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+
+// Sets the new contact name
+insertIntent.putExtra(ContactsContract.Intents.Insert.NAME, name);
+
+// Sets the new company and job title
+insertIntent.putExtra(ContactsContract.Intents.Insert.COMPANY, company);
+insertIntent.putExtra(ContactsContract.Intents.Insert.JOB_TITLE, jobtitle);
+
+/*
+ * Demonstrates adding data rows as an array list associated with the DATA key
+ */
+
+// Defines an array list to contain the ContentValues objects for each row
+ArrayList&lt;ContentValues&gt; contactData = new ArrayList&lt;ContentValues&gt;();
+
+
+/*
+ * Defines the raw contact row
+ */
+
+// Sets up the row as a ContentValues object
+ContentValues rawContactRow = new ContentValues();
+
+// Adds the account type and name to the row
+rawContactRow.put(ContactsContract.RawContacts.ACCOUNT_TYPE, mSelectedAccount.getType());
+rawContactRow.put(ContactsContract.RawContacts.ACCOUNT_NAME, mSelectedAccount.getName());
+
+// Adds the row to the array
+contactData.add(rawContactRow);
+
+/*
+ * Sets up the phone number data row
+ */
+
+// Sets up the row as a ContentValues object
+ContentValues phoneRow = new ContentValues();
+
+// Specifies the MIME type for this data row (all data rows must be marked by their type)
+phoneRow.put(
+        ContactsContract.Data.MIMETYPE,
+        ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE
+);
+
+// Adds the phone number and its type to the row
+phoneRow.put(ContactsContract.CommonDataKinds.Phone.NUMBER, phone);
+
+// Adds the row to the array
+contactData.add(phoneRow);
+
+/*
+ * Sets up the email data row
+ */
+
+// Sets up the row as a ContentValues object
+ContentValues emailRow = new ContentValues();
+
+// Specifies the MIME type for this data row (all data rows must be marked by their type)
+emailRow.put(
+        ContactsContract.Data.MIMETYPE,
+        ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE
+);
+
+// Adds the email address and its type to the row
+emailRow.put(ContactsContract.CommonDataKinds.Email.ADDRESS, email);
+
+// Adds the row to the array
+contactData.add(emailRow);
+
+/*
+ * Adds the array to the intent's extras. It must be a parcelable object in order to
+ * travel between processes. The device's contacts app expects its key to be
+ * Intents.Insert.DATA
+ */
+insertIntent.putParcelableArrayListExtra(ContactsContract.Intents.Insert.DATA, contactData);
+
+// Send out the intent to start the device's contacts app in its add contact activity.
+startActivity(insertIntent);
+</pre>
+<h3 id="DataIntegrity">データの整合性</h3>
+<p>
+    連絡先リポジトリにはユーザーによる修正や更新が予想される重要で秘密性の高いデータが格納されるため、連絡先プロバイダにはデータの整合性に関して明確に定義されたルールがあります。
+連絡先データを変更する際にこれらのルールを守ることは、開発側の責任です。
+ここでは、重要なルールを示します。
+
+</p>
+<dl>
+    <dt>
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.StructuredName.html?hl=ja">ContactsContract.CommonDataKinds.StructuredName</a></code> 行を、追加する <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> 行ごとに必ず追加してください。
+
+    </dt>
+    <dd>
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルに <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.StructuredName.html?hl=ja">ContactsContract.CommonDataKinds.StructuredName</a></code> 行のない <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> 行は、集約中に問題を引き起こすことがあります。
+
+
+
+    </dd>
+    <dt>
+        新しい <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> 行を、その親 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> 行に必ずリンクしてください。
+
+    </dt>
+    <dd>
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> にリンクされていない <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> 行は端末の連絡先アプリケーションで可視にならず、同期アダプタで問題になることがあります。
+
+
+    </dd>
+    <dt>
+        変更するのは、所有する未加工連絡先のデータに限ってください。
+    </dt>
+    <dd>
+        通常、連絡先プロバイダは複数の異なるアカウント タイプやオンライン サービスから取得したデータを管理しています。
+そのため、アプリケーションが所有しているデータのみ変更または削除されるようにし、アプリケーションが管理しているアカウント タイプとアカウント名のデータのみ挿入するようにすることが必要です。
+
+
+    </dd>
+    <dt>
+        権限、コンテンツ URI、URI パス、列名、MIME タイプ、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.CommonColumns.html?hl=ja#TYPE">TYPE</a></code> 値については、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.html?hl=ja">ContactsContract</a></code> とそのサブクラスに定義されている定数を必ず使用してください。
+
+
+    </dt>
+    <dd>
+        そのような定数を使用することがエラーの予防に役立ちます。また、使われなくなった定数があれば、コンパイラーから警告として通知されます。
+
+    </dd>
+</dl>
+<h3 id="CustomData">カスタムデータ行</h3>
+<p>
+    独自のカスタム MIME タイプを作成して使用すると、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルで独自データ行を挿入、編集、削除、取得できます。
+独自行で使用できるのは <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja">ContactsContract.DataColumns</a></code> に定義された列だけですが、独自タイプに固有の列名をデフォルトの列名にマッピングできます。
+
+
+端末の連絡先アプリケーションで、独自行のデータは表示されますが、編集または削除はできず、ユーザーはデータの追加ができません。
+
+ユーザーがカスタムデータ行を変更できるようにするには、独自のアプリケーションでエディタ アクティビティを提供する必要があります。
+
+</p>
+<p>
+    カスタムデータを表示するには、1 つの <code>&lt;ContactsAccountType&gt;</code> 要素と 1 つまたは複数の <code>&lt;ContactsDataKind&gt;</code> 子要素を含む <code>contacts.xml</code> ファイルを提供します。
+
+詳しくは、<a href="#SocialStreamDataKind"><code>&lt;ContactsDataKind&gt; element</code></a>に関するセクションで説明しています。
+
+</p>
+<p>
+    カスタム MIME タイプについて詳しくは、<a href="content-provider-creating9e29.html?hl=ja">コンテンツ プロバイダの作成</a>をご覧ください。
+
+
+</p>
+<h2 id="SyncAdapters">連絡先プロバイダの同期アダプタ</h2>
+<p>
+    連絡先プロバイダは、特に端末とオンライン サービスとの間における連絡先データの<strong>同期</strong>を処理するために設計されています。
+これを使用することで、ユーザーは既存のデータを新しい端末にダウンロードしたり、既存のデータを新しいアカウントにアップロードしたりできています。
+
+    また、同期によって、追加や変更のソースに関係なく、ユーザーは最新データを入手できます。
+同期の利点としては他にも、端末がネットワークに接続されていなくても連絡先データを使用できるようになることが挙げられます。
+
+</p>
+<p>
+    同期はさまざまな手法で実装できますが、Android システムでは次のタスクを自動化するプラグイン同期フレームワークを提供しています。
+
+    <ul>
+
+    <li>
+        ネットワークの可用性のチェック。
+    </li>
+    <li>
+        ユーザーのプリファレンスに基づく同期のスケジュールと実施。
+    </li>
+    <li>
+        停止された同期の再開。
+    </li>
+    </ul>
+<p>
+    このフレームワークを使用するには、同期アダプタ プラグインを提供する必要があります。各同期アダプタはサービスと連絡先プロバイダに対して一意ですが、同じサービスに対して複数のアカウント名を処理できます。
+また、このフレームワークでは同じサービスとプロバイダに対して複数の同期アダプタが可能です。
+
+</p>
+<h3 id="SyncClassesFiles">同期アダプタのクラスとファイル</h3>
+<p>
+    同期アダプタは、<code><a href="https://developer.android.com/reference/android/content/AbstractThreadedSyncAdapter.html?hl=ja">AbstractThreadedSyncAdapter</a></code> のサブクラスとして実装し、Android アプリケーションの一部としてインストールします。
+
+システムは同期アダプタに関する知識を、アプリケーション マニフェストの要素からと、マニフェストが指す専用の XML ファイルから取得します。
+この XML ファイルは、オンライン サービスのアカウント タイプと連絡先プロバイダに絡む権限を定義しており、この組み合わせでアダプタを一意に識別します。
+
+同期アダプタは、ユーザーが同期アダプタのアカウント タイプに対してアカウントを追加し、同期アダプタの同期対象である連絡先プロバイダで同期を有効にすることで、アクティブになります。
+
+この時点で、システムはアダプタの管理を開始し、連絡先プロバイダとサーバーとの同期が必要になるとそれを呼び出します。
+
+</p>
+<p class="note">
+    <strong>注: </strong>アカウント タイプを同期アダプタの識別の一環として使用することにより、システムは同じ組織から異なるサービスにアクセスする同期アダプタを検出してグループ化できます。
+
+たとえば、Google オンライン サービス用の同期アダプタでは、すべて同じアカウント タイプ <code>com.google</code> です。
+ユーザーが Google アカウントを端末に追加すると、Google サービス用にインストールされているすべての同期アダプタがひとまとめにリストされ、リストされている各同期アダプタは端末上の異なる連絡先プロバイダと同期します。
+
+
+</p>
+<p>
+    データにアクセスするたび、ほとんどのサービスがユーザーに ID の確認を要求するため、Android システムでは、同期アダプタ フレームワークと類似した認証フレームワークを提供しており、往々にして同期アダプタ フレームワークと組み合わせて使用します。
+
+この認証フレームワークでは、<code><a href="https://developer.android.com/reference/android/accounts/AbstractAccountAuthenticator.html?hl=ja">AbstractAccountAuthenticator</a></code> のサブクラスであるプラグイン認証システムを使用します。
+
+認証システムは、次の手順でユーザーの身元を検証します。
+
+    <ol>
+        <li>
+            ユーザー名とパスワードか、それに準ずる情報（ユーザーの<strong>資格情報</strong>）を収集します。
+
+        </li>
+        <li>
+            収集した資格情報をサービスに送信します。
+        </li>
+        <li>
+            サービスの返答を検証します。
+        </li>
+    </ol>
+<p>
+    サービスが資格情報を受け入れた場合、認証システムはその資格情報を後での使用のために格納します。
+<code><a href="https://developer.android.com/reference/android/accounts/AccountManager.html?hl=ja">AccountManager</a></code> はプラグイン認証フレームワークのおかげで、OAuth2 認証トークンなど、認証システムがサポートして公開することを選択している任意の認証トークンへのアクセスを提供できます。
+
+
+</p>
+<p>
+    認証は必須ではありませんが、たいていの連絡先サービスが使用しています。
+    ただし、認証に Android 認証フレームワークを使用する必要はありません。
+</p>
+<h3 id="SyncAdapterImplementing">同期アダプタの実装</h3>
+<p>
+    連絡先プロバイダ用の同期アダプタを実装するには、まず以下を備えた Android アプリケーションを作成します。
+
+</p>
+    <dl>
+        <dt>
+            システムからの同期アダプタとのバインド要求に対処する <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ja">Service</a></code> コンポーネント。
+
+        </dt>
+        <dd>
+            システムは、同期しようとするとき、サービスの <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ja#onBind(android.content.Intent)">onBind()</a></code> メソッドを呼び出して、同期アダプタの <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ja">IBinder</a></code> を取得します。
+
+これにより、システムはアダプタのメソッドに対するプロセス間呼び出しを実行できます。
+
+            <p>
+                <a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=ja">サンプル同期アダプタ</a>のサンプルアプリで、このサービスのクラス名は <code>com.example.android.samplesync.syncadapter.SyncService</code> です。
+
+
+            </p>
+        </dd>
+        <dt>
+            <code><a href="https://developer.android.com/reference/android/content/AbstractThreadedSyncAdapter.html?hl=ja">AbstractThreadedSyncAdapter</a></code> の具象サブクラスとして実装された、実際の同期アダプタ。
+
+        </dt>
+        <dd>
+            このクラスが、サーバーからのデータのダウンロード、端末からのデータのアップロード、競合の解消といった作業を実施します。
+アダフタの主な作業は、メソッド <code><a href="https://developer.android.com/reference/android/content/AbstractThreadedSyncAdapter.html?hl=ja#onPerformSync(android.accounts.Account, android.os.Bundle, java.lang.String, android.content.ContentProviderClient, android.content.SyncResult)">onPerformSync()</a></code> で実行されます。
+
+
+このクラスは、シングルトンとしてインスタンス化する必要があります。
+            <p>
+                <a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=ja">サンプル同期アダプタ</a>のサンプルアプリで、同期アダプタはクラス <code>com.example.android.samplesync.syncadapter.SyncAdapter</code> に定義されています。
+
+
+            </p>
+        </dd>
+        <dt>
+            <code><a href="https://developer.android.com/reference/android/app/Application.html?hl=ja">Application</a></code> のサブクラス。
+        </dt>
+        <dd>
+            このクラスは同期アダプタ シングルトンのファクトリとして機能します。同期アダプタのインスタンス化には <code><a href="https://developer.android.com/reference/android/app/Application.html?hl=ja#onCreate()">onCreate()</a></code> メソッドを使用し、同期アダプタ シングルトンを同期アダプタのサービスの <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ja#onBind(android.content.Intent)">onBind()</a></code> メソッドに返すための静的な「getter」メソッドを提供します。
+
+
+
+
+        </dd>
+        <dt>
+            <strong>任意:</strong>システムからのユーザー認証要求に対処する <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ja">Service</a></code> コンポーネント。
+
+        </dt>
+        <dd>
+            <code><a href="https://developer.android.com/reference/android/accounts/AccountManager.html?hl=ja">AccountManager</a></code> は、このサービスを開始することによって認証プロセスを始めます。
+サービスの <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ja#onCreate()">onCreate()</a></code> メソッドは、認証システム オブジェクトをインスタンス化します。
+システムは、アプリケーションの同期アダプタのためにユーザー アカウントを認証しようとするとき、サービスの <code><a href="https://developer.android.com/reference/android/app/Service.html?hl=ja#onBind(android.content.Intent)">onBind()</a></code> メソッドを呼び出して、認証システムの <code><a href="https://developer.android.com/reference/android/os/IBinder.html?hl=ja">IBinder</a></code> を取得します。
+
+
+これにより、システムは認証システムのメソッドに対するプロセス間呼び出しを実行できます。
+
+            <p>
+                <a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=ja">サンプル同期アダプタ</a>のサンプルアプリで、このサービスのクラス名は <code>com.example.android.samplesync.authenticator.AuthenticationService</code> です。
+
+
+            </p>
+        </dd>
+        <dt>
+            <strong>任意:</strong>認証の要求を処理する <code><a href="https://developer.android.com/reference/android/accounts/AbstractAccountAuthenticator.html?hl=ja">AbstractAccountAuthenticator</a></code> の具象サブクラス。
+
+
+        </dt>
+        <dd>
+            このクラスは、ユーザーの資格情報をサーバーに対して認証するために <code><a href="https://developer.android.com/reference/android/accounts/AccountManager.html?hl=ja">AccountManager</a></code> が呼び出すメソッドを提供します。
+認証プロセスの詳細は、使用されているサーバー技術に応じて多岐にわたります。
+認証について詳しくは、使用するサーバー ソフトウェアのドキュメントをご覧ください。
+
+            <p>
+                <a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=ja">サンプル同期アダプタ</a>のサンプルアプリで、認証はクラス <code>com.example.android.samplesync.authenticator.Authenticator</code> に定義されています。
+
+
+            </p>
+        </dd>
+        <dt>
+            システムに対する同期アダプタと認証システムを定義する XML ファイル。
+        </dt>
+        <dd>
+            前述の同期アダプタと認証システム サービスのコンポーネントは、アプリケーション マニフェストの <code>&lt;<a href="../manifest/service-element9e29.html?hl=ja">service</a>&gt;</code> 要素に定義されます。
+
+
+これらの要素には、特定のデータをシステムに提供する次のような <code>&lt;<a href="../manifest/meta-data-element9e29.html?hl=ja">meta-data</a>&gt;</code> 子要素が含まれます。
+
+
+
+
+            <ul>
+                <li>
+                    同期アダプタ サービス用の <code>&lt;<a href="../manifest/meta-data-element9e29.html?hl=ja">meta-data</a>&gt;</code> 要素は、XML ファイル <code>res/xml/syncadapter.xml</code> を指します。
+
+
+このファイルが、連絡先プロバイダと同期されるウェブサービスの URI と、そのウェブサービスで使用するアカウント タイプを指定します。
+
+
+                </li>
+                <li>
+                    <strong>任意:</strong>認証システム用の <code>&lt;<a href="../manifest/meta-data-element9e29.html?hl=ja">meta-data</a>&gt;</code> 要素は、XML ファイル <code>res/xml/authenticator.xml</code> を指します。
+
+
+このファイルが、この認証システムがサポートするアカウント タイプと、認証プロセスの最中に表示される UI リソースを指定します。
+
+この要素に指定されるアカウント タイプは、同期アダプタ用に指定されるアカウント タイプと同じであることが必要です。
+
+
+                </li>
+            </ul>
+        </dd>
+    </dl>
+<h2 id="SocialStream">ソーシャル ストリーム データ</h2>
+<p>
+    android.provider.ContactsContract.StreamItems テーブルとandroid.provider.ContactsContract.StreamItemPhotos テーブルは、ソーシャル ネットワークからの受信データを管理します。
+
+独自ネットワークからのストリーム データをこれらのテーブルに追加する同期アダプタを作成したり、ストリーム データをこれらのテーブルから読み込んで独自アプリケーションに表示したり、この両方を行ったりできます。
+
+このような機能があると、ソーシャル ネットワーキングのサービスやアプリケーションを Android のソーシャル ネットワーキング機能に統合できます。
+
+</p>
+<h3 id="StreamText">ソーシャル ストリーム テキスト</h3>
+<p>
+    ストリーム アイテムは、必ず未加工連絡先に関連付けられます。android.provider.ContactsContract.StreamItemsColumns#RAW_CONTACT_ID は、未加工連絡先の <code>_ID</code> 値にリンクされます。
+
+未加工連絡先のアカウント タイプとアカウント名は、ストリーム アイテム行にも格納されます。
+
+</p>
+<p>
+    ストリームからのデータを次の列に格納します。
+</p>
+<dl>
+    <dt>
+        android.provider.ContactsContract.StreamItemsColumns#ACCOUNT_TYPE
+    </dt>
+    <dd>
+        <strong>必須</strong>。このストリーム アイテムに関連付けられている未加工連絡先の、ユーザーのアカウント タイプ。
+ストリーム アイテムを挿入する際には、この値を忘れずに設定してください。
+    </dd>
+    <dt>
+        android.provider.ContactsContract.StreamItemsColumns#ACCOUNT_NAME
+    </dt>
+    <dd>
+        <strong>必須</strong>。このストリーム アイテムに関連付けられている未加工連絡先の、ユーザーのアカウント名。
+ストリーム アイテムを挿入する際には、この値を忘れずに設定してください。
+    </dd>
+    <dt>
+        識別用列
+    </dt>
+    <dd>
+        <strong>必須</strong>。ストリーム アイテムを挿入する際には、次の識別用列を挿入する必要があります。
+
+        <ul>
+            <li>
+                android.provider.ContactsContract.StreamItemsColumns#CONTACT_ID:このストリーム アイテムが関連付けられている連絡先の android.provider.BaseColumns#_ID 値。
+
+
+            </li>
+            <li>
+                android.provider.ContactsContract.StreamItemsColumns#CONTACT_LOOKUP_KEY:このストリーム アイテムが関連付けられている連絡先の android.provider.ContactsContract.ContactsColumns#LOOKUP_KEY 値。
+
+
+            </li>
+            <li>
+                android.provider.ContactsContract.StreamItemsColumns#RAW_CONTACT_ID:このストリーム アイテムが関連付けられている未加工連絡先の android.provider.BaseColumns#_ID 値。
+
+
+            </li>
+        </ul>
+    </dd>
+    <dt>
+        android.provider.ContactsContract.StreamItemsColumns#COMMENTS
+    </dt>
+    <dd>
+        省略可能。ストリーム アイテムの冒頭に表示できる概要情報を格納します。
+    </dd>
+    <dt>
+        android.provider.ContactsContract.StreamItemsColumns#TEXT
+    </dt>
+    <dd>
+        ストリーム アイテムのテキスト。アイテムのソースによって投稿されたコンテンツか、そのストリーム アイテムを生成した何らかのアクションに関する説明です。
+この列には、<code><a href="https://developer.android.com/reference/android/text/Html.html?hl=ja#fromHtml(java.lang.String)">fromHtml()</a></code> でレンダリングできる任意の書式や埋め込みリソース画像を含めることができます。
+
+プロバイダは、長いコンテンツを切り捨てたり省いたりすることがありますが、タグは壊さないようにします。
+
+    </dd>
+    <dt>
+        android.provider.ContactsContract.StreamItemsColumns#TIMESTAMP
+    </dt>
+    <dd>
+        ストリーム アイテムが挿入またはアップデートされた時刻を含むテキスト。エポックからのミリ秒の形式です。<em></em>
+ストリーム アイテムを挿入またはアップデートするアプリケーションは、この列の管理を担当します。この列は、連絡先プロバイダによって自動的に管理されるわけではありません。
+
+
+    </dd>
+</dl>
+<p>
+    ストリーム アイテムの識別情報を表示するには、android.provider.ContactsContract.StreamItemsColumns#RES_ICON、android.provider.ContactsContract.StreamItemsColumns#RES_LABEL、android.provider.ContactsContract.StreamItemsColumns#RES_PACKAGE を使用してアプリケーション内のリソースにリンクします。
+
+
+
+
+</p>
+<p>
+    android.provider.ContactsContract.StreamItems テーブルには、同期アダプタ専用に列 android.provider.ContactsContract.StreamItemsColumns#SYNC1 ～ android.provider.ContactsContract.StreamItemsColumns#SYNC4 も含まれます。
+
+
+
+</p>
+<h3 id="StreamPhotos">ソーシャル ストリーム フォト</h3>
+<p>
+   android.provider.ContactsContract.StreamItemPhotos テーブルには、ストリーム アイテムに関連付けられた写真が格納されます。
+このテーブルの android.provider.ContactsContract.StreamItemPhotosColumns#STREAM_ITEM_ID 列は、android.provider.ContactsContract.StreamItems テーブルの <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">_ID</a></code> 列の値にリンクされます。
+
+
+写真の参照は、テーブルの次の列に格納されます。
+
+</p>
+<dl>
+    <dt>
+        android.provider.ContactsContract.StreamItemPhotos#PHOTO 列 （BLOB）。
+    </dt>
+    <dd>
+        写真のバイナリ表現。格納や表示のためにプロバイダによってサイズが変更されます。
+        この列は、写真を格納するために使用されていた連絡先プロバイダの従来のバージョンとの下方互換性のために用意されています。
+ただし、現在のバージョンでは、写真の格納にこの列を使用しないでください。
+代わりに、android.provider.ContactsContract.StreamItemPhotosColumns#PHOTO_FILE_ID または android.provider.ContactsContract.StreamItemPhotosColumns#PHOTO_URI（どちらについても次の項目で説明します）を使用して、写真をファイルに保存します。
+
+
+現状では、この列には写真のサムネイルが格納されており、読み出し可能です。
+
+    </dd>
+    <dt>
+        android.provider.ContactsContract.StreamItemPhotosColumns#PHOTO_FILE_ID
+    </dt>
+    <dd>
+        未加工連絡先の写真の数値 ID。この値を定数 <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DisplayPhoto.html?hl=ja#CONTENT_URI">DisplayPhoto.CONTENT_URI</a></code> の末尾に追加して、1 つの写真ファイルを指すコンテンツ URI を取得し、<code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#openAssetFileDescriptor(android.net.Uri, java.lang.String)">openAssetFileDescriptor()</a></code> を呼び出して、その写真ファイルのハンドルを取得します。
+
+
+
+
+    </dd>
+    <dt>
+        android.provider.ContactsContract.StreamItemPhotosColumns#PHOTO_URI
+    </dt>
+    <dd>
+        この行によって表されている写真の写真ファイルを直接指すコンテンツ URI。
+        この URI を使用して <code><a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ja#openAssetFileDescriptor(android.net.Uri, java.lang.String)">openAssetFileDescriptor()</a></code> を呼び出して、写真ファイルのハンドルを取得します。
+
+    </dd>
+</dl>
+<h3 id="SocialStreamTables">ソーシャル ストリーム テーブルの使用</h3>
+<p>
+    これらのテーブルは、連絡先プロバイダの他の主なテーブルと同じように機能しますが、次のような例外があります。
+</p>
+    <ul>
+        <li>
+            これらのテーブルには、追加のアクセス パーミッションが必要です。これらからの読み出しには、アプリケーションにパーミッション android.Manifest.permission#READ_SOCIAL_STREAM が必要です。
+これらの変更には、アプリケーションにパーミッション android.Manifest.permission#WRITE_SOCIAL_STREAM が必要です。
+
+
+        </li>
+        <li>
+            android.provider.ContactsContract.StreamItems テーブルについては、各未加工連絡先を格納できる行数に上限があります。
+上限に達すると、連絡先プロバイダは最も古い android.provider.ContactsContract.StreamItemsColumns#TIMESTAMP を持つ行を自動的に削除して、新しいストリーム アイテムのための領域を作ります。
+
+
+この上限を取得するには、コンテンツ URI android.provider.ContactsContract.StreamItems#CONTENT_LIMIT_URI にクエリを発行します。
+
+コンテンツ URI を除くすべての引数は、<code>null</code> のままでかまいません。
+このクエリは、列が android.provider.ContactsContract.StreamItems#MAX_ITEMS だけの 1 行を含む Cursor を返します。
+
+
+        </li>
+    </ul>
+
+<p>
+    クラス android.provider.ContactsContract.StreamItems.StreamItemPhotos は、1 つのストリーム アイテムの写真行を含む android.provider.ContactsContract.StreamItemPhotos のサブテーブルを定義します。
+
+
+</p>
+<h3 id="SocialStreamInteraction">ソーシャル ストリーム操作</h3>
+<p>
+    連絡先プロバイダによって端末の連絡先アプリケーションと連携して管理されるソーシャル ストリーム データは、ソーシャル ネットワーキング システムと既存の連絡先を接続するためのとても便利な手段を用意しています。
+
+利用できる機能は次のとおりです。
+</p>
+    <ul>
+        <li>
+            同期アダプタを使用してソーシャル ネットワーキング サービスを連絡先プロバイダに同期することで、ユーザーの連絡先の最近のアクティビティを取得し、それを android.provider.ContactsContract.StreamItems テーブルや android.provider.ContactsContract.StreamItemPhotos テーブルに格納して後で使えるようにできます。
+
+
+
+        </li>
+        <li>
+            ユーザーが連絡先を選択して表示したときには、定期的な同期とは別に同期アダプタを起動して追加データを取得できます。
+この機能により、同期アダプタは連絡先の高解像度の写真や直近のストリーム アイテムを取得できます。
+
+        </li>
+        <li>
+            端末の連絡先アプリケーションと連絡先プロバイダに関する通知を登録すると、連絡先が表示された場合にインテントを受信し、その時点で連絡先のステータスをサービスからアップデートできます。<em></em>
+
+このアプローチは、同期アダプタを使用してフル同期を実施するより、処理が速く、帯域幅が節約されます。
+
+        </li>
+        <li>
+            ユーザーが端末の連絡先アプリケーションで連絡先を見ている間に、その連絡先をソーシャル ネットワーキング サービスに追加できます。
+この機能は「連絡先の招待」機能を使用して実現できます。連絡先の招待は、既存の連絡先をネットワークに追加するアクティビティと、端末の連絡先アプリケーションと連絡先プロバイダにアプリケーションの詳細を提供する XML ファイルとを組み合わせて実現できます。
+
+
+
+        </li>
+    </ul>
+<p>
+    連絡先プロバイダを使用したストリーム アイテムの定期的な同期は、他の同期と同じです。
+同期について詳しくは、<a href="#SyncAdapters">連絡先プロバイダの同期アダプタ</a>をご覧ください。
+通知の登録と連絡先の招待については、次の 2 つのセクションで説明します。
+
+</p>
+<h4>ソーシャル ネットワーキング表示を処理するための登録</h4>
+<p>
+    同期アダプタを登録し、同期アダプタによって管理されている連絡先をユーザーが表示したときに通知されるようにする方法は、次のとおりです。
+
+</p>
+<ol>
+    <li>
+        <code>contacts.xml</code> という名前のファイルをプロジェクトの <code>res/xml/</code> ディレクトリに作成します。
+このファイルが既に存在する場合は、この手順を省略できます。
+    </li>
+    <li>
+        このファイルに要素 <code>&lt;ContactsAccountType xmlns:android="http://schemas.android.com/apk/res/android"&gt;</code> を追加します。
+
+        この要素が既に存在する場合は、この手順を省略できます。
+    </li>
+    <li>
+        ユーザーが端末の連絡先アプリケーションで連絡先の詳細ページを開いたときに通知されるサービスを登録するには、属性 <code>viewContactNotifyService="<em>serviceclass</em>"</code> を要素に追加します。<code><em>serviceclass</em></code> は、端末の連絡先アプリケーションからインテントを受け取ることになるサービスの完全修飾クラス名です。
+
+
+
+通知側サービスのために、<code><a href="https://developer.android.com/reference/android/app/IntentService.html?hl=ja">IntentService</a></code> を機能拡張したクラスを使用して、そのサービスがインテントを受け取れるようにします。
+
+受け取るインテントに含まれるデータには、ユーザーがクリックした未加工連絡先のコンテンツ URI が格納されます。
+通知側サービスから、同期アダプタをバインドして呼び出し、未加工連絡先のデータをアップデートできます。
+
+    </li>
+</ol>
+<p>
+    ユーザーがストリーム アイテムかストリーム フォトかその両方をクリックしたときに呼び出されるアクティビティを登録する方法は次のとおりです。
+</p>
+<ol>
+    <li>
+        <code>contacts.xml</code> という名前のファイルをプロジェクトの <code>res/xml/</code> ディレクトリに作成します。
+このファイルが既に存在する場合は、この手順を省略できます。
+    </li>
+    <li>
+        このファイルに要素 <code>&lt;ContactsAccountType xmlns:android="http://schemas.android.com/apk/res/android"&gt;</code> を追加します。
+
+        この要素が既に存在する場合は、この手順を省略できます。
+    </li>
+    <li>
+        アクティビティのどれかを登録して、ユーザーが端末の連絡先アプリケーションでストリーム アイテムをタップしたことに対処するには、属性 <code>viewStreamItemActivity="<em>activityclass</em>"</code> を要素に追加します。<code><em>activityclass</em></code> は、端末の連絡先アプリケーションからインテントを受け取ることになるアクティビティの完全修飾クラス名です。
+
+
+
+
+    </li>
+    <li>
+        アクティビティのどれかを登録して、ユーザーが端末の連絡先アプリケーションでストリーム フォトをタップしたことに対処するには、属性 <code>viewStreamItemPhotoActivity="<em>activityclass</em>"</code> を要素に追加します。<code><em>activityclass</em></code> は、端末の連絡先アプリケーションからインテントを受け取ることになるアクティビティの完全修飾クラス名です。
+
+
+
+
+    </li>
+</ol>
+<p>
+    <code>&lt;ContactsAccountType&gt;</code> 要素については、<a href="#SocialStreamAcctType">&lt;ContactsAccountType&gt; 要素</a>で詳しく説明しています。
+
+</p>
+<p>
+    受け取るインテントには、ユーザーがクリックしたアイテムまたは写真のコンテンツ URI が格納されます。
+    テキスト アイテムと写真とで異なるアクティビティを使用するには、同じファイルで両方の属性を使用します。
+</p>
+<h4>ソーシャル ネットワーキング サービスの操作</h4>
+<p>
+    ユーザーは、連絡先をソーシャル ネットワーキング サービスに招待するのに、端末の連絡先アプリケーションを離れる必要はありません。
+その代わりとして、連絡先をアクティビティのどれかに招待するインテントを端末の連絡先アプリケーションに送信させることができます。
+これをセットアップする方法は次のとおりです。
+</p>
+<ol>
+    <li>
+        <code>contacts.xml</code> という名前のファイルをプロジェクトの <code>res/xml/</code> ディレクトリに作成します。
+このファイルが既に存在する場合は、この手順を省略できます。
+    </li>
+    <li>
+        このファイルに要素 <code>&lt;ContactsAccountType xmlns:android="http://schemas.android.com/apk/res/android"&gt;</code> を追加します。
+
+        この要素が既に存在する場合は、この手順を省略できます。
+    </li>
+    <li>
+        次の属性を追加します。
+        <ul>
+            <li><code>inviteContactActivity="<em>activityclass</em>"</code></li>
+            <li>
+                <code>inviteContactActionLabel="&#64;string/<em>invite_action_label</em>"</code>
+            </li>
+        </ul>
+        <code><em>activityclass</em></code> 値は、インテントを受信するアクティビティの完全修飾クラス名です。
+<code><em>invite_action_label</em></code> 値は、端末の連絡先アプリケーションの [<strong>Add Connection</strong>] メニューに表示される文字列です。
+
+
+    </li>
+</ol>
+<p class="note">
+    <strong>注:</strong> <code>ContactsSource</code> は廃止されたタグ名で、<code>ContactsAccountType</code> に置き換わっています。
+
+</p>
+<h3 id="ContactsFile">contacts.xml リファレンス</h3>
+<p>
+    ファイル <code>contacts.xml</code> には、同期アダプタやアプリケーションと連絡先アプリケーションや連絡先プロバイダとのやり取りを管理する XML 要素が含まれています。
+これらの要素について、以降のセクションで説明します。
+
+</p>
+<h4 id="SocialStreamAcctType">&lt;ContactsAccountType&gt; 要素</h4>
+<p>
+    <code>&lt;ContactsAccountType&gt;</code> 要素は、アプリケーションと連絡先アプリケーションとのやり取りを管理します。
+構文は次のとおりです。
+</p>
+<pre>
+&lt;ContactsAccountType
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        inviteContactActivity="<em>activity_name</em>"
+        inviteContactActionLabel="<em>invite_command_text</em>"
+        viewContactNotifyService="<em>view_notify_service</em>"
+        viewGroupActivity="<em>group_view_activity</em>"
+        viewGroupActionLabel="<em>group_action_text</em>"
+        viewStreamItemActivity="<em>viewstream_activity_name</em>"
+        viewStreamItemPhotoActivity="<em>viewphotostream_activity_name</em>"&gt;
+</pre>
+<p>
+    <strong>含まれているファイル:</strong>
+</p>
+<p>
+    <code>res/xml/contacts.xml</code>
+</p>
+<p>
+    <strong>含めることのできる要素:</strong>
+</p>
+<p>
+    <strong><code>&lt;ContactsDataKind&gt;</code></strong>
+</p>
+<p>
+    <strong>説明:</strong>
+</p>
+<p>
+    ユーザーが連絡先の 1 人をソーシャル ネットワーキングに招待できるようにしたり、ソーシャル ネットワーキング ストリームのどれかがアップデートされたらユーザーに通知したりするための、Android コンポーネントや UI ラベルを宣言します。
+
+
+</p>
+<p>
+    属性プレフィックス <code>android:</code> は、<code>&lt;ContactsAccountType&gt;</code> の属性に必須ではないことに注目してください。
+
+</p>
+<p>
+    <strong>属性:</strong>
+</p>
+<dl>
+    <dt><code>inviteContactActivity</code></dt>
+    <dd>
+        ユーザーが端末の連絡先アプリケーションで [<strong>Add Connection</strong>] を選択したときに起動する、アプリケーション内のアクティビティの完全修飾クラス名。
+
+
+    </dd>
+    <dt><code>inviteContactActionLabel</code></dt>
+    <dd>
+        [<strong>Add Connection</strong>] メニューで、<code>inviteContactActivity</code> に指定されたアクティビティ用に表示されるテキスト。
+
+        たとえば、文字列「Follow in my network」を指定できます。このラベルには文字列リソース ID を使用できます。
+
+    </dd>
+    <dt><code>viewContactNotifyService</code></dt>
+    <dd>
+        ユーザーが連絡先を表示したときに通知を受け取ることになる、独自アプリケーション内のサービスの完全修飾クラス名。
+この通知は端末の連絡先アプリケーションによって送信されます。これを使用することで、アプリケーションはデータ処理の多い操作を必要になるまで延期できます。
+
+たとえば、アプリケーションはこの通知への対応として、連絡先の高解像度写真と直近のソーシャル ストリーム アイテムを読み込んで表示できます。
+
+この機能について詳しくは、<a href="#SocialStreamInteraction">ソーシャル ストリーム操作</a>で説明しています。
+<code>NotifierService.java</code> ファイルに指定された通知サービスの例は、<a href="https://developer.android.com/resources/samples/SampleSyncAdapter/index.html?hl=ja">SampleSyncAdapter</a> サンプル アプリケーションにあります。
+
+
+
+    </dd>
+    <dt><code>viewGroupActivity</code></dt>
+    <dd>
+        グループ情報を表示できる、独自アプリケーション内のアクティビティの完全修飾クラス名。
+ユーザーが端末の連絡先アプリケーションでグループラベルをタップすると、このアクティビティの UI が表示されます。
+
+    </dd>
+    <dt><code>viewGroupActionLabel</code></dt>
+    <dd>
+        ユーザーがアプリケーションでグループを表示できるようにする UI コントロールに対し、連絡先アプリケーションが表示するラベル。
+
+        <p>
+            たとえば、端末に Google+ アプリケーションをインストールし、Google+ を連絡先アプリケーションと同期すると、Google+ のサークルが連絡先アプリケーションの [<strong>Groups</strong>] タブにグループとして表示されます。
+
+Google+ サークルのどれかをクリックすると、そのサークルに所属する人が「グループ」として表示されます。
+表示の最上部に、Google+ アイコンが表示されます。それをクリックすると、制御が Google+ アプリに移ります。
+
+連絡先アプリケーションはこれを <code>viewGroupActivity</code> を使用して行い、Google+ アイコンを <code>viewGroupActionLabel</code> の値として使用します。
+
+
+        </p>
+        <p>
+            この属性には、文字列リソース ID を使用できます。
+        </p>
+    </dd>
+    <dt><code>viewStreamItemActivity</code></dt>
+    <dd>
+        ユーザーが未加工連絡先のストリーム アイテムをタップしたときに端末の連絡先アプリケーションが起動する、独自アプリケーション内のアクティビティの完全修飾クラス名。
+
+    </dd>
+    <dt><code>viewStreamItemPhotoActivity</code></dt>
+    <dd>
+        ユーザーが未加工連絡先のストリーム アイテムで写真をタップしたときに端末の連絡先アプリケーションが起動する、独自アプリケーション内のアクティビティの完全修飾クラス名。
+
+
+    </dd>
+</dl>
+<h4 id="SocialStreamDataKind">&lt;ContactsDataKind&gt; 要素</h4>
+<p>
+    <code>&lt;ContactsDataKind&gt;</code> 要素は、連絡先アプリケーションにおける独自アプリケーション UI のカスタムデータ行の表示を管理します。
+構文は次のとおりです。
+</p>
+<pre>
+&lt;ContactsDataKind
+        android:mimeType="<em>MIMEtype</em>"
+        android:icon="<em>icon_resources</em>"
+        android:summaryColumn="<em>column_name</em>"
+        android:detailColumn="<em>column_name</em>"&gt;
+</pre>
+<p>
+    <strong>含まれているファイル:</strong>
+</p>
+<code>&lt;ContactsAccountType&gt;</code>
+<p>
+    <strong>説明:</strong>
+</p>
+<p>
+    この要素は、カスタムデータ行のコンテンツを未加工連絡先の詳細の一部として連絡先アプリケーションに表示させるために使用します。
+<code>&lt;ContactsAccountType&gt;</code> の各 <code>&lt;ContactsDataKind&gt;</code> 子要素は、同期アダプタが <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルに追加するカスタムデータ行のタイプを表します。
+
+使用するカスタム MIME タイプごとに <code>&lt;ContactsDataKind&gt;</code> 要素を 1 つ追加します。
+データを表示しないカスタムデータ行がある場合は、この要素を追加する必要はありません。
+
+</p>
+<p>
+    <strong>属性:</strong>
+</p>
+<dl>
+    <dt><code>android:mimeType</code></dt>
+    <dd>
+        <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルに含まれるカスタムデータ行のどれかに定義したカスタム MIME タイプ。
+たとえば、値 <code>vnd.android.cursor.item/vnd.example.locationstatus</code> は、連絡先の最新の場所情報を記録するデータ行のためのカスタム MIME タイプということが考えられます。
+
+
+    </dd>
+    <dt><code>android:icon</code></dt>
+    <dd>
+        連絡先アプリケーションがデータの隣に表示する Android <a href="../resources/drawable-resource9e29.html?hl=ja">ドローアブル リソース</a>。
+
+そのデータが独自サービスからのものであることを示すのに使用します。
+
+    </dd>
+    <dt><code>android:summaryColumn</code></dt>
+    <dd>
+        データ行から取得された 2 つの値で最初の列名。この値は、このデータ行のエントリの先頭行として表示されます。
+この先頭行は、データの要約として使われることを狙ったものですが、省略可能です。
+<a href="#detailColumn">android:detailColumn</a> もご覧ください。
+
+    </dd>
+    <dt><code>android:detailColumn</code></dt>
+    <dd>
+        データ行から取得された 2 つの値で 2 番目の列名。この値は、このデータ行のエントリの 2 行目として表示されます。
+<code>android:summaryColumn</code> もご覧ください。
+
+    </dd>
+</dl>
+<h2 id="AdditionalFeatures">連絡先プロバイダの追加機能</h2>
+<p>
+    ここまでのセクションで説明した主な機能の他に、連絡先プロバイダには連絡先データの作業用として次のような便利な機能が用意されています。
+
+</p>
+    <ul>
+       <li>連絡先グループ</li>
+       <li>写真機能</li>
+    </ul>
+<h3 id="Groups">連絡先グループ</h3>
+<p>
+    連絡先プロバイダでは、オプションで、関連連絡先のコレクションを<strong>グループ</strong> データでラベル付けできます。
+あるユーザー アカウントに関連付けられているサーバーがグループを管理する場合、そのアカウントのアカウント タイプ用の同期アダプタが、連絡先プロバイダとサーバーとの間でグループデータを転送する必要があります。
+
+ユーザーが新しい連絡先をサーバーに追加し、その連絡先を新しいグループに入れた場合、同期アダプタはその新しいグループを <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Groups.html?hl=ja">ContactsContract.Groups</a></code> テーブルに追加する必要があります。
+
+ある未加工連絡先が属するグループ（複数の場合あり）は、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルに、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.GroupMembership.html?hl=ja">ContactsContract.CommonDataKinds.GroupMembership</a></code> MIME タイプを使用して格納されます。
+
+
+</p>
+<p>
+    サーバーからの未加工連絡先データを連絡先プロバイダに追加する同期アダプタを設計している場合、グループを使用しないのであれば、連絡先プロバイダに対してデータが可視であることを通知する必要があります。
+
+ユーザーがアカウントを端末に追加したときに実行されるコード内で、連絡先プロバイダがそのアカウントに対して追加する <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Settings.html?hl=ja">ContactsContract.Settings</a></code> 行をアップデートします。
+
+この行で、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.SettingsColumns.html?hl=ja#UNGROUPED_VISIBLE">Settings.UNGROUPED_VISIBLE</a></code> 列の値を 1 に設定します。こうすると、連絡先プロバイダは、グループを使用していない場合でも、独自の連絡先データを常に表示します。
+
+
+</p>
+<h3 id="Photos">連絡先の写真</h3>
+<p>
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルは、写真を MIME タイプ <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Photo.html?hl=ja#CONTENT_ITEM_TYPE">Photo.CONTENT_ITEM_TYPE</a></code> の行として格納します。
+
+この行の <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContactsColumns.html?hl=ja#CONTACT_ID">CONTACT_ID</a></code> 列は、それが属する未加工連絡先の <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">_ID</a></code> 列にリンクされます。
+
+
+    クラス <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.Photo.html?hl=ja">ContactsContract.Contacts.Photo</a></code> は、連絡先のプライマリ フォトの写真情報を格納する <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.html?hl=ja">ContactsContract.Contacts</a></code> のサブテーブルを定義します。ここでプライマリ フォトとは、連絡先のプライマリ未加工連絡先のプライマリ フォトのことを示します。
+
+同様に、クラス <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.DisplayPhoto.html?hl=ja">ContactsContract.RawContacts.DisplayPhoto</a></code> は、未加工連絡先のプライマリ フォトに関する情報を含む <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.html?hl=ja">ContactsContract.RawContacts</a></code> のサブテーブルを定義します。
+
+
+
+</p>
+<p>
+    <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Contacts.Photo.html?hl=ja">ContactsContract.Contacts.Photo</a></code> と <code><a href="https://developer.android.com/reference/android/provider/ContactsContract.RawContacts.DisplayPhoto.html?hl=ja">ContactsContract.RawContacts.DisplayPhoto</a></code> の参照ドキュメントには、写真情報の取得例が含まれています。
+
+未加工連絡先のプライマリ サムネイルを取得するための便利なクラスはありませんが、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.Data.html?hl=ja">ContactsContract.Data</a></code> テーブルにクエリを送信して、未加工連絡先の <code><a href="https://developer.android.com/reference/android/provider/BaseColumns.html?hl=ja#_ID">_ID</a></code>、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Photo.html?hl=ja#CONTENT_ITEM_TYPE">Photo.CONTENT_ITEM_TYPE</a></code>、<code><a href="https://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html?hl=ja#IS_PRIMARY">IS_PRIMARY</a></code> 列を選んでその未加工連絡先のプライマリ フォト行を探すことができます。
+
+
+
+
+
+
+</p>
+<p>
+    人のソーシャル ストリーム データにも写真が含まれていることがあります。その場合は android.provider.ContactsContract.StreamItemPhotos テーブルに格納されています。このテーブルについては、<a href="#StreamPhotos">ソーシャル ストリーム フォト</a>で詳しく説明しています
+
+
+</p>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=ja" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="ブログ" target="_blank">ブログ</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=ja" title="サポート">サポート</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=ja" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=ja" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=ja" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=ja" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="5VJZm7PjtcwLaSxYqOUteotKA6BKqXNu6iQMh_KBkeY6MTQ5NzUxNzExMzgwMDc0MA" />
+      <input type="hidden" name="next" value="contacts-provider.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+            >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+             selected="selected" >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">メールアドレス</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unifieddd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="../../../android_metadata_endd52.js?hl=ja?v=2017061508" defer></script>
+  
+  <script src="../../../reference/listsdd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="../../../reference/gms_listsdd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/listsdd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/listsdd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/listsdd52.js?hl=ja?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=ja"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_ja.js?hl=ja?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/providers/contacts-provider.html?hl=ja by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:16:13 GMT -->
+</html>

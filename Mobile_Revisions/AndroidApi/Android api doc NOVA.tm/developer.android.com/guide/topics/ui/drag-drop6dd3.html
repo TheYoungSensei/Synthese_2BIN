@@ -1,0 +1,1924 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<!-- Mirrored from developer.android.com/guide/topics/ui/drag-drop.html?hl=pt-br by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:04:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+  
+
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+
+
+
+
+<script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script>
+
+<meta charset="utf-8">
+
+
+
+<meta name="xsrf_token" content="lJ3GJwq8FTQdK1GXcyYkTmA2mRSA25P9nDoMyngy8ek6MTQ5NzUxNjEzNDgyMzc0MA" />
+
+  
+    <link rel="canonical" href="drag-drop6dd3.html?hl=pt-br">
+  
+
+  
+    <link rel="alternate" href="drag-drop0b8e.html?hl=zh-cn" hreflang="zh-Hans">
+  
+    <link rel="alternate" href="drag-drop7554.html?hl=es-419" hreflang="es-419">
+  
+    <link rel="alternate" href="drag-drop0cf2.html?hl=id" hreflang="id">
+  
+    <link rel="alternate" href="drag-drop9e29.html?hl=ja" hreflang="ja">
+  
+    <link rel="alternate" href="drag-drop232e.html?hl=ko" hreflang="ko">
+  
+    <link rel="alternate" href="drag-drop6dd3.html?hl=pt-br" hreflang="pt-br">
+  
+    <link rel="alternate" href="drag-drop.html" hreflang="en">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=zh-cn" hreflang="zh-Hans-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=es-419" hreflang="es-419-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=id" hreflang="id-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=ja" hreflang="ja-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=ko" hreflang="ko-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html?hl=pt-br" hreflang="pt-br-cn">
+  
+    <link rel="alternate" href="https://developer.android.google.cn/guide/topics/ui/drag-drop.html" hreflang="en-cn">
+  
+
+  <link rel="alternate" href="drag-drop.html" hreflang="x-default">
+
+
+
+
+<link rel="shortcut icon" href="../../../_static/f304fc21fa/images/android/favicon6dd3.png?hl=pt-br">
+
+<link rel="apple-touch-icon" href="../../../_static/f304fc21fa/images/android/touchicon-1806dd3.png?hl=pt-br">
+
+
+<title>
+
+  Arrastar e soltar | Android Developers
+
+</title>
+
+  <meta name="description" content="With the Android drag&amp;#47;drop framework, you can allow your users to move data from one View to another View in the current layout using a graphical drag and drop gesture. The framework includes a drag event class, drag listeners, and helper methods …">
+
+
+<!-- STYLESHEETS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Condensed">
+<link rel="stylesheet"
+    href="http://fonts.googleapis.com/css?family=Roboto:light,regular,medium,thin,italic,mediumitalic,bold"
+    title="roboto">
+
+
+
+
+
+
+
+<link href="../../../static/css/default9fbc.css?hl=pt-br?v=2017061508" rel="stylesheet" type="text/css">
+<!-- JAVASCRIPT -->
+<script src="../../../_static/f304fc21fa/js/android_3p-bundle6dd3.js?hl=pt-br" type="text/javascript"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_closure_android__pt_br6dd3.js?hl=pt-br"></script>
+<script src="../../../_static/f304fc21fa/js/script_foot_android6dd3.js?hl=pt-br"></script>
+
+<script type="text/javascript">
+  var toRoot = 'https://developer.android.com/';
+  devsite.permissions.init({"039e5d84b87fd75807ffb37b7f1bbf2c": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
+
+  var replaceBlog = false;
+  var replaceYouTube = false;
+  var siteDefaultLocale = 'en';
+
+  var ANDROID_LANGUAGES = [
+      'id','de','en','es','es-419','fr','pt-br','vi','tr','ru','th','ja','zh-cn','zh-tw','ko'
+  ];
+</script>
+<script src="../../../static/js/docs9fbc.js?hl=pt-br?v=2017061508" type="text/javascript"></script>
+
+
+</head>
+
+<body class="gc-documentation
+            
+            
+              develop
+              guide
+            
+            "
+      itemscope itemtype="http://schema.org/Article">
+  
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;pt-br&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;pt-br&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-49880327-2&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;pt-br&quot;, &quot;dimension4&quot;: &quot;API Guides&quot;, &quot;dimension5&quot;: &quot;pt-br&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-5831155-1&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "BE", "language": {"requested": "pt-br", "served": "pt-br"}, "projectName": "API Guides", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+  
+  <a href="#top" id="skip-to-main">Skip to content</a>
+  <header id="header-wrapper">
+    <div class="dac-header" id="header">
+      <div class="dac-header-inner">
+        <a class="dac-nav-toggle" data-dac-toggle-nav href="#" title="Open navigation">
+          <span class="dac-nav-hamburger">
+            <span class="dac-nav-hamburger-top"></span>
+            <span class="dac-nav-hamburger-mid"></span>
+            <span class="dac-nav-hamburger-bot"></span>
+          </span>
+        </a>
+        
+        <a class="dac-header-logo" href="https://developer.android.com/index.html?hl=pt-br">
+          <img class="dac-header-logo-image" src="../../../static/images/android_logo6dd3.png?hl=pt-br"
+              srcset="https://developer.android.com/static/images/android_logo_2x.png 2x?hl=pt-br"
+              width="32" height="36" alt="Android"> Developers</a>
+        <ul class="dac-header-tabs">
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/design/index.html?hl=pt-br"
+               zh-tw-lang="設計"
+               zh-cn-lang="设计"
+               ru-lang="Проектирование"
+               ko-lang="디자인"
+               ja-lang="設計"
+               es-lang="Diseñar">Design</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/develop/index.html?hl=pt-br"
+               zh-tw-lang="開發"
+               zh-cn-lang="开发"
+               ru-lang="Разработка"
+               ko-lang="개발"
+               ja-lang="開発"
+               es-lang="Desarrollar">Develop</a>
+          </li>
+          <li>
+            <a class="dac-header-tab" href="https://developer.android.com/distribute/index.html?hl=pt-br"
+               zh-tw-lang="發佈"
+               zh-cn-lang="分发"
+               ru-lang="Распространение"
+               ko-lang="배포"
+               ja-lang="配布"
+               es-lang="Distribuir">Distribute</a>
+          </li>
+        </ul>
+
+
+        
+
+        <a class="dac-header-console-btn gc-analytics-event" href="https://play.google.com/apps/publish/"
+           data-category="User" data-action="Console" data-label="Clicked">
+          <img src="https://developer.android.com/static/images/developer-console-icon.svg?hl=pt-br" width="18" height="19" alt="Play Console">Play Console</a>
+
+        
+
+<form data-search="" class="dac-header-search">
+  <button class="dac-header-search-close" data-search-close="">
+    <i class="dac-sprite dac-back-arrow"></i>
+  </button>
+
+  <div class="dac-header-search-inner">
+    <i class="dac-sprite dac-search-white dac-header-search-icon"></i>
+    
+    <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q" class="dac-header-search-input" placeholder="Pesquisa">
+    <button class="dac-header-search-clear dac-hidden" data-search-clear="">
+      <i class="dac-sprite dac-close-black"></i>
+    </button>
+  </div>
+</form>
+
+        
+      </div><!--/.header-wrap.wrap-->
+    </div><!--/.header-->
+
+    
+
+<div id="search-results" class="dac-search-results">
+  <div id="dac-search-results-history" class="dac-search-results-history">
+    <div class="wrap dac-search-results-history-wrap">
+      <div class="cols">
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Most visited</h2>
+          <div class="resource-flow-layout" data-history-query="history:most/visited" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+
+        <div class="col-1of2 col-tablet-1of2 col-mobile-1of1">
+          <h2>Recently visited</h2>
+          <div class="resource-flow-layout cols" data-history-query="history:recent" data-allow-duplicates="true" data-maxresults="3" data-cardsizes="18x2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dac-search-results-content" class="dac-search-results-content">
+    <div class="dac-search-results-metadata wrap">
+      <div class="dac-search-results-for">
+        
+          <h2>
+          Results for <span id="search-results-for"></span>
+          </h2>
+      </div>
+
+      <div id="dac-search-results-hero"></div>
+
+      <div class="dac-search-results-hero cols">
+        <div id="dac-search-results-reference" class="col-6of6 col-tablet-2of2 col-mobile-1of1">
+          <div class="suggest-card reference no-display">
+            <ul class="dac-search-results-reference">
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cols dac-search-results-cse">
+        <script src="../../../../cse.google.com/f4116.txt?cx=000521750095050289010:zpcpi1ea4s8" async></script>
+        <gcse:searchresults-only linkTarget="_self"></gcse:searchresults-only>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>
+
+  <a name="navigation" tabindex=0 class="nav-start-marker">navigation</a>
+  <nav class="dac-nav">
+    <div class="dac-nav-dimmer" data-dac-toggle-nav></div>
+    <div class="dac-nav-sidebar" data-swap data-dynamic="false" data-transition-speed="300" data-dac-nav>
+      <div data-swap-container>
+        
+        <a class="dac-nav-back-button dac-swap-section dac-up dac-no-anim" tabindex=0 data-swap-button>
+          
+          <i class="dac-sprite dac-nav-back"></i> <span class="dac-nav-back-title">Voltar</span>
+        </a>
+
+        <div class="dac-nav-sub dac-swap-section dac-right dac-active" itemscope
+            itemtype="http://schema.org/SiteNavigationElement">
+          
+          
+            
+            <ul id="nav">
+              <li class="nav-section"><div class="nav-section-header"><a href="../../index6dd3.html?hl=pt-br" >Introdução</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fundamentals6dd3.html?hl=pt-br" >Fundamentos de aplicativos</a></li><li><a href="../../practices/compatibility6dd3.html?hl=pt-br" >Compatibilidade do dispositivo</a></li><li><a href="../security/permissions6dd3.html?hl=pt-br" >Permissões do sistema</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../platform/index6dd3.html?hl=pt-br" >Arquitetura da plataforma</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../platform/j8-jack6dd3.html?hl=pt-br"  es-lang="Funciones del lenguaje Java 8" in-lang="Fitur Bahasa Java 8" ja-lang="Java 8 の機能" ko-lang="Java 8 언어 기능" pt-br-lang="Recursos de linguagem do Java 8" ru-lang="Возможности языка Java 8" vi-lang="Tính năng của Ngôn ngữ Java 8" zh-cn-lang="Java 8 语言功能" zh-tw-lang="Java 8 語言功能">Use recursos de linguagem do Java 8</a></li><li><a href="../../practices/verifying-apps-art6dd3.html?hl=pt-br" >Verificação do comportamento do aplicativo no Android Runtime (ART)</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/index6dd3.html?hl=pt-br" >Componentes de aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../components/intents-filters6dd3.html?hl=pt-br" >Intents e filtros de intent</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/intents-common6dd3.html?hl=pt-br" >Intents comuns</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/activities6dd3.html?hl=pt-br" >Atividades</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/fragments6dd3.html?hl=pt-br" >Fragmentos</a></li><li><a href="../../components/loaders6dd3.html?hl=pt-br" >Carregadores</a></li><li><a href="../../components/tasks-and-back-stack6dd3.html?hl=pt-br" >Tarefas e pilha de retorno</a></li><li><a href="../../components/recents6dd3.html?hl=pt-br" >Tela de visão geral</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../components/services6dd3.html?hl=pt-br" >Serviços</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../components/bound-services6dd3.html?hl=pt-br" >Serviços vinculados</a></li><li><a href="../../components/aidl6dd3.html?hl=pt-br" >AIDL</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../providers/content-providers6dd3.html?hl=pt-br" >Provedores de conteúdo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../providers/content-provider-basics6dd3.html?hl=pt-br" >Fundamentos do provedor de conteúdo</a></li><li><a href="../providers/content-provider-creating6dd3.html?hl=pt-br" >Criação de um provedor de conteúdo</a></li><li><a href="../providers/calendar-provider6dd3.html?hl=pt-br" >Provedor de agenda</a></li><li><a href="../providers/contacts-provider6dd3.html?hl=pt-br" >Provedor de contatos</a></li><li><a href="../providers/document-provider6dd3.html?hl=pt-br" >Estrutura de acesso ao armazenamento</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../appwidgets/index6dd3.html?hl=pt-br" >Widgets do aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../appwidgets/host6dd3.html?hl=pt-br" >Host de widgets do aplicativo</a></li></ul></li><li><a href="../../components/processes-and-threads6dd3.html?hl=pt-br" >Processos e encadeamentos</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/index6dd3.html?hl=pt-br" >Recursos do aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/overview6dd3.html?hl=pt-br" >Visão geral</a></li><li><a href="../resources/providing-resources6dd3.html?hl=pt-br" >Fornecimento de recursos</a></li><li><a href="../resources/accessing-resources6dd3.html?hl=pt-br" >Acesso aos recursos</a></li><li><a href="../resources/runtime-changes6dd3.html?hl=pt-br" >Processamento de alterações em tempo de execução</a></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/localization6dd3.html?hl=pt-br" >Localização</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/icu4j-framework6dd3.html?hl=pt-br" >APIs de estrutura do Android para ICU4J</a></li><li><a href="../resources/multilingual-support6dd3.html?hl=pt-br" >Idioma e localidade</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../resources/available-resources6dd3.html?hl=pt-br" >Tipos de recursos</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../resources/animation-resource6dd3.html?hl=pt-br" >Animação</a></li><li><a href="../resources/color-list-resource6dd3.html?hl=pt-br" >Lista de estados de cores</a></li><li><a href="../resources/drawable-resource6dd3.html?hl=pt-br" >Desenhável</a></li><li><a href="../resources/layout-resource6dd3.html?hl=pt-br" >Layout</a></li><li><a href="../resources/menu-resource6dd3.html?hl=pt-br" >Menu</a></li><li><a href="../resources/string-resource6dd3.html?hl=pt-br" >Cadeia de caracteres</a></li><li><a href="../resources/style-resource6dd3.html?hl=pt-br" >Estilo</a></li><li><a href="../resources/more-resources6dd3.html?hl=pt-br" >Mais tipos</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../manifest/manifest-intro6dd3.html?hl=pt-br" >Manifesto do aplicativo</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../manifest/action-element6dd3.html?hl=pt-br" >&lt;action&gt;</a></li><li><a href="../manifest/activity-element6dd3.html?hl=pt-br" >&lt;activity&gt;</a></li><li><a href="../manifest/activity-alias-element6dd3.html?hl=pt-br" >&lt;activity-alias&gt;</a></li><li><a href="../manifest/application-element6dd3.html?hl=pt-br" >&lt;application&gt;</a></li><li><a href="../manifest/category-element6dd3.html?hl=pt-br" >&lt;category&gt;</a></li><li><a href="../manifest/compatible-screens-element6dd3.html?hl=pt-br" >&lt;compatible-screens&gt;</a></li><li><a href="../manifest/data-element6dd3.html?hl=pt-br" >&lt;data&gt;</a></li><li><a href="../manifest/grant-uri-permission-element6dd3.html?hl=pt-br" >&lt;grant-uri-permission&gt;</a></li><li><a href="../manifest/instrumentation-element6dd3.html?hl=pt-br" >&lt;instrumentation&gt;</a></li><li><a href="../manifest/intent-filter-element6dd3.html?hl=pt-br" >&lt;intent-filter&gt;</a></li><li><a href="../manifest/manifest-element6dd3.html?hl=pt-br" >&lt;manifest&gt;</a></li><li><a href="../manifest/meta-data-element6dd3.html?hl=pt-br" >&lt;meta-data&gt;</a></li><li><a href="../manifest/path-permission-element6dd3.html?hl=pt-br" >&lt;path-permission&gt;</a></li><li><a href="../manifest/permission-element6dd3.html?hl=pt-br" >&lt;permission&gt;</a></li><li><a href="../manifest/permission-group-element6dd3.html?hl=pt-br" >&lt;permission-group&gt;</a></li><li><a href="../manifest/permission-tree-element6dd3.html?hl=pt-br" >&lt;permission-tree&gt;</a></li><li><a href="../manifest/provider-element6dd3.html?hl=pt-br" >&lt;provider&gt;</a></li><li><a href="../manifest/receiver-element6dd3.html?hl=pt-br" >&lt;receiver&gt;</a></li><li><a href="../manifest/service-element6dd3.html?hl=pt-br" >&lt;service&gt;</a></li><li><a href="../manifest/supports-gl-texture-element6dd3.html?hl=pt-br" >&lt;supports-gl-texture&gt;</a></li><li><a href="../manifest/supports-screens-element6dd3.html?hl=pt-br" >&lt;supports-screens&gt;</a></li><li><a href="../manifest/uses-configuration-element6dd3.html?hl=pt-br" >&lt;uses-configuration&gt;</a></li><li><a href="../manifest/uses-feature-element6dd3.html?hl=pt-br" >&lt;uses-feature&gt;</a></li><li><a href="../manifest/uses-library-element6dd3.html?hl=pt-br" >&lt;uses-library&gt;</a></li><li><a href="../manifest/uses-permission-element6dd3.html?hl=pt-br" >&lt;uses-permission&gt;</a></li><li><a href="../manifest/uses-permission-sdk-23-element6dd3.html?hl=pt-br" >&lt;uses-permission-sdk-23&gt;</a></li><li><a href="../manifest/uses-sdk-element6dd3.html?hl=pt-br" >&lt;uses-sdk&gt;</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="index6dd3.html?hl=pt-br" >Interface do usuário</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="overview6dd3.html?hl=pt-br" >Visão geral</a></li><li class="nav-section"><div class="nav-section-header"><a href="declaring-layout6dd3.html?hl=pt-br" >Layouts</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="layout/linear6dd3.html?hl=pt-br" >Layout linear</a></li><li><a href="layout/relative6dd3.html?hl=pt-br" >Layout relativo</a></li><li><a href="layout/listview6dd3.html?hl=pt-br" >Exibição em lista</a></li><li><a href="layout/gridview6dd3.html?hl=pt-br" >Exibição em grade</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="controls6dd3.html?hl=pt-br" >Controles de entrada</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="controls/button6dd3.html?hl=pt-br" >Botões</a></li><li><a href="https://developer.android.com/training/keyboard-input/style.html?hl=pt-br" >Campos de texto</a></li><li><a href="controls/checkbox6dd3.html?hl=pt-br" >Caixas de seleção</a></li><li><a href="controls/radiobutton6dd3.html?hl=pt-br" >Botões de opção</a></li><li><a href="controls/togglebutton6dd3.html?hl=pt-br" >Botões de alternância</a></li><li><a href="controls/spinner6dd3.html?hl=pt-br" >Controles giratórios</a></li><li><a href="controls/pickers6dd3.html?hl=pt-br" >Seletores</a></li></ul></li><li><a href="ui-events6dd3.html?hl=pt-br" >Eventos de entrada</a></li><li><a href="menus6dd3.html?hl=pt-br" >Menus</a></li><li><a href="settings6dd3.html?hl=pt-br" >Configurações</a></li><li><a href="dialogs6dd3.html?hl=pt-br" >Caixas de diálogo</a></li><li><a href="notifiers/notifications6dd3.html?hl=pt-br" >Notificações</a></li><li><a href="notifiers/toasts6dd3.html?hl=pt-br" >Avisos</a></li><li class="nav-section"><div class="nav-section-header"><a href="../search/index6dd3.html?hl=pt-br" >Busca</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../search/search-dialog6dd3.html?hl=pt-br" >Criação de uma interface de pesquisa</a></li><li><a href="../search/adding-recent-query-suggestions6dd3.html?hl=pt-br" >Adição de sugestões recentes de consulta</a></li><li><a href="../search/adding-custom-suggestions6dd3.html?hl=pt-br" >Adição de sugestões personalizadas</a></li><li><a href="../search/searchable-config6dd3.html?hl=pt-br" >Configuração pesquisável</a></li></ul></li><li><a href="multi-window6dd3.html?hl=pt-br" >Compatibilidade com várias janelas</a></li><li><a href="drag-drop6dd3.html?hl=pt-br" >Arrastar e soltar</a></li><li class="nav-section"><div class="nav-section-header"><a href="accessibility/index6dd3.html?hl=pt-br" >Acessibilidade</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="accessibility/apps6dd3.html?hl=pt-br" >Para tornar os aplicativos acessíveis</a></li><li><a href="accessibility/checklist6dd3.html?hl=pt-br" >Lista de verificação de acessibilidade do desenvolvedor</a></li><li><a href="accessibility/services6dd3.html?hl=pt-br" >Criação de serviços de acessibilidade</a></li></ul></li><li><a href="themes6dd3.html?hl=pt-br" >Estilos e temas</a></li><li><a href="custom-components6dd3.html?hl=pt-br" >Componentes personalizados</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../graphics/index6dd3.html?hl=pt-br" >Animação e gráficos</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../graphics/overview6dd3.html?hl=pt-br" >Visão geral</a></li><li><a href="../graphics/prop-animation6dd3.html?hl=pt-br" >Animação de propriedade</a></li><li><a href="../graphics/view-animation6dd3.html?hl=pt-br" >Exibição de animação</a></li><li><a href="../graphics/drawable-animation6dd3.html?hl=pt-br" >Animação de desenhável</a></li><li><a href="../graphics/2d-graphics6dd3.html?hl=pt-br" >Tela e desenháveis</a></li><li><a href="../graphics/opengl6dd3.html?hl=pt-br" >OpenGL ES</a></li><li><a href="../graphics/hardware-accel6dd3.html?hl=pt-br" >Aceleração de hardware</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/index6dd3.html?hl=pt-br" >Computação</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/compute6dd3.html?hl=pt-br" >RenderScript</a></li><li><a href="../renderscript/advanced6dd3.html?hl=pt-br" >RenderScript avançado</a></li><li class="nav-section"><div class="nav-section-header"><a href="../renderscript/reference/overview6dd3.html?hl=pt-br" >Referência da API de tempo de execução</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../renderscript/reference/rs_value_types6dd3.html?hl=pt-br" >Tipos numéricos</a></li><li><a href="../renderscript/reference/rs_object_types6dd3.html?hl=pt-br" >Tipos de objeto</a></li><li><a href="../renderscript/reference/rs_convert6dd3.html?hl=pt-br" >Funções de conversão</a></li><li><a href="../renderscript/reference/rs_math6dd3.html?hl=pt-br" >Constantes e funções matemáticas</a></li><li><a href="../renderscript/reference/rs_vector_math6dd3.html?hl=pt-br" >Funções matemáticas de vetores</a></li><li><a href="../renderscript/reference/rs_matrix6dd3.html?hl=pt-br" >Funções de matriz</a></li><li><a href="../renderscript/reference/rs_quaternion6dd3.html?hl=pt-br" >Funções de quaternion</a></li><li><a href="../renderscript/reference/rs_atomic6dd3.html?hl=pt-br" >Funções de atualização atômicas</a></li><li><a href="../renderscript/reference/rs_time6dd3.html?hl=pt-br" >Funções e tipos de tempo</a></li><li><a href="../renderscript/reference/rs_allocation_data6dd3.html?hl=pt-br" >Funções de acesso a dados de alocação</a></li><li><a href="../renderscript/reference/rs_object_info6dd3.html?hl=pt-br" >Funções de características de objetos</a></li><li><a href="../renderscript/reference/rs_for_each6dd3.html?hl=pt-br" >Funções e tipos de invocação de kernel</a></li><li><a href="../renderscript/reference/rs_io6dd3.html?hl=pt-br" >Funções de entrada/saída</a></li><li><a href="../renderscript/reference/rs_debug6dd3.html?hl=pt-br" >Funções de deputação</a></li><li><a href="../renderscript/reference/rs_graphics6dd3.html?hl=pt-br" >Funções e tipos de gráfico</a></li><li><a href="../renderscript/reference/index6dd3.html?hl=pt-br" >Índice</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../media/index6dd3.html?hl=pt-br" >Mídia e câmera</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../media/mediaplayer6dd3.html?hl=pt-br" >Reprodução de mídia</a></li><li><a href="../media/mediarouter6dd3.html?hl=pt-br" >Roteador de mídia</a></li><li><a href="../media/mediarouteprovider6dd3.html?hl=pt-br" >Provedor de roteamento de mídia</a></li><li><a href="../media/exoplayer6dd3.html?hl=pt-br" >ExoPlayer</a></li><li><a href="../media/media-formats6dd3.html?hl=pt-br" >Formatos de mídia suportados</a></li><li><a href="../media/mediarecorder6dd3.html?hl=pt-br" >Captura de áudio</a></li><li><a href="../media/jetplayer6dd3.html?hl=pt-br" >JetPlayer</a></li><li><a href="../media/camera6dd3.html?hl=pt-br" >Câmera</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../sensors/index6dd3.html?hl=pt-br" >Localização e sensores</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../location/index6dd3.html?hl=pt-br" >Localização e mapas</a></li><li><a href="../location/strategies6dd3.html?hl=pt-br" >Estratégias de localização</a></li><li><a href="../sensors/sensors_overview6dd3.html?hl=pt-br" >Visão geral de sensores</a></li><li><a href="../sensors/sensors_motion6dd3.html?hl=pt-br" >Sensores de movimento</a></li><li><a href="../sensors/sensors_position6dd3.html?hl=pt-br" >Sensores de posição</a></li><li><a href="../sensors/sensors_environment6dd3.html?hl=pt-br" >Sensores de ambiente</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/index6dd3.html?hl=pt-br" >Conectividade</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/bluetooth6dd3.html?hl=pt-br" >Bluetooth</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/bluetooth-le6dd3.html?hl=pt-br" >Bluetooth Low Energy</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/nfc/index6dd3.html?hl=pt-br" >NFC</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/nfc/nfc6dd3.html?hl=pt-br" >Fundamentos de NFC</a></li><li><a href="../connectivity/nfc/advanced-nfc6dd3.html?hl=pt-br" >NFC avançado</a></li><li><a href="../connectivity/nfc/hce6dd3.html?hl=pt-br" >Emulação de cartão com base em host</a></li></ul></li><li><a href="../connectivity/wifip2p6dd3.html?hl=pt-br" >Wi-Fi P2P</a></li><li class="nav-section"><div class="nav-section-header"><a href="../connectivity/usb/index6dd3.html?hl=pt-br" >USB</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../connectivity/usb/accessory6dd3.html?hl=pt-br" >Acessório</a></li><li><a href="../connectivity/usb/host6dd3.html?hl=pt-br" >Host</a></li></ul></li><li><a href="../connectivity/sip6dd3.html?hl=pt-br" >SIP</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../text/index6dd3.html?hl=pt-br" >Texto e entrada</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../text/copy-paste6dd3.html?hl=pt-br" >Copiar e colar</a></li><li><a href="../text/creating-input-method6dd3.html?hl=pt-br" >Criação de um IME</a></li><li><a href="../text/spell-checker-framework6dd3.html?hl=pt-br" >Verificador ortográfico</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../data/index6dd3.html?hl=pt-br" >Armazenamento de dados</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../data/data-storage6dd3.html?hl=pt-br" >Opções de armazenamento</a></li><li><a href="../data/backup6dd3.html?hl=pt-br" >Backup de dados</a></li><li><a href="../data/install-location6dd3.html?hl=pt-br" >Local da instalação do aplicativo</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/index.html?hl=pt-br" >Bibliotecas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/support-library/index.html?hl=pt-br" >Biblioteca de suporte</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=pt-br" >Recursos</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/setup.html?hl=pt-br" >Configuração</a></li><li><a href="https://developer.android.com/topic/libraries/support-library/revisions.html?hl=pt-br" >Histórico de revisão</a></li></ul></li><li><a href="https://developer.android.com/topic/libraries/data-binding/index.html?hl=pt-br" >Data Binding Library</a></li><li class="nav-section"><div class="nav-section-header"><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html?hl=pt-br" >Testing Support Library</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="https://developer.android.com/reference/android/support/test/package-summary.html?hl=pt-br" >Referência da API</a></li></ul></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../admin/index6dd3.html?hl=pt-br" >Administração</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../admin/device-admin6dd3.html?hl=pt-br" >Políticas do dispositivo</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../webapps/index6dd3.html?hl=pt-br" >Aplicativos Web</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../webapps/targeting6dd3.html?hl=pt-br" >Suporte a diferentes telas em aplicativos Web</a></li><li><a href="../../webapps/webview6dd3.html?hl=pt-br" >Criação de aplicativos Web no WebView</a></li><li><a href="../../webapps/migrating6dd3.html?hl=pt-br" >Migração do WebView para o Android 4.4</a></li><li><a href="../../webapps/debugging6dd3.html?hl=pt-br" >Depuração de aplicativos Web</a></li><li><a href="../../webapps/best-practices6dd3.html?hl=pt-br" >Práticas recomendadas para aplicativos Web</a></li></ul></li><li class="nav-section"><div class="nav-section-header"><a href="../../practices/index6dd3.html?hl=pt-br"  de-lang="Bewährte Verfahren" es-lang="Prácticas recomendadas" fr-lang="Meilleures pratiques" it-lang="Prática recomendada" ja-lang="ベスト プラクティス" zh-cn-lang="最佳实践" zh-tw-lang="最佳實務">Práticas recomendadas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li class="nav-section"><div class="nav-section-header"><a href="../../practices/screens_support6dd3.html?hl=pt-br" >Compatibilidade com várias telas</a><span class="toggle-icon" tabindex="0"></span></div><ul><li><a href="../../practices/screens-distribution6dd3.html?hl=pt-br" >Distribuição para telas específicas</a></li><li><a href="../../practices/screen-compat-mode6dd3.html?hl=pt-br" >Modo de compatibilidade da tela</a></li></ul></li><li><a href="../../practices/tablets-and-handsets6dd3.html?hl=pt-br" >Compatibilidade com tablets e celulares</a></li></ul></li>
+            </ul>
+            
+          
+        </div>
+        
+        
+          
+
+
+
+<ul id="dac-main-navigation" class="dac-nav-list dac-swap-section dac-left dac-no-anim" tabindex=0>
+  <li class="dac-nav-item home">
+    <a class="dac-nav-link" href="https://developer.android.com/index.html?hl=pt-br">Início</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary about">
+      <li class="dac-nav-item versions">
+        <a class="dac-nav-link" href="https://developer.android.com/about/versions/nougat/index.html?hl=pt-br">Android</a>
+      </li>
+      <li class="dac-nav-item wear">
+        <a class="dac-nav-link" href="https://developer.android.com/wear/index.html?hl=pt-br">Wear</a>
+      </li>
+      <li class="dac-nav-item tv">
+        <a class="dac-nav-link" href="https://developer.android.com/tv/index.html?hl=pt-br">TV</a>
+      </li>
+      <li class="dac-nav-item auto">
+        <a class="dac-nav-link" href="https://developer.android.com/auto/index.html?hl=pt-br">Auto</a>
+      </li>
+      <li class="dac-nav-item things">
+        <a class="dac-nav-link" href="https://developer.android.com/things/index.html?hl=pt-br">Things</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item design">
+    <a class="dac-nav-link" href="https://developer.android.com/design/index.html?hl=pt-br"
+       zh-tw-lang="設計"
+       zh-cn-lang="设计"
+       ru-lang="Проектирование"
+       ko-lang="디자인"
+       ja-lang="設計"
+       es-lang="Diseñar">Design</a>
+  </li>
+  <li class="dac-nav-item develop">
+    <a class="dac-nav-link" href="https://developer.android.com/develop/index.html?hl=pt-br"
+       zh-tw-lang="開發"
+       zh-cn-lang="开发"
+       ru-lang="Разработка"
+       ko-lang="개발"
+       ja-lang="開発"
+       es-lang="Desarrollar">Develop</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary develop">
+      <li class="dac-nav-item training">
+        <a class="dac-nav-link" href="https://developer.android.com/training/index.html?hl=pt-br"
+           zh-tw-lang="訓練課程"
+           zh-cn-lang="培训"
+           ru-lang="Курсы"
+           ko-lang="교육"
+           ja-lang="トレーニング"
+           es-lang="Capacitación">Treinamento</a>
+      </li>
+      <li class="dac-nav-item guide">
+        <a class="dac-nav-link" href="../../index6dd3.html?hl=pt-br"
+           zh-tw-lang="API 指南"
+           zh-cn-lang="API 指南"
+           ru-lang="Руководства по API"
+           ko-lang="API 가이드"
+           ja-lang="API ガイド"
+           es-lang="Guías de la API">API Guides</a>
+      </li>
+      <li class="dac-nav-item reference">
+        <a class="dac-nav-link" href="https://developer.android.com/reference/packages.html?hl=pt-br"
+           zh-tw-lang="參考資源"
+           zh-cn-lang="参考"
+           ru-lang="Справочник"
+           ko-lang="참조문서"
+           ja-lang="リファレンス"
+           es-lang="Referencia">Referência</a>
+      </li>
+      <li class="dac-nav-item samples">
+        <a class="dac-nav-link" href="https://developer.android.com/samples/index.html?hl=pt-br">Amostras</a>
+      </li>
+      <li class="dac-nav-item libraries">
+        <a class="dac-nav-link" href="https://developer.android.com/topic/libraries/index.html?hl=pt-br"
+           >Bibliotecas</a></li>
+      <li class="dac-nav-item studio">
+        <a class="dac-nav-link" href="https://developer.android.com/studio/index.html?hl=pt-br"
+           >Android Studio</a></li>
+      <li class="dac-nav-item ndk">
+        <a class="dac-nav-link" href="https://developer.android.com/ndk/index.html?hl=pt-br"
+           >Android NDK</a></li>
+      <li class="dac-nav-item google">
+        <a class="dac-nav-link" href="https://developer.android.com/google/index.html?hl=pt-br">Google Services</a>
+      </li>
+      <li class="dac-nav-item quality-guidelines">
+        <a class="dac-nav-link" href="https://developer.android.com/develop/quality-guidelines/index.html?hl=pt-br">Quality Guidelines</a>
+      </li>
+      <li class="dac-nav-item kotlin">
+        <a class="dac-nav-link" href="https://developer.android.com/kotlin/index.html?hl=pt-br">Kotlin</a>
+       </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item distribute">
+    <a class="dac-nav-link" href="https://developer.android.com/distribute/index.html?hl=pt-br"
+       zh-tw-lang="發佈"
+       zh-cn-lang="分发"
+       ru-lang="Распространение"
+       ko-lang="배포"
+       ja-lang="配布"
+       de-lang="Vertrieb"
+       es-lang="Distribuir"
+       es-419-lang="Distribuye"
+       fr-lang="Distribuer"
+       id-lang="Distribusikan"
+       pt-br-lang="Distribuição"
+       th-lang="จัดจำหน่าย"
+       tr-lang="Dağıtma"
+       vi-lang="Phân phối">Distribute</a>
+    <i class="dac-sprite dac-expand-more-black dac-nav-sub-slider" tabindex=0></i>
+    <ul class="dac-nav-secondary distribute">
+      <li class="dac-nav-item google-play">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/google-play/index.html?hl=pt-br">Google Play</a>
+      </li>
+      <li class="dac-nav-item console">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/console/index.html?hl=pt-br">Play Console</a>
+      </li>
+      <li class="dac-nav-item best-practices">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/best-practices/index.html?hl=pt-br"
+          es-419-lang="Recomendaciones"
+          fr-lang="Bonnes pratiques"
+          id-lang="Praktik terbaik"
+          ja-lang="おすすめの方法"
+          ko-lang="권장사항"
+          pt-br-lang="Práticas recomendadas"
+          ru-lang="Рекомендации"
+          th-lang="จัดจำหน่าย"
+          tr-lang="En iyi uygulamalar"
+          vi-lang="Các phương pháp hay nhất"
+          zh-cn-lang="最佳做法"
+          zh-tw-lang="最佳做法">Best practices</a>
+      </li>
+      <li class="dac-nav-item marketing-tools">
+        <a class="dac-nav-link" href="https://developer.android.com/distribute/marketing-tools/index.html?hl=pt-br"
+          de-lang="Marketing-Tools"
+          es-419-lang="Herramientas de marketing"
+          fr-lang="Outils marketing"
+          id-lang="Fitur pemasaran"
+          ja-lang="マーケティング ツール"
+          ko-lang="마케팅 도구"
+          pt-br-lang="Ferramentas de marketing"
+          ru-lang="Маркетинговые инструменты"
+          th-lang="เครื่องมือการตลาด"
+          tr-lang="Pazarlama araçları"
+          vi-lang="Công cụ tiếp thị"
+          zh-cn-lang="营销工具"
+          zh-tw-lang="行銷工具">Marketing tools</a>
+      </li>
+      <li class="dac-nav-item policy-center">
+        <a class="dac-nav-link" href="https://play.google.com/about/developer-content-policy/" target="_blank">Policy center</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dac-nav-item stories">
+    <a class="dac-nav-link" href="https://developer.android.com/stories/index.html?hl=pt-br">Stories</a>
+  </li>
+  
+  <li class="dac-nav-item preview">
+    <a class="dac-nav-link" href="https://developer.android.com/preview/index.html?hl=pt-br">Preview</a>
+  </li>
+  
+</ul>
+
+        
+      </div>
+    </div>
+  </nav>
+
+  <a name="top" tabindex="0"></a>
+  
+  <div class="wrap clearfix" id="body-content">
+  
+    
+      
+      <div class="content-header">
+        <ul class="dac-header-crumbs"></ul>
+        <!-- Breadcrumb Setup -->
+        <script>$('.dac-nav-list').dacCurrentPage().dacCrumbs();</script>
+        <h1 itemprop="name">Arrastar e soltar</h1>
+      
+        
+      
+      </div>
+      
+    
+    <div class="jd-descr " itemprop="articleBody">
+      
+
+<div id="qv-wrapper">
+    <div id="qv">
+        <h2>Visualização rápida</h2>
+            <ul>
+                <li>
+                    Permite que os usuários movam dados dentro do layout da Activity usando gestos gráficos.
+                </li>
+                <li>
+                    Permite operações além da movimentação de dados.
+                </li>
+                <li>
+                    Funciona apenas com um único aplicativo.
+                </li>
+                <li>
+                    Exige a API 11.
+                </li>
+            </ul>
+        <h2>Neste documento</h2>
+        <ol>
+            <li>
+                <a href="#AboutDragging">Visão geral</a>
+                <ol>
+                    <li>
+                        <a href="#DragDropLifecycle">O processo de arrastar e soltar</a>
+                    </li>
+                    <li>
+                        <a href="#AboutDragListeners">O ouvinte de eventos de arrastar e o método de retorno de chamada</a>
+                    </li>
+                    <li>
+                        <a href="#AboutDragEvent">Eventos de arrastar</a>
+                    </li>
+                    <li>
+                        <a href="#AboutDragShadowBuilder">
+                        A sombra da ação de arrastar</a>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <a href="#DesignDragOperation">Projetar uma operação de arrastar e soltar</a>
+                <ol>
+                    <li>
+                        <a href="#StartDrag">Iniciar uma ação de arrastar</a>
+                    </li>
+                    <li>
+                        <a href="#HandleStart">Responder a um início de ação de arrastar</a>
+                    </li>
+                    <li>
+                        <a href="#HandleDuring">Processar eventos durante a ação de arrastar</a>
+                    </li>
+                    <li>
+                        <a href="#HandleDrop">Responder a uma ação de soltar</a>
+                    </li>
+                    <li>
+                        <a href="#HandleEnd">Responder a um fim de ação de arrastar</a>
+                    </li>
+                    <li>
+                        <a href="#RespondEventSample">Responder a eventos de arrastar: um exemplo</a>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+        <h2>Classes principais</h2>
+        <ol>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br">View</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.OnLongClickListener.html?hl=pt-br">OnLongClickListener</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=pt-br">OnDragListener</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br">DragEvent</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">DragShadowBuilder</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/content/ClipData.html?hl=pt-br">ClipData</a></code>
+            </li>
+            <li>
+                <code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=pt-br">ClipDescription</a></code>
+            </li>
+        </ol>
+        <h2>Exemplos relacionados</h2>
+        <ol>
+            <li>
+                <a href="https://developer.android.com/resources/samples/HoneycombGallery/index.html?hl=pt-br">
+                Honeycomb Gallery</a>.
+            </li>
+            <li>
+                <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/DragAndDropDemo.html?hl=pt-br">
+DragAndDropDemo.java</a> e
+                <a href="https://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/view/DraggableDot.html?hl=pt-br">
+DraggableDot.java</a> em <a href="https://developer.android.com/resources/samples/ApiDemos/index.html?hl=pt-br">Api Demos</a>.
+            </li>
+        </ol>
+        <h2>Veja também</h2>
+        <ol>
+            <li>
+            <a href="../providers/content-providers6dd3.html?hl=pt-br">Provedores de conteúdo</a>
+            </li>
+            <li>
+                <a href="ui-events6dd3.html?hl=pt-br">Eventos de entrada</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<p>
+    Com a estrutura de trabalho de arrastar e soltar do Android, você pode permitir que usuários movam dados
+    de uma View para outra no layout atual usando um gesto gráfico de arrastar e soltar.
+    A estrutura de trabalho contém uma classe de eventos de arrastar, ouvintes de arrastar e métodos e classes auxiliares.
+</p>
+<p>
+    Embora a estrutura de trabalho seja projetada principalmente para movimentação de dados, é possível usá-la
+    para outras ações de IU. Por exemplo: você pode criar um aplicativo que mistura cores quando o usuário
+    arrasta um ícone colorido sobre outro ícone. No entanto, o resto desse tópico descreve
+    a estrutura de trabalho em termos de movimentação de dados.
+</p>
+<h2 id="AboutDragging">Visão geral</h2>
+<p>
+    Uma operação de arrastar e soltar começa quando o usuário faz um gesto reconhecido como um
+    sinal para começar a arrastar dados. Como resposta, o aplicativo informa ao sistema que a ação de arrastar está
+    começando. O sistema executa um retorno de chamada para o aplicativo para obter uma representação dos dados
+    sendo arrastados. Conforme o dedo do usuário move essa representação (uma “sombra da ação de arrastar”)
+    sobre o layout atual, o sistema envia eventos de arrastar aos objetos de ouvinte de eventos de arrastar e
+    aos métodos de retorno de chamada dos eventos de arrastar associados aos objetos <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br">View</a></code> no layout.
+    Depois que o usuário liberar a sombra da ação de arrastar, o sistema encerrará a operação de arrastar.
+</p>
+<p>
+    Você cria um objeto de ouvinte de evento de arrastar (“ouvintes”) de uma classe que implemente
+    <code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=pt-br">View.OnDragListener</a></code>. O objeto ouvinte do evento de arrastar para uma View
+    é definido com o método
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#setOnDragListener(android.view.View.OnDragListener)">setOnDragListener()</a></code> do objeto View.
+    Cada objeto View também tem um método de retorno de chamada <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#onDragEvent(android.view.DragEvent)">onDragEvent()</a></code>.
+ Ambos estão descritos em mais detalhes na seção
+    <a href="#AboutDragListeners">O ouvinte do evento de arrastar e o método de retorno de chamada</a>.
+</p>
+<p class="note">
+    <strong>Observação</strong>: Para simplificar, as seções a seguir se referem à rotina
+    que recebe eventos de arrastar como o “ouvinte de eventos de arrastar”, mesmo que ele possa ser na verdade
+    um método de retorno de chamada.
+</p>
+<p>
+    Ao iniciar uma ação de arrastar, incluem-se os dados a mover e os metadados que descrevem esses
+    dados como parte da chamada do sistema. Durante a ação de arrastar, o sistema envia eventos de arrastar aos ouvintes
+    de evento de arrastar ou métodos de retorno de chamada de cada View do layout. Os ouvintes ou métodos
+    de retorno de chamada podem usar os metadados para decidir se querem aceitar os dados quando são soltos.
+    Se o usuário soltar os dados sobre um objeto View e o ouvinte ou método de retorno de chamada
+    dessa View informou previamente ao sistema que quer aceitar a ação de soltar, o sistema enviará
+    os dados ao ouvinte ou método de retorno de chamada em um evento de arrastar.
+</p>
+<p>
+    O aplicativo instrui o sistema a chamar
+    o método     <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+para iniciar uma ação de arrastar. Isso instrui o sistema a começar a enviar eventos de arrastar. O método também envia os dados
+    sendo arrastados.
+</p>
+<p>
+    Você pode chamar
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+    para qualquer View anexada ao layout atual. O sistema usa o objeto View apenas para obter acesso
+    às configurações globais no layout.
+</p>
+<p>
+    Depois que o aplicativo chama
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>,
+    o resto do processo usa eventos que o sistema envia a objetos View no layout
+    atual.
+</p>
+<h3 id="DragDropLifecycle">O processo de arrastar e soltar</h3>
+<p>
+    Existem essencialmente quatro etapas ou estados no processo de arrastar e soltar:
+</p>
+<dl>
+    <dt>
+        <em>Iniciado</em>
+    </dt>
+    <dd>
+        Em resposta ao gesto do usuário de iniciar uma ação de arrastar, o aplicativo chama
+         <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+        para instruir o sistema a iniciar uma ação de arrastar. Os argumentos
+         <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+         fornecem os dados a serem arrastados, os metadados desses dados e um retorno de chamada para desenhar
+         a sombra da ação de arrastar.
+        <p>
+            Primeiro, o sistema responde executando um retorno de chamada ao aplicativo para obter a sombra da ação de arrastar. Em seguida,
+            ele exibe a sombra da ação de arrastar no dispositivo.
+        </p>
+        <p>
+            Depois, o sistema envia um evento de arrastar com tipo de ação
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code> aos ouvintes de eventos de arrastar
+            de todos os objetos View no layout atual. Para continuar a receber eventos de arrastar,
+            inclusive um possível evento de soltar, o ouvinte de eventos de arrastar deve retornar <code>true</code>.
+            Esse retorno registra o ouvinte no sistema. Somente ouvintes registrados continuam
+            a receber eventos de arrastar. Nesse momento, os ouvintes também podem alterar a aparência
+            do objeto View para mostrar que o ouvinte pode aceitar um evento de soltar.
+        </p>
+        <p>
+            Se o ouvinte de eventos retornar <code>false</code>, não receberá eventos
+           de arrastar para a operação atual até que o sistema enviar um evento de arrastar com tipo de ação
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>. Ao enviar <code>false</code>,
+            o ouvinte informa ao sistema que não está interessado na operação de arrastar
+            e não quer aceitar os dados arrastados.
+        </p>
+    </dd>
+    <dt>
+        <em>Continuando</em>
+    </dt>
+    <dd>
+        O usuário continua a ação de arrastar. Quando a sombra da ação de arrastar cruzar a caixa delimitadora de um objeto
+        View, o sistema enviará um ou mais eventos de arrastar ao ouvinte de eventos de arrastar do objeto
+        View (se ele estiver registrado para receber eventos). O ouvinte pode optar por
+        alterar a aparência do objeto View em resposta ao evento. Por exemplo, se o evento
+        indicar que a sombra da ação de arrastar entrou na caixa delimitadora da View
+        (tipo de ação <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code>), o ouvinte
+        poderá reagir destacando sua View.
+    </dd>
+    <dt>
+        <em>Solto</em>
+    </dt>
+    <dd>
+        O usuário libera a sombra da ação arrastar dentro da caixa delimitadora de uma View que pode aceitar
+        os dados. O sistema envia ao ouvinte do objeto View um evento de arrastar com tipo de ação
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>. O evento de arrastar contém os dados
+        passados ao sistema na chamada
+        de <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+        que iniciou a operação. O ouvinte deverá retornar um <code>true</code> booleano
+        ao sistema se o código para aceitar a ação de soltar for bem-sucedido.
+        <p>
+            Observe que essa etapa ocorre apenas quando o usuário solta a sombra da ação de arrastar dentro da caixa
+            delimitadora de uma View cujo ouvinte está registrado para receber eventos de arrastar. Se o usuário soltar
+            a sombra da ação de arrastar em qualquer outra situação, nenhum evento de arrastar
+            será enviado <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>.
+        </p>
+    </dd>
+    <dt>
+        <em>Encerrado</em>
+    </dt>
+    <dd>
+        Depois que o usuário soltar a sombra da ação de arrastar e o sistema enviar (se necessário)
+        um evento de arrastar com o tipo de ação <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>, o sistema enviará
+        um evento de arrastar com o tipo de ação <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>
+        para indicar o término da operação de arrastar. Isso será feito independentemente do local onde o usuário
+        soltar a sombra da ação de arrastar. O evento é enviado a todos os ouvintes registrados para receber eventos de
+        arrastar, mesmo se o ouvinte recebeu o evento <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>.
+    </dd>
+</dl>
+<p>
+    Essas quatro etapas são descritas mais detalhadamente na seção
+    <a href="#DesignDragOperation">Projetar uma operação de arrastar e soltar</a>.
+</p>
+<h3 id="AboutDragListeners">O ouvinte de eventos de arrastar e o método de retorno de chamada</h3>
+<p>
+    Uma View recebe eventos de arrastar com um ouvinte de eventos de arrastar que implementa
+    <code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=pt-br">View.OnDragListener</a></code> ou com seu
+    método de retorno de chamada <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#onDragEvent(android.view.DragEvent)">onDragEvent(DragEvent)</a></code>.
+    Quando o sistema chama o método ou ouvinte, passa-lhes
+    um objeto <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br">DragEvent</a></code>.
+</p>
+<p>
+    Você provavelmente usará o ouvinte na maioria dos casos. Ao projetar IUs, normalmente
+    não são criadas subclasses das classes View, mas o uso do método de retorno de chamada exige que isso seja feito para
+    modificar o método. Por outro lado, é possível implementar uma classe de ouvinte e usá-la
+    com diversos objetos View. Também é possível implementá-la como uma classe anônima em linha. Para
+    definir o ouvinte de um objeto View, chame
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#setOnDragListener(android.view.View.OnDragListener)">setOnDragListener()</a></code>.
+</p>
+<p>
+    É possível ter ao mesmo tempo um ouvinte e um método de retorno de chamada para um objeto View. Se isso ocorrer,
+    o sistema chamará primeiro o ouvinte. O sistema não chamará o método de retorno de chamada a menos que o
+    ouvinte retorne <code>false</code>.
+</p>
+<p>
+    A combinação do método <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#onDragEvent(android.view.DragEvent)">onDragEvent(DragEvent)</a></code>
+e     <code><a href="https://developer.android.com/reference/android/view/View.OnDragListener.html?hl=pt-br">View.OnDragListener</a></code> é análoga à combinação
+    de <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#onTouchEvent(android.view.MotionEvent)">onTouchEvent()</a></code>
+    e <code><a href="https://developer.android.com/reference/android/view/View.OnTouchListener.html?hl=pt-br">View.OnTouchListener</a></code> usados com eventos de toque.
+</p>
+<h3 id="AboutDragEvent">Eventos de arrastar</h3>
+<p>
+    O sistema envia um evento de arrastar como um objeto <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br">DragEvent</a></code>. O
+    objeto tem um tipo de ação que informa ao ouvinte o que está ocorrendo no processo de
+    arrastar e soltar. O objeto contém outros dados, dependendo do tipo de ação.
+</p>
+<p>
+    Para obter o tipo de ação, o ouvinte chama <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getAction()">getAction()</a></code>. Há
+    seis valores possíveis, definidos por constantes na classe <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br">DragEvent</a></code>. Esses valores
+    estão listados na <a href="#table1">Tabela 1</a>.
+</p>
+<p>
+    O objeto <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br">DragEvent</a></code> também contém os dados fornecidos pelo aplicativo
+    ao sistema na chamada ao
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>.
+    Alguns dados são válidos apenas para determinados tipos de ação. Os dados que são válidos para cada tipo de
+    ação são resumidos na <a href="#table2">Tabela 2</a>. Eles também são descritos em detalhe com o
+    evento em que são válidos na seção
+    <a href="#DesignDragOperation">Projetar uma operação de arrastar e soltar</a>.
+</p>
+<p class="table-caption" id="table1">
+  <strong>Tabela 1.</strong> Tipos de ação DragEvent
+</p>
+<table>
+    <tr>
+        <th scope="col">getAction() value</th>
+        <th scope="col">Significado</th>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code></td>
+        <td>
+            O ouvinte de eventos de arrastar do objeto View recebe esse tipo de ação de evento logo depois que o
+            aplicativo chama
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code> e
+            obtém uma sombra da ação de arrastar.
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code></td>
+        <td>
+            O ouvinte de eventos de arrastar do objeto View recebe esse tipo de ação de evento assim que a sombra da ação de arrastar
+            entra na caixa delimitadora da View. Esse é o primeiro tipo de ação de evento recebido
+            pelo ouvinte quando a sombra da ação de arrastar entra na caixa delimitadora. Se o ouvinte quiser
+            continuar a receber eventos de arrastar para essa operação, deverá retornar um
+            <code>true</code> booleano ao sistema.
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code></td>
+        <td>
+            O ouvinte de eventos de arrastar do objeto View recebe esse tipo de ação de evento depois de receber um evento
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> enquanto a sombra da ação de arrastar ainda
+            está na caixa delimitadora da View.
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code></td>
+        <td>
+            O ouvinte de eventos de arrastar do objeto View recebe esse tipo de ação de evento depois de receber um
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> e pelo menos um evento
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code>, depois que o usuário mover
+            a sombra da ação de arrastar para fora da caixa delimitadora da View.
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code></td>
+        <td>
+            O ouvinte de eventos de arrastar do objeto View recebe esse tipo de ação de evento quando o usuário
+            libera a sombra da ação de arrastar sobre o objeto View. Esse tipo de ação somente será enviado ao ouvinte
+            do objeto View se esse ouvinte retornou um <code>true</code> booleano como resposta ao evento de arrastar
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code>. Esse tipo de ação não será
+            enviado se o usuário liberar a sombra da ação de arrastar em uma View cujo ouvinte não está registrado,
+            ou se o usuário liberar a sombra da ação de arrastar em qualquer área que não faça parte do layout
+            atual.
+            <p>
+                O ouvinte deverá retornar <code>true</code> booleano se processar
+                de forma bem-sucedida a ação de soltar. Caso contrário, deverá retornar <code>false</code>.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code></td>
+        <td>
+            O ouvinte de eventos de arrastar do objeto View recebe esse tipo de ação
+           quando o sistema está encerrando a operação de arrastar. Esse tipo de ação não é necessariamente
+            precedido por um evento <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>. Se o sistema enviou
+            um <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>, o recebimento do
+            tipo de ação <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> não significa que a
+            operação de soltar foi bem-sucedida. O ouvinte deve chamar
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getResult()">getResult()</a></code> para obter o valor que foi
+            retornado como resposta de <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>. Se um
+            evento <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code> não foi enviado,
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getResult()">getResult()</a></code> retorna <code>false</code>.
+        </td>
+    </tr>
+</table>
+<p class="table-caption" id="table2">
+  <strong>Tabela 2.</strong> Dados válidos de DragEvent por tipo de ação</p>
+<table>
+    <tr>
+        <th scope="col">Valor de <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getAction()">getAction()</a></code></th>
+        <th scope="col">Valor de <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getClipDescription()">getClipDescription()</a></code></th>
+        <th scope="col">Valor de <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getLocalState()">getLocalState()</a></code></th>
+        <th scope="col">Valor de <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getX()">getX()</a></code></th>
+        <th scope="col">Valor de <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getY()">getY()</a></code></th>
+        <th scope="col">Valor de <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getClipData()">getClipData()</a></code></th>
+        <th scope="col">valor de <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getResult()">getResult()</a></code></th>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td><code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code></td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">X</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">&nbsp;</td>
+        <td style="text-align: center;">X</td>
+    </tr>
+</table>
+<p>
+    Os métodos <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getAction()">getAction()</a></code>,
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#describeContents()">describeContents()</a></code>,
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#writeToParcel(android.os.Parcel, int)">writeToParcel()</a></code> e
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#toString()">toString()</a></code> sempre retornam dados válidos.
+</p>
+<p>
+    Se um método não contiver dados válidos para um determinado tipo de ação, retornará
+    <code>null</code> ou 0 dependendo do tipo de resultado.
+</p>
+<h3 id="AboutDragShadowBuilder">
+    A sombra da ação de arrastar
+</h3>
+<p>
+    Durante uma operação de arrastar e soltar, o sistema exibe uma imagem arrastada pelo usuário.
+    Para o movimento de dados, essa imagem representa os dados sendo arrastados. Para outras operações, a
+    imagem representa algum aspecto da operação de arrastar.
+</p>
+<p>
+    Essa imagem é denominada uma sombra da ação de arrastar. Ela é criada com métodos declarados para um objeto
+    <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">View.DragShadowBuilder</a></code> e então passada ao sistema quando uma
+    ação de arrastar é iniciada usando
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>.
+    Como parte de sua resposta a
+    <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>,
+    o sistema invoca os métodos de retorno de chamada que você definiu em
+    <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">View.DragShadowBuilder</a></code> para obter uma sombra da ação de arrastar.
+</p>
+<p>
+    A classe <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">View.DragShadowBuilder</a></code> tem dois construtores:
+</p>
+    <dl>
+    <dt><code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br#View.DragShadowBuilder(android.view.View)">View.DragShadowBuilder(View)</a></code></dt>
+    <dd>
+        Esse construtor aceita qualquer um dos objetos
+        <code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br">View</a></code> do aplicativo. O construtor armazena o objeto View
+        no objeto <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">View.DragShadowBuilder</a></code>. Portanto, durante
+        o retorno de chamada, você pode acessá-lo durante a construção da sombra da ação de arrastar.
+        Ele não precisa ser associado à View (se houver) selecionada pelo
+        usuário para iniciar a operação de arrastar.
+        <p>
+            Se você usar esse construtor, não precisa estender
+            <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">View.DragShadowBuilder</a></code> nem modificar seus métodos. Por padrão,
+            você obterá uma sombra da ação de arrastar com a mesma aparência que a View passada como
+            argumento, centralizada no local onde o usuário está tocando a tela.
+        </p>
+    </dd>
+    <dt><code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br#View.DragShadowBuilder()">View.DragShadowBuilder()</a></code></dt>
+    <dd>
+        Se você usar esse construtor, nenhum objeto View estará disponível no
+        objeto <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">View.DragShadowBuilder</a></code> (o campo é definido como <code>null</code>).
+        Se você usar esse construtor e não estender
+        <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">View.DragShadowBuilder</a></code> nem modificar seus métodos,
+        você obterá uma sombra da ação de arrastar invisível.
+        O sistema <em>não</em> gera um erro.
+    </dd>
+</dl>
+<p>
+    A classe <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">View.DragShadowBuilder</a></code> tem dois métodos:
+</p>
+<dl>
+    <dt>
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br#onProvideShadowMetrics(android.graphics.Point, android.graphics.Point)">onProvideShadowMetrics()</a></code>
+    </dt>
+    <dd>
+        O sistema chama esse método imediatamente após a chamada de
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>. Use-o
+        para enviar ao sistema as dimensões e o ponto de contato da sombra da ação de arrastar. O método tem dois
+        argumentos:
+        <dl>
+            <dt><em>dimensões</em></dt>
+            <dd>
+                Um objeto <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=pt-br">Point</a></code>. A largura da sombra da ação de arrastar é especificada em
+                <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=pt-br#x">x</a></code> e a altura em
+                <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=pt-br#y">y</a></code>.
+            </dd>
+            <dt><em>ponto de contato</em></dt>
+            <dd>
+                Um objeto <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=pt-br">Point</a></code>. O ponto de contato é o local dentro da
+                sombra da ação de arrastar que deve estar sob o dedo do usuário durante a ação de arrastar. Sua posição X
+                é especificada em <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=pt-br#x">x</a></code> e sua posição Y em
+                <code><a href="https://developer.android.com/reference/android/graphics/Point.html?hl=pt-br#y">y</a></code>
+            </dd>
+        </dl>
+    </dd>
+    <dt>
+       <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br#onDrawShadow(android.graphics.Canvas)">onDrawShadow()</a></code>
+    </dt>
+    <dd>
+        Imediatamente após a chamada de
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br#onProvideShadowMetrics(android.graphics.Point, android.graphics.Point)">onProvideShadowMetrics()</a></code>
+        o sistema chama
+        <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br#onDrawShadow(android.graphics.Canvas)">onDrawShadow()</a></code> para obter a
+        sombra da ação de arrastar. O método tem um único argumento, um objeto <code><a href="https://developer.android.com/reference/android/graphics/Canvas.html?hl=pt-br">Canvas</a></code>
+        que o sistema constrói com base nos parâmetros informados em
+<code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br#onProvideShadowMetrics(android.graphics.Point, android.graphics.Point)">onProvideShadowMetrics()</a></code>
+        Use-o para desenhar a sombra da ação de arrastar no objeto <code><a href="https://developer.android.com/reference/android/graphics/Canvas.html?hl=pt-br">Canvas</a></code> fornecido.
+    </dd>
+</dl>
+<p>
+    Para melhorar o desempenho, use um tamanho pequeno para a sombra da ação de arrastar. Para um único item,
+    você pode usar um ícone. Para uma seleção múltipla, você pode usar ícones em uma pilha
+    em vez de imagens completas espalhadas pela tela.
+</p>
+<h2 id="DesignDragOperation">Projetar uma operação de arrastar e soltar</h2>
+<p>
+    Esta seção mostra detalhadamente como iniciar uma ação de arrastar, como responder a eventos durante
+    a ação de arrastar, como responder a um evento de largar e como encerrar a operação de arrastar e largar.
+</p>
+<h3 id="StartDrag">Iniciar uma ação de arrastar</h3>
+<p>
+    O usuário inicia uma ação de arrastar com um gesto de arrastar — normalmente, uma pressão longa — em um objeto View.
+    Como resposta, você deve fazer o seguinte:
+</p>
+<ol>
+     <li>
+        Se necessário crie um <code><a href="https://developer.android.com/reference/android/content/ClipData.html?hl=pt-br">ClipData</a></code> e
+        um <code><a href="https://developer.android.com/reference/android/content/ClipData.Item.html?hl=pt-br">ClipData.Item</a></code> para os dados sendo movidos. Como parte do objeto
+        ClipData, forneça metadados armazenados em um objeto <code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=pt-br">ClipDescription</a></code>
+        dentro do ClipData. Para uma operação de arrastar e soltar que não representa movimento
+        de dados, você pode usar <code>null</code> em vez de um objeto real.
+        <p>
+            Por exemplo: este snippet de código mostra como responder a uma pressão longa em uma ImageView
+            criando um objeto ClipData que contém a tag ou o rótulo de uma
+            ImageView. Depois desse snippet, o próximo snippet mostra como modificar os métodos em
+            <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">View.DragShadowBuilder</a></code>:
+        </p>
+<pre>
+// Create a string for the ImageView label
+private static final String IMAGEVIEW_TAG = &quot;icon bitmap&quot;
+
+// Creates a new ImageView
+ImageView imageView = new ImageView(this);
+
+// Sets the bitmap for the ImageView from an icon bit map (defined elsewhere)
+imageView.setImageBitmap(mIconBitmap);
+
+// Sets the tag
+imageView.setTag(IMAGEVIEW_TAG);
+
+    ...
+
+// Sets a long click listener for the ImageView using an anonymous listener object that
+// implements the OnLongClickListener interface
+imageView.setOnLongClickListener(new View.OnLongClickListener() {
+
+    // Defines the one method for the interface, which is called when the View is long-clicked
+    public boolean onLongClick(View v) {
+
+    // Create a new ClipData.
+    // This is done in two steps to provide clarity. The convenience method
+    // ClipData.newPlainText() can create a plain text ClipData in one step.
+
+    // Create a new ClipData.Item from the ImageView object's tag
+    ClipData.Item item = new ClipData.Item(v.getTag());
+
+    // Create a new ClipData using the tag as a label, the plain text MIME type, and
+    // the already-created item. This will create a new ClipDescription object within the
+    // ClipData, and set its MIME type entry to &quot;text/plain&quot;
+    ClipData dragData = new ClipData(v.getTag(),ClipData.MIMETYPE_TEXT_PLAIN,item);
+
+    // Instantiates the drag shadow builder.
+    View.DragShadowBuilder myShadow = new MyDragShadowBuilder(imageView);
+
+    // Starts the drag
+
+            v.startDrag(dragData,  // the data to be dragged
+                        myShadow,  // the drag shadow builder
+                        null,      // no need to use local data
+                        0          // flags (not currently used, set to 0)
+            );
+
+    }
+}
+</pre>
+    </li>
+    <li>
+        O snippet de código a seguir define <code>myDragShadowBuilder</code>
+        Ele cria uma sombra da ação de arrastar para arrastar uma TextView como um retângulo cinza pequeno:
+<pre>
+    private static class MyDragShadowBuilder extends View.DragShadowBuilder {
+
+    // The drag shadow image, defined as a drawable thing
+    private static Drawable shadow;
+
+        // Defines the constructor for myDragShadowBuilder
+        public MyDragShadowBuilder(View v) {
+
+            // Stores the View parameter passed to myDragShadowBuilder.
+            super(v);
+
+            // Creates a draggable image that will fill the Canvas provided by the system.
+            shadow = new ColorDrawable(Color.LTGRAY);
+        }
+
+        // Defines a callback that sends the drag shadow dimensions and touch point back to the
+        // system.
+        &#64;Override
+        public void onProvideShadowMetrics (Point size, Point touch) {
+            // Defines local variables
+            private int width, height;
+
+            // Sets the width of the shadow to half the width of the original View
+            width = getView().getWidth() / 2;
+
+            // Sets the height of the shadow to half the height of the original View
+            height = getView().getHeight() / 2;
+
+            // The drag shadow is a ColorDrawable. This sets its dimensions to be the same as the
+            // Canvas that the system will provide. As a result, the drag shadow will fill the
+            // Canvas.
+            shadow.setBounds(0, 0, width, height);
+
+            // Sets the size parameter's width and height values. These get back to the system
+            // through the size parameter.
+            size.set(width, height);
+
+            // Sets the touch point's position to be in the middle of the drag shadow
+            touch.set(width / 2, height / 2);
+        }
+
+        // Defines a callback that draws the drag shadow in a Canvas that the system constructs
+        // from the dimensions passed in onProvideShadowMetrics().
+        &#64;Override
+        public void onDrawShadow(Canvas canvas) {
+
+            // Draws the ColorDrawable in the Canvas passed in from the system.
+            shadow.draw(canvas);
+        }
+    }
+</pre>
+        <p class="note">
+            <strong>Observação:</strong> Lembre-se de que não é necessário estender
+            <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br">View.DragShadowBuilder</a></code>. O construtor
+            <code><a href="https://developer.android.com/reference/android/view/View.DragShadowBuilder.html?hl=pt-br#View.DragShadowBuilder(android.view.View)">View.DragShadowBuilder(View)</a></code> cria uma
+            sombra da ação de arrastar padrão com o mesmo tamanho do argumento View passado a ele, com o
+            ponto de contato centralizado na sombra da ação de arrastar.
+        </p>
+    </li>
+</ol>
+<h3 id="HandleStart">Responder a um início de ação de arrastar</h3>
+<p>
+    Durante a operação de arrastar, o sistema despacha eventos de arrastar aos ouvintes de eventos de arrastar
+    dos objetos View no layout atual. Os ouvintes devem reagir
+    chamando <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getAction()">getAction()</a></code> para obter o tipo de ação.
+    No início de uma ação de arrastar, esse método retorna <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code>.
+</p>
+<p>
+    Em resposta a um evento com o tipo de ação <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code>,
+    um ouvinte poderia fazer o seguinte:
+</p>
+<ol>
+    <li>
+        Chamar <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getClipDescription()">getClipDescription()</a></code> para obter
+        a <code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=pt-br">ClipDescription</a></code>. Usar os métodos de tipo MIME
+        em <code><a href="https://developer.android.com/reference/android/content/ClipDescription.html?hl=pt-br">ClipDescription</a></code> para ver se o ouvinte pode aceitar os dados
+        sendo arrastados.
+        <p>
+            Se a operação de arrastar e soltar não representar movimento de dados, talvez isso não seja
+            necessário.
+        </p>
+    </li>
+    <li>
+        Se o ouvinte puder aceitar uma ação de soltar, deverá retornar <code>true</code>. Isso instrui
+        o sistema a continuar a enviar eventos de arrastar ao ouvinte.
+        Se ele não puder aceitar uma ação de soltar, deverá retornar <code>false</code> e o sistema
+        deixará de enviar eventos de arrastar até enviar
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>.
+    </li>
+</ol>
+<p>
+    Observe que para um evento <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code>,
+    os métodos de <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br">DragEvent</a></code> a seguir não são válidos:
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getClipData()">getClipData()</a></code>, <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getX()">getX()</a></code>,
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getY()">getY()</a></code> e <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getResult()">getResult()</a></code>.
+</p>
+<h3 id="HandleDuring">Processar eventos durante a ação de arrastar</h3>
+<p>
+    Durante a ação de arrastar, os ouvintes que retornaram <code>true</code> como resposta ao
+    evento de arrastar <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_STARTED">ACTION_DRAG_STARTED</a></code> continuam recebendo eventos de
+    arrastar. Os tipos de eventos de arrastar recebidos pelo ouvinte durante a ação de arrastar dependem da localização
+    da sombra da ação de arrastar e da visibilidade da View do ouvinte.
+</p>
+<p>
+    Durante a ação de arrastar, os ouvintes usam principalmente eventos de arrastar para decidir se devem alterar
+    a aparência da View.
+</p>
+<p>
+    Durante a ação de arrastar, <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getAction()">getAction()</a></code> retorna um dentre três
+    valores:
+</p>
+<ul>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code>:
+        O ouvinte recebe esse valores quando o ponto de contato
+        (o ponto da tela sob o dedo do usuário) entrou na caixa delimitadora
+        da View do ouvinte.
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code>: Após receber
+        um evento <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> e antes de receber um evento
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code>, o ouvinte receberá um novo
+        evento <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code> sempre que o ponto do contato se mover.
+        Os métodos <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getX()">getX()</a></code> e <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getY()">getY()</a></code>
+        retornam as coordenadas X e Y do ponto de contato.
+    </li>
+    <li>
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code>:  Esse evento é enviado a um ouvinte que
+        recebeu previamente <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code>, depois
+        que a sombra da ação de arrastar não estava mais dentro da caixa delimitadora da View do ouvinte.
+    </li>
+</ul>
+<p>
+    O ouvinte não precisa reagir a nenhum desses tipos de ação. Se o ouvinte retornar
+    um valor para o sistema, ele será ignorado. Veja a seguir algumas diretrizes para responder a cada um
+    desses tipos de ação:
+</p>
+<ul>
+    <li>
+        Como reposta a <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> ou
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code>, o ouvinte pode alterar a aparência
+        da View para indicar que receberá em breve uma ação de soltar.
+    </li>
+    <li>
+        Um evento com o tipo de ação <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code> contém
+        dados válidos para <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getX()">getX()</a></code> e
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getY()">getY()</a></code>, correspondentes à localização do ponto de contato.
+        O ouvinte poderá usar essas informações para alterar a aparência da parte da
+        View que está no ponto de contato. O ouvinte também poderá usar essas informações
+        para determinar a posição exata em que o usuário vai soltar a sombra da ação de arrastar.
+    </li>
+    <li>
+        Como resposta a <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_EXITED">ACTION_DRAG_EXITED</a></code>, o ouvinte deve redefinir
+        todas as alterações de aparência aplicadas como resposta a
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENTERED">ACTION_DRAG_ENTERED</a></code> ou
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_LOCATION">ACTION_DRAG_LOCATION</a></code>. Isso indica ao usuário que
+        a View deixou de ser um destino para uma ação de soltar iminente.
+    </li>
+</ul>
+<h3 id="HandleDrop">Responder a uma ação de soltar</h3>
+<p>
+    Quando o usuário liberar a sombra da ação de arrastar em uma View no aplicativo, e a View tiver informado
+    previamente que poderia aceitar o conteúdo sendo arrastado, o sistema despachará um evento de arrastar
+    a essa View com o tipo de ação <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>. O ouvinte
+    deve fazer o seguinte:
+</p>
+<ol>
+    <li>
+        Chamar <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getClipData()">getClipData()</a></code> para obter o
+        objeto <code><a href="https://developer.android.com/reference/android/content/ClipData.html?hl=pt-br">ClipData</a></code> originalmente fornecido na chamada
+        de
+<code><a href="https://developer.android.com/reference/android/view/View.html?hl=pt-br#startDrag(android.content.ClipData, android.view.View.DragShadowBuilder, java.lang.Object, int)">startDrag()</a></code>
+        e armazená-lo. Se as operações de arrastar e soltar não representarem movimento de dados,
+         talvez isso não seja necessário.
+    </li>
+    <li>
+        Retorne um <code>true</code> booleano para indicar que a ação de soltar foi processada corretamente ou,
+        caso contrário, <code>false</code>. O valor retornado se torna o valor retornado por
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getResult()">getResult()</a></code> para um
+        evento <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>.
+        <p>
+            Observe que se o sistema não enviar um evento <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>,
+            o valor de <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getResult()">getResult()</a></code> para um
+            <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code> evento será <code>false</code>.
+        </p>
+    </li>
+</ol>
+<p>
+    Para um evento <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>,
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getX()">getX()</a></code> e <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getY()">getY()</a></code>
+    retornam as posições X e Y do ponto da ação de arrastar no momento da ação de soltar, usando o sistema
+    de coordenadas da View que recebeu a ação de soltar.
+</p>
+<p>
+    O sistema permite que o usuário libere a sombra da ação de arrastar em uma View cujo ouvinte não está
+    recebendo eventos de arrastar. Além disso, ele também permite que o usuário libere a sombra da ação de arrastar
+    em regiões vazias da IU do aplicativo ou em áreas fora do aplicativo.
+    Em todos esses casos, o sistema não envia um evento com o tipo de ação
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>, embora envie um evento
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>.
+</p>
+<h3 id="HandleEnd">Responder a um fim de ação de arrastar</h3>
+<p>
+    Imediatamente depois da liberação da sombra da ação de arrastar pelo usuário, o sistema envia um
+    evento de arrastar a todos os ouvintes de eventos de arrastar no aplicativo com um tipo de ação
+    <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DRAG_ENDED">ACTION_DRAG_ENDED</a></code>. Isso indica que a operação de arrastar foi
+    concluída.
+</p>
+<p>
+    Cada ouvinte deve fazer o seguinte:
+</p>
+<ol>
+    <li>
+        Se um ouvinte alterou a aparência do objeto View durante a operação, deve redefinir
+        a View para a sua aparência padrão. Isso é uma indicação visual para o usuário de que a operação
+        foi concluída.
+    </li>
+    <li>
+        Opcionalmente, o ouvinte pode chamar <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getResult()">getResult()</a></code> para obter mais informações
+        sobre a operação. Se um ouvinte retornou <code>true</code> como resposta de um evento do
+        tipo de ação <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>, 
+        <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getResult()">getResult()</a></code> retornará <code>true</code> booleano. Em todos os
+        outros casos, <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#getResult()">getResult()</a></code> retornará <code>false</code> booleano,
+        inclusive todos os casos em que o sistema não enviou um
+        evento <code><a href="https://developer.android.com/reference/android/view/DragEvent.html?hl=pt-br#ACTION_DROP">ACTION_DROP</a></code>.
+    </li>
+    <li>
+        O ouvinte deve retornar <code>true</code> booleano ao sistema.
+    </li>
+</ol>
+<p>
+</p>
+<h3 id="RespondEventSample">Responder a eventos de arrastar: um exemplo</h3>
+<p>
+    Todos os eventos são recebidos inicialmente pelo método ou ouvinte de eventos de arrastar. O snippet
+    de código a seguir é um exemplo simples da reação a eventos de arrastar em um ouvinte:
+</p>
+<pre>
+// Creates a new drag event listener
+mDragListen = new myDragEventListener();
+
+View imageView = new ImageView(this);
+
+// Sets the drag event listener for the View
+imageView.setOnDragListener(mDragListen);
+
+...
+
+protected class myDragEventListener implements View.OnDragListener {
+
+    // This is the method that the system calls when it dispatches a drag event to the
+    // listener.
+    public boolean onDrag(View v, DragEvent event) {
+
+        // Defines a variable to store the action type for the incoming event
+        final int action = event.getAction();
+
+        // Handles each of the expected events
+        switch(action) {
+
+            case DragEvent.ACTION_DRAG_STARTED:
+
+                // Determines if this View can accept the dragged data
+                if (event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+
+                    // As an example of what your application might do,
+                    // applies a blue color tint to the View to indicate that it can accept
+                    // data.
+                    v.setColorFilter(Color.BLUE);
+
+                    // Invalidate the view to force a redraw in the new tint
+                    v.invalidate();
+
+                    // returns true to indicate that the View can accept the dragged data.
+                    return true;
+
+                }
+
+                // Returns false. During the current drag and drop operation, this View will
+                // not receive events again until ACTION_DRAG_ENDED is sent.
+                return false;
+
+            case DragEvent.ACTION_DRAG_ENTERED:
+
+                // Applies a green tint to the View. Return true; the return value is ignored.
+
+                v.setColorFilter(Color.GREEN);
+
+                // Invalidate the view to force a redraw in the new tint
+                v.invalidate();
+
+                return true;
+
+            case DragEvent.ACTION_DRAG_LOCATION:
+
+                // Ignore the event
+                return true;
+
+            case DragEvent.ACTION_DRAG_EXITED:
+
+                // Re-sets the color tint to blue. Returns true; the return value is ignored.
+                v.setColorFilter(Color.BLUE);
+
+                // Invalidate the view to force a redraw in the new tint
+                v.invalidate();
+
+                return true;
+
+            case DragEvent.ACTION_DROP:
+
+                // Gets the item containing the dragged data
+                ClipData.Item item = event.getClipData().getItemAt(0);
+
+                // Gets the text data from the item.
+                dragData = item.getText();
+
+                // Displays a message containing the dragged data.
+                Toast.makeText(this, "Dragged data is " + dragData, Toast.LENGTH_LONG);
+
+                // Turns off any color tints
+                v.clearColorFilter();
+
+                // Invalidates the view to force a redraw
+                v.invalidate();
+
+                // Returns true. DragEvent.getResult() will return true.
+                return true;
+
+            case DragEvent.ACTION_DRAG_ENDED:
+
+                // Turns off any color tinting
+                v.clearColorFilter();
+
+                // Invalidates the view to force a redraw
+                v.invalidate();
+
+                // Does a getResult(), and displays what happened.
+                if (event.getResult()) {
+                    Toast.makeText(this, "The drop was handled.", Toast.LENGTH_LONG);
+
+                } else {
+                    Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_LONG);
+
+                }
+
+                // returns true; the value is ignored.
+                return true;
+
+            // An unknown action type was received.
+            default:
+                Log.e("DragDrop Example","Unknown action type received by OnDragListener.");
+                break;
+        }
+
+        return false;
+    }
+};
+</pre>
+
+
+
+    </div>
+
+    
+
+  
+    
+  
+    
+
+
+
+<div class="wrap">
+  <footer class="dac-footer ">
+    <div class="cols dac-footer-main">
+      <div class="col-1of2">
+        <div class="dac-footer-contact">
+          <a class="dac-footer-contact-link" href="https://developer.android.com/newsletter/index.html?hl=pt-br" title="Newsletter">Newsletter</a>
+          <a class="dac-footer-contact-link" href="https://android-developers.blogspot.com/" title="Blog" target="_blank">Blog</a>
+          <a class="dac-footer-contact-link" href="https://developer.android.com/support.html?hl=pt-br" title="Suporte">Suporte</a>
+        </div>
+      </div>
+      <div class="col-1of2 dac-footer-reachout">
+        <div class="dac-footer-social">
+          <a class="dac-button-social dac-youtube dac-footer-social-link" href="https://www.youtube.com/user/androiddevelopers" title="Android Developers on YouTube" target="_blank"><i class="dac-sprite dac-youtube"></i><span class="hide-text">Android Developers on YouTube</span></a>
+          <a class="dac-button-social dac-gplus dac-footer-social-link" href="https://plus.google.com/+AndroidDevelopers" title="Android Developers on Google+" target="_blank"><i class="dac-sprite dac-gplus"></i><span class="hide-text">Android Developers on Google+</span></a>
+          <a class="dac-button-social dac-twitter dac-footer-social-link" href="https://twitter.com/AndroidDev" title="Android Developers on Twitter" target="_blank"><i class="dac-sprite dac-twitter"></i><span class="hide-text">Android Developers on Twitter</span></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dac-footer-separator"/>
+      
+      <p class="dac-footer-copyright">
+        
+        Except as noted, this content is licensed under <a href="http://creativecommons.org/licenses/by/2.5/" target="_blank">Creative Commons Attribution 2.5</a>. For details and restrictions, see the <a href="https://developer.android.com/license.html">Content License</a>.
+      </p>
+    
+
+    <p class="dac-footer-links">
+      <a href="https://www.android.com/" title="Android.com" target="_blank">Android.com</a>
+      <a href="https://developer.android.com/?hl=pt-br" title="Android Developers">Android Developers</a>
+      <a href="https://developer.android.com/studio/index.html?hl=pt-br" title="Android Studio">Android Studio</a>
+      <a href="https://developer.android.com/distribute/console/index.html?hl=pt-br" title="Google Play Console">Google Play Console</a>
+      <a href="https://developer.android.com/legal.html?hl=pt-br" title="Legal Notice">Legal Notice</a>
+    </p>
+
+    <!-- TODO(akassay) Update all DAC js to use the class instead of the id b/30368561 -->
+    <form class="devsite-utility-footer-language" id="setlang" action="https://developer.android.com/i18n/setlang/" method="post">
+      <input type="hidden" name="xsrf_token" value="lJ3GJwq8FTQdK1GXcyYkTmA2mRSA25P9nDoMyngy8ek6MTQ5NzUxNjEzNDgyMzc0MA" />
+      <input type="hidden" name="next" value="drag-drop.html">
+      <span id="language" class="locales">
+        <select class="devsite-utility-footer-language-select" name="language">
+          
+          <option value="id"
+            >
+            Bahasa Indonesia
+          </option>
+          
+          <option value="de"
+            >
+            Deutsch
+          </option>
+          
+          <option value="en"
+            >
+            English
+          </option>
+          
+          <option value="es"
+            >
+            español
+          </option>
+          
+          <option value="es-419"
+            >
+            Español (América Latina)
+          </option>
+          
+          <option value="fr"
+            >
+            français
+          </option>
+          
+          <option value="pt-br"
+             selected="selected" >
+            Português Brasileiro
+          </option>
+          
+          <option value="vi"
+            >
+            Tiếng Việt
+          </option>
+          
+          <option value="tr"
+            >
+            Türkçe
+          </option>
+          
+          <option value="ru"
+            >
+            Русский
+          </option>
+          
+          <option value="th"
+            >
+            ภาษาไทย
+          </option>
+          
+          <option value="ja"
+            >
+            日本語
+          </option>
+          
+          <option value="zh-cn"
+            >
+            简体中文
+          </option>
+          
+          <option value="zh-tw"
+            >
+            繁體中文
+          </option>
+          
+          <option value="ko"
+            >
+            한국어
+          </option>
+          
+        </select>
+      </span>
+    </form>
+  </footer>
+</div><!--/.wrap -->
+
+<div class="dac-toast-group">
+  <div class="dac-toast" data-toast>
+    <div class="dac-toast-wrap">
+      This site uses cookies to store your preferences for site-specific language and display options.
+    </div>
+  </div>
+</div>
+
+<div data-modal="newsletter" data-newsletter-fb data-swap class="dac-modal newsletter">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <div class="dac-swap" data-swap-container>
+          <section class="dac-swap-section dac-active dac-down">
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.title">Get the latest Android developer news and tips that will help you find success on Google Play.</h2>
+            <p class="dac-modal-header-subtitle" data-t="newsletter.requiredHint">* Required Fields</p>
+          </section>
+          <section class="dac-swap-section dac-up">
+            
+            <h2 class="norule dac-modal-header-title" data-t="newsletter.successTitle">Hooray!</h2>
+          </section>
+        </div>
+      </header>
+      <div class="dac-swap" data-swap-container>
+        <section class="dac-swap-section dac-active dac-left">
+          <form action="https://services.google.com/fb/submissions/android-developer-mailing-list/" class="dac-form" method="post">
+            <section class="dac-modal-content">
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-full-name" class="dac-form-floatlabel" data-t="newsletter.name">Full name</label>
+                      <input type="text" class="dac-form-input" name="fullname" id="newsletter-full-name" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-email" class="dac-form-floatlabel" data-t="newsletter.email">Endereço de e-mail</label>
+                      <input type="email" class="dac-form-input" name="emailaddress" id="newsletter-email" required>
+                      <span class="dac-form-required">*</span>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-company" class="dac-form-floatlabel" data-t="newsletter.company">Company / developer name</label>
+                      <input type="text" class="dac-form-input" name="companydevelopername" id="newsletter-company">
+                    </div>
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-play-store" class="dac-form-floatlabel" data-t="newsletter.appUrl">One of your Play Store app URLs</label>
+                      <input type="url" class="dac-form-input" name="playstoreappurls" id="newsletter-play-store">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="dac-form-fieldset">
+                <div class="cols">
+                  <div class="col-1of2 newsletter-leftCol newsletter-interested" data-validation-message="Please check at least one item.">
+                    <legend class="dac-form-legend">What are you interested in?<span class="dac-form-required">*</span></legend>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-whats-new" value="whats-new">
+                      <label for="interested-whats-new" class="dac-form-checkbox-button"></label>
+                      <label for="interested-whats-new" class="dac-form-label">What's new</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-games-updates" value="games-updates">
+                      <label for="interested-games-updates" class="dac-form-checkbox-button"></label>
+                      <label for="interested-games-updates" class="dac-form-label">Games updates</label>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <input type="checkbox" class="dac-form-checkbox" name="interested" id="interested-android-development" value="android-development">
+                      <label for="interested-android-development" class="dac-form-checkbox-button"></label>
+                      <label for="interested-android-development" class="dac-form-label">Android development</label>
+                    </div>
+                  </div>
+                  <div class="col-1of2 newsletter-rightCol newsletter-checkboxes">
+                    <div class="dac-form-input-group">
+                      <label for="newsletter-receive-in">Receive newsletter in</label>
+                      <select name="language" class="dac-form-select" id="newsletter-receive-in">
+                        <option value="en-US" selected>English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="id">Indonesian (Bahasa)</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="pt-BR">Portuguese (Brazilian)</option>
+                        <option value="ru">Russian</option>
+                        <option value="es-419">Spanish (Latin American)</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="vi">Vietnamese</option>
+                      </select>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="marketingoptin" id="newsletter-add" required value="Add me to the mailing list.">
+                          <label for="newsletter-add" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-add" class="dac-form-label dac-form-aside">
+                            Add me to the mailing list.
+                            <span class="dac-form-required">*</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dac-form-radio-group">
+                      <div class="dac-media">
+                        <div class="dac-media-figure">
+                          <input type="checkbox" class="dac-form-checkbox" name="privacystatement" id="newsletter-terms" required value="I acknowledge that the information provided in this form will be subject to Google's privacy policy (https://www.google.com/policies/privacy/).">
+                          <label for="newsletter-terms" class="dac-form-checkbox-button"></label>
+                        </div>
+                        <div class="dac-media-body">
+                          <label for="newsletter-terms" class="dac-form-label dac-form-aside"><span data-t="newsletter.privacyPolicy" data-t-html>
+                            
+                            I acknowledge that the information provided in this form will be subject to <a href="https://www.google.com/policies/privacy/">Google's privacy policy</a>.
+                          </span>
+                          <span class="dac-form-required">*</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </section>
+            <input type="hidden" name="referrer" value="dac">
+            <footer class="dac-modal-footer">
+              <div class="cols">
+                <div class="col-2of5">
+                </div>
+              </div>
+              <button type="submit" value="Submit" class="dac-fab dac-primary dac-large dac-modal-action"><i class="dac-sprite dac-arrow-right"></i></button>
+            </footer>
+          </form>
+        </section>
+        <section class="dac-swap-section dac-right">
+          <div class="dac-modal-content">
+            <p class="newsletter-success-message" data-t="newsletter.successDetails">
+              You have successfully signed up for the latest Android developer news and tips.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div><!--/.dac-modal.newsletter-->
+
+
+<div data-modal="langform" class="dac-modal" id="langform">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            Browse this site in <span class="span-target-lang"></span>?
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <fieldset class="dac-form-fieldset">
+              <div class="cols">
+                <div class="col-2of2 langform-leftCol">
+                  <p id="resetLangText">
+                    You requested a page in <span class="span-target-lang"></span>, but your language preference for this site is <span class="span-current-lang"></span>.
+                  </p>
+                  <p id="resetLangCta">
+                    Would you like to change your language preference and browse this site in <span class="span-target-lang"></span>? If you want to change your language preference later, use the language menu at the bottom of each page.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="yes" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang yes" data-t="newsletter.resetLangButtonYes" data-modal-toggle>
+                Change Language
+              </button>
+            </a>
+            <a href="#" class="" onclick="return false;">
+              <button class="button dac-primary dac-modal-action lang no" data-t="newsletter.resetLangButtonNo" data-modal-toggle>
+                Not Now
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal-->
+
+
+<div data-modal="api-unavailable" class="dac-modal" id="api-unavailable">
+  <div class="dac-modal-container">
+    <div class="dac-modal-window">
+      <header class="dac-modal-header">
+        <div class="dac-modal-header-actions">
+          <button class="dac-modal-header-close" data-modal-toggle></button>
+        </div>
+        <section class="dac-swap-section dac-active dac-down">
+          <h2 class="norule dac-modal-header-title">
+            This class requires API level <span class="api-level"></span> or higher
+          </h2>
+        </section>
+      </header>
+      <section class="dac-swap-section dac-active dac-left">
+          <section class="dac-modal-content">
+            <p>
+              This doc is hidden because your selected API level for the documentation is <span class="api-level"></span>. You can change the documentation API level with the selector above the left navigation.
+            </p>
+            
+            <p>For more information about specifying the API level your app requires, read <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">Supporting Different Platform Versions</a>.</p>
+          </section>
+          <footer class="dac-modal-footer" id="langfooter">
+            <div class="cols">
+              <div class="col-2of5">
+              </div>
+            </div>
+            <a href="#" class="ok" onclick="return false;">
+              <button class="button dac-primary dac-modal-action ok"
+              data-modal-toggle>
+                OK, make this page visible
+              </button>
+            </a>
+          </footer>
+        </form>
+      </section>
+    </div>
+  </div>
+</div><!--/.dac-modal#api-unavailable-->
+
+    
+  </div><!--/#body-content-->
+
+  <!-- Nav Setup -->
+  <script>$('[data-dac-nav]').dacNav();</script>
+  <script type="text/javascript">
+    $('.slideshow-container').dacSlideshow({
+        btnPrev: '.slideshow-prev',
+        btnNext: '.slideshow-next',
+        btnPause: '#pauseButton'
+    });
+
+    $(".feed").dacTabbedList({
+      nav_id: '.feed-nav',
+      frame_id: '.feed-frame'
+    });
+  </script>
+  
+  <script src="../../../ytblogger_lists_unified9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../android_metadata_en9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  
+  <script src="../../../reference/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/gms_lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/wearable/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/test/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="../../../reference/android/support/constraint/lists9fbc.js?hl=pt-br?v=2017061508" defer></script>
+  <script src="https://developer.android.com/_static2/f304fc21fa/jsi18n/?hl=pt-br"></script>
+  <script>
+    // Load localized metadata.
+    (function(lang) {
+      if (lang === 'en') { return; }
+      document.write('<script src="https://developer.android.com/android_metadata_pt-br.js?hl=pt-br?v=2017061508" defer></' + 'script>');
+    })(getLangPref())
+
+    // Add skip to content for accessibility.
+    $('#skip-to-main').click(function() {
+      $('a[name=top]').focus();
+    });
+
+    $('.devsite-utility-footer-language-select').each(function() {
+      $(this).change(function() {
+        changeLangPref(this.value, true)
+        $('.devsite-utility-footer-language').submit();
+      });
+    });
+  </script>
+
+  <script>
+    (function($) {
+      devsite.analytics.InitAnalytics();
+    })(jQuery);
+  </script>
+
+  
+
+
+<div id="survey-box-wrapper">
+  <div class="material-dialog" style="width:270px">
+    <div class="material-dialog-title">
+      Take a one-minute survey?
+    </div>
+    <div class="material-dialog-description">
+      Help us improve Android tools and documentation.
+    </div>
+    <div class="material-button-bar">
+      <a class="dac-button dac-primary dac-raised" target="_blank"
+          href="https://goo.gl/forms/kV7MoyD2dvcWkd5N2">Sure</a>
+      <a class="dac-button" href="#">No thanks</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from developer.android.com/guide/topics/ui/drag-drop.html?hl=pt-br by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 15 Jun 2017 09:04:45 GMT -->
+</html>
